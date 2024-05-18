@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserFeatureDTO {
     private Boolean articleModule;
-    private Boolean projectModule;
+    private Boolean planModule;
     private Boolean vocabularyModule;
 
     public static UserFeatureDTO convert(UserFeatureEntity entity) {

@@ -30,7 +30,7 @@ public class UserUpdateDTO {
     @Length(max = 200)
     private String blog;
     @Length(max = 100)
-    private String position;
+    private String profession;
     @Length(max = 2000)
     private String photoImg;
     @Length(max = 2000)

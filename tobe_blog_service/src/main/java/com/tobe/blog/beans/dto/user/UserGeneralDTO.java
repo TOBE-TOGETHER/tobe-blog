@@ -14,7 +14,7 @@ public class UserGeneralDTO {
     private String avatarUrl;
     private String introduction;
     private String blog;
-    private String position;
+    private String profession;
     private String photoImg;
     private String backgroundImg;
     private UserFeatureDTO features;

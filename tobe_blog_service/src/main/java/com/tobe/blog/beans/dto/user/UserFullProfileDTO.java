@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserFullProfileDTO extends UserBriefProfileDTO {
-    private String position;
+    private String profession;
     private String address;
     private String photoImg;
     private String backgroundImg;

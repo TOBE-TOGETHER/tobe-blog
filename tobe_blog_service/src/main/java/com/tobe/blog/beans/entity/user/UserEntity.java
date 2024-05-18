@@ -31,5 +31,5 @@ public class UserEntity extends BaseEntity {
     private String createBy = "New Created";
     private String photoImg;
     private String backgroundImg;
-    private String position;
+    private String profession;
 }
