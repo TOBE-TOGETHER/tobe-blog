@@ -9,10 +9,10 @@ import com.tobe.blog.beans.dto.user.UserLoginDTO;
 import com.tobe.blog.beans.entity.user.UserEntity;
 import com.tobe.blog.beans.entity.user.UserRoleEntity;
 import com.tobe.blog.core.utils.TokenUtil;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,34 +24,15 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AuthService implements UserDetailsService {
 
-    private UserService userService;
-
-    private UserRoleService userRoleService;
-
-    private UserFeatureService userFeatureService;
-
-    private AuthenticationManager authenticationManager;
-
-    private TokenUtil tokenUtil;
-
-    public AuthService(
-            UserService userService,
-            UserRoleService userRoleService,
-            UserFeatureService userFeatureService,
-            AuthenticationManager authenticationManager,
-            TokenUtil tokenUtil) {
-        this.userService = userService;
-        this.userRoleService = userRoleService;
-        this.userFeatureService = userFeatureService;
-        this.authenticationManager = authenticationManager;
-        this.tokenUtil = tokenUtil;
-    }
+    private final UserService userService;
+    private final UserRoleService userRoleService;
+    private final UserFeatureService userFeatureService;
+    private final TokenUtil tokenUtil;
 
     public EnhancedUserDetail login(UserLoginDTO dto) {
-        // verify the username & password via authenticationManager
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
         final EnhancedUserDetail userDetails = (EnhancedUserDetail) loadUserByUsername(dto.getUsername());
         final String accessToken = tokenUtil.createAccessToken(userDetails);
         final String refreshToken = tokenUtil.createRefreshToken(userDetails);
@@ -72,12 +53,13 @@ public class AuthService implements UserDetailsService {
         }
         final UserGeneralDTO profile = BasicConverter.convert(userEntity, UserGeneralDTO.class);
         profile.setFeatures(BasicConverter.convert(userFeatureService.getById(profile.getId()), UserFeatureDTO.class));
-        return new EnhancedUserDetail(getAuthority(userEntity.getId()), userEntity.getUsername(), userEntity.getPassword(),
-                profile);
+        return new EnhancedUserDetail(getAuthority(userEntity.getId()), userEntity.getUsername(),
+                userEntity.getPassword(), profile);
     }
 
     private List<SimpleGrantedAuthority> getAuthority(long id) {
-        final List<UserRoleEntity> roles = userRoleService.list(new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, id));
+        final List<UserRoleEntity> roles = userRoleService
+                .list(new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, id));
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
 
