@@ -34,25 +34,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors().and()
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, exception) -> {
-                    log.info("Failed in auth: " + exception.getMessage());
-                    response.addHeader("WWW-Authenticate", "Basic realm=TOBE-JWT");
-                    response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
-                })
-                .and().authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers("/actuator/**").permitAll()
-                .antMatchers("/v1/auth/**").permitAll()
-                .antMatchers("/v1/api/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/v1/users/**").permitAll()
-                .anyRequest().authenticated().and()
+                .csrf(csrf -> csrf.disable())
+                .exceptionHandling(handling -> handling
+                        .authenticationEntryPoint((request, response, exception) -> {
+                            log.info("Failed in auth: " + exception.getMessage());
+                            response.addHeader("WWW-Authenticate", "Basic realm=TOBE-JWT");
+                            response.sendError(HttpStatus.UNAUTHORIZED.value(),
+                                    HttpStatus.UNAUTHORIZED.getReasonPhrase());
+                        }))
+                .authorizeRequests(requests -> requests
+                        .antMatchers(HttpMethod.OPTIONS).permitAll()
+                        .antMatchers("/actuator/**").permitAll()
+                        .antMatchers("/v1/auth/**").permitAll()
+                        .antMatchers("/v1/api/**").permitAll()
+                        .antMatchers(HttpMethod.POST, "/v1/users/**").permitAll()
+                        .anyRequest().authenticated())
                 .addFilterAfter(tokenFilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .httpBasic().and()
-                .headers().cacheControl();
+                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .headers(headers -> headers.cacheControl());
         return http.build();
     }
 
