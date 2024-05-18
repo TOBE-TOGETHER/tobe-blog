@@ -62,8 +62,10 @@ public class TokenUtil implements Serializable {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private String buildToken(String secret, String subject, long id, Collection<? extends GrantedAuthority> roles,
             long tokenExpiration) {
+
         final String token = Jwts.builder()
                 .setHeader(HEADERS)
                 .setIssuer(TOKEN_ISSUER)
@@ -77,6 +79,7 @@ public class TokenUtil implements Serializable {
         return String.format(TOKEN_PATTERN, token);
     }
 
+    @SuppressWarnings("deprecation")
     public String freshAccessToken(String refreshToken) {
         try {
             final Claims refreshClaims = Jwts.parserBuilder().setSigningKey(REFRESH_SECRET_KEY).build()

@@ -63,7 +63,7 @@ public class AuthService implements UserDetailsService {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
 
-    private UserFeatureDTO getUserFeature(long id) {
-        return UserFeatureDTO.convert(userFeatureService.getById(id));
-    }
+    // private UserFeatureDTO getUserFeature(long id) {
+    // return UserFeatureDTO.convert(userFeatureService.getById(id));
+    // }
 }
