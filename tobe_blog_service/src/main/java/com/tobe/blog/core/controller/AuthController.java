@@ -4,14 +4,15 @@ import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
 import com.tobe.blog.beans.dto.user.UserLoginDTO;
 import com.tobe.blog.core.service.AuthService;
 import com.tobe.blog.core.utils.TokenUtil;
-import io.micrometer.core.instrument.util.StringUtils;
+
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/v1/auth")

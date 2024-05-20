@@ -1,14 +1,16 @@
 package com.tobe.blog.core.service;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -29,7 +31,8 @@ import com.tobe.blog.core.mapper.UserRoleMapper;
 @SpringBootTest
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-public class TestUserService {
+@DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
+public class UserServiceTests {
 
     @Autowired
     private UserService userService;
@@ -160,7 +163,7 @@ public class TestUserService {
 
     @Test
     @DisplayName("User Service: get existing user brief profile info by userId")
-    public void testgetUserBriefProfile_getExistingUser() {
+    public void testGetUserBriefProfile_getExistingUser() {
         UserBriefProfileDTO dto = userService.getUserBriefProfile(1);
         Assertions.assertEquals(DefaultTestData.USER_ID, dto.getId());
         Assertions.assertEquals(DefaultTestData.LAST_NAME, dto.getLastName());
@@ -172,33 +175,33 @@ public class TestUserService {
 
     @Test
     @DisplayName("User Service: get non-existing user brief profile info by userId")
-    public void testgetUserBriefProfile_getNoneExistingUser() {
+    public void testGetUserBriefProfile_getNoneExistingUser() {
         Assertions.assertNull(userService.getUserBriefProfile(2));
     }
 
     @Test
     @DisplayName("User Service: get existing user full profile info by userId")
-    public void testgetUserFullProfile_getExistingUser() {
+    public void testGetUserFullProfile_getExistingUser() {
         UserFullProfileDTO dto = userService.getUserFullProfile(1);
-        Assertions.assertEquals(dto.getId(), 1);
-        Assertions.assertEquals(dto.getLastName(), "Admin");
-        Assertions.assertEquals(dto.getFirstName(), "TOBE");
-        Assertions.assertEquals(dto.getAddress(), "Shenzhen China");
-        Assertions.assertEquals(dto.getAvatarUrl(), "https://avatar.com");
-        Assertions.assertEquals(dto.getIntroduction(), "Hello world");
-        Assertions.assertEquals(dto.getBlog(), "https://blog.com");
-        Assertions.assertEquals(dto.getBackgroundImg(), "https://bg.com");
-        Assertions.assertEquals(dto.getPhotoImg(), "https://photo.com");
-        Assertions.assertEquals(dto.getProfession(), "Developer");
+        Assertions.assertEquals(DefaultTestData.USER_ID, dto.getId());
+        Assertions.assertEquals(DefaultTestData.LAST_NAME, dto.getLastName());
+        Assertions.assertEquals(DefaultTestData.FIRST_NAME, dto.getFirstName());
+        Assertions.assertEquals(DefaultTestData.ADDRESS, dto.getAddress());
+        Assertions.assertEquals(DefaultTestData.AVATAR, dto.getAvatarUrl());
+        Assertions.assertEquals(DefaultTestData.INTRODUCTION, dto.getIntroduction());
+        Assertions.assertEquals(DefaultTestData.BLOG, dto.getBlog());
+        Assertions.assertEquals(DefaultTestData.BACKGROUND_IMG, dto.getBackgroundImg());
+        Assertions.assertEquals(DefaultTestData.PHOTO_IMG, dto.getPhotoImg());
+        Assertions.assertEquals(DefaultTestData.PROFESSION, dto.getProfession());
         UserFeatureDTO featureDTO = dto.getFeatures();
-        Assertions.assertEquals(featureDTO.getArticleModule(), Boolean.TRUE);
-        Assertions.assertEquals(featureDTO.getPlanModule(), Boolean.TRUE);
-        Assertions.assertEquals(featureDTO.getVocabularyModule(), Boolean.FALSE);
+        Assertions.assertEquals(Boolean.TRUE, featureDTO.getArticleModule());
+        Assertions.assertEquals(Boolean.TRUE, featureDTO.getPlanModule());
+        Assertions.assertEquals(Boolean.FALSE, featureDTO.getVocabularyModule());
     }
 
     @Test
     @DisplayName("User Service: get non-existing user full profile info by userId")
-    public void testgetUserFullProfile_getNoneExistingUser() {
+    public void testGetUserFullProfile_getNoneExistingUser() {
         Assertions.assertNull(userService.getUserFullProfile(2));
     }
 
@@ -212,21 +215,80 @@ public class TestUserService {
     }
 
     @Test
-    @DisplayName("User Service: get all user profiles in pages")
+    @DisplayName("User Service: update existing user")
     public void testUpdateUser_existingUserCanBeUpdated() {
-        UserUpdateDTO updateDTO = new UserUpdateDTO();
-        updateDTO.setId(1L);
-        updateDTO.setAddress(null);
-        // TODO
-        UserGeneralDTO dto = userService.getUser(1);
+        final UserCreationDTO dto = new UserCreationDTO();
+        dto.setEmail("user-to-be-updated@tobe.com");
+        dto.setPassword("123456");
+        UserGeneralDTO createdUser = userService.createUser(dto);
+        final UserUpdateDTO updateDTO = new UserUpdateDTO();
+        updateDTO.setId(createdUser.getId());
+        updateDTO.setEmail("user-updated@tobe.com");
+        updateDTO.setAddress(DefaultTestData.ADDRESS);
+        updateDTO.setAvatarUrl(DefaultTestData.AVATAR);
+        updateDTO.setBackgroundImg(DefaultTestData.BACKGROUND_IMG);
+        updateDTO.setBlog(DefaultTestData.BLOG);
+        updateDTO.setFirstName(DefaultTestData.FIRST_NAME);
+        updateDTO.setLastName(DefaultTestData.LAST_NAME);
+        updateDTO.setIntroduction(DefaultTestData.INTRODUCTION);
+        updateDTO.setPhoneNum(DefaultTestData.PHONE_NUM);
+        updateDTO.setPhotoImg(DefaultTestData.PHOTO_IMG);
+        updateDTO.setProfession(DefaultTestData.PROFESSION);
+        updateDTO.setUsername(DefaultTestData.USERNAME);
 
+        // all fields should be update correctly
+        UserGeneralDTO updatedUser = userService.updateUser(updateDTO);
+        Assertions.assertEquals("user-updated@tobe.com", updatedUser.getEmail());
+        Assertions.assertEquals(DefaultTestData.ADDRESS, updatedUser.getAddress());
+        Assertions.assertEquals(DefaultTestData.AVATAR, updatedUser.getAvatarUrl());
+        Assertions.assertEquals(DefaultTestData.BACKGROUND_IMG, updatedUser.getBackgroundImg());
+        Assertions.assertEquals(DefaultTestData.BLOG, updatedUser.getBlog());
+        Assertions.assertEquals(DefaultTestData.FIRST_NAME, updatedUser.getFirstName());
+        Assertions.assertEquals(DefaultTestData.LAST_NAME, updatedUser.getLastName());
+        Assertions.assertEquals(DefaultTestData.INTRODUCTION, updatedUser.getIntroduction());
+        Assertions.assertEquals(DefaultTestData.PHONE_NUM, updatedUser.getPhoneNum());
+        Assertions.assertEquals(DefaultTestData.PHOTO_IMG, updatedUser.getPhotoImg());
+        Assertions.assertEquals(DefaultTestData.PROFESSION, updatedUser.getProfession());
+        Assertions.assertEquals(DefaultTestData.USERNAME, updatedUser.getUsername());
+    }
+
+    @Test
+    @DisplayName("User Service: update non-existing user")
+    public void testUpdateUser_nonexistingUserCanNotBeUpdated() {
+        UserUpdateDTO updateDTO = new UserUpdateDTO();
+        updateDTO.setId(2L);
+        updateDTO.setUsername(DefaultTestData.USERNAME);
+        UserGeneralDTO result = userService.updateUser(updateDTO);
+        Assertions.assertNull(result.getId());
+        Assertions.assertNull(result.getUsername());
+    }
+
+    @Test
+    @DisplayName("User Service: delete existing user")
+    public void testDeleteUser_deleteExistingUser() {
+        final UserCreationDTO dto = new UserCreationDTO();
+        dto.setEmail("user-to-be-deleted@tobe.com");
+        dto.setPassword("123456");
+        UserGeneralDTO createdUser = userService.createUser(dto);
+        userService.deleteUser(createdUser.getId());
+        UserRoleEntity roleEntity = roleMapper.selectOne(
+                new LambdaQueryWrapper<UserRoleEntity>()
+                        .eq(UserRoleEntity::getUserId, createdUser.getId())
+                        .eq(UserRoleEntity::getDeleted, Boolean.FALSE));
+        Assertions.assertNull(roleEntity);
+        UserFeatureEntity featureEntity = featureMapper.selectOne(
+                new LambdaQueryWrapper<UserFeatureEntity>()
+                        .eq(UserFeatureEntity::getUserId, createdUser.getId())
+                        .eq(UserFeatureEntity::getDeleted, Boolean.FALSE));
+        Assertions.assertNull(featureEntity);
+        Assertions.assertNull(userService.getUser(createdUser.getId()));
     }
 
     class DefaultTestData {
         public static final long USER_ID = 1L;
         public static final String FIRST_NAME = "Admin";
         public static final String LAST_NAME = "TOBE";
-        public static final String USERNAME = "TOBE";
+        public static final String USERNAME = "tobe_admin";
         public static final String EMAIL = "tobe_admin@tobe.com";
         public static final String ADDRESS = "Shenzhen China";
         public static final String AVATAR = "https://avatar.com";

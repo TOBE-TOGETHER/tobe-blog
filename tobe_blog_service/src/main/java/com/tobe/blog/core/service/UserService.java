@@ -96,6 +96,9 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
     public void deleteUser(long id) {
         // delete role of the specific user
         this.userRoleService.remove(new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, id));
+        // delete features of the specific user
+        this.userFeatureService
+                .remove(new LambdaQueryWrapper<UserFeatureEntity>().eq(UserFeatureEntity::getUserId, id));
         // delete the specific user
         this.removeById(id);
     }
