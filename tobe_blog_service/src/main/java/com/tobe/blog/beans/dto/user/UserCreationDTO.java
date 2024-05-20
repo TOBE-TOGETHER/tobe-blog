@@ -3,8 +3,8 @@ package com.tobe.blog.beans.dto.user;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 
 @Data
 public class UserCreationDTO {

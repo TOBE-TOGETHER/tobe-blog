@@ -8,7 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -26,7 +25,6 @@ import java.util.List;
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private final TokenFilter tokenFilter;
@@ -42,16 +40,15 @@ public class SecurityConfig {
                             response.sendError(HttpStatus.UNAUTHORIZED.value(),
                                     HttpStatus.UNAUTHORIZED.getReasonPhrase());
                         }))
-                .authorizeRequests(requests -> requests
-                        .antMatchers(HttpMethod.OPTIONS).permitAll()
-                        .antMatchers("/actuator/**").permitAll()
-                        .antMatchers("/v1/auth/**").permitAll()
-                        .antMatchers("/v1/api/**").permitAll()
-                        .antMatchers(HttpMethod.POST, "/v1/users/**").permitAll()
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/v1/auth/**").permitAll()
+                        .requestMatchers("/v1/api/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/v1/users/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterAfter(tokenFilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .headers(headers -> headers.cacheControl());
+                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 

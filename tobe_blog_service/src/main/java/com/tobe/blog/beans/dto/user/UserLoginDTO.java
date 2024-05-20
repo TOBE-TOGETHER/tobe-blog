@@ -1,7 +1,8 @@
 package com.tobe.blog.beans.dto.user;
 
-import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+
+import lombok.Data;
 
 @Data
 public class UserLoginDTO {
