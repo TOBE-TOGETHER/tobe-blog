@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -34,19 +35,24 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
     }
 
     public UserGeneralDTO getUser(long id) {
-        return this.getById(id) != null ? BasicConverter.convert(this.getById(id), UserGeneralDTO.class) : null;
+        return Optional.ofNullable(this.getById(id))
+                .map(u -> BasicConverter.convert(u, UserGeneralDTO.class))
+                .orElse(null);
     }
 
-    public UserBriefProfileDTO getUserBasicProfile(long id) {
-        return this.getById(id) != null ? BasicConverter.convert(this.getById(id), UserBriefProfileDTO.class) : null;
+    public UserBriefProfileDTO getUserBriefProfile(long id) {
+        return Optional.ofNullable(this.getById(id))
+                .map(u -> BasicConverter.convert(u, UserBriefProfileDTO.class))
+                .orElse(null);
     }
 
     public UserFullProfileDTO getUserFullProfile(long id) {
-        final UserEntity entity = this.getById(id);
-        if (Objects.isNull(entity)) {
+        UserFullProfileDTO result = Optional.ofNullable(this.getById(id))
+                .map(u -> BasicConverter.convert(u, UserFullProfileDTO.class))
+                .orElse(null);
+        if (Objects.isNull(result)) {
             return null;
         }
-        UserFullProfileDTO result = BasicConverter.convert(this.getById(id), UserFullProfileDTO.class);
         result.setFeatures(BasicConverter.convert(userFeatureService.getById(id), UserFeatureDTO.class));
         return result;
     }
