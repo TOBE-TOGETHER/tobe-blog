@@ -10,8 +10,8 @@ public class UserBriefProfileDTO {
     protected String avatarUrl;
     protected String introduction;
     protected String blog;
-    protected Long creationCount;
-    protected Long publicCreationCount;
+    protected Long contentCount;
+    protected Long publicContentCount;
     protected Long viewCount;
     protected Long likeCount;
 }

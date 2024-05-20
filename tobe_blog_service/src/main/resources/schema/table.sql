@@ -1,3 +1,4 @@
+DROP TABLE tobe_core_user IF EXISTS;
 CREATE TABLE `tobe_core_user`
 (
     `ID`             bigint NOT NULL AUTO_INCREMENT,
@@ -18,7 +19,7 @@ CREATE TABLE `tobe_core_user`
     `CREATE_BY`      varchar(30)   DEFAULT NULL,
     `UPDATE_TIME`    datetime      DEFAULT NULL,
     `UPDATE_BY`      varchar(30)   DEFAULT NULL,
-    `DELETED`        bit(1)        DEFAULT b'0',
+    `DELETED`        bit(1)        DEFAULT FALSE,
     PRIMARY KEY (`ID`),
     UNIQUE KEY `tobe_core_user_ID_uindex` (`ID`),
     UNIQUE KEY `tobe_core_user_EMAIL_uindex` (`EMAIL`)
@@ -28,18 +29,18 @@ CREATE TABLE `tobe_core_user`
   COLLATE = utf8mb4_0900_ai_ci
 ;
 
-
+DROP TABLE tobe_core_user_feature IF EXISTS;
 CREATE TABLE `tobe_core_user_feature`
 (
     `USER_ID`           bigint NOT NULL,
-    `ARTICLE_MODULE`    bit(1)      DEFAULT b'1',
-    `PLAN_MODULE`       bit(1)      DEFAULT b'1',
-    `VOCABULARY_MODULE` bit(1)      DEFAULT b'1',
+    `ARTICLE_MODULE`    bit(1)      DEFAULT TRUE,
+    `PLAN_MODULE`       bit(1)      DEFAULT TRUE,
+    `VOCABULARY_MODULE` bit(1)      DEFAULT TRUE,
     `CREATE_TIME`       datetime    DEFAULT NULL,
     `CREATE_BY`         varchar(30) DEFAULT NULL,
     `UPDATE_TIME`       datetime    DEFAULT NULL,
     `UPDATE_BY`         varchar(30) DEFAULT NULL,
-    `DELETED`           bit(1)      DEFAULT b'0',
+    `DELETED`           bit(1)      DEFAULT FALSE,
     PRIMARY KEY (`USER_ID`),
     UNIQUE KEY `tobe_core_user_feature_USER_ID_uindex` (`USER_ID`)
 ) ENGINE = InnoDB
@@ -47,7 +48,7 @@ CREATE TABLE `tobe_core_user_feature`
   COLLATE = utf8mb4_0900_ai_ci
 ;
 
-
+DROP TABLE tobe_core_user_role IF EXISTS;
 CREATE TABLE `tobe_core_user_role`
 (
     `ID`          int NOT NULL AUTO_INCREMENT,
@@ -58,7 +59,7 @@ CREATE TABLE `tobe_core_user_role`
     `CREATE_BY`   varchar(30) DEFAULT NULL,
     `UPDATE_TIME` datetime    DEFAULT NULL,
     `UPDATE_BY`   varchar(30) DEFAULT NULL,
-    `DELETED`     bit(1)      DEFAULT b'0',
+    `DELETED`     bit(1)      DEFAULT FALSE,
     PRIMARY KEY (`ID`),
     UNIQUE KEY `tobe_core_user_role_ID_uindex` (`ID`),
     KEY `tobe_core_user_role_USER_ID_index` (`USER_ID`)
