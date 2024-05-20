@@ -14,7 +14,7 @@ Home: https://www.lucienchen.xyz/
 
 ### 启动
 
-该项目由 `Maven` 构建，因此用 IDE 加载项目后用 `mvn intall` 命令来装载相关依赖，执行成功后利用 `mvn spring-boot:run` 命令启动项目，默认端口为 `8080`。
+该项目由 `Maven` 构建，因此用 IDE 加载项目后用 `mvn install` 命令来装载相关依赖，执行成功后利用 `mvn spring-boot:run` 命令启动项目，默认端口为 `8080`。
 
 ### 打包
 
@@ -23,5 +23,5 @@ Home: https://www.lucienchen.xyz/
 
 ### 配置
 
-项目配置都放在 `resources` 路径下的 `application` 开头的三个 yaml 文件中。
+项目配置都放在 `resources` 路径下的 `application` 开头的 yaml 文件中。
    
