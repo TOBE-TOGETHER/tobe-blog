@@ -19,6 +19,11 @@
             "name": "jwt.expire.refresh",
             "type": "java.lang.String",
             "description": "Refresh token expire time"
+        },
+        {
+            "name": "security-context.enable",
+            "type": "java.lang.Boolean",
+            "description": "Switch for manipulating security context is enabled or not"
         }
     ]
 }
