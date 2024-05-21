@@ -7,10 +7,11 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    connect-timeout: 3000
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      connect-timeout: 3000
 jwt:
   # 256 digits secret key, remember to replace before go live to prod
   secret:
