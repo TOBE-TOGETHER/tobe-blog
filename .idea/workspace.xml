@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ad070d49-24f8-497f-9c82-7b9923e82d3b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/stylesheetLinters/stylelint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/.eslintrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/footer/AppFooter.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/footer/CopyRight.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/footer/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/layout/BasicLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/layout/FrontendLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/layout/Page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/layout/SidePanel.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/layout/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/loading/Loading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/portal/components/PortalHeader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/portal/components/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/portal/containers/home/Home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/portal/containers/signIn/SignIn.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/portal/containers/signUp/SignUp.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/routes/MainRouter.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/routes/URL.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/routes/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/src/vite-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/tsconfig.node.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tobe_blog_web/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tobe_blog_web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tobe_blog_web/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tobe_blog_web/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="7e8df8d5-3cf8-4ba1-a733-79c3d853911b" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="o7tnbfa7" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectId" id="2gd8er1KwkZ3Pcn8Yiq6z9EjojO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "chore/idea",
+    "last_opened_file_path": "/Users/ArthurSun/IdeaProjects/tobe_blog/tobe_blog_web/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "/Users/ArthurSun/IdeaProjects/tobe_blog/tobe_blog_web/node_modules/typescript/lib"
+  }
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.rcb.reactComponents" value="false" />
+        <entry key="com.haulmont.rcb.reactInspector" value="false" />
+        <entry key="com.haulmont.rcb.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tobe_blog_web/src" />
+      <recent name="$PROJECT_DIR$/tobe_blog_web" />
+      <recent name="$PROJECT_DIR$/.idea" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/tobe_blog_web/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ad070d49-24f8-497f-9c82-7b9923e82d3b" name="Changes" comment="" />
+      <created>1716016194049</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716016194049</updated>
+      <workItem from="1716016195356" duration="839000" />
+      <workItem from="1716017070577" duration="6523000" />
+      <workItem from="1716300336796" duration="2535000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/add_user_module" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
