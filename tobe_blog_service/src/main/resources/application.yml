@@ -21,8 +21,11 @@ jwt:
     # access: 900000
     access: 86400000
     refresh: 864000000
+security-context:
+  enable: true
 mybatis-plus:
   global-config:
+    banner: false
     db-config:
       logic-delete-field: deleted
       logic-delete-value: 1
