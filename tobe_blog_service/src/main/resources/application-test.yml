@@ -19,6 +19,4 @@ spring:
 # security-context is turn off for unit testing as the requests come from inside the web container
 # thus unable to parse the user identifiers needed by mybatis-plus metaObjectHandler
 security-context: 
-  enable: false 
-
-
+  enable: false
