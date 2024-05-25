@@ -1,23 +1,17 @@
-import {
-  CssBaseline,
-  ThemeProvider,
-} from '@mui/material';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { SnackbarProvider } from 'notistack';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { AppFooter } from './components/footer';
-import { BasicLayout } from './components/layout';
-import reportWebVitals from './reportWebVitals';
-import { MainRouter } from './routes';
+import { BasicLayout } from './components/layout/index.ts';
+import { MainRouter } from './routes/index.ts';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme.ts';
+import { AppFooter } from './components/footer/index.ts';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
 
-root.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}></ThemeProvider>
       <CssBaseline />
       <SnackbarProvider
         maxSnack={3}
@@ -31,11 +25,5 @@ root.render(
           <AppFooter />
         </BasicLayout>
       </SnackbarProvider>
-    </ThemeProvider>
   </React.StrictMode>,
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+)
