@@ -1,7 +1,5 @@
-import {
-  Box,
-  Stack,
-} from '@mui/material';
+import { Box, Stack } from '@mui/material';
+
 // import { FrontendHeader } from "../header";
 import { AppFooter } from '../footer';
 

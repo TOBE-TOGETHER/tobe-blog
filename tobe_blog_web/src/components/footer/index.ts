@@ -1,3 +1,3 @@
-import AppFooter from "./AppFooter";
+import AppFooter from './AppFooter';
 
 export { AppFooter };

@@ -1,6 +1,7 @@
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import project from "../../../package.json";
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+
+import project from '../../../package.json';
 
 /**
  * Copyright component
@@ -16,10 +17,13 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="/">
+      {'Copyright © '}
+      <Link
+        color="inherit"
+        href="/"
+      >
         <strong>{project.name.toUpperCase()}</strong>
-      </Link>{" "}
+      </Link>{' '}
       {new Date().getFullYear()}
       {/* {license && (
         <>

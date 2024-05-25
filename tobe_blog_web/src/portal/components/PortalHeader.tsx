@@ -1,15 +1,8 @@
-import {
-  AppBar,
-  Container,
-  Toolbar,
-  Typography,
-} from '@mui/material';
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import { AppBar, Container, Toolbar, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 // import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom';
+
 import project from '../../../package.json';
 import theme from '../../theme';
 // import { publicPages } from './configs';
@@ -20,7 +13,7 @@ export default function FrontendHeader() {
   const [yIndex, setYIndex] = useState<number>(0);
   const [showFixedHeader, setShowFixedHeader] = useState<boolean>(false);
   const [shouldShowHeader, setShouldShowHeader] = useState<boolean>(false);
-  
+
   function handleScroll() {
     // if scroll down more than 80, it should show header when scroll up
     if (document.documentElement.scrollTop > 80) {
@@ -30,11 +23,7 @@ export default function FrontendHeader() {
     if (document.documentElement.scrollTop === 0) {
       setShouldShowHeader(false);
     }
-    if (
-      document.documentElement.scrollTop - yIndex > 0 ||
-      (document.documentElement.scrollTop - yIndex < 0 &&
-        document.documentElement.scrollTop <= 0)
-    ) {
+    if (document.documentElement.scrollTop - yIndex > 0 || (document.documentElement.scrollTop - yIndex < 0 && document.documentElement.scrollTop <= 0)) {
       setShowFixedHeader(false);
     } else {
       if (shouldShowHeader) {
@@ -43,12 +32,12 @@ export default function FrontendHeader() {
     }
     setYIndex(document.documentElement.scrollTop);
   }
-  
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   });
-  
+
   return (
     <>
       <AppBar
@@ -77,7 +66,7 @@ export default function FrontendHeader() {
       </AppBar>
     </>
   );
-};
+}
 
 const HeaderContent = () => {
   const navigate = useNavigate();
@@ -96,7 +85,7 @@ const HeaderContent = () => {
   //   }
   //   setAnchorElNav(null);
   // };
-  
+
   return (
     <Container maxWidth="xl">
       <Toolbar disableGutters>
@@ -117,7 +106,7 @@ const HeaderContent = () => {
         >
           {project.name.toUpperCase()}
         </Typography>
-        
+
         {/*<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>*/}
         {/*  <IconButton*/}
         {/*    size="small"*/}
@@ -185,7 +174,7 @@ const HeaderContent = () => {
         {/*<Box sx={{ flexGrow: 0 }}>*/}
         {/*  <HeaderLanguageMenu color={theme.palette.secondary.main} />*/}
         {/*</Box>*/}
-        
+
         {/*<Box sx={{ flexGrow: 0 }}>*/}
         {/*  <HeaderUserMenu />*/}
         {/*</Box>*/}

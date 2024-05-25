@@ -1,4 +1,4 @@
-import {URL, validateUrl} from "./URL";
-import {MainRouter} from "./MainRouter";
+import { MainRouter } from './MainRouter';
+import { URL, validateUrl } from './URL';
 
-export {URL, validateUrl, MainRouter};
+export { MainRouter, URL, validateUrl };

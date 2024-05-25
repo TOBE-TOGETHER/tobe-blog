@@ -1,3 +1,3 @@
-import PortalHeader from "./PortalHeader";
+import PortalHeader from './PortalHeader';
 
 export { PortalHeader };
