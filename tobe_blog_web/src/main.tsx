@@ -1,7 +1,15 @@
+import {
+  CssBaseline,
+  ThemeProvider,
+} from '@mui/material';
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { AppFooter } from './components/footer';
+import { BasicLayout } from './components/layout';
 import reportWebVitals from './reportWebVitals';
-// import { MainRouter } from './routes';/
+import { MainRouter } from './routes';
+import theme from './theme.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -9,21 +17,21 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    {/*<ThemeProvider theme={theme}>*/}
-    {/*  <CssBaseline />*/}
-    {/*  <SnackbarProvider*/}
-    {/*    maxSnack={3}*/}
-    {/*    anchorOrigin={{*/}
-    {/*      vertical: 'bottom',*/}
-    {/*      horizontal: 'right',*/}
-    {/*    }}*/}
-    {/*  >*/}
-    {/*    <BasicLayout>*/}
-    {/*      /!*<MainRouter />*!/*/}
-    {/*      <AppFooter />*/}
-    {/*    </BasicLayout>*/}
-    {/*  </SnackbarProvider>*/}
-    {/*</ThemeProvider>*/}
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+      >
+        <BasicLayout>
+          <MainRouter />
+          <AppFooter />
+        </BasicLayout>
+      </SnackbarProvider>
+    </ThemeProvider>
   </React.StrictMode>,
 );
 
