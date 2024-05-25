@@ -4,9 +4,9 @@ import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { AppFooter } from './components/footer/index.ts';
-import { BasicLayout } from './components/layout/index.ts';
-import { MainRouter } from './routes/index.ts';
+import { AppFooter } from './components/footer';
+import { BasicLayout } from './components/layout';
+import { MainRouter } from './routes';
 import theme from './theme.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
