@@ -20,11 +20,13 @@ export function MainRouter() {
             element={<HomePage />}
           />
           <Route
-            path={URL.SIGN_UP}
+            path={URL.SIGN_IN}
             element={<SignIn />}
           ></Route>
-          {/*<Route path={URL.SIGN_IN}*/}
-          {/*       element={<SignUp />} />*/}
+          <Route
+            path={URL.SIGN_UP}
+            element={<SignUp />}
+          />
         </Routes>
       </BrowserRouter>
     </Suspense>
