@@ -39,9 +39,13 @@ public class SecurityConfig {
                             response.sendError(HttpStatus.UNAUTHORIZED.value(),
                                     HttpStatus.UNAUTHORIZED.getReasonPhrase());
                         }))
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/v1/auth/**", "/v1/users/**", "/v1/api/**", "/api-docs/**",
+                        "/swagger-ui/**", "/actuator/**"))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
                         .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v1/auth/**").permitAll()
                         .requestMatchers("/v1/api/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/v1/users/**").permitAll()

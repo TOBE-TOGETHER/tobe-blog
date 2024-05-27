@@ -12,6 +12,11 @@ spring:
       host: 127.0.0.1
       port: 6379
       connect-timeout: 3000
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+  api-docs:
+    path: /api-docs
 jwt:
   # 256 digits secret key, remember to replace before go live to prod
   secret:
