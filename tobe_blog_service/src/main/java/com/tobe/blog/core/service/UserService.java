@@ -10,6 +10,8 @@ import com.tobe.blog.beans.entity.user.UserFeatureEntity;
 import com.tobe.blog.beans.entity.user.UserRoleEntity;
 import com.tobe.blog.core.mapper.UserMapper;
 import com.tobe.blog.core.utils.BasicConverter;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,17 +24,12 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserService extends ServiceImpl<UserMapper, UserEntity> {
 
-    private UserRoleService userRoleService;
-    private UserFeatureService userFeatureService;
-    private BCryptPasswordEncoder encoder;
-
-    public UserService(UserRoleService userRoleService, UserFeatureService userFeatureService) {
-        this.userRoleService = userRoleService;
-        this.userFeatureService = userFeatureService;
-        this.encoder = new BCryptPasswordEncoder();
-    }
+    private final UserRoleService userRoleService;
+    private final UserFeatureService userFeatureService;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public UserGeneralDTO getUser(long id) {
         return Optional.ofNullable(this.getById(id))
