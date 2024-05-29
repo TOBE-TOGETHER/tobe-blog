@@ -8,8 +8,11 @@ import com.tobe.blog.beans.dto.user.*;
 import com.tobe.blog.beans.entity.user.UserEntity;
 import com.tobe.blog.beans.entity.user.UserFeatureEntity;
 import com.tobe.blog.beans.entity.user.UserRoleEntity;
+import com.tobe.blog.core.exception.TobeRuntimeException;
 import com.tobe.blog.core.mapper.UserMapper;
 import com.tobe.blog.core.utils.BasicConverter;
+import com.tobe.blog.core.utils.CacheUtil;
+import com.tobe.blog.core.utils.GsonUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService extends ServiceImpl<UserMapper, UserEntity> {
 
+    private final CacheUtil cacheUtil;
     private final UserRoleService userRoleService;
     private final UserFeatureService userFeatureService;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -61,6 +65,12 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
 
     @Transactional
     public UserGeneralDTO createUser(UserCreationDTO dto) {
+        // verify if the same request has been submitted in last 3s
+        validateRequestSubmitted(dto);
+
+        // verify if the user already exists
+        validateEmailExist(dto.getEmail());
+
         // insert user
         UserEntity userEntity = BasicConverter.convert(dto, UserEntity.class);
         userEntity.setUsername(getDefaultUsernameFromEmail(userEntity.getEmail()));
@@ -116,5 +126,22 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
 
     private String getDefaultUsernameFromEmail(String email) {
         return email.substring(0, email.indexOf('@'));
+    }
+
+    private void validateRequestSubmitted(UserCreationDTO dto) {
+        String payload = GsonUtil.toJson(dto);
+        if (cacheUtil.getExpireTime(payload) > 0) {
+            throw new TobeRuntimeException("The request has been submitted, please don't repeatly submit.");
+        };
+        cacheUtil.set(payload, null, 3);
+    }
+
+    private void validateEmailExist(String email) {
+        boolean emailExist = this.getOneOpt(
+            new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getEmail, email))
+            .isPresent();
+        if (emailExist) {
+            throw new TobeRuntimeException("The email has been registered, please login directly.");
+        }
     }
 }

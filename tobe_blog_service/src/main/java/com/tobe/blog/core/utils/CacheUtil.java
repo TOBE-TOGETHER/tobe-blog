@@ -11,8 +11,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-@Component
 @Slf4j
+@Component
 public class CacheUtil implements ICacheUtil {
 
     private RedisTemplate<String, Object> redisTemplate;

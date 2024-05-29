@@ -38,13 +38,13 @@ public class SecurityConfig {
                         .authenticationEntryPoint((request, response, exception) -> {
                             log.info("Failed in auth: " + exception.getMessage());
                             response.addHeader("WWW-Authenticate", "Basic realm=TOBE-JWT");
-                            response.sendError(HttpStatus.UNAUTHORIZED.value(),
-                                    HttpStatus.UNAUTHORIZED.getReasonPhrase());
+                            response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
                         }))
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/v1/auth/**", "/v1/users/**", "/v1/api/**", "/api-docs/**",
                         "/swagger-ui/**", "/actuator/**"))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                        .requestMatchers("/error").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/api-docs/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
