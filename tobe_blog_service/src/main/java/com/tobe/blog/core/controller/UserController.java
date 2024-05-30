@@ -25,8 +25,8 @@ public class UserController {
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Page<UserGeneralDTO>> getUsers(
-            @RequestParam(value = "current", required = false, defaultValue = "1") int current,
-            @RequestParam(value = "size", required = false, defaultValue = "10") int size
+        @RequestParam(value = "current", required = false, defaultValue = "1") int current,
+        @RequestParam(value = "size", required = false, defaultValue = "10") int size
     ) {
         return ResponseEntity.ok(userService.getUsers(current, size));
     }
@@ -51,8 +51,10 @@ public class UserController {
      * API to update a specific user's profile
      */
     @PutMapping("{id}")
-    public ResponseEntity<UserGeneralDTO> updateUser(@PathVariable long id,
-                                                     @RequestBody @Validated UserUpdateDTO dto) {
+    public ResponseEntity<UserGeneralDTO> updateUser(
+        @PathVariable long id,
+        @RequestBody @Validated UserUpdateDTO dto) 
+    {
         return ResponseEntity.ok(userService.updateUser(dto));
     }
 
