@@ -5,4 +5,12 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   envDir: './env',
   plugins: [react()],
+  server: {
+    port: 8080,
+    strictPort: true,
+    open: true,
+  },
+  build: {
+    manifest: true,
+  },
 })

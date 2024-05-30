@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad070d49-24f8-497f-9c82-7b9923e82d3b" name="Changes" comment="feat(idea): update ignore list">
-      <change afterPath="$PROJECT_DIR$/tobe_blog_web/env/.env.development" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tobe_blog_web/env/.env.production" afterDir="false" />
+    <list default="true" id="ad070d49-24f8-497f-9c82-7b9923e82d3b" name="Changes" comment="feat(environments): set up environments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tobe_blog_web/src/components/footer/CopyRight.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/footer/CopyRight.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tobe_blog_web/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tobe_blog_web/src/services/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/src/services/server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tobe_blog_web/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +130,7 @@
       <workItem from="1716300336796" duration="2535000" />
       <workItem from="1716793664206" duration="1216000" />
       <workItem from="1717052225103" duration="781000" />
-      <workItem from="1717054389496" duration="1623000" />
+      <workItem from="1717054389496" duration="3330000" />
     </task>
     <task id="LOCAL-00001" summary="feat(idea): update ignore list">
       <option name="closed" value="true" />
@@ -153,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716304227792</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat(environments): set up environments">
+      <option name="closed" value="true" />
+      <created>1717056161960</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717056161960</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +192,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="feat(idea): update ignore list" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(idea): update ignore list" />
+    <MESSAGE value="feat(environments): set up environments" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(environments): set up environments" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
