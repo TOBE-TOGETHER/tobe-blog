@@ -5,7 +5,7 @@ import { LOCAL_STORAGE_KEYS } from '../commons';
 import { URL } from '../routes';
 
 const server = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_ROOT_URL,
+  baseURL: import.meta.env.VITE_SERVER_ROOT_URL,
   timeout: 60000,
 });
 
@@ -14,7 +14,7 @@ server.defaults.headers.put['Content-Type'] = 'application/json';
 
 /**
  * Request Interceptor
- * Add Authorization header too all requests besides the refresh token request
+ * Add Authorization header to all requests besides the refresh token request
  *
  * 请求拦截器
  * 为除了更换访问令牌请求之外的所有请求添加访问令牌
@@ -37,7 +37,7 @@ server.interceptors.request.use(
  * Response Interceptor
  * usage:
  *  - Refresh token and retry when got 401 error from server(excluding refresh token and login api)
- *  - If can't get new access token with the refresh token, redirect uses to login page
+ *  - If you can't get new access token with the refresh token, redirect uses to login page
  *
  * 返回拦截器
  * 作用：

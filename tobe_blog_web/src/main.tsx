@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom/client';
 
 import { AppFooter } from './components/footer';
 import { BasicLayout } from './components/layout';
+import { AuthProvider } from './contexts';
 import { MainRouter } from './routes';
 import theme from './theme.ts';
 
@@ -21,7 +22,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       }}
     >
       <BasicLayout>
-        <MainRouter />
+        <AuthProvider>
+          <MainRouter />
+        </AuthProvider>
         <AppFooter />
       </BasicLayout>
     </SnackbarProvider>

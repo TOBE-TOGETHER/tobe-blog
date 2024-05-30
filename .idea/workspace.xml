@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad070d49-24f8-497f-9c82-7b9923e82d3b" name="Changes" comment="feat(idea): update ignore list">
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/env/.env.development" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tobe_blog_web/env/.env.production" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tobe_blog_web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tobe_blog_web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tobe_blog_web/src/components/footer/CopyRight.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/src/components/footer/CopyRight.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tobe_blog_web/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tobe_blog_web/src/services/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/src/services/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tobe_blog_web/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tobe_blog_web/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +23,11 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="add_user_module" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubDefaultAccount">
@@ -52,8 +60,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "chore/idea",
-    "last_opened_file_path": "/Users/ArthurSun/IdeaProjects/tobe_blog/tobe_blog_web/src",
+    "git-widget-placeholder": "copy__files",
+    "last_opened_file_path": "/Users/ArthurSun/IdeaProjects/tobe_blog/tobe_blog_web",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.stylelint": "true",
     "node.js.detected.package.tslint": "true",
@@ -62,7 +70,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.sourceCode.HTML",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/Users/ArthurSun/IdeaProjects/tobe_blog/tobe_blog_web/node_modules/typescript/lib"
   }
 }]]></component>
@@ -77,12 +85,25 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/tobe_blog_web/src" />
       <recent name="$PROJECT_DIR$/tobe_blog_web" />
+      <recent name="$PROJECT_DIR$/tobe_blog_web/src" />
       <recent name="$PROJECT_DIR$/.idea" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tobe_blog_web/env" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.start">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/tobe_blog_web/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/tobe_blog_web/package.json" />
       <command value="run" />
@@ -95,6 +116,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
@@ -110,6 +133,9 @@
       <workItem from="1716016195356" duration="839000" />
       <workItem from="1716017070577" duration="6523000" />
       <workItem from="1716300336796" duration="2535000" />
+      <workItem from="1716793664206" duration="1216000" />
+      <workItem from="1717052225103" duration="781000" />
+      <workItem from="1717054389496" duration="1623000" />
     </task>
     <task id="LOCAL-00001" summary="feat(idea): update ignore list">
       <option name="closed" value="true" />
@@ -132,6 +158,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
