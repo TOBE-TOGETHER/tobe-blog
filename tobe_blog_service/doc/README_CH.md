@@ -1,12 +1,3 @@
-[![Spring-boot](https://img.shields.io/badge/3.2.5-6DB33F?style=flat-square&logo=SpringBoot&logoColor=white&label=Spring-Boot)](https://github.com/spring-projects/spring-boot)
-[![Spring-security](https://img.shields.io/badge/6.2.4-00BAFF?style=flat-square&logo=Spring-Security&logoColor=white&label=Spring-Security&color=blue)](https://github.com/spring-projects/spring-security)
-[![Unit Test Covered](https://img.shields.io/badge/5.9.2-25A162?style=flat-square&logo=JUnit5&logoColor=white&label=Junit5)](https://github.com/junit-team/junit5)
-
-
-## 成为更好的自己！
-
-Home: https://www.lucienchen.xyz/
-
 ## 准备
 
 - JDK 17
@@ -39,6 +30,10 @@ mvn package -Pprod
 ```bash
 mvn test
 ```
+
+## API 
+
+项目遵循 RESTful API 设计原则并已集成 spring-doc 插件，因此可通过 `/swagger-ui/index.html` 页面查看并调试所有 API.
 
 ## 配置
 

@@ -2,10 +2,12 @@
 [![Spring-security](https://img.shields.io/badge/6.2.4-00BAFF?style=flat-square&logo=Spring-Security&logoColor=white&label=Spring-Security&color=blue)](https://github.com/spring-projects/spring-security)
 [![Unit Test Covered](https://img.shields.io/badge/5.9.2-25A162?style=flat-square&logo=JUnit5&logoColor=white&label=Junit5)](https://github.com/junit-team/junit5)
 
+> To be a better yourself!  
+> 成为更好的自己！
 
-## To be a better yourself！
+This is the backend service for providing the needed APIs for the blog system, implmented with spring-boot framework.
 
-Home: https://www.lucienchen.xyz/
+[中文文档](./doc/README_CH.md)  
 
 ## Prerequisites
 
@@ -35,10 +37,14 @@ mvn package -Pprod
 
 ## Testing
 
-Unit tests are used in this project to ensure code quality. Rich test samples and `Juint5 + H2` solution achieve comprehensive coverage from API, service layer to database data.
+Unit tests are being used in this project to ensure code quality. Rich test samples and `Juint5 + H2` solution achieve comprehensive coverage from API, service layer to database data.
 ```bash
 mvn test
 ```
+
+## API 
+
+Project follows the RESTful API design principles and has integrated the spring-doc plugin, thus the APIs can be viewed and online debugged by `/swagger-ui/index.html` page.
 
 ## Configuation
 
@@ -56,4 +62,7 @@ Major dependencies are as below：
 - Junit: 5.9.2
 
 
-   
+
+
+
+
