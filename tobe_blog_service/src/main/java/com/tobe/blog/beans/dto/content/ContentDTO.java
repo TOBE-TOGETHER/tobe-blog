@@ -1,13 +1,12 @@
 package com.tobe.blog.beans.dto.content;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * @author louis
- * @version 1.0
- * @date 2024/6/1 15:38
- */
-public class ContentDTO {
+import lombok.Data;
+
+@Data
+public class ContentDTO implements Serializable {
     protected String id;
     protected String title;
     protected String description;

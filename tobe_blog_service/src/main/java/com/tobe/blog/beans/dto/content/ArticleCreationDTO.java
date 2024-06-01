@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticleCreationDTO extends ContentCreationDTO{
+@EqualsAndHashCode(callSuper = true)
+public class ArticleCreationDTO extends ContentCreationDTO {
     private String subTitle;
     private String content;
 }

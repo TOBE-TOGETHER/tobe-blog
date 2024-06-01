@@ -30,7 +30,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @EnableWebMvc
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled=true)
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig implements WebMvcConfigurer {
 
     private final TokenFilter tokenFilter;
@@ -42,7 +42,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .authenticationEntryPoint((request, response, exception) -> {
                             log.info("Failed in auth: " + exception.getMessage());
                             response.addHeader("WWW-Authenticate", "Basic realm=TOBE-JWT");
-                            response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+                            response.sendError(HttpStatus.UNAUTHORIZED.value(),
+                                    HttpStatus.UNAUTHORIZED.getReasonPhrase());
                         }))
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/v1/auth/**", "/v1/users/**", "/v1/api/**", "/api-docs/**",
                         "/swagger-ui/**", "/actuator/**"))
