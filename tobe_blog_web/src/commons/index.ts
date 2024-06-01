@@ -19,6 +19,9 @@ export const FEATURE_CODE = {
   VOCABULARY_MODULE: 'vocabularyModule',
 };
 
+export type FeatureCodeKey = keyof typeof FEATURE_CODE;
+export type AuthorityKey = keyof typeof AUTHORITY;
+
 export function authed(requiredRole?: string[]): boolean {
   const userAuthorities = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.AUTHORITIES) || '[]');
   // if no role required, then return true directly

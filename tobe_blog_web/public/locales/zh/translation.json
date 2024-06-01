@@ -1,0 +1,430 @@
+{
+  "breadcrumbs": {
+    "content": "正文",
+    "home": "首页",
+    "subjects": "合集",
+    "articles": "笔记",
+    "projects": "计划",
+    "vocabularies": "单词本"
+  },
+  "components": {
+    "upload-pics": "上传图片",
+    "edit-icon-button": {
+      "save": "保存",
+      "edit": "修改"
+    },
+    "standard-button": {
+      "detail": "详情",
+      "delete": "删除",
+      "create": "新增",
+      "release": "公开"
+    },
+    "rich-editor": {
+      "placeholder": "请输入内容..."
+    },
+    "tag-select": {
+      "placeholder": "请输入标签名...",
+      "msg": {
+        "success": "添加成功",
+        "error": "添加失败",
+        "warning": "名字长度过长"
+      }
+    },
+    "function-bar": {
+      "recent-only": "最新内容",
+      "card-view-btn": "精简模式",
+      "search-box-placeholder": "搜索..."
+    },
+    "meta-bar": {
+      "view": "阅读量",
+      "edit-btn": "编辑"
+    },
+    "author-panel": {
+      "public-creation-count": "公开内容数",
+      "view-count": "累积阅读量"
+    },
+    "general-card-view": {
+      "title": {
+        "open": "所有人可见",
+        "private": "仅自己可见"
+      }
+    }
+  },
+  "home-page": {
+    "projects": "计划",
+    "articles": "笔记",
+    "vocabularies": "单词本",
+    "workout": "锻炼",
+    "activities": "活动",
+    "view-count": "阅读量",
+    "subjects": "合集",
+    "tools": "工具",
+    "end-line": "实在是没有了。。。",
+    "load-more": "加载更多",
+    "no-content": "找不到相关内容",
+    "top5-active-users": "活跃排行榜",
+    "top5-popular-subjects": "合集排行榜",
+    "tag-statistics": "标签筛选"
+  },
+  "sign-in": {
+    "title": "欢迎登陆 TOBE",
+    "sign-in-btn": "登录",
+    "forget-pw-btn": "忘记密码?",
+    "sign-up-btn": "注册账号",
+    "remember-me-btn": "记住登录",
+    "description": {
+      "email": "邮箱地址",
+      "password": "密码"
+    },
+    "msg": {
+      "success": "登录成功",
+      "error": "登录失败，请再次确认您的用户名密码"
+    }
+  },
+  "sign-up": {
+    "title": "欢迎加入 TOBE",
+    "sign-up-btn": "注册",
+    "sign-in-btn": "已有账号? 登录",
+    "fields": {
+      "first-name": "名字",
+      "last-name": "姓氏",
+      "email": "邮箱地址",
+      "password": "密码",
+      "password-confirm": "再次确认密码"
+    },
+    "msg": {
+      "success": "注册成功",
+      "error": "注册失败",
+      "warning": {
+        "invalid-email-format": "邮件格式异常",
+        "two-password-dismatch": "两次输入的密码不一致",
+        "invalid-password-length": "密码长度应为6至8位"
+      }
+    }
+  },
+  "app-header": {
+    "sign-in-btn": "登录",
+    "pages": {
+      "home": "首页",
+      "news": "近期动态",
+      "about": "关于",
+      "article": "文章",
+      "vocabulary": "单词本",
+      "subject": "合集",
+      "tool": "工具"
+    },
+    "settings": {
+      "btn-tooltip": "打开设置",
+      "profile": "用户信息",
+      "my-zone": "统计",
+      "projects": "计划",
+      "articles": "笔记",
+      "vocabularies": "单词本",
+      "subjects": "合集",
+      "sign-out": "登出系统"
+    },
+    "language": {
+      "btn-label": "语言",
+      "btn-tooltip": "切换语言",
+      "options": {
+        "zh": "中文",
+        "en": "EN"
+      }
+    }
+  },
+  "profile-setting": {
+    "form-title": "编辑您的档案",
+    "fields": {
+      "first-name": "名字",
+      "last-name": "姓氏",
+      "phone-number": "联系电话",
+      "email": "邮箱地址",
+      "address": "联系地址",
+      "blog": "博客地址",
+      "introduction": "个人介绍",
+      "introduction-placeholder": "让大家更了解你...",
+      "position": "职位",
+      "background-img": "主页背景图片",
+      "photo-img": "个人头像照片"
+    },
+    "back-btn": "返回",
+    "submit-btn": "提交",
+    "preview-btn": "预览",
+    "msg": {
+      "success": "更新成功",
+      "error": "更新失败"
+    }
+  },
+  "my-menu": {
+    "actions": {
+      "share": "分享",
+      "create-project": "创建项目"
+    }
+  },
+  "user-table": {
+    "title": "用户",
+    "label": {
+      "id": "ID",
+      "email": "邮箱",
+      "username": "用户名",
+      "first-name": "名字",
+      "last-name": "姓氏",
+      "phone-number": "联系电话",
+      "operation": "操作"
+    }
+  },
+  "domain-page": {
+    "load-more": "加载更多",
+    "msg": {
+      "error": "操作失败"
+    }
+  },
+  "projects-page": {
+    "page-main-title": "计划"
+  },
+  "project-creation-page": {
+    "form-title": "创建新的项目",
+    "fields": {
+      "name": "项目名称",
+      "description": "项目描述",
+      "target-start-time": "计划开始时间",
+      "target-end-time": "计划结束时间"
+    },
+    "back-btn": "返回",
+    "submit-btn": "提交",
+    "msg": {
+      "success": "创建成功",
+      "error": "创建失败",
+      "warning": {
+        "name-empty": "项目名称不能为空",
+        "target-start-time-empty": "计划开始时间不可以为空",
+        "target-end-time-empty": "计划结束时间不可以为空",
+        "target-invalid-start-end-time": "计划开始时间不可以晚于结束时间"
+      }
+    }
+  },
+  "project-detail-page": {
+    "fields": {
+      "name": "项目名称",
+      "description": "项目描述",
+      "target-start-time": "计划开始时间",
+      "target-end-time": "计划结束时间"
+    },
+    "msg": {
+      "error": "操作失败",
+      "success": "操作成功"
+    }
+  },
+  "project-progress": {
+    "title": "进展",
+    "add-new-tip": "有任何进展可以分享么？",
+    "send-btn": "发布",
+    "msg": {
+      "error": "操作失败",
+      "warning": "请输入有效内容",
+      "success": "操作成功"
+    }
+  },
+  "dashboard-nav": {
+    "pages": {
+      "statistics": "统计",
+      "users": "用户",
+      "projects": "计划",
+      "articles": "笔记",
+      "vocabularies": "单词本",
+      "subjects": "合集"
+    },
+    "msg": {
+      "error": "获取数据失败"
+    }
+  },
+  "statistics-page": {
+    "page-main-title": "统计",
+    "domain": {
+      "title": {
+        "project": "计划总览",
+        "article": "笔记总览",
+        "vocabulary": "单词本总览"
+      },
+      "public": "公开总计",
+      "all": "内容总计",
+      "view-count": "阅读总计(千)"
+    },
+    "msg": {
+      "error": "获取数据失败"
+    }
+  },
+  "news-page": {
+    "page-main-title": "近期动态",
+    "update-at": "更新于 ",
+    "publish-at": "发表于 ",
+    "news-types": {
+      "project": "计划",
+      "article": "笔记"
+    }
+  },
+  "about-page": {
+    "page-main-title": "关于",
+    "about-tobe": {
+      "title": "你好啊旅行者",
+      "p1": "TOBE 是一个专注个人成长，积累，经验分享的小站。在这纷杂的世界中留出一片空间，静下心来沉淀自己。如果你碰巧发现这里，而且能找到让你感兴趣或是有帮助的东西，那说明你与这里有着美妙的缘分。",
+      "p2": "当然，这里非常欢迎你成为一位分享者。你可以微信联系我注册账号或是获取源码搭建属于自己的 TOBE。"
+    },
+    "contact": {
+      "title": "联系我们",
+      "wechat": "微信：LucienChen_ChenXi",
+      "email": "邮箱：474504303@qq.com",
+      "linkedin": "领英："
+    }
+  },
+  "articles-page": {
+    "page-main-title": "笔记"
+  },
+  "article-creation-page": {
+    "page-main-title": "创建新的笔记",
+    "expand-label": "其他补充信息",
+    "fields": {
+      "title": "标题",
+      "sub-title": "副标题",
+      "description": "简述",
+      "tag": "标签",
+      "content-protected": "该篇文章只有登录用户才能看到完整内容"
+    },
+    "submit-btn": "保存",
+    "back-btn": "返回",
+    "msg": {
+      "success": "操作成功",
+      "error": "操作失败"
+    }
+  },
+  "article-detail-page": {
+    "page-main-title": "编辑笔记"
+  },
+  "article-reading-page": {
+    "back-btn": "返回",
+    "relevant-articles": "相关内容",
+    "content-protected": "请登录以阅读此文",
+    "msg": {
+      "error": "加载数据失败"
+    }
+  },
+  "subject-creation-page": {
+    "page-main-title": "创建一个合集",
+    "fields": {
+      "name": "合集名",
+      "description": "合集描述",
+      "cover-img-url": "封面链接"
+    },
+    "msg": {
+      "success": "创建成功",
+      "error": "创建失败",
+      "warning": {
+        "name-empty": "合集名不能为空"
+      }
+    },
+    "submit-btn": "保存",
+    "back-btn": "返回"
+  },
+  "subject-detail-page": {
+    "btn": {
+      "add": "新增",
+      "delete": "删除"
+    },
+    "msg": {
+      "success": "操作成功",
+      "error": "操作失败"
+    }
+  },
+  "subjects-page": {
+    "page-main-title": "合集"
+  },
+  "subjects-list-page": {
+    "page-main-title": "合集",
+    "msg": {
+      "error": "加载数据失败"
+    }
+  },
+  "subject-reading-page": {
+    "tip": {
+      "tba": "敬请期待"
+    },
+    "msg": {
+      "error": "加载数据失败"
+    }
+  },
+  "vocabulary-creation-page": {
+    "page-main-title": "创建一个单词本",
+    "fields": {
+      "title": "标题",
+      "description": "描述",
+      "language": "语言",
+      "tags": "标签"
+    },
+    "msg": {
+      "success": "创建成功",
+      "error": "创建失败"
+    },
+    "submit-btn": "保存",
+    "back-btn": "返回"
+  },
+  "vocabularies-page": {
+    "page-main-title": "单词本",
+    "vocabulary-table": {
+      "label": {
+        "title": "标题",
+        "description": "简述",
+        "createTime": "创建时间",
+        "updateTime": "更新时间",
+        "operation": "操作"
+      }
+    }
+  },
+  "tools-list-page": {
+    "page-main-title": "工具",
+    "pomodoro": {
+      "name": "番茄时钟",
+      "desc": "一款基于番茄时间管理理论的闹钟"
+    },
+    "time-converter": {
+      "name": "时间转换工具",
+      "desc": "一款便于使用的时间戳转换工具"
+    }
+  },
+  "tools-pomodoro": {
+    "page-main-title": "番茄时钟",
+    "tip": {
+      "start": "开始一轮工作倒计时"
+    },
+    "btn": {
+      "start": "开始",
+      "pause": "暂停",
+      "reset": "重置"
+    }
+  },
+  "tools-time-converter": {
+    "page-main-title": "时间转换",
+    "curent-timestamp": "当前时间戳（Timestamp）",
+    "tip": ", 点击右侧按键查询当前时间",
+    "timestamp-label": "时间戳(Unix)",
+    "time-label": "本地时间",
+    "timestamp-input-helper": "请输入时间戳",
+    "time-input-helper": "请输入时间"
+  },
+  "word-dialog": {
+    "add": "新增",
+    "title": "编辑单词本",
+    "fields": {
+      "word": "文本",
+      "partOfSpeech": "词性",
+      "meaningInChinese": "中文含义",
+      "meaningInEnglish": "英文含义"
+    },
+    "save": "保存",
+    "back": "返回",
+    "delete": "删除",
+    "msg": {
+      "error": "操作失败",
+      "success": "操作成功"
+    }
+  }
+}
