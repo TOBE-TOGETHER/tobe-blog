@@ -24,7 +24,7 @@ CREATE TABLE `tobe_core_user`
     UNIQUE KEY `tobe_core_user_ID_uindex` (`ID`),
     UNIQUE KEY `tobe_core_user_EMAIL_uindex` (`EMAIL`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 10
+  AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci
 ;
@@ -64,6 +64,6 @@ CREATE TABLE `tobe_core_user_role`
     UNIQUE KEY `tobe_core_user_role_ID_uindex` (`ID`),
     KEY `tobe_core_user_role_USER_ID_index` (`USER_ID`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 40
+  AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci
