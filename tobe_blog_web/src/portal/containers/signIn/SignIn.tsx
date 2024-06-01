@@ -1,20 +1,35 @@
-import { Box, Button, Container, Grid, Link, Paper, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Link,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../../components/loading/Loading.tsx';
 
-import { loginUser, useAuthDispatch } from '../../../contexts';
+import {
+  loginUser,
+  useAuthDispatch,
+} from '../../../contexts';
 import { URL } from '../../../routes';
 
 export default function SignIn() {
   const dispatch = useAuthDispatch();
+  const [openLoading, updateOpenLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    updateOpenLoading(true);
 
     loginUser(dispatch, {
       username: data.get('email'),
@@ -30,7 +45,9 @@ export default function SignIn() {
         enqueueSnackbar(t('sign-in.msg.error'), {
           variant: 'error',
         });
-      });
+      }).finally(() => {
+      updateOpenLoading(false);
+    });
   };
 
   return (
@@ -39,6 +56,7 @@ export default function SignIn() {
       maxWidth="sm"
       sx={{ mb: 4, mt: '15vh' }}
     >
+      <Loading open={openLoading} />
       <Paper
         variant="outlined"
         sx={{
