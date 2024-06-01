@@ -1,27 +1,68 @@
-## To be a better yourself
+[![Spring-boot](https://img.shields.io/badge/3.2.5-6DB33F?style=flat-square&logo=SpringBoot&logoColor=white&label=Spring-Boot)](https://github.com/spring-projects/spring-boot)
+[![Spring-security](https://img.shields.io/badge/6.2.4-00BAFF?style=flat-square&logo=Spring-Security&logoColor=white&label=Spring-Security&color=blue)](https://github.com/spring-projects/spring-security)
+[![Unit Test Covered](https://img.shields.io/badge/5.9.2-25A162?style=flat-square&logo=JUnit5&logoColor=white&label=Junit5)](https://github.com/junit-team/junit5)
 
-Home: https://www.lucienchen.xyz/
-![image](https://github.com/LucienChenXi92/tobe/assets/44730766/a04ceb91-6c37-49c7-a9ab-6c71d170fa8a)
+> To be a better yourself!  
+> 成为更好的自己！
 
-该项目目前处于开发初期阶段，在完善代码质量，添加单元测试，以及接口文档后会正式开源。
-欢迎研究学习，同时也欢迎提出意见，贡献代码。
+This is the backend service for providing the needed APIs for the blog system, implmented with spring-boot framework.
 
-### 准备
+[中文文档](./doc/README_CH.md)  
 
-想要启动该项目，你需要准备如下环境：
-1. JDK 11
-2. IDE (IntellJ or VS code)
+## Prerequisites
 
-### 启动
+- JDK 17
+- Maven
+- IDE (VSCode, IntellJ)
 
-该项目由 `Maven` 构建，因此用 IDE 加载项目后用 `mvn install` 命令来装载相关依赖，执行成功后利用 `mvn spring-boot:run` 命令启动项目，默认端口为 `8080`。
+## How to run ?
 
-### 打包
+```bash
+mvn spring-boot:run
+```
 
-测试环境：`mvn package`
-生产环境：`mvn package -Pprod`
+Default port: `8080`
 
-### 配置
+## How to build ?
 
-项目配置都放在 `resources` 路径下的 `application` 开头的三个 yaml 文件中。
-   
+Local or development env:
+```bash
+mvn package
+```
+
+Production env:
+```bash
+mvn package -Pprod
+```
+
+## Testing
+
+Unit tests are being used in this project to ensure code quality. Rich test samples and `Juint5 + H2` solution achieve comprehensive coverage from API, service layer to database data.
+```bash
+mvn test
+```
+
+## API 
+
+Project follows the RESTful API design principles and has integrated the spring-doc plugin, thus the APIs can be viewed and online debugged by `/swagger-ui/index.html` page.
+
+## Configuation
+
+Project configurations are all placed in yaml files starting with `application` under the `resources` path.
+
+## Dependencies
+
+Major dependencies are as below：
+- spring-boot: 3.2.5
+- spring-security: 6.2.4
+- mybatis-plus: 3.5.6
+- spring-boot-starter-data-redis: 3.2.5
+- spring-doc: 2.5.0
+- h2: 2.2.224
+- Junit: 5.9.2
+
+
+
+
+
+
