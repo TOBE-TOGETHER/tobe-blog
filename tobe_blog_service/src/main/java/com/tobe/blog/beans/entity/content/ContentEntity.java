@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("tobe_content_info")
-public class BaseContentEntity extends BaseEntity {
+public class ContentEntity extends BaseEntity {
     protected String id;
     protected String title;
     protected String description;
@@ -23,7 +23,7 @@ public class BaseContentEntity extends BaseEntity {
     protected Timestamp publishTime;
     protected Long viewCount;
     protected Long likeCount;
-    protected Integer ownerId;
+    protected Long ownerId;
     protected String contentType;
     // manipulate if the content require login to view
     protected Boolean contentProtected;

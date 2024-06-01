@@ -5,4 +5,10 @@ public class Const {
         public static final String ADMIN = "ROLE_ADMIN";
         public static final String BASIC = "ROLE_BASIC";
     }
+
+    public static enum ContentType {
+        ARTICLE,
+        PLAN,
+        VOC
+    }
 }
