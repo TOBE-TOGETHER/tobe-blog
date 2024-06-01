@@ -2,12 +2,12 @@ export interface Column {
   id: string;
   label: string;
   minWidth?: number;
-  align?: "left" | "right" | "center";
+  align?: 'left' | 'right' | 'center';
   format?: (value: any) => string;
 }
 
 export interface Operation {
-  name: "detail" | "delete" | "active" | "release" | "close";
+  name: 'detail' | 'delete' | 'active' | 'release' | 'close';
   onClick: (id: number | string) => void;
   hide?: (data: any) => boolean;
 }
@@ -182,9 +182,9 @@ export interface VocabularyUpdateDTO extends VocabularyCreationDTO {
 }
 
 export enum Domain {
-  Article = "ARTICLE",
-  Project = "PROJECT",
-  Vocabulary = "VOCABULARY",
+  Article = 'ARTICLE',
+  Project = 'PROJECT',
+  Vocabulary = 'VOCABULARY',
 }
 
 export interface BaseInfoOverview {
@@ -271,7 +271,7 @@ export interface BreadcrumbsNode {
 }
 
 export interface WordGeneralDTO {
-  id: number;
+  id: string;
   vocabularyId: string;
   word: string;
   partOfSpeech: string;
@@ -287,4 +287,4 @@ export interface WordCreateDTO {
   meaningInEnglish: string;
 }
 
-export interface WordUpdateDTO extends WordGeneralDTO { }
+export interface WordUpdateDTO extends WordGeneralDTO {}
