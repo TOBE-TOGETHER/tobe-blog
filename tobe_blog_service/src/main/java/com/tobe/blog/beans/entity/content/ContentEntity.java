@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @EqualsAndHashCode(callSuper = true)
 @TableName("tobe_content_info")
 public class ContentEntity extends BaseEntity {
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_UUID)
     protected String id;
     protected String title;
     protected String description;

@@ -45,8 +45,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                             response.sendError(HttpStatus.UNAUTHORIZED.value(),
                                     HttpStatus.UNAUTHORIZED.getReasonPhrase());
                         }))
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/v1/auth/**", "/v1/users/**", "/v1/api/**", "/api-docs/**",
-                        "/swagger-ui/**", "/actuator/**"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/v1/**", "/api-docs/**", "/swagger-ui/**", "/actuator/**"))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
                         .requestMatchers("/error").permitAll()

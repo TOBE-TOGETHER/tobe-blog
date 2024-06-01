@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @TableName("tobe_article_info")
 public class ArticleEntity extends BaseEntity {
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.INPUT)
     private String contentId;
     private String subTitle;
     private String content;
