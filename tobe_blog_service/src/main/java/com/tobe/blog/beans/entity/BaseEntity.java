@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Data
-public class BaseEntity {
+public class BaseEntity implements Serializable {
+
     @TableLogic
     protected Boolean deleted;
     @TableField(fill = FieldFill.INSERT)
