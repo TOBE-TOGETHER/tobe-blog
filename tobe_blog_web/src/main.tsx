@@ -21,12 +21,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         horizontal: 'right',
       }}
     >
-      <BasicLayout>
-        <AuthProvider>
+      <AuthProvider>
+        <BasicLayout>
           <MainRouter />
-        </AuthProvider>
-        <AppFooter />
-      </BasicLayout>
+          <AppFooter />
+        </BasicLayout>
+      </AuthProvider>
     </SnackbarProvider>
   </React.StrictMode>
 );
