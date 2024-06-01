@@ -1,5 +1,6 @@
 package com.tobe.blog.core.service;
 
+import com.tobe.blog.core.exception.TobeRuntimeException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -83,7 +84,7 @@ public class UserServiceTests {
         userService.createUser(dto);
 
         // DuplicateKeyException should be throw when executing the same request again
-        Assertions.assertThrows(DuplicateKeyException.class, () -> userService.createUser(dto));
+        Assertions.assertThrows(TobeRuntimeException.class, () -> userService.createUser(dto));
     }
 
     @Test
