@@ -1,9 +1,6 @@
 package com.tobe.blog.beans.entity.content;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.tobe.blog.beans.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,9 +13,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @TableName("tobe_plan_info")
-public class PlanEntity extends BaseEntity {
-    @TableId(type = IdType.AUTO)
-    private String contentId;
+public class PlanEntity extends BaseSubContentEntity {
     private Timestamp targetStartTime;
     private Timestamp targetEndTime;
 }

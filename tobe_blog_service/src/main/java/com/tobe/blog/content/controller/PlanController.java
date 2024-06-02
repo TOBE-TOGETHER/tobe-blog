@@ -1,9 +1,9 @@
 package com.tobe.blog.content.controller;
 
-/**
- * @author louis
- * @version 1.0
- * @date 2024/6/1 15:18
- */
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/v1/plans")
 public class PlanController {
 }

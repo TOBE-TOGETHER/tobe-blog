@@ -2,30 +2,26 @@ package com.tobe.blog.content.controller;
 
 import com.tobe.blog.beans.dto.content.ArticleCreationDTO;
 import com.tobe.blog.beans.dto.content.ArticleDTO;
+import com.tobe.blog.beans.dto.content.ArticleUpdateDTO;
+import com.tobe.blog.beans.entity.content.ArticleEntity;
+import com.tobe.blog.content.mapper.ArticleMapper;
 import com.tobe.blog.content.service.ArticleService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/v1/articles")
 @RequiredArgsConstructor
-public class ArticleController extends AbstractContentController<ArticleDTO, ArticleCreationDTO> {
+public class ArticleController extends
+        BaseContentController<ArticleDTO, ArticleCreationDTO, ArticleUpdateDTO, ArticleEntity, ArticleMapper, ArticleService> {
 
-    private final ArticleService articleService;
+    private ArticleService articleService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ArticleDTO> getArticleById(@RequestParam String id) {
-        return ResponseEntity.ok(articleService.getDTOById(id));
+    @Override
+    protected ArticleService getConcreteSubContentService() {
+        return this.articleService;
     }
 
-    @PostMapping
-    public ResponseEntity<ArticleDTO> createArticle(@RequestBody ArticleCreationDTO dto) {
-        return ResponseEntity.ok(articleService.save(dto));
-    }
 }

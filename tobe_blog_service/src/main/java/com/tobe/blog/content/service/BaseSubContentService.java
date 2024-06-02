@@ -6,42 +6,21 @@ import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.content.ContentCreationDTO;
 import com.tobe.blog.beans.dto.content.ContentDTO;
 import com.tobe.blog.beans.dto.content.ContentUpdateDTO;
-import com.tobe.blog.beans.entity.BaseEntity;
+import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
 import com.tobe.blog.beans.entity.content.ContentEntity;
-import com.tobe.blog.core.exception.TobeRuntimeException;
 import com.tobe.blog.core.utils.SecurityUtil;
 
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class AbstractContentService<G extends ContentDTO, C extends ContentCreationDTO, U extends ContentUpdateDTO, M extends BaseMapper<E>, E extends BaseEntity>
+public abstract class BaseSubContentService<G extends ContentDTO, C extends ContentCreationDTO, U extends ContentUpdateDTO, E extends BaseSubContentEntity, M extends BaseMapper<E>>
         extends ServiceImpl<M, E> {
 
     @Autowired
     private ContentService contentService;
-
-    @Transactional
-    public G save(C creationDTO) {
-        // save content level data
-        ContentEntity content = new ContentEntity();
-        BeanUtils.copyProperties(creationDTO, content);
-        content.setContentType(getContentType().name());
-        content.setDeleted(Boolean.FALSE);
-        content.setPublicToAll(Boolean.FALSE);
-        content.setViewCount(0L);
-        content.setLikeCount(0L);
-        content.setOwnerId(SecurityUtil.getUserId());
-        contentService.save(content);
-        // fill in content level field values
-        G result = getConcreteDTO();
-        BeanUtils.copyProperties(content, result);
-        // save concrete level data and return general concrete DTO
-        return this.saveConcreteContentValues(result, creationDTO);
-    }
 
     public G getDTOById(String id) {
         final ContentEntity contentEntity = contentService.getById(id);
@@ -58,12 +37,33 @@ public abstract class AbstractContentService<G extends ContentDTO, C extends Con
     }
 
     @Transactional
+    public G save(C creationDTO) {
+        // save content level data
+        ContentEntity contentEntity = new ContentEntity();
+        BeanUtils.copyProperties(creationDTO, contentEntity);
+        contentEntity.setContentType(getContentType().name());
+        contentEntity.setDeleted(Boolean.FALSE);
+        contentEntity.setPublicToAll(Boolean.FALSE);
+        contentEntity.setViewCount(0L);
+        contentEntity.setLikeCount(0L);
+        contentEntity.setOwnerId(SecurityUtil.getUserId());
+        contentService.save(contentEntity);
+        // save sub level data and return general concrete DTO
+        E concreteEntity = this.getConcreteEntity();
+        concreteEntity.setContentId(contentEntity.getId());
+        concreteEntity.setDeleted(Boolean.FALSE);
+        BeanUtils.copyProperties(creationDTO, concreteEntity);
+        this.save(concreteEntity);
+        return this.getDTOById(contentEntity.getId());
+    }
+
+    @Transactional
     public G update(U updateDTO) {
         // validate and update content level values
         final ContentEntity contentEntity = contentService.getAndValidateContent(updateDTO.getId());
         BeanUtils.copyProperties(updateDTO, contentEntity);
         contentService.updateById(contentEntity);
-        // update concrete level values
+        // update sub level values
         final E concreteEntity = this.getById(updateDTO.getId());
         BeanUtils.copyProperties(updateDTO, concreteEntity);
         this.updateById(concreteEntity);
@@ -72,15 +72,15 @@ public abstract class AbstractContentService<G extends ContentDTO, C extends Con
     }
 
     @Transactional
-    protected void delete(String id) {
+    public void delete(String id) {
         contentService.getAndValidateContent(id);
         contentService.removeById(id);
         this.removeById(id);
     }
 
-    protected abstract G saveConcreteContentValues(G contentDTO, C creationDTO);
-
     protected abstract G getConcreteDTO();
+
+    protected abstract E getConcreteEntity();
 
     protected abstract Const.ContentType getContentType();
 }
