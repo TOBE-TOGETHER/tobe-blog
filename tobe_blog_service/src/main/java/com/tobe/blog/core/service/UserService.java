@@ -132,14 +132,14 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
         String payload = GsonUtil.toJson(dto);
         if (cacheUtil.getExpireTime(payload) > 0) {
             throw new TobeRuntimeException("The request has been submitted, please don't repeatly submit.");
-        };
+        }
         cacheUtil.set(payload, null, 3);
     }
 
     private void validateEmailExist(String email) {
         boolean emailExist = this.getOneOpt(
-            new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getEmail, email))
-            .isPresent();
+                new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getEmail, email))
+                .isPresent();
         if (emailExist) {
             throw new TobeRuntimeException("The email has been registered, please login directly.");
         }
