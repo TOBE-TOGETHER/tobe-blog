@@ -1,5 +1,7 @@
 package com.tobe.blog.beans.dto.content;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ArticleCreationDTO extends BaseContentCreationDTO {
-    private String subTitle;
-    private String content;
+public class PlanCreationDTO extends BaseContentCreationDTO {
+    private Timestamp targetStartTime;
+    private Timestamp targetEndTime;
 }

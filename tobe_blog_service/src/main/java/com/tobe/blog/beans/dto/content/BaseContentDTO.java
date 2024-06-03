@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class ContentDTO implements Serializable {
+public class BaseContentDTO implements Serializable {
     protected String id;
     protected String title;
     protected String description;

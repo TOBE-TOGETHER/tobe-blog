@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.tobe.blog.beans.dto.content.ContentCreationDTO;
-import com.tobe.blog.beans.dto.content.ContentDTO;
-import com.tobe.blog.beans.dto.content.ContentUpdateDTO;
+import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
+import com.tobe.blog.beans.dto.content.BaseContentDTO;
+import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
 import com.tobe.blog.content.service.BaseSubContentService;
 
-public abstract class BaseContentController<G extends ContentDTO, C extends ContentCreationDTO, U extends ContentUpdateDTO, E extends BaseSubContentEntity, M extends BaseMapper<E>, S extends BaseSubContentService<G, C, U, E, M>> {
+public abstract class BaseContentController<G extends BaseContentDTO, C extends BaseContentCreationDTO, U extends BaseContentUpdateDTO, E extends BaseSubContentEntity, M extends BaseMapper<E>, S extends BaseSubContentService<G, C, U, E, M>> {
 
     protected abstract S getConcreteSubContentService();
 

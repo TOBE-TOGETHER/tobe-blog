@@ -13,11 +13,6 @@ public class ArticleService extends
         BaseSubContentService<ArticleDTO, ArticleCreationDTO, ArticleUpdateDTO, ArticleEntity, ArticleMapper> {
 
     @Override
-    protected ContentType getContentType() {
-        return ContentType.ARTICLE;
-    }
-
-    @Override
     protected ArticleDTO getConcreteDTO() {
         return new ArticleDTO();
     }
@@ -25,6 +20,11 @@ public class ArticleService extends
     @Override
     protected ArticleEntity getConcreteEntity() {
         return new ArticleEntity();
+    }
+
+    @Override
+    protected ContentType getContentType() {
+        return ContentType.ARTICLE;
     }
 
 }

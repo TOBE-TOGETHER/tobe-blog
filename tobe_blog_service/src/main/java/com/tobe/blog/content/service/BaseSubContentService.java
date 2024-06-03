@@ -3,9 +3,9 @@ package com.tobe.blog.content.service;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tobe.blog.beans.consts.Const;
-import com.tobe.blog.beans.dto.content.ContentCreationDTO;
-import com.tobe.blog.beans.dto.content.ContentDTO;
-import com.tobe.blog.beans.dto.content.ContentUpdateDTO;
+import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
+import com.tobe.blog.beans.dto.content.BaseContentDTO;
+import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
 import com.tobe.blog.beans.entity.content.ContentEntity;
 import com.tobe.blog.core.utils.SecurityUtil;
@@ -16,7 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class BaseSubContentService<G extends ContentDTO, C extends ContentCreationDTO, U extends ContentUpdateDTO, E extends BaseSubContentEntity, M extends BaseMapper<E>>
+public abstract class BaseSubContentService<G extends BaseContentDTO, C extends BaseContentCreationDTO, U extends BaseContentUpdateDTO, E extends BaseSubContentEntity, M extends BaseMapper<E>>
         extends ServiceImpl<M, E> {
 
     @Autowired

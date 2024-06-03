@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ArticleDTO extends ContentDTO {
-    private String content;
+public class ArticleDTO extends BaseContentDTO {
     private String subTitle;
+    private String content;
 }

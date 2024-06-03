@@ -1,6 +1,6 @@
 package com.tobe.blog.content.controller;
 
-import com.tobe.blog.beans.dto.content.ContentDTO;
+import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.content.service.ContentService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,9 +22,9 @@ public class ContentController {
     private final ContentService contentService;
 
     @GetMapping
-    public ResponseEntity<List<ContentDTO>> getContents() {
-        List<ContentDTO> result = contentService.list().stream().map(e -> {
-            ContentDTO dto = new ContentDTO();
+    public ResponseEntity<List<BaseContentDTO>> getContents() {
+        List<BaseContentDTO> result = contentService.list().stream().map(e -> {
+            BaseContentDTO dto = new BaseContentDTO();
             BeanUtils.copyProperties(e, dto);
             return dto;
         }).collect(Collectors.toList());

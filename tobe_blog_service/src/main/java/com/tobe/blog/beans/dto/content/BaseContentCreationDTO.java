@@ -5,8 +5,8 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class ContentUpdateDTO implements Serializable {
-    protected String id;
+public class BaseContentCreationDTO implements Serializable {
+    protected String title;
     protected String description;
     protected Boolean contentProtected;
 }
