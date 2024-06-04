@@ -12,7 +12,7 @@ public interface BaseSubContentMapper<D, E> extends BaseMapper<E> {
         throw new UnsupportedOperationException("pageDTOsByUserId needs to be implemented by each concrete mapper");
     }
 
-    default D getDTOById(@Param("id") String id) {
+    default D getDTOById(@Param("tableName") String tableName, @Param("id") String id) {
         throw new UnsupportedOperationException("getDTOById needs to be implemented by each concrete mapper");
     }
 }
