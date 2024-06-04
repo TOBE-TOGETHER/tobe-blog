@@ -1,13 +1,15 @@
 package com.tobe.blog.content.service;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
+import com.tobe.blog.beans.dto.content.BaseSearchFilter;
 import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
 import com.tobe.blog.beans.entity.content.ContentEntity;
+import com.tobe.blog.content.mapper.BaseSubContentMapper;
 import com.tobe.blog.core.utils.SecurityUtil;
 
 import java.util.Objects;
@@ -16,19 +18,23 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class BaseSubContentService<G extends BaseContentDTO, C extends BaseContentCreationDTO, U extends BaseContentUpdateDTO, E extends BaseSubContentEntity, M extends BaseMapper<E>>
-        extends ServiceImpl<M, E> {
+public abstract class BaseSubContentService<
+    D extends BaseContentDTO, 
+    C extends BaseContentCreationDTO, 
+    U extends BaseContentUpdateDTO, 
+    E extends BaseSubContentEntity, 
+    M extends BaseSubContentMapper<D, E>> extends ServiceImpl<M, E> {
 
     @Autowired
     private ContentService contentService;
 
-    public G getDTOById(String id) {
+    public D getDTOById(String id) {
         final ContentEntity contentEntity = contentService.getById(id);
         if (Objects.isNull(contentEntity)) {
             return null;
         }
         // build result DTO and copy content level values
-        final G result = getConcreteDTO();
+        final D result = getConcreteDTO();
         BeanUtils.copyProperties(contentEntity, result);
         // get concrete entity and set values if entity existings
         final E concreteEntity = this.getById(id);
@@ -37,7 +43,7 @@ public abstract class BaseSubContentService<G extends BaseContentDTO, C extends 
     }
 
     @Transactional
-    public G save(C creationDTO) {
+    public D save(C creationDTO) {
         // save content level data
         ContentEntity contentEntity = new ContentEntity();
         BeanUtils.copyProperties(creationDTO, contentEntity);
@@ -58,7 +64,7 @@ public abstract class BaseSubContentService<G extends BaseContentDTO, C extends 
     }
 
     @Transactional
-    public G update(U updateDTO) {
+    public D update(U updateDTO) {
         // validate and update content level values
         final ContentEntity contentEntity = contentService.getAndValidateContent(updateDTO.getId());
         BeanUtils.copyProperties(updateDTO, contentEntity);
@@ -78,7 +84,11 @@ public abstract class BaseSubContentService<G extends BaseContentDTO, C extends 
         this.removeById(id);
     }
 
-    protected abstract G getConcreteDTO();
+    public Page<D> search(int current, int size, BaseSearchFilter filter) {
+        return this.baseMapper.pageDTOsByUserId(new Page<>(current, size), getConcreteEntity().getTableName(), SecurityUtil.getUserId(), filter);
+    }
+
+    protected abstract D getConcreteDTO();
 
     protected abstract E getConcreteEntity();
 

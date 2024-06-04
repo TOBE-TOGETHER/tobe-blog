@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/v1/vocabularies")
 @RequiredArgsConstructor
 public class VOCController
-        extends BaseContentController<VOCDTO, VOCCreationDTO, VOCUpdateDTO, VOCEntity, VOCMapper, VOCService> {
+        extends BaseSubContentController<VOCDTO, VOCCreationDTO, VOCUpdateDTO, VOCEntity, VOCMapper, VOCService> {
 
     private final VOCService vocService;
 

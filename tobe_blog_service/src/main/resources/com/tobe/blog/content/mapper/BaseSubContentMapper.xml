@@ -1,0 +1,37 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tobe.blog.content.mapper.BaseSubContentMapper">
+    <sql id="base_sub_content_select">
+        SELECT
+            tci.*,
+            tcci.*,
+            CONCAT(tcu.FIRST_NAME, ' ', tcu.LAST_NAME) as OWNER_NAME,
+            tcu.ID as OWNER_ID,
+            tcu.AVATAR_URL as AVATAR_URL
+        FROM TOBE_CONTENT_INFO tci
+        JOIN ${tableName} tcci ON tcci.CONTENT_ID = tci.ID AND tci.DELETED = 0
+        JOIN TOBE_CORE_USER tcu ON tci.OWNER_ID = tcu.ID AND tci.DELETED = 0
+        WHERE 1=1
+        <if test="userId != null and userId != ''" >
+            AND tcu.ID = #{userId}
+        </if>
+        <if test="filter.createFrom != null" >
+            AND tci.CREATE_TIME &gt;= #{filter.createFrom}
+        </if>
+        <if test="filter.createTo != null" >
+            AND tci.CREATE_TIME &lt;= #{filter.createTo}
+        </if>
+        <if test="filter.updateFrom != null" >
+            AND tci.UPDATE_TIME &gt;= #{filter.updateFrom}
+        </if>
+        <if test="filter.updateTo != null" >
+            AND tci.UPDATE_TIME &lt;= #{filter.updateTo}
+        </if>
+        <if test="filter.keyword != null and filter.keyword != ''" >
+            AND (
+                tci.TITLE LIKE CONCAT('%', #{filter.keyword}, '%')
+                OR tci.DESCRIPTION LIKE CONCAT('%', #{filter.keyword}, '%')
+            )
+        </if>
+    </sql>
+</mapper>

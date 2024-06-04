@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 
 @Data
 public class BaseEntity implements Serializable {
-
     @TableLogic
     protected Boolean deleted;
     @TableField(fill = FieldFill.INSERT)

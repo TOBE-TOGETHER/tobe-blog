@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/v1/plans")
 @RequiredArgsConstructor
 public class PlanController
-        extends BaseContentController<PlanDTO, PlanCreationDTO, PlanUpdateDTO, PlanEntity, PlanMapper, PlanService> {
+        extends BaseSubContentController<PlanDTO, PlanCreationDTO, PlanUpdateDTO, PlanEntity, PlanMapper, PlanService> {
 
     private final PlanService planService;
 

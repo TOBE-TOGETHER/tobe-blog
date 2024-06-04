@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/articles")
 @RequiredArgsConstructor
 public class ArticleController extends
-        BaseContentController<ArticleDTO, ArticleCreationDTO, ArticleUpdateDTO, ArticleEntity, ArticleMapper, ArticleService> {
+        BaseSubContentController<ArticleDTO, ArticleCreationDTO, ArticleUpdateDTO, ArticleEntity, ArticleMapper, ArticleService> {
 
-    private ArticleService articleService;
+    private final ArticleService articleService;
 
     @Override
     protected ArticleService getConcreteSubContentService() {
