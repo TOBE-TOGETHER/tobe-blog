@@ -1,11 +1,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tobe.blog.content.mapper.ArticleMapper">
-    <select id="pageDTOsByUserId" resultType="com.tobe.blog.beans.dto.content.ArticleDTO">
+<mapper namespace="com.tobe.blog.content.mapper.VOCMapper">
+    <select id="pageDTOsByUserId" resultType="com.tobe.blog.beans.dto.content.VOCDTO">
         <include refid="com.tobe.blog.content.mapper.BaseSubContentMapper.base_sub_content_select_by_filter"></include>
     </select>
 
-    <select id="getDTOById" resultType="com.tobe.blog.beans.dto.content.ArticleDTO">
+    <select id="getDTOById" resultType="com.tobe.blog.beans.dto.content.VOCDTO">
         <include refid="com.tobe.blog.content.mapper.BaseSubContentMapper.base_sub_content_select_by_id"></include>
     </select>
 </mapper>

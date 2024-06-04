@@ -12,12 +12,21 @@ import com.tobe.blog.beans.entity.content.ContentEntity;
 import com.tobe.blog.content.mapper.BaseSubContentMapper;
 import com.tobe.blog.core.utils.SecurityUtil;
 
-import java.util.Objects;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * This is the core service to save, update, delete, and search user contents.
+ * The code has been highly abstracted with generics and several DTO beans 
+ * and entities need to be created when onboarding new kind of user content.
+ * 
+ * @param <D> DTO used to return basic info to client
+ * @param <C> DTO used for creation
+ * @param <U> DTO used for update
+ * @param <E> Entity used for database, @TableName annotation is required
+ * @param <M> Mapper used for manipulating data, providing common CRUD methods
+ */
 public abstract class BaseSubContentService<
     D extends BaseContentDTO, 
     C extends BaseContentCreationDTO, 
@@ -27,20 +36,6 @@ public abstract class BaseSubContentService<
 
     @Autowired
     private ContentService contentService;
-
-    public D getDTOById(String id) {
-        final ContentEntity contentEntity = contentService.getById(id);
-        if (Objects.isNull(contentEntity)) {
-            return null;
-        }
-        // build result DTO and copy content level values
-        final D result = getConcreteDTO();
-        BeanUtils.copyProperties(contentEntity, result);
-        // get concrete entity and set values if entity existings
-        final E concreteEntity = this.getById(id);
-        BeanUtils.copyProperties(concreteEntity, result);
-        return result;
-    }
 
     @Transactional
     public D save(C creationDTO) {
@@ -86,6 +81,10 @@ public abstract class BaseSubContentService<
 
     public Page<D> search(int current, int size, BaseSearchFilter filter) {
         return this.baseMapper.pageDTOsByUserId(new Page<>(current, size), getConcreteEntity().getTableName(), SecurityUtil.getUserId(), filter);
+    }
+
+    public D getDTOById(String id) {
+        return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
     }
 
     protected abstract D getConcreteDTO();

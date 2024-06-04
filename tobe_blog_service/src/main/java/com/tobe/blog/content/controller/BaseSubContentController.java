@@ -22,6 +22,18 @@ import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
 import com.tobe.blog.content.mapper.BaseSubContentMapper;
 import com.tobe.blog.content.service.BaseSubContentService;
 
+/**
+ * This is an abstract controller which provides some common implementations 
+ * of basic CRUD APIs for user content module. Thereby, the concrete controllers 
+ * can be as clean as possible and only focus on the special logic of their own.
+ * 
+ * @param <D> DTO used to return basic info to client
+ * @param <C> DTO used for creation
+ * @param <U> DTO used for update
+ * @param <E> Entity used for database, @TableName annotation is required
+ * @param <M> Mapper used for manipulating data, providing common CRUD methods
+ * @param <S> Core service to implement the save, update, delete operations
+ */
 public abstract class BaseSubContentController<
     D extends BaseContentDTO, 
     C extends BaseContentCreationDTO, 
@@ -47,7 +59,6 @@ public abstract class BaseSubContentController<
         @RequestParam(value = "updateFrom", required = false, defaultValue = "") String updateFrom,
         @RequestParam(value = "updateTo", required = false, defaultValue = "") String updateTo,
         @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
-
         try {
             final BaseSearchFilter filter = buildSearchFilter(createFrom, createTo, updateFrom, updateTo, keyword);
             return ResponseEntity.ok(this.getConcreteSubContentService().search(current, size, filter));

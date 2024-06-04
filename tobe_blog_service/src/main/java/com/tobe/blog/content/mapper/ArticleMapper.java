@@ -13,5 +13,5 @@ public interface ArticleMapper extends BaseSubContentMapper<ArticleDTO, ArticleE
     Page<ArticleDTO> pageDTOsByUserId(Page<ArticleDTO> page, @Param("tableName") String tableName, @Param("userId") Long userId, BaseSearchFilter filter);
 
     @Override
-    ArticleDTO getDTOById(@Param("id") String id);
+    ArticleDTO getDTOById(@Param("tableName") String tableName, @Param("id") String id);
 }
