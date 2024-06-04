@@ -1,8 +1,11 @@
-import { IconButton, Tooltip } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import SaveIcon from "@mui/icons-material/Save";
-import EditIcon from "@mui/icons-material/Edit";
-import { MouseEventHandler } from "react";
+import EditIcon from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
+import {
+  IconButton,
+  Tooltip,
+} from '@mui/material';
+import { MouseEventHandler } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface EditIconButtonProps {
   editable: boolean;

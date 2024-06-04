@@ -1,10 +1,20 @@
-import "@wangeditor/editor/dist/css/style.css";
+import {
+  IDomEditor,
+  IEditorConfig,
+  IToolbarConfig,
+  SlateElement,
+} from '@wangeditor/editor';
+import {
+  Editor,
+  Toolbar,
+} from '@wangeditor/editor-for-react';
+import '@wangeditor/editor/dist/css/style.css';
 
-import { useState, useEffect } from "react";
-import { Editor, Toolbar } from "@wangeditor/editor-for-react";
-import { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor";
-import { useTranslation } from "react-i18next";
-import { SlateElement } from "@wangeditor/editor";
+import {
+  useEffect,
+  useState,
+} from 'react';
+import { useTranslation } from 'react-i18next';
 
 type ImageElement = SlateElement & {
   src: string;

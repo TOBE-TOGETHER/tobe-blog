@@ -17,7 +17,7 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { ProjectService } from '../../../../services';
-import { MultipleTagSelecter } from '../../../components';
+import { MultipleTagSelector } from '../../../components';
 
 export default function ProjectCreationPage() {
   const { t } = useTranslation();
@@ -183,7 +183,7 @@ export default function ProjectCreationPage() {
                   item
                   xs={12}
                 >
-                  <MultipleTagSelecter
+                  <MultipleTagSelector
                     value={tagValue}
                     setValue={setTagValue}
                   />

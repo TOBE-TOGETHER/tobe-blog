@@ -22,7 +22,7 @@ import {
 import { ProjectService } from '../../../../services';
 import {
   EditIconButton,
-  MultipleTagSelecter,
+  MultipleTagSelector,
 } from '../../../components';
 import ProjectProgressModal from './component/ProjectProgressModal';
 import ProjectStatusToolbar from './component/ProjectStatusToolbar';
@@ -204,7 +204,7 @@ export default function ProjectDetailPage() {
                 item
                 xs={12}
               >
-                <MultipleTagSelecter
+                <MultipleTagSelector
                   value={tagValue}
                   setValue={setTagValue}
                   disabled={!editable}

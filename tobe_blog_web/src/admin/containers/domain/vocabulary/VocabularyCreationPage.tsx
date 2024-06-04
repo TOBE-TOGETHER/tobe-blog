@@ -13,7 +13,7 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { VocabularyService } from '../../../../services';
-import { MultipleTagSelecter } from '../../../components';
+import { MultipleTagSelector } from '../../../components';
 
 export default function VocabularyCreationPage() {
   const { t } = useTranslation();
@@ -116,7 +116,7 @@ export default function VocabularyCreationPage() {
               item
               xs={12}
             >
-              <MultipleTagSelecter
+              <MultipleTagSelector
                 value={tagValue}
                 setValue={setTagValue}
               />

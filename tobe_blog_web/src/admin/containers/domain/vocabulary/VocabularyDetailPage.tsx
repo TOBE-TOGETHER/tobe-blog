@@ -21,7 +21,7 @@ import {
 import { VocabularyService } from '../../../../services';
 import {
   EditIconButton,
-  MultipleTagSelecter,
+  MultipleTagSelector,
 } from '../../../components';
 import { WordListPanel } from '../components/WordListPanel';
 
@@ -170,7 +170,7 @@ export default function VocabularyDetailPage() {
                 item
                 xs={12}
               >
-                <MultipleTagSelecter
+                <MultipleTagSelector
                   value={tagValue}
                   setValue={setTagValue}
                   disabled={!editable}

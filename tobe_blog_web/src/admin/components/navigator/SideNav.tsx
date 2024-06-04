@@ -1,29 +1,39 @@
-import { Drawer, Typography, IconButton, useMediaQuery } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import { NavItems } from "./NavItems";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import FlagIcon from "@mui/icons-material/Flag";
-import Groups from "@mui/icons-material/Groups";
-import ArticleIcon from "@mui/icons-material/Article";
-import Abc from "@mui/icons-material/Abc";
-import FolderIcon from "@mui/icons-material/Folder";
-import { URL } from "../../../../routes";
-import { AUTHORITY, FEATURE_CODE } from "../../../../commons";
-import { PageItem } from "../../../../global/types";
-import theme from "../../../../theme";
-import project from "../../../../../package.json";
+import Abc from '@mui/icons-material/Abc';
+import ArticleIcon from '@mui/icons-material/Article';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import FlagIcon from '@mui/icons-material/Flag';
+import FolderIcon from '@mui/icons-material/Folder';
+import Groups from '@mui/icons-material/Groups';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import {
+  Drawer,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import {
+  AUTHORITY,
+  FEATURE_CODE,
+} from '../../../commons';
+import { PageItem } from '../../../global/types.ts';
+import theme from '../../../theme.ts';
+
+import { NavItems } from './NavItems';
 
 const basicPageItems: PageItem[] = [
   {
-    label: "dashboard-nav.pages.statistics",
+    label: 'dashboard-nav.pages.statistics',
     icon: <DashboardIcon />,
     url: URL.STATISTICS,
-    requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
+    requiredRoles: [
+      AUTHORITY.ROLE_BASIC,
+      AUTHORITY.ROLE_ADMIN,
+    ],
   },
   {
-    label: "dashboard-nav.pages.projects",
+    label: 'dashboard-nav.pages.projects',
     icon: <FlagIcon />,
     url: URL.PROJECTS,
     secondaryUrl: URL.CREATE_PROJECT,

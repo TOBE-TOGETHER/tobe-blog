@@ -1,5 +1,8 @@
-import { Grid } from "@mui/material";
-import { ReactNode, useEffect } from "react";
+import { Grid } from '@mui/material';
+import {
+  ReactNode,
+  useEffect,
+} from 'react';
 
 export default function InfiniteScrollList<T>(props: {
   loading: boolean;
