@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tobe.blog.DefaultTestData.DefaultUser;
 import com.tobe.blog.beans.consts.Const.Role;
 import com.tobe.blog.beans.dto.user.UserBriefProfileDTO;
 import com.tobe.blog.beans.dto.user.UserCreationDTO;
@@ -138,19 +138,19 @@ public class UserServiceTests {
     @DisplayName("User Service: get existing user info by userId")
     public void testGetUser_getExistingUser() {
         UserGeneralDTO dto = userService.getUser(1);
-        Assertions.assertEquals(DefaultUserTestData.USER_ID, dto.getId());
-        Assertions.assertEquals(DefaultUserTestData.USERNAME, dto.getUsername());
-        Assertions.assertEquals(DefaultUserTestData.PHONE_NUM, dto.getPhoneNum());
-        Assertions.assertEquals(DefaultUserTestData.EMAIL, dto.getEmail());
-        Assertions.assertEquals(DefaultUserTestData.LAST_NAME, dto.getLastName());
-        Assertions.assertEquals(DefaultUserTestData.FIRST_NAME, dto.getFirstName());
-        Assertions.assertEquals(DefaultUserTestData.ADDRESS, dto.getAddress());
-        Assertions.assertEquals(DefaultUserTestData.AVATAR, dto.getAvatarUrl());
-        Assertions.assertEquals(DefaultUserTestData.INTRODUCTION, dto.getIntroduction());
-        Assertions.assertEquals(DefaultUserTestData.BLOG, dto.getBlog());
-        Assertions.assertEquals(DefaultUserTestData.BACKGROUND_IMG, dto.getBackgroundImg());
-        Assertions.assertEquals(DefaultUserTestData.PHOTO_IMG, dto.getPhotoImg());
-        Assertions.assertEquals(DefaultUserTestData.PROFESSION, dto.getProfession());
+        Assertions.assertEquals(DefaultUser.USER_ID, dto.getId());
+        Assertions.assertEquals(DefaultUser.USERNAME, dto.getUsername());
+        Assertions.assertEquals(DefaultUser.PHONE_NUM, dto.getPhoneNum());
+        Assertions.assertEquals(DefaultUser.EMAIL, dto.getEmail());
+        Assertions.assertEquals(DefaultUser.LAST_NAME, dto.getLastName());
+        Assertions.assertEquals(DefaultUser.FIRST_NAME, dto.getFirstName());
+        Assertions.assertEquals(DefaultUser.ADDRESS, dto.getAddress());
+        Assertions.assertEquals(DefaultUser.AVATAR, dto.getAvatarUrl());
+        Assertions.assertEquals(DefaultUser.INTRODUCTION, dto.getIntroduction());
+        Assertions.assertEquals(DefaultUser.BLOG, dto.getBlog());
+        Assertions.assertEquals(DefaultUser.BACKGROUND_IMG, dto.getBackgroundImg());
+        Assertions.assertEquals(DefaultUser.PHOTO_IMG, dto.getPhotoImg());
+        Assertions.assertEquals(DefaultUser.PROFESSION, dto.getProfession());
     }
 
     @Test
@@ -163,12 +163,12 @@ public class UserServiceTests {
     @DisplayName("User Service: get existing user brief profile info by userId")
     public void testGetUserBriefProfile_getExistingUser() {
         UserBriefProfileDTO dto = userService.getUserBriefProfile(1);
-        Assertions.assertEquals(DefaultUserTestData.USER_ID, dto.getId());
-        Assertions.assertEquals(DefaultUserTestData.LAST_NAME, dto.getLastName());
-        Assertions.assertEquals(DefaultUserTestData.FIRST_NAME, dto.getFirstName());
-        Assertions.assertEquals(DefaultUserTestData.AVATAR, dto.getAvatarUrl());
-        Assertions.assertEquals(DefaultUserTestData.INTRODUCTION, dto.getIntroduction());
-        Assertions.assertEquals(DefaultUserTestData.BLOG, dto.getBlog());
+        Assertions.assertEquals(DefaultUser.USER_ID, dto.getId());
+        Assertions.assertEquals(DefaultUser.LAST_NAME, dto.getLastName());
+        Assertions.assertEquals(DefaultUser.FIRST_NAME, dto.getFirstName());
+        Assertions.assertEquals(DefaultUser.AVATAR, dto.getAvatarUrl());
+        Assertions.assertEquals(DefaultUser.INTRODUCTION, dto.getIntroduction());
+        Assertions.assertEquals(DefaultUser.BLOG, dto.getBlog());
     }
 
     @Test
@@ -181,16 +181,16 @@ public class UserServiceTests {
     @DisplayName("User Service: get existing user full profile info by userId")
     public void testGetUserFullProfile_getExistingUser() {
         UserFullProfileDTO dto = userService.getUserFullProfile(1);
-        Assertions.assertEquals(DefaultUserTestData.USER_ID, dto.getId());
-        Assertions.assertEquals(DefaultUserTestData.LAST_NAME, dto.getLastName());
-        Assertions.assertEquals(DefaultUserTestData.FIRST_NAME, dto.getFirstName());
-        Assertions.assertEquals(DefaultUserTestData.ADDRESS, dto.getAddress());
-        Assertions.assertEquals(DefaultUserTestData.AVATAR, dto.getAvatarUrl());
-        Assertions.assertEquals(DefaultUserTestData.INTRODUCTION, dto.getIntroduction());
-        Assertions.assertEquals(DefaultUserTestData.BLOG, dto.getBlog());
-        Assertions.assertEquals(DefaultUserTestData.BACKGROUND_IMG, dto.getBackgroundImg());
-        Assertions.assertEquals(DefaultUserTestData.PHOTO_IMG, dto.getPhotoImg());
-        Assertions.assertEquals(DefaultUserTestData.PROFESSION, dto.getProfession());
+        Assertions.assertEquals(DefaultUser.USER_ID, dto.getId());
+        Assertions.assertEquals(DefaultUser.LAST_NAME, dto.getLastName());
+        Assertions.assertEquals(DefaultUser.FIRST_NAME, dto.getFirstName());
+        Assertions.assertEquals(DefaultUser.ADDRESS, dto.getAddress());
+        Assertions.assertEquals(DefaultUser.AVATAR, dto.getAvatarUrl());
+        Assertions.assertEquals(DefaultUser.INTRODUCTION, dto.getIntroduction());
+        Assertions.assertEquals(DefaultUser.BLOG, dto.getBlog());
+        Assertions.assertEquals(DefaultUser.BACKGROUND_IMG, dto.getBackgroundImg());
+        Assertions.assertEquals(DefaultUser.PHOTO_IMG, dto.getPhotoImg());
+        Assertions.assertEquals(DefaultUser.PROFESSION, dto.getProfession());
         UserFeatureDTO featureDTO = dto.getFeatures();
         Assertions.assertEquals(Boolean.TRUE, featureDTO.getArticleModule());
         Assertions.assertEquals(Boolean.TRUE, featureDTO.getPlanModule());
@@ -222,32 +222,32 @@ public class UserServiceTests {
         final UserUpdateDTO updateDTO = new UserUpdateDTO();
         updateDTO.setId(createdUser.getId());
         updateDTO.setEmail("user-updated@tobe.com");
-        updateDTO.setAddress(DefaultUserTestData.ADDRESS);
-        updateDTO.setAvatarUrl(DefaultUserTestData.AVATAR);
-        updateDTO.setBackgroundImg(DefaultUserTestData.BACKGROUND_IMG);
-        updateDTO.setBlog(DefaultUserTestData.BLOG);
-        updateDTO.setFirstName(DefaultUserTestData.FIRST_NAME);
-        updateDTO.setLastName(DefaultUserTestData.LAST_NAME);
-        updateDTO.setIntroduction(DefaultUserTestData.INTRODUCTION);
-        updateDTO.setPhoneNum(DefaultUserTestData.PHONE_NUM);
-        updateDTO.setPhotoImg(DefaultUserTestData.PHOTO_IMG);
-        updateDTO.setProfession(DefaultUserTestData.PROFESSION);
-        updateDTO.setUsername(DefaultUserTestData.USERNAME);
+        updateDTO.setAddress(DefaultUser.ADDRESS);
+        updateDTO.setAvatarUrl(DefaultUser.AVATAR);
+        updateDTO.setBackgroundImg(DefaultUser.BACKGROUND_IMG);
+        updateDTO.setBlog(DefaultUser.BLOG);
+        updateDTO.setFirstName(DefaultUser.FIRST_NAME);
+        updateDTO.setLastName(DefaultUser.LAST_NAME);
+        updateDTO.setIntroduction(DefaultUser.INTRODUCTION);
+        updateDTO.setPhoneNum(DefaultUser.PHONE_NUM);
+        updateDTO.setPhotoImg(DefaultUser.PHOTO_IMG);
+        updateDTO.setProfession(DefaultUser.PROFESSION);
+        updateDTO.setUsername(DefaultUser.USERNAME);
 
         // all fields should be update correctly
         UserGeneralDTO updatedUser = userService.updateUser(updateDTO);
         Assertions.assertEquals("user-updated@tobe.com", updatedUser.getEmail());
-        Assertions.assertEquals(DefaultUserTestData.ADDRESS, updatedUser.getAddress());
-        Assertions.assertEquals(DefaultUserTestData.AVATAR, updatedUser.getAvatarUrl());
-        Assertions.assertEquals(DefaultUserTestData.BACKGROUND_IMG, updatedUser.getBackgroundImg());
-        Assertions.assertEquals(DefaultUserTestData.BLOG, updatedUser.getBlog());
-        Assertions.assertEquals(DefaultUserTestData.FIRST_NAME, updatedUser.getFirstName());
-        Assertions.assertEquals(DefaultUserTestData.LAST_NAME, updatedUser.getLastName());
-        Assertions.assertEquals(DefaultUserTestData.INTRODUCTION, updatedUser.getIntroduction());
-        Assertions.assertEquals(DefaultUserTestData.PHONE_NUM, updatedUser.getPhoneNum());
-        Assertions.assertEquals(DefaultUserTestData.PHOTO_IMG, updatedUser.getPhotoImg());
-        Assertions.assertEquals(DefaultUserTestData.PROFESSION, updatedUser.getProfession());
-        Assertions.assertEquals(DefaultUserTestData.USERNAME, updatedUser.getUsername());
+        Assertions.assertEquals(DefaultUser.ADDRESS, updatedUser.getAddress());
+        Assertions.assertEquals(DefaultUser.AVATAR, updatedUser.getAvatarUrl());
+        Assertions.assertEquals(DefaultUser.BACKGROUND_IMG, updatedUser.getBackgroundImg());
+        Assertions.assertEquals(DefaultUser.BLOG, updatedUser.getBlog());
+        Assertions.assertEquals(DefaultUser.FIRST_NAME, updatedUser.getFirstName());
+        Assertions.assertEquals(DefaultUser.LAST_NAME, updatedUser.getLastName());
+        Assertions.assertEquals(DefaultUser.INTRODUCTION, updatedUser.getIntroduction());
+        Assertions.assertEquals(DefaultUser.PHONE_NUM, updatedUser.getPhoneNum());
+        Assertions.assertEquals(DefaultUser.PHOTO_IMG, updatedUser.getPhotoImg());
+        Assertions.assertEquals(DefaultUser.PROFESSION, updatedUser.getProfession());
+        Assertions.assertEquals(DefaultUser.USERNAME, updatedUser.getUsername());
     }
 
     @Test
@@ -255,7 +255,7 @@ public class UserServiceTests {
     public void testUpdateUser_nonexistingUserCanNotBeUpdated() {
         UserUpdateDTO updateDTO = new UserUpdateDTO();
         updateDTO.setId(2L);
-        updateDTO.setUsername(DefaultUserTestData.USERNAME);
+        updateDTO.setUsername(DefaultUser.USERNAME);
         UserGeneralDTO result = userService.updateUser(updateDTO);
         Assertions.assertNull(result.getId());
         Assertions.assertNull(result.getUsername());
@@ -280,22 +280,6 @@ public class UserServiceTests {
                         .eq(UserFeatureEntity::getDeleted, Boolean.FALSE));
         Assertions.assertNull(featureEntity);
         Assertions.assertNull(userService.getUser(createdUser.getId()));
-    }
-
-    public class DefaultUserTestData {
-        public static final long USER_ID = 1L;
-        public static final String FIRST_NAME = "Admin";
-        public static final String LAST_NAME = "TOBE";
-        public static final String USERNAME = "tobe_admin";
-        public static final String EMAIL = "tobe_admin@tobe.com";
-        public static final String ADDRESS = "Shenzhen China";
-        public static final String AVATAR = "https://avatar.com";
-        public static final String PHONE_NUM = "13145801234";
-        public static final String INTRODUCTION = "Hello world";
-        public static final String BLOG = "https://blog.com";
-        public static final String BACKGROUND_IMG = "https://bg.com";
-        public static final String PHOTO_IMG = "https://photo.com";
-        public static final String PROFESSION = "Developer";
     }
 
 }

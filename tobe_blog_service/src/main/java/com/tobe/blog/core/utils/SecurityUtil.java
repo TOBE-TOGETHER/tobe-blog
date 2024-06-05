@@ -2,6 +2,8 @@ package com.tobe.blog.core.utils;
 
 import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -21,6 +23,14 @@ public class SecurityUtil {
     @SuppressWarnings("unchecked")
     public static List<GrantedAuthority> getAuthorities() {
         return getUserDetail() != null ? (List<GrantedAuthority>) getUserDetail().getAuthorities() : List.of();
+    }
+
+    public static void setUserDetail(Authentication auth) {
+        try {
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        } catch (Exception ex) {
+            log.error("Cannot set user detail into the security context", ex);
+        }
     }
 
     private static EnhancedUserDetail getUserDetail() {

@@ -45,6 +45,22 @@ public abstract class BaseSubContentController<
     protected abstract S getConcreteSubContentService();
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+    @PostMapping
+    public ResponseEntity<D> create(@RequestBody C dto) {
+        return ResponseEntity.ok(getConcreteSubContentService().save(dto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<D> update(@PathVariable String id, @RequestBody U dto) {
+        return ResponseEntity.ok(getConcreteSubContentService().update(dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<D> delete(@PathVariable String id) {
+        getConcreteSubContentService().delete(id);
+        return ResponseEntity.ok(null);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<D> getById(@PathVariable String id) {
         return ResponseEntity.ok(getConcreteSubContentService().getDTOById(id));
@@ -65,22 +81,6 @@ public abstract class BaseSubContentController<
         } catch (ParseException e) {
             return ResponseEntity.badRequest().build();
         }   
-    }
-
-    @PostMapping
-    public ResponseEntity<D> create(@RequestBody C dto) {
-        return ResponseEntity.ok(getConcreteSubContentService().save(dto));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<D> update(@PathVariable String id, @RequestBody U dto) {
-        return ResponseEntity.ok(getConcreteSubContentService().update(dto));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<D> delete(@PathVariable String id) {
-        getConcreteSubContentService().delete(id);
-        return ResponseEntity.ok(null);
     }
 
     private BaseSearchFilter buildSearchFilter(
