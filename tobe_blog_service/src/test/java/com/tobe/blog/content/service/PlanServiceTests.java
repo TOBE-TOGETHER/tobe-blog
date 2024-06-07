@@ -62,7 +62,7 @@ public class PlanServiceTests {
 
     @Test
     @DisplayName("Plan Service: update item")
-    void testUpdate_existingVocabulary() {
+    void testUpdate_existingPlan() {
         PlanCreationDTO dto = new PlanCreationDTO();
         dto.setTitle("Vocabulry To Be Update");
         dto.setDescription("Desc to be updated");
