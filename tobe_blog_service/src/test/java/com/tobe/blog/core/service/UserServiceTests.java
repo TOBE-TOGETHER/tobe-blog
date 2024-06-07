@@ -3,6 +3,7 @@ package com.tobe.blog.core.service;
 import com.tobe.blog.core.exception.TobeRuntimeException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tobe.blog.DefaultTestData;
 import com.tobe.blog.DefaultTestData.DefaultUser;
 import com.tobe.blog.beans.consts.Const.Role;
 import com.tobe.blog.beans.dto.user.UserBriefProfileDTO;
@@ -26,6 +28,7 @@ import com.tobe.blog.beans.entity.user.UserFeatureEntity;
 import com.tobe.blog.beans.entity.user.UserRoleEntity;
 import com.tobe.blog.core.mapper.UserFeatureMapper;
 import com.tobe.blog.core.mapper.UserRoleMapper;
+import com.tobe.blog.core.utils.SecurityUtil;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -38,6 +41,11 @@ public class UserServiceTests {
     private UserRoleMapper roleMapper;
     @Autowired
     private UserFeatureMapper featureMapper;
+
+    @BeforeEach
+    void setUp() {
+        SecurityUtil.setUserDetail(DefaultTestData.getDefaultUserAuthentication());
+    }
 
     @Test
     @DisplayName("User Service: user can be created successfully with correct input")
