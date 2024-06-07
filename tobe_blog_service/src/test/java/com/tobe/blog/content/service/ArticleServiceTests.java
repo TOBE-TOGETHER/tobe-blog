@@ -1,48 +1,37 @@
 package com.tobe.blog.content.service;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.tobe.blog.DefaultTestData;
 import com.tobe.blog.DefaultTestData.DefaultUser;
+import com.tobe.blog.beans.consts.Const.ContentType;
 import com.tobe.blog.beans.dto.content.ArticleCreationDTO;
 import com.tobe.blog.beans.dto.content.ArticleDTO;
-import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
-import com.tobe.blog.beans.dto.user.UserLoginDTO;
-import com.tobe.blog.core.service.AuthService;
+import com.tobe.blog.beans.dto.content.ArticleUpdateDTO;
 import com.tobe.blog.core.utils.SecurityUtil;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
 public class ArticleServiceTests {
 
     @Autowired
     private ArticleService articleService;
 
-    @Autowired
-    private AuthService authService;
-
     @BeforeEach
     void setUp() {
-        UserLoginDTO dto = new UserLoginDTO();
-        dto.setUsername(DefaultUser.USERNAME);
-        dto.setPassword("123456");
-        EnhancedUserDetail userDetail = authService.login(dto);
-        SecurityUtil.setUserDetail(new UsernamePasswordAuthenticationToken(
-            userDetail, null, userDetail.getAuthorities()));
+        SecurityUtil.setUserDetail(DefaultTestData.getDefaultUserAuthentication());
     }
 
     @Test
     @DisplayName("Article Service: create new Article with valid input")
-    void testSave() {
+    void testSave_withValidInput() {
         ArticleCreationDTO dto = new ArticleCreationDTO();
         dto.setTitle("Hello world!");
         dto.setSubTitle("This is the first article content of the system");
@@ -58,11 +47,61 @@ public class ArticleServiceTests {
         Assertions.assertEquals(dto.getSubTitle(), result.getSubTitle());
         Assertions.assertEquals(dto.getContent(), result.getContent());
         Assertions.assertEquals(dto.getContentProtected(), result.getContentProtected());
+        Assertions.assertEquals(ContentType.ARTICLE.name(), result.getContentType());
         Assertions.assertEquals(dto.getDescription(), result.getDescription());
         Assertions.assertNotNull(result.getId());
         Assertions.assertEquals(0, result.getViewCount());
         Assertions.assertEquals(0, result.getLikeCount());
         Assertions.assertEquals(Boolean.FALSE, result.getPublicToAll());
         Assertions.assertNull(result.getPublishTime());
+    }
+
+    @Test
+    @DisplayName("Article Service: create new Article with invalid input")
+    void testSaveWithInvalidInput() {
+        ArticleCreationDTO dto = new ArticleCreationDTO();
+        dto.setTitle("Article With Long Subtitle");
+        dto.setSubTitle(RandomStringUtils.randomAlphabetic(129));
+        dto.setDescription("Let's verify the content together!");
+        dto.setContentProtected(Boolean.FALSE);
+        dto.setContent("Today is a special one in the history!");
+        // SubTitle length can not exceed 128
+        Assertions.assertThrows(RuntimeException.class, () -> articleService.save(dto));
+        dto.setSubTitle(RandomStringUtils.randomAlphabetic(128));
+        ArticleDTO result = articleService.save(dto);
+        Assertions.assertNotNull(result.getId());
+        // No length constrain to the content field
+        dto.setTitle("Article With Long Content");
+        dto.setContent(RandomStringUtils.randomAlphabetic(40000));
+        result = articleService.save(dto);
+        Assertions.assertNotNull(result.getId());
+    }
+
+    @Test
+    @DisplayName("Article Service: update article")
+    void testUpdate_existingArticle() {
+        ArticleCreationDTO dto = new ArticleCreationDTO();
+        dto.setTitle("Article To Be Update");
+        dto.setSubTitle("Subtitle to be updated");
+        dto.setDescription("Desc to be updated");
+        dto.setContentProtected(Boolean.FALSE);
+        dto.setContent("Content to be updated");
+        ArticleDTO saveResult = articleService.save(dto);
+        // prepare update DTO
+        ArticleUpdateDTO updateDTO = new ArticleUpdateDTO();
+        String UPDATED_SUBTITLE = "Updated subtitle";
+        String UPDATED_DESCRIPTION = "Updated desc";
+        String UPDATED_CONTENT = "Updated content";
+        updateDTO.setId(saveResult.getId());
+        updateDTO.setSubTitle(UPDATED_SUBTITLE);
+        updateDTO.setDescription(UPDATED_DESCRIPTION);
+        updateDTO.setContent(UPDATED_CONTENT);
+        updateDTO.setContentProtected(Boolean.TRUE);
+        ArticleDTO updateResult = articleService.update(updateDTO);
+        Assertions.assertEquals(saveResult.getId(), updateResult.getId());
+        Assertions.assertEquals(UPDATED_SUBTITLE, updateResult.getSubTitle());
+        Assertions.assertEquals(UPDATED_DESCRIPTION, updateResult.getDescription());
+        Assertions.assertEquals(UPDATED_CONTENT, updateResult.getContent());
+        Assertions.assertEquals(Boolean.TRUE, updateResult.getContentProtected());
     }
 }
