@@ -1,15 +1,8 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Page } from '../../../components/layout';
-import {
-  Column,
-  Operation,
-  UserData,
-} from '../../../global/types';
+import { Column, Operation, UserData } from '../../../global/types';
 import { UserService } from '../../../services';
 import { PagedTable } from '../../components';
 
@@ -20,26 +13,22 @@ export default function UsersPage() {
   const [openLoading, setOpenLoading] = useState(false);
   const [totalCount, setTotalCount] = useState<number>(0);
   const { t } = useTranslation();
-  
+
   const loadUserData = useCallback((): void => {
     setOpenLoading(true);
     UserService.getUsers(size, current)
-      .then((response) => {
+      .then(response => {
         setRows(response.data.records || []);
         setTotalCount(response.data.total);
         setOpenLoading(true);
       })
-      .catch((error) => {})
       .finally(() => {
         setOpenLoading(false);
       });
-  }, [
-    current,
-    size,
-  ]);
-  
+  }, [current, size]);
+
   useEffect(() => loadUserData(), [loadUserData]);
-  
+
   const columns: readonly Column[] = [
     { id: 'id', label: t('user-table.label.id'), align: 'center' },
     { id: 'email', label: t('user-table.label.email') },
@@ -65,7 +54,7 @@ export default function UsersPage() {
       align: 'center',
     },
   ];
-  
+
   function deleteUserDate(id: number | string) {
     setOpenLoading(true);
     UserService.deleteUser(id)
@@ -73,34 +62,32 @@ export default function UsersPage() {
         setOpenLoading(true);
         loadUserData();
       })
-      .catch((error) => console.error(error))
+      .catch(error => console.error(error))
       .finally(() => {
         setOpenLoading(false);
       });
   }
-  
+
   const handleChangeCurrent = (event: unknown, newPage: number): void => {
     setCurrent(newPage);
   };
-  
-  const handleChangeSize = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ): void => {
+
+  const handleChangeSize = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSize(+event.target.value);
     setCurrent(0);
   };
-  
+
   const handleDelete = (id: number | string): void => {
     deleteUserDate(id);
   };
-  
+
   const operations: Operation[] = [
     {
       name: 'delete',
       onClick: (id: number | string) => handleDelete(id),
     },
   ];
-  
+
   return (
     <Page
       pageTitle={t('user-table.title')}
