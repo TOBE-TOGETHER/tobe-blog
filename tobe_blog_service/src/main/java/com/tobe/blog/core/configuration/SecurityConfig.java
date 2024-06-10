@@ -46,9 +46,10 @@ public class SecurityConfig implements WebMvcConfigurer {
                             response.sendError(HttpStatus.UNAUTHORIZED.value(),
                                     HttpStatus.UNAUTHORIZED.getReasonPhrase());
                         }))
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/v1/**", "/api-docs/**", "/swagger-ui/**", "/actuator/**"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/v1/**", "/api-docs/**",
+                        "/swagger-ui/**", "/actuator/**"))
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/api-docs/**").permitAll()
@@ -64,19 +65,10 @@ public class SecurityConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(@NonNull CorsRegistry registry) {
-        registry.addMapping("/**");
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "OPTIONS", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(List.of("Content-Type", "Origin", "Accept", "Authorization", "Refresh-Token"));
-        configuration.applyPermitDefaultValues();
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+        registry.addMapping("/**")
+                .allowedMethods("GET", "POST", "OPTIONS", "PUT", "DELETE")
+                .allowedHeaders("Content-Type", "Origin", "Accept", "Authorization", "Refresh-Token")
+                .allowedOriginPatterns("*");
     }
 
     @Bean
