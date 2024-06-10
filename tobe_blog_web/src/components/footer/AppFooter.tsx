@@ -7,12 +7,10 @@ export default function AppFooter() {
     <Box
       component="footer"
       sx={{
-        position: 'absolute',
         bottom: 0,
         width: '100%',
         py: 3,
         px: 2,
-        mt: 'auto',
         paddingTop: '15px',
         paddingBottom: '10px',
         backgroundColor: theme => (theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[800]),

@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { Add } from "@mui/icons-material";
-import theme from "../../../../theme";
+import theme from "../../../theme";
 
 export default function AddIconButton(props: { onClick: () => void }) {
   return (

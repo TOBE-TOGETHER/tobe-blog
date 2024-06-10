@@ -12,8 +12,8 @@ import { useTranslation } from "react-i18next";
 import Add from "@mui/icons-material/Add";
 import { useNavigate, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import { authed, enabled } from "../../../../commons";
-import { PageItem } from "../../../../global/types";
+import { authed, enabled } from "../../../commons";
+import { PageItem } from "../../../global/types";
 
 const NavItem = styled(ListItem)(({ theme }) => ({
   "& .MuiListItemButton-root.Mui-selected": {

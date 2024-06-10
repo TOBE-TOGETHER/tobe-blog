@@ -1,7 +1,7 @@
 import { SvgIconProps } from "@mui/material/SvgIcon";
 import { alpha, styled } from "@mui/material/styles";
-import TreeView from "@mui/lab/TreeView";
-import TreeItem, { TreeItemProps, treeItemClasses } from "@mui/lab/TreeItem";
+import { TreeView } from "@mui/x-tree-view/TreeView";
+import { TreeItem, TreeItemProps, treeItemClasses } from "@mui/x-tree-view/TreeItem";
 import Collapse from "@mui/material/Collapse";
 import { useSpring, animated } from "@react-spring/web";
 import { TransitionProps } from "@mui/material/transitions";
@@ -9,7 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { RenderTree } from "../../../../global/types";
+import { RenderTree } from "../../../global/types";
 
 export default function TreePanel(props: {
   nodes: RenderTree;

@@ -9,11 +9,11 @@ import Groups from "@mui/icons-material/Groups";
 import ArticleIcon from "@mui/icons-material/Article";
 import Abc from "@mui/icons-material/Abc";
 import FolderIcon from "@mui/icons-material/Folder";
-import { URL } from "../../../../routes";
-import { AUTHORITY, FEATURE_CODE } from "../../../../commons";
-import { PageItem } from "../../../../global/types";
-import theme from "../../../../theme";
-import project from "../../../../../package.json";
+import { URL } from "../../URL";
+import { AUTHORITY, FEATURE_CODE } from "../../../commons";
+import { PageItem } from "../../../global/types";
+import theme from "../../../theme";
+import project from "../../../../package.json";
 
 const basicPageItems: PageItem[] = [
   {
@@ -28,7 +28,7 @@ const basicPageItems: PageItem[] = [
     url: URL.PROJECTS,
     secondaryUrl: URL.CREATE_PROJECT,
     requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    requiredFeature: FEATURE_CODE.projectModule,
+    requiredFeature: FEATURE_CODE.PLAN_MODULE,
   },
   {
     label: "dashboard-nav.pages.articles",
@@ -36,7 +36,7 @@ const basicPageItems: PageItem[] = [
     url: URL.ARTICLES,
     secondaryUrl: URL.CREATE_ARTICLE,
     requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    requiredFeature: FEATURE_CODE.articleModule,
+    requiredFeature: FEATURE_CODE.ARTICLE_MODULE,
   },
   {
     label: "dashboard-nav.pages.vocabularies",
@@ -44,7 +44,7 @@ const basicPageItems: PageItem[] = [
     url: URL.VOCABULARIES,
     secondaryUrl: URL.CREATE_VOCABULARY,
     requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    requiredFeature: FEATURE_CODE.vocabularyModule,
+    requiredFeature: FEATURE_CODE.VOCABULARY_MODULE,
   },
   {
     label: "dashboard-nav.pages.subjects",

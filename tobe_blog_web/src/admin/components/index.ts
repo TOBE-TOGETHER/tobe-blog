@@ -7,16 +7,11 @@ import InputFileUploadButton from "./misc/InputFileUploadButton";
 import CardHeaderActionButton from "./misc/CardHeaderActionButton";
 import RichContentEditor from "./misc/RichContentEditor";
 import InfiniteScrollList from "./misc/InfiniteScrollList";
-import {
-  BackendLayout,
-  FrontendLayout,
-  Loading,
-  Page,
-  TagDisplayBar,
-  SidePanel,
-  WordDisplayDialog,
-  WordListPanel,
-} from "../../../components";
+import BackendLayout from "./layout/BackendLayout";
+import Loading from "../../components/loading/Loading";
+import { Page, SidePanel } from "../../components/layout";
+import { WordDisplayDialog } from "../containers/domain/components/WordDisplayDialog";
+import { WordListPanel } from "../containers/domain/components/WordListPanel";
 
 export {
   AddIconButton,
@@ -28,11 +23,9 @@ export {
   InputFileUploadButton,
   InfiniteScrollList,
   BackendLayout,
-  FrontendLayout,
   Loading,
   Page,
   RichContentEditor,
-  TagDisplayBar,
   SidePanel,
   WordDisplayDialog,
   WordListPanel,
