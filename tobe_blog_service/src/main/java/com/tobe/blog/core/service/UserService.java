@@ -96,7 +96,12 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
         }
         BeanUtils.copyProperties(dto, oriUserEntity);
         this.updateById(oriUserEntity);
-        return BasicConverter.convert(oriUserEntity, UserGeneralDTO.class);
+        UserGeneralDTO result = BasicConverter.convert(oriUserEntity, UserGeneralDTO.class);
+        UserFeatureDTO featureDTO = userFeatureService
+                .getOneOpt(new LambdaQueryWrapper<UserFeatureEntity>().eq(UserFeatureEntity::getUserId, dto.getId()))
+                .map(e -> BasicConverter.convert(e, UserFeatureDTO.class)).orElse(null);
+        result.setFeatures(featureDTO);
+        return result;
     }
 
     @Transactional
