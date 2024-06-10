@@ -13,7 +13,7 @@ const UsersPage = React.lazy(() => import('./containers/user/UsersPage'));
 
 export function getAdminRoutes(): React.ReactNode[] {
     return [(
-        <Route element={<ProtectedRoutes />}>
+        <Route element={<ProtectedRoutes />} key="protected-routes">
             <Route path={URL.SIGN_OUT} element={<SignOutRoute />} />
             < Route
                 path={URL.PROFILE}
