@@ -1,44 +1,34 @@
-import Abc from '@mui/icons-material/Abc';
-import ArticleIcon from '@mui/icons-material/Article';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import FlagIcon from '@mui/icons-material/Flag';
-import FolderIcon from '@mui/icons-material/Folder';
-import Groups from '@mui/icons-material/Groups';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import {
-  Drawer,
-  IconButton,
-  Typography,
-  useMediaQuery,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
-import {
-  AUTHORITY,
-  FEATURE_CODE,
-} from '../../../commons';
-import { PageItem } from '../../../global/types.ts';
-import theme from '../../../theme.ts';
-
-import { NavItems } from './NavItems';
+import { Drawer, Typography, IconButton, useMediaQuery } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import { NavItems } from "./NavItems";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import FlagIcon from "@mui/icons-material/Flag";
+import Groups from "@mui/icons-material/Groups";
+import ArticleIcon from "@mui/icons-material/Article";
+import Abc from "@mui/icons-material/Abc";
+import FolderIcon from "@mui/icons-material/Folder";
+import { URL } from "../../URL";
+import { AUTHORITY, FEATURE_CODE } from "../../../commons";
+import { PageItem } from "../../../global/types";
+import theme from "../../../theme";
+import project from "../../../../package.json";
 
 const basicPageItems: PageItem[] = [
   {
-    label: 'dashboard-nav.pages.statistics',
+    label: "dashboard-nav.pages.statistics",
     icon: <DashboardIcon />,
     url: URL.STATISTICS,
-    requiredRoles: [
-      AUTHORITY.ROLE_BASIC,
-      AUTHORITY.ROLE_ADMIN,
-    ],
+    requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
   },
   {
-    label: 'dashboard-nav.pages.projects',
+    label: "dashboard-nav.pages.projects",
     icon: <FlagIcon />,
     url: URL.PROJECTS,
     secondaryUrl: URL.CREATE_PROJECT,
     requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    requiredFeature: FEATURE_CODE.projectModule,
+    requiredFeature: FEATURE_CODE.PLAN_MODULE,
   },
   {
     label: "dashboard-nav.pages.articles",
@@ -46,7 +36,7 @@ const basicPageItems: PageItem[] = [
     url: URL.ARTICLES,
     secondaryUrl: URL.CREATE_ARTICLE,
     requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    requiredFeature: FEATURE_CODE.articleModule,
+    requiredFeature: FEATURE_CODE.ARTICLE_MODULE,
   },
   {
     label: "dashboard-nav.pages.vocabularies",
@@ -54,7 +44,7 @@ const basicPageItems: PageItem[] = [
     url: URL.VOCABULARIES,
     secondaryUrl: URL.CREATE_VOCABULARY,
     requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    requiredFeature: FEATURE_CODE.vocabularyModule,
+    requiredFeature: FEATURE_CODE.VOCABULARY_MODULE,
   },
   {
     label: "dashboard-nav.pages.subjects",

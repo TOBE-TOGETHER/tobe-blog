@@ -1,35 +1,22 @@
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
-import RemoveIcon from '@mui/icons-material/Remove';
-import {
-  TreeItem,
-  TreeItemProps,
-  TreeView,
-} from '@mui/lab';
-import Collapse from '@mui/material/Collapse';
-import {
-  alpha,
-  styled,
-} from '@mui/material/styles';
-import { SvgIconProps } from '@mui/material/SvgIcon';
-import { TransitionProps } from '@mui/material/transitions';
-import {
-  animated,
-  useSpring,
-} from '@react-spring/web';
+import { SvgIconProps } from "@mui/material/SvgIcon";
+import { alpha, styled } from "@mui/material/styles";
+import { TreeView } from "@mui/x-tree-view/TreeView";
+import { TreeItem, TreeItemProps, treeItemClasses } from "@mui/x-tree-view/TreeItem";
+import Collapse from "@mui/material/Collapse";
+import { useSpring, animated } from "@react-spring/web";
+import { TransitionProps } from "@mui/material/transitions";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import CloseIcon from "@mui/icons-material/Close";
 
-import { RenderTree } from '../../../global/types';
+import { RenderTree } from "../../../global/types";
 
 export default function TreePanel(props: {
   nodes: RenderTree;
   onNodeFocus: (event: React.SyntheticEvent, value: string) => void;
 }) {
   const renderTree = (nodes: RenderTree) => (
-    <StyledTreeItem
-      key={nodes.id}
-      nodeId={nodes.id}
-      label={nodes.name}
-    >
+    <StyledTreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
       {Array.isArray(nodes.children)
         ? nodes.children.map((node) => renderTree(node))
         : null}
@@ -38,7 +25,7 @@ export default function TreePanel(props: {
   return (
     <TreeView
       aria-label="customized"
-      defaultExpanded={['root']}
+      defaultExpanded={["root"]}
       defaultCollapseIcon={<MinusSquare />}
       defaultExpandIcon={<PlusSquare />}
       defaultEndIcon={<CloseSquare />}
@@ -46,8 +33,8 @@ export default function TreePanel(props: {
         height: 264,
         flexGrow: 1,
         maxWidth: 400,
-        overflowY: 'auto',
-        backgroundColor: 'grey',
+        overflowY: "auto",
+        backgroundColor: "grey",
       }}
       onNodeFocus={props.onNodeFocus}
     >
@@ -56,25 +43,16 @@ export default function TreePanel(props: {
   );
 }
 
-function MinusSquare(_props: SvgIconProps) {
-  return <RemoveIcon
-    fontSize="inherit"
-    sx={{ width: 14, height: 14 }}
-  />;
+function MinusSquare(props: SvgIconProps) {
+  return <RemoveIcon fontSize="inherit" sx={{ width: 14, height: 14 }} />;
 }
 
-function PlusSquare(_props: SvgIconProps) {
-  return <AddIcon
-    fontSize="inherit"
-    sx={{ width: 14, height: 14 }}
-  />;
+function PlusSquare(props: SvgIconProps) {
+  return <AddIcon fontSize="inherit" sx={{ width: 14, height: 14 }} />;
 }
 
-function CloseSquare(_props: SvgIconProps) {
-  return <CloseIcon
-    fontSize="inherit"
-    sx={{ width: 14, height: 14 }}
-  />;
+function CloseSquare(props: SvgIconProps) {
+  return <CloseIcon fontSize="inherit" sx={{ width: 14, height: 14 }} />;
 }
 
 function TransitionComponent(props: TransitionProps) {

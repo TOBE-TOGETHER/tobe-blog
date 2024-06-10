@@ -28,7 +28,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <AuthProvider>
             <BasicLayout>
               <MainRouter />
-              <AppFooter />
             </BasicLayout>
           </AuthProvider>
         </SnackbarProvider>

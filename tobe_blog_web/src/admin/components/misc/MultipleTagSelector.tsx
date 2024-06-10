@@ -1,15 +1,14 @@
-import { enqueueSnackbar } from 'notistack';
-import {
-  useEffect,
-  useState,
-} from 'react';
-import { useTranslation } from 'react-i18next';
-import { TagOption } from '../../../global/types.ts';
-import { TagService } from '../../../services';
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { enqueueSnackbar } from "notistack";
+import CreatableSelect from "react-select/creatable";
+import { StylesConfig } from "react-select";
+import { TagService } from "../../../services";
+import { TagOption } from "../../../global/types";
 
 const styles: StylesConfig<TagOption, true> = {};
 
-export default function MultipleTagSelector(props: {
+export default function MultipleTagSelecter(props: {
   value: TagOption[];
   setValue: (newValue: TagOption[]) => void;
   disabled?: boolean;
@@ -17,9 +16,9 @@ export default function MultipleTagSelector(props: {
   const [options, setOptions] = useState<TagOption[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();
-  
-  useEffect(() => loadTags(''), []);
-  
+
+  useEffect(() => loadTags(""), []);
+
   function loadTags(inputValue: string) {
     TagService.getTags(inputValue)
       .then((response) => {

@@ -7,14 +7,10 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-} from '@mui/material';
-import Loading from '../../../components/loading/Loading.tsx';
-import {
-  Column,
-  Operation,
-} from '../../../global/types.ts';
-
-import { getButtonByOperationName } from './TobeButton';
+} from "@mui/material";
+import Loading from "../../../components/loading/Loading";
+import { Column, Operation } from "../../../global/types";
+import { getButtonByOperationName } from "./TobeButton";
 
 interface PagedTableProps {
   openLoading?: boolean;

@@ -15,7 +15,7 @@ export const AUTHORITY = {
 
 export const FEATURE_CODE = {
   ARTICLE_MODULE: 'articleModule',
-  PROJECT_MODULE: 'projectModule',
+  PLAN_MODULE: 'planModule',
   VOCABULARY_MODULE: 'vocabularyModule',
 };
 

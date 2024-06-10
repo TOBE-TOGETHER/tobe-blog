@@ -1,35 +1,28 @@
-import Add from '@mui/icons-material/Add';
 import {
-  Divider,
   IconButton,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import {
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
-
-import {
-  authed,
-  enabled,
-} from '../../../commons';
-import { PageItem } from '../../../global/types.ts';
+  ListItemIcon,
+  Divider,
+} from "@mui/material";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Add from "@mui/icons-material/Add";
+import { useNavigate, useLocation } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import { authed, enabled } from "../../../commons";
+import { PageItem } from "../../../global/types";
 
 const NavItem = styled(ListItem)(({ theme }) => ({
-  '& .MuiListItemButton-root.Mui-selected': {
-    borderRight: '5px solid',
-    paddingRight: '5px',
+  "& .MuiListItemButton-root.Mui-selected": {
+    borderRight: "5px solid",
+    paddingRight: "5px",
     borderColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.main + ' !important',
-    '& .MuiListItemIcon-root': {
-      color: theme.palette.secondary.main + ' !important',
+    color: theme.palette.secondary.main + " !important",
+    "& .MuiListItemIcon-root": {
+      color: theme.palette.secondary.main + " !important",
     },
   },
 }));

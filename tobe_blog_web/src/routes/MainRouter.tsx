@@ -3,14 +3,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Loading from '../components/loading/Loading';
 import { URL } from './URL';
+import { getAdminRoutes } from '../admin/AdminRoutes';
 
 const HomePage = React.lazy(() => import('../portal/containers/home/Home'));
 
 const SignUp = React.lazy(() => import('../portal/containers/signUp/SignUp'));
 
 const SignIn = React.lazy(() => import('../portal/containers/signIn/SignIn'));
-
-const Admin = React.lazy(() => import('../admin/Admin'));
 
 export function MainRouter() {
   return (
@@ -24,15 +23,12 @@ export function MainRouter() {
           <Route
             path={URL.SIGN_IN}
             element={<SignIn />}
-          ></Route>
+          />
           <Route
             path={URL.SIGN_UP}
             element={<SignUp />}
           />
-          <Route
-            path="/admin"
-            element={<Admin />}
-          ></Route>
+          {getAdminRoutes()}
         </Routes>
       </BrowserRouter>
     </Suspense>
