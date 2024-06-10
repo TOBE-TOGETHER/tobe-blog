@@ -10,6 +10,8 @@ const SignUp = React.lazy(() => import('../portal/containers/signUp/SignUp'));
 
 const SignIn = React.lazy(() => import('../portal/containers/signIn/SignIn'));
 
+const Admin = React.lazy(() => import('../admin/Admin'));
+
 export function MainRouter() {
   return (
     <Suspense fallback={<Loading open={true} />}>
@@ -27,6 +29,10 @@ export function MainRouter() {
             path={URL.SIGN_UP}
             element={<SignUp />}
           />
+          <Route
+            path="/admin"
+            element={<Admin />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </Suspense>
