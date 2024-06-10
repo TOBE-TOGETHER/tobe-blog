@@ -31,7 +31,7 @@ export function updateUser(data: {
   avatarUrl: string | undefined;
   introduction: string | undefined;
   blog: string | undefined;
-  position: string | undefined;
+  profession: string | undefined;
   backgroundImg: string | undefined;
   photoImg: string | undefined;
 }): AxiosPromise {
