@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navigate, Outlet, Route, useLocation } from 'react-router-dom';
+import BackendLayout from './components/layout/BackendLayout.tsx';
 import { URL } from './URL';
 import { LOCAL_STORAGE_KEYS } from '../commons';
 import { useAuthDispatch, useAuthState } from '../contexts';
-import { BackendLayout } from './components';
 
 const SignInPage = React.lazy(
     () => import("../portal/containers/signIn/SignIn")
