@@ -83,6 +83,11 @@ public abstract class BaseSubContentController<
         }   
     }
 
+    @PutMapping("/{id}/release")
+    public ResponseEntity<D> release(@PathVariable String id) {
+        return ResponseEntity.ok(this.getConcreteSubContentService().release(id));
+    }
+
     private BaseSearchFilter buildSearchFilter(
         String createFrom, 
         String createTo, 

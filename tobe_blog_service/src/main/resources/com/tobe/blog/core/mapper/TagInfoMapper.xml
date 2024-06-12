@@ -1,0 +1,10 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tobe.blog.core.mapper.TagInfoMapper">
+    <select id="getTagsBySourceId" resultType="com.tobe.blog.beans.dto.tag.TagInfoGeneralDTO">
+        WITH TAGS AS (
+            SELECT tct.TAG_ID FROM TOBE_CONTENT_TAG tct WHERE tct.SRC_ID = #{ID} AND tct.DELETED=0)
+        SELECT tti.ID AS VALUE, tti.KEYWORD AS LABEL
+        FROM TAGS tags JOIN TOBE_TAG_INFO tti ON tags.TAG_ID = tti.ID AND tti.DELETED=0
+    </select>
+</mapper>

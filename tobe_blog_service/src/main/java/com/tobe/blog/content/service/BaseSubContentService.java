@@ -12,6 +12,8 @@ import com.tobe.blog.beans.entity.content.ContentEntity;
 import com.tobe.blog.content.mapper.BaseSubContentMapper;
 import com.tobe.blog.core.utils.SecurityUtil;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,6 +86,14 @@ public abstract class BaseSubContentService<
     }
 
     public D getDTOById(String id) {
+        return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
+    }
+
+    public D release(String id) {
+        final ContentEntity entity = contentService.getAndValidateContent(id);
+        entity.setPublicToAll(Boolean.TRUE);
+        entity.setPublishTime(new Timestamp(System.currentTimeMillis()));
+        contentService.updateById(entity);
         return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
     }
 
