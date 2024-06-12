@@ -149,7 +149,7 @@ create table tobe_tag_info
 (
     ID          int auto_increment
         primary key,
-    keyword     varchar(32)       not null,
+    KEYWORD     varchar(32)       not null,
     DELETED     bit default false not null,
     CREATE_BY   varchar(64)       null,
     CREATE_TIME datetime          null,
@@ -179,13 +179,6 @@ create table tobe_tag_relationship
 DROP TABLE IF EXISTS tobe_content_tag;
 create table tobe_content_tag
 (
-    ID          int auto_increment
-        primary key,
     CONTENT_ID  varchar(32)       not null,
-    TAG_ID      int               not null,
-    DELETED     bit default false not null,
-    CREATE_BY   varchar(64)       null,
-    CREATE_TIME datetime          null,
-    UPDATE_BY   varchar(64)       null,
-    UPDATE_TIME datetime          null
+    TAG_ID      int               not null
 );

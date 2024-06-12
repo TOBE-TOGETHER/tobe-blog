@@ -45,4 +45,20 @@
         JOIN ${tableName} tcci ON tcci.CONTENT_ID = tci.ID AND tci.DELETED = 0
         JOIN TOBE_CORE_USER tcu ON tci.OWNER_ID = tcu.ID AND tci.DELETED = 0
     </sql>
+
+    <resultMap id="general_dto_result_map" type="com.tobe.blog.beans.dto.content.BaseContentDTO">
+        <id column="ID" property="id" />
+        <collection property="tags" javaType="java.util.ArrayList"
+                    ofType="com.tobe.blog.beans.dto.tag.TagInfoGeneralDTO"
+                    column="ID"
+                    select="getTagsBySourceId">
+        </collection>
+    </resultMap>
+
+    <select id="getTagsBySourceId" resultType="com.tobe.blog.beans.dto.tag.TagInfoGeneralDTO">
+        SELECT tti.ID AS VALUE, tti.KEYWORD AS LABEL
+        FROM TOBE_CONTENT_TAG tct 
+        LEFT JOIN TOBE_TAG_INFO tti ON tct.TAG_ID = tti.ID
+        WHERE tct.CONTENT_ID = #{ID}
+    </select>
 </mapper>

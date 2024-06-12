@@ -1,5 +1,6 @@
 package com.tobe.blog.content.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tobe.blog.beans.consts.Const;
@@ -7,12 +8,15 @@ import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.dto.content.BaseSearchFilter;
+import com.tobe.blog.beans.dto.tag.TagInfoGeneralDTO;
 import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
 import com.tobe.blog.beans.entity.content.ContentEntity;
+import com.tobe.blog.beans.entity.content.ContentTagEntity;
 import com.tobe.blog.content.mapper.BaseSubContentMapper;
 import com.tobe.blog.core.utils.SecurityUtil;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * This is the core service to save, update, delete, and search user contents.
- * The code has been highly abstracted with generics and several DTO beans 
+ * The code has been highly abstracted with generics and several DTO beans
  * and entities need to be created when onboarding new kind of user content.
  * 
  * @param <D> DTO used to return basic info to client
@@ -38,6 +42,8 @@ public abstract class BaseSubContentService<
 
     @Autowired
     private ContentService contentService;
+    @Autowired
+    private ContentTagService tagService;
 
     @Transactional
     public D save(C creationDTO) {
@@ -57,6 +63,8 @@ public abstract class BaseSubContentService<
         concreteEntity.setDeleted(Boolean.FALSE);
         BeanUtils.copyProperties(creationDTO, concreteEntity);
         this.save(concreteEntity);
+        // save tag info
+        saveContentTag(contentEntity.getId(), creationDTO.getTags());
         return this.getDTOById(contentEntity.getId());
     }
 
@@ -70,6 +78,8 @@ public abstract class BaseSubContentService<
         final E concreteEntity = this.getById(updateDTO.getId());
         BeanUtils.copyProperties(updateDTO, concreteEntity);
         this.updateById(concreteEntity);
+        // save tag info
+        saveContentTag(contentEntity.getId(), updateDTO.getTags());
         // return updated general DTO
         return this.getDTOById(updateDTO.getId());
     }
@@ -82,7 +92,8 @@ public abstract class BaseSubContentService<
     }
 
     public Page<D> search(int current, int size, BaseSearchFilter filter) {
-        return this.baseMapper.pageDTOsByUserId(new Page<>(current, size), getConcreteEntity().getTableName(), SecurityUtil.getUserId(), filter);
+        return this.baseMapper.pageDTOsByUserId(new Page<>(current, size), getConcreteEntity().getTableName(),
+                SecurityUtil.getUserId(), filter);
     }
 
     public D getDTOById(String id) {
@@ -95,6 +106,15 @@ public abstract class BaseSubContentService<
         entity.setPublishTime(new Timestamp(System.currentTimeMillis()));
         contentService.updateById(entity);
         return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
+    }
+
+    private void saveContentTag(String contentId, List<TagInfoGeneralDTO> tags) {
+        tagService.remove(
+                new LambdaQueryWrapper<ContentTagEntity>()
+                        .eq(ContentTagEntity::getContentId, contentId));
+        tagService.saveBatch(
+                tags.stream().map(
+                        t -> new ContentTagEntity(contentId, t.getValue())).toList());
     }
 
     protected abstract D getConcreteDTO();
