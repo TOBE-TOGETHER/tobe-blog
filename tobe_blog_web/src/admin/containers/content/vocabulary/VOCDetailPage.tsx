@@ -25,7 +25,7 @@ import {
 } from '../../../components';
 import { WordListPanel } from '../components/WordListPanel';
 
-export default function VocabularyDetailPage() {
+export default function VOCDetailPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();

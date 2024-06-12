@@ -55,7 +55,7 @@ export default function GeneralCardView(props: {
             textOverflow: 'ellipsis',
           }}
         >
-          {record.tags.map((t) => t.label).join(', ')}
+          {record?.tags?.map((t) => t.label).join(', ')}
         </Typography>
       </Grid>
     );

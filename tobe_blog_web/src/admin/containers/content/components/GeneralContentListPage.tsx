@@ -12,9 +12,9 @@ import {
 } from '../../../../global/types';
 import DomainService from '../../../../services/DomainService';
 import GeneralCardView from './GeneralCardView';
-import GeneralDomainListPageFunctionBar from './GeneralDomainListPageFunctionBar';
+import GeneralContentListPageFunctionBar from './GeneralContentListPageFunctionBar';
 
-export default function GeneralDomainListPage(props: {
+export default function GeneralContentListPage(props: {
   domainService: DomainService;
   pageTitle: string;
   detailPageURL: string;
@@ -102,7 +102,7 @@ export default function GeneralDomainListPage(props: {
       openLoading={openLoading}
       pageTitle={props.pageTitle}
     >
-      <GeneralDomainListPageFunctionBar
+      <GeneralContentListPageFunctionBar
         createNewAction={() => navigate(props.createPageURL)}
       />
       <GeneralCardView

@@ -24,10 +24,9 @@ import {
   EditIconButton,
   MultipleTagSelecter,
 } from '../../../components';
-import ProjectProgressModal from './component/ProjectProgressModal';
-import ProjectStatusToolbar from './component/ProjectStatusToolbar';
+import PlanStatusToolbar from './component/PlanStatusToolbar';
 
-export default function ProjectDetailPage() {
+export default function PlanDetailPage() {
   const { t } = useTranslation();
   const { id } = useParams();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
@@ -116,7 +115,7 @@ export default function ProjectDetailPage() {
             item
             flexGrow={1}
           >
-            <ProjectStatusToolbar project={project} />
+            <PlanStatusToolbar project={project} />
           </Grid>
           <Grid
             item
@@ -214,10 +213,6 @@ export default function ProjectDetailPage() {
           )}
         </Box>
       </Paper>
-      {id && <ProjectProgressModal
-        projectId={id}
-        viewOnly={false}
-      />}
     </Page>
   );
 }

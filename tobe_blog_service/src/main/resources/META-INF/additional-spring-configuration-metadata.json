@@ -1,29 +1,32 @@
-{
-    "properties": [
-        {
-            "name": "jwt.secret.access",
-            "type": "java.lang.String",
-            "description": "256 digits secret key for access token'"
-        },
-        {
-            "name": "jwt.secret.refresh",
-            "type": "java.lang.String",
-            "description": "256 digits secret key for refresh token'"
-        },
-        {
-            "name": "jwt.expire.access",
-            "type": "java.lang.String",
-            "description": "Access token expire time'"
-        },
-        {
-            "name": "jwt.expire.refresh",
-            "type": "java.lang.String",
-            "description": "Refresh token expire time"
-        },
-        {
-            "name": "security-context.enable",
-            "type": "java.lang.Boolean",
-            "description": "Switch for manipulating security context is enabled or not"
-        }
-    ]
-}
+{"properties": [
+  {
+    "name": "jwt.secret.access",
+    "type": "java.lang.String",
+    "description": "256 digits secret key for access token'"
+  },
+  {
+    "name": "jwt.secret.refresh",
+    "type": "java.lang.String",
+    "description": "256 digits secret key for refresh token'"
+  },
+  {
+    "name": "jwt.expire.access",
+    "type": "java.lang.String",
+    "description": "Access token expire time'"
+  },
+  {
+    "name": "jwt.expire.refresh",
+    "type": "java.lang.String",
+    "description": "Refresh token expire time"
+  },
+  {
+    "name": "security-context.enable",
+    "type": "java.lang.Boolean",
+    "description": "Switch for manipulating security context is enabled or not"
+  },
+  {
+    "name": "spring.datasource.charset",
+    "type": "java.lang.String",
+    "description": "Charset of datasource"
+  }
+]}

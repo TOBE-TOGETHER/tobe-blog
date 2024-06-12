@@ -15,7 +15,7 @@ import { URL } from '../../../../routes';
 import { VocabularyService } from '../../../../services';
 import { MultipleTagSelecter } from '../../../components';
 
-export default function VocabularyCreationPage() {
+export default function VOCCreationPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();

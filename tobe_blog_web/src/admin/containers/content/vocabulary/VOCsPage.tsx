@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { URL } from '../../../../routes';
+import { URL } from "../../../URL";
 import { VocabularyService } from '../../../../services';
-import GeneralDomainListPage from '../components/GeneralDomainListPage';
+import GeneralContentListPage from '../components/GeneralContentListPage';
 
-export default function VocabulariesPage() {
+export default function VOCsPage() {
   const { t } = useTranslation();
   return (
-    <GeneralDomainListPage
+    <GeneralContentListPage
       domainService={VocabularyService}
       pageTitle={t('vocabularies-page.page-main-title')}
       detailPageURL={URL.VOCABULARY_DETAIL}

@@ -19,14 +19,14 @@ import { URL } from '../../../../routes';
 import { ProjectService } from '../../../../services';
 import { MultipleTagSelecter } from '../../../components';
 
-export default function ProjectCreationPage() {
+export default function PlanCreationPage() {
   const { t } = useTranslation();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
   const [tagValue, setTagValue] = useState<TagOption[]>([]);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const [fromTime, setFromTime] = useState<never>(null);
-  const [toTime, setToTime] = useState<never>(null);
+  const [fromTime, setFromTime] = useState<Date | null>(null);
+  const [toTime, setToTime] = useState<Date | null>(null);
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,12 +50,12 @@ export default function ProjectCreationPage() {
       warn(t('project-creation-page.msg.warning.target-end-time-empty'));
       return false;
     }
-    // if (fromTime?.time.getTime() > toTime?.time.getTime()) {
-    //   warn(
-    //     t('project-creation-page.msg.warning.target-invalid-start-end-time'),
-    //   );
-    //   return false;
-    // }
+    if (fromTime?.getTime() > toTime?.getTime()) {
+      warn(
+        t('project-creation-page.msg.warning.target-invalid-start-end-time'),
+      );
+      return false;
+    }
     
     return true;
   }
@@ -127,38 +127,13 @@ export default function ProjectCreationPage() {
                 
                 <Grid
                   item
-                  xs={6}
+                  xs={12}
                 >
                   <DatePicker
                     disablePast={true}
                     label={t('project-creation-page.fields.target-start-time')}
                     value={fromTime}
                     onChange={(newValue) => setFromTime(newValue)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="standard"
-                        fullWidth
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid
-                  item
-                  xs={6}
-                >
-                  <DatePicker
-                    disablePast={true}
-                    label={t('project-creation-page.fields.target-end-time')}
-                    value={toTime}
-                    onChange={(newValue) => setToTime(newValue)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="standard"
-                        fullWidth
-                      />
-                    )}
                   />
                 </Grid>
                 

@@ -10,18 +10,32 @@ const SignInPage = React.lazy(
 );
 const ProfileSettingPage = React.lazy(() => import('./containers/profileSettingPage/ProfileSettingPage'));
 const UsersPage = React.lazy(() => import('./containers/user/UsersPage'));
-
+const ArticlesPage = React.lazy(() => import('./containers/content/article/ArticlesPage'));
+const ArticleCreationPage = React.lazy(() => import('./containers/content/article/ArticleCreationPage'));
+const ArticleDetailPage = React.lazy(() => import('./containers/content/article/ArticleDetailPage'));
 export function getAdminRoutes(): React.ReactNode[] {
     return [(
         <Route element={<ProtectedRoutes />} key="protected-routes">
             <Route path={URL.SIGN_OUT} element={<SignOutRoute />} />
-            < Route
+            <Route
                 path={URL.PROFILE}
                 element={< ProfileSettingPage />}
             />
-            < Route
+            <Route
                 path={URL.USERS}
                 element={< UsersPage />}
+            />
+            <Route
+                path={URL.ARTICLES}
+                element={<ArticlesPage />}
+            />
+            <Route
+                path={URL.CREATE_ARTICLE}
+                element={<ArticleCreationPage />}
+            />
+            <Route
+                path={URL.ARTICLE_DETAIL}
+                element={<ArticleDetailPage />}
             />
         </Route >
     )];

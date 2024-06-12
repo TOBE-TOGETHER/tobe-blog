@@ -10,8 +10,8 @@ import InfiniteScrollList from "./misc/InfiniteScrollList";
 import BackendLayout from "./layout/BackendLayout";
 import Loading from "../../components/loading/Loading";
 import { Page, SidePanel } from "../../components/layout";
-import { WordDisplayDialog } from "../containers/domain/components/WordDisplayDialog";
-import { WordListPanel } from "../containers/domain/components/WordListPanel";
+import { WordDisplayDialog } from "../containers/content/components/WordDisplayDialog";
+import { WordListPanel } from "../containers/content/components/WordListPanel";
 
 export {
   AddIconButton,

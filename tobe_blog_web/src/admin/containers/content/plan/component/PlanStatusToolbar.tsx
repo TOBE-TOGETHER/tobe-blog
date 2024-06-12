@@ -1,13 +1,14 @@
 import { Box, Tooltip } from "@mui/material";
-import { ProjectInfo } from "../../../../../global/types";
-import VerifiedIcon from "@mui/icons-material/Verified";
 import { useTranslation } from "react-i18next";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import { ProjectInfo } from "../../../../../global/types";
 
-interface ProjectStatusToolbarProps {
+
+interface PlanStatusToolbarProps {
   project: ProjectInfo;
 }
 
-export default function ProjectStatusToolbar(props: ProjectStatusToolbarProps) {
+export default function PlanStatusToolbar(props: PlanStatusToolbarProps) {
   const { t } = useTranslation();
   return (
     <Box>

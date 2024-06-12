@@ -6,9 +6,9 @@ import {
 import { URL } from '../../../../routes';
 import { ProjectService } from '../../../../services';
 
-import GeneralDomainListPage from '../components/GeneralDomainListPage';
+import GeneralContentListPage from '../components/GeneralContentListPage';
 
-export default function ProjectsPage() {
+export default function PlansPage() {
   const { t } = useTranslation();
   
   function convertToGeneralCardData(data: ProjectInfo[]): GeneralCardData[] {
@@ -25,7 +25,7 @@ export default function ProjectsPage() {
   }
   
   return (
-    <GeneralDomainListPage
+    <GeneralContentListPage
       domainService={ProjectService}
       pageTitle={t('projects-page.page-main-title')}
       detailPageURL={URL.PROJECT_DETAIL}

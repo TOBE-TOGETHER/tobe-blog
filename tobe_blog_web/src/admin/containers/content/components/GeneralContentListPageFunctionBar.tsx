@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { AddIconButton } from '../../../components';
 
-export default function GeneralDomainListPageFunctionBar(props: {
+export default function GeneralContentListPageFunctionBar(props: {
   createNewAction: () => void;
 }) {
   return (
