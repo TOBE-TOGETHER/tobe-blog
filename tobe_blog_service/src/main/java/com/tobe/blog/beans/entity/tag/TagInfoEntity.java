@@ -3,7 +3,7 @@ package com.tobe.blog.beans.entity.tag;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.tobe.blog.beans.dto.tag.TagInfoGeneralDTO;
+import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 import com.tobe.blog.beans.entity.BaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ public class TagInfoEntity extends BaseEntity {
     private Long id;
     private String keyword;
 
-    public static TagInfoGeneralDTO covertToDTO(TagInfoEntity entity) {
-        return TagInfoGeneralDTO.builder().value(entity.id).label(entity.keyword).build();
+    public static TagInfoDTO covertToDTO(TagInfoEntity entity) {
+        return TagInfoDTO.builder().value(entity.id).label(entity.keyword).build();
     }
 }

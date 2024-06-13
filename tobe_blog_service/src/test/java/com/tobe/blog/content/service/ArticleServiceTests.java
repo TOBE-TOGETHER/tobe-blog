@@ -30,7 +30,7 @@ public class ArticleServiceTests {
     }
 
     @Test
-    @DisplayName("Article Service: create new Article with valid input")
+    @DisplayName("Article Service: create with valid input")
     void testSave_withValidInput() {
         ArticleCreationDTO dto = new ArticleCreationDTO();
         dto.setTitle("Hello world!");
@@ -103,5 +103,31 @@ public class ArticleServiceTests {
         Assertions.assertEquals(UPDATED_DESCRIPTION, updateResult.getDescription());
         Assertions.assertEquals(UPDATED_CONTENT, updateResult.getContent());
         Assertions.assertEquals(Boolean.TRUE, updateResult.getContentProtected());
+    }
+
+    @Test
+    @DisplayName("Article Service: delete article")
+    void testDelete() {
+        ArticleCreationDTO dto = new ArticleCreationDTO();
+        dto.setTitle("Article To Be Deleted");
+        ArticleDTO saveResult = articleService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        Assertions.assertDoesNotThrow(() -> articleService.delete(saveResult.getId()));
+        // should throw when the content has been deleted or not existing
+        Assertions.assertThrows(RuntimeException.class, () -> articleService.delete(saveResult.getId()));
+    }
+
+    @Test
+    @DisplayName("Article Service: release article")
+    void testRelease() {
+        ArticleCreationDTO dto = new ArticleCreationDTO();
+        dto.setTitle("Article To Be Released");
+        ArticleDTO saveResult = articleService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        ArticleDTO releaseResult = articleService.release(saveResult.getId());
+        Assertions.assertTrue(releaseResult.getPublicToAll());
+        Assertions.assertNotNull(releaseResult.getPublishTime());
+        // should not be able to repeatly release 
+        Assertions.assertThrows(RuntimeException.class, () -> articleService.release(saveResult.getId()));
     }
 }

@@ -14,6 +14,8 @@ import org.springframework.test.context.ActiveProfiles;
 import com.tobe.blog.DefaultTestData;
 import com.tobe.blog.DefaultTestData.DefaultUser;
 import com.tobe.blog.beans.consts.Const.ContentType;
+import com.tobe.blog.beans.dto.content.ArticleCreationDTO;
+import com.tobe.blog.beans.dto.content.ArticleDTO;
 import com.tobe.blog.beans.dto.content.PlanCreationDTO;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanUpdateDTO;
@@ -79,5 +81,31 @@ public class PlanServiceTests {
         Assertions.assertEquals(Boolean.TRUE, updateResult.getContentProtected());
         Assertions.assertEquals(updatedTimestamp, updateResult.getTargetStartTime());
         Assertions.assertEquals(updatedTimestamp, updateResult.getTargetEndTime());
+    }
+
+    @Test
+    @DisplayName("Plan Service: delete plan")
+    void testDelete() {
+        PlanCreationDTO dto = new PlanCreationDTO();
+        dto.setTitle("Plan To Be Deleted");
+        PlanDTO saveResult = planService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        Assertions.assertDoesNotThrow(() -> planService.delete(saveResult.getId()));
+        // should throw when the content has been deleted or not existing
+        Assertions.assertThrows(RuntimeException.class, () -> planService.delete(saveResult.getId()));
+    }
+
+    @Test
+    @DisplayName("Plan Service: release plan")
+    void testRelease() {
+        PlanCreationDTO dto = new PlanCreationDTO();
+        dto.setTitle("Plan To Be Released");
+        PlanDTO saveResult = planService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        PlanDTO releaseResult = planService.release(saveResult.getId());
+        Assertions.assertTrue(releaseResult.getPublicToAll());
+        Assertions.assertNotNull(releaseResult.getPublishTime());
+        // should not be able to repeatly release 
+        Assertions.assertThrows(RuntimeException.class, () -> planService.release(saveResult.getId()));
     }
 }

@@ -1,13 +1,11 @@
 package com.tobe.blog.core.service;
 
-import com.tobe.blog.core.exception.TobeRuntimeException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -26,6 +24,7 @@ import com.tobe.blog.beans.dto.user.UserGeneralDTO;
 import com.tobe.blog.beans.dto.user.UserUpdateDTO;
 import com.tobe.blog.beans.entity.user.UserFeatureEntity;
 import com.tobe.blog.beans.entity.user.UserRoleEntity;
+import com.tobe.blog.core.exception.TobeRuntimeException;
 import com.tobe.blog.core.mapper.UserFeatureMapper;
 import com.tobe.blog.core.mapper.UserRoleMapper;
 import com.tobe.blog.core.utils.SecurityUtil;

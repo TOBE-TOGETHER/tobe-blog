@@ -98,8 +98,8 @@ create table tobe_article_info
 (
     CONTENT_ID  varchar(32)                             not null
         primary key,
-    SUB_TITLE   varchar(128) collate utf8mb4_unicode_ci not null,
-    CONTENT     longtext collate utf8mb4_unicode_ci     not null,
+    SUB_TITLE   varchar(128) collate utf8mb4_unicode_ci null,
+    CONTENT     longtext collate utf8mb4_unicode_ci     null,
     DELETED     bit default false                       not null,
     CREATE_BY   varchar(64)                             null,
     CREATE_TIME datetime                                null,

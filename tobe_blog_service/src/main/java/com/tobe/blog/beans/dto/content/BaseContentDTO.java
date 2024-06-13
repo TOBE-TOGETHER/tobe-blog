@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.tobe.blog.beans.dto.tag.TagInfoGeneralDTO;
+import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 
 import lombok.Data;
 
@@ -25,7 +25,7 @@ public class BaseContentDTO implements Serializable {
     protected String contentType;
     // manipulate if the content require login to view
     protected Boolean contentProtected;
-    protected List<TagInfoGeneralDTO> tags;
+    protected List<TagInfoDTO> tags;
     protected Timestamp createTime;
     protected Timestamp updateTime;
 

@@ -5,6 +5,6 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TagInfoStatisticDTO extends TagInfoGeneralDTO {
+public class TagInfoStatisticDTO extends TagInfoDTO {
     private int count;
 }

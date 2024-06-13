@@ -60,6 +60,8 @@ public class VOCServiceTests {
         dto.setTitle("Vocabulry With Long Language value");
         dto.setDescription("Let's verify the content together!");
         dto.setContentProtected(Boolean.FALSE);
+        // language field can not be null
+        Assertions.assertThrows(RuntimeException.class, () -> vocService.save(dto));
         // language field length can not exceed 32
         dto.setLanguage(RandomStringUtils.randomAlphanumeric(33));
         Assertions.assertThrows(RuntimeException.class, () -> vocService.save(dto));
@@ -84,5 +86,34 @@ public class VOCServiceTests {
         VOCDTO updateResult = vocService.update(updateDTO);
         Assertions.assertEquals(saveResult.getId(), updateResult.getId());
         Assertions.assertEquals("CH", updateResult.getLanguage());
+    }
+
+
+    @Test
+    @DisplayName("Vocabulary Service: delete item")
+    void testDelete() {
+        VOCCreationDTO dto = new VOCCreationDTO();
+        dto.setTitle("Plan To Be Deleted");
+        dto.setLanguage("EN");
+        VOCDTO saveResult = vocService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        Assertions.assertDoesNotThrow(() -> vocService.delete(saveResult.getId()));
+        // should throw when the content has been deleted or not existing
+        Assertions.assertThrows(RuntimeException.class, () -> vocService.delete(saveResult.getId()));
+    }
+
+    @Test
+    @DisplayName("Vocabulary Service: release item")
+    void testRelease() {
+        VOCCreationDTO dto = new VOCCreationDTO();
+        dto.setTitle("Plan To Be Released");
+        dto.setLanguage("EN");
+        VOCDTO saveResult = vocService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        VOCDTO releaseResult = vocService.release(saveResult.getId());
+        Assertions.assertTrue(releaseResult.getPublicToAll());
+        Assertions.assertNotNull(releaseResult.getPublishTime());
+        // should not be able to repeatly release 
+        Assertions.assertThrows(RuntimeException.class, () -> vocService.release(saveResult.getId()));
     }
 }

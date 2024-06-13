@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagInfoGeneralDTO {
+public class TagInfoDTO {
     protected Long value;
     protected String label;
 }

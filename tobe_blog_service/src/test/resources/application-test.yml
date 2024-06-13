@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:abc;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_ON_EXIT=TRUE;
+    url: jdbc:h2:mem:local_test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_ON_EXIT=TRUE;NON_KEYWORDS=VALUE
     username:
     password:
     driver-class-name: org.h2.Driver
@@ -16,3 +16,6 @@ spring:
     init:
       data-locations: classpath:schema/data.sql
       schema-locations: classpath:schema/table.sql
+  test:
+    database:
+      replace: none

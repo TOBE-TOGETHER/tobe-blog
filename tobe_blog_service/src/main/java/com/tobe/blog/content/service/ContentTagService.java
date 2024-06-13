@@ -8,5 +8,4 @@ import com.tobe.blog.content.mapper.ContentTagMapper;
 
 @Service
 public class ContentTagService extends ServiceImpl<ContentTagMapper, ContentTagEntity> {
-
 }

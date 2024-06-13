@@ -1,5 +1,12 @@
 package com.tobe.blog.content.service;
 
+import java.sql.Timestamp;
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -8,19 +15,16 @@ import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.dto.content.BaseSearchFilter;
-import com.tobe.blog.beans.dto.tag.TagInfoGeneralDTO;
+import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
 import com.tobe.blog.beans.entity.content.ContentEntity;
 import com.tobe.blog.beans.entity.content.ContentTagEntity;
 import com.tobe.blog.content.mapper.BaseSubContentMapper;
+import com.tobe.blog.core.exception.TobeRuntimeException;
 import com.tobe.blog.core.utils.SecurityUtil;
 
-import java.sql.Timestamp;
-import java.util.List;
-
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import io.jsonwebtoken.lang.Collections;
+import io.netty.util.internal.StringUtil;
 
 /**
  * This is the core service to save, update, delete, and search user contents.
@@ -102,19 +106,23 @@ public abstract class BaseSubContentService<
 
     public D release(String id) {
         final ContentEntity entity = contentService.getAndValidateContent(id);
+        if (entity.getPublicToAll()) {
+            throw new TobeRuntimeException("Content has already been released");
+        }
         entity.setPublicToAll(Boolean.TRUE);
         entity.setPublishTime(new Timestamp(System.currentTimeMillis()));
         contentService.updateById(entity);
         return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
     }
 
-    private void saveContentTag(String contentId, List<TagInfoGeneralDTO> tags) {
+    private void saveContentTag(String contentId, List<TagInfoDTO> tags) {
+        if (Collections.isEmpty(tags) || StringUtil.isNullOrEmpty(contentId)) {
+          return;
+        }
         tagService.remove(
-                new LambdaQueryWrapper<ContentTagEntity>()
-                        .eq(ContentTagEntity::getContentId, contentId));
+            new LambdaQueryWrapper<ContentTagEntity>().eq(ContentTagEntity::getContentId, contentId));
         tagService.saveBatch(
-                tags.stream().map(
-                        t -> new ContentTagEntity(contentId, t.getValue())).toList());
+            tags.stream().map(t -> new ContentTagEntity(contentId, t.getValue())).toList());
     }
 
     protected abstract D getConcreteDTO();
