@@ -32,15 +32,19 @@ public class TagInfoServiceTests {
         TagInfoDTO result = tagInfoService.createTag(dto);
         Assertions.assertEquals(dto.getKeyword(), result.getLabel());
         Assertions.assertNotNull(result.getValue());
-        // the duplicate tag should not be save
+        // the duplicate tag should not be saved
         Assertions.assertThrows(RuntimeException.class, () -> tagInfoService.createTag(dto));
     }
 
     @Test
     void testSave_withInvalidInput() {
         final TagInfoCreationDTO dto = new TagInfoCreationDTO();
+        // keyword cannot be null
+        Assertions.assertThrows(RuntimeException.class, () -> tagInfoService.createTag(dto));
+        // keyword length can not exceed 32
         dto.setKeyword(RandomStringUtils.randomAlphanumeric(33));
         Assertions.assertThrows(RuntimeException.class, () -> tagInfoService.createTag(dto));
+        // should be saved with 32 chars
         dto.setKeyword(RandomStringUtils.randomAlphanumeric(32));
         TagInfoDTO result = tagInfoService.createTag(dto);
         Assertions.assertEquals(dto.getKeyword(), result.getLabel());

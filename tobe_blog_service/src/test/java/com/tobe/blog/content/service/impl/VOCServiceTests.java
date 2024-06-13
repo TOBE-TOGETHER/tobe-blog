@@ -1,5 +1,7 @@
 package com.tobe.blog.content.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +17,7 @@ import com.tobe.blog.beans.consts.Const.ContentType;
 import com.tobe.blog.beans.dto.content.VOCCreationDTO;
 import com.tobe.blog.beans.dto.content.VOCDTO;
 import com.tobe.blog.beans.dto.content.VOCUpdateDTO;
+import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 import com.tobe.blog.core.utils.SecurityUtil;
 
 @SpringBootTest
@@ -93,7 +96,7 @@ public class VOCServiceTests {
     @DisplayName("Vocabulary Service: delete item")
     void testDelete() {
         VOCCreationDTO dto = new VOCCreationDTO();
-        dto.setTitle("Plan To Be Deleted");
+        dto.setTitle("Vocabulary To Be Deleted");
         dto.setLanguage("EN");
         VOCDTO saveResult = vocService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
@@ -106,7 +109,7 @@ public class VOCServiceTests {
     @DisplayName("Vocabulary Service: release item")
     void testRelease() {
         VOCCreationDTO dto = new VOCCreationDTO();
-        dto.setTitle("Plan To Be Released");
+        dto.setTitle("Vocabulary To Be Released");
         dto.setLanguage("EN");
         VOCDTO saveResult = vocService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
@@ -115,5 +118,30 @@ public class VOCServiceTests {
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
         Assertions.assertThrows(RuntimeException.class, () -> vocService.release(saveResult.getId()));
+    }
+
+    @Test
+    @DisplayName("Vocabulary Service: create with tags")
+    void testCreateWithTags() {
+        VOCCreationDTO dto = new VOCCreationDTO();
+        dto.setTitle("Vocabulary with tags");
+        dto.setLanguage("EN");
+        dto.setTags(List.of(
+          TagInfoDTO.builder().value(1L).label("FIRST").build(), 
+          TagInfoDTO.builder().value(2L).label("SECOND").build()
+        ));
+        // the tags should be correctly saved
+        VOCDTO saveResult = vocService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        Assertions.assertEquals(2, saveResult.getTags().size());
+        // the tags should be correctly updated
+        VOCUpdateDTO updateDTO = new VOCUpdateDTO();
+        updateDTO.setId(saveResult.getId());
+        updateDTO.setTags(List.of(
+          TagInfoDTO.builder().value(1L).label("FIRST").build()
+        ));
+        VOCDTO updateResult = vocService.update(updateDTO);
+        Assertions.assertNotNull(updateResult.getId());
+        Assertions.assertEquals(1, updateResult.getTags().size());
     }
 }

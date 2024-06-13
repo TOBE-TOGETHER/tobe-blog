@@ -1,5 +1,7 @@
 package com.tobe.blog.content.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +17,7 @@ import com.tobe.blog.beans.consts.Const.ContentType;
 import com.tobe.blog.beans.dto.content.ArticleCreationDTO;
 import com.tobe.blog.beans.dto.content.ArticleDTO;
 import com.tobe.blog.beans.dto.content.ArticleUpdateDTO;
+import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 import com.tobe.blog.core.utils.SecurityUtil;
 
 @SpringBootTest
@@ -129,5 +132,29 @@ public class ArticleServiceTests {
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
         Assertions.assertThrows(RuntimeException.class, () -> articleService.release(saveResult.getId()));
+    }
+
+    @Test
+    @DisplayName("Article Service: create with tags")
+    void testCreateWithTags() {
+        ArticleCreationDTO dto = new ArticleCreationDTO();
+        dto.setTitle("Article with tags");
+        dto.setTags(List.of(
+          TagInfoDTO.builder().value(1L).label("FIRST").build(), 
+          TagInfoDTO.builder().value(2L).label("SECOND").build()
+        ));
+        // the tags should be correctly saved
+        ArticleDTO saveResult = articleService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        Assertions.assertEquals(2, saveResult.getTags().size());
+        // the tags should be correctly updated
+        ArticleUpdateDTO updateDTO = new ArticleUpdateDTO();
+        updateDTO.setId(saveResult.getId());
+        updateDTO.setTags(List.of(
+          TagInfoDTO.builder().value(1L).label("FIRST").build()
+        ));
+        ArticleDTO updateResult = articleService.update(updateDTO);
+        Assertions.assertNotNull(updateResult.getId());
+        Assertions.assertEquals(1, updateResult.getTags().size());
     }
 }

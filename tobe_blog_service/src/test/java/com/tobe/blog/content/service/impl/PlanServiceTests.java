@@ -1,6 +1,7 @@
 package com.tobe.blog.content.service.impl;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Assertions;
@@ -17,6 +18,7 @@ import com.tobe.blog.beans.consts.Const.ContentType;
 import com.tobe.blog.beans.dto.content.PlanCreationDTO;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanUpdateDTO;
+import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 import com.tobe.blog.core.utils.SecurityUtil;
 
 import io.micrometer.core.instrument.util.TimeUtils;
@@ -64,7 +66,7 @@ public class PlanServiceTests {
     @DisplayName("Plan Service: update item")
     void testUpdate_existingPlan() {
         PlanCreationDTO dto = new PlanCreationDTO();
-        dto.setTitle("Vocabulry To Be Update");
+        dto.setTitle("Plan To Be Update");
         dto.setDescription("Desc to be updated");
         PlanDTO saveResult = planService.save(dto);
         // prepare update DTO
@@ -105,5 +107,29 @@ public class PlanServiceTests {
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
         Assertions.assertThrows(RuntimeException.class, () -> planService.release(saveResult.getId()));
+    }
+
+    @Test
+    @DisplayName("Plan Service: create with tags")
+    void testCreateWithTags() {
+        PlanCreationDTO dto = new PlanCreationDTO();
+        dto.setTitle("Plan with tags");
+        dto.setTags(List.of(
+          TagInfoDTO.builder().value(1L).label("FIRST").build(), 
+          TagInfoDTO.builder().value(2L).label("SECOND").build()
+        ));
+        // the tags should be correctly saved
+        PlanDTO saveResult = planService.save(dto);
+        Assertions.assertNotNull(saveResult.getId());
+        Assertions.assertEquals(2, saveResult.getTags().size());
+        // the tags should be correctly updated
+        PlanUpdateDTO updateDTO = new PlanUpdateDTO();
+        updateDTO.setId(saveResult.getId());
+        updateDTO.setTags(List.of(
+          TagInfoDTO.builder().value(1L).label("FIRST").build()
+        ));
+        PlanDTO updateResult = planService.update(updateDTO);
+        Assertions.assertNotNull(updateResult.getId());
+        Assertions.assertEquals(1, updateResult.getTags().size());
     }
 }

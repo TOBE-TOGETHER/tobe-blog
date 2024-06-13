@@ -124,7 +124,7 @@ public abstract class BaseContentService<
 
     private void saveContentTag(String contentId, List<TagInfoDTO> tags) {
         if (Collections.isEmpty(tags) || StringUtil.isNullOrEmpty(contentId)) {
-          return;
+            return;
         }
         tagService.remove(
             new LambdaQueryWrapper<ContentTagEntity>().eq(ContentTagEntity::getContentId, contentId));
