@@ -14,8 +14,6 @@ import org.springframework.test.context.ActiveProfiles;
 import com.tobe.blog.DefaultTestData;
 import com.tobe.blog.DefaultTestData.DefaultUser;
 import com.tobe.blog.beans.consts.Const.ContentType;
-import com.tobe.blog.beans.dto.content.ArticleCreationDTO;
-import com.tobe.blog.beans.dto.content.ArticleDTO;
 import com.tobe.blog.beans.dto.content.PlanCreationDTO;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanUpdateDTO;
