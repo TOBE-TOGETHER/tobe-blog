@@ -7,7 +7,7 @@ import com.tobe.blog.beans.dto.content.BaseSearchFilter;
 import com.tobe.blog.beans.dto.content.VOCDTO;
 import com.tobe.blog.beans.entity.content.VOCEntity;
 
-public interface VOCMapper extends BaseSubContentMapper<VOCDTO, VOCEntity> {
+public interface VOCMapper extends BaseContentMapper<VOCDTO, VOCEntity> {
     @Override
     Page<VOCDTO> pageDTOsByUserId(Page<VOCDTO> page, @Param("tableName") String tableName, @Param("userId") Long userId, BaseSearchFilter filter);
 

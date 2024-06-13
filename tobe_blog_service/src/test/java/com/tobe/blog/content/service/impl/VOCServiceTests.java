@@ -1,4 +1,4 @@
-package com.tobe.blog.content.service;
+package com.tobe.blog.content.service.impl;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;

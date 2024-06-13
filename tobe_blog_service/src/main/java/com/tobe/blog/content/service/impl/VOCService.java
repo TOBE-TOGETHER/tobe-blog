@@ -1,4 +1,4 @@
-package com.tobe.blog.content.service;
+package com.tobe.blog.content.service.impl;
 
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import com.tobe.blog.beans.entity.content.VOCEntity;
 import com.tobe.blog.content.mapper.VOCMapper;
 
 @Service
-public class VOCService extends BaseSubContentService<VOCDTO, VOCCreationDTO, VOCUpdateDTO, VOCEntity, VOCMapper> {
+public class VOCService extends BaseContentService<VOCDTO, VOCCreationDTO, VOCUpdateDTO, VOCEntity, VOCMapper> {
 
     @Override
     protected VOCDTO getConcreteDTO() {

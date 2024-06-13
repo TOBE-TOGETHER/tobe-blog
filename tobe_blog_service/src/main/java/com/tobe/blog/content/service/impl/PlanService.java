@@ -1,4 +1,4 @@
-package com.tobe.blog.content.service;
+package com.tobe.blog.content.service.impl;
 
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import com.tobe.blog.content.mapper.PlanMapper;
 
 @Service
 public class PlanService
-        extends BaseSubContentService<PlanDTO, PlanCreationDTO, PlanUpdateDTO, PlanEntity, PlanMapper> {
+        extends BaseContentService<PlanDTO, PlanCreationDTO, PlanUpdateDTO, PlanEntity, PlanMapper> {
 
     @Override
     protected PlanDTO getConcreteDTO() {

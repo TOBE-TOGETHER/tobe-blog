@@ -68,9 +68,9 @@ CREATE TABLE `tobe_core_user_role`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS EXISTStobe_content_info;
+DROP TABLE IF EXISTS tobe_content_general_info;
 -- base content info
-create table tobe_content_info
+create table tobe_content_general_info
 (
     ID                varchar(32)                              not null
         primary key,

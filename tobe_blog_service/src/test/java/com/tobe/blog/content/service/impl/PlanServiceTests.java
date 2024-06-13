@@ -1,4 +1,4 @@
-package com.tobe.blog.content.service;
+package com.tobe.blog.content.service.impl;
 
 import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;

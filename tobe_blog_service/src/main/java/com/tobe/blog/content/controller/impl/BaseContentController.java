@@ -1,4 +1,4 @@
-package com.tobe.blog.content.controller;
+package com.tobe.blog.content.controller.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,9 +18,10 @@ import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.dto.content.BaseSearchFilter;
-import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
-import com.tobe.blog.content.mapper.BaseSubContentMapper;
-import com.tobe.blog.content.service.BaseSubContentService;
+import com.tobe.blog.beans.entity.content.BaseContentEntity;
+import com.tobe.blog.content.controller.IContentController;
+import com.tobe.blog.content.mapper.BaseContentMapper;
+import com.tobe.blog.content.service.IContentService;
 
 /**
  * This is an abstract controller which provides some common implementations 
@@ -34,38 +35,43 @@ import com.tobe.blog.content.service.BaseSubContentService;
  * @param <M> Mapper used for manipulating data, providing common CRUD methods
  * @param <S> Core service to implement the save, update, delete operations
  */
-public abstract class BaseSubContentController<
+public abstract class BaseContentController<
     D extends BaseContentDTO, 
     C extends BaseContentCreationDTO, 
     U extends BaseContentUpdateDTO, 
-    E extends BaseSubContentEntity, 
-    M extends BaseSubContentMapper<D, E>, 
-    S extends BaseSubContentService<D, C, U, E, M>> {
+    E extends BaseContentEntity, 
+    M extends BaseContentMapper<D, E>, 
+    S extends IContentService<D, C, U, E, M>> implements IContentController<D, C, U, E, M, S> {
 
     protected abstract S getConcreteSubContentService();
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+    @Override
     @PostMapping
     public ResponseEntity<D> create(@RequestBody C dto) {
         return ResponseEntity.ok(getConcreteSubContentService().save(dto));
     }
 
+    @Override
     @PutMapping("/{id}")
     public ResponseEntity<D> update(@PathVariable String id, @RequestBody U dto) {
         return ResponseEntity.ok(getConcreteSubContentService().update(dto));
     }
 
+    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<D> delete(@PathVariable String id) {
         getConcreteSubContentService().delete(id);
         return ResponseEntity.ok(null);
     }
 
+    @Override
     @GetMapping("/{id}")
     public ResponseEntity<D> getById(@PathVariable String id) {
         return ResponseEntity.ok(getConcreteSubContentService().getDTOById(id));
     }
 
+    @Override
     @GetMapping
     public ResponseEntity<Page<D>> search(            
         @RequestParam(value = "current", required = false, defaultValue = "1") int current,
@@ -83,6 +89,7 @@ public abstract class BaseSubContentController<
         }   
     }
 
+    @Override
     @PutMapping("/{id}/release")
     public ResponseEntity<D> release(@PathVariable String id) {
         return ResponseEntity.ok(this.getConcreteSubContentService().release(id));

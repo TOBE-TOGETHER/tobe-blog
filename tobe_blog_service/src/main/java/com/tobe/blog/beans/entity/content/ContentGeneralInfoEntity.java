@@ -1,22 +1,23 @@
 package com.tobe.blog.beans.entity.content;
 
+import java.sql.Timestamp;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.tobe.blog.beans.entity.BaseEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName("tobe_content_info")
-public class ContentEntity extends BaseEntity {
+@TableName("tobe_content_general_info")
+public class ContentGeneralInfoEntity extends BaseEntity {
     @TableId(type = IdType.ASSIGN_UUID)
     protected String id;
     protected String title;

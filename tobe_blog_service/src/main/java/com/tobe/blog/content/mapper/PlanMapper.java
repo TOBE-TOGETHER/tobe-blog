@@ -7,7 +7,7 @@ import com.tobe.blog.beans.dto.content.BaseSearchFilter;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.entity.content.PlanEntity;
 
-public interface PlanMapper extends BaseSubContentMapper<PlanDTO, PlanEntity> {
+public interface PlanMapper extends BaseContentMapper<PlanDTO, PlanEntity> {
     @Override
     Page<PlanDTO> pageDTOsByUserId(Page<PlanDTO> page, @Param("tableName") String tableName, @Param("userId") Long userId, BaseSearchFilter filter);
 

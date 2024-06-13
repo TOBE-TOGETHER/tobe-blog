@@ -1,4 +1,4 @@
-package com.tobe.blog.content.service;
+package com.tobe.blog.content.service.impl;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -16,10 +16,11 @@ import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.dto.content.BaseSearchFilter;
 import com.tobe.blog.beans.dto.tag.TagInfoDTO;
-import com.tobe.blog.beans.entity.content.BaseSubContentEntity;
-import com.tobe.blog.beans.entity.content.ContentEntity;
+import com.tobe.blog.beans.entity.content.BaseContentEntity;
+import com.tobe.blog.beans.entity.content.ContentGeneralInfoEntity;
 import com.tobe.blog.beans.entity.content.ContentTagEntity;
-import com.tobe.blog.content.mapper.BaseSubContentMapper;
+import com.tobe.blog.content.mapper.BaseContentMapper;
+import com.tobe.blog.content.service.IContentService;
 import com.tobe.blog.core.exception.TobeRuntimeException;
 import com.tobe.blog.core.utils.SecurityUtil;
 
@@ -37,22 +38,23 @@ import io.netty.util.internal.StringUtil;
  * @param <E> Entity used for database, @TableName annotation is required
  * @param <M> Mapper used for manipulating data, providing common CRUD methods
  */
-public abstract class BaseSubContentService<
+public abstract class BaseContentService<
     D extends BaseContentDTO, 
     C extends BaseContentCreationDTO, 
     U extends BaseContentUpdateDTO, 
-    E extends BaseSubContentEntity, 
-    M extends BaseSubContentMapper<D, E>> extends ServiceImpl<M, E> {
+    E extends BaseContentEntity, 
+    M extends BaseContentMapper<D, E>> extends ServiceImpl<M, E> implements IContentService<D, C, U, E, M> {
 
     @Autowired
-    private ContentService contentService;
+    private ContentGeneralInfoService generalInfoService;
     @Autowired
     private ContentTagService tagService;
 
+    @Override
     @Transactional
     public D save(C creationDTO) {
         // save content level data
-        ContentEntity contentEntity = new ContentEntity();
+        ContentGeneralInfoEntity contentEntity = new ContentGeneralInfoEntity();
         BeanUtils.copyProperties(creationDTO, contentEntity);
         contentEntity.setContentType(getContentType().name());
         contentEntity.setDeleted(Boolean.FALSE);
@@ -60,7 +62,7 @@ public abstract class BaseSubContentService<
         contentEntity.setViewCount(0L);
         contentEntity.setLikeCount(0L);
         contentEntity.setOwnerId(SecurityUtil.getUserId());
-        contentService.save(contentEntity);
+        generalInfoService.save(contentEntity);
         // save sub level data and return general concrete DTO
         E concreteEntity = this.getConcreteEntity();
         concreteEntity.setContentId(contentEntity.getId());
@@ -72,12 +74,13 @@ public abstract class BaseSubContentService<
         return this.getDTOById(contentEntity.getId());
     }
 
+    @Override
     @Transactional
     public D update(U updateDTO) {
         // validate and update content level values
-        final ContentEntity contentEntity = contentService.getAndValidateContent(updateDTO.getId());
+        final ContentGeneralInfoEntity contentEntity = generalInfoService.getAndValidateContent(updateDTO.getId());
         BeanUtils.copyProperties(updateDTO, contentEntity);
-        contentService.updateById(contentEntity);
+        generalInfoService.updateById(contentEntity);
         // update sub level values
         final E concreteEntity = this.getById(updateDTO.getId());
         BeanUtils.copyProperties(updateDTO, concreteEntity);
@@ -88,30 +91,34 @@ public abstract class BaseSubContentService<
         return this.getDTOById(updateDTO.getId());
     }
 
+    @Override
     @Transactional
     public void delete(String id) {
-        contentService.getAndValidateContent(id);
-        contentService.removeById(id);
+        generalInfoService.getAndValidateContent(id);
+        generalInfoService.removeById(id);
         this.removeById(id);
     }
 
+    @Override
     public Page<D> search(int current, int size, BaseSearchFilter filter) {
         return this.baseMapper.pageDTOsByUserId(new Page<>(current, size), getConcreteEntity().getTableName(),
                 SecurityUtil.getUserId(), filter);
     }
 
+    @Override
     public D getDTOById(String id) {
         return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
     }
 
+    @Override
     public D release(String id) {
-        final ContentEntity entity = contentService.getAndValidateContent(id);
+        final ContentGeneralInfoEntity entity = generalInfoService.getAndValidateContent(id);
         if (entity.getPublicToAll()) {
             throw new TobeRuntimeException("Content has already been released");
         }
         entity.setPublicToAll(Boolean.TRUE);
         entity.setPublishTime(new Timestamp(System.currentTimeMillis()));
-        contentService.updateById(entity);
+        generalInfoService.updateById(entity);
         return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
     }
 

@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public abstract class BaseSubContentEntity extends BaseEntity {
+public abstract class BaseContentEntity extends BaseEntity {
     @TableId(type = IdType.INPUT)
     protected String contentId;
 

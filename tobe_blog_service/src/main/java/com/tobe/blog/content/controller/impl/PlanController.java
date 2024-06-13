@@ -1,4 +1,4 @@
-package com.tobe.blog.content.controller;
+package com.tobe.blog.content.controller.impl;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +8,7 @@ import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanUpdateDTO;
 import com.tobe.blog.beans.entity.content.PlanEntity;
 import com.tobe.blog.content.mapper.PlanMapper;
-import com.tobe.blog.content.service.PlanService;
+import com.tobe.blog.content.service.impl.PlanService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/v1/plans")
 @RequiredArgsConstructor
 public class PlanController
-        extends BaseSubContentController<PlanDTO, PlanCreationDTO, PlanUpdateDTO, PlanEntity, PlanMapper, PlanService> {
+        extends BaseContentController<PlanDTO, PlanCreationDTO, PlanUpdateDTO, PlanEntity, PlanMapper, PlanService> {
 
     private final PlanService planService;
 
