@@ -1,28 +1,27 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import Backend from "i18next-http-backend";
-import LanguageDetector from "i18next-browser-languagedetector";
+import i18n, { use } from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend from 'i18next-http-backend';
+import { initReactI18next } from 'react-i18next';
 
-i18n
-  .use(LanguageDetector)
+void use(LanguageDetector)
   .use(Backend)
   .use(initReactI18next)
   .init({
     backend: {
-      loadPath: "/locales/{{lng}}/{{ns}}.json",
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    fallbackLng: "en",
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },
     detection: {
-      caches: ["localStorage", "sessionStorage", "cookie"],
+      caches: ['localStorage', 'sessionStorage', 'cookie'],
     },
   });
 
 export default i18n;
 
 export const LANGUAGE = {
-  ZH: "zh",
-  EN: "en",
+  ZH: 'zh',
+  EN: 'en',
 };

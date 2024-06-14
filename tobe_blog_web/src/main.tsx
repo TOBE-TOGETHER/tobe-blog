@@ -5,8 +5,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import { AppFooter } from './components/footer';
 import { BasicLayout } from './components/layout';
 import { AuthProvider } from './contexts';
 import './i18n';
