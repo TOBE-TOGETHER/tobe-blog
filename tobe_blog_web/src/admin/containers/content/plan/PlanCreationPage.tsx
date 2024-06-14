@@ -8,6 +8,7 @@ import {
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useSnackbar } from 'notistack';
 import {
+  FormEvent,
   Fragment,
   useState,
 } from 'react';
@@ -28,7 +29,7 @@ export default function PlanCreationPage() {
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
   
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (!validateForm(data)) {
@@ -75,11 +76,11 @@ export default function PlanCreationPage() {
       targetEndTime: toTime,
       tags: tagValue,
     })
-      .then((response) => {
+      .then(() => {
         enqueueSnackbar(t('plan-creation-page.msg.success'), {
           variant: 'success',
         });
-        navigate(URL.PROJECTS);
+        navigate(URL.PLANS);
       })
       .catch(() => {
         enqueueSnackbar(t('plan-creation-page.msg.error'), {
@@ -134,6 +135,31 @@ export default function PlanCreationPage() {
                     label={t('plan-creation-page.fields.target-start-time')}
                     value={fromTime}
                     onChange={(newValue) => setFromTime(newValue)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        variant="standard"
+                        fullWidth
+                      />
+                    )}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={6}
+                >
+                  <DatePicker
+                    disablePast={true}
+                    label={t('plan-creation-page.fields.target-end-time')}
+                    value={toTime}
+                    onChange={(newValue) => setToTime(newValue)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        variant="standard"
+                        fullWidth
+                      />
+                    )}
                   />
                 </Grid>
                 

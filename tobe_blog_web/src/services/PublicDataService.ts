@@ -35,8 +35,8 @@ export function getVocabularyById(id: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/vocabularies/${id}`);
 }
 
-export function getProgressesByProjectId(projectId: string): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/projects/${projectId}/progresses?size=1000&current=1`);
+export function getProgressesByProjectId(projectId: string, size: number, current: number): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/projects/${projectId}/progresses?size=${size}&current=${current}`);
 }
 
 export function getWordsByVocabularyId(id: string): AxiosPromise {
@@ -57,4 +57,8 @@ export function getTagStatistics(domain: Domain, ownerId: string) {
 
 export function getTop5ActiveUsers() {
   return server.get(`/${API_DATA_URI}/top5-active-users`);
+}
+
+export function getBySrcIdAndFileType(srcId: string, fileType: string) {
+  return server.get(`/${API_DATA_URI}/files?srcId=${srcId}&fileType=${fileType}`);
 }
