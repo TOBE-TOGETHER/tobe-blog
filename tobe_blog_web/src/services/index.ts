@@ -1,5 +1,6 @@
 import { ArticleService } from './ArticleService';
 import * as AuthService from './AuthService';
+import * as FileService from './FileService';
 import * as OverviewService from './OverviewService';
 import { PlanService } from './PlanService.ts';
 import * as ProjectProgressService from './ProjectProgressService';
@@ -14,6 +15,7 @@ import * as WordService from './WordService';
 export {
   ArticleService,
   AuthService,
+  FileService,
   OverviewService,
   ProjectProgressService,
   PlanService,
