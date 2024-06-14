@@ -6,7 +6,10 @@ import {
   TextField,
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import { useState } from 'react';
+import {
+  FormEvent,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../components/layout';
@@ -19,7 +22,7 @@ export default function SubjectCreationPage() {
   const navigate = useNavigate();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
   
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (!data.get('subjectName')) {
@@ -38,7 +41,7 @@ export default function SubjectCreationPage() {
       description: data.get('description')?.toString() || '',
       coverImgUrl: data.get('coverImgUrl')?.toString() || '',
     })
-      .then((response) => {
+      .then(() => {
         enqueueSnackbar(t('subject-creation-page.msg.success'), {
           variant: 'success',
         });

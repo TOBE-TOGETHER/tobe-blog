@@ -14,11 +14,9 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import {
-  enabled,
-  FEATURE_CODE,
-} from '../../../commons';
+import { enabled } from '../../../commons';
 import { Page } from '../../../components/layout';
+import { EFeatureCode } from '../../../global/enums.ts';
 import {
   BaseInfoOverview,
   Domain,
@@ -29,7 +27,7 @@ import { OverviewService } from '../../../services';
 export default function StatisticsPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const [projectData, setProjectData] = useState<BaseInfoOverview>({
+  const [planData, setPlanData] = useState<BaseInfoOverview>({
     totalNum: 0,
     publicNum: 0,
     totalViewCount: 0,
@@ -62,7 +60,7 @@ export default function StatisticsPage() {
     ],
   );
   const loadData = useCallback((): void => {
-    loadOverview(Domain.Project, setProjectData);
+    loadOverview(Domain.Plan, setPlanData);
     loadOverview(Domain.Article, setArticleData);
     loadOverview(Domain.Vocabulary, setVocabularyData);
   }, [loadOverview]);
@@ -78,21 +76,21 @@ export default function StatisticsPage() {
         container
         spacing={1}
       >
-        {enabled(FEATURE_CODE.PROJECT_MODULE) && (
+        {enabled(EFeatureCode.PLAN_MODULE) && (
           <StatisticsDomainPanel
-            domain={Domain.Project}
-            data={projectData}
-            link={URL.PROJECTS}
+            domain={Domain.Plan}
+            data={planData}
+            link={URL.PLANS}
           />
         )}
-        {enabled(FEATURE_CODE.ARTICLE_MODULE) && (
+        {enabled(EFeatureCode.ARTICLE_MODULE) && (
           <StatisticsDomainPanel
             domain={Domain.Article}
             data={articleData}
             link={URL.ARTICLES}
           />
         )}
-        {enabled(FEATURE_CODE.VOCABULARY_MODULE) && (
+        {enabled(EFeatureCode.VOCABULARY_MODULE) && (
           <StatisticsDomainPanel
             domain={Domain.Vocabulary}
             data={vocabularyData}

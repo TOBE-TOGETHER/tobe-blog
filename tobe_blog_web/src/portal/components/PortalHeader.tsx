@@ -16,7 +16,7 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import project from '../../../package.json';
+import plan from '../../../package.json';
 import { validateUrl } from '../../routes';
 import theme from '../../theme';
 import { publicPages } from './configs';
@@ -50,6 +50,7 @@ const PortalHeader = () => {
     }
     setYIndex(document.documentElement.scrollTop);
   }
+  
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -121,7 +122,7 @@ const HeaderContent = () => {
             cursor: 'pointer',
           }}
         >
-          {project.name.toUpperCase()}
+          {plan.name.toUpperCase()}
         </Typography>
         
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

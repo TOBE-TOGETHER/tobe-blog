@@ -5,13 +5,13 @@ import {
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ProjectProgress } from '../../../../../global/types';
+import { PlanProgress } from '../../../../../global/types';
 import { PublicDataService } from '../../../../../services';
 import { InfiniteScrollList } from '../../../../components';
-import ProjectProgressItem from './ProjectProgressItem';
+import PlanProgressItem from './PlanProgressItem.tsx';
 
-export default function ProjectProgressItems(props: {
-  projectId: string;
+export default function PlanProgressItems(props: {
+  planId: string;
   viewOnly: boolean;
   refreshCode: number;
 }) {
@@ -21,22 +21,22 @@ export default function ProjectProgressItems(props: {
   const [loading, setLoading] = useState<boolean>(false);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
-  const [progresses, setProgresses] = useState<ProjectProgress[]>([]);
+  const [progresses, setProgresses] = useState<PlanProgress[]>([]);
   
   useEffect(() => {
     loadProgresses(0, []);
   }, [
-    props.projectId,
+    props.planId,
     props.refreshCode,
   ]);
   
   const loadProgresses = (
     _current: number,
-    _progresses: ProjectProgress[],
+    _progresses: PlanProgress[],
   ): void => {
     setLoading(true);
-    PublicDataService.getProgressesByProjectId(
-      props.projectId,
+    PublicDataService.getProgressesByPlanId(
+      props.planId,
       DEFAULT_PAGE_SIZE,
       _current + 1,
     )
@@ -46,7 +46,7 @@ export default function ProjectProgressItems(props: {
         setTotalPage(response.data.pages);
       })
       .catch(() => {
-        enqueueSnackbar(t('project-progress.msg.error'), {
+        enqueueSnackbar(t('plan-progress.msg.error'), {
           variant: 'error',
         });
       })
@@ -58,7 +58,7 @@ export default function ProjectProgressItems(props: {
     <InfiniteScrollList
       loading={loading}
       dataSource={progresses}
-      renderItem={(progress: ProjectProgress) => (
+      renderItem={(progress: PlanProgress) => (
         <Grid
           item
           xs={12}
@@ -68,7 +68,7 @@ export default function ProjectProgressItems(props: {
           xl={12}
           key={`infinite-scroll-item-${progress.id}`}
         >
-          <ProjectProgressItem
+          <PlanProgressItem
             progress={progress}
             viewOnly={props.viewOnly}
             key={progress.id}

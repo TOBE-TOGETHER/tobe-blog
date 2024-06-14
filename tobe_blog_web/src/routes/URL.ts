@@ -6,7 +6,7 @@ export const URL = {
   SIGN_UP: '/sign-up',
   ARTICLE: '/article',
   ABOUT: '/about',
-  NEWS_PROJECT_DETAIL: '/news/plans/:id',
+  NEWS_PLAN_DETAIL: '/news/plans/:id',
   NEWS_ARTICLE_DETAIL: '/news/articles/:id',
   NEWS_VOCABULARY_DETAIL: '/news/vocabularies/:id',
 

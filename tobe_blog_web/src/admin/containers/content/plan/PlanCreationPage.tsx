@@ -35,11 +35,11 @@ export default function PlanCreationPage() {
     if (!validateForm(data)) {
       return;
     }
-    handleProjectCreation(data);
+    handlePlanCreation(data);
   };
   
   function validateForm(data: FormData): boolean {
-    if (!data.get('planName')) {
+    if (!data.get('title')) {
       warn(t('plan-creation-page.msg.warning.name-empty'));
       return false;
     }
@@ -67,10 +67,10 @@ export default function PlanCreationPage() {
     });
   }
   
-  function handleProjectCreation(data: FormData): void {
+  function handlePlanCreation(data: FormData): void {
     setOpenLoading(true);
     PlanService.create({
-      name: data.get('planName')?.toString() || '',
+      title: data.get('title')?.toString() || '',
       description: data.get('description')?.toString() || '',
       targetStartTime: fromTime,
       targetEndTime: toTime,
@@ -117,8 +117,8 @@ export default function PlanCreationPage() {
                 >
                   <TextField
                     required
-                    id="projectName"
-                    name="projectName"
+                    id="title"
+                    name="title"
                     label={t('plan-creation-page.fields.name')}
                     fullWidth
                     autoComplete="name"

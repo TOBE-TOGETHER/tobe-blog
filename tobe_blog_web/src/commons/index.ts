@@ -1,29 +1,8 @@
+import { ELocalStorageKeys } from '../global/enums.ts';
 import * as TimeFormat from './TimeFormat';
 
-export const LOCAL_STORAGE_KEYS = {
-  CURRENT_USER: 'currentUser',
-  ACCESS_TOKEN: 'accessToken',
-  REFRESH_TOKEN: 'refreshToken',
-  AUTHORITIES: 'authorities',
-};
-
-export const AUTHORITY = {
-  ROLE_BASIC: 'ROLE_BASIC',
-  ROLE_ADMIN: 'ROLE_ADMIN',
-  ROLE_GUEST: 'ROLE_GUEST',
-};
-
-export const FEATURE_CODE = {
-  ARTICLE_MODULE: 'articleModule',
-  PLAN_MODULE: 'planModule',
-  VOCABULARY_MODULE: 'vocabularyModule',
-};
-
-export type FeatureCodeKey = keyof typeof FEATURE_CODE;
-export type AuthorityKey = keyof typeof AUTHORITY;
-
 export function authed(requiredRole?: string[]): boolean {
-  const userAuthorities = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.AUTHORITIES) || '[]');
+  const userAuthorities = JSON.parse(localStorage.getItem(ELocalStorageKeys.AUTHORITIES) || '[]');
   // if no role required, then return true directly
   if (requiredRole) {
     let isValid: boolean = false;
@@ -40,7 +19,7 @@ export function authed(requiredRole?: string[]): boolean {
 }
 
 export function enabled(requiredFeature?: string): boolean {
-  const userProfile = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.CURRENT_USER) || '{}');
+  const userProfile = JSON.parse(localStorage.getItem(ELocalStorageKeys.CURRENT_USER) || '{}');
   // if no feature code required, then return true directly
   if (!requiredFeature) {
     return true;

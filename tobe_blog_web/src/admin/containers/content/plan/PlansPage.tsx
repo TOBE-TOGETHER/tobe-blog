@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import {
   GeneralCardData,
-  ProjectInfo,
+  PlanInfo,
 } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PlanService } from '../../../../services';
@@ -11,7 +11,7 @@ import GeneralContentListPage from '../components/GeneralContentListPage';
 export default function PlansPage() {
   const { t } = useTranslation();
   
-  function convertToGeneralCardData(data: ProjectInfo[]): GeneralCardData[] {
+  function convertToGeneralCardData(data: PlanInfo[]): GeneralCardData[] {
     return data.map((d) => {
       return {
         id: d.id,

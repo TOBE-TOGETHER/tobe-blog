@@ -15,8 +15,8 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import {
-  ProjectInfo,
-  ProjectUpdateDTO,
+  PlanInfo,
+  PlanUpdateDTO,
   TagOption,
 } from '../../../../global/types';
 import { PlanService } from '../../../../services';
@@ -33,7 +33,7 @@ export default function PlanDetailPage() {
   const [tagValue, setTagValue] = useState<TagOption[]>([]);
   const { enqueueSnackbar } = useSnackbar();
   const [editable, setEditable] = useState<boolean>(false);
-  const [project, setProject] = useState<ProjectInfo | null>(null);
+  const [plan, setPlan] = useState<PlanInfo | null>(null);
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
   const [description, setDescription] = useState<string | null>(null);
@@ -43,14 +43,14 @@ export default function PlanDetailPage() {
       setOpenLoading(true);
       PlanService.getById(id)
         .then((response) => {
-          setProject(response.data);
+          setPlan(response.data);
           setFromTime(new Date(response.data.targetStartTime));
           setToTime(new Date(response.data.targetEndTime));
           setDescription(response.data.description);
           setTagValue(response.data.tags);
         })
         .catch(() => {
-          enqueueSnackbar(t('project-detail-page.msg.error'), {
+          enqueueSnackbar(t('plan-detail-page.msg.error'), {
             variant: 'error',
           });
         })
@@ -67,16 +67,16 @@ export default function PlanDetailPage() {
     id,
   ]);
   
-  function handleProjectUpdate(updatedProject: ProjectUpdateDTO): void {
+  function handlePlanUpdate(updatedPlan: PlanUpdateDTO): void {
     setOpenLoading(true);
-    PlanService.update(updatedProject)
+    PlanService.update(updatedPlan)
       .then(() => {
-        enqueueSnackbar(t('project-detail-page.msg.success'), {
+        enqueueSnackbar(t('plan-detail-page.msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('project-detail-page.msg.error'), {
+        enqueueSnackbar(t('plan-detail-page.msg.error'), {
           variant: 'error',
         });
       })
@@ -84,13 +84,13 @@ export default function PlanDetailPage() {
   }
   
   const handleEditableChange = () => {
-    if (!project) {
+    if (!plan) {
       return;
     }
     if (editable) {
-      handleProjectUpdate({
-        id: project.id,
-        name: project.name,
+      handlePlanUpdate({
+        id: plan.id,
+        name: plan.name,
         description: description || '',
         targetStartTime: fromTime,
         targetEndTime: toTime,
@@ -103,9 +103,9 @@ export default function PlanDetailPage() {
   return (
     <Page
       openLoading={openLoading}
-      pageTitle={project?.name}
+      pageTitle={plan?.name}
     >
-      {project && (
+      {plan && (
         <Grid
           container
           sx={{ m: 0, p: { xs: 0.5, md: 1 } }}
@@ -115,7 +115,7 @@ export default function PlanDetailPage() {
             item
             flexGrow={1}
           >
-            <PlanStatusToolbar project={project} />
+            <PlanStatusToolbar plan={plan} />
           </Grid>
           <Grid
             item
@@ -136,7 +136,7 @@ export default function PlanDetailPage() {
           component="form"
           noValidate
         >
-          {project && (
+          {plan && (
             <Grid
               container
               spacing={3}
@@ -148,7 +148,7 @@ export default function PlanDetailPage() {
                 <TextField
                   id="description"
                   name="description"
-                  label={t('project-detail-page.fields.description')}
+                  label={t('plan-detail-page.fields.description')}
                   fullWidth
                   autoComplete="description"
                   variant="standard"
@@ -171,7 +171,7 @@ export default function PlanDetailPage() {
                   xs={6}
                 >
                   <DatePicker
-                    label={t('project-detail-page.fields.target-start-time')}
+                    label={t('plan-detail-page.fields.target-start-time')}
                     value={fromTime}
                     onChange={(newValue) => setFromTime(newValue)}
                     disabled={!editable}
@@ -182,7 +182,7 @@ export default function PlanDetailPage() {
                   xs={6}
                 >
                   <DatePicker
-                    label={t('project-detail-page.fields.target-end-time')}
+                    label={t('plan-detail-page.fields.target-end-time')}
                     value={toTime}
                     onChange={(newValue) => setToTime(newValue)}
                     disabled={!editable}

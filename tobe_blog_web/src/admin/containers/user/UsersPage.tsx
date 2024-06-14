@@ -1,4 +1,5 @@
 import {
+  ChangeEvent,
   useCallback,
   useEffect,
   useState,
@@ -29,7 +30,7 @@ export default function UsersPage() {
         setTotalCount(response.data.total);
         setOpenLoading(true);
       })
-      .catch((error) => {})
+      .catch(() => {})
       .finally(() => {
         setOpenLoading(false);
       });
@@ -79,12 +80,12 @@ export default function UsersPage() {
       });
   }
   
-  const handleChangeCurrent = (event: unknown, newPage: number): void => {
+  const handleChangeCurrent = (_event: unknown, newPage: number): void => {
     setCurrent(newPage);
   };
   
   const handleChangeSize = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
   ): void => {
     setSize(+event.target.value);
     setCurrent(0);

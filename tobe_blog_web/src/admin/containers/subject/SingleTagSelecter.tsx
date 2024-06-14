@@ -29,7 +29,7 @@ export default function SingleTagSelecter(props: {
       .then((response) => {
         setOptions(response.data.records);
       })
-      .catch((error) => {
+      .catch(() => {
         setOptions([]);
       });
   }

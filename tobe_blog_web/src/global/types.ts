@@ -1,3 +1,5 @@
+import { EAuthority, EFeatureCode } from './enums.ts';
+
 export interface Column {
   id: string;
   label: string;
@@ -21,7 +23,7 @@ export interface UserData {
   phoneNum: string;
 }
 
-export interface ProjectInfo {
+export interface PlanInfo {
   id: string;
   name: string;
   description: string;
@@ -42,18 +44,18 @@ export interface PageItem {
   icon: JSX.Element;
   url: string;
   secondaryUrl?: string;
-  requiredRoles: string[];
-  requiredFeature?: string;
+  requiredRoles: EAuthority[];
+  requiredFeature?: EFeatureCode;
 }
 
-export interface ProjectCardProps {
+export interface PlanCardProps {
   operations: Operation[];
-  project: ProjectInfo;
+  plan: PlanInfo;
 }
 
-export interface ProjectProgress {
+export interface PlanProgress {
   id: string;
-  projectId: string;
+  planId: string;
   description: string;
   updaterName: string;
   createTime: string;
@@ -95,7 +97,7 @@ export interface UserFullProfileDTO extends UserBriefProfileDTO {
 
 export interface UserFeatureDTO {
   articleModule: boolean;
-  projectModule: boolean;
+  planModule: boolean;
   vocabularyModule: boolean;
 }
 
@@ -108,7 +110,7 @@ export interface TagStatisticDTO extends TagOption {
   readonly count: number;
 }
 
-export interface ProjectCreationDTO {
+export interface PlanCreationDTO {
   name: string;
   description: string;
   targetStartTime: Date | null;
@@ -116,18 +118,19 @@ export interface ProjectCreationDTO {
   tags: TagOption[];
 }
 
-export interface ProjectUpdateDTO extends ProjectCreationDTO {
+export interface PlanUpdateDTO extends PlanCreationDTO {
   id: string;
 }
 
-export interface ProjectProgressCreationDTO {
-  projectId: string;
+export interface PlanProgressCreationDTO {
+  planId: string;
   description: string;
 }
 
-export interface ProjectProgressUpdateDTO extends ProjectProgressCreationDTO {
+export interface PlanProgressUpdateDTO extends PlanProgressCreationDTO {
   id: string;
 }
+
 export interface ArticleCreationDTO {
   title: string;
   subTitle: string;
@@ -183,7 +186,7 @@ export interface VocabularyUpdateDTO extends VocabularyCreationDTO {
 
 export enum Domain {
   Article = 'ARTICLE',
-  Project = 'PROJECT',
+  Plan = 'Plan',
   Vocabulary = 'VOCABULARY',
 }
 
@@ -233,7 +236,7 @@ export interface TagRelationshipGeneralDTO {
   label: string;
   subjectId: string;
   relatedArticles: NewsDTO[];
-  relatedProjects: NewsDTO[];
+  relatedPlans: NewsDTO[];
   relatedVocabularies: NewsDTO[];
   children: TagRelationshipGeneralDTO[];
 }

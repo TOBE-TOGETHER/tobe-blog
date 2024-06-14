@@ -13,11 +13,11 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import project from '../../../../package.json';
+import plan from '../../../../package.json';
 import {
-  AUTHORITY,
-  FEATURE_CODE,
-} from '../../../commons';
+  EAuthority,
+  EFeatureCode,
+} from '../../../global/enums.ts';
 import { PageItem } from '../../../global/types';
 import theme from '../../../theme';
 import { URL } from '../../URL';
@@ -29,8 +29,8 @@ const basicPageItems: PageItem[] = [
     icon: <DashboardIcon />,
     url: URL.STATISTICS,
     requiredRoles: [
-      AUTHORITY.ROLE_BASIC,
-      AUTHORITY.ROLE_ADMIN,
+      EAuthority.ROLE_BASIC,
+      EAuthority.ROLE_ADMIN,
     ],
   },
   {
@@ -39,10 +39,10 @@ const basicPageItems: PageItem[] = [
     url: URL.PLANS,
     secondaryUrl: URL.CREATE_PLAN,
     requiredRoles: [
-      AUTHORITY.ROLE_BASIC,
-      AUTHORITY.ROLE_ADMIN,
+      EAuthority.ROLE_BASIC,
+      EAuthority.ROLE_ADMIN,
     ],
-    requiredFeature: FEATURE_CODE.PLAN_MODULE,
+    requiredFeature: EFeatureCode.PLAN_MODULE,
   },
   {
     label: 'dashboard-nav.pages.articles',
@@ -50,10 +50,10 @@ const basicPageItems: PageItem[] = [
     url: URL.ARTICLES,
     secondaryUrl: URL.CREATE_ARTICLE,
     requiredRoles: [
-      AUTHORITY.ROLE_BASIC,
-      AUTHORITY.ROLE_ADMIN,
+      EAuthority.ROLE_BASIC,
+      EAuthority.ROLE_ADMIN,
     ],
-    requiredFeature: FEATURE_CODE.ARTICLE_MODULE,
+    requiredFeature: EFeatureCode.ARTICLE_MODULE,
   },
   {
     label: 'dashboard-nav.pages.vocabularies',
@@ -61,10 +61,10 @@ const basicPageItems: PageItem[] = [
     url: URL.VOCABULARIES,
     secondaryUrl: URL.CREATE_VOCABULARY,
     requiredRoles: [
-      AUTHORITY.ROLE_BASIC,
-      AUTHORITY.ROLE_ADMIN,
+      EAuthority.ROLE_BASIC,
+      EAuthority.ROLE_ADMIN,
     ],
-    requiredFeature: FEATURE_CODE.VOCABULARY_MODULE,
+    requiredFeature: EFeatureCode.VOCABULARY_MODULE,
   },
   {
     label: 'dashboard-nav.pages.subjects',
@@ -72,8 +72,8 @@ const basicPageItems: PageItem[] = [
     url: URL.SUBJECTS,
     secondaryUrl: URL.CREATE_SUBJECT,
     requiredRoles: [
-      AUTHORITY.ROLE_BASIC,
-      AUTHORITY.ROLE_ADMIN,
+      EAuthority.ROLE_BASIC,
+      EAuthority.ROLE_ADMIN,
     ],
   },
 ];
@@ -83,7 +83,7 @@ const adminPageItems: PageItem[] = [
     label: 'dashboard-nav.pages.users',
     icon: <Groups />,
     url: URL.USERS,
-    requiredRoles: [AUTHORITY.ROLE_ADMIN],
+    requiredRoles: [EAuthority.ROLE_ADMIN],
   },
 ];
 
@@ -151,7 +151,7 @@ export default function SideNav(props: SideNavProps) {
             cursor: 'pointer',
           }}
         >
-          {project.name.toUpperCase()}
+          {plan.name.toUpperCase()}
         </Typography>
       </DrawerHeader>
       <NavItems pageItems={basicPageItems} />

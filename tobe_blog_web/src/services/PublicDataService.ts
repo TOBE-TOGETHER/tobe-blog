@@ -27,16 +27,16 @@ export function getArticleById(id: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/articles/${id}`);
 }
 
-export function getProjectById(id: string | number): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/projects/${id}`);
+export function getPlanById(id: string | number): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/plans/${id}`);
 }
 
 export function getVocabularyById(id: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/vocabularies/${id}`);
 }
 
-export function getProgressesByProjectId(projectId: string, size: number, current: number): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/projects/${projectId}/progresses?size=${size}&current=${current}`);
+export function getProgressesByPlanId(planId: string, size: number, current: number): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/plans/${planId}/progresses?size=${size}&current=${current}`);
 }
 
 export function getWordsByVocabularyId(id: string): AxiosPromise {

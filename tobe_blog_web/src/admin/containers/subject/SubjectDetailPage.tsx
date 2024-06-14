@@ -107,7 +107,7 @@ export default function SubjectDetailPage() {
   function handleUpdate(target: SubjectInfoUpdateDTO): void {
     setOpenLoading(true);
     SubjectService.update(target)
-      .then((response) => {
+      .then(() => {
         enqueueSnackbar(t('subject-detail-page.msg.success'), {
           variant: 'success',
         });
@@ -132,7 +132,7 @@ export default function SubjectDetailPage() {
       parentId,
       tagId,
       subjectId: id,
-    }).then((response) => {
+    }).then(() => {
       loadData(id);
       setTargetTag(null);
     });
@@ -145,7 +145,7 @@ export default function SubjectDetailPage() {
     if (!targetId || !id) {
       return;
     }
-    SubjectService.deleteRelationship(targetId).then((response) => {
+    SubjectService.deleteRelationship(targetId).then(() => {
       loadData(id);
       setTargetTag(null);
     });
@@ -240,7 +240,7 @@ export default function SubjectDetailPage() {
         >
           <TreePanel
             nodes={treeData}
-            onNodeFocus={(event, id) => setCurrentNodeId(id)}
+            onNodeFocus={(_event, id) => setCurrentNodeId(id)}
           />
         </Grid>
         <Grid

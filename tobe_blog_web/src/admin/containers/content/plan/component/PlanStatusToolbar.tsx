@@ -1,19 +1,21 @@
-import { Box, Tooltip } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import { ProjectInfo } from "../../../../../global/types";
-
+import VerifiedIcon from '@mui/icons-material/Verified';
+import {
+  Box,
+  Tooltip,
+} from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { PlanInfo } from '../../../../../global/types';
 
 interface PlanStatusToolbarProps {
-  project: ProjectInfo;
+  plan: PlanInfo;
 }
 
 export default function PlanStatusToolbar(props: PlanStatusToolbarProps) {
   const { t } = useTranslation();
   return (
     <Box>
-      {props.project.publicToAll && (
-        <Tooltip title={t("project-table.card.tooltip.public-to-all")}>
+      {props.plan.publicToAll && (
+        <Tooltip title={t('plan-table.card.tooltip.public-to-all')}>
           <VerifiedIcon color="info" />
         </Tooltip>
       )}

@@ -2,8 +2,8 @@ import { ArticleService } from './ArticleService';
 import * as AuthService from './AuthService';
 import * as FileService from './FileService';
 import * as OverviewService from './OverviewService';
+import * as PlanProgressService from './PlanProgressService';
 import { PlanService } from './PlanService.ts';
-import * as ProjectProgressService from './ProjectProgressService';
 import * as PublicDataService from './PublicDataService';
 import server from './server';
 import * as SubjectService from './SubjectService';
@@ -17,7 +17,7 @@ export {
   AuthService,
   FileService,
   OverviewService,
-  ProjectProgressService,
+  PlanProgressService,
   PlanService,
   PublicDataService,
   SubjectService,

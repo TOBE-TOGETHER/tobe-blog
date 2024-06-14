@@ -1,47 +1,47 @@
-import { AUTHORITY, AuthorityKey, FEATURE_CODE, FeatureCodeKey } from '../../commons';
+import { EAuthority, EFeatureCode } from '../../global/enums.ts';
 import { URL } from '../../routes';
 
 export const pages: Array<{
   label: string;
   url: string;
-  requiredRoles?: AuthorityKey[];
-  requiredFeature?: FeatureCodeKey;
+  requiredRoles?: EAuthority[];
+  requiredFeature?: EFeatureCode;
 }> = [
-    {
-      label: 'app-header.settings.profile',
-      url: URL.PROFILE,
-      requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    },
-    {
-      label: 'app-header.settings.my-zone',
-      url: URL.MY_ZONE,
-      requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    },
-    {
-      label: 'app-header.settings.projects',
-      url: URL.PROJECTS,
-      requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-      requiredFeature: FEATURE_CODE.PROJECT_MODULE,
-    },
-    {
-      label: 'app-header.settings.articles',
-      url: URL.ARTICLES,
-      requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-      requiredFeature: FEATURE_CODE.ARTICLE_MODULE,
-    },
-    {
-      label: 'app-header.settings.vocabularies',
-      url: URL.VOCABULARIES,
-      requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-      requiredFeature: FEATURE_CODE.VOCABULARY_MODULE,
-    },
-    {
-      label: 'app-header.settings.subjects',
-      url: URL.SUBJECTS,
-      requiredRoles: [AUTHORITY.ROLE_BASIC, AUTHORITY.ROLE_ADMIN],
-    },
-    { label: 'app-header.settings.sign-out', url: URL.SIGN_OUT },
-  ];
+  {
+    label: 'app-header.settings.profile',
+    url: URL.PROFILE,
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+  },
+  {
+    label: 'app-header.settings.my-zone',
+    url: URL.MY_ZONE,
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+  },
+  {
+    label: 'app-header.settings.plans',
+    url: URL.PLANS,
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+    requiredFeature: EFeatureCode.PLAN_MODULE,
+  },
+  {
+    label: 'app-header.settings.articles',
+    url: URL.ARTICLES,
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+    requiredFeature: EFeatureCode.ARTICLE_MODULE,
+  },
+  {
+    label: 'app-header.settings.vocabularies',
+    url: URL.VOCABULARIES,
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+    requiredFeature: EFeatureCode.VOCABULARY_MODULE,
+  },
+  {
+    label: 'app-header.settings.subjects',
+    url: URL.SUBJECTS,
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+  },
+  { label: 'app-header.settings.sign-out', url: URL.SIGN_OUT },
+];
 
 export const publicPages: Array<{ label: string; url: string }> = [
   { label: 'app-header.pages.home', url: URL.HOME },

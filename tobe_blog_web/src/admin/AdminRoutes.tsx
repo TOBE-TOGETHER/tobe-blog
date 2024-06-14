@@ -5,11 +5,11 @@ import {
   Route,
   useLocation,
 } from 'react-router-dom';
-import { LOCAL_STORAGE_KEYS } from '../commons';
 import {
   useAuthDispatch,
   useAuthState,
 } from '../contexts';
+import { ELocalStorageKeys } from '../global/enums.ts';
 import { BackendLayout } from './components';
 import PlanCreationPage from './containers/content/plan/PlanCreationPage.tsx';
 import PlansPage from './containers/content/plan/PlansPage.tsx';
@@ -90,10 +90,10 @@ function ProtectedRoutes(): React.ReactElement | null {
 }
 
 function SignOutRoute() {
-  localStorage.removeItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
-  localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTHORITIES);
-  localStorage.removeItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
-  localStorage.removeItem(LOCAL_STORAGE_KEYS.CURRENT_USER);
+  localStorage.removeItem(ELocalStorageKeys.ACCESS_TOKEN);
+  localStorage.removeItem(ELocalStorageKeys.AUTHORITIES);
+  localStorage.removeItem(ELocalStorageKeys.REFRESH_TOKEN);
+  localStorage.removeItem(ELocalStorageKeys.CURRENT_USER);
   
   const dispatch = useAuthDispatch();
   dispatch({ type: 'LOGOUT', payload: null });

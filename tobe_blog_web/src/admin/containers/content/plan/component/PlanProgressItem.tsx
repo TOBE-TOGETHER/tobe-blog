@@ -11,23 +11,23 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../../../../commons';
-import { ProjectProgress } from '../../../../../global/types';
+import { PlanProgress } from '../../../../../global/types';
 import {
-  ProjectProgressService,
+  PlanProgressService,
   PublicDataService,
 } from '../../../../../services';
 import { EditIconButton } from '../../../../components';
 import { ImagesPanel } from './ImagesPanel';
 
-interface ProjectProgressItemProps {
-  progress: ProjectProgress;
+interface PlanProgressItemProps {
+  progress: PlanProgress;
   viewOnly: boolean;
 }
 
-export default function ProjectProgressItem(props: ProjectProgressItemProps) {
+export default function PlanProgressItem(props: PlanProgressItemProps) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const [progress, setProgress] = useState<ProjectProgress>(props.progress);
+  const [progress, setProgress] = useState<PlanProgress>(props.progress);
   const [editable, setEditable] = useState<boolean>(false);
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [progressDesc, setProgressDesc] = useState<string>(
@@ -36,7 +36,7 @@ export default function ProjectProgressItem(props: ProjectProgressItemProps) {
   
   const handleEditableChange = () => {
     if (editable) {
-      handleProgresssUpdate();
+      handleProgressUpdate();
     }
     setEditable(!editable);
   };
@@ -45,7 +45,7 @@ export default function ProjectProgressItem(props: ProjectProgressItemProps) {
     function loadImages() {
       PublicDataService.getBySrcIdAndFileType(
         props.progress.id,
-        'PROJECT_PIC',
+        'PLAN_PIC',
       ).then((response) => {
         let imageUrls = response.data.map(
           (f: { downloadURL: string }) => f.downloadURL,
@@ -57,20 +57,20 @@ export default function ProjectProgressItem(props: ProjectProgressItemProps) {
     loadImages();
   }, [props.progress.id]);
   
-  function handleProgresssUpdate(): void {
-    ProjectProgressService.updateProgress({
+  function handleProgressUpdate(): void {
+    PlanProgressService.updateProgress({
       id: progress.id,
-      projectId: progress.projectId,
+      planId: progress.planId,
       description: progressDesc,
     })
       .then((response) => {
-        enqueueSnackbar(t('project-detail-page.msg.success'), {
+        enqueueSnackbar(t('plan-detail-page.msg.success'), {
           variant: 'success',
         });
         setProgress(response.data);
       })
       .catch(() => {
-        enqueueSnackbar(t('project-detail-page.msg.error'), {
+        enqueueSnackbar(t('plan-detail-page.msg.error'), {
           variant: 'error',
         });
       });
@@ -137,7 +137,7 @@ export default function ProjectProgressItem(props: ProjectProgressItemProps) {
           )}
         </Grid>
         <ImagesPanel
-          keyProfix={props.progress.id}
+          keyPrefix={props.progress.id}
           imageURLs={imageURLs}
         />
       </Grid>

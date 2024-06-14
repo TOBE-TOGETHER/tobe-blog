@@ -1,4 +1,3 @@
-import { ReactNode, useState } from 'react';
 import PersonIcon from '@mui/icons-material/Person';
 import {
   Avatar,
@@ -11,13 +10,17 @@ import {
   TextField,
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
+import {
+  ReactNode,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
-import { LOCAL_STORAGE_KEYS } from '../../../commons';
 import { Page } from '../../../components/layout';
 import {
   useAuthDispatch,
   useAuthState,
 } from '../../../contexts';
+import { ELocalStorageKeys } from '../../../global/enums.ts';
 import { URL } from '../../../routes';
 import { UserService } from '../../../services';
 
@@ -28,11 +31,11 @@ export default function ProfileSettingPage() {
   const authState = useAuthState();
   const { user } = authState;
   const dispatch = useAuthDispatch();
-
+  
   const [showAvatars, setShowAvatars] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
   const avatars: { alt: string; src: string }[] = initAvatars();
-
+  
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -55,7 +58,7 @@ export default function ProfileSettingPage() {
       .then((response) => {
         dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
         localStorage.setItem(
-          LOCAL_STORAGE_KEYS.CURRENT_USER,
+          ELocalStorageKeys.CURRENT_USER,
           JSON.stringify(response.data),
         );
         enqueueSnackbar(t('profile-setting.msg.success'), {
@@ -69,7 +72,7 @@ export default function ProfileSettingPage() {
       })
       .finally(() => setOpenLoading(false));
   };
-
+  
   function initAvatars() {
     const result = [];
     for (let i = 1; i <= 20; i++) {
@@ -80,7 +83,7 @@ export default function ProfileSettingPage() {
     }
     return result;
   }
-
+  
   function renderAvatarOptions(avatars: any[]) {
     const rows = [];
     let fast = 0;
@@ -100,16 +103,16 @@ export default function ProfileSettingPage() {
     }
     return rows;
   }
-
+  
   function handleShowAvatarsChange() {
     setShowAvatars(!showAvatars);
   }
-
+  
   function handleAvatarChange(newAvatarUrl: string) {
     setAvatarUrl(newAvatarUrl);
     setShowAvatars(false);
   }
-
+  
   return (
     <Page
       openLoading={openLoading}
@@ -150,7 +153,7 @@ export default function ProfileSettingPage() {
                   onClick={handleShowAvatarsChange}
                 />
               )}
-
+              
               {showAvatars && (
                 <ClickAwayListener onClickAway={handleShowAvatarsChange}>
                   <Paper
@@ -200,7 +203,7 @@ export default function ProfileSettingPage() {
               defaultValue={user.lastName || ''}
             />
           </Grid>
-
+          
           <Grid
             item
             xs={12}
@@ -351,8 +354,8 @@ export default function ProfileSettingPage() {
             {t('profile-setting.submit-btn')}
           </Button>
         </Box>
-      </Box >
-    </Page >
+      </Box>
+    </Page>
   );
 }
 
@@ -363,8 +366,8 @@ const InfoSection = (props: { children: ReactNode[], mt?: number }) => {
   ><Grid
     container
     spacing={3}
-  >{props.children}</Grid></Paper>
-}
+  >{props.children}</Grid></Paper>;
+};
 
 const AvatarOptionRow = (props: {
   avatars: { alt: string; src: string }[];

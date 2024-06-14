@@ -14,14 +14,14 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import {
   FileService,
-  ProjectProgressService,
+  PlanProgressService,
 } from '../../../../../services';
 import { InputFileUploadButton } from '../../../../components';
 import { ImagesPanel } from './ImagesPanel';
-import ProjectProgressItems from './ProjectProgressItems';
+import PlanProgressItems from './PlanProgressItems.tsx';
 
-export default function ProjectProgressModal(props: {
-  projectId: string;
+export default function PlanProgressModal(props: {
+  planId: string;
   viewOnly: boolean;
 }) {
   const { t } = useTranslation();
@@ -45,26 +45,26 @@ export default function ProjectProgressModal(props: {
     );
     setImageURLs(newImageUrls);
   }, [
-    props.projectId,
+    props.planId,
     images,
   ]);
   
   function handleProgressCreation(): void {
     if (!newProgress.trim()) {
-      enqueueSnackbar(t('project-progress.msg.warning'), {
+      enqueueSnackbar(t('plan-progress.msg.warning'), {
         variant: 'warning',
       });
       return;
     }
-    ProjectProgressService.createProgress({
-      projectId: props.projectId,
+    PlanProgressService.createProgress({
+      planId: props.planId,
       description: newProgress,
     })
       .then((response) => {
         if (images.length > 0) {
           return FileService.batchUpload(
             response.data.id,
-            'PROJECT_PIC',
+            'PLAN_PIC',
             images,
           );
         }
@@ -74,12 +74,12 @@ export default function ProjectProgressModal(props: {
         setImages([]);
         setImageURLs([]);
         setRefreshCode(new Date().getTime());
-        enqueueSnackbar(t('project-progress.msg.success'), {
+        enqueueSnackbar(t('plan-progress.msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('project-progress.msg.error'), {
+        enqueueSnackbar(t('plan-progress.msg.error'), {
           variant: 'error',
         });
       });
@@ -92,7 +92,7 @@ export default function ProjectProgressModal(props: {
           variant="subtitle1"
           color="text.secondary"
         >
-          {t('project-progress.title')}
+          {t('plan-progress.title')}
         </Typography>
       </Divider>
       
@@ -112,7 +112,7 @@ export default function ProjectProgressModal(props: {
             >
               <TextField
                 id="add-progress-desc"
-                label={t('project-progress.add-new-tip')}
+                label={t('plan-progress.add-new-tip')}
                 fullWidth
                 variant="outlined"
                 multiline
@@ -153,18 +153,18 @@ export default function ProjectProgressModal(props: {
                 onClick={handleProgressCreation}
                 sx={{ ml: 1 }}
               >
-                {t('project-progress.send-btn')}
+                {t('plan-progress.send-btn')}
               </Button>
             </Grid>
           </Grid>
           <ImagesPanel
-            keyProfix={'new_progress'}
+            keyPrefix={'new_progress'}
             imageURLs={imageURLs}
           />
         </Paper>
       )}
-      <ProjectProgressItems
-        projectId={props.projectId}
+      <PlanProgressItems
+        planId={props.planId}
         viewOnly={props.viewOnly}
         refreshCode={refreshCode}
       />
