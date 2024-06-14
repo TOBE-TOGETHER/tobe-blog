@@ -27,7 +27,7 @@
     "@react-spring/web": "^9.7.1",
     "@wangeditor/editor": "^5.1.20",
     "@wangeditor/editor-for-react": "^1.0.5",
-    "axios": "^0.27.2",
+    "axios": "^0.28.0",
     "compressorjs": "^1.2.1",
     "date-fns": "^2.29.0",
     "eslint-config-prettier": "^9.1.0",
