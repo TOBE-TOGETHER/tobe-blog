@@ -128,20 +128,13 @@ export default function PlanCreationPage() {
                 
                 <Grid
                   item
-                  xs={12}
+                  xs={6}
                 >
                   <DatePicker
                     disablePast={true}
                     label={t('plan-creation-page.fields.target-start-time')}
                     value={fromTime}
                     onChange={(newValue) => setFromTime(newValue)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="standard"
-                        fullWidth
-                      />
-                    )}
                   />
                 </Grid>
                 <Grid
@@ -153,13 +146,6 @@ export default function PlanCreationPage() {
                     label={t('plan-creation-page.fields.target-end-time')}
                     value={toTime}
                     onChange={(newValue) => setToTime(newValue)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="standard"
-                        fullWidth
-                      />
-                    )}
                   />
                 </Grid>
                 

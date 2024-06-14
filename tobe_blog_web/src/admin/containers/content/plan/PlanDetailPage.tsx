@@ -70,7 +70,7 @@ export default function PlanDetailPage() {
   function handleProjectUpdate(updatedProject: ProjectUpdateDTO): void {
     setOpenLoading(true);
     PlanService.update(updatedProject)
-      .then((response) => {
+      .then(() => {
         enqueueSnackbar(t('project-detail-page.msg.success'), {
           variant: 'success',
         });
@@ -174,11 +174,6 @@ export default function PlanDetailPage() {
                     label={t('project-detail-page.fields.target-start-time')}
                     value={fromTime}
                     onChange={(newValue) => setFromTime(newValue)}
-                    renderInput={(params) => (
-                      <TextField {...params} variant="standard"
-                                 fullWidth
-                      />
-                    )}
                     disabled={!editable}
                   />
                 </Grid>
@@ -190,11 +185,6 @@ export default function PlanDetailPage() {
                     label={t('project-detail-page.fields.target-end-time')}
                     value={toTime}
                     onChange={(newValue) => setToTime(newValue)}
-                    renderInput={(params) => (
-                      <TextField {...params} variant="standard"
-                                 fullWidth
-                      />
-                    )}
                     disabled={!editable}
                   />
                 </Grid>
