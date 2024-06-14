@@ -4,7 +4,7 @@ import {
   ProjectInfo,
 } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { ProjectService } from '../../../../services';
+import { PlanService } from '../../../../services';
 
 import GeneralContentListPage from '../components/GeneralContentListPage';
 
@@ -26,10 +26,10 @@ export default function PlansPage() {
   
   return (
     <GeneralContentListPage
-      domainService={ProjectService}
-      pageTitle={t('projects-page.page-main-title')}
-      detailPageURL={URL.PROJECT_DETAIL}
-      createPageURL={URL.CREATE_PROJECT}
+      domainService={PlanService}
+      pageTitle={t('plans-page.page-main-title')}
+      detailPageURL={URL.PLAN_DETAIL}
+      createPageURL={URL.CREATE_PLAN}
       dataConverter={convertToGeneralCardData}
     />
   );

@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { ProjectService } from '../../../../services';
+import { PlanService } from '../../../../services';
 import { MultipleTagSelecter } from '../../../components';
 
 export default function PlanCreationPage() {
@@ -38,21 +38,21 @@ export default function PlanCreationPage() {
   };
   
   function validateForm(data: FormData): boolean {
-    if (!data.get('projectName')) {
-      warn(t('project-creation-page.msg.warning.name-empty'));
+    if (!data.get('planName')) {
+      warn(t('plan-creation-page.msg.warning.name-empty'));
       return false;
     }
     if (!fromTime) {
-      warn(t('project-creation-page.msg.warning.target-start-time-empty'));
+      warn(t('plan-creation-page.msg.warning.target-start-time-empty'));
       return false;
     }
     if (!toTime) {
-      warn(t('project-creation-page.msg.warning.target-end-time-empty'));
+      warn(t('plan-creation-page.msg.warning.target-end-time-empty'));
       return false;
     }
     if (fromTime?.getTime() > toTime?.getTime()) {
       warn(
-        t('project-creation-page.msg.warning.target-invalid-start-end-time'),
+        t('plan-creation-page.msg.warning.target-invalid-start-end-time'),
       );
       return false;
     }
@@ -68,21 +68,21 @@ export default function PlanCreationPage() {
   
   function handleProjectCreation(data: FormData): void {
     setOpenLoading(true);
-    ProjectService.create({
-      name: data.get('projectName')?.toString() || '',
+    PlanService.create({
+      name: data.get('planName')?.toString() || '',
       description: data.get('description')?.toString() || '',
       targetStartTime: fromTime,
       targetEndTime: toTime,
       tags: tagValue,
     })
       .then((response) => {
-        enqueueSnackbar(t('project-creation-page.msg.success'), {
+        enqueueSnackbar(t('plan-creation-page.msg.success'), {
           variant: 'success',
         });
         navigate(URL.PROJECTS);
       })
       .catch(() => {
-        enqueueSnackbar(t('project-creation-page.msg.error'), {
+        enqueueSnackbar(t('plan-creation-page.msg.error'), {
           variant: 'error',
         });
       })
@@ -92,7 +92,7 @@ export default function PlanCreationPage() {
   return (
     <Page
       openLoading={openLoading}
-      pageTitle={t('project-creation-page.form-title')}
+      pageTitle={t('plan-creation-page.form-title')}
     >
       <Paper
         variant="outlined"
@@ -118,7 +118,7 @@ export default function PlanCreationPage() {
                     required
                     id="projectName"
                     name="projectName"
-                    label={t('project-creation-page.fields.name')}
+                    label={t('plan-creation-page.fields.name')}
                     fullWidth
                     autoComplete="name"
                     variant="standard"
@@ -131,7 +131,7 @@ export default function PlanCreationPage() {
                 >
                   <DatePicker
                     disablePast={true}
-                    label={t('project-creation-page.fields.target-start-time')}
+                    label={t('plan-creation-page.fields.target-start-time')}
                     value={fromTime}
                     onChange={(newValue) => setFromTime(newValue)}
                   />
@@ -144,7 +144,7 @@ export default function PlanCreationPage() {
                   <TextField
                     id="description"
                     name="description"
-                    label={t('project-creation-page.fields.description')}
+                    label={t('plan-creation-page.fields.description')}
                     fullWidth
                     autoComplete="description"
                     variant="standard"
@@ -172,14 +172,14 @@ export default function PlanCreationPage() {
               onClick={() => window.history.back()}
               sx={{ mt: 3, ml: 1 }}
             >
-              {t('project-creation-page.back-btn')}
+              {t('plan-creation-page.back-btn')}
             </Button>
             <Button
               variant="contained"
               type="submit"
               sx={{ mt: 3, ml: 1 }}
             >
-              {t('project-creation-page.submit-btn')}
+              {t('plan-creation-page.submit-btn')}
             </Button>
           </Box>
         </Box>
