@@ -4,7 +4,7 @@
     "home": "Home",
     "subjects": "Subjects",
     "articles": "Articles",
-    "projects": "Projects",
+    "plans": "Plans",
     "vocabularies": "Vocabularies"
   },
   "components": {
@@ -51,7 +51,7 @@
     }
   },
   "home-page": {
-    "projects": "Projects",
+    "plans": "Plans",
     "articles": "Articles",
     "vocabularies": "Vocabularies",
     "workout": "Workout",
@@ -117,7 +117,7 @@
       "btn-tooltip": "Open settings",
       "profile": "User Profile",
       "my-zone": "Statistics",
-      "projects": "Projects",
+      "plans": "Plans",
       "articles": "Articles",
       "vocabularies": "Vocabularies",
       "subjects": "Subjects",
@@ -158,7 +158,7 @@
   "my-menu": {
     "actions": {
       "share": "Share",
-      "create-project": "Create a project"
+      "create-plan": "Create a plan"
     }
   },
   "user-table": {
@@ -179,13 +179,13 @@
       "error": "Operation failed"
     }
   },
-  "projects-page": {
-    "page-main-title": "Projects"
+  "plans-page": {
+    "page-main-title": "Plans"
   },
-  "project-creation-page": {
-    "form-title": "Create a new project",
+  "plan-creation-page": {
+    "form-title": "Create a new plan",
     "fields": {
-      "name": "Project Name",
+      "name": "Plan Name",
       "description": "Description",
       "target-start-time": "Target start time",
       "target-end-time": "Target end time"
@@ -196,16 +196,16 @@
       "success": "Created",
       "error": "Creation failed",
       "warning": {
-        "name-empty": "Project name cannot be empty",
+        "name-empty": "Plan name cannot be empty",
         "target-start-time-empty": "Target start time cannot be empty",
         "target-end-time-empty": "Target end time cannot be empty",
         "target-invalid-start-end-time": "Target start time cannot behind end time"
       }
     }
   },
-  "project-detail-page": {
+  "plan-detail-page": {
     "fields": {
-      "name": "Project name",
+      "name": "Plan name",
       "description": "Description",
       "target-start-time": "Target start time",
       "target-end-time": "Target end time"
@@ -215,7 +215,7 @@
       "success": "Operation success"
     }
   },
-  "project-progress": {
+  "plan-progress": {
     "title": "Progresses",
     "add-new-tip": "Any fresh news to share?",
     "send-btn": "Send",
@@ -229,7 +229,7 @@
     "pages": {
       "statistics": "Statistics",
       "users": "Users",
-      "projects": "Projects",
+      "plans": "Plans",
       "articles": "Articles",
       "vocabularies": "Vocabularies",
       "subjects": "Subjects"
@@ -239,7 +239,7 @@
     "page-main-title": "Statistics",
     "domain": {
       "title": {
-        "project": "Project Data",
+        "plan": "Plan Data",
         "article": "Article Data",
         "vocabulary": "Vocabulary Data"
       },
@@ -256,7 +256,7 @@
     "update-at": "Updated at ",
     "publish-at": "Published at ",
     "news-types": {
-      "project": "Project",
+      "plan": "Plan",
       "article": "Article"
     }
   },

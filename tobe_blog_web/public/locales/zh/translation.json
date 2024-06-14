@@ -4,7 +4,7 @@
     "home": "首页",
     "subjects": "合集",
     "articles": "笔记",
-    "projects": "计划",
+    "plans": "计划",
     "vocabularies": "单词本"
   },
   "components": {
@@ -51,7 +51,7 @@
     }
   },
   "home-page": {
-    "projects": "计划",
+    "plans": "计划",
     "articles": "笔记",
     "vocabularies": "单词本",
     "workout": "锻炼",
@@ -117,7 +117,7 @@
       "btn-tooltip": "打开设置",
       "profile": "用户信息",
       "my-zone": "统计",
-      "projects": "计划",
+      "plans": "计划",
       "articles": "笔记",
       "vocabularies": "单词本",
       "subjects": "合集",
@@ -158,7 +158,7 @@
   "my-menu": {
     "actions": {
       "share": "分享",
-      "create-project": "创建项目"
+      "create-plan": "创建项目"
     }
   },
   "user-table": {
@@ -179,10 +179,10 @@
       "error": "操作失败"
     }
   },
-  "projects-page": {
+  "plans-page": {
     "page-main-title": "计划"
   },
-  "project-creation-page": {
+  "plan-creation-page": {
     "form-title": "创建新的项目",
     "fields": {
       "name": "项目名称",
@@ -203,7 +203,7 @@
       }
     }
   },
-  "project-detail-page": {
+  "plan-detail-page": {
     "fields": {
       "name": "项目名称",
       "description": "项目描述",
@@ -215,7 +215,7 @@
       "success": "操作成功"
     }
   },
-  "project-progress": {
+  "plan-progress": {
     "title": "进展",
     "add-new-tip": "有任何进展可以分享么？",
     "send-btn": "发布",
@@ -229,7 +229,7 @@
     "pages": {
       "statistics": "统计",
       "users": "用户",
-      "projects": "计划",
+      "plans": "计划",
       "articles": "笔记",
       "vocabularies": "单词本",
       "subjects": "合集"
@@ -242,7 +242,7 @@
     "page-main-title": "统计",
     "domain": {
       "title": {
-        "project": "计划总览",
+        "plan": "计划总览",
         "article": "笔记总览",
         "vocabulary": "单词本总览"
       },
@@ -259,7 +259,7 @@
     "update-at": "更新于 ",
     "publish-at": "发表于 ",
     "news-types": {
-      "project": "计划",
+      "plan": "计划",
       "article": "笔记"
     }
   },

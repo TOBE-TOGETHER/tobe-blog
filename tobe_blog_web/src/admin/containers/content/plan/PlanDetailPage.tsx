@@ -19,7 +19,7 @@ import {
   ProjectUpdateDTO,
   TagOption,
 } from '../../../../global/types';
-import { ProjectService } from '../../../../services';
+import { PlanService } from '../../../../services';
 import {
   EditIconButton,
   MultipleTagSelecter,
@@ -41,7 +41,7 @@ export default function PlanDetailPage() {
   const loadData = useCallback(
     (id: string): void => {
       setOpenLoading(true);
-      ProjectService.getById(id)
+      PlanService.getById(id)
         .then((response) => {
           setProject(response.data);
           setFromTime(new Date(response.data.targetStartTime));
@@ -69,7 +69,7 @@ export default function PlanDetailPage() {
   
   function handleProjectUpdate(updatedProject: ProjectUpdateDTO): void {
     setOpenLoading(true);
-    ProjectService.update(updatedProject)
+    PlanService.update(updatedProject)
       .then((response) => {
         enqueueSnackbar(t('project-detail-page.msg.success'), {
           variant: 'success',
