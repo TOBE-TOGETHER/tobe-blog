@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
 
 import { server } from '.';
-import { Domain } from '../global/types';
+import { EDomain } from '../global/enums.ts';
 
 const API_DATA_URI = 'v1/api';
 
@@ -11,7 +11,7 @@ const options = {
   },
 };
 
-export function getNewsByTags(domain: Domain, size: number, current: number, tags: string[], ownerId: string): AxiosPromise {
+export function getNewsByTags(domain: EDomain, size: number, current: number, tags: string[], ownerId: string): AxiosPromise {
   return server.get(`/${API_DATA_URI}/news?size=${size}&current=${current}&tags=${tags}&domain=${domain}&ownerId=${ownerId}`, options);
 }
 
@@ -51,7 +51,7 @@ export function getFullProfileByUserId(userId: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/detail-profile/${userId}`);
 }
 
-export function getTagStatistics(domain: Domain, ownerId: string) {
+export function getTagStatistics(domain: EDomain, ownerId: string) {
   return server.get(`/${API_DATA_URI}/tag-statistics?domain=${domain}&ownerId=${ownerId}`);
 }
 

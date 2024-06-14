@@ -7,6 +7,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Page } from '../../../components/layout';
 import {
+  EColumnPosition,
+  EOperationName,
+} from '../../../global/enums.ts';
+import {
   Column,
   Operation,
   UserData,
@@ -41,9 +45,16 @@ export default function UsersPage() {
   
   useEffect(() => loadUserData(), [loadUserData]);
   
-  const columns: readonly Column[] = [
-    { id: 'id', label: t('user-table.label.id'), align: 'center' },
-    { id: 'email', label: t('user-table.label.email') },
+  const columns: Column[] = [
+    {
+      id: 'id',
+      label: t('user-table.label.id'),
+      align: EColumnPosition.CENTER,
+    },
+    {
+      id: 'email',
+      label: t('user-table.label.email'),
+    },
     {
       id: 'username',
       label: t('user-table.label.username'),
@@ -63,7 +74,7 @@ export default function UsersPage() {
     {
       id: 'operation',
       label: t('user-table.label.operation'),
-      align: 'center',
+      align: EColumnPosition.CENTER,
     },
   ];
   
@@ -97,7 +108,7 @@ export default function UsersPage() {
   
   const operations: Operation[] = [
     {
-      name: 'delete',
+      name: EOperationName.DELETE,
       onClick: (id: number | string) => handleDelete(id),
     },
   ];

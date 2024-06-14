@@ -16,11 +16,11 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { enabled } from '../../../commons';
 import { Page } from '../../../components/layout';
-import { EFeatureCode } from '../../../global/enums.ts';
 import {
-  BaseInfoOverview,
-  Domain,
-} from '../../../global/types';
+  EDomain,
+  EFeatureCode,
+} from '../../../global/enums.ts';
+import { BaseInfoOverview } from '../../../global/types';
 import { URL } from '../../../routes';
 import { OverviewService } from '../../../services';
 
@@ -43,7 +43,7 @@ export default function StatisticsPage() {
     totalViewCount: 0,
   });
   const loadOverview = useCallback(
-    (domain: Domain, setData: (any: any) => void): void => {
+    (domain: EDomain, setData: (any: any) => void): void => {
       OverviewService.getOverviewData(domain)
         .then((response) => {
           setData(response.data);
@@ -60,9 +60,9 @@ export default function StatisticsPage() {
     ],
   );
   const loadData = useCallback((): void => {
-    loadOverview(Domain.Plan, setPlanData);
-    loadOverview(Domain.Article, setArticleData);
-    loadOverview(Domain.Vocabulary, setVocabularyData);
+    loadOverview(EDomain.Plan, setPlanData);
+    loadOverview(EDomain.Article, setArticleData);
+    loadOverview(EDomain.Vocabulary, setVocabularyData);
   }, [loadOverview]);
   
   useEffect(() => loadData(), [loadData]);
@@ -78,21 +78,21 @@ export default function StatisticsPage() {
       >
         {enabled(EFeatureCode.PLAN_MODULE) && (
           <StatisticsDomainPanel
-            domain={Domain.Plan}
+            domain={EDomain.Plan}
             data={planData}
             link={URL.PLANS}
           />
         )}
         {enabled(EFeatureCode.ARTICLE_MODULE) && (
           <StatisticsDomainPanel
-            domain={Domain.Article}
+            domain={EDomain.Article}
             data={articleData}
             link={URL.ARTICLES}
           />
         )}
         {enabled(EFeatureCode.VOCABULARY_MODULE) && (
           <StatisticsDomainPanel
-            domain={Domain.Vocabulary}
+            domain={EDomain.Vocabulary}
             data={vocabularyData}
             link={URL.VOCABULARIES}
           />
@@ -158,7 +158,7 @@ const StandardSmallWidget = (props: {
 const StatisticsDomainPanel = (props: {
   data: BaseInfoOverview;
   link: string;
-  domain: Domain;
+  domain: EDomain;
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();

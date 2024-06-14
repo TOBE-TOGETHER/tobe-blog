@@ -1,15 +1,15 @@
-import { EAuthority, EFeatureCode } from './enums.ts';
+import { EAuthority, EColumnPosition, EFeatureCode, EOperationName } from './enums.ts';
 
 export interface Column {
   id: string;
   label: string;
   minWidth?: number;
-  align?: 'left' | 'right' | 'center';
+  align?: EColumnPosition;
   format?: (value: any) => string;
 }
 
 export interface Operation {
-  name: 'detail' | 'delete' | 'active' | 'release' | 'close';
+  name: EOperationName;
   onClick: (id: number | string) => void;
   hide?: (data: any) => boolean;
 }
@@ -182,12 +182,6 @@ export interface GeneralCardData {
 
 export interface VocabularyUpdateDTO extends VocabularyCreationDTO {
   id: string;
-}
-
-export enum Domain {
-  Article = 'ARTICLE',
-  Plan = 'Plan',
-  Vocabulary = 'VOCABULARY',
 }
 
 export interface BaseInfoOverview {

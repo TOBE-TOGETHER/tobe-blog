@@ -8,6 +8,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../components/layout';
+import { EOperationName } from '../../../global/enums.ts';
 import {
   Operation,
   SubjectInfo,
@@ -74,12 +75,12 @@ export default function SubjectsPage() {
   
   const operations: Operation[] = [
     {
-      name: 'release',
+      name: EOperationName.RELEASE,
       onClick: (id: number | string) => releaseById(id),
       hide: (data: any) => data.publicToAll,
     },
     {
-      name: 'delete',
+      name: EOperationName.DELETE,
       onClick: (id: number | string) => deleteById(id),
     },
   ];

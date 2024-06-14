@@ -4,6 +4,18 @@ export enum EAuthority {
   ROLE_GUEST = 'ROLE_GUEST',
 }
 
+export enum EColumnPosition {
+  CENTER = 'center',
+  LEFT = 'left',
+  RIGHT = 'right',
+}
+
+export enum EDomain {
+  Article = 'ARTICLE',
+  Plan = 'Plan',
+  Vocabulary = 'VOCABULARY',
+}
+
 export enum EFeatureCode {
   ARTICLE_MODULE = 'articleModule',
   PLAN_MODULE = 'planModule',
@@ -15,4 +27,12 @@ export enum ELocalStorageKeys {
   ACCESS_TOKEN = 'accessToken',
   REFRESH_TOKEN = 'refreshToken',
   AUTHORITIES = 'authorities',
+}
+
+export enum EOperationName {
+  ACTIVE = 'active',
+  CLOSE = 'close',
+  DELETE = 'delete',
+  DETAIL = 'detail',
+  RELEASE = 'release',
 }
