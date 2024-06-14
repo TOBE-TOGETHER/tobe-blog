@@ -25,7 +25,7 @@
     "@react-spring/web": "^9.7.1",
     "@wangeditor/editor": "^5.1.20",
     "@wangeditor/editor-for-react": "^1.0.5",
-    "axios": "^0.27.2",
+    "axios": "^0.28.0",
     "date-fns": "^2.29.0",
     "i18next": "^21.8.10",
     "i18next-browser-languagedetector": "^7.0.0",
