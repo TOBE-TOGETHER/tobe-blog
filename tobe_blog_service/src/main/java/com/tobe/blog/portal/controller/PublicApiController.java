@@ -41,7 +41,7 @@ public class PublicApiController {
     }
 
     @GetMapping("/plans/{id}")
-    public ResponseEntity<PlanDTO> getProjectById(@PathVariable(value = "id") String id) {
+    public ResponseEntity<PlanDTO> getPlanById(@PathVariable(value = "id") String id) {
         final PlanDTO result = planService.getDTOByIdAndCount(id);
         return ResponseEntity.ok(result);
     }
@@ -53,7 +53,7 @@ public class PublicApiController {
     }
 
     @GetMapping("/plans/{id}/progresses")
-    public ResponseEntity<Page<PlanProgressDTO>> getProgressesByProjectId(
+    public ResponseEntity<Page<PlanProgressDTO>> getProgressesByPlanId(
             @PathVariable String id,
             @RequestParam(value = "current", required = false, defaultValue = "1") int current,
             @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
