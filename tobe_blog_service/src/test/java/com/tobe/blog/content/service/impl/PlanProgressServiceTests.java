@@ -12,6 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tobe.blog.DefaultTestData;
 import com.tobe.blog.DefaultTestData.DefaultUser;
+import com.tobe.blog.beans.dto.content.PlanCreationDTO;
+import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressCreationDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressUpdateDTO;
@@ -23,22 +25,27 @@ public class PlanProgressServiceTests {
 
     @Autowired
     private PlanProgressService progressService;
-    private static final String PLAN_ID = "04c97dcc5b7350e113b0bfcd06a7500a";
+    @Autowired
+    private PlanService planService;
+    private PlanDTO plan;
 
     @BeforeEach
     void setUp() {
         SecurityUtil.setUserDetail(DefaultTestData.getDefaultUserAuthentication());
+        PlanCreationDTO planCreationDTO = new PlanCreationDTO();
+        planCreationDTO.setTitle("Plan for testing progress");
+        this.plan = planService.save(planCreationDTO);
     }
 
     @Test
     @DisplayName("Plan Progress Service: create with valid input")
     void testCreateProgress_withValidInput() {
         final PlanProgressCreationDTO dto = new PlanProgressCreationDTO();
-        dto.setPlanId(PLAN_ID);
+        dto.setPlanId(plan.getId());
         dto.setDescription("Progress: this is the first update");
-        PlanProgressDTO saveResult = progressService.createProgress(dto);
+        PlanProgressDTO saveResult = progressService.saveProgress(dto);
         Assertions.assertNotNull(saveResult.getId());
-        Assertions.assertEquals(PLAN_ID, saveResult.getPlanId());
+        Assertions.assertEquals(plan.getId(), saveResult.getPlanId());
         Assertions.assertEquals(dto.getDescription(), saveResult.getDescription());
         Assertions.assertEquals(DefaultUser.USER_ID, saveResult.getUpdaterId());
         Assertions.assertEquals(
@@ -54,25 +61,25 @@ public class PlanProgressServiceTests {
         // PLAN ID can not be null
         final PlanProgressCreationDTO dtoWithoutPlanId = new PlanProgressCreationDTO();
         dtoWithoutPlanId.setDescription("Progress: Plan ID can not be null");
-        Assertions.assertThrows(RuntimeException.class, () -> progressService.createProgress(dtoWithoutPlanId));
-        dtoWithoutPlanId.setPlanId(PLAN_ID);
-        Assertions.assertDoesNotThrow(() -> progressService.createProgress(dtoWithoutPlanId));
+        Assertions.assertThrows(RuntimeException.class, () -> progressService.saveProgress(dtoWithoutPlanId));
+        dtoWithoutPlanId.setPlanId(plan.getId());
+        Assertions.assertDoesNotThrow(() -> progressService.saveProgress(dtoWithoutPlanId));
         // Description length can not exceed 1000
         final PlanProgressCreationDTO dtoWithInvalidDesc = new PlanProgressCreationDTO();
-        dtoWithInvalidDesc.setPlanId(PLAN_ID);
+        dtoWithInvalidDesc.setPlanId(plan.getId());
         dtoWithInvalidDesc.setDescription(RandomStringUtils.randomAlphanumeric(1001));
-        Assertions.assertThrows(RuntimeException.class, () -> progressService.createProgress(dtoWithInvalidDesc));
+        Assertions.assertThrows(RuntimeException.class, () -> progressService.saveProgress(dtoWithInvalidDesc));
         dtoWithInvalidDesc.setDescription(RandomStringUtils.randomAlphanumeric(1000));
-        Assertions.assertDoesNotThrow(() -> progressService.createProgress(dtoWithInvalidDesc));
+        Assertions.assertDoesNotThrow(() -> progressService.saveProgress(dtoWithInvalidDesc));
     }
 
     @Test
     @DisplayName("Plan Progress Service: update progress")
     void testUpdateProgress() {
         final PlanProgressCreationDTO dto = new PlanProgressCreationDTO();
-        dto.setPlanId(PLAN_ID);
+        dto.setPlanId(plan.getId());
         dto.setDescription("Progress to be updated");
-        PlanProgressDTO saveResult = progressService.createProgress(dto);
+        PlanProgressDTO saveResult = progressService.saveProgress(dto);
         // build update DTO
         final PlanProgressUpdateDTO updateDTO = new PlanProgressUpdateDTO();
         updateDTO.setId(saveResult.getId());
@@ -82,17 +89,21 @@ public class PlanProgressServiceTests {
     }
 
     @Test
-    @DisplayName("Plan Progress Service: update progress")
+    @DisplayName("Plan Progress Service: get progresses")
     void testGetProgressesByPlanId() {
+        // create a new plan to avoid test conflict with other test methods
+        final PlanCreationDTO planCreationDTO = new PlanCreationDTO();
+        planCreationDTO.setTitle("Plan for getting progresses");
+        final String PLAN_ID_FOR_QUERY = planService.save(planCreationDTO).getId();
+        // init progresses
         final PlanProgressCreationDTO dto = new PlanProgressCreationDTO();
-        final String PLAN_ID_FOR_QUERY = "04c97dcc5b7350e113b0bfcd06a7500b";
         dto.setPlanId(PLAN_ID_FOR_QUERY);
         dto.setDescription("Progress one");
-        progressService.createProgress(dto);
+        progressService.saveProgress(dto);
         dto.setDescription("Progress two");
-        progressService.createProgress(dto);
+        progressService.saveProgress(dto);
         dto.setDescription("Progress three");
-        progressService.createProgress(dto);
+        progressService.saveProgress(dto);
         // get all progress
         Page<PlanProgressDTO> result = progressService.getProgressesByPlanId(PLAN_ID_FOR_QUERY, 1, 2);
         Assertions.assertEquals(1, result.getCurrent());

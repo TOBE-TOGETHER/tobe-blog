@@ -161,6 +161,22 @@ create table tobe_vocabulary_info
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS tobe_word_info;
+create table tobe_word_info (
+  ID            int auto_increment 
+      primary key,
+  VOCABULARY_ID varchar(32) not null,
+  TEXT varchar(200)         not null,
+  MEANING_IN_CHINESE varchar(128) null,
+  MEANING_IN_ENGLISH varchar(128) null,
+  PART_OF_SPEECH varchar(32) null,
+  DELETED bit(1) not null DEFAULT false,
+  CREATE_BY varchar(64) null,
+  CREATE_TIME datetime null,
+  UPDATE_BY varchar(64) null,
+  UPDATE_TIME datetime null
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+
 
 DROP TABLE IF EXISTS tobe_tag_info;
 create table tobe_tag_info

@@ -8,17 +8,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tobe.blog.beans.consts.Const.ContentType;
 import com.tobe.blog.beans.dto.content.PlanProgressCreationDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressUpdateDTO;
+import com.tobe.blog.beans.entity.content.ContentGeneralInfoEntity;
 import com.tobe.blog.beans.entity.content.PlanProgressEntity;
 import com.tobe.blog.content.mapper.PlanProgressMapper;
 import com.tobe.blog.core.exception.TobeRuntimeException;
 import com.tobe.blog.core.utils.BasicConverter;
 import com.tobe.blog.core.utils.SecurityUtil;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class PlanProgressService extends ServiceImpl<PlanProgressMapper, PlanProgressEntity> {
+
+    private final ContentGeneralInfoService contentGeneralInfoService;
 
     public Page<PlanProgressDTO> getProgressesByPlanId(String planId, int current, int size) {
         return this.baseMapper.getProgressDTOsByPlanId(new Page<>(current, size), planId);
@@ -29,7 +36,11 @@ public class PlanProgressService extends ServiceImpl<PlanProgressMapper, PlanPro
     }
 
     @Transactional
-    public PlanProgressDTO createProgress(PlanProgressCreationDTO dto) {
+    public PlanProgressDTO saveProgress(PlanProgressCreationDTO dto) {
+        final ContentGeneralInfoEntity contentEntity = contentGeneralInfoService.getById(dto.getPlanId());
+        if (Objects.isNull(contentEntity) || !ContentType.PLAN.name().equals(contentEntity.getContentType())) {
+            throw new TobeRuntimeException("The planId is invalid");
+        }
         final PlanProgressEntity entity = BasicConverter.convert(dto, PlanProgressEntity.class);
         entity.setUpdaterId(SecurityUtil.getUserId());
         this.save(entity);
