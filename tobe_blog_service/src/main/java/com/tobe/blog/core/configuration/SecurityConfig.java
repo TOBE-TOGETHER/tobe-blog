@@ -40,12 +40,13 @@ public class SecurityConfig implements WebMvcConfigurer {
                             log.info("Failed in auth: " + exception.getMessage());
                             response.addHeader("WWW-Authenticate", "Basic realm=TOBE-JWT");
                             response.sendError(HttpStatus.UNAUTHORIZED.value(),
-                                    HttpStatus.UNAUTHORIZED.getReasonPhrase());
+                            HttpStatus.UNAUTHORIZED.getReasonPhrase());
                         }))
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/v1/**", "/api-docs/**",
                         "/swagger-ui/**", "/actuator/**"))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/favicon.ico").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers("/api-docs/**").permitAll()
