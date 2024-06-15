@@ -10,10 +10,10 @@ import {
   useAuthState,
 } from '../contexts';
 import { ELocalStorageKeys } from '../global/enums.ts';
+import { URL } from './URL';
 import { BackendLayout } from './components';
 import PlanCreationPage from './containers/content/plan/PlanCreationPage.tsx';
 import PlansPage from './containers/content/plan/PlansPage.tsx';
-import { URL } from './URL';
 
 const SignInPage = React.lazy(
   () => import('../portal/containers/signIn/SignIn'),
@@ -23,6 +23,9 @@ const UsersPage = React.lazy(() => import('./containers/user/UsersPage'));
 const ArticlesPage = React.lazy(() => import('./containers/content/article/ArticlesPage'));
 const ArticleCreationPage = React.lazy(() => import('./containers/content/article/ArticleCreationPage'));
 const ArticleDetailPage = React.lazy(() => import('./containers/content/article/ArticleDetailPage'));
+const VOCsPage = React.lazy(() => import('./containers/content/vocabulary/VOCsPage'));
+const VOCDetailPage = React.lazy(() => import('./containers/content/vocabulary/VOCDetailPage'));
+const VOCCreationPage = React.lazy(() => import('./containers/content/vocabulary/VOCCreationPage'));
 
 export function getAdminRoutes(): React.ReactNode[] {
   return [
@@ -62,6 +65,18 @@ export function getAdminRoutes(): React.ReactNode[] {
         <Route
           path={URL.ARTICLE_DETAIL}
           element={<ArticleDetailPage />}
+        />
+        <Route
+          path={URL.VOCABULARIES}
+          element={<VOCsPage />}
+        />
+        <Route
+          path={URL.VOCABULARY_DETAIL}
+          element={<VOCDetailPage />}
+        />
+        <Route
+          path={URL.CREATE_VOCABULARY}
+          element={<VOCCreationPage />}
         />
       </Route>
     ),

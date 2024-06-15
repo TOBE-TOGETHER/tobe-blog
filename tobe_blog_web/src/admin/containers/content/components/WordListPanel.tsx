@@ -78,16 +78,16 @@ export function WordListPanel(props: {
   
   function render(words: WordGeneralDTO[]) {
     const letterSet: Set<string> = new Set(
-      words.map((w) => w.word[0].toUpperCase()).sort(),
+      words.map((w) => w.text[0].toUpperCase()).sort(),
     );
     const elements: JSX.Element[] = [];
     Array.from(letterSet).forEach((l) => {
       let groupedWords = words
-        .filter((w) => w.word.toUpperCase().startsWith(l))
+        .filter((w) => w.text.toUpperCase().startsWith(l))
         .sort((w1, w2) => {
-          if (w1.word > w2.word) {
+          if (w1.text > w2.text) {
             return 1;
-          } else if (w1.word < w2.word) {
+          } else if (w1.text < w2.text) {
             return -1;
           } else {
             return 0;
@@ -121,7 +121,7 @@ export function WordListPanel(props: {
               size="large"
               sx={{ color: theme.palette.text.secondary }}
             >
-              {w.word}
+              {w.text}
             </Button>
           </Grid>,
         );

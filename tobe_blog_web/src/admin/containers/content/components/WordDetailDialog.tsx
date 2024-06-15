@@ -28,8 +28,7 @@ export function WordDetailDialog(props: {
   function handleSave() {
     WordService.updateWord({
       id: props.word?.id || 0,
-      vocabularyId: props.word?.vocabularyId || '',
-      word: props.word?.word || '',
+      text: props.word?.text || '',
       partOfSpeech: props.word?.partOfSpeech || '',
       meaningInChinese: props.word?.meaningInChinese || '',
       meaningInEnglish: props.word?.meaningInEnglish || '',
@@ -76,7 +75,7 @@ export function WordDetailDialog(props: {
                   label={t('word-dialog.fields.word')}
                   fullWidth
                   variant="standard"
-                  defaultValue={props.word?.word}
+                  defaultValue={props.word?.text}
                   onChange={(e) =>
                     Object.assign(props.word || {}, { word: e.target.value })
                   }

@@ -29,7 +29,7 @@ public class PlanController
     private final PlanService planService;
     private final PlanProgressService progressService;
 
-    @GetMapping("/{id}/progress")
+    @GetMapping("/{id}/progresses")
     public ResponseEntity<Page<PlanProgressDTO>> getProgressByPlanId(
         @PathVariable String id,         
         @RequestParam(value = "current", required = false, defaultValue = "1") int current,

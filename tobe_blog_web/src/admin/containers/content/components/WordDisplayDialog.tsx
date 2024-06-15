@@ -39,11 +39,11 @@ export function WordDisplayDialog(props: {
                   variant="h6"
                   sx={{ fontWeight: 600 }}
                 >
-                  {props.word?.word}
+                  {props.word?.text}
                 </Typography>
                 <Speech
                   id={props.word?.id || ''}
-                  text={props.word?.word || 'Unknown'}
+                  text={props.word?.text || 'Unknown'}
                   startBtn={
                     <IconButton>
                       <PlayCircleOutlineIcon

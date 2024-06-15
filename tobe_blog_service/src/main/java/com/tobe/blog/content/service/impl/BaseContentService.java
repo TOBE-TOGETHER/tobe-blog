@@ -22,6 +22,7 @@ import com.tobe.blog.beans.entity.content.ContentTagEntity;
 import com.tobe.blog.content.mapper.BaseContentMapper;
 import com.tobe.blog.content.service.IContentService;
 import com.tobe.blog.core.exception.TobeRuntimeException;
+import com.tobe.blog.core.utils.CacheUtil;
 import com.tobe.blog.core.utils.SecurityUtil;
 
 import io.jsonwebtoken.lang.Collections;
@@ -45,10 +46,14 @@ public abstract class BaseContentService<
     E extends BaseContentEntity, 
     M extends BaseContentMapper<D, E>> extends ServiceImpl<M, E> implements IContentService<D, C, U, E, M> {
 
+    private static final String CONTENT_VIEW_COUNT = "CONTENT_VIEW_COUNT";
     @Autowired
     private ContentGeneralInfoService generalInfoService;
     @Autowired
     private ContentTagService tagService;
+    @Autowired
+    private CacheUtil cacheUtil;
+    
 
     @Override
     @Transactional
@@ -108,6 +113,13 @@ public abstract class BaseContentService<
     @Override
     public D getDTOById(String id) {
         return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
+    }
+
+    @Override
+    public D getDTOByIdAndCount(String id) {
+        D result = this.getDTOById(id);
+        result.setViewCount(result.getViewCount() + cacheUtil.hIncr(CONTENT_VIEW_COUNT, id, 1L));
+        return result;
     }
 
     @Override

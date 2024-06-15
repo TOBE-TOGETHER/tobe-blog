@@ -268,9 +268,9 @@ export interface BreadcrumbsNode {
 }
 
 export interface WordGeneralDTO {
-  id: string;
+  id: number;
   vocabularyId: string;
-  word: string;
+  text: string;
   partOfSpeech: string;
   meaningInChinese: string;
   meaningInEnglish: string;
@@ -278,10 +278,16 @@ export interface WordGeneralDTO {
 
 export interface WordCreateDTO {
   vocabularyId: string;
-  word: string;
+  text: string;
   partOfSpeech: string;
   meaningInChinese: string;
   meaningInEnglish: string;
 }
 
-export interface WordUpdateDTO extends WordGeneralDTO {}
+export interface WordUpdateDTO {
+  id: number;
+  text: string;
+  partOfSpeech: string;
+  meaningInChinese: string;
+  meaningInEnglish: string;
+}

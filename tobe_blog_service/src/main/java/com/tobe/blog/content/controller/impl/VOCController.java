@@ -29,7 +29,7 @@ public class VOCController
     private final VOCService vocService;
     private final WordService wordService;
 
-    @GetMapping("/{id}/word")
+    @GetMapping("/{id}/words")
     public ResponseEntity<List<WordDTO>> getWordsByVOCId(@RequestParam String id) {
         return ResponseEntity.ok(wordService.getWordsByVOCId(id));
     }

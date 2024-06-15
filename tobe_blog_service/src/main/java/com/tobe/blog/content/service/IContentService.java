@@ -25,6 +25,8 @@ public interface IContentService<
 
     D getDTOById(String id);
 
+    D getDTOByIdAndCount(String id);
+
     D release(String id);
 
 }

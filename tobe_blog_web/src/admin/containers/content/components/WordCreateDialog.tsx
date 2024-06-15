@@ -20,13 +20,13 @@ export function WordCreateDialog(props: {
 }) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const [word, setWord] = useState<string>('');
+  const [text, setText] = useState<string>('');
   const [partOfSpeech, setPartOfSpeech] = useState<string>('');
   const [meaningInChinese, setMeaningInChinese] = useState<string>('');
   const [meaningInEnglish, setMeaningInEnglish] = useState<string>('');
   
   function handleClose() {
-    setWord('');
+    setText('');
     setPartOfSpeech('');
     setMeaningInChinese('');
     setMeaningInEnglish('');
@@ -36,7 +36,7 @@ export function WordCreateDialog(props: {
   function handleSave() {
     WordService.createWord({
       vocabularyId: props.vocabularyId,
-      word: word,
+      text: text,
       partOfSpeech: partOfSpeech,
       meaningInChinese: meaningInChinese,
       meaningInEnglish: meaningInEnglish,
@@ -82,8 +82,8 @@ export function WordCreateDialog(props: {
                 label={t('word-dialog.fields.word')}
                 fullWidth
                 variant="standard"
-                value={word}
-                onChange={(e) => setWord(e.target.value)}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
               />
             </Grid>
             <Grid
