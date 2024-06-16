@@ -86,9 +86,9 @@ public class PlanServiceTests {
     @Test
     @DisplayName("Plan Service: delete plan")
     void testDelete() {
-        PlanCreationDTO dto = new PlanCreationDTO();
+        final PlanCreationDTO dto = new PlanCreationDTO();
         dto.setTitle("Plan To Be Deleted");
-        PlanDTO saveResult = planService.save(dto);
+        final PlanDTO saveResult = planService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         Assertions.assertDoesNotThrow(() -> planService.delete(saveResult.getId()));
         // should throw when the content has been deleted or not existing
@@ -98,11 +98,11 @@ public class PlanServiceTests {
     @Test
     @DisplayName("Plan Service: release plan")
     void testRelease() {
-        PlanCreationDTO dto = new PlanCreationDTO();
+        final PlanCreationDTO dto = new PlanCreationDTO();
         dto.setTitle("Plan To Be Released");
-        PlanDTO saveResult = planService.save(dto);
+        final PlanDTO saveResult = planService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
-        PlanDTO releaseResult = planService.release(saveResult.getId());
+        final PlanDTO releaseResult = planService.release(saveResult.getId());
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
@@ -112,23 +112,23 @@ public class PlanServiceTests {
     @Test
     @DisplayName("Plan Service: create with tags")
     void testCreateWithTags() {
-        PlanCreationDTO dto = new PlanCreationDTO();
+        final PlanCreationDTO dto = new PlanCreationDTO();
         dto.setTitle("Plan with tags");
         dto.setTags(List.of(
           TagInfoDTO.builder().value(1L).label("FIRST").build(), 
           TagInfoDTO.builder().value(2L).label("SECOND").build()
         ));
         // the tags should be correctly saved
-        PlanDTO saveResult = planService.save(dto);
+        final PlanDTO saveResult = planService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         Assertions.assertEquals(2, saveResult.getTags().size());
         // the tags should be correctly updated
-        PlanUpdateDTO updateDTO = new PlanUpdateDTO();
+        final PlanUpdateDTO updateDTO = new PlanUpdateDTO();
         updateDTO.setId(saveResult.getId());
         updateDTO.setTags(List.of(
           TagInfoDTO.builder().value(1L).label("FIRST").build()
         ));
-        PlanDTO updateResult = planService.update(updateDTO);
+        final PlanDTO updateResult = planService.update(updateDTO);
         Assertions.assertNotNull(updateResult.getId());
         Assertions.assertEquals(1, updateResult.getTags().size());
     }

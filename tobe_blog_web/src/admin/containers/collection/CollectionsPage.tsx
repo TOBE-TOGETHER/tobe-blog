@@ -7,30 +7,30 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Page } from '../../../components/layout';
+import { Page } from '../../../components/layout/index.ts';
 import { EOperationName } from '../../../global/enums.ts';
 import {
+  CollectionInfo,
   Operation,
-  SubjectInfo,
-} from '../../../global/types';
-import { URL } from '../../../routes';
-import { SubjectService } from '../../../services';
-import { AddIconButton } from '../../components';
-import SubjectCardView from './SubjectCardView';
+} from '../../../global/types.ts';
+import { CollectionService } from '../../../services/index.ts';
+import { URL } from '../../URL.ts';
+import { AddIconButton } from '../../components/index.ts';
+import CollectionCardView from './CollectionCardView.tsx';
 
-export default function SubjectsPage() {
+export default function CollectionsPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
-  const [subjects, setSubjects] = useState<SubjectInfo[]>([]);
+  const [collections, setCollections] = useState<CollectionInfo[]>([]);
   const [current] = useState<number>(0);
   const [size] = useState<number>(1000);
   const loadData = useCallback((): void => {
     setOpenLoading(true);
-    SubjectService.get(size, current)
+    CollectionService.get(size, current)
       .then((response) => {
-        setSubjects(response.data.records || []);
+        setCollections(response.data.records || []);
       })
       .catch(() => {
         enqueueSnackbar(t('articles-page.msg.error'), {
@@ -51,7 +51,7 @@ export default function SubjectsPage() {
   
   function releaseById(id: number | string) {
     setOpenLoading(true);
-    SubjectService.releaseById(id)
+    CollectionService.releaseById(id)
       .then(() => {
         loadData();
       })
@@ -63,7 +63,7 @@ export default function SubjectsPage() {
   
   function deleteById(id: number | string) {
     setOpenLoading(true);
-    SubjectService.deleteById(id)
+    CollectionService.deleteById(id)
       .then(() => {
         loadData();
       })
@@ -97,14 +97,14 @@ export default function SubjectsPage() {
         alignItems="center"
       >
         <Grid item>
-          <AddIconButton onClick={() => navigate(URL.CREATE_SUBJECT)} />
+          <AddIconButton onClick={() => navigate(URL.CREATE_COLLECTION)} />
         </Grid>
       </Grid>
-      <SubjectCardView
+      <CollectionCardView
         operations={operations}
-        data={subjects}
+        data={collections}
         onClick={(id: number | string) =>
-          navigate(URL.SUBJECT_DETAIL.replace(':id', id.toString()))
+          navigate(URL.COLLECTION_DETAIL.replace(':id', id.toString()))
         }
       />
     </Page>

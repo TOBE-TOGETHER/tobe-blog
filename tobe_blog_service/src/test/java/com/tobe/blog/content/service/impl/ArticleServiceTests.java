@@ -35,13 +35,13 @@ public class ArticleServiceTests {
     @Test
     @DisplayName("Article Service: create with valid input")
     void testSave_withValidInput() {
-        ArticleCreationDTO dto = new ArticleCreationDTO();
+        final ArticleCreationDTO dto = new ArticleCreationDTO();
         dto.setTitle("Hello world!");
         dto.setSubTitle("This is the first article content of the system");
         dto.setDescription("Let's verify the content together!");
         dto.setContentProtected(Boolean.FALSE);
         dto.setContent("Today is a special one in the history!");
-        ArticleDTO result = articleService.save(dto);
+        final ArticleDTO result = articleService.save(dto);
 
         Assertions.assertEquals(DefaultUser.USER_ID, result.getOwnerId());
         Assertions.assertEquals(String.format("%s %s", DefaultUser.FIRST_NAME, DefaultUser.LAST_NAME), result.getOwnerName());
@@ -60,9 +60,9 @@ public class ArticleServiceTests {
     }
 
     @Test
-    @DisplayName("Article Service: create new Article with invalid input")
+    @DisplayName("Article Service: create with invalid input")
     void testSaveWithInvalidInput() {
-        ArticleCreationDTO dto = new ArticleCreationDTO();
+        final ArticleCreationDTO dto = new ArticleCreationDTO();
         dto.setTitle("Article With Long Subtitle");
         dto.setSubTitle(RandomStringUtils.randomAlphabetic(129));
         dto.setDescription("Let's verify the content together!");
@@ -83,7 +83,7 @@ public class ArticleServiceTests {
     @Test
     @DisplayName("Article Service: update article")
     void testUpdate_existingArticle() {
-        ArticleCreationDTO dto = new ArticleCreationDTO();
+        final ArticleCreationDTO dto = new ArticleCreationDTO();
         dto.setTitle("Article To Be Update");
         dto.setSubTitle("Subtitle to be updated");
         dto.setDescription("Desc to be updated");
@@ -91,7 +91,7 @@ public class ArticleServiceTests {
         dto.setContent("Content to be updated");
         ArticleDTO saveResult = articleService.save(dto);
         // prepare update DTO
-        ArticleUpdateDTO updateDTO = new ArticleUpdateDTO();
+        final ArticleUpdateDTO updateDTO = new ArticleUpdateDTO();
         String UPDATED_SUBTITLE = "Updated subtitle";
         String UPDATED_DESCRIPTION = "Updated desc";
         String UPDATED_CONTENT = "Updated content";
@@ -137,23 +137,23 @@ public class ArticleServiceTests {
     @Test
     @DisplayName("Article Service: create with tags")
     void testCreateWithTags() {
-        ArticleCreationDTO dto = new ArticleCreationDTO();
+        final ArticleCreationDTO dto = new ArticleCreationDTO();
         dto.setTitle("Article with tags");
         dto.setTags(List.of(
           TagInfoDTO.builder().value(1L).label("FIRST").build(), 
           TagInfoDTO.builder().value(2L).label("SECOND").build()
         ));
         // the tags should be correctly saved
-        ArticleDTO saveResult = articleService.save(dto);
+        final ArticleDTO saveResult = articleService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         Assertions.assertEquals(2, saveResult.getTags().size());
         // the tags should be correctly updated
-        ArticleUpdateDTO updateDTO = new ArticleUpdateDTO();
+        final ArticleUpdateDTO updateDTO = new ArticleUpdateDTO();
         updateDTO.setId(saveResult.getId());
         updateDTO.setTags(List.of(
           TagInfoDTO.builder().value(1L).label("FIRST").build()
         ));
-        ArticleDTO updateResult = articleService.update(updateDTO);
+        final ArticleDTO updateResult = articleService.update(updateDTO);
         Assertions.assertNotNull(updateResult.getId());
         Assertions.assertEquals(1, updateResult.getTags().size());
     }

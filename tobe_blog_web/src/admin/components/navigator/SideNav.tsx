@@ -69,8 +69,8 @@ const basicPageItems: PageItem[] = [
   {
     label: 'dashboard-nav.pages.subjects',
     icon: <FolderIcon />,
-    url: URL.SUBJECTS,
-    secondaryUrl: URL.CREATE_SUBJECT,
+    url: URL.COLLECTIONS,
+    secondaryUrl: URL.CREATE_COLLECTION,
     requiredRoles: [
       EAuthority.ROLE_BASIC,
       EAuthority.ROLE_ADMIN,

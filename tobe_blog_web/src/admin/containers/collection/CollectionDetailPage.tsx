@@ -15,27 +15,27 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../components/layout';
 import {
+  CollectionDTO,
+  CollectionUpdateDTO,
   RenderTree,
-  SubjectInfoGeneralDTO,
-  SubjectInfoUpdateDTO,
   TagOption,
   TagRelationship,
 } from '../../../global/types';
-import { SubjectService } from '../../../services';
+import { CollectionService } from '../../../services';
 import {
   EditIconButton,
   TreePanel,
 } from '../../components';
 import SingleTagSelecter from './SingleTagSelecter';
 
-export default function SubjectDetailPage() {
+export default function CollectionDetailPage() {
   const ROOT = 'root';
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
   const [editable, setEditable] = useState<boolean>(false);
   const [openLoading, setOpenLoading] = useState<boolean>(false);
-  const [subject, setSubject] = useState<SubjectInfoGeneralDTO | null>(null);
+  const [collection, setCollections] = useState<CollectionDTO | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [treeData, setTreeData] = useState<RenderTree>({
@@ -62,9 +62,9 @@ export default function SubjectDetailPage() {
       }
       
       setOpenLoading(true);
-      SubjectService.getById(id)
+      CollectionService.getById(id)
         .then((response) => {
-          setSubject(response.data);
+          setCollections(response.data);
           setDescription(response.data.description);
           setCoverImgUrl(response.data.coverImgUrl);
           treeData.children = convert(response.data.tagTree);
@@ -90,13 +90,13 @@ export default function SubjectDetailPage() {
   ]);
   
   const handleEditableChange = () => {
-    if (!subject) {
+    if (!collection) {
       return;
     }
     if (editable) {
       handleUpdate({
-        id: subject.id,
-        name: subject.name,
+        id: collection.id,
+        title: collection.title,
         description: description || '',
         coverImgUrl: coverImgUrl || '',
       });
@@ -104,9 +104,9 @@ export default function SubjectDetailPage() {
     setEditable(!editable);
   };
   
-  function handleUpdate(target: SubjectInfoUpdateDTO): void {
+  function handleUpdate(target: CollectionUpdateDTO): void {
     setOpenLoading(true);
-    SubjectService.update(target)
+    CollectionService.update(target)
       .then(() => {
         enqueueSnackbar(t('subject-detail-page.msg.success'), {
           variant: 'success',
@@ -128,7 +128,7 @@ export default function SubjectDetailPage() {
       return;
     }
     const tagId = Number.parseInt(targetTag.value);
-    SubjectService.createRelationship({
+    CollectionService.createRelationship({
       parentId,
       tagId,
       subjectId: id,
@@ -145,7 +145,7 @@ export default function SubjectDetailPage() {
     if (!targetId || !id) {
       return;
     }
-    SubjectService.deleteRelationship(targetId).then(() => {
+    CollectionService.deleteRelationship(targetId).then(() => {
       loadData(id);
       setTargetTag(null);
     });
@@ -154,9 +154,9 @@ export default function SubjectDetailPage() {
   return (
     <Page
       openLoading={openLoading}
-      pageTitle={subject?.name || ''}
+      pageTitle={collection?.title || ''}
     >
-      {subject && (
+      {collection && (
         <Grid
           container
           sx={{ m: 0, p: { xs: 0.5, md: 1 } }}
@@ -182,7 +182,7 @@ export default function SubjectDetailPage() {
         sx={{ mt: 0, mb: 1, p: { xs: 2, md: 3 } }}
       >
         <Box justifyContent="center">
-          {subject && (
+          {collection && (
             <Grid
               container
               spacing={3}

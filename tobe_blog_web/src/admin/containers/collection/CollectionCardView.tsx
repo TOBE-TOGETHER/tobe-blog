@@ -8,13 +8,13 @@ import {
   Typography,
 } from '@mui/material';
 import {
+  CollectionInfo,
   Operation,
-  SubjectInfo,
 } from '../../../global/types';
 import { CardHeaderActionButton } from '../../components';
 
-export default function SubjectCardView(props: {
-  data: SubjectInfo[];
+export default function CollectionCardView(props: {
+  data: CollectionInfo[];
   operations: Operation[];
   onClick?: (id: number | string) => void;
 }) {
@@ -23,7 +23,7 @@ export default function SubjectCardView(props: {
       container
       spacing={1}
     >
-      {props.data.map((subject: SubjectInfo) => (
+      {props.data.map((subject: CollectionInfo) => (
         <Grid
           item
           xs={12}
@@ -51,7 +51,7 @@ export default function SubjectCardView(props: {
                   alignContent: 'center',
                 }}
                 image={subject.coverImgUrl}
-                title={subject.name}
+                title={subject.title}
               >
                 <Typography
                   gutterBottom
@@ -66,7 +66,7 @@ export default function SubjectCardView(props: {
                     textAlign: 'center',
                   }}
                 >
-                  {subject.name}
+                  {subject.title}
                 </Typography>
               </CardMedia>
               <CardContent>

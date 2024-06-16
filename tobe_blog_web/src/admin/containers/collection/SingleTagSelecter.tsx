@@ -3,7 +3,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useTranslation } from 'react-i18next';
+import { TFuncReturn, useTranslation } from 'react-i18next';
+import { StylesConfig } from 'react-select';
 import { TagOption } from '../../../global/types';
 import { TagService } from '../../../services';
 

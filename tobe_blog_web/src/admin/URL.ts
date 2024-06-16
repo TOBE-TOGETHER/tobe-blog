@@ -14,9 +14,9 @@ export const URL = {
   ARTICLE_DETAIL: '/my/articles/:id',
   CREATE_ARTICLE: '/my/articles/create-article',
 
-  CREATE_SUBJECT: '/my/subjects/create-subject',
-  SUBJECT_DETAIL: '/my/subjects/:id',
-  SUBJECTS: '/my/subjects',
+  CREATE_COLLECTION: '/my/collections/create-collection',
+  COLLECTION_DETAIL: '/my/collections/:id',
+  COLLECTIONS: '/my/collections',
 
   CREATE_VOCABULARY: '/my/vocabularies/create-vocabularies',
   VOCABULARY_DETAIL: '/my/vocabularies/:id',

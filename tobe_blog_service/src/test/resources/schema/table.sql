@@ -144,6 +144,20 @@ create table tobe_plan_progress
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS tobe_collection_info;
+CREATE TABLE tobe_collection_info 
+(
+    CONTENT_ID varchar(32) NOT NULL PRIMARY KEY,
+    COVER_IMG_URL varchar(2000) DEFAULT NULL,
+    DELETED bit(1) NOT NULL DEFAULT false,
+    CREATE_BY varchar(64) DEFAULT NULL,
+    CREATE_TIME datetime DEFAULT NULL,
+    UPDATE_BY varchar(64) DEFAULT NULL,
+    UPDATE_TIME datetime DEFAULT NULL
+) ENGINE = InnoDB 
+  DEFAULT CHARSET = utf8mb4 
+  COLLATE = utf8mb4_0900_ai_ci; 
+
 DROP TABLE IF EXISTS tobe_vocabulary_info;
 -- base vocabulary info
 create table tobe_vocabulary_info

@@ -190,22 +190,22 @@ export interface BaseInfoOverview {
   totalViewCount: number;
 }
 
-export interface SubjectInfoCreationDTO {
-  name: string;
+export interface CollectionCreationDTO {
+  title: string;
   description: string;
   coverImgUrl?: string;
 }
 
-export interface SubjectInfoUpdateDTO {
+export interface CollectionUpdateDTO {
   id: string;
-  name: string;
+  title: string;
   description: string;
   coverImgUrl?: string;
 }
 
-export interface SubjectInfoGeneralDTO {
+export interface CollectionDTO {
   id: string;
-  name: string;
+  title: string;
   description: string;
   coverImgUrl?: string;
   ownerId: string;
@@ -249,9 +249,9 @@ export interface TagRelationship {
   children: TagRelationship[];
 }
 
-export interface SubjectInfo {
+export interface CollectionInfo {
   id: string;
-  name: string;
+  title: string;
   description: string;
   coverImgUrl: string;
   ownerId: string;
