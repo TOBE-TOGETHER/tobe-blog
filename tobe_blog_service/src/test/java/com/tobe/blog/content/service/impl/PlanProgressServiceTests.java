@@ -105,7 +105,7 @@ public class PlanProgressServiceTests {
         dto.setDescription("Progress three");
         progressService.saveProgress(dto);
         // get all progress
-        Page<PlanProgressDTO> result = progressService.getProgressesByPlanId(PLAN_ID_FOR_QUERY, 1, 2);
+        final Page<PlanProgressDTO> result = progressService.getProgressesByPlanId(PLAN_ID_FOR_QUERY, 1, 2);
         Assertions.assertEquals(1, result.getCurrent());
         Assertions.assertEquals(2, result.getRecords().size());
         Assertions.assertEquals(3, result.getTotal());

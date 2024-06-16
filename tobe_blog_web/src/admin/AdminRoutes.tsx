@@ -27,6 +27,10 @@ const VOCsPage = React.lazy(() => import('./containers/content/vocabulary/VOCsPa
 const VOCDetailPage = React.lazy(() => import('./containers/content/vocabulary/VOCDetailPage'));
 const VOCCreationPage = React.lazy(() => import('./containers/content/vocabulary/VOCCreationPage'));
 
+const CollectionsPage = React.lazy(() => import('./containers/collection/CollectionsPage.tsx'));
+const CollectionCreationPage = React.lazy(() => import('./containers/collection/CollectionCreationPage.tsx'));
+const CollectionDetailPage = React.lazy(() => import('./containers/collection/CollectionDetailPage.tsx'));
+
 export function getAdminRoutes(): React.ReactNode[] {
   return [
     (
@@ -77,6 +81,18 @@ export function getAdminRoutes(): React.ReactNode[] {
         <Route
           path={URL.CREATE_VOCABULARY}
           element={<VOCCreationPage />}
+        />
+        <Route
+          path={URL.COLLECTIONS}
+          element={<CollectionsPage />}
+        />
+        <Route
+          path={URL.COLLECTION_DETAIL}
+          element={<CollectionDetailPage />}
+        />
+        <Route
+          path={URL.CREATE_COLLECTION}
+          element={<CollectionCreationPage />}
         />
       </Route>
     ),

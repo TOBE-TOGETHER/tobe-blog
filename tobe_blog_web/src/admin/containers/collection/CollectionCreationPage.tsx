@@ -13,10 +13,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../components/layout';
-import { URL } from '../../../routes';
-import { SubjectService } from '../../../services';
+import { CollectionService } from '../../../services';
+import { URL } from '../../URL';
 
-export default function SubjectCreationPage() {
+export default function CollectionCreationPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -36,8 +36,8 @@ export default function SubjectCreationPage() {
   
   function handleCreation(data: FormData): void {
     setOpenLoading(true);
-    SubjectService.create({
-      name: data.get('subjectName')?.toString() || '',
+    CollectionService.create({
+      title: data.get('subjectName')?.toString() || '',
       description: data.get('description')?.toString() || '',
       coverImgUrl: data.get('coverImgUrl')?.toString() || '',
     })
@@ -45,7 +45,7 @@ export default function SubjectCreationPage() {
         enqueueSnackbar(t('subject-creation-page.msg.success'), {
           variant: 'success',
         });
-        navigate(URL.SUBJECTS);
+        navigate(URL.COLLECTIONS);
       })
       .catch(() => {
         enqueueSnackbar(t('subject-creation-page.msg.error'), {

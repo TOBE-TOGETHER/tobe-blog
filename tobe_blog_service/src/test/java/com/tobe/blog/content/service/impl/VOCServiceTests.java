@@ -76,17 +76,17 @@ public class VOCServiceTests {
     @Test
     @DisplayName("Vocabulary Service: update item")
     void testUpdate_existingVocabulary() {
-        VOCCreationDTO dto = new VOCCreationDTO();
+        final VOCCreationDTO dto = new VOCCreationDTO();
         dto.setTitle("Vocabulry To Be Update");
         dto.setDescription("Desc to be updated");
         dto.setLanguage("EN");
-        VOCDTO saveResult = vocService.save(dto);
+        final VOCDTO saveResult = vocService.save(dto);
         // prepare update DTO
-        VOCUpdateDTO updateDTO = new VOCUpdateDTO();
+        final VOCUpdateDTO updateDTO = new VOCUpdateDTO();
         updateDTO.setId(saveResult.getId());
         updateDTO.setLanguage("CH");
         updateDTO.setContentProtected(Boolean.TRUE);
-        VOCDTO updateResult = vocService.update(updateDTO);
+        final VOCDTO updateResult = vocService.update(updateDTO);
         Assertions.assertEquals(saveResult.getId(), updateResult.getId());
         Assertions.assertEquals("CH", updateResult.getLanguage());
     }
@@ -95,10 +95,10 @@ public class VOCServiceTests {
     @Test
     @DisplayName("Vocabulary Service: delete item")
     void testDelete() {
-        VOCCreationDTO dto = new VOCCreationDTO();
+        final VOCCreationDTO dto = new VOCCreationDTO();
         dto.setTitle("Vocabulary To Be Deleted");
         dto.setLanguage("EN");
-        VOCDTO saveResult = vocService.save(dto);
+        final VOCDTO saveResult = vocService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         Assertions.assertDoesNotThrow(() -> vocService.delete(saveResult.getId()));
         // should throw when the content has been deleted or not existing
@@ -108,12 +108,12 @@ public class VOCServiceTests {
     @Test
     @DisplayName("Vocabulary Service: release item")
     void testRelease() {
-        VOCCreationDTO dto = new VOCCreationDTO();
+        final VOCCreationDTO dto = new VOCCreationDTO();
         dto.setTitle("Vocabulary To Be Released");
         dto.setLanguage("EN");
-        VOCDTO saveResult = vocService.save(dto);
+        final VOCDTO saveResult = vocService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
-        VOCDTO releaseResult = vocService.release(saveResult.getId());
+        final VOCDTO releaseResult = vocService.release(saveResult.getId());
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
@@ -123,7 +123,7 @@ public class VOCServiceTests {
     @Test
     @DisplayName("Vocabulary Service: create with tags")
     void testCreateWithTags() {
-        VOCCreationDTO dto = new VOCCreationDTO();
+        final VOCCreationDTO dto = new VOCCreationDTO();
         dto.setTitle("Vocabulary with tags");
         dto.setLanguage("EN");
         dto.setTags(List.of(
@@ -131,16 +131,16 @@ public class VOCServiceTests {
           TagInfoDTO.builder().value(2L).label("SECOND").build()
         ));
         // the tags should be correctly saved
-        VOCDTO saveResult = vocService.save(dto);
+        final VOCDTO saveResult = vocService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         Assertions.assertEquals(2, saveResult.getTags().size());
         // the tags should be correctly updated
-        VOCUpdateDTO updateDTO = new VOCUpdateDTO();
+        final VOCUpdateDTO updateDTO = new VOCUpdateDTO();
         updateDTO.setId(saveResult.getId());
         updateDTO.setTags(List.of(
           TagInfoDTO.builder().value(1L).label("FIRST").build()
         ));
-        VOCDTO updateResult = vocService.update(updateDTO);
+        final VOCDTO updateResult = vocService.update(updateDTO);
         Assertions.assertNotNull(updateResult.getId());
         Assertions.assertEquals(1, updateResult.getTags().size());
     }
