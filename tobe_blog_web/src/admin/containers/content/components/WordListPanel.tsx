@@ -160,6 +160,36 @@ export function WordListPanel(props: {
         </Grid>,
       );
     });
+
+    if (!letterSet || letterSet.size === 0) {
+      elements.push(<Grid
+          key={'sec-0'}
+          item
+          container
+          sx={{ m: 0.5 }}
+        >
+          <Grid
+            item
+            key={'add-btn-0'}
+            flexGrow={1}
+            sx={{
+              opacity: 0,
+              '&:hover': {
+                opacity: 100,
+              },
+            }}
+          >
+            <Button
+              variant="text"
+              onClick={() => setOpen(true)}
+              size="large"
+              sx={{ color: 'rgba(0,0,0,0.4)' }}
+            >
+              <Add />
+            </Button>
+          </Grid>
+        </Grid>)
+    }
     
     return elements;
   }
