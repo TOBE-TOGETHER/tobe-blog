@@ -69,6 +69,7 @@ export default function AnalyticsPage() {
     loadOverview(EContentType.Plan, setPlanData);
     loadOverview(EContentType.Article, setArticleData);
     loadOverview(EContentType.Vocabulary, setVOCData);
+    loadOverview(EContentType.Collection, setCOLData);
   }, [loadOverview]);
   
   useEffect(() => loadData(), [loadData]);
@@ -123,7 +124,7 @@ const StandardSmallWidget = (props: {
       item
       container
       xs={3}
-      sx={{ px: 3, py: 2 }}
+      sx={{ px: 2, py: 1.5 }}
     >
       <Grid
         item
@@ -177,7 +178,7 @@ const UserContentAnalyticsPanel = (props: {
             mt: 2,
             mb: 0,
             cursor: 'pointer',
-            ':hover': { fontWeight: 600 },
+            ':hover': { fontWeight: 550 },
           }}
           onClick={() => navigate(props.link)}
         >

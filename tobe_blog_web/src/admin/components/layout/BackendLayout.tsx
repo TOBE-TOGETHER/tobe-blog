@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { Box, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { SideNav } from "../navigator";
+import { useState } from "react";
 import BackendHeader from "../header/BackendHeader";
+import { SideNav } from "../navigator";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;

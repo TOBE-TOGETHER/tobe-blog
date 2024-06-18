@@ -24,7 +24,7 @@ public class VOCService extends BaseContentService<VOCDTO, VOCCreationDTO, VOCUp
 
     @Override
     protected ContentType getContentType() {
-        return ContentType.VOC;
+        return ContentType.VOCABULARY;
     }
 
 }

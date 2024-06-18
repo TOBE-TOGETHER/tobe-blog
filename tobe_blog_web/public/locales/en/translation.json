@@ -239,10 +239,10 @@
     "page-main-title": "Analytics",
     "content": {
       "title": {
-        "plan": "Plan Data",
-        "article": "Article Data",
-        "vocabulary": "Vocabulary Data",
-        "collection": "Collection Data"
+        "plan": "Plan",
+        "article": "Article",
+        "vocabulary": "Vocabulary",
+        "collection": "Collection"
       },
       "public": "Public count",
       "all": "Total count",

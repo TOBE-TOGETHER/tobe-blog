@@ -47,7 +47,7 @@ public class VOCServiceTests {
         Assertions.assertEquals(DefaultUser.AVATAR, result.getAvatarUrl());
         Assertions.assertEquals(dto.getTitle(), result.getTitle());
         Assertions.assertEquals(dto.getContentProtected(), result.getContentProtected());
-        Assertions.assertEquals(ContentType.VOC.name(), result.getContentType());
+        Assertions.assertEquals(ContentType.VOCABULARY.name(), result.getContentType());
         Assertions.assertEquals(dto.getDescription(), result.getDescription());
         Assertions.assertNotNull(result.getId());
         Assertions.assertEquals(0, result.getViewCount());

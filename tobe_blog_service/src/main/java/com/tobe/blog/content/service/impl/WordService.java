@@ -29,7 +29,7 @@ public class WordService extends ServiceImpl<WordMapper, WordEntity> {
     @Transactional
     public WordDTO saveWord(WordCreationDTO dto) {
         final ContentGeneralInfoEntity contentEntity = contentGeneralInfoService.getById(dto.getVocabularyId());
-        if (Objects.isNull(contentEntity) || !ContentType.VOC.name().equals(contentEntity.getContentType())) {
+        if (Objects.isNull(contentEntity) || !ContentType.VOCABULARY.name().equals(contentEntity.getContentType())) {
             throw new TobeRuntimeException("The vocabularyId is invalid");
         }
         final WordEntity entity = BasicConverter.convert(dto, WordEntity.class);
