@@ -214,7 +214,7 @@ create table tobe_tag_relationship
         primary key,
     TAG_ID      int               not null,
     PARENT_ID   int               null,
-    SUBJECT_ID  varchar(32)       not null,
+    COLLECTION_ID  varchar(32)       not null,
     DELETED     bit default false null,
     CREATE_BY   varchar(64)       null,
     CREATE_TIME datetime          null,

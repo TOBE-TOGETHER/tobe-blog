@@ -4,7 +4,7 @@ import { server } from '.';
 import { CollectionCreationDTO, CollectionUpdateDTO, TagRelationshipCreateDTO } from '../global/types';
 
 const COLLECTION_URI = 'v1/collections';
-const TAG_RELATIONSHIP_URI = 'v1/tag-relationship';
+const TAG_RELATIONSHIP_URI = 'v1/tag-relationships';
 
 export function get(size: number, current: number): AxiosPromise {
   return server.get(`/${COLLECTION_URI}?size=${size}&current=${current + 1}`);

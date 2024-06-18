@@ -8,26 +8,36 @@ import com.tobe.blog.beans.dto.content.CollectionDTO;
 import com.tobe.blog.beans.dto.content.CollectionUpdateDTO;
 import com.tobe.blog.beans.entity.content.CollectionEntity;
 import com.tobe.blog.content.mapper.CollectionMapper;
+import com.tobe.blog.content.mapper.TagRelationshipMapper;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class CollectionService extends BaseContentService<CollectionDTO, CollectionCreationDTO, CollectionUpdateDTO, CollectionEntity, CollectionMapper> {
-  
-  @Override
-  protected CollectionDTO getConcreteDTO() {
-      return new CollectionDTO();
-  }
 
-  @Override
-  protected CollectionEntity getConcreteEntity() {
-      return new CollectionEntity();
-  }
+    private TagRelationshipMapper tagRelationshipMapper;
 
-  @Override
-  protected ContentType getContentType() {
-      return ContentType.COLLECTION;
-  }
+    @Override
+    public CollectionDTO getDTOById(String id) {
+        CollectionDTO result = super.getDTOById(id);
+        result.setTagTree(tagRelationshipMapper.getTagRelationshipByParentId(null, id));
+        return result;
+    }
+
+    @Override
+    protected CollectionDTO getConcreteDTO() {
+        return new CollectionDTO();
+    }
+
+    @Override
+    protected CollectionEntity getConcreteEntity() {
+        return new CollectionEntity();
+    }
+
+    @Override
+    protected ContentType getContentType() {
+        return ContentType.COLLECTION;
+    }
   
 }

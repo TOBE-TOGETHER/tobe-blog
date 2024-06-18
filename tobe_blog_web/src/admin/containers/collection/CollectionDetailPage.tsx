@@ -131,7 +131,7 @@ export default function CollectionDetailPage() {
     CollectionService.createRelationship({
       parentId,
       tagId,
-      subjectId: id,
+      collectionId: id,
     }).then(() => {
       loadData(id);
       setTargetTag(null);

@@ -20,5 +20,5 @@ public class TagRelationshipEntity extends BaseEntity {
     private Long id;
     private Long tagId;
     private Long parentId;
-    private String subjectId;
+    private String collectionId;
 }

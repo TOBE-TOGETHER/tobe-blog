@@ -214,25 +214,22 @@ export interface CollectionDTO {
   publicToAll: boolean;
   publishTime: string;
   viewCount: number;
-  tagTree: TagRelationshipGeneralDTO[];
+  tagTree: ITagRelationshipDTO[];
 }
 
 export interface TagRelationshipCreateDTO {
   parentId: number | null;
   tagId: number;
-  subjectId: string;
+  collectionId: string;
 }
 
-export interface TagRelationshipGeneralDTO {
+export interface ITagRelationshipDTO {
   id: number;
   parentId: number;
   tagId: number;
   label: string;
-  subjectId: string;
-  relatedArticles: NewsDTO[];
-  relatedPlans: NewsDTO[];
-  relatedVocabularies: NewsDTO[];
-  children: TagRelationshipGeneralDTO[];
+  collectionId: string;
+  children: ITagRelationshipDTO[];
 }
 
 export interface RenderTree {

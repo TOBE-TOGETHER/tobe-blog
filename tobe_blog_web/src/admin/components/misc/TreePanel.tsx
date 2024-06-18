@@ -1,45 +1,42 @@
+import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
+import RemoveIcon from "@mui/icons-material/Remove";
+import Collapse from "@mui/material/Collapse";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 import { alpha, styled } from "@mui/material/styles";
-import { TreeView } from "@mui/x-tree-view/TreeView";
-import { TreeItem, TreeItemProps, treeItemClasses } from "@mui/x-tree-view/TreeItem";
-import Collapse from "@mui/material/Collapse";
-import { useSpring, animated } from "@react-spring/web";
 import { TransitionProps } from "@mui/material/transitions";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import CloseIcon from "@mui/icons-material/Close";
+import { TreeItem, TreeItemProps, treeItemClasses } from "@mui/x-tree-view/TreeItem";
+import { animated, useSpring } from "@react-spring/web";
 
+import { SimpleTreeView } from "@mui/x-tree-view";
 import { RenderTree } from "../../../global/types";
 
 export default function TreePanel(props: {
   nodes: RenderTree;
-  onNodeFocus: (event: React.SyntheticEvent, value: string) => void;
+  onNodeFocus: (event: React.SyntheticEvent | null, value: string) => void;
 }) {
   const renderTree = (nodes: RenderTree) => (
-    <StyledTreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+    <StyledTreeItem key={nodes.id} itemId={nodes.id} label={nodes.name}>
       {Array.isArray(nodes.children)
         ? nodes.children.map((node) => renderTree(node))
         : null}
     </StyledTreeItem>
   );
   return (
-    <TreeView
+    <SimpleTreeView
       aria-label="customized"
-      defaultExpanded={["root"]}
-      defaultCollapseIcon={<MinusSquare />}
-      defaultExpandIcon={<PlusSquare />}
-      defaultEndIcon={<CloseSquare />}
+      defaultExpandedItems={["root"]}
+      slots={{ collapseIcon: MinusSquare, expandIcon: PlusSquare, endIcon: CloseSquare}}
       sx={{
         height: 264,
         flexGrow: 1,
         maxWidth: 400,
         overflowY: "auto",
-        backgroundColor: "grey",
       }}
-      onNodeFocus={props.onNodeFocus}
+      onItemFocus={props.onNodeFocus}
     >
       {renderTree(props.nodes)}
-    </TreeView>
+    </SimpleTreeView>
   );
 }
 
@@ -75,14 +72,14 @@ function TransitionComponent(props: TransitionProps) {
 }
 
 const StyledTreeItem = styled((props: TreeItemProps) => (
-  <TreeItem {...props} TransitionComponent={TransitionComponent} />
+  <TreeItem {...props} slots={{ groupTransition: TransitionComponent}} slotProps={{groupTransition: {timeout: 600}}}/>
 ))(({ theme }) => ({
   [`& .${treeItemClasses.iconContainer}`]: {
     "& .close": {
       opacity: 0.3,
     },
   },
-  [`& .${treeItemClasses.group}`]: {
+  [`& .${treeItemClasses.groupTransition}`]: {
     marginLeft: 15,
     paddingLeft: 18,
     borderLeft: `1px dashed ${alpha(theme.palette.text.primary, 0.4)}`,
