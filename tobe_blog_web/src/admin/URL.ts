@@ -2,8 +2,8 @@ export const URL = {
   SIGN_IN: '/sign-in',
   SIGN_OUT: '/sign-out',
 
-  MY_ZONE: '/my/statistics',
-  STATISTICS: '/my/statistics',
+  MY_ZONE: '/my/analytics',
+  ANALYTICS: '/my/analytics',
   PROFILE: '/my/profile',
   USERS: '/my/users',
   PLANS: '/my/plans',

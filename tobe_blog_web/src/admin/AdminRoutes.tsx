@@ -20,9 +20,12 @@ const SignInPage = React.lazy(
 );
 const ProfileSettingPage = React.lazy(() => import('./containers/profileSettingPage/ProfileSettingPage'));
 const UsersPage = React.lazy(() => import('./containers/user/UsersPage'));
+const AnalyticsPage = React.lazy(() => import('./containers/analytics/AnalyticsPage'));
+
 const ArticlesPage = React.lazy(() => import('./containers/content/article/ArticlesPage'));
 const ArticleCreationPage = React.lazy(() => import('./containers/content/article/ArticleCreationPage'));
 const ArticleDetailPage = React.lazy(() => import('./containers/content/article/ArticleDetailPage'));
+
 const VOCsPage = React.lazy(() => import('./containers/content/vocabulary/VOCsPage'));
 const VOCDetailPage = React.lazy(() => import('./containers/content/vocabulary/VOCDetailPage'));
 const VOCCreationPage = React.lazy(() => import('./containers/content/vocabulary/VOCCreationPage'));
@@ -49,6 +52,10 @@ export function getAdminRoutes(): React.ReactNode[] {
         <Route
           path={URL.USERS}
           element={<UsersPage />}
+        />
+        <Route 
+          path={URL.ANALYTICS}
+          element={<AnalyticsPage />} 
         />
         <Route
           path={URL.PLANS}

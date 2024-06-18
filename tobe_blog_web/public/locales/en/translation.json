@@ -2,7 +2,7 @@
   "breadcrumbs": {
     "content": "Content",
     "home": "Home",
-    "subjects": "Subjects",
+    "collections": "Collections",
     "articles": "Articles",
     "plans": "Plans",
     "vocabularies": "Vocabularies"
@@ -56,14 +56,14 @@
     "vocabularies": "Vocabularies",
     "workout": "Workout",
     "activities": "Activities",
-    "subjects": "Subjects",
+    "collections": "Collections",
     "tools": "Tools",
     "view-count": "View",
     "end-line": "No more content",
     "load-more": "Load more",
     "no-content": "No available content",
     "top5-active-users": "Top 5 active users",
-    "top5-popular-subjects": "Top 5 popular subjects",
+    "top5-popular-collections": "Top 5 popular collections",
     "tag-statistics": "Featured tags"
   },
   "sign-in": {
@@ -110,17 +110,17 @@
       "about": "About",
       "article": "Article",
       "vocabulary": "Vocabulary",
-      "subject": "Subject",
+      "collection": "Collection",
       "tool": "Tool"
     },
     "settings": {
       "btn-tooltip": "Open settings",
       "profile": "User Profile",
-      "my-zone": "Statistics",
+      "my-zone": "Analytics",
       "plans": "Plans",
       "articles": "Articles",
       "vocabularies": "Vocabularies",
-      "subjects": "Subjects",
+      "collections": "Collections",
       "sign-out": "Sign Out"
     },
     "language": {
@@ -227,25 +227,27 @@
   },
   "dashboard-nav": {
     "pages": {
-      "statistics": "Statistics",
+      "analytics": "Analytics",
       "users": "Users",
       "plans": "Plans",
       "articles": "Articles",
       "vocabularies": "Vocabularies",
-      "subjects": "Subjects"
+      "collections": "Collections"
     }
   },
-  "statistics-page": {
-    "page-main-title": "Statistics",
-    "domain": {
+  "analytics-page": {
+    "page-main-title": "Analytics",
+    "content": {
       "title": {
         "plan": "Plan Data",
         "article": "Article Data",
-        "vocabulary": "Vocabulary Data"
+        "vocabulary": "Vocabulary Data",
+        "collection": "Collection Data"
       },
       "public": "Public count",
       "all": "Total count",
-      "view-count": "View count(k)"
+      "view-count": "View count(k)",
+      "like-count": "Like count(k)"
     },
     "msg": {
       "error": "Failed to fetch data"
@@ -305,10 +307,10 @@
       "error": "Failed to fetch data"
     }
   },
-  "subject-creation-page": {
-    "page-main-title": "Create a new subject",
+  "collection-creation-page": {
+    "page-main-title": "Create a new collection",
     "fields": {
-      "name": "Subject Name",
+      "name": "Collection Name",
       "description": "Description",
       "cover-img-url": "Cover Image URL"
     },
@@ -316,13 +318,13 @@
       "success": "Created",
       "error": "Creation failed",
       "warning": {
-        "name-empty": "Subject name cannot be empty"
+        "name-empty": "Collection name cannot be empty"
       }
     },
     "submit-btn": "Save",
     "back-btn": "Back"
   },
-  "subject-detail-page": {
+  "collection-detail-page": {
     "btn": {
       "add": "Add",
       "delete": "Delete"
@@ -332,16 +334,16 @@
       "error": "Operation failed"
     }
   },
-  "subjects-page": {
-    "page-main-title": "Subjects"
+  "collections-page": {
+    "page-main-title": "Collections"
   },
-  "subjects-list-page": {
-    "page-main-title": "Subjects",
+  "collections-list-page": {
+    "page-main-title": "Collections",
     "msg": {
       "error": "Failed to fetch data"
     }
   },
-  "subject-reading-page": {
+  "collection-reading-page": {
     "tip": {
       "tba": "To be continued"
     },

@@ -16,6 +16,13 @@ export enum EDomain {
   Vocabulary = 'VOCABULARY',
 }
 
+export enum EContentType {
+  Article = 'ARTICLE',
+  Plan = 'PLAN',
+  Vocabulary = 'VOCABULARY',
+  Collection = 'COLLECTION'
+}
+
 export enum EFeatureCode {
   ARTICLE_MODULE = 'articleModule',
   PLAN_MODULE = 'planModule',

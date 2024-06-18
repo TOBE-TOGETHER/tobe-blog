@@ -36,8 +36,8 @@ export const pages: Array<{
     requiredFeature: EFeatureCode.VOCABULARY_MODULE,
   },
   {
-    label: 'app-header.settings.subjects',
-    url: URL.SUBJECTS,
+    label: 'app-header.settings.collections',
+    url: URL.COLLECTIONS,
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
   },
   { label: 'app-header.settings.sign-out', url: URL.SIGN_OUT },
@@ -45,7 +45,7 @@ export const pages: Array<{
 
 export const publicPages: Array<{ label: string; url: string }> = [
   { label: 'app-header.pages.home', url: URL.HOME },
-  { label: 'app-header.pages.subject', url: URL.SUBJECTS_PAGE },
-  { label: 'app-header.pages.tool', url: URL.TOOLS_PAGE },
+  { label: 'app-header.pages.collection', url: URL.SUBJECTS_PAGE },
+  // { label: 'app-header.pages.tool', url: URL.TOOLS_PAGE },
   // { label: "app-header.pages.about", url: URL.ABOUT },
 ];

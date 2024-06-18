@@ -71,7 +71,7 @@ export default function CollectionDetailPage() {
           setTreeData(treeData);
         })
         .catch(() => {
-          enqueueSnackbar(t('subject-detail-page.msg.error'), {
+          enqueueSnackbar(t('collection-detail-page.msg.error'), {
             variant: 'error',
           });
         })
@@ -108,12 +108,12 @@ export default function CollectionDetailPage() {
     setOpenLoading(true);
     CollectionService.update(target)
       .then(() => {
-        enqueueSnackbar(t('subject-detail-page.msg.success'), {
+        enqueueSnackbar(t('collection-detail-page.msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('subject-detail-page.msg.error'), {
+        enqueueSnackbar(t('collection-detail-page.msg.error'), {
           variant: 'error',
         });
       })
@@ -194,7 +194,7 @@ export default function CollectionDetailPage() {
                 <TextField
                   id="coverImgUrl"
                   name="coverImgUrl"
-                  label={t('subject-creation-page.fields.cover-img-url')}
+                  label={t('collection-creation-page.fields.cover-img-url')}
                   fullWidth
                   disabled={!editable}
                   autoComplete="coverImgUrl"
@@ -210,7 +210,7 @@ export default function CollectionDetailPage() {
                 <TextField
                   id="description"
                   name="description"
-                  label={t('subject-creation-page.fields.description')}
+                  label={t('collection-creation-page.fields.description')}
                   fullWidth
                   autoComplete="description"
                   variant="standard"
@@ -272,7 +272,7 @@ export default function CollectionDetailPage() {
               variant="contained"
               onClick={handleCreateNewRelationship}
             >
-              {t('subject-detail-page.btn.add')}
+              {t('collection-detail-page.btn.add')}
             </Button>
           </Grid>
           <Grid
@@ -286,7 +286,7 @@ export default function CollectionDetailPage() {
               variant="contained"
               onClick={handleDeleteRelationship}
             >
-              {t('subject-detail-page.btn.delete')}
+              {t('collection-detail-page.btn.delete')}
             </Button>
           </Grid>
         </Grid>

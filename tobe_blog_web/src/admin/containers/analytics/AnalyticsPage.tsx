@@ -1,6 +1,3 @@
-import StorageIcon from '@mui/icons-material/Storage';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import {
   Grid,
   Paper,
@@ -14,42 +11,51 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { enabled } from '../../../commons';
-import { Page } from '../../../components/layout';
+import { enabled } from '../../../commons/index.ts';
+import { Page } from '../../../components/layout/index.ts';
 import {
-  EDomain,
-  EFeatureCode,
+  EContentType,
+  EFeatureCode
 } from '../../../global/enums.ts';
-import { BaseInfoOverview } from '../../../global/types';
-import { URL } from '../../../routes';
-import { OverviewService } from '../../../services';
+import { IUserContentAnalyticsDTO } from '../../../global/types.ts';
+import { OverviewService } from '../../../services/index.ts';
+import { URL } from '../../URL';
 
-export default function StatisticsPage() {
+export default function AnalyticsPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const [planData, setPlanData] = useState<BaseInfoOverview>({
-    totalNum: 0,
-    publicNum: 0,
+  const [planData, setPlanData] = useState<IUserContentAnalyticsDTO>({
+    totalCount: 0,
+    publicCount: 0,
     totalViewCount: 0,
+    totalLikeCount: 0,
   });
-  const [articleData, setArticleData] = useState<BaseInfoOverview>({
-    totalNum: 0,
-    publicNum: 0,
+  const [articleData, setArticleData] = useState<IUserContentAnalyticsDTO>({
+    totalCount: 0,
+    publicCount: 0,
     totalViewCount: 0,
+    totalLikeCount: 0,
   });
-  const [vocabularyData, setVocabularyData] = useState<BaseInfoOverview>({
-    totalNum: 0,
-    publicNum: 0,
+  const [vocData, setVOCData] = useState<IUserContentAnalyticsDTO>({
+    totalCount: 0,
+    publicCount: 0,
     totalViewCount: 0,
+    totalLikeCount: 0,
+  });
+  const [colData, setCOLData] = useState<IUserContentAnalyticsDTO>({
+    totalCount: 0,
+    publicCount: 0,
+    totalViewCount: 0,
+    totalLikeCount: 0,
   });
   const loadOverview = useCallback(
-    (domain: EDomain, setData: (any: any) => void): void => {
-      OverviewService.getOverviewData(domain)
+    (contentType: EContentType, setData: (any: any) => void): void => {
+      OverviewService.getOverviewData(contentType)
         .then((response) => {
           setData(response.data);
         })
         .catch(() => {
-          enqueueSnackbar(t('statistics-page.msg.error'), {
+          enqueueSnackbar(t('analytics-page.msg.error'), {
             variant: 'error',
           });
         });
@@ -60,9 +66,9 @@ export default function StatisticsPage() {
     ],
   );
   const loadData = useCallback((): void => {
-    loadOverview(EDomain.Plan, setPlanData);
-    loadOverview(EDomain.Article, setArticleData);
-    loadOverview(EDomain.Vocabulary, setVocabularyData);
+    loadOverview(EContentType.Plan, setPlanData);
+    loadOverview(EContentType.Article, setArticleData);
+    loadOverview(EContentType.Vocabulary, setVOCData);
   }, [loadOverview]);
   
   useEffect(() => loadData(), [loadData]);
@@ -70,33 +76,38 @@ export default function StatisticsPage() {
   return (
     <Page
       openLoading={false}
-      pageTitle={t('statistics-page.page-main-title')}
+      pageTitle={t('analytics-page.page-main-title')}
     >
       <Grid
         container
         spacing={1}
       >
         {enabled(EFeatureCode.PLAN_MODULE) && (
-          <StatisticsDomainPanel
-            domain={EDomain.Plan}
+          <UserContentAnalyticsPanel
+            contentType={EContentType.Plan}
             data={planData}
             link={URL.PLANS}
           />
         )}
         {enabled(EFeatureCode.ARTICLE_MODULE) && (
-          <StatisticsDomainPanel
-            domain={EDomain.Article}
+          <UserContentAnalyticsPanel
+            contentType={EContentType.Article}
             data={articleData}
             link={URL.ARTICLES}
           />
         )}
         {enabled(EFeatureCode.VOCABULARY_MODULE) && (
-          <StatisticsDomainPanel
-            domain={EDomain.Vocabulary}
-            data={vocabularyData}
+          <UserContentAnalyticsPanel
+            contentType={EContentType.Vocabulary}
+            data={vocData}
             link={URL.VOCABULARIES}
           />
         )}
+        <UserContentAnalyticsPanel
+            contentType={EContentType.Collection}
+            data={colData}
+            link={URL.COLLECTIONS}
+        />
       </Grid>
     </Page>
   );
@@ -106,36 +117,22 @@ const StandardSmallWidget = (props: {
   value: number | string;
   label: string;
   link: string;
-  icon: any;
 }) => {
   return (
     <Grid
       item
       container
-      xs={4}
+      xs={3}
       sx={{ px: 3, py: 2 }}
     >
       <Grid
         item
-        flexGrow={0}
-        sx={{ mr: 1 }}
+        xs={12}
       >
         <Typography
           variant="subtitle2"
-          flexGrow={1}
           color="text.secondary"
-        >
-          {props.icon}
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        flexGrow={1}
-      >
-        <Typography
-          variant="subtitle2"
-          flexGrow={1}
-          color="text.secondary"
+          sx={{textAlign: "center"}}
         >
           {props.label}
         </Typography>
@@ -145,8 +142,9 @@ const StandardSmallWidget = (props: {
         xs={12}
       >
         <Typography
-          variant="h4"
+          variant="h5"
           color="text.secondary"
+          sx={{textAlign: "center"}}
         >
           {props.value}
         </Typography>
@@ -155,10 +153,10 @@ const StandardSmallWidget = (props: {
   );
 };
 
-const StatisticsDomainPanel = (props: {
-  data: BaseInfoOverview;
+const UserContentAnalyticsPanel = (props: {
+  data: IUserContentAnalyticsDTO;
   link: string;
-  domain: EDomain;
+  contentType: EContentType;
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -183,7 +181,7 @@ const StatisticsDomainPanel = (props: {
           }}
           onClick={() => navigate(props.link)}
         >
-          {t('statistics-page.domain.title.' + props.domain.toLowerCase())}
+          {t('analytics-page.content.title.' + props.contentType.toLowerCase())}
         </Typography>
       </Grid>
       <Grid
@@ -193,31 +191,24 @@ const StatisticsDomainPanel = (props: {
         variant="outlined"
       >
         <StandardSmallWidget
-          value={props.data.publicNum}
-          label={t('statistics-page.domain.public')}
+          value={props.data.publicCount}
+          label={t('analytics-page.content.public')}
           link={props.link}
-          icon={<VerifiedIcon
-            color="info"
-            sx={{ fontSize: 20 }}
-          />}
         />
         <StandardSmallWidget
-          value={props.data.totalNum}
-          label={t('statistics-page.domain.all')}
+          value={props.data.totalCount}
+          label={t('analytics-page.content.all')}
           link={props.link}
-          icon={<StorageIcon
-            color="disabled"
-            sx={{ fontSize: 20 }}
-          />}
         />
         <StandardSmallWidget
           value={(props.data.totalViewCount / 1000).toFixed(1)}
-          label={t('statistics-page.domain.view-count')}
+          label={t('analytics-page.content.like-count')}
           link={props.link}
-          icon={<VisibilityIcon
-            color="success"
-            sx={{ fontSize: 20 }}
-          />}
+        />
+        <StandardSmallWidget
+          value={(props.data.totalViewCount / 1000).toFixed(1)}
+          label={t('analytics-page.content.view-count')}
+          link={props.link}
         />
       </Grid>
     </Grid>

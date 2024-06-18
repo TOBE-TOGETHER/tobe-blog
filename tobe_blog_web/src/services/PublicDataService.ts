@@ -16,11 +16,11 @@ export function getNewsByTags(domain: EDomain, size: number, current: number, ta
 }
 
 export function getSubjects(size: number, current: number): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/subjects?size=${size}&current=${current}`);
+  return server.get(`/${API_DATA_URI}/collections?size=${size}&current=${current}`);
 }
 
 export function getSubjectById(id: string | number): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/subjects/${id}`);
+  return server.get(`/${API_DATA_URI}/collections/${id}`);
 }
 
 export function getArticleById(id: string | number): AxiosPromise {

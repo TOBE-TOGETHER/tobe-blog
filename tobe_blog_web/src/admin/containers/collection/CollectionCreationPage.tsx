@@ -26,7 +26,7 @@ export default function CollectionCreationPage() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (!data.get('subjectName')) {
-      enqueueSnackbar(t('subject-creation-page.msg.warning.name-empty'), {
+      enqueueSnackbar(t('collection-creation-page.msg.warning.name-empty'), {
         variant: 'warning',
       });
       return;
@@ -42,13 +42,13 @@ export default function CollectionCreationPage() {
       coverImgUrl: data.get('coverImgUrl')?.toString() || '',
     })
       .then(() => {
-        enqueueSnackbar(t('subject-creation-page.msg.success'), {
+        enqueueSnackbar(t('collection-creation-page.msg.success'), {
           variant: 'success',
         });
         navigate(URL.COLLECTIONS);
       })
       .catch(() => {
-        enqueueSnackbar(t('subject-creation-page.msg.error'), {
+        enqueueSnackbar(t('collection-creation-page.msg.error'), {
           variant: 'error',
         });
       })
@@ -58,7 +58,7 @@ export default function CollectionCreationPage() {
   return (
     <Page
       openLoading={openLoading}
-      pageTitle={t('subject-creation-page.page-main-title')}
+      pageTitle={t('collection-creation-page.page-main-title')}
     >
       <Paper
         variant="outlined"
@@ -82,7 +82,7 @@ export default function CollectionCreationPage() {
                 required
                 id="subjectName"
                 name="subjectName"
-                label={t('subject-creation-page.fields.name')}
+                label={t('collection-creation-page.fields.name')}
                 fullWidth
                 autoComplete="name"
                 variant="standard"
@@ -95,7 +95,7 @@ export default function CollectionCreationPage() {
               <TextField
                 id="coverImgUrl"
                 name="coverImgUrl"
-                label={t('subject-creation-page.fields.cover-img-url')}
+                label={t('collection-creation-page.fields.cover-img-url')}
                 fullWidth
                 autoComplete="coverImgUrl"
                 variant="standard"
@@ -108,7 +108,7 @@ export default function CollectionCreationPage() {
               <TextField
                 id="description"
                 name="description"
-                label={t('subject-creation-page.fields.description')}
+                label={t('collection-creation-page.fields.description')}
                 fullWidth
                 autoComplete="description"
                 variant="standard"
@@ -123,14 +123,14 @@ export default function CollectionCreationPage() {
               onClick={() => window.history.back()}
               sx={{ mt: 3, ml: 1 }}
             >
-              {t('subject-creation-page.back-btn')}
+              {t('collection-creation-page.back-btn')}
             </Button>
             <Button
               variant="contained"
               type="submit"
               sx={{ mt: 3, ml: 1 }}
             >
-              {t('subject-creation-page.submit-btn')}
+              {t('collection-creation-page.submit-btn')}
             </Button>
           </Box>
         </Box>

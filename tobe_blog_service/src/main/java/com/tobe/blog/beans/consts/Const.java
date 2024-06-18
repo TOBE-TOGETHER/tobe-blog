@@ -9,7 +9,7 @@ public class Const {
     public static enum ContentType {
         ARTICLE,
         PLAN,
-        VOC,
+        VOCABULARY,
         COLLECTION
     }
 }

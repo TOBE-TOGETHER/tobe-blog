@@ -1,3 +1,4 @@
+
 export const URL = {
   HOME: '/',
   PERSONAL_PORTAL: '/personal-portal/:id',
@@ -10,15 +11,15 @@ export const URL = {
   NEWS_ARTICLE_DETAIL: '/news/articles/:id',
   NEWS_VOCABULARY_DETAIL: '/news/vocabularies/:id',
 
-  SUBJECTS_PAGE: '/subjects',
-  SUBJECT_READING_PAGE: '/subjects/:id',
+  SUBJECTS_PAGE: '/collections',
+  SUBJECT_READING_PAGE: '/collections/:id',
 
   TOOLS_PAGE: '/tools',
   TOOL_POMODORO: '/tools/pomodoro',
   TOOL_TIME_CONVERTER: '/tools/time-coverter',
 
-  MY_ZONE: '/my/statistics',
-  STATISTICS: '/my/statistics',
+  MY_ZONE: '/my/analytics',
+  ANALYTICS: '/my/analytics',
   PROFILE: '/my/profile',
   USERS: '/my/users',
   PLANS: '/my/plans',
@@ -29,9 +30,9 @@ export const URL = {
   ARTICLE_DETAIL: '/my/articles/:id',
   CREATE_ARTICLE: '/my/articles/create-article',
 
-  CREATE_SUBJECT: '/my/subjects/create-subject',
-  SUBJECT_DETAIL: '/my/subjects/:id',
-  SUBJECTS: '/my/subjects',
+  CREATE_SUBJECT: '/my/collections/create-collection',
+  SUBJECT_DETAIL: '/my/collections/:id',
+  COLLECTIONS: '/my/collections',
 
   CREATE_VOCABULARY: '/my/vocabularies/create-vocabularies',
   VOCABULARY_DETAIL: '/my/vocabularies/:id',

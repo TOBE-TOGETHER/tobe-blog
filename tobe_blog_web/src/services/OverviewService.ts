@@ -1,10 +1,10 @@
 import { AxiosPromise } from 'axios';
 
 import { server } from '.';
-import { EDomain } from '../global/enums.ts';
+import { EContentType } from '../global/enums.ts';
 
-const OVERVIEW_URI = 'v1/overview';
+const OVERVIEW_URI = 'v1/analytics';
 
-export function getOverviewData(domain: EDomain): AxiosPromise {
-  return server.get(`/${OVERVIEW_URI}/${domain}`);
+export function getOverviewData(contentType: EContentType): AxiosPromise {
+  return server.get(`/${OVERVIEW_URI}/${contentType}`);
 }

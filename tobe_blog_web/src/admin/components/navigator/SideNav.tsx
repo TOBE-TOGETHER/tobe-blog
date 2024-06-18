@@ -25,9 +25,9 @@ import { NavItems } from './NavItems';
 
 const basicPageItems: PageItem[] = [
   {
-    label: 'dashboard-nav.pages.statistics',
+    label: 'dashboard-nav.pages.analytics',
     icon: <DashboardIcon />,
-    url: URL.STATISTICS,
+    url: URL.ANALYTICS,
     requiredRoles: [
       EAuthority.ROLE_BASIC,
       EAuthority.ROLE_ADMIN,
@@ -67,7 +67,7 @@ const basicPageItems: PageItem[] = [
     requiredFeature: EFeatureCode.VOCABULARY_MODULE,
   },
   {
-    label: 'dashboard-nav.pages.subjects',
+    label: 'dashboard-nav.pages.collections',
     icon: <FolderIcon />,
     url: URL.COLLECTIONS,
     secondaryUrl: URL.CREATE_COLLECTION,

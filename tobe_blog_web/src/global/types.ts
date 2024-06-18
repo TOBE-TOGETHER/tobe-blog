@@ -184,10 +184,11 @@ export interface VocabularyUpdateDTO extends VocabularyCreationDTO {
   id: string;
 }
 
-export interface BaseInfoOverview {
-  totalNum: number;
-  publicNum: number;
+export interface IUserContentAnalyticsDTO {
+  totalCount: number;
+  publicCount: number;
   totalViewCount: number;
+  totalLikeCount: number;
 }
 
 export interface CollectionCreationDTO {

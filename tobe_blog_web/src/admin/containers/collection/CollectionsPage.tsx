@@ -88,7 +88,7 @@ export default function CollectionsPage() {
   return (
     <Page
       openLoading={openLoading}
-      pageTitle={t('subjects-page.page-main-title')}
+      pageTitle={t('collections-page.page-main-title')}
     >
       <Grid
         container

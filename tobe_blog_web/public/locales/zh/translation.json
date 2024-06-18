@@ -2,10 +2,10 @@
   "breadcrumbs": {
     "content": "正文",
     "home": "首页",
-    "subjects": "合集",
+    "collections": "合集",
     "articles": "笔记",
     "plans": "计划",
-    "vocabularies": "单词本"
+    "vocabularies": "词汇"
   },
   "components": {
     "upload-pics": "上传图片",
@@ -53,17 +53,17 @@
   "home-page": {
     "plans": "计划",
     "articles": "笔记",
-    "vocabularies": "单词本",
+    "vocabularies": "词汇",
     "workout": "锻炼",
     "activities": "活动",
     "view-count": "阅读量",
-    "subjects": "合集",
+    "collections": "合集",
     "tools": "工具",
     "end-line": "实在是没有了。。。",
     "load-more": "加载更多",
     "no-content": "找不到相关内容",
     "top5-active-users": "活跃排行榜",
-    "top5-popular-subjects": "合集排行榜",
+    "top5-popular-collections": "合集排行榜",
     "tag-statistics": "标签筛选"
   },
   "sign-in": {
@@ -109,18 +109,18 @@
       "news": "近期动态",
       "about": "关于",
       "article": "文章",
-      "vocabulary": "单词本",
-      "subject": "合集",
+      "vocabulary": "单词",
+      "collection": "合集",
       "tool": "工具"
     },
     "settings": {
       "btn-tooltip": "打开设置",
       "profile": "用户信息",
-      "my-zone": "统计",
+      "my-zone": "分析",
       "plans": "计划",
       "articles": "笔记",
-      "vocabularies": "单词本",
-      "subjects": "合集",
+      "vocabularies": "单词",
+      "collections": "合集",
       "sign-out": "登出系统"
     },
     "language": {
@@ -227,28 +227,30 @@
   },
   "dashboard-nav": {
     "pages": {
-      "statistics": "统计",
+      "analytics": "分析",
       "users": "用户",
       "plans": "计划",
       "articles": "笔记",
-      "vocabularies": "单词本",
-      "subjects": "合集"
+      "vocabularies": "词汇",
+      "collections": "合集"
     },
     "msg": {
       "error": "获取数据失败"
     }
   },
-  "statistics-page": {
-    "page-main-title": "统计",
-    "domain": {
+  "analytics-page": {
+    "page-main-title": "分析",
+    "content": {
       "title": {
         "plan": "计划总览",
         "article": "笔记总览",
-        "vocabulary": "单词本总览"
+        "vocabulary": "词汇总览",
+        "collection": "合集总览"
       },
-      "public": "公开总计",
-      "all": "内容总计",
-      "view-count": "阅读总计(千)"
+      "public": "发表量",
+      "all": "内容量",
+      "view-count": "阅读量（千）",
+      "like-count": "点赞量（千）"
     },
     "msg": {
       "error": "获取数据失败"
@@ -308,7 +310,7 @@
       "error": "加载数据失败"
     }
   },
-  "subject-creation-page": {
+  "collection-creation-page": {
     "page-main-title": "创建一个合集",
     "fields": {
       "name": "合集名",
@@ -325,7 +327,7 @@
     "submit-btn": "保存",
     "back-btn": "返回"
   },
-  "subject-detail-page": {
+  "collection-detail-page": {
     "btn": {
       "add": "新增",
       "delete": "删除"
@@ -335,16 +337,16 @@
       "error": "操作失败"
     }
   },
-  "subjects-page": {
+  "collections-page": {
     "page-main-title": "合集"
   },
-  "subjects-list-page": {
+  "collections-list-page": {
     "page-main-title": "合集",
     "msg": {
       "error": "加载数据失败"
     }
   },
-  "subject-reading-page": {
+  "collection-reading-page": {
     "tip": {
       "tba": "敬请期待"
     },
@@ -353,7 +355,7 @@
     }
   },
   "vocabulary-creation-page": {
-    "page-main-title": "创建一个单词本",
+    "page-main-title": "词汇",
     "fields": {
       "title": "标题",
       "description": "描述",
@@ -368,7 +370,7 @@
     "back-btn": "返回"
   },
   "vocabularies-page": {
-    "page-main-title": "单词本",
+    "page-main-title": "词汇",
     "vocabulary-table": {
       "label": {
         "title": "标题",
@@ -412,7 +414,7 @@
   },
   "word-dialog": {
     "add": "新增",
-    "title": "编辑单词本",
+    "title": "编辑单词",
     "fields": {
       "word": "文本",
       "partOfSpeech": "词性",
