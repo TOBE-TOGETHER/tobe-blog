@@ -12,7 +12,7 @@
         SELECT
                ttr.ID,
                ttr.TAG_ID,
-               tti.KEYWORD AS 'LABEL',
+               tti.KEYWORD AS LABEL,
                ttr.PARENT_ID,
                ttr.COLLECTION_ID
         FROM TOBE_TAG_RELATIONSHIP ttr
@@ -29,6 +29,6 @@
         </choose>
         AND ttr.COLLECTION_ID = #{collectionId}
         AND ttr.DELETED = false
-        ORDER BY tti.KEYWORD
+        ORDER BY tti.KEYWORD ASC
     </select>
 </mapper>
