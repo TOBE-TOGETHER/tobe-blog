@@ -10,8 +10,8 @@ import {
 import {
   CollectionInfo,
   Operation,
-} from '../../../global/types';
-import { CardHeaderActionButton } from '../../components';
+} from '../../../../global/types';
+import { CardHeaderActionButton } from '../../../components';
 
 export default function CollectionCardView(props: {
   data: CollectionInfo[];

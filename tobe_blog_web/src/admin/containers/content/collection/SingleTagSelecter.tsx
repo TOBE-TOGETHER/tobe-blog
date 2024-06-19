@@ -6,8 +6,8 @@ import {
 import { useTranslation } from 'react-i18next';
 import { StylesConfig } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import { TagOption } from '../../../global/types';
-import { TagService } from '../../../services';
+import { TagOption } from '../../../../global/types';
+import { TagService } from '../../../../services';
 
 const styles: StylesConfig<TagOption, true> = {};
 

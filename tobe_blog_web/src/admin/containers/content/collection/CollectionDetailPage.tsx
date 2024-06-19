@@ -13,19 +13,19 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { Page } from '../../../components/layout';
+import { Page } from '../../../../components/layout';
 import {
-  CollectionDTO,
   CollectionUpdateDTO,
+  ICollectionDTO,
   RenderTree,
   TagOption,
-  TagRelationship,
-} from '../../../global/types';
-import { CollectionService } from '../../../services';
+  TagRelationship
+} from '../../../../global/types';
+import { CollectionService, TagRelationshipService } from '../../../../services';
 import {
   EditIconButton,
   TreePanel,
-} from '../../components';
+} from '../../../components';
 import SingleTagSelecter from './SingleTagSelecter';
 
 export default function CollectionDetailPage() {
@@ -35,7 +35,7 @@ export default function CollectionDetailPage() {
   const { id } = useParams();
   const [editable, setEditable] = useState<boolean>(false);
   const [openLoading, setOpenLoading] = useState<boolean>(false);
-  const [collection, setCollections] = useState<CollectionDTO | null>(null);
+  const [collection, setCollections] = useState<ICollectionDTO | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [treeData, setTreeData] = useState<RenderTree>({
@@ -128,7 +128,7 @@ export default function CollectionDetailPage() {
       return;
     }
     const tagId = Number.parseInt(targetTag.value);
-    CollectionService.createRelationship({
+    TagRelationshipService.createRelationship({
       parentId,
       tagId,
       collectionId: id,
@@ -145,7 +145,7 @@ export default function CollectionDetailPage() {
     if (!targetId || !id) {
       return;
     }
-    CollectionService.deleteRelationship(targetId).then(() => {
+    TagRelationshipService.deleteRelationship(targetId).then(() => {
       loadData(id);
       setTargetTag(null);
     });

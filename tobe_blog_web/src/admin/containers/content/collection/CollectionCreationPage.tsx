@@ -12,9 +12,9 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Page } from '../../../components/layout';
-import { CollectionService } from '../../../services';
-import { URL } from '../../URL';
+import { Page } from '../../../../components/layout';
+import { CollectionService } from '../../../../services';
+import { URL } from '../../../URL';
 
 export default function CollectionCreationPage() {
   const { t } = useTranslation();

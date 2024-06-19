@@ -204,7 +204,7 @@ export interface CollectionUpdateDTO {
   coverImgUrl?: string;
 }
 
-export interface CollectionDTO {
+export interface IBaseUserContentDTO {
   id: string;
   title: string;
   description: string;
@@ -215,6 +215,23 @@ export interface CollectionDTO {
   publicToAll: boolean;
   publishTime: string;
   viewCount: number;
+  tags: TagOption[];
+  createTime: string;
+  updateTime: string;
+}
+
+export interface ICollectionDTO {
+  id: string;
+  title: string;
+  description: string;
+  coverImgUrl?: string;
+  ownerId: string;
+  ownerName: string;
+  avatarUrl: string;
+  publicToAll: boolean;
+  publishTime: string;
+  viewCount: number;
+  tags: TagOption[];
   tagTree: ITagRelationshipDTO[];
 }
 
