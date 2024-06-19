@@ -25,7 +25,7 @@ export interface UserData {
 
 export interface PlanInfo {
   id: string;
-  name: string;
+  title: string;
   description: string;
   statusValue: number;
   ownerName: string;
@@ -111,7 +111,7 @@ export interface TagStatisticDTO extends TagOption {
 }
 
 export interface PlanCreationDTO {
-  name: string;
+  title: string;
   description: string;
   targetStartTime: Date | null;
   targetEndTime: Date | null;

@@ -10,10 +10,11 @@ import {
   useAuthState,
 } from '../contexts';
 import { ELocalStorageKeys } from '../global/enums.ts';
-import { URL } from './URL';
 import { BackendLayout } from './components';
 import PlanCreationPage from './containers/content/plan/PlanCreationPage.tsx';
+import PlanDetailPage from './containers/content/plan/PlanDetailPage.tsx';
 import PlansPage from './containers/content/plan/PlansPage.tsx';
+import { URL } from './URL';
 
 const SignInPage = React.lazy(
   () => import('../portal/containers/signIn/SignIn'),
@@ -53,18 +54,22 @@ export function getAdminRoutes(): React.ReactNode[] {
           path={URL.USERS}
           element={<UsersPage />}
         />
-        <Route 
+        <Route
           path={URL.ANALYTICS}
-          element={<AnalyticsPage />} 
+          element={<AnalyticsPage />}
         />
         <Route
           path={URL.PLANS}
           element={<PlansPage />}
-        ></Route>
+        />
         <Route
           path={URL.CREATE_PLAN}
           element={<PlanCreationPage />}
-        ></Route>
+        />
+        <Route
+          path={URL.PLAN_DETAIL}
+          element={<PlanDetailPage />}
+        />
         <Route
           path={URL.ARTICLES}
           element={<ArticlesPage />}
