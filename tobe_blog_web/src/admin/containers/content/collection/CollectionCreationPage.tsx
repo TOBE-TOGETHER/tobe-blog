@@ -13,14 +13,17 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
+import { TagOption } from '../../../../global/types';
 import { CollectionService } from '../../../../services';
 import { URL } from '../../../URL';
+import { MultipleTagSelecter } from '../../../components';
 
 export default function CollectionCreationPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
+  const [tagValues, setTagValues] = useState<TagOption[]>([]);
   
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,6 +43,7 @@ export default function CollectionCreationPage() {
       title: data.get('subjectName')?.toString() || '',
       description: data.get('description')?.toString() || '',
       coverImgUrl: data.get('coverImgUrl')?.toString() || '',
+      tags: tagValues
     })
       .then(() => {
         enqueueSnackbar(t('collection-creation-page.msg.success'), {
@@ -117,6 +121,15 @@ export default function CollectionCreationPage() {
                 minRows={2}
               />
             </Grid>
+            <Grid
+                item
+                xs={12}
+              >
+                <MultipleTagSelecter
+                  value={tagValues}
+                  setValue={setTagValues}
+                />
+              </Grid>
           </Grid>
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button

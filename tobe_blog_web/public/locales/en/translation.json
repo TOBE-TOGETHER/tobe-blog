@@ -312,7 +312,8 @@
     "fields": {
       "name": "Collection Name",
       "description": "Description",
-      "cover-img-url": "Cover Image URL"
+      "cover-img-url": "Cover Image URL",
+      "tag": "Tag"
     },
     "msg": {
       "success": "Created",

@@ -196,6 +196,7 @@ export interface CollectionCreationDTO {
   title: string;
   description: string;
   coverImgUrl?: string;
+  tags: TagOption[];
 }
 
 export interface CollectionUpdateDTO {
@@ -203,6 +204,7 @@ export interface CollectionUpdateDTO {
   title: string;
   description: string;
   coverImgUrl?: string;
+  tags: TagOption[];
 }
 
 export interface IBaseUserContentDTO {

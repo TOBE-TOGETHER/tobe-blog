@@ -190,6 +190,11 @@ const UserContentAnalyticsPanel = (props: {
         component={Paper}
         onClick={() => navigate(props.link)}
         variant="outlined"
+        sx={{
+          overflow: "hidden", 
+          position: "relative",
+          zIndex: 0
+        }}
       >
         <StandardSmallWidget
           value={props.data.publicCount}
@@ -211,7 +216,24 @@ const UserContentAnalyticsPanel = (props: {
           label={t('analytics-page.content.view-count')}
           link={props.link}
         />
+        <DecordateBox color={"red"} xIndex="10px" />
+        <DecordateBox color={"blue"} xIndex="-100px" />
       </Grid>
     </Grid>
   );
 };
+
+const DecordateBox = (props: {color: string, xIndex: string}) => {
+  return <Grid item sx={{
+          top: "-44px",
+          width: "260px",
+          zIndex: "-1",
+          height: "160px",
+          right: props.xIndex,
+          opacity: "0.12",
+          borderRadius: "24px",
+          position: "absolute",
+          transform: "rotate(40deg)",
+          background: props.color
+        }}/>
+}

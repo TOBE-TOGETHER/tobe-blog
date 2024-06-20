@@ -315,7 +315,8 @@
     "fields": {
       "name": "合集名",
       "description": "合集描述",
-      "cover-img-url": "封面链接"
+      "cover-img-url": "封面链接",
+      "tag": "标签"
     },
     "msg": {
       "success": "创建成功",

@@ -72,7 +72,7 @@ export default function ArticleDetailPage() {
       tags: tagValues,
       contentProtected: contentProtected,
     })
-      .then((response) => {
+      .then(() => {
         enqueueSnackbar(t('article-creation-page.msg.success'), {
           variant: 'success',
         });

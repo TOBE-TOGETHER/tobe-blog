@@ -24,6 +24,7 @@ import {
 import { CollectionService, TagRelationshipService } from '../../../../services';
 import {
   EditIconButton,
+  MultipleTagSelecter,
   TreePanel,
 } from '../../../components';
 import SingleTagSelecter from './SingleTagSelecter';
@@ -38,6 +39,7 @@ export default function CollectionDetailPage() {
   const [collection, setCollections] = useState<ICollectionDTO | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
+  const [tagValues, setTagValues] = useState<TagOption[]>([]);
   const [treeData, setTreeData] = useState<RenderTree>({
     id: ROOT,
     name: 'ROOT',
@@ -67,6 +69,7 @@ export default function CollectionDetailPage() {
           setCollections(response.data);
           setDescription(response.data.description);
           setCoverImgUrl(response.data.coverImgUrl);
+          setTagValues(response.data.tags);
           treeData.children = convert(response.data.tagTree);
           setTreeData(treeData);
         })
@@ -99,6 +102,7 @@ export default function CollectionDetailPage() {
         title: collection.title,
         description: description || '',
         coverImgUrl: coverImgUrl || '',
+        tags: tagValues
       });
     }
     setEditable(!editable);
@@ -220,6 +224,16 @@ export default function CollectionDetailPage() {
                   disabled={!editable}
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+              >
+                <MultipleTagSelecter
+                  value={tagValues}
+                  setValue={setTagValues}
+                  disabled={!editable}
                 />
               </Grid>
             </Grid>

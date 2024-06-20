@@ -14,7 +14,7 @@ export default function CollectionsPage() {
         title: d.title,
         description: d.description,
         publicToAll: d.publicToAll,
-        tags: [],
+        tags: d.tags,
         createTime: d.createTime
       };
     });

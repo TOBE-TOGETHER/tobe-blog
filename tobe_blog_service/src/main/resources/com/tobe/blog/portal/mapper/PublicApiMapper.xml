@@ -7,7 +7,6 @@
                 SELECT DISTINCT tct.CONTENT_ID AS ID FROM TOBE_CONTENT_TAG tct
                 JOIN TOBE_TAG_INFO tti ON tti.ID = tct.TAG_ID
                 WHERE 1=1
-                AND tct.DELETED=0
                 AND tti.DELETED=0
                 AND tti.ID IN
                 <foreach item="tag" collection="tags" open="(" separator="," close=")">#{tag}</foreach>
