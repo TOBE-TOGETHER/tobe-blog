@@ -65,8 +65,9 @@ export interface PlanProgress {
 export interface NewsDTO {
   id: string;
   title: string;
-  domain: string;
+  contentType: string;
   description: string;
+  ownerId: number;
   ownerName: string;
   avatarUrl: string;
   createTime: string;

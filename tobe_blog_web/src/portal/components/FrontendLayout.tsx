@@ -1,13 +1,7 @@
 import { Box, Stack } from '@mui/material';
 
-// import { FrontendHeader } from "../header";
-import { AppFooter } from '../footer';
+import PortalHeader from "./PortalHeader";
 
-/**
- * FrontendLayout, a flex container with the basic header, footer
- *
- * 基础布局， 一个带有网站页头和页脚的流式布局容器
- */
 export default function FrontendLayout({ children }: { children: any }) {
   return (
     <Box
@@ -17,7 +11,7 @@ export default function FrontendLayout({ children }: { children: any }) {
         minHeight: '100vh',
       }}
     >
-      {/*<FrontendHeader />*/}
+      <PortalHeader />
       <Box>
         <Stack
           justifyContent="start"
@@ -35,7 +29,6 @@ export default function FrontendLayout({ children }: { children: any }) {
           {children}
         </Stack>
       </Box>
-      <AppFooter />
     </Box>
   );
 }

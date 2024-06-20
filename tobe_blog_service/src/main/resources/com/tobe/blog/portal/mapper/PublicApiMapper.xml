@@ -1,0 +1,63 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tobe.blog.portal.mapper.PublicApiMapper">
+    <select id="searchContents" resultMap="com.tobe.blog.content.mapper.BaseContentMapper.general_dto_result_map">
+        <if test="tags != null and tags.length > 0">
+            WITH TAG_FILTERED_TABLE AS (
+                SELECT DISTINCT tct.CONTENT_ID AS ID FROM TOBE_CONTENT_TAG tct
+                JOIN TOBE_TAG_INFO tti ON tti.ID = tct.TAG_ID
+                WHERE 1=1
+                AND tct.DELETED=0
+                AND tti.DELETED=0
+                AND tti.ID IN
+                <foreach item="tag" collection="tags" open="(" separator="," close=")">#{tag}</foreach>
+            )
+        </if>
+        SELECT
+        tcgi.*,
+        CONCAT(tcu.FIRST_NAME, ' ', tcu.LAST_NAME) as OWNER_NAME,
+        tcu.AVATAR_URL
+        FROM TOBE_CONTENT_GENERAL_INFO tcgi
+        JOIN TOBE_CORE_USER tcu ON tcgi.OWNER_ID = tcu.ID
+        <if test="tags != null and tags.length > 0">
+            JOIN TAG_FILTERED_TABLE tfat ON tfat.ID = tcgi.ID
+        </if>
+        WHERE tcgi.PUBLIC_TO_ALL=1 AND tcgi.DELETED=0
+        <if test="ownerId != null and ownerId != ''">
+            AND tcgi.OWNER_ID = #{ownerId}
+        </if>
+        <if test="contentType != null and contentType != ''">
+            AND tcgi.CONTENT_TYPE = #{contentType}
+        </if>
+        ORDER BY tcgi.CREATE_TIME DESC, tcgi.VIEW_COUNT DESC, tcgi.UPDATE_TIME DESC
+    </select>
+
+    <select id="getTop5ActiveUsers" resultType="com.tobe.blog.beans.dto.user.UserBriefProfileDTO">
+        SELECT tcu.*, content.CONTENT_COUNT AS SCORE
+        FROM TOBE_CORE_USER tcu LEFT JOIN (
+          SELECT tcu.id, COUNT(1) as CONTENT_COUNT
+              FROM TOBE_CORE_USER tcu JOIN TOBE_CONTENT_GENERAL_INFO tcgi ON tcu.ID = tcgi.OWNER_ID
+              AND tcgi.DELETED = 0 AND tcgi.PUBLIC_TO_ALL = 1
+              WHERE tcgi.id is not null GROUP BY tcu.id) as content ON content.id = tcu.id
+        ORDER BY SCORE DESC, tcu.CREATE_TIME DESC
+        LIMIT 5
+    </select>
+
+    <select id="getTagInfoStatistics"
+            resultType="com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO">
+        WITH COUNT_TABLE AS (
+            SELECT tct.TAG_ID, count(*) as COUNT FROM TOBE_CONTENT_TAG tct
+            JOIN TOBE_CONTENT_GENERAL_INFO tcgi ON tct.CONTENT_ID = tcgi.ID AND tcgi.CONTENT_TYPE = #{contentType}
+            WHERE tcgi.DELETED=0 AND tcgi.PUBLIC_TO_ALL=1
+            <if test="ownerId != null and ownerId != ''">
+                tcgi.OWNER_ID = #{ownerId}
+            </if>
+            GROUP BY tct.TAG_ID
+        )
+        SELECT tti.KEYWORD as LABEL,
+        tti.ID as VALUE,
+        ct.COUNT as COUNT
+        FROM TOBE_TAG_INFO tti JOIN COUNT_TABLE ct ON ct.TAG_ID = tti.ID AND tti.DELETED=0
+        ORDER BY ct.COUNT DESC, tti.KEYWORD DESC
+    </select>
+</mapper>

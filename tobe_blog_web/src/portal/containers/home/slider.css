@@ -1,0 +1,24 @@
+div.awssld--active > div.awssld__content > div {
+  z-index: 10;
+}
+
+nav.awssld__bullets {
+  display: none;
+}
+
+.awssld {
+  --loader-bar-color: transparent !important;
+  max-height: 35vh;
+}
+
+@media (max-width: 720px) {
+  .awssld {
+    max-height: 20vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .awssld {
+    max-height: 18vh;
+  }
+}

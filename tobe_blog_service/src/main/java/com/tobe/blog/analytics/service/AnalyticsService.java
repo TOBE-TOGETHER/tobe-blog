@@ -14,21 +14,31 @@ import lombok.RequiredArgsConstructor;
 public class AnalyticsService {
 
     private final ContentGeneralInfoService generalInfoService;
+
+    public UserContentAnalyticsDTO getOverallResult(Long userId) {
+        final UserContentAnalyticsDTO result = new UserContentAnalyticsDTO();
+        generalInfoService.list(new LambdaQueryWrapper<ContentGeneralInfoEntity>()
+          .eq(ContentGeneralInfoEntity::getOwnerId, userId)).stream()
+          .forEach(c -> statistics(c, result));
+        return result;
+    }
   
     public UserContentAnalyticsDTO getResult(String contentType, Long userId) {
         final UserContentAnalyticsDTO result = new UserContentAnalyticsDTO();
         generalInfoService.list(new LambdaQueryWrapper<ContentGeneralInfoEntity>()
           .eq(ContentGeneralInfoEntity::getOwnerId, userId)
           .eq(ContentGeneralInfoEntity::getContentType, contentType)).stream()
-          .forEach(c -> {
-              result.setTotalCount(result.getTotalCount() + 1);
-              result.setTotalLikeCount(result.getTotalLikeCount() + c.getLikeCount());
-              result.setTotalViewCount(result.getTotalViewCount() + c.getViewCount());
-              if (c.getPublicToAll()) {
-                  result.setPublicCount(result.getPublicCount() + 1);
-              }
-          });
+          .forEach(c -> statistics(c, result));
         return result;
+    }
+
+    private void statistics(ContentGeneralInfoEntity content, UserContentAnalyticsDTO result) {
+        result.setTotalCount(result.getTotalCount() + 1);
+        result.setTotalLikeCount(result.getTotalLikeCount() + content.getLikeCount());
+        result.setTotalViewCount(result.getTotalViewCount() + content.getViewCount());
+        if (content.getPublicToAll()) {
+            result.setPublicCount(result.getPublicCount() + 1);
+        }
     }
 
 }
