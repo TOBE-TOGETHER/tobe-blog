@@ -1,0 +1,34 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tobe.blog.content.mapper.TagRelationshipMapper">
+    <resultMap id="orgTreeMap" type="com.tobe.blog.beans.dto.content.TagRelationshipDTO">
+        <collection property="children"
+                    javaType="java.util.ArrayList"
+                    ofType="com.lucien.tobe.beans.dto.domain.subject.TagRelationshipGeneralDTO"
+                    select="getTagRelationshipByParentId"
+                    column="{parentId=ID, collectionId=COLLECTION_ID}"/>
+    </resultMap>
+    <select id="getTagRelationshipByParentId" resultMap="orgTreeMap">
+        SELECT
+               ttr.ID,
+               ttr.TAG_ID,
+               tti.KEYWORD AS LABEL,
+               ttr.PARENT_ID,
+               ttr.COLLECTION_ID
+        FROM TOBE_TAG_RELATIONSHIP ttr
+            JOIN TOBE_TAG_INFO tti ON ttr.TAG_ID = tti.ID AND tti.DELETED = false
+            JOIN TOBE_COLLECTION_INFO tci ON ttr.COLLECTION_ID = tci.CONTENT_ID AND tci.DELETED = false
+        WHERE 1=1
+        <choose>
+            <when test="parentId != null and parentId != ''">
+                AND ttr.PARENT_ID = #{parentId}
+            </when>
+            <otherwise>
+                AND ttr.PARENT_ID is null
+            </otherwise>
+        </choose>
+        AND ttr.COLLECTION_ID = #{collectionId}
+        AND ttr.DELETED = false
+        ORDER BY tti.KEYWORD ASC
+    </select>
+</mapper>

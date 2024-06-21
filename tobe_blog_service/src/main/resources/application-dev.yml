@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://rm-wz99x61sx0ptz4c41wo.mysql.rds.aliyuncs.com:3306/tobe_blog_test?useUnicode=true&character_set_server=utf8mb4
+    url: jdbc:mysql://rm-wz99751n4ub3707x4fo.mysql.rds.aliyuncs.com:3306/tobe_blog_test?useUnicode=true&character_set_server=utf8mb4
     charset: utf8mb4
     username: tobe
-    password: 19920215cx
+    password: 19920215#Cx
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       pool-name: tobe_Hikari_Pool

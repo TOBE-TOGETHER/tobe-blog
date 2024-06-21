@@ -1,7 +1,11 @@
-import { Container, Divider, Typography } from '@mui/material';
+import {
+  Container,
+  Divider,
+  Typography,
+} from '@mui/material';
 import { useEffect } from 'react';
 
-import project from '../../../package.json';
+import plan from '../../../package.json';
 import Loading from '../loading/Loading';
 
 interface PageProps {
@@ -13,12 +17,12 @@ interface PageProps {
 
 export default function Page(props: PageProps) {
   useEffect(() => {
-    window.document.title = `${project.name.toUpperCase()} ${props.pageTitle ? ' | ' + props.pageTitle : ''}`;
+    window.document.title = `${plan.name.toUpperCase()} ${props.pageTitle ? ' | ' + props.pageTitle : ''}`;
     return function restoreTitle() {
-      window.document.title = `${project.name.toUpperCase()}`;
+      window.document.title = `${plan.name.toUpperCase()}`;
     };
   });
-
+  
   return (
     <Container
       sx={{

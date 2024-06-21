@@ -1,0 +1,92 @@
+{
+    "editor.fontSize": 14,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.startupEditor": "welcomePage",
+    "editor.wordWrap": "on",
+    "git.enableSmartCommit": true,
+    "editor.tokenColorCustomizations": {
+      "comments": {
+        "fontStyle": "italic",
+        "foreground": "#d78527"
+      }
+    },
+    "files.associations": {
+      "*.js": "javascript",
+      "*.json": "jsonc",
+      "*.cjson": "jsonc",
+      "*.wxss": "css",
+      "*.wxs": "javascript"
+    },
+    "extensions.ignoreRecommendations": false,
+    "files.exclude": {
+      "**/.DS_Store": true,
+      "**/.git": true,
+      "**/.hg": true,
+      "**/.svn": true,
+      "**/CVS": true,
+      "**/node_modules": false,
+      "**/tmp": true
+    },
+    "prettier.printWidth": 120,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "typescript.updateImportsOnFileMove.enabled": "prompt",
+    "git.confirmSync": false,
+    "editor.fontWeight": "500",
+    "editor.tabCompletion": "on",
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "explorer.confirmDelete": false,
+    "debug.console.fontSize": 14,
+    "editor.minimap.enabled": true,
+    "emmet.extensionsPath": [
+      ""
+    ],
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+      "source.fixAll.eslint": true,
+      "source.fixAll": true
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "javascript.format.semicolons": "remove",
+    "[vue]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "prettier.trailingComma": "none",
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.showAbbreviationSuggestions": true,
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact",
+      "vue-html": "html",
+      "vue": "html",
+      "wxml": "html"
+    },
+    "editor.rulers": [],
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "git.ignoreMissingGitWarning": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.guides.bracketPairs": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "files.autoSave": "onFocusChange",
+    "files.autoSaveDelay": 10000,
+    "notebook.formatOnSave.enabled": true,
+  }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { AuthService } from '.';
-import { LOCAL_STORAGE_KEYS } from '../commons';
+import { ELocalStorageKeys } from '../global/enums.ts';
 import { URL } from '../routes';
 
 const server = axios.create({
@@ -58,7 +58,7 @@ server.interceptors.response.use(
         // if successfully get the new accessToken, save in localStorage
         if (res.data) {
           // save new access token back to local storage
-          localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, res.data);
+          localStorage.setItem(ELocalStorageKeys.ACCESS_TOKEN, res.data);
           // update the Authorization header value
           error.config.headers.Authorization = res.data;
           return server(error.config);
@@ -76,11 +76,11 @@ server.interceptors.response.use(
 );
 
 function getAccessToken() {
-  return localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+  return localStorage.getItem(ELocalStorageKeys.ACCESS_TOKEN);
 }
 
 function getRefreshToken() {
-  return localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
+  return localStorage.getItem(ELocalStorageKeys.REFRESH_TOKEN);
 }
 
 export default server;

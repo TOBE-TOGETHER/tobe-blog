@@ -9,10 +9,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.tobe.blog.DefaultTestData.DefaultUser;
 import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
 import com.tobe.blog.beans.dto.user.UserLoginDTO;
-import com.tobe.blog.core.service.UserServiceTests.DefaultUserTestData;
 
+/**
+ * No need to verify the correctness of the login password in this test
+ * as it has been verified in the Controller layer by authenticationManager 
+ */
 @SpringBootTest
 @ActiveProfiles("test")
 @DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
@@ -30,17 +34,17 @@ public class AuthServiceTests {
         Assertions.assertEquals(loginDTO.getUsername(), userDetails.getUsername());
         Assertions.assertNotNull(userDetails.getAccessToken());
         Assertions.assertNotNull(userDetails.getRefreshToken());
-        Assertions.assertEquals(DefaultUserTestData.USER_ID, userDetails.getUserProfile().getId());
-        Assertions.assertEquals(DefaultUserTestData.ADDRESS, userDetails.getUserProfile().getAddress());
-        Assertions.assertEquals(DefaultUserTestData.AVATAR, userDetails.getUserProfile().getAvatarUrl());
-        Assertions.assertEquals(DefaultUserTestData.BACKGROUND_IMG, userDetails.getUserProfile().getBackgroundImg());
-        Assertions.assertEquals(DefaultUserTestData.BLOG, userDetails.getUserProfile().getBlog());
-        Assertions.assertEquals(DefaultUserTestData.EMAIL, userDetails.getUserProfile().getEmail());
-        Assertions.assertEquals(DefaultUserTestData.FIRST_NAME, userDetails.getUserProfile().getFirstName());
-        Assertions.assertEquals(DefaultUserTestData.LAST_NAME, userDetails.getUserProfile().getLastName());
-        Assertions.assertEquals(DefaultUserTestData.INTRODUCTION, userDetails.getUserProfile().getIntroduction());
-        Assertions.assertEquals(DefaultUserTestData.PHONE_NUM, userDetails.getUserProfile().getPhoneNum());
-        Assertions.assertEquals(DefaultUserTestData.PHOTO_IMG, userDetails.getUserProfile().getPhotoImg());
+        Assertions.assertEquals(DefaultUser.USER_ID, userDetails.getUserProfile().getId());
+        Assertions.assertEquals(DefaultUser.ADDRESS, userDetails.getUserProfile().getAddress());
+        Assertions.assertEquals(DefaultUser.AVATAR, userDetails.getUserProfile().getAvatarUrl());
+        Assertions.assertEquals(DefaultUser.BACKGROUND_IMG, userDetails.getUserProfile().getBackgroundImg());
+        Assertions.assertEquals(DefaultUser.BLOG, userDetails.getUserProfile().getBlog());
+        Assertions.assertEquals(DefaultUser.EMAIL, userDetails.getUserProfile().getEmail());
+        Assertions.assertEquals(DefaultUser.FIRST_NAME, userDetails.getUserProfile().getFirstName());
+        Assertions.assertEquals(DefaultUser.LAST_NAME, userDetails.getUserProfile().getLastName());
+        Assertions.assertEquals(DefaultUser.INTRODUCTION, userDetails.getUserProfile().getIntroduction());
+        Assertions.assertEquals(DefaultUser.PHONE_NUM, userDetails.getUserProfile().getPhoneNum());
+        Assertions.assertEquals(DefaultUser.PHOTO_IMG, userDetails.getUserProfile().getPhotoImg());
     }
 
     @Test

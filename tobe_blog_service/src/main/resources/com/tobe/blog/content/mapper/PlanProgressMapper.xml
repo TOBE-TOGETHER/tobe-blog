@@ -1,0 +1,43 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tobe.blog.content.mapper.PlanProgressMapper">
+
+    <select id="getProgressDTOById"
+            resultType="com.tobe.blog.beans.dto.content.PlanProgressDTO">
+        <include refid="select_clause_for_general_dto" />
+        <include refid="from_clause" />
+        <include refid="where_clause_get_by_id" />
+    </select>
+
+    <select id="getProgressDTOsByPlanId"
+            resultType="com.tobe.blog.beans.dto.content.PlanProgressDTO">
+        <include refid="select_clause_for_general_dto" />
+        <include refid="from_clause" />
+        <include refid="where_clause_get_by_project_id" />
+        ORDER BY tpp.CREATE_TIME DESC
+    </select>
+
+    <sql id="select_clause_for_general_dto">
+        SELECT tpp.*, 
+        CONCAT(tcu.FIRST_NAME, ' ', tcu.LAST_NAME) AS UPDATER_NAME,
+        tcu.ID AS UPDATER_ID,
+        tcu.AVATAR_URL AS AVATAR_URL
+    </sql>
+
+    <sql id="from_clause">
+        FROM TOBE_PLAN_PROGRESS tpp
+        JOIN TOBE_CORE_USER tcu ON tpp.UPDATER_ID = tcu.ID
+    </sql>
+
+    <sql id="where_clause_get_by_project_id">
+        WHERE 1=1
+        AND tpp.DELETED = 0
+        AND tpp.PLAN_ID = #{planId}
+    </sql>
+
+    <sql id="where_clause_get_by_id">
+        WHERE 1=1
+        AND tpp.DELETED=0
+        AND tpp.ID = #{id}
+    </sql>
+</mapper>

@@ -1,0 +1,436 @@
+{
+  "breadcrumbs": {
+    "content": "Content",
+    "home": "Home",
+    "collections": "Collections",
+    "articles": "Articles",
+    "plans": "Plans",
+    "vocabularies": "Vocabularies"
+  },
+  "components": {
+    "upload-pics": "Upload Pictures",
+    "edit-icon-button": {
+      "save": "Save",
+      "edit": "Edit"
+    },
+    "save-btn-panel": {
+      "save": "Save",
+      "back": "Back"
+    },
+    "standard-button": {
+      "detail": "Detail",
+      "delete": "Delete",
+      "create": "Create",
+      "release": "Release"
+    },
+    "rich-editor": {
+      "placeholder": "Please input content..."
+    },
+    "tag-select": {
+      "placeholder": "Please input tag name...",
+      "msg": {
+        "success": "Tag created!",
+        "error": "Operation failed",
+        "warning": "Tag name is too long"
+      }
+    },
+    "function-bar": {
+      "recent-only": "Recent only",
+      "card-view-btn": "Simple View",
+      "search-box-placeholder": "Search..."
+    },
+    "meta-bar": {
+      "view": "View",
+      "edit-btn": "Edit"
+    },
+    "author-panel": {
+      "public-creation-count": "Published content",
+      "view-count": "Total view"
+    },
+    "general-card-view": {
+      "title": {
+        "open": "Visible to everyone",
+        "private": "Only visible to yourself"
+      }
+    }
+  },
+  "home-page": {
+    "plans": "Plans",
+    "articles": "Articles",
+    "vocabularies": "Vocabularies",
+    "workout": "Workout",
+    "activities": "Activities",
+    "collections": "Collections",
+    "tools": "Tools",
+    "view-count": "View",
+    "end-line": "No more content",
+    "load-more": "Load more",
+    "no-content": "No available content",
+    "top5-active-users": "Top 5 active users",
+    "top5-popular-collections": "Top 5 popular collections",
+    "tag-statistics": "Featured tags"
+  },
+  "sign-in": {
+    "title": "Sign In TOBE",
+    "sign-in-btn": "Sign In",
+    "forget-pw-btn": "Forget password?",
+    "sign-up-btn": "Don't have an account? Sign Up",
+    "remember-me-btn": "Remember me",
+    "description": {
+      "email": "Email Address",
+      "password": "Password"
+    },
+    "msg": {
+      "success": "Sign in successfully",
+      "error": "Please double check your password and username"
+    }
+  },
+  "sign-up": {
+    "title": "Join TOBE",
+    "sign-up-btn": "Sign Up",
+    "sign-in-btn": "Already have an account? Sign in",
+    "fields": {
+      "first-name": "First name",
+      "last-name": "Last name",
+      "email": "Email Address",
+      "password": "Password",
+      "password-confirm": "Confirm Password"
+    },
+    "msg": {
+      "success": "Sign up successfully, let's sign in",
+      "error": "Sign up failed",
+      "warning": {
+        "invalid-email-format": "Invalid email format",
+        "two-password-dismatch": "Two passwords are not same",
+        "invalid-password-length": "Password length should between 6-8 digits"
+      }
+    }
+  },
+  "app-header": {
+    "sign-in-btn": "Login",
+    "pages": {
+      "home": "Home",
+      "news": "News",
+      "about": "About",
+      "article": "Article",
+      "vocabulary": "Vocabulary",
+      "collection": "Collection",
+      "tool": "Tool"
+    },
+    "settings": {
+      "btn-tooltip": "Open settings",
+      "profile": "User Profile",
+      "my-zone": "Analytics",
+      "plans": "Plans",
+      "articles": "Articles",
+      "vocabularies": "Vocabularies",
+      "collections": "Collections",
+      "sign-out": "Sign Out"
+    },
+    "language": {
+      "btn-label": "Lang",
+      "btn-tooltip": "Switch language",
+      "options": {
+        "zh": "中文",
+        "en": "EN"
+      }
+    }
+  },
+  "profile-setting": {
+    "form-title": "Your Profile",
+    "fields": {
+      "first-name": "First name",
+      "last-name": "Last name",
+      "phone-number": "Phone number",
+      "email": "Email",
+      "address": "Address",
+      "blog": "Blog home",
+      "introduction": "Introduction",
+      "introduction-placeholder": "Let others know more about you...",
+      "profession": "Profession",
+      "background-img": "Portal background image",
+      "photo-img": "Personal photo image"
+    },
+    "back-btn": "Back",
+    "preview-btn": "Preview",
+    "submit-btn": "Submit",
+    "msg": {
+      "success": "Updated",
+      "error": "Update failed"
+    }
+  },
+  "my-menu": {
+    "actions": {
+      "share": "Share",
+      "create-plan": "Create a plan"
+    }
+  },
+  "user-table": {
+    "title": "Users",
+    "label": {
+      "id": "ID",
+      "email": "Email",
+      "username": "User Name",
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "phone-number": "Phone Number",
+      "operation": "Operation"
+    }
+  },
+  "domain-page": {
+    "load-more": "Load more",
+    "msg": {
+      "error": "Operation failed"
+    }
+  },
+  "plans-page": {
+    "page-main-title": "Plans"
+  },
+  "plan-creation-page": {
+    "form-title": "Create a new plan",
+    "fields": {
+      "name": "Plan Name",
+      "description": "Description",
+      "target-start-time": "Target start time",
+      "target-end-time": "Target end time"
+    },
+    "back-btn": "Back",
+    "submit-btn": "Submit",
+    "msg": {
+      "success": "Created",
+      "error": "Creation failed",
+      "warning": {
+        "name-empty": "Plan name cannot be empty",
+        "target-start-time-empty": "Target start time cannot be empty",
+        "target-end-time-empty": "Target end time cannot be empty",
+        "target-invalid-start-end-time": "Target start time cannot behind end time"
+      }
+    }
+  },
+  "plan-detail-page": {
+    "fields": {
+      "name": "Plan name",
+      "description": "Description",
+      "target-start-time": "Target start time",
+      "target-end-time": "Target end time"
+    },
+    "msg": {
+      "error": "Operation failed",
+      "success": "Operation success"
+    }
+  },
+  "plan-progress": {
+    "title": "Progresses",
+    "add-new-tip": "Any fresh news to share?",
+    "send-btn": "Send",
+    "msg": {
+      "error": "Operation failed",
+      "warning": "Please type in valid context",
+      "success": "Operation success"
+    }
+  },
+  "dashboard-nav": {
+    "pages": {
+      "analytics": "Analytics",
+      "users": "Users",
+      "plans": "Plans",
+      "articles": "Articles",
+      "vocabularies": "Vocabularies",
+      "collections": "Collections"
+    }
+  },
+  "analytics-page": {
+    "page-main-title": "Analytics",
+    "content": {
+      "title": {
+        "plan": "Plan",
+        "article": "Article",
+        "vocabulary": "Vocabulary",
+        "collection": "Collection"
+      },
+      "public": "Public count",
+      "all": "Total count",
+      "view-count": "View count(k)",
+      "like-count": "Like count(k)"
+    },
+    "msg": {
+      "error": "Failed to fetch data"
+    }
+  },
+  "news-page": {
+    "page-main-title": "Fresh News",
+    "update-at": "Updated at ",
+    "publish-at": "Published at ",
+    "news-types": {
+      "plan": "Plan",
+      "article": "Article"
+    }
+  },
+  "about-page": {
+    "page-main-title": "About",
+    "about-tobe": {
+      "title": "Hi traveler!",
+      "p1": "TOBE is a small website focused on personal growth, accumulation, and experience sharing. Leave some space in this chaotic world to calm down and settle yourself. If you happen to find this place and find something that interests you or is helpful, it means you have a wonderful connection with this place.",
+      "p2": "Of course, you are more than welcome to become a sharer. You can contact me on WeChat to register an account for login this website or get the source code to build your own TOBE."
+    },
+    "contact": {
+      "title": "Contact",
+      "wechat": "Wechat: LucienChen_ChenXi",
+      "email": "Email: 474504303@qq.com",
+      "linkedin": "Linkedin: "
+    }
+  },
+  "articles-page": {
+    "page-main-title": "Articles"
+  },
+  "article-creation-page": {
+    "page-main-title": "Create a new article",
+    "expand-label": "Other secondary info",
+    "fields": {
+      "title": "Title",
+      "sub-title": "Subtitle",
+      "description": "Description",
+      "tag": "Tag",
+      "content-protected": "Only logged in users can read the full content"
+    },
+    "submit-btn": "Save",
+    "back-btn": "Back",
+    "msg": {
+      "success": "Operation success",
+      "error": "Operation failed"
+    }
+  },
+  "article-detail-page": {
+    "page-main-title": "Edit article"
+  },
+  "article-reading-page": {
+    "back-btn": "Back",
+    "relevant-articles": "Relevant articles",
+    "content-protected": "Please log in to read the full content",
+    "msg": {
+      "error": "Failed to fetch data"
+    }
+  },
+  "collection-creation-page": {
+    "page-main-title": "Create a new collection",
+    "fields": {
+      "name": "Collection Name",
+      "description": "Description",
+      "cover-img-url": "Cover Image URL",
+      "tag": "Tag"
+    },
+    "msg": {
+      "success": "Created",
+      "error": "Creation failed",
+      "warning": {
+        "name-empty": "Collection name cannot be empty"
+      }
+    },
+    "submit-btn": "Save",
+    "back-btn": "Back"
+  },
+  "collection-detail-page": {
+    "btn": {
+      "add": "Add",
+      "delete": "Delete"
+    },
+    "msg": {
+      "success": "Operation success",
+      "error": "Operation failed"
+    }
+  },
+  "collections-page": {
+    "page-main-title": "Collections"
+  },
+  "collections-list-page": {
+    "page-main-title": "Collections",
+    "msg": {
+      "error": "Failed to fetch data"
+    }
+  },
+  "collection-reading-page": {
+    "tip": {
+      "tba": "To be continued"
+    },
+    "msg": {
+      "error": "Failed to fetch data"
+    }
+  },
+  "vocabulary-creation-page": {
+    "page-main-title": "Create a new vocabulary",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "language": "Language",
+      "tags": "Tags"
+    },
+    "msg": {
+      "success": "Created",
+      "error": "Creation failed"
+    },
+    "submit-btn": "Save",
+    "back-btn": "Back"
+  },
+  "vocabularies-page": {
+    "page-main-title": "Vocabularies",
+    "vocabulary-table": {
+      "label": {
+        "title": "Title",
+        "description": "Description",
+        "createTime": "Create time",
+        "updateTime": "Update time",
+        "operation": "Operation"
+      }
+    },
+    "recent-only": "Recent only",
+    "search-box-placeholder": "Search..."
+  },
+  "tools-list-page": {
+    "page-main-title": "Tools",
+    "pomodoro": {
+      "name": "Pomodoro",
+      "desc": "A timer based on the Pomodoro time management technique."
+    },
+    "time-converter": {
+      "name": "Time Coverter",
+      "desc": "An easy-use tool for time-zone and timestamp converting."
+    }
+  },
+  "tools-pomodoro": {
+    "page-main-title": "Pomodoro",
+    "tip": {
+      "start": "Start a countdown"
+    },
+    "btn": {
+      "start": "Start",
+      "pause": "Pause",
+      "reset": "Reset"
+    }
+  },
+  "tools-time-converter": {
+    "page-main-title": "Time Converter",
+    "curent-timestamp": "Current Timestamp",
+    "timestamp-label": "Timestamp(Unix)",
+    "tip": ", click button to get your current local time",
+    "time-label": "Local Time",
+    "timestamp-input-helper": "Please input timestamp",
+    "time-input-helper": "Please input time"
+  },
+  "word-dialog": {
+    "add": "Add",
+    "title": "Edit a word",
+    "fields": {
+      "word": "Text",
+      "partOfSpeech": "Part of Speech",
+      "meaningInChinese": "Meaning in Chinese",
+      "meaningInEnglish": "Meaning in English"
+    },
+    "save": "Save",
+    "back": "Back",
+    "delete": "Delete",
+    "msg": {
+      "error": "Operation failed",
+      "success": "Operation success"
+    }
+  }
+}

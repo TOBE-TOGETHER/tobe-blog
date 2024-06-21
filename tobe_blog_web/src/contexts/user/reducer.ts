@@ -1,7 +1,7 @@
-import { LOCAL_STORAGE_KEYS } from '../../commons';
+import { ELocalStorageKeys } from '../../global/enums.ts';
 import { Action, AuthState } from '../types';
 
-const user: any = localStorage.getItem(LOCAL_STORAGE_KEYS.CURRENT_USER) ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.CURRENT_USER) || '') : '';
+const user: any = localStorage.getItem(ELocalStorageKeys.CURRENT_USER) ? JSON.parse(localStorage.getItem(ELocalStorageKeys.CURRENT_USER) || '') : '';
 
 export const initialState: AuthState = {
   user: user,

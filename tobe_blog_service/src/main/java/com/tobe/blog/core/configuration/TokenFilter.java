@@ -1,6 +1,7 @@
 package com.tobe.blog.core.configuration;
 
 import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
+import com.tobe.blog.core.utils.SecurityUtil;
 import com.tobe.blog.core.utils.TokenUtil;
 
 import jakarta.annotation.Resource;
@@ -9,8 +10,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -25,9 +26,9 @@ public class TokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain) throws ServletException, IOException {
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain) throws ServletException, IOException {
         parseTokenAndSetAuthContext(request, response);
         filterChain.doFilter(request, response);
     }
@@ -42,7 +43,7 @@ public class TokenFilter extends OncePerRequestFilter {
                 if (user != null) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             user, null, user.getAuthorities());
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    SecurityUtil.setUserDetail(authentication);
                 }
             }
         } catch (Exception ex) {

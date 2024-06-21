@@ -1,13 +1,15 @@
+import { EAuthority, EColumnPosition, EFeatureCode, EOperationName } from './enums.ts';
+
 export interface Column {
   id: string;
   label: string;
   minWidth?: number;
-  align?: "left" | "right" | "center";
+  align?: EColumnPosition;
   format?: (value: any) => string;
 }
 
 export interface Operation {
-  name: "detail" | "delete" | "active" | "release" | "close";
+  name: EOperationName;
   onClick: (id: number | string) => void;
   hide?: (data: any) => boolean;
 }
@@ -21,9 +23,9 @@ export interface UserData {
   phoneNum: string;
 }
 
-export interface ProjectInfo {
+export interface PlanInfo {
   id: string;
-  name: string;
+  title: string;
   description: string;
   statusValue: number;
   ownerName: string;
@@ -42,18 +44,18 @@ export interface PageItem {
   icon: JSX.Element;
   url: string;
   secondaryUrl?: string;
-  requiredRoles: string[];
-  requiredFeature?: string;
+  requiredRoles: EAuthority[];
+  requiredFeature?: EFeatureCode;
 }
 
-export interface ProjectCardProps {
+export interface PlanCardProps {
   operations: Operation[];
-  project: ProjectInfo;
+  plan: PlanInfo;
 }
 
-export interface ProjectProgress {
+export interface PlanProgress {
   id: string;
-  projectId: string;
+  planId: string;
   description: string;
   updaterName: string;
   createTime: string;
@@ -63,8 +65,9 @@ export interface ProjectProgress {
 export interface NewsDTO {
   id: string;
   title: string;
-  domain: string;
+  contentType: string;
   description: string;
+  ownerId: number;
   ownerName: string;
   avatarUrl: string;
   createTime: string;
@@ -95,7 +98,7 @@ export interface UserFullProfileDTO extends UserBriefProfileDTO {
 
 export interface UserFeatureDTO {
   articleModule: boolean;
-  projectModule: boolean;
+  planModule: boolean;
   vocabularyModule: boolean;
 }
 
@@ -108,26 +111,27 @@ export interface TagStatisticDTO extends TagOption {
   readonly count: number;
 }
 
-export interface ProjectCreationDTO {
-  name: string;
+export interface PlanCreationDTO {
+  title: string;
   description: string;
   targetStartTime: Date | null;
   targetEndTime: Date | null;
   tags: TagOption[];
 }
 
-export interface ProjectUpdateDTO extends ProjectCreationDTO {
+export interface PlanUpdateDTO extends PlanCreationDTO {
   id: string;
 }
 
-export interface ProjectProgressCreationDTO {
-  projectId: string;
+export interface PlanProgressCreationDTO {
+  planId: string;
   description: string;
 }
 
-export interface ProjectProgressUpdateDTO extends ProjectProgressCreationDTO {
+export interface PlanProgressUpdateDTO extends PlanProgressCreationDTO {
   id: string;
 }
+
 export interface ArticleCreationDTO {
   title: string;
   subTitle: string;
@@ -181,34 +185,31 @@ export interface VocabularyUpdateDTO extends VocabularyCreationDTO {
   id: string;
 }
 
-export enum Domain {
-  Article = "ARTICLE",
-  Project = "PROJECT",
-  Vocabulary = "VOCABULARY",
-}
-
-export interface BaseInfoOverview {
-  totalNum: number;
-  publicNum: number;
+export interface IUserContentAnalyticsDTO {
+  totalCount: number;
+  publicCount: number;
   totalViewCount: number;
+  totalLikeCount: number;
 }
 
-export interface SubjectInfoCreationDTO {
-  name: string;
+export interface CollectionCreationDTO {
+  title: string;
   description: string;
   coverImgUrl?: string;
+  tags: TagOption[];
 }
 
-export interface SubjectInfoUpdateDTO {
+export interface CollectionUpdateDTO {
   id: string;
-  name: string;
+  title: string;
   description: string;
   coverImgUrl?: string;
+  tags: TagOption[];
 }
 
-export interface SubjectInfoGeneralDTO {
+export interface IBaseUserContentDTO {
   id: string;
-  name: string;
+  title: string;
   description: string;
   coverImgUrl?: string;
   ownerId: string;
@@ -217,25 +218,39 @@ export interface SubjectInfoGeneralDTO {
   publicToAll: boolean;
   publishTime: string;
   viewCount: number;
-  tagTree: TagRelationshipGeneralDTO[];
+  tags: TagOption[];
+  createTime: string;
+  updateTime: string;
+}
+
+export interface ICollectionDTO {
+  id: string;
+  title: string;
+  description: string;
+  coverImgUrl?: string;
+  ownerId: string;
+  ownerName: string;
+  avatarUrl: string;
+  publicToAll: boolean;
+  publishTime: string;
+  viewCount: number;
+  tags: TagOption[];
+  tagTree: ITagRelationshipDTO[];
 }
 
 export interface TagRelationshipCreateDTO {
   parentId: number | null;
   tagId: number;
-  subjectId: string;
+  collectionId: string;
 }
 
-export interface TagRelationshipGeneralDTO {
+export interface ITagRelationshipDTO {
   id: number;
   parentId: number;
   tagId: number;
   label: string;
-  subjectId: string;
-  relatedArticles: NewsDTO[];
-  relatedProjects: NewsDTO[];
-  relatedVocabularies: NewsDTO[];
-  children: TagRelationshipGeneralDTO[];
+  collectionId: string;
+  children: ITagRelationshipDTO[];
 }
 
 export interface RenderTree {
@@ -252,9 +267,9 @@ export interface TagRelationship {
   children: TagRelationship[];
 }
 
-export interface SubjectInfo {
+export interface CollectionInfo {
   id: string;
-  name: string;
+  title: string;
   description: string;
   coverImgUrl: string;
   ownerId: string;
@@ -273,7 +288,7 @@ export interface BreadcrumbsNode {
 export interface WordGeneralDTO {
   id: number;
   vocabularyId: string;
-  word: string;
+  text: string;
   partOfSpeech: string;
   meaningInChinese: string;
   meaningInEnglish: string;
@@ -281,10 +296,16 @@ export interface WordGeneralDTO {
 
 export interface WordCreateDTO {
   vocabularyId: string;
-  word: string;
+  text: string;
   partOfSpeech: string;
   meaningInChinese: string;
   meaningInEnglish: string;
 }
 
-export interface WordUpdateDTO extends WordGeneralDTO { }
+export interface WordUpdateDTO {
+  id: number;
+  text: string;
+  partOfSpeech: string;
+  meaningInChinese: string;
+  meaningInEnglish: string;
+}

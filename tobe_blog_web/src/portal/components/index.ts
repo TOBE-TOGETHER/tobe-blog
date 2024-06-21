@@ -1,3 +1,5 @@
+import FrontendLayout from './FrontendLayout';
 import PortalHeader from './PortalHeader';
 
-export { PortalHeader };
+export { FrontendLayout, PortalHeader };
+

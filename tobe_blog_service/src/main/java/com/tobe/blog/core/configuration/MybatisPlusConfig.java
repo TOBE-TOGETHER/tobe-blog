@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.tobe.blog.core.utils.SecurityUtil;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,9 +14,6 @@ import java.util.Objects;
 
 @Configuration
 public class MybatisPlusConfig {
-
-    @Value("${security-context.enable}")
-    private boolean securityContextEnabled;
 
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
@@ -57,10 +53,6 @@ public class MybatisPlusConfig {
     }
 
     private String getUsernameFromContext() {
-        if (securityContextEnabled) {
-            return SecurityUtil.getUsername();
-        } else {
-            return "Unknown";
-        }
+        return SecurityUtil.getUsername();
     }
 }

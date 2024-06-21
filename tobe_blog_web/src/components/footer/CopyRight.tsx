@@ -1,7 +1,7 @@
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
-import project from '../../../package.json';
+import plan from '../../../package.json';
 
 /**
  * Copyright component
@@ -22,7 +22,7 @@ function Copyright(props: any) {
         color="inherit"
         href="/"
       >
-        <strong>{project.name.toUpperCase()}</strong>
+        <strong>{plan.name.toUpperCase()}</strong>
       </Link>{' '}
       {new Date().getFullYear()}
       {license && (
