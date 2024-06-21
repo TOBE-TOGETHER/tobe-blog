@@ -22,7 +22,9 @@ import {
 import { PlanService } from '../../../../services';
 import {
   EditIconButton,
+  HalfRow,
   MultipleTagSelecter,
+  OneRow,
 } from '../../../components';
 import PlanProgressModal from './component/PlanProgressModal.tsx';
 import PlanStatusToolbar from './component/PlanStatusToolbar';
@@ -142,10 +144,7 @@ export default function PlanDetailPage() {
               container
               spacing={3}
             >
-              <Grid
-                item
-                xs={12}
-              >
+              <OneRow>
                 <TextField
                   id="description"
                   name="description"
@@ -160,46 +159,39 @@ export default function PlanDetailPage() {
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
                 />
-              </Grid>
+              </OneRow>
               <Grid
                 container
                 item
                 xs={12}
                 spacing={3}
               >
-                <Grid
-                  item
-                  xs={6}
-                >
+                <HalfRow>
                   <DatePicker
                     label={t('plan-detail-page.fields.target-start-time')}
                     value={fromTime}
+                    sx={{width: "100%"}}
                     onChange={(newValue) => setFromTime(newValue)}
                     disabled={!editable}
                   />
-                </Grid>
-                <Grid
-                  item
-                  xs={6}
-                >
+                </HalfRow>
+                <HalfRow>
                   <DatePicker
                     label={t('plan-detail-page.fields.target-end-time')}
                     value={toTime}
+                    sx={{width: "100%"}}
                     onChange={(newValue) => setToTime(newValue)}
                     disabled={!editable}
                   />
-                </Grid>
+                </HalfRow>
               </Grid>
-              <Grid
-                item
-                xs={12}
-              >
+              <OneRow>
                 <MultipleTagSelecter
                   value={tagValue}
                   setValue={setTagValue}
                   disabled={!editable}
                 />
-              </Grid>
+              </OneRow>
             </Grid>
           )}
         </Box>

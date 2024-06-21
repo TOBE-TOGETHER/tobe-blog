@@ -25,6 +25,7 @@ import { CollectionService, TagRelationshipService } from '../../../../services'
 import {
   EditIconButton,
   MultipleTagSelecter,
+  OneRow,
   TreePanel,
 } from '../../../components';
 import SingleTagSelecter from './SingleTagSelecter';
@@ -191,10 +192,7 @@ export default function CollectionDetailPage() {
               container
               spacing={3}
             >
-              <Grid
-                item
-                xs={12}
-              >
+              <OneRow>
                 <TextField
                   id="coverImgUrl"
                   name="coverImgUrl"
@@ -206,11 +204,8 @@ export default function CollectionDetailPage() {
                   value={coverImgUrl}
                   onChange={(event) => setCoverImgUrl(event.target.value)}
                 />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-              >
+              </OneRow>
+              <OneRow>
                 <TextField
                   id="description"
                   name="description"
@@ -225,17 +220,14 @@ export default function CollectionDetailPage() {
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
                 />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-              >
+              </OneRow>
+              <OneRow>
                 <MultipleTagSelecter
                   value={tagValues}
                   setValue={setTagValues}
                   disabled={!editable}
                 />
-              </Grid>
+              </OneRow>
             </Grid>
           )}
         </Box>

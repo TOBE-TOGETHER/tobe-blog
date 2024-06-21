@@ -1,14 +1,11 @@
 import {
-  Box,
-  Button,
   Grid,
   Paper,
-  TextField,
+  TextField
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import {
-  FormEvent,
-  useState,
+  useState
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +13,7 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { CollectionService } from '../../../../services';
 import { URL } from '../../../URL';
-import { MultipleTagSelecter } from '../../../components';
+import { MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
 
 export default function CollectionCreationPage() {
   const { t } = useTranslation();
@@ -24,25 +21,26 @@ export default function CollectionCreationPage() {
   const navigate = useNavigate();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
   const [tagValues, setTagValues] = useState<TagOption[]>([]);
+  const [title, setTitle] = useState<string>();
+  const [coverImgUrl, setCoverImgUrl] = useState<string>();
+  const [description, setDescription] = useState<string>();
   
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    if (!data.get('subjectName')) {
+  const handleSubmit = () => {
+    if (!title) {
       enqueueSnackbar(t('collection-creation-page.msg.warning.name-empty'), {
         variant: 'warning',
       });
       return;
     }
-    handleCreation(data);
+    handleCreation();
   };
   
-  function handleCreation(data: FormData): void {
+  function handleCreation(): void {
     setOpenLoading(true);
     CollectionService.create({
-      title: data.get('subjectName')?.toString() || '',
-      description: data.get('description')?.toString() || '',
-      coverImgUrl: data.get('coverImgUrl')?.toString() || '',
+      title: title,
+      description: description,
+      coverImgUrl: coverImgUrl,
       tags: tagValues
     })
       .then(() => {
@@ -66,88 +64,45 @@ export default function CollectionCreationPage() {
     >
       <Paper
         variant="outlined"
-        sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+        sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
       >
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          sx={{ mt: 1 }}
-        >
           <Grid
             container
             spacing={3}
           >
-            <Grid
-              item
-              xs={12}
-            >
+            <OneRow>
               <TextField
-                required
-                id="subjectName"
-                name="subjectName"
                 label={t('collection-creation-page.fields.name')}
                 fullWidth
-                autoComplete="name"
-                variant="standard"
+                onChange={e => setTitle(e.target.value)}
               />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
+            </OneRow>
+            <OneRow>
               <TextField
-                id="coverImgUrl"
-                name="coverImgUrl"
                 label={t('collection-creation-page.fields.cover-img-url')}
                 fullWidth
-                autoComplete="coverImgUrl"
-                variant="standard"
+                onChange={e => setCoverImgUrl(e.target.value)}
               />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
+            </OneRow>
+            <OneRow>
               <TextField
-                id="description"
-                name="description"
                 label={t('collection-creation-page.fields.description')}
                 fullWidth
-                autoComplete="description"
-                variant="standard"
+                onChange={e => setDescription(e.target.value)}
                 multiline
                 maxRows={2}
                 minRows={2}
               />
-            </Grid>
-            <Grid
-                item
-                xs={12}
-              >
+            </OneRow>
+            <OneRow>
                 <MultipleTagSelecter
                   value={tagValues}
                   setValue={setTagValues}
                 />
-              </Grid>
+            </OneRow>
           </Grid>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button
-              onClick={() => window.history.back()}
-              sx={{ mt: 3, ml: 1 }}
-            >
-              {t('collection-creation-page.back-btn')}
-            </Button>
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{ mt: 3, ml: 1 }}
-            >
-              {t('collection-creation-page.submit-btn')}
-            </Button>
-          </Box>
-        </Box>
       </Paper>
+      <SaveButtonPanel primaryEvent={handleSubmit}/>
     </Page>
   );
 }

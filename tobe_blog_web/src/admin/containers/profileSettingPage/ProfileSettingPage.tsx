@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Divider,
   Grid,
   Paper,
@@ -19,6 +18,7 @@ import {
 } from '../../../contexts';
 import { ELocalStorageKeys } from '../../../global/enums.ts';
 import { UserService } from '../../../services';
+import { HalfRow, OneRow, QuarterRow, SaveButtonPanel } from '../../components';
 import AvatarSelector from './AvatarSelector.tsx';
 
 export default function ProfileSettingPage() {
@@ -29,26 +29,34 @@ export default function ProfileSettingPage() {
   const dispatch = useAuthDispatch();
   
   const [showAvatars, setShowAvatars] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
+  const [avatarUrl, setAvatarUrl] = useState<string>(user.avatarUrl)
+  const [firstName, setFirstName] = useState<string>(user.firstName);
+  const [lastName, setLastName] = useState<string>(user.lastName);
+  const [profession, setProfession] = useState<string>(user.profession);
+  const [email, setEmail] = useState<string>(user.email);
+  const [phoneNum, setPhoneNum] = useState<string>(user.phoneNum);
+  const [address, setAddress] = useState<string>(user.address);
+  const [blog, setBlog] = useState<string>(user.blog);
+  const [introduction, setIntroduction] = useState<string>(user.introduction);
+  const [backgroundImg, setBackgroundImg] = useState<string>(user.backgroundImg);
+  const [photoImg, setPhotoImg] = useState<string>(user.photoImg);
   
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  const handleSubmit = () => {
     setOpenLoading(true);
     UserService.updateUser({
       id: user.id,
-      email: user.email,
+      email: email,
       username: user.username,
-      firstName: data.get('firstName')?.toString(),
-      lastName: data.get('lastName')?.toString(),
-      phoneNum: data.get('phoneNum')?.toString(),
-      address: data.get('address')?.toString(),
+      firstName: firstName,
+      lastName: lastName,
+      phoneNum: phoneNum,
+      address: address,
       avatarUrl: avatarUrl,
-      introduction: data.get('introduction')?.toString(),
-      blog: data.get('blog')?.toString(),
-      profession: data.get('profession')?.toString(),
-      backgroundImg: data.get('backgroundImg')?.toString(),
-      photoImg: data.get('photoImg')?.toString(),
+      introduction: introduction,
+      blog: blog,
+      profession: profession,
+      backgroundImg: backgroundImg,
+      photoImg: photoImg,
     })
       .then((response) => {
         dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
@@ -73,11 +81,7 @@ export default function ProfileSettingPage() {
       openLoading={openLoading}
       pageTitle={t('profile-setting.form-title')}
     >
-      <Box
-        component="form"
-        noValidate
-        onSubmit={handleSubmit}
-      >
+      <Box>
         <InfoSection mt={8}>
           <Grid
             item
@@ -90,171 +94,103 @@ export default function ProfileSettingPage() {
               avatarUrl={avatarUrl} 
               setAvatarUrl={setAvatarUrl} />
           </Grid>
-          <Grid
-            item
-            xs={6}
-            sm={3}
-          >
+          <QuarterRow>
             <TextField
               required
-              id="firstName"
-              name="firstName"
               label={t('profile-setting.fields.first-name')}
               fullWidth
-              autoComplete="given-name"
-              defaultValue={user.firstName || ''}
+              onChange={e => setFirstName(e.target.value)}
+              defaultValue={firstName}
             />
-          </Grid>
-          <Grid
-            item
-            xs={6}
-            sm={3}
-          >
+          </QuarterRow>
+          <QuarterRow>
             <TextField
               required
-              id="lastName"
-              name="lastName"
               label={t('profile-setting.fields.last-name')}
               fullWidth
-              autoComplete="family-name"
-              defaultValue={user.lastName || ''}
+              onChange={e => setLastName(e.target.value)}
+              defaultValue={lastName}
             />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-          >
+          </QuarterRow>
+          <HalfRow>
             <TextField
-              id="profession"
-              name="profession"
               label={t('profile-setting.fields.profession')}
               fullWidth
-              autoComplete="profession"
-              defaultValue={user.profession || ''}
+              onChange={e => setProfession(e.target.value)}
+              defaultValue={user.profession}
             />
-          </Grid>
-          
-          <Grid
-            item
-            xs={12}
-            sm={6}
-          >
+          </HalfRow>
+          <HalfRow>
             <TextField
               disabled
               InputLabelProps={{ shrink: true }}
-              id="email"
-              name="email"
               label={t('profile-setting.fields.email')}
               fullWidth
               type="email"
               autoComplete="email"
-              defaultValue={user.email || ''}
+              onChange={e => setEmail(e.target.value)}
+              defaultValue={email}
             />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-          >
+          </HalfRow>
+          <HalfRow>
             <TextField
-              id="phoneNum"
-              name="phoneNum"
               label={t('profile-setting.fields.phone-number')}
               fullWidth
-              autoComplete="phone number"
-              defaultValue={user.phoneNum || ''}
+              onChange={e => setPhoneNum(e.target.value)}
+              defaultValue={phoneNum}
             />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-          >
+          </HalfRow>
+          <HalfRow>
             <TextField
-              id="address"
-              name="address"
               label={t('profile-setting.fields.address')}
               fullWidth
-              autoComplete="address"
-              defaultValue={user.address || ''}
+              onChange={e => setAddress(e.target.value)}
+              defaultValue={address}
             />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-          >
+          </HalfRow>
+          <HalfRow>
             <TextField
-              id="blog"
-              name="blog"
               label={t('profile-setting.fields.blog')}
               fullWidth
-              autoComplete="blog"
-              defaultValue={user.blog || ''}
+              onChange={e => setBlog(e.target.value)}
+              defaultValue={blog}
               placeholder={'https://xxx.blog.com'}
             />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-          >
+          </HalfRow>
+          <OneRow>
             <TextField
-              id="introduction"
-              name="introduction"
               label={t('profile-setting.fields.introduction')}
               fullWidth
-              autoComplete="introduction"
-              variant="outlined"
-              defaultValue={user.introduction || ''}
+              onChange={e => setIntroduction(e.target.value)}
+              defaultValue={introduction}
               multiline
               minRows={3}
               placeholder={t(
                 'profile-setting.fields.introduction-placeholder',
               )}
             />
-          </Grid>
+          </OneRow>
         </InfoSection>
         <Divider />
         <InfoSection>
-          <Grid
-            item
-            xs={6}
-          >
+          <HalfRow>
             <TextField
-              id="backgroundImg"
-              name="backgroundImg"
               label={t('profile-setting.fields.background-img')}
               fullWidth
-              autoComplete="backgroundImg"
-              defaultValue={user.backgroundImg || ''}
+              onChange={e => setBackgroundImg(e.target.value)}
+              defaultValue={backgroundImg}
             />
-          </Grid>
-          <Grid
-            item
-            xs={6}
-          >
+          </HalfRow>
+          <HalfRow>
             <TextField
-              id="photoImg"
-              name="photoImg"
               label={t('profile-setting.fields.photo-img')}
               fullWidth
-              autoComplete="photoImg"
-              defaultValue={user.photoImg || ''}
+              onChange={e => setPhotoImg(e.target.value)}
+              defaultValue={photoImg}
             />
-          </Grid>
+          </HalfRow>
         </InfoSection>
-        <Box sx={{ display: 'flex', my: 2, justifyContent: 'flex-end' }}>
-          <Button onClick={() => window.history.back()}>
-            {t('profile-setting.back-btn')}
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-          >
-            {t('profile-setting.submit-btn')}
-          </Button>
-        </Box>
+        <SaveButtonPanel primaryEvent={handleSubmit}/>
       </Box>
     </Page>
   );

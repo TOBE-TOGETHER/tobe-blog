@@ -33,7 +33,7 @@ export default function ArticleCreationPage() {
       tags: tagValues,
       contentProtected: contentProtected,
     })
-      .then((response) => {
+      .then(() => {
         enqueueSnackbar(t('article-creation-page.msg.success'), {
           variant: 'success',
         });

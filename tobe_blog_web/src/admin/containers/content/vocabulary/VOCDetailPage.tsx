@@ -22,6 +22,7 @@ import { VocabularyService } from '../../../../services';
 import {
   EditIconButton,
   MultipleTagSelecter,
+  OneRow,
 } from '../../../components';
 import { WordListPanel } from '../components/WordListPanel';
 
@@ -134,10 +135,7 @@ export default function VOCDetailPage() {
               container
               spacing={3}
             >
-              <Grid
-                item
-                xs={12}
-              >
+              <OneRow>
                 <TextField
                   id="language"
                   name="language"
@@ -149,11 +147,8 @@ export default function VOCDetailPage() {
                   value={language}
                   onChange={(event) => setLanguage(event.target.value)}
                 />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-              >
+              </OneRow>
+              <OneRow>
                 <TextField
                   id="description"
                   name="description"
@@ -165,17 +160,14 @@ export default function VOCDetailPage() {
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
                 />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-              >
+              </OneRow>
+              <OneRow>
                 <MultipleTagSelecter
                   value={tagValue}
                   setValue={setTagValue}
                   disabled={!editable}
                 />
-              </Grid>
+              </OneRow>
             </Grid>
           )}
         </Box>

@@ -48,9 +48,7 @@ export default function AvatarSelector(props: {
     props.setAvatarUrl(newAvatarUrl);
     props.setShowAvatars(false);
   }
-  return  (
-            <Box
-              sx={{
+  return(<Box sx={{
                 p: 0,
                 border: '1px solid rgba(0,0,0,0.12)',
                 borderRadius: 4,
@@ -93,7 +91,6 @@ export default function AvatarSelector(props: {
               )}
             </Box>);
 }
-
 
 const AvatarOptionRow = (props: {
   avatars: { alt: string; src: string }[];

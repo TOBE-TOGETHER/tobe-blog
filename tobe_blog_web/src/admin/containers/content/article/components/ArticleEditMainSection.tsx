@@ -1,16 +1,15 @@
-import { useState } from "react";
 import {
-  Button,
   Checkbox,
   Grid,
   Paper,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { RichContentEditor, MultipleTagSelecter } from "../../../../components";
-import { FieldWrapper } from "./FieldWrapper";
 import { TagOption } from "../../../../../global/types";
+import { MultipleTagSelecter, RichContentEditor, SaveButtonPanel } from "../../../../components";
+import { FieldWrapper } from "./FieldWrapper";
 import {
   TobeAccordion,
   TobeAccordionDetails,
@@ -120,7 +119,7 @@ export default function ArticleEditMainSection(
           </TobeAccordionDetails>
         </TobeAccordion>
       </Grid>
-      <Grid item xs={12} sx={{ my: 1 }}>
+      <Grid item xs={12} sx={{ mt: 1 }}>
         <Grid
           container
           sx={{ px: 2, py: 1 }}
@@ -135,18 +134,7 @@ export default function ArticleEditMainSection(
           />
         </Grid>
       </Grid>
-      <Grid container item xs={12} sx={{ my: 1, justifyContent: "flex-end" }}>
-        <Button onClick={() => window.history.back()}>
-          {t("article-creation-page.back-btn")}
-        </Button>
-        <Button
-          color="primary"
-          onClick={props.onClickPrimaryBtn}
-          variant="contained"
-        >
-          {t("article-creation-page.submit-btn")}
-        </Button>
-      </Grid>
+      <SaveButtonPanel primaryEvent={props.onClickPrimaryBtn}/>
     </Grid>
   );
 }

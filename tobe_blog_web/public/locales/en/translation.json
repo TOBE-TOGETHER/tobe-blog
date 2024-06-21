@@ -13,6 +13,10 @@
       "save": "Save",
       "edit": "Edit"
     },
+    "save-btn-panel": {
+      "save": "Save",
+      "back": "Back"
+    },
     "standard-button": {
       "detail": "Detail",
       "delete": "Delete",

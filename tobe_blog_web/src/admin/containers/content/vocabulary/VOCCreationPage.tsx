@@ -1,9 +1,7 @@
 import {
-  Box,
-  Button,
   Grid,
   Paper,
-  TextField,
+  TextField
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
@@ -13,7 +11,7 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { VocabularyService } from '../../../../services';
-import { MultipleTagSelecter } from '../../../components';
+import { MultipleTagSelecter, SaveButtonPanel } from '../../../components';
 
 export default function VOCCreationPage() {
   const { t } = useTranslation();
@@ -21,19 +19,16 @@ export default function VOCCreationPage() {
   const navigate = useNavigate();
   const [tagValue, setTagValue] = useState<TagOption[]>([]);
   const [openLoading, setOpenLoading] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>();
+  const [description, setDescription] = useState<string>();
+  const [language, setLanguage] = useState<string>();
   
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    handleCreation(data);
-  };
-  
-  function handleCreation(data: FormData): void {
+  function handleCreation(): void {
     setOpenLoading(true);
     VocabularyService.create({
-      title: data.get('title')?.toString() || '',
-      description: data.get('description')?.toString() || '',
-      language: data.get('language')?.toString() || '',
+      title: title,
+      description: description,
+      language: language,
       tags: tagValue,
     })
       .then((response) => {
@@ -57,14 +52,8 @@ export default function VOCCreationPage() {
     >
       <Paper
         variant="outlined"
-        sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+        sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
       >
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          sx={{ mt: 1 }}
-        >
           <Grid
             container
             spacing={3}
@@ -74,13 +63,9 @@ export default function VOCCreationPage() {
               xs={12}
             >
               <TextField
-                required
-                id="title"
-                name="title"
                 label={t('vocabulary-creation-page.fields.title')}
                 fullWidth
-                autoComplete="name"
-                variant="standard"
+                onChange={e => setTitle(e.target.value)}
               />
             </Grid>
             <Grid
@@ -88,12 +73,9 @@ export default function VOCCreationPage() {
               xs={12}
             >
               <TextField
-                id="language"
-                name="language"
                 label={t('vocabulary-creation-page.fields.language')}
                 fullWidth
-                autoComplete="language"
-                variant="standard"
+                onChange={e => setLanguage(e.target.value)}
               />
             </Grid>
             <Grid
@@ -101,12 +83,9 @@ export default function VOCCreationPage() {
               xs={12}
             >
               <TextField
-                id="description"
-                name="description"
                 label={t('vocabulary-creation-page.fields.description')}
                 fullWidth
-                autoComplete="description"
-                variant="standard"
+                onChange={e => setDescription(e.target.value)}
                 multiline
                 maxRows={2}
                 minRows={2}
@@ -121,30 +100,9 @@ export default function VOCCreationPage() {
                 setValue={setTagValue}
               />
             </Grid>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                width: '100%',
-              }}
-            >
-              <Button
-                onClick={() => window.history.back()}
-                sx={{ mt: 3, ml: 1 }}
-              >
-                {t('vocabulary-creation-page.back-btn')}
-              </Button>
-              <Button
-                variant="contained"
-                type="submit"
-                sx={{ mt: 3, ml: 1 }}
-              >
-                {t('vocabulary-creation-page.submit-btn')}
-              </Button>
-            </Box>
           </Grid>
-        </Box>
       </Paper>
+      <SaveButtonPanel primaryEvent={handleCreation}/>
     </Page>
   );
 }

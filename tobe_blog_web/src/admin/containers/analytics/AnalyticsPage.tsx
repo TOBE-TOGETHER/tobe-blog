@@ -226,9 +226,9 @@ const UserContentAnalyticsPanel = (props: {
 const DecordateBox = (props: {color: string, xIndex: string}) => {
   return <Grid item sx={{
           top: "-44px",
-          width: "260px",
+          width: "240px",
           zIndex: "-1",
-          height: "160px",
+          height: "180px",
           right: props.xIndex,
           opacity: "0.12",
           borderRadius: "24px",
