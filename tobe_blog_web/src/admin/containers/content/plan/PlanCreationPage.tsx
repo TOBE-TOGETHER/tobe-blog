@@ -121,7 +121,7 @@ export default function PlanCreationPage() {
               onChange={(newValue) => setToTime(newValue)}
               />
           </HalfRow>
-          <HalfRow>
+          <OneRow>
             <TextField
               label={t('plan-creation-page.fields.description')}
               fullWidth
@@ -130,7 +130,7 @@ export default function PlanCreationPage() {
               maxRows={4}
               minRows={4}
               />
-          </HalfRow>
+          </OneRow>
           <OneRow>
             <MultipleTagSelecter
               value={tagValue}
