@@ -1,13 +1,10 @@
-import PersonIcon from '@mui/icons-material/Person';
 import {
-  Avatar,
   Box,
   Button,
-  ClickAwayListener,
   Divider,
   Grid,
   Paper,
-  TextField,
+  TextField
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import {
@@ -21,20 +18,18 @@ import {
   useAuthState,
 } from '../../../contexts';
 import { ELocalStorageKeys } from '../../../global/enums.ts';
-import { URL } from '../../../routes';
 import { UserService } from '../../../services';
+import AvatarSelector from './AvatarSelector.tsx';
 
 export default function ProfileSettingPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [openLoading, setOpenLoading] = useState(false);
-  const authState = useAuthState();
-  const { user } = authState;
+  const { user } = useAuthState();
   const dispatch = useAuthDispatch();
   
   const [showAvatars, setShowAvatars] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
-  const avatars: { alt: string; src: string }[] = initAvatars();
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -73,46 +68,6 @@ export default function ProfileSettingPage() {
       .finally(() => setOpenLoading(false));
   };
   
-  function initAvatars() {
-    const result = [];
-    for (let i = 1; i <= 20; i++) {
-      result.push({
-        alt: i.toString(),
-        src: `/images/avatars/avatar${i}.png`,
-      });
-    }
-    return result;
-  }
-  
-  function renderAvatarOptions(avatars: any[]) {
-    const rows = [];
-    let fast = 0;
-    let slow = 0;
-    for (let i = 1; i <= avatars.length; i++) {
-      fast = i;
-      if (fast % 5 === 0 || fast === avatars.length) {
-        rows.push(
-          <AvatarOptionRow
-            avatars={avatars.slice(slow, fast)}
-            handleAvatarChange={handleAvatarChange}
-            key={Math.floor(fast / 5)}
-          />,
-        );
-        slow = i;
-      }
-    }
-    return rows;
-  }
-  
-  function handleShowAvatarsChange() {
-    setShowAvatars(!showAvatars);
-  }
-  
-  function handleAvatarChange(newAvatarUrl: string) {
-    setAvatarUrl(newAvatarUrl);
-    setShowAvatars(false);
-  }
-  
   return (
     <Page
       openLoading={openLoading}
@@ -129,53 +84,16 @@ export default function ProfileSettingPage() {
             xs={12}
             sx={{ mt: -7 }}
           >
-            <Box
-              sx={{
-                p: 0,
-                border: '1px solid rgba(0,0,0,0.12)',
-                borderRadius: 4,
-                width: '100px',
-                height: '107px',
-                background: '#fff',
-                cursor: 'pointer',
-              }}
-            >
-              {avatarUrl ? (
-                <img
-                  src={avatarUrl}
-                  width="100%"
-                  onClick={handleShowAvatarsChange}
-                  alt={avatarUrl}
-                ></img>
-              ) : (
-                <PersonIcon
-                  sx={{ width: '100%', height: '100%' }}
-                  onClick={handleShowAvatarsChange}
-                />
-              )}
-              
-              {showAvatars && (
-                <ClickAwayListener onClickAway={handleShowAvatarsChange}>
-                  <Paper
-                    sx={{
-                      position: 'absolute',
-                      display: 'inline-block',
-                      ml: 1,
-                      py: 2,
-                      maxHeight: '107px',
-                      overflow: 'scroll',
-                    }}
-                    variant="outlined"
-                  >
-                    {renderAvatarOptions(avatars)}
-                  </Paper>
-                </ClickAwayListener>
-              )}
-            </Box>
+            <AvatarSelector 
+              showAvatars={showAvatars} 
+              setShowAvatars={setShowAvatars} 
+              avatarUrl={avatarUrl} 
+              setAvatarUrl={setAvatarUrl} />
           </Grid>
           <Grid
             item
             xs={6}
+            sm={3}
           >
             <TextField
               required
@@ -184,13 +102,13 @@ export default function ProfileSettingPage() {
               label={t('profile-setting.fields.first-name')}
               fullWidth
               autoComplete="given-name"
-              variant="standard"
               defaultValue={user.firstName || ''}
             />
           </Grid>
           <Grid
             item
             xs={6}
+            sm={3}
           >
             <TextField
               required
@@ -199,8 +117,21 @@ export default function ProfileSettingPage() {
               label={t('profile-setting.fields.last-name')}
               fullWidth
               autoComplete="family-name"
-              variant="standard"
               defaultValue={user.lastName || ''}
+            />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+          >
+            <TextField
+              id="profession"
+              name="profession"
+              label={t('profile-setting.fields.profession')}
+              fullWidth
+              autoComplete="profession"
+              defaultValue={user.profession || ''}
             />
           </Grid>
           
@@ -218,7 +149,6 @@ export default function ProfileSettingPage() {
               fullWidth
               type="email"
               autoComplete="email"
-              variant="standard"
               defaultValue={user.email || ''}
             />
           </Grid>
@@ -233,13 +163,13 @@ export default function ProfileSettingPage() {
               label={t('profile-setting.fields.phone-number')}
               fullWidth
               autoComplete="phone number"
-              variant="standard"
               defaultValue={user.phoneNum || ''}
             />
           </Grid>
           <Grid
             item
             xs={12}
+            sm={6}
           >
             <TextField
               id="address"
@@ -247,17 +177,13 @@ export default function ProfileSettingPage() {
               label={t('profile-setting.fields.address')}
               fullWidth
               autoComplete="address"
-              variant="standard"
               defaultValue={user.address || ''}
-              multiline
             />
           </Grid>
-        </InfoSection>
-        <Divider />
-        <InfoSection>
           <Grid
             item
             xs={12}
+            sm={6}
           >
             <TextField
               id="blog"
@@ -265,9 +191,7 @@ export default function ProfileSettingPage() {
               label={t('profile-setting.fields.blog')}
               fullWidth
               autoComplete="blog"
-              variant="standard"
               defaultValue={user.blog || ''}
-              multiline
               placeholder={'https://xxx.blog.com'}
             />
           </Grid>
@@ -298,26 +222,11 @@ export default function ProfileSettingPage() {
             xs={6}
           >
             <TextField
-              id="profession"
-              name="profession"
-              label={t('profile-setting.fields.profession')}
-              fullWidth
-              autoComplete="profession"
-              variant="standard"
-              defaultValue={user.profession || ''}
-            />
-          </Grid>
-          <Grid
-            item
-            xs={6}
-          >
-            <TextField
               id="backgroundImg"
               name="backgroundImg"
               label={t('profile-setting.fields.background-img')}
               fullWidth
               autoComplete="backgroundImg"
-              variant="standard"
               defaultValue={user.backgroundImg || ''}
             />
           </Grid>
@@ -331,7 +240,6 @@ export default function ProfileSettingPage() {
               label={t('profile-setting.fields.photo-img')}
               fullWidth
               autoComplete="photoImg"
-              variant="standard"
               defaultValue={user.photoImg || ''}
             />
           </Grid>
@@ -339,13 +247,6 @@ export default function ProfileSettingPage() {
         <Box sx={{ display: 'flex', my: 2, justifyContent: 'flex-end' }}>
           <Button onClick={() => window.history.back()}>
             {t('profile-setting.back-btn')}
-          </Button>
-          <Button
-            onClick={() =>
-              window.open(URL.PERSONAL_PORTAL.replace(':id', user.id))
-            }
-          >
-            {t('profile-setting.preview-btn')}
           </Button>
           <Button
             variant="contained"
@@ -360,36 +261,9 @@ export default function ProfileSettingPage() {
 }
 
 const InfoSection = (props: { children: ReactNode[], mt?: number }) => {
-  return <Paper
-    sx={{ mt: props.mt || 2, mb: 2, p: { xs: 2, md: 3 } }}
-    variant="outlined"
-  ><Grid
-    container
-    spacing={3}
-  >{props.children}</Grid></Paper>;
-};
-
-const AvatarOptionRow = (props: {
-  avatars: { alt: string; src: string }[];
-  handleAvatarChange: Function;
-}) => {
-  return (
-    <Grid
-      container
-      spacing={0.5}
-    >
-      {props.avatars.map((i) => (
-        <Grid
-          item
-          key={i.alt}
-        >
-          <Avatar
-            alt={i.alt}
-            src={i.src}
-            onClick={() => props.handleAvatarChange(i.src)}
-          />
-        </Grid>
-      ))}
+  return (<Paper sx={{ mt: props.mt || 2, mb: 2, p: { xs: 2, md: 3 } }} variant="outlined">
+    <Grid container spacing={3}>
+    {props.children}
     </Grid>
-  );
+  </Paper>);
 };
