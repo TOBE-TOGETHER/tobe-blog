@@ -192,6 +192,7 @@ export default function PlanDetailPage() {
                 <TextField
                   label={t('plan-detail-page.fields.cover-img-url')}
                   fullWidth
+                  value={coverImgUrl}
                   onChange={e => setCoverImgUrl(e.target.value)}
                   disabled={!editable}
                   />

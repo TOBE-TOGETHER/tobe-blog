@@ -162,6 +162,7 @@ export default function VOCDetailPage() {
                 <TextField
                   label={t('vocabulary-creation-page.fields.cover-img-url')}
                   fullWidth
+                  value={coverImgUrl}
                   onChange={e => setCoverImgUrl(e.target.value)}
                   disabled={!editable}
                   />
