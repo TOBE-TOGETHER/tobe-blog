@@ -25,6 +25,7 @@ export default function ArticleDetailPage() {
   const [textValue, setTextValue] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
+  const [coverImgUrl, setCoverImgUrl] = useState<string>('');
   const [tagValues, setTagValues] = useState<TagOption[]>([]);
   const [contentProtected, setContentProtected] = useState<boolean>(false);
   const loadData = useCallback((): void => {
@@ -37,6 +38,7 @@ export default function ArticleDetailPage() {
         setHtmlValue(response.data.content);
         setTitle(response.data.title);
         setSubTitle(response.data.subTitle);
+        setCoverImgUrl(response.data.coverImgUrl)
         setTagValues(response.data.tags);
         setContentProtected(response.data.contentProtected);
       })
@@ -62,8 +64,9 @@ export default function ArticleDetailPage() {
     setOpenLoading(true);
     ArticleService.update({
       id: id,
-      title,
-      subTitle,
+      title: title,
+      subTitle: subTitle,
+      coverImgUrl: coverImgUrl,
       content: htmlValue,
       description:
         textValue.trim().length >= 500
@@ -96,6 +99,8 @@ export default function ArticleDetailPage() {
         setTitle={setTitle}
         subTitle={subTitle}
         setSubTitle={setSubTitle}
+        coverImgUrl={coverImgUrl}
+        setCoverImgUrl={setCoverImgUrl}
         tagValues={tagValues}
         setTagValues={setTagValues}
         contentProtected={contentProtected}

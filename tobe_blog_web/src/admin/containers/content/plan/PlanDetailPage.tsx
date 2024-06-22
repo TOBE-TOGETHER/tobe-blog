@@ -37,6 +37,7 @@ export default function PlanDetailPage() {
   const { enqueueSnackbar } = useSnackbar();
   const [editable, setEditable] = useState<boolean>(false);
   const [plan, setPlan] = useState<PlanInfo | null>(null);
+  const [coverImgUrl, setCoverImgUrl] = useState<string>('');
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
   const [description, setDescription] = useState<string | null>(null);
@@ -50,6 +51,7 @@ export default function PlanDetailPage() {
           setFromTime(new Date(response.data.targetStartTime));
           setToTime(new Date(response.data.targetEndTime));
           setDescription(response.data.description);
+          setCoverImgUrl(response.data.coverImgUrl);
           setTagValue(response.data.tags);
         })
         .catch(() => {
@@ -95,6 +97,7 @@ export default function PlanDetailPage() {
         id: plan.id,
         title: plan.title,
         description: description || '',
+        coverImgUrl: coverImgUrl,
         targetStartTime: fromTime,
         targetEndTime: toTime,
         tags: tagValue,
@@ -185,6 +188,14 @@ export default function PlanDetailPage() {
                   />
                 </HalfRow>
               </Grid>
+              <OneRow>
+                <TextField
+                  label={t('plan-detail-page.fields.cover-img-url')}
+                  fullWidth
+                  onChange={e => setCoverImgUrl(e.target.value)}
+                  disabled={!editable}
+                  />
+              </OneRow>
               <OneRow>
                 <MultipleTagSelecter
                   value={tagValue}

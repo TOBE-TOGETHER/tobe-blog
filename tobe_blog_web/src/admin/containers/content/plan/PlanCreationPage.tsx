@@ -24,6 +24,7 @@ export default function PlanCreationPage() {
   const { enqueueSnackbar } = useSnackbar();
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
+  const [coverImgUrl, setCoverImgUrl] = useState<string>('');
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
   
@@ -70,6 +71,7 @@ export default function PlanCreationPage() {
       description: description,
       targetStartTime: fromTime,
       targetEndTime: toTime,
+      coverImgUrl: coverImgUrl,
       tags: tagValue,
     })
       .then(() => {
@@ -129,6 +131,13 @@ export default function PlanCreationPage() {
               multiline
               maxRows={4}
               minRows={4}
+              />
+          </OneRow>
+          <OneRow>
+            <TextField
+              label={t('plan-creation-page.fields.cover-img-url')}
+              fullWidth
+              onChange={e => setCoverImgUrl(e.target.value)}
               />
           </OneRow>
           <OneRow>

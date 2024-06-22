@@ -1,16 +1,15 @@
+import MoreHoriz from "@mui/icons-material/MoreHoriz";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   GeneralCardData,
   Operation,
-  SubjectInfo,
-} from "../../../../global/types";
+} from "../../../global/types";
 
 export default function CardHeaderActionButton(props: {
   operations: Operation[];
-  data: SubjectInfo | GeneralCardData;
+  data: GeneralCardData;
   color?: string;
 }) {
   const { t } = useTranslation();
@@ -48,7 +47,7 @@ export default function CardHeaderActionButton(props: {
         aria-expanded={open ? "true" : undefined}
         onClick={(event) => handleClick(event, props.data.id)}
       >
-        <MoreVertIcon
+        <MoreHoriz
           sx={{
             color: props.color,
           }}
@@ -62,12 +61,12 @@ export default function CardHeaderActionButton(props: {
           "aria-labelledby": "basic-button",
         }}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: "top",
+          horizontal: "left",
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: "bottom",
+          horizontal: "left",
         }}
       >
         {props.operations?.map(

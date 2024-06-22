@@ -7,6 +7,17 @@
         <if test="userId != null and userId != ''" >
             AND tcu.ID = #{userId}
         </if>
+        <choose>
+          <when test="filter.status == 'DRAFT'">
+            AND tcgi.PUBLIC_TO_ALL = false
+          </when>
+          <when test="filter.status == 'PUBLISHED'">
+            AND tcgi.PUBLIC_TO_ALL = true
+          </when>
+          <otherwise>
+            <!-- DO NOTHING -->
+          </otherwise>
+        </choose>
         <if test="filter.createFrom != null" >
             AND tcgi.CREATE_TIME &gt;= #{filter.createFrom}
         </if>

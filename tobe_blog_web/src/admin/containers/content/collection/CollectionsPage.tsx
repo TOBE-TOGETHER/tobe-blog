@@ -7,15 +7,18 @@ import GeneralContentListPage from '../components/GeneralContentListPage.tsx';
 export default function CollectionsPage() {
   const { t } = useTranslation();
   
-   function convertToGeneralCardData(data: IBaseUserContentDTO[]): GeneralCardData[] {
+  function convertToGeneralCardData(data: IBaseUserContentDTO[]): GeneralCardData[] {
     return data.map((d) => {
       return {
         id: d.id,
         title: d.title,
         description: d.description,
         publicToAll: d.publicToAll,
+        coverImgUrl: d.coverImgUrl,
         tags: d.tags,
-        createTime: d.createTime
+        createTime: d.createTime,
+        likeCount: d.likeCount,
+        viewCount: d.viewCount
       };
     });
   }

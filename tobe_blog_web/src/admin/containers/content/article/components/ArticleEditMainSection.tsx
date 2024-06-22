@@ -21,6 +21,8 @@ export interface ArticleEditMainSectionProps {
   setTitle: (value: string) => void;
   subTitle: string;
   setSubTitle: (value: string) => void;
+  coverImgUrl: string;
+  setCoverImgUrl: (value: string) => void;
   contentProtected: boolean;
   setContentProtected: (value: boolean) => void;
   tagValues: TagOption[];
@@ -89,6 +91,19 @@ export default function ArticleEditMainSection(
                     value={props.subTitle}
                     onChange={(v) => props.setSubTitle(v.target.value)}
                     error={props.subTitle.length >= 1000}
+                  />
+                }
+              />
+              <FieldWrapper
+                label={t("article-creation-page.fields.cover-img-url")}
+                labelPosition="left"
+                children={
+                  <TextField
+                    fullWidth
+                    variant="standard"
+                    value={props.coverImgUrl}
+                    onChange={(v) => props.setCoverImgUrl(v.target.value)}
+                    error={props.coverImgUrl?.length >= 2000}
                   />
                 }
               />

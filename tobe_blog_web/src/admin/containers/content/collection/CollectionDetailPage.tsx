@@ -194,31 +194,24 @@ export default function CollectionDetailPage() {
             >
               <OneRow>
                 <TextField
-                  id="coverImgUrl"
-                  name="coverImgUrl"
-                  label={t('collection-creation-page.fields.cover-img-url')}
-                  fullWidth
-                  disabled={!editable}
-                  autoComplete="coverImgUrl"
-                  variant="standard"
-                  value={coverImgUrl}
-                  onChange={(event) => setCoverImgUrl(event.target.value)}
-                />
-              </OneRow>
-              <OneRow>
-                <TextField
-                  id="description"
-                  name="description"
                   label={t('collection-creation-page.fields.description')}
                   fullWidth
-                  autoComplete="description"
-                  variant="standard"
                   multiline
                   maxRows={2}
                   minRows={2}
                   disabled={!editable}
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
+                />
+              </OneRow>
+              <OneRow>
+                <TextField
+                  label={t('collection-creation-page.fields.cover-img-url')}
+                  fullWidth
+                  disabled={!editable}
+                  autoComplete="coverImgUrl"
+                  value={coverImgUrl}
+                  onChange={(event) => setCoverImgUrl(event.target.value)}
                 />
               </OneRow>
               <OneRow>

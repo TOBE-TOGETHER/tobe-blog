@@ -9,8 +9,8 @@ export default class DomainService {
     this.baseUri = baseUri;
   }
 
-  get(size: number, current: number, keyword: string): AxiosPromise {
-    return server.get(`/${this.baseUri}?size=${size}&current=${current + 1}&keyword=${keyword}`);
+  get(size: number, current: number, keyword: string, status: string): AxiosPromise {
+    return server.get(`/${this.baseUri}?size=${size}&current=${current}&keyword=${keyword}&status=${status}`);
   }
 
   getById(id: string): AxiosPromise {

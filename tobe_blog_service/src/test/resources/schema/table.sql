@@ -76,6 +76,7 @@ create table tobe_content_general_info
         primary key,
     TITLE             varchar(128) collate utf8mb4_unicode_ci  not null,
     DESCRIPTION       varchar(1000) collate utf8mb4_unicode_ci null,
+    COVER_IMG_URL     varchar(2000) collate utf8mb4_unicode_ci null,
     CONTENT_TYPE      varchar(20)                              not null,
     OWNER_ID          int                                      not null,
     LIKE_COUNT        int default 0                            not null,
@@ -148,7 +149,6 @@ DROP TABLE IF EXISTS tobe_collection_info;
 CREATE TABLE tobe_collection_info 
 (
     CONTENT_ID varchar(32) NOT NULL PRIMARY KEY,
-    COVER_IMG_URL varchar(2000) DEFAULT NULL,
     DELETED bit(1) NOT NULL DEFAULT false,
     CREATE_BY varchar(64) DEFAULT NULL,
     CREATE_TIME datetime DEFAULT NULL,

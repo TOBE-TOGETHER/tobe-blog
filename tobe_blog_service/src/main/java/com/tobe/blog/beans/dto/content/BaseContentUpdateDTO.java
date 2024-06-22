@@ -10,7 +10,9 @@ import lombok.Data;
 @Data
 public class BaseContentUpdateDTO implements Serializable {
     protected String id;
+    protected String title;
     protected String description;
+    protected String coverImgUrl;
     protected Boolean contentProtected;
     protected List<TagInfoDTO> tags;
 }

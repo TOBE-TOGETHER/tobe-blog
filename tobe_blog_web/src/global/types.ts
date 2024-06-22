@@ -27,6 +27,7 @@ export interface PlanInfo {
   id: string;
   title: string;
   description: string;
+  coverImgUrl: string;
   statusValue: number;
   ownerName: string;
   ownerId: string;
@@ -36,6 +37,7 @@ export interface PlanInfo {
   targetEndTime: string;
   tags: TagOption[];
   viewCount: number;
+  likeCount: number;
   createTime: string;
 }
 
@@ -114,6 +116,7 @@ export interface TagStatisticDTO extends TagOption {
 export interface PlanCreationDTO {
   title: string;
   description: string;
+  coverImgUrl: string;
   targetStartTime: Date | null;
   targetEndTime: Date | null;
   tags: TagOption[];
@@ -159,6 +162,7 @@ export interface VocabularyCreationDTO {
   title: string;
   description: string;
   language: string;
+  coverImgUrl: string;
   tags: TagOption[];
 }
 
@@ -176,9 +180,12 @@ export interface GeneralCardData {
   id: string;
   title: string;
   description: string;
+  coverImgUrl: string;
   publicToAll: boolean;
   tags: TagOption[];
   createTime?: string;
+  viewCount: number;
+  likeCount: number;
 }
 
 export interface VocabularyUpdateDTO extends VocabularyCreationDTO {
@@ -211,13 +218,14 @@ export interface IBaseUserContentDTO {
   id: string;
   title: string;
   description: string;
-  coverImgUrl?: string;
+  coverImgUrl: string;
   ownerId: string;
   ownerName: string;
   avatarUrl: string;
   publicToAll: boolean;
   publishTime: string;
   viewCount: number;
+  likeCount: number;
   tags: TagOption[];
   createTime: string;
   updateTime: string;
@@ -227,7 +235,7 @@ export interface ICollectionDTO {
   id: string;
   title: string;
   description: string;
-  coverImgUrl?: string;
+  coverImgUrl: string;
   ownerId: string;
   ownerName: string;
   avatarUrl: string;

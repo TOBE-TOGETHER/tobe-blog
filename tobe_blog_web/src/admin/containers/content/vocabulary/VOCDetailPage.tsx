@@ -37,6 +37,7 @@ export default function VOCDetailPage() {
   );
   const [description, setDescription] = useState<string | null>(null);
   const [language, setLanguage] = useState<string | null>(null);
+  const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [tagValue, setTagValue] = useState<TagOption[]>([]);
   
   const loadData = useCallback(
@@ -47,6 +48,7 @@ export default function VOCDetailPage() {
           setVocabulary(response.data);
           setDescription(response.data.description);
           setLanguage(response.data.language);
+          setCoverImgUrl(response.data.coverImgUrl);
           setTagValue(response.data.tags);
         })
         .catch(() => {
@@ -77,6 +79,7 @@ export default function VOCDetailPage() {
         title: vocabulary.title,
         description: description || '',
         language: language || '',
+        coverImgUrl: coverImgUrl || '',
         tags: tagValue,
       });
     }
@@ -86,7 +89,7 @@ export default function VOCDetailPage() {
   function handleUpdate(updateDTO: VocabularyUpdateDTO): void {
     setOpenLoading(true);
     VocabularyService.update(updateDTO)
-      .then((response) => {
+      .then(() => {
         enqueueSnackbar(t('vocabulary-detail-page.msg.success'), {
           variant: 'success',
         });
@@ -137,12 +140,9 @@ export default function VOCDetailPage() {
             >
               <OneRow>
                 <TextField
-                  id="language"
-                  name="language"
                   label={t('vocabulary-creation-page.fields.language')}
                   fullWidth
                   autoComplete="language"
-                  variant="standard"
                   disabled={!editable}
                   value={language}
                   onChange={(event) => setLanguage(event.target.value)}
@@ -150,16 +150,21 @@ export default function VOCDetailPage() {
               </OneRow>
               <OneRow>
                 <TextField
-                  id="description"
-                  name="description"
                   label={t('vocabulary-creation-page.fields.description')}
                   fullWidth
                   autoComplete="description"
-                  variant="standard"
                   disabled={!editable}
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
                 />
+              </OneRow>
+              <OneRow>
+                <TextField
+                  label={t('vocabulary-creation-page.fields.cover-img-url')}
+                  fullWidth
+                  onChange={e => setCoverImgUrl(e.target.value)}
+                  disabled={!editable}
+                  />
               </OneRow>
               <OneRow>
                 <MultipleTagSelecter

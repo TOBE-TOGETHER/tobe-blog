@@ -100,7 +100,7 @@ export default function FeaturedArticles(props: {
     >
       <Tabs
         value={props.contentType}
-        onChange={(event: React.SyntheticEvent, newValue: EContentType) =>
+        onChange={(_: React.SyntheticEvent, newValue: EContentType) =>
           props.handleContentTypeChange(newValue)
         }
         sx={{

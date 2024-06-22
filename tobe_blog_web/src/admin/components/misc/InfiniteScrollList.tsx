@@ -20,7 +20,6 @@ export default function InfiniteScrollList<T>(props: {
         document.documentElement.clientHeight +
           document.documentElement.scrollTop
       ) {
-        console.log("列表触底");
         loadMore();
       }
     };

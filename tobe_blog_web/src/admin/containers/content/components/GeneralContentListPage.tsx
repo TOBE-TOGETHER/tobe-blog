@@ -1,3 +1,4 @@
+import { Box, Tab, Tabs } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import {
   useEffect,
@@ -30,28 +31,33 @@ export default function GeneralContentListPage(props: {
   const [data, setData] = useState<GeneralCardData[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const [status, setStatus] = useState<string>("");
+
   const loadData = (): void => {
-    setOpenLoading(true);
     props.domainService
-      .get(DEFAULT_PAGE_SIZE, current, '')
+      .get(DEFAULT_PAGE_SIZE, current + 1, '', status)
       .then((response) => {
         setData(data.concat(response.data.records));
         setCurrent(response.data.current);
         setTotalPage(response.data.pages);
       })
       .catch(() => {
-        enqueueSnackbar(t('domain-page.msg.error'), {
+        enqueueSnackbar(t('contents-page.msg.error'), {
           variant: 'error',
         });
-      })
-      .finally(() => {
-        setOpenLoading(false);
       });
   };
+
+  const handleFilterChange = (v: string): void => {
+    setData([]);
+    setStatus(v);
+    setCurrent(0);
+    setTotalPage(1); 
+  }
   
   useEffect(() => {
     loadData();
-  }, []);
+  }, [status]);
   
   function releaseById(id: number | string) {
     setOpenLoading(true);
@@ -106,6 +112,13 @@ export default function GeneralContentListPage(props: {
       <GeneralContentListPageFunctionBar
         createNewAction={() => navigate(props.createPageURL)}
       />
+      <Box sx={{ mb: 1, width: "100%" }}>
+        <Tabs value={status} onChange={(_,v: string) => handleFilterChange(v)}>
+          <Tab disableRipple label={t("contents-page.filter.all")} value="" />
+          <Tab disableRipple label={t("contents-page.filter.published")} value="PUBLISHED" />
+          <Tab disableRipple label={t("contents-page.filter.draft")} value="DRAFT" />
+        </Tabs>
+      </Box>
       <GeneralCardView
         loading={openLoading}
         current={current}

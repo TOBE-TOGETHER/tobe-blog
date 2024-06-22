@@ -11,7 +11,7 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { VocabularyService } from '../../../../services';
-import { MultipleTagSelecter, SaveButtonPanel } from '../../../components';
+import { MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
 
 export default function VOCCreationPage() {
   const { t } = useTranslation();
@@ -22,6 +22,7 @@ export default function VOCCreationPage() {
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [language, setLanguage] = useState<string>();
+  const [coverImgUrl, setCoverImgUrl] = useState<string>('');
   
   function handleCreation(): void {
     setOpenLoading(true);
@@ -29,9 +30,10 @@ export default function VOCCreationPage() {
       title: title,
       description: description,
       language: language,
+      coverImgUrl: coverImgUrl,
       tags: tagValue,
     })
-      .then((response) => {
+      .then(() => {
         enqueueSnackbar(t('vocabulary-creation-page.msg.success'), {
           variant: 'success',
         });
@@ -58,30 +60,21 @@ export default function VOCCreationPage() {
             container
             spacing={3}
           >
-            <Grid
-              item
-              xs={12}
-            >
+            <OneRow>
               <TextField
                 label={t('vocabulary-creation-page.fields.title')}
                 fullWidth
                 onChange={e => setTitle(e.target.value)}
               />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
+            </OneRow>
+            <OneRow>
               <TextField
                 label={t('vocabulary-creation-page.fields.language')}
                 fullWidth
                 onChange={e => setLanguage(e.target.value)}
               />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
+            </OneRow>
+            <OneRow>
               <TextField
                 label={t('vocabulary-creation-page.fields.description')}
                 fullWidth
@@ -90,16 +83,20 @@ export default function VOCCreationPage() {
                 maxRows={2}
                 minRows={2}
               />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
+            </OneRow>
+            <OneRow>
+              <TextField
+                label={t('vocabulary-creation-page.fields.cover-img-url')}
+                fullWidth
+                onChange={e => setCoverImgUrl(e.target.value)}
+                />
+            </OneRow>
+            <OneRow>
               <MultipleTagSelecter
                 value={tagValue}
                 setValue={setTagValue}
               />
-            </Grid>
+            </OneRow>
           </Grid>
       </Paper>
       <SaveButtonPanel primaryEvent={handleCreation}/>

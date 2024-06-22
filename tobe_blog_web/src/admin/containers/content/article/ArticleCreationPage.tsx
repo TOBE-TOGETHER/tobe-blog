@@ -17,6 +17,7 @@ export default function ArticleCreationPage() {
   const [textValue, setTextValue] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
+  const [coverImgUrl, setCoverImgUrl] = useState<string>('');
   const [tagValues, setTagValues] = useState<TagOption[]>([]);
   const [contentProtected, setContentProtected] = useState<boolean>(false);
   
@@ -26,6 +27,7 @@ export default function ArticleCreationPage() {
       title: title,
       subTitle: subTitle,
       content: htmlValue,
+      coverImgUrl: coverImgUrl,
       description:
         textValue.trim().length >= 500
           ? textValue.trim().substring(0, 497) + '...'
@@ -57,6 +59,8 @@ export default function ArticleCreationPage() {
         setTitle={setTitle}
         subTitle={subTitle}
         setSubTitle={setSubTitle}
+        coverImgUrl={coverImgUrl}
+        setCoverImgUrl={setCoverImgUrl}
         tagValues={tagValues}
         setTagValues={setTagValues}
         contentProtected={contentProtected}

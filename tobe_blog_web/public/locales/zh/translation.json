@@ -48,6 +48,8 @@
       "view-count": "累积阅读量"
     },
     "general-card-view": {
+      "published": "已发布",
+      "draft": "草稿",
       "title": {
         "open": "所有人可见",
         "private": "仅自己可见"
@@ -177,8 +179,12 @@
       "operation": "操作"
     }
   },
-  "domain-page": {
-    "load-more": "加载更多",
+  "contents-page": {
+    "filter": {
+      "all": "全部",
+      "published": "已发布",
+      "draft": "草稿"
+    },
     "msg": {
       "error": "操作失败"
     }
@@ -192,7 +198,8 @@
       "name": "项目名称",
       "description": "项目描述",
       "target-start-time": "计划开始时间",
-      "target-end-time": "计划结束时间"
+      "target-end-time": "计划结束时间",
+      "cover-img-url": "封面链接"
     },
     "back-btn": "返回",
     "submit-btn": "提交",
@@ -212,7 +219,8 @@
       "name": "项目名称",
       "description": "项目描述",
       "target-start-time": "计划开始时间",
-      "target-end-time": "计划结束时间"
+      "target-end-time": "计划结束时间",
+      "cover-img-url": "封面链接"
     },
     "msg": {
       "error": "操作失败",
@@ -292,6 +300,7 @@
     "fields": {
       "title": "标题",
       "sub-title": "副标题",
+      "cover-img-url": "封面链接",
       "description": "简述",
       "tag": "标签",
       "content-protected": "该篇文章只有登录用户才能看到完整内容"
@@ -365,6 +374,7 @@
       "title": "标题",
       "description": "描述",
       "language": "语言",
+      "cover-img-url": "封面链接",
       "tags": "标签"
     },
     "msg": {
