@@ -59,7 +59,7 @@ export function GeneralCard(props: {record: GeneralCardData, onClick?: (id: stri
                       color="text.secondary"
                       sx={{
                         maxWidth: '100%',
-                        height: 60,
+                        height: '40px',
                         display: 'block',
                         whiteSpace: 'wrap',
                         overflow: 'hidden',
@@ -86,7 +86,7 @@ export function GeneralCard(props: {record: GeneralCardData, onClick?: (id: stri
                     </Grid>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} >
-                  <Grid container width='100%' height='100%' p={1}>
+                  <Grid container width='100%' height='100%' p={1} sx={{maxHeight: {xs: '160px', sm: '160px', md: '100%'}}}>
                     <img style={{objectFit: 'cover', verticalAlign: 'bottom', borderRadius: '16px'}} width='100%' height='100%' 
                     src={props.record.coverImgUrl || 'https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} />
                   </Grid>

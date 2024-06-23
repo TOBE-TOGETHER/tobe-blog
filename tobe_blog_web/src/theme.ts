@@ -6,7 +6,7 @@ import { createTheme } from '@mui/material/styles';
  */
 const theme = createTheme({
   typography: {
-    fontFamily: ['"Noto Sans SC"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(','),
+    fontFamily: ['"Public Sans Variable"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(','),
   },
   palette: {
     primary: {
@@ -22,6 +22,10 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
+    text: {
+      primary: '#1c252e',
+      secondary: '#637381'
+    }
   },
   components: {
     MuiButton: {
