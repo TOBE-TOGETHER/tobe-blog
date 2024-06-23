@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material';
 
-import PortalHeader from "./PortalHeader";
+import PortalHeader from './PortalHeader';
 
 export default function FrontendLayout({ children }: { children: any }) {
   return (
@@ -19,7 +19,6 @@ export default function FrontendLayout({ children }: { children: any }) {
           direction="column"
           sx={{
             minHeight: '100vh',
-            backgroundColor: { xs: 'rgba(255,255,255,1)', sm: '#f3f2ef' },
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             display: { md: 'flex' },

@@ -1,5 +1,5 @@
-import { Grid } from "@mui/material";
-import { ReactNode, useEffect } from "react";
+import { Grid } from '@mui/material';
+import { ReactNode, useEffect } from 'react';
 
 export default function InfiniteScrollList<T>(props: {
   loading: boolean;
@@ -9,29 +9,28 @@ export default function InfiniteScrollList<T>(props: {
   hasMore: boolean;
   loadMore: () => void;
 }) {
-  const { loading, dataSource, renderItem, renderSkeleton, loadMore, hasMore } =
-    props;
+  const { loading, dataSource, renderItem, renderSkeleton, loadMore, hasMore } = props;
 
   useEffect(() => {
     const scrollEvent = () => {
       if (!hasMore || loading) return;
-      if (
-        document.documentElement.scrollHeight <=
-        document.documentElement.clientHeight +
-          document.documentElement.scrollTop
-      ) {
+      if (document.documentElement.scrollHeight <= document.documentElement.clientHeight + document.documentElement.scrollTop) {
         loadMore();
       }
     };
-    window.addEventListener("scroll", scrollEvent);
+    window.addEventListener('scroll', scrollEvent);
     return () => {
-      window.removeEventListener("scroll", scrollEvent);
+      window.removeEventListener('scroll', scrollEvent);
     };
   }, [hasMore, loading]);
 
   return (
-    <Grid container sx={{ overFlowY: "auto" }} spacing={1}>
-      {dataSource.map((data) => {
+    <Grid
+      container
+      sx={{ overFlowY: 'auto' }}
+      spacing={1}
+    >
+      {dataSource.map(data => {
         return renderItem(data);
       })}
       {loading && new Array(4).fill(0).map(() => renderSkeleton?.())}

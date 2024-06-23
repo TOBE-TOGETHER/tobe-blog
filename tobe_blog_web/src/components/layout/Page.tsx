@@ -1,8 +1,4 @@
-import {
-  Container,
-  Divider,
-  Typography,
-} from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { useEffect } from 'react';
 
 import plan from '../../../package.json';
@@ -22,25 +18,20 @@ export default function Page(props: PageProps) {
       window.document.title = `${plan.name.toUpperCase()}`;
     };
   });
-  
+
   return (
     <Container
       sx={{
         ...{
           minHeight: '95vh',
-          pt: { sm: '11vh', xs: '8vh' },
+          pt: { sm: '8vh', xs: '6vh' },
           pb: 2,
         },
         ...props.sx,
       }}
     >
       <Loading open={props.openLoading} />
-      {props.pageTitle && (
-        <>
-          <Typography sx={{ fontSize: { xs: '1.2rem', sm: '1.3rem', md: '1.5rem' } }}>{props.pageTitle}</Typography>
-          <Divider />
-        </>
-      )}
+      {props.pageTitle && <Typography sx={{ fontSize: { xs: '1.2rem', sm: '1.3rem', md: '1.5rem' } }}>{props.pageTitle}</Typography>}
       {props.children}
     </Container>
   );

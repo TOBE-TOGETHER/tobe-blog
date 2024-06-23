@@ -1,23 +1,15 @@
 import Abc from '@mui/icons-material/Abc';
 import ArticleIcon from '@mui/icons-material/Article';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import FirstPage from '@mui/icons-material/FirstPage';
 import FlagIcon from '@mui/icons-material/Flag';
 import FolderIcon from '@mui/icons-material/Folder';
 import Groups from '@mui/icons-material/Groups';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import {
-  Drawer,
-  IconButton,
-  Typography,
-  useMediaQuery,
-} from '@mui/material';
+import { Drawer, IconButton, Typography, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import plan from '../../../../package.json';
-import {
-  EAuthority,
-  EFeatureCode,
-} from '../../../global/enums.ts';
+import { EAuthority, EFeatureCode } from '../../../global/enums.ts';
 import { PageItem } from '../../../global/types';
 import theme from '../../../theme';
 import { URL } from '../../URL';
@@ -28,20 +20,14 @@ const basicPageItems: PageItem[] = [
     label: 'dashboard-nav.pages.analytics',
     icon: <DashboardIcon />,
     url: URL.ANALYTICS,
-    requiredRoles: [
-      EAuthority.ROLE_BASIC,
-      EAuthority.ROLE_ADMIN,
-    ],
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
   },
   {
     label: 'dashboard-nav.pages.plans',
     icon: <FlagIcon />,
     url: URL.PLANS,
     secondaryUrl: URL.CREATE_PLAN,
-    requiredRoles: [
-      EAuthority.ROLE_BASIC,
-      EAuthority.ROLE_ADMIN,
-    ],
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
     requiredFeature: EFeatureCode.PLAN_MODULE,
   },
   {
@@ -49,10 +35,7 @@ const basicPageItems: PageItem[] = [
     icon: <ArticleIcon />,
     url: URL.ARTICLES,
     secondaryUrl: URL.CREATE_ARTICLE,
-    requiredRoles: [
-      EAuthority.ROLE_BASIC,
-      EAuthority.ROLE_ADMIN,
-    ],
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
     requiredFeature: EFeatureCode.ARTICLE_MODULE,
   },
   {
@@ -60,10 +43,7 @@ const basicPageItems: PageItem[] = [
     icon: <Abc />,
     url: URL.VOCABULARIES,
     secondaryUrl: URL.CREATE_VOCABULARY,
-    requiredRoles: [
-      EAuthority.ROLE_BASIC,
-      EAuthority.ROLE_ADMIN,
-    ],
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
     requiredFeature: EFeatureCode.VOCABULARY_MODULE,
   },
   {
@@ -71,10 +51,7 @@ const basicPageItems: PageItem[] = [
     icon: <FolderIcon />,
     url: URL.COLLECTIONS,
     secondaryUrl: URL.CREATE_COLLECTION,
-    requiredRoles: [
-      EAuthority.ROLE_BASIC,
-      EAuthority.ROLE_ADMIN,
-    ],
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
   },
 ];
 
@@ -105,15 +82,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function SideNav(props: SideNavProps) {
   const navigate = useNavigate();
   const underSmScreen = useMediaQuery(theme.breakpoints.down('md'));
-  
   return (
     <Drawer
       sx={{
-        width: props.drawerWidth,
-        flexShrink: 0,
+        'width': props.drawerWidth,
+        'flexShrink': 0,
         '& .MuiDrawer-paper': {
           width: props.drawerWidth,
           boxSizing: 'border-box',
+          borderRadius: 0,
+          borderColor: theme.palette.divider,
+          boxShadow: 'none',
         },
       }}
       variant={underSmScreen ? 'temporary' : 'persistent'}
@@ -121,21 +100,7 @@ export default function SideNav(props: SideNavProps) {
       open={props.openDrawer}
       onClose={() => props.setOpenDrawer(false)}
     >
-      <DrawerHeader sx={{ backgroundColor: theme.palette.primary.main }}>
-        <IconButton onClick={() => props.setOpenDrawer(!props.openDrawer)}>
-          <MenuOpenIcon
-            sx={{
-              color: '#fff',
-              border: '1.5px solid #fff',
-              borderRadius: 2,
-              fontSize: '2rem',
-              p: '3px',
-              '&:hover': {
-                background: 'grey',
-              },
-            }}
-          />
-        </IconButton>
+      <DrawerHeader sx={{ background: 'transparent' }}>
         <Typography
           variant="h6"
           noWrap
@@ -146,13 +111,20 @@ export default function SideNav(props: SideNavProps) {
             display: { xs: 'flex' },
             fontWeight: 700,
             letterSpacing: '.3rem',
-            color: 'white',
             textDecoration: 'none',
             cursor: 'pointer',
+            color: theme.palette.secondary.main,
           }}
         >
           {plan.name.toUpperCase()}
         </Typography>
+        <IconButton
+          size="large"
+          sx={{ color: theme.palette.secondary.main }}
+          onClick={() => props.setOpenDrawer(!props.openDrawer)}
+        >
+          <FirstPage />
+        </IconButton>
       </DrawerHeader>
       <NavItems pageItems={basicPageItems} />
       <NavItems pageItems={adminPageItems} />

@@ -3,12 +3,7 @@ import { Grid, Link, Paper, Typography } from '@mui/material';
 
 export default function SidePanel(props: { title: string; readMoreUrl?: string; children: any }) {
   return (
-    <Grid
-      container
-      component={Paper}
-      sx={{ p: 0 }}
-      variant="outlined"
-    >
+    <Paper sx={{ p: 1, borderRadius: 4 }}>
       <Grid
         container
         alignItems="center"
@@ -38,6 +33,6 @@ export default function SidePanel(props: { title: string; readMoreUrl?: string; 
         )}
       </Grid>
       {props.children}
-    </Grid>
+    </Paper>
   );
 }

@@ -1,21 +1,10 @@
-import {
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Grid, Paper, TextField, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../../../../commons';
 import { PlanProgress } from '../../../../../global/types';
-import {
-  PlanProgressService,
-  PublicDataService,
-} from '../../../../../services';
+import { PlanProgressService, PublicDataService } from '../../../../../services';
 import { EditIconButton } from '../../../../components';
 import { ImagesPanel } from './ImagesPanel';
 
@@ -30,40 +19,33 @@ export default function PlanProgressItem(props: PlanProgressItemProps) {
   const [progress, setProgress] = useState<PlanProgress>(props.progress);
   const [editable, setEditable] = useState<boolean>(false);
   const [imageURLs, setImageURLs] = useState<string[]>([]);
-  const [progressDesc, setProgressDesc] = useState<string>(
-    props.progress.description,
-  );
-  
+  const [progressDesc, setProgressDesc] = useState<string>(props.progress.description);
+
   const handleEditableChange = () => {
     if (editable) {
       handleProgressUpdate();
     }
     setEditable(!editable);
   };
-  
+
   useEffect(() => {
     function loadImages() {
-      PublicDataService.getBySrcIdAndFileType(
-        props.progress.id,
-        'PLAN_PIC',
-      ).then((response) => {
-        let imageUrls = response.data.map(
-          (f: { downloadURL: string }) => f.downloadURL,
-        );
+      PublicDataService.getBySrcIdAndFileType(props.progress.id, 'PLAN_PIC').then(response => {
+        let imageUrls = response.data.map((f: { downloadURL: string }) => f.downloadURL);
         setImageURLs(imageUrls);
       });
     }
-    
+
     loadImages();
   }, [props.progress.id]);
-  
+
   function handleProgressUpdate(): void {
     PlanProgressService.updateProgress({
       id: progress.id,
       planId: progress.planId,
       description: progressDesc,
     })
-      .then((response) => {
+      .then(response => {
         enqueueSnackbar(t('plan-detail-page.msg.success'), {
           variant: 'success',
         });
@@ -75,15 +57,15 @@ export default function PlanProgressItem(props: PlanProgressItemProps) {
         });
       });
   }
-  
+
   return (
     <Paper
-      variant="outlined"
       sx={{
         py: 2,
         px: { sm: 2, xs: 0 },
         borderWidth: { xs: '0px', sm: '1px' },
         borderBottomWidth: { xs: '1px' },
+        borderRadius: 4,
       }}
     >
       <Grid
@@ -102,8 +84,7 @@ export default function PlanProgressItem(props: PlanProgressItemProps) {
             color="text.secondary"
             variant="body2"
           >
-            {TimeFormat.dateFormat(progress.createTime)}{' '}
-            {TimeFormat.timeFormat(progress.createTime)}
+            {TimeFormat.dateFormat(progress.createTime)} {TimeFormat.timeFormat(progress.createTime)}
           </Typography>
           {!props.viewOnly && (
             <EditIconButton
@@ -125,7 +106,7 @@ export default function PlanProgressItem(props: PlanProgressItemProps) {
               maxRows={20}
               disabled={!editable}
               value={progressDesc}
-              onChange={(event) => setProgressDesc(event.target.value)}
+              onChange={event => setProgressDesc(event.target.value)}
             />
           ) : (
             <Typography

@@ -1,20 +1,10 @@
-import {
-  Checkbox,
-  Grid,
-  Paper,
-  TextField,
-  Typography
-} from "@mui/material";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { TagOption } from "../../../../../global/types";
-import { MultipleTagSelecter, RichContentEditor, SaveButtonPanel } from "../../../../components";
-import { FieldWrapper } from "./FieldWrapper";
-import {
-  TobeAccordion,
-  TobeAccordionDetails,
-  TobeAccordionSummary,
-} from "./TobeAccordion";
+import { Checkbox, Grid, Paper, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { TagOption } from '../../../../../global/types';
+import { MultipleTagSelecter, RichContentEditor, SaveButtonPanel } from '../../../../components';
+import { FieldWrapper } from './FieldWrapper';
+import { TobeAccordion, TobeAccordionDetails, TobeAccordionSummary } from './TobeAccordion';
 
 export interface ArticleEditMainSectionProps {
   title: string;
@@ -34,37 +24,45 @@ export interface ArticleEditMainSectionProps {
   onClickPrimaryBtn: () => void;
 }
 
-export default function ArticleEditMainSection(
-  props: ArticleEditMainSectionProps
-) {
+export default function ArticleEditMainSection(props: ArticleEditMainSectionProps) {
   const { t } = useTranslation();
   const [expanded, setExpanded] = useState<boolean>(false);
   return (
-    <Grid container sx={{ py: 2 }}>
+    <Grid
+      container
+      sx={{ py: 2 }}
+    >
       <Grid
         item
         xs={12}
         component={Paper}
-        variant="outlined"
-        sx={{ width: "100%", py: 2, px: 2 }}
+        sx={{ width: '100%', py: 2, px: 2, borderRadius: 4 }}
       >
-        <Grid container item xs={12}>
+        <Grid
+          container
+          item
+          xs={12}
+        >
           <FieldWrapper
-            label={t("article-creation-page.fields.title")}
+            label={t('article-creation-page.fields.title')}
             labelPosition="left"
             children={
               <TextField
                 fullWidth
                 variant="standard"
                 value={props.title}
-                onChange={(v) => props.setTitle(v.target.value)}
+                onChange={v => props.setTitle(v.target.value)}
                 error={props.title.length >= 128}
               />
             }
           />
         </Grid>
       </Grid>
-      <Grid item xs={12} sx={{ mt: 1 }}>
+      <Grid
+        item
+        xs={12}
+        sx={{ mt: 1 }}
+      >
         <TobeAccordion
           expanded={expanded}
           onChange={() => setExpanded(!expanded)}
@@ -72,43 +70,46 @@ export default function ArticleEditMainSection(
         >
           <TobeAccordionSummary>
             <Typography
-              color={"text.secondary"}
-              variant={"body2"}
-              sx={{ textAlign: "end", flexGrow: 0 }}
+              color={'text.secondary'}
+              variant={'body2'}
+              sx={{ textAlign: 'end', flexGrow: 0 }}
             >
-              {t("article-creation-page.expand-label")}
+              {t('article-creation-page.expand-label')}
             </Typography>
           </TobeAccordionSummary>
           <TobeAccordionDetails>
-            <Grid container sx={{ py: 0 }}>
+            <Grid
+              container
+              sx={{ py: 0 }}
+            >
               <FieldWrapper
-                label={t("article-creation-page.fields.sub-title")}
+                label={t('article-creation-page.fields.sub-title')}
                 labelPosition="left"
                 children={
                   <TextField
                     fullWidth
                     variant="standard"
                     value={props.subTitle}
-                    onChange={(v) => props.setSubTitle(v.target.value)}
+                    onChange={v => props.setSubTitle(v.target.value)}
                     error={props.subTitle.length >= 1000}
                   />
                 }
               />
               <FieldWrapper
-                label={t("article-creation-page.fields.cover-img-url")}
+                label={t('article-creation-page.fields.cover-img-url')}
                 labelPosition="left"
                 children={
                   <TextField
                     fullWidth
                     variant="standard"
                     value={props.coverImgUrl}
-                    onChange={(v) => props.setCoverImgUrl(v.target.value)}
+                    onChange={v => props.setCoverImgUrl(v.target.value)}
                     error={props.coverImgUrl?.length >= 2000}
                   />
                 }
               />
               <FieldWrapper
-                label={t("article-creation-page.fields.tag")}
+                label={t('article-creation-page.fields.tag')}
                 labelPosition="left"
                 children={
                   <MultipleTagSelecter
@@ -118,15 +119,13 @@ export default function ArticleEditMainSection(
                 }
               />
               <FieldWrapper
-                label={t("article-creation-page.fields.content-protected")}
+                label={t('article-creation-page.fields.content-protected')}
                 labelPosition="right"
                 children={
                   <Checkbox
                     size="small"
                     checked={props.contentProtected}
-                    onChange={(e) =>
-                      props.setContentProtected(e.target.checked)
-                    }
+                    onChange={e => props.setContentProtected(e.target.checked)}
                   />
                 }
               />
@@ -134,12 +133,15 @@ export default function ArticleEditMainSection(
           </TobeAccordionDetails>
         </TobeAccordion>
       </Grid>
-      <Grid item xs={12} sx={{ mt: 1 }}>
+      <Grid
+        item
+        xs={12}
+        sx={{ mt: 1 }}
+      >
         <Grid
           container
-          sx={{ px: 2, py: 1 }}
+          sx={{ px: 2, py: 1, borderRadius: 4 }}
           component={Paper}
-          variant="outlined"
         >
           <RichContentEditor
             htmlValue={props.htmlValue}
@@ -149,7 +151,7 @@ export default function ArticleEditMainSection(
           />
         </Grid>
       </Grid>
-      <SaveButtonPanel primaryEvent={props.onClickPrimaryBtn}/>
+      <SaveButtonPanel primaryEvent={props.onClickPrimaryBtn} />
     </Grid>
   );
 }

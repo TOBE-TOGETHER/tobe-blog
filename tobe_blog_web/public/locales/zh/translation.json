@@ -327,7 +327,7 @@
     "page-main-title": "创建一个合集",
     "fields": {
       "name": "合集名",
-      "description": "合集描述",
+      "description": "合集",
       "cover-img-url": "封面链接",
       "tag": "标签"
     },

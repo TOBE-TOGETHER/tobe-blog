@@ -1,12 +1,7 @@
 import PersonIcon from '@mui/icons-material/Person';
-import { Avatar, Box, ClickAwayListener, Grid, Paper } from "@mui/material";
+import { Avatar, Box, ClickAwayListener, Grid, Paper } from '@mui/material';
 
-export default function AvatarSelector(props: {
-  showAvatars: boolean;
-  setShowAvatars: (newValue: boolean) => void;
-  avatarUrl: string;
-  setAvatarUrl: (newValue: string) => void
-}) {
+export default function AvatarSelector(props: { showAvatars: boolean; setShowAvatars: (newValue: boolean) => void; avatarUrl: string; setAvatarUrl: (newValue: string) => void }) {
   const avatars: { alt: string; src: string }[] = initAvatars();
 
   function initAvatars() {
@@ -19,7 +14,7 @@ export default function AvatarSelector(props: {
     }
     return result;
   }
-  
+
   function renderAvatarOptions(avatars: any[]) {
     const rows = [];
     let fast = 0;
@@ -32,14 +27,14 @@ export default function AvatarSelector(props: {
             avatars={avatars.slice(slow, fast)}
             handleAvatarChange={handleAvatarChange}
             key={Math.floor(fast / 5)}
-          />,
+          />
         );
         slow = i;
       }
     }
     return rows;
   }
-  
+
   function handleShowAvatarsChange() {
     props.setShowAvatars(!props.showAvatars);
   }
@@ -48,60 +43,59 @@ export default function AvatarSelector(props: {
     props.setAvatarUrl(newAvatarUrl);
     props.setShowAvatars(false);
   }
-  return(<Box sx={{
-                p: 0,
-                border: '1px solid rgba(0,0,0,0.12)',
-                borderRadius: 4,
-                width: '100px',
-                height: '107px',
-                background: '#fff',
-                cursor: 'pointer',
-              }}
-            >
-              {props.avatarUrl ? (
-                <img
-                  src={props.avatarUrl}
-                  width="100%"
-                  onClick={handleShowAvatarsChange}
-                  alt={props.avatarUrl}
-                ></img>
-              ) : (
-                <PersonIcon
-                  sx={{ width: '100%', height: '100%' }}
-                  onClick={handleShowAvatarsChange}
-                />
-              )}
-              
-              {props.showAvatars && (
-                <ClickAwayListener onClickAway={handleShowAvatarsChange}>
-                  <Paper
-                    sx={{
-                      position: 'absolute',
-                      display: 'inline-block',
-                      ml: 1,
-                      py: 2,
-                      maxHeight: '107px',
-                      overflow: 'scroll',
-                    }}
-                    variant="outlined"
-                  >
-                    {renderAvatarOptions(avatars)}
-                  </Paper>
-                </ClickAwayListener>
-              )}
-            </Box>);
+  return (
+    <Box
+      sx={{
+        p: 0,
+        border: '1px solid rgba(0,0,0,0.12)',
+        borderRadius: 4,
+        width: '100px',
+        height: '107px',
+        background: '#fff',
+        cursor: 'pointer',
+      }}
+    >
+      {props.avatarUrl ? (
+        <img
+          src={props.avatarUrl}
+          width="100%"
+          onClick={handleShowAvatarsChange}
+          alt={props.avatarUrl}
+        ></img>
+      ) : (
+        <PersonIcon
+          sx={{ width: '100%', height: '100%' }}
+          onClick={handleShowAvatarsChange}
+        />
+      )}
+
+      {props.showAvatars && (
+        <ClickAwayListener onClickAway={handleShowAvatarsChange}>
+          <Paper
+            sx={{
+              position: 'absolute',
+              display: 'inline-block',
+              ml: 1,
+              p: 2,
+              maxHeight: '107px',
+              overflow: 'scroll',
+            }}
+          >
+            {renderAvatarOptions(avatars)}
+          </Paper>
+        </ClickAwayListener>
+      )}
+    </Box>
+  );
 }
 
-const AvatarOptionRow = (props: {
-  avatars: { alt: string; src: string }[];
-  handleAvatarChange: Function;
-}) => {
+const AvatarOptionRow = (props: { avatars: { alt: string; src: string }[]; handleAvatarChange: Function }) => {
   return (
     <Grid
       container
       spacing={0.5}
     >
-      {props.avatars.map((i) => (
+      {props.avatars.map(i => (
         <Grid
           item
           key={i.alt}

@@ -6,7 +6,19 @@ import { createTheme } from '@mui/material/styles';
  */
 const theme = createTheme({
   typography: {
-    fontFamily: ['"Public Sans Variable"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"'].join(','),
+    fontFamily: [
+      '"Public Sans Variable"',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
   },
   palette: {
     primary: {
@@ -24,8 +36,8 @@ const theme = createTheme({
     },
     text: {
       primary: '#1c252e',
-      secondary: '#637381'
-    }
+      secondary: '#637381',
+    },
   },
   components: {
     MuiButton: {
@@ -49,6 +61,16 @@ const theme = createTheme({
           color: 'rgba(0, 0, 0, 0.6) !important',
         },
       },
+    },
+    MuiPaper: {
+      variants: [
+        {
+          props: { variant: 'elevation' },
+          style: {
+            boxShadow: 'rgba(145, 158, 171, 0.28) 0px 0px 2px 0px, rgba(145, 158, 171, 0.16) 0px 12px 24px -4px',
+          },
+        },
+      ],
     },
     MuiCardHeader: {
       styleOverrides: {

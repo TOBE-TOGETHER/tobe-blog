@@ -1,22 +1,11 @@
-import {
-  Grid,
-  Paper,
-  Typography,
-} from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { enabled } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout/index.ts';
-import {
-  EContentType,
-  EFeatureCode
-} from '../../../global/enums.ts';
+import { EContentType, EFeatureCode } from '../../../global/enums.ts';
 import { IUserContentAnalyticsDTO } from '../../../global/types.ts';
 import { OverviewService } from '../../../services/index.ts';
 import { URL } from '../../URL';
@@ -51,7 +40,7 @@ export default function AnalyticsPage() {
   const loadOverview = useCallback(
     (contentType: EContentType, setData: (any: any) => void): void => {
       OverviewService.getOverviewData(contentType)
-        .then((response) => {
+        .then(response => {
           setData(response.data);
         })
         .catch(() => {
@@ -60,10 +49,7 @@ export default function AnalyticsPage() {
           });
         });
     },
-    [
-      enqueueSnackbar,
-      t,
-    ],
+    [enqueueSnackbar, t]
   );
   const loadData = useCallback((): void => {
     loadOverview(EContentType.Plan, setPlanData);
@@ -71,9 +57,9 @@ export default function AnalyticsPage() {
     loadOverview(EContentType.Vocabulary, setVOCData);
     loadOverview(EContentType.Collection, setCOLData);
   }, [loadOverview]);
-  
+
   useEffect(() => loadData(), [loadData]);
-  
+
   return (
     <Page
       openLoading={false}
@@ -105,20 +91,16 @@ export default function AnalyticsPage() {
           />
         )}
         <UserContentAnalyticsPanel
-            contentType={EContentType.Collection}
-            data={colData}
-            link={URL.COLLECTIONS}
+          contentType={EContentType.Collection}
+          data={colData}
+          link={URL.COLLECTIONS}
         />
       </Grid>
     </Page>
   );
 }
 
-const StandardSmallWidget = (props: {
-  value: number | string;
-  label: string;
-  link: string;
-}) => {
+const StandardSmallWidget = (props: { value: number | string; label: string; link: string }) => {
   return (
     <Grid
       item
@@ -133,7 +115,7 @@ const StandardSmallWidget = (props: {
         <Typography
           variant="subtitle2"
           color="text.secondary"
-          sx={{textAlign: "center"}}
+          sx={{ textAlign: 'center' }}
         >
           {props.label}
         </Typography>
@@ -145,7 +127,7 @@ const StandardSmallWidget = (props: {
         <Typography
           variant="h5"
           color="text.secondary"
-          sx={{textAlign: "center"}}
+          sx={{ textAlign: 'center' }}
         >
           {props.value}
         </Typography>
@@ -154,11 +136,7 @@ const StandardSmallWidget = (props: {
   );
 };
 
-const UserContentAnalyticsPanel = (props: {
-  data: IUserContentAnalyticsDTO;
-  link: string;
-  contentType: EContentType;
-}) => {
+const UserContentAnalyticsPanel = (props: { data: IUserContentAnalyticsDTO; link: string; contentType: EContentType }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
@@ -175,9 +153,9 @@ const UserContentAnalyticsPanel = (props: {
         <Typography
           variant="h6"
           sx={{
-            mt: 2,
-            mb: 0,
-            cursor: 'pointer',
+            'mt': 2,
+            'mb': 0,
+            'cursor': 'pointer',
             ':hover': { fontWeight: 550 },
           }}
           onClick={() => navigate(props.link)}
@@ -189,11 +167,11 @@ const UserContentAnalyticsPanel = (props: {
         container
         component={Paper}
         onClick={() => navigate(props.link)}
-        variant="outlined"
         sx={{
-          overflow: "hidden", 
-          position: "relative",
-          zIndex: 0
+          overflow: 'hidden',
+          position: 'relative',
+          zIndex: 0,
+          borderRadius: 4,
         }}
       >
         <StandardSmallWidget
@@ -216,24 +194,35 @@ const UserContentAnalyticsPanel = (props: {
           label={t('analytics-page.content.view-count')}
           link={props.link}
         />
-        <DecordateBox color={"red"} xIndex="10px" />
-        <DecordateBox color={"blue"} xIndex="-100px" />
+        <DecordateBox
+          color={'red'}
+          xIndex="10px"
+        />
+        <DecordateBox
+          color={'blue'}
+          xIndex="-100px"
+        />
       </Grid>
     </Grid>
   );
 };
 
-const DecordateBox = (props: {color: string, xIndex: string}) => {
-  return <Grid item sx={{
-          top: "-44px",
-          width: "240px",
-          zIndex: "-1",
-          height: "180px",
-          right: props.xIndex,
-          opacity: "0.12",
-          borderRadius: "24px",
-          position: "absolute",
-          transform: "rotate(40deg)",
-          background: props.color
-        }}/>
-}
+const DecordateBox = (props: { color: string; xIndex: string }) => {
+  return (
+    <Grid
+      item
+      sx={{
+        top: '-44px',
+        width: '240px',
+        zIndex: '-1',
+        height: '180px',
+        right: props.xIndex,
+        opacity: '0.12',
+        borderRadius: '24px',
+        position: 'absolute',
+        transform: 'rotate(40deg)',
+        background: props.color,
+      }}
+    />
+  );
+};

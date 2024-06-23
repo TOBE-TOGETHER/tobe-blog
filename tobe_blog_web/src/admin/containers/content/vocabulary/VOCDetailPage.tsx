@@ -1,29 +1,12 @@
-import {
-  Box,
-  Grid,
-  Paper,
-  TextField,
-} from '@mui/material';
+import { Box, Grid, Paper, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import {
-  TagOption,
-  VocabularyDetailDTO,
-  VocabularyUpdateDTO,
-} from '../../../../global/types';
+import { TagOption, VocabularyDetailDTO, VocabularyUpdateDTO } from '../../../../global/types';
 import { VocabularyService } from '../../../../services';
-import {
-  EditIconButton,
-  MultipleTagSelecter,
-  OneRow,
-} from '../../../components';
+import { EditIconButton, MultipleTagSelecter, OneRow } from '../../../components';
 import { WordListPanel } from '../components/WordListPanel';
 
 export default function VOCDetailPage() {
@@ -32,19 +15,17 @@ export default function VOCDetailPage() {
   const { id } = useParams();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
   const [editable, setEditable] = useState<boolean>(false);
-  const [vocabulary, setVocabulary] = useState<VocabularyDetailDTO | null>(
-    null,
-  );
+  const [vocabulary, setVocabulary] = useState<VocabularyDetailDTO | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [language, setLanguage] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [tagValue, setTagValue] = useState<TagOption[]>([]);
-  
+
   const loadData = useCallback(
     (vocabularyId: string): void => {
       setOpenLoading(true);
       VocabularyService.getById(vocabularyId)
-        .then((response) => {
+        .then(response => {
           setVocabulary(response.data);
           setDescription(response.data.description);
           setLanguage(response.data.language);
@@ -58,17 +39,11 @@ export default function VOCDetailPage() {
         })
         .finally(() => setOpenLoading(false));
     },
-    [
-      enqueueSnackbar,
-      t,
-    ],
+    [enqueueSnackbar, t]
   );
-  
-  useEffect(() => loadData(id || ''), [
-    id,
-    loadData,
-  ]);
-  
+
+  useEffect(() => loadData(id || ''), [id, loadData]);
+
   const handleEditableChange = () => {
     if (!vocabulary) {
       return;
@@ -85,7 +60,7 @@ export default function VOCDetailPage() {
     }
     setEditable(!editable);
   };
-  
+
   function handleUpdate(updateDTO: VocabularyUpdateDTO): void {
     setOpenLoading(true);
     VocabularyService.update(updateDTO)
@@ -101,7 +76,7 @@ export default function VOCDetailPage() {
       })
       .finally(() => setOpenLoading(false));
   }
-  
+
   return (
     <Page
       openLoading={openLoading}
@@ -128,10 +103,7 @@ export default function VOCDetailPage() {
           </Grid>
         </Grid>
       )}
-      <Paper
-        variant="outlined"
-        sx={{ mt: 0, mb: 1, p: { xs: 2, md: 3 } }}
-      >
+      <Paper sx={{ mt: 0, mb: 1, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
         <Box justifyContent="center">
           {vocabulary && (
             <Grid
@@ -145,7 +117,7 @@ export default function VOCDetailPage() {
                   autoComplete="language"
                   disabled={!editable}
                   value={language}
-                  onChange={(event) => setLanguage(event.target.value)}
+                  onChange={event => setLanguage(event.target.value)}
                 />
               </OneRow>
               <OneRow>
@@ -155,7 +127,7 @@ export default function VOCDetailPage() {
                   autoComplete="description"
                   disabled={!editable}
                   value={description}
-                  onChange={(event) => setDescription(event.target.value)}
+                  onChange={event => setDescription(event.target.value)}
                 />
               </OneRow>
               <OneRow>
@@ -165,7 +137,7 @@ export default function VOCDetailPage() {
                   value={coverImgUrl}
                   onChange={e => setCoverImgUrl(e.target.value)}
                   disabled={!editable}
-                  />
+                />
               </OneRow>
               <OneRow>
                 <MultipleTagSelecter
@@ -179,10 +151,7 @@ export default function VOCDetailPage() {
         </Box>
       </Paper>
       {id && (
-        <Paper
-          variant="outlined"
-          sx={{ my: 1, p: { xs: 2, md: 3 } }}
-        >
+        <Paper sx={{ my: 1, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
           <WordListPanel
             editable={true}
             vocabularyId={id}

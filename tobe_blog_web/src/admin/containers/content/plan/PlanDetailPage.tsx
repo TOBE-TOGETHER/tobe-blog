@@ -1,31 +1,13 @@
-import {
-  Box,
-  Grid,
-  Paper,
-  TextField,
-} from '@mui/material';
+import { Box, Grid, Paper, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useSnackbar } from 'notistack';
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import {
-  PlanInfo,
-  PlanUpdateDTO,
-  TagOption,
-} from '../../../../global/types';
+import { PlanInfo, PlanUpdateDTO, TagOption } from '../../../../global/types';
 import { PlanService } from '../../../../services';
-import {
-  EditIconButton,
-  HalfRow,
-  MultipleTagSelecter,
-  OneRow,
-} from '../../../components';
+import { EditIconButton, HalfRow, MultipleTagSelecter, OneRow } from '../../../components';
 import PlanProgressModal from './component/PlanProgressModal.tsx';
 import PlanStatusToolbar from './component/PlanStatusToolbar';
 
@@ -41,12 +23,12 @@ export default function PlanDetailPage() {
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
   const [description, setDescription] = useState<string | null>(null);
-  
+
   const loadData = useCallback(
     (id: string): void => {
       setOpenLoading(true);
       PlanService.getById(id)
-        .then((response) => {
+        .then(response => {
           setPlan(response.data);
           setFromTime(new Date(response.data.targetStartTime));
           setToTime(new Date(response.data.targetEndTime));
@@ -61,17 +43,11 @@ export default function PlanDetailPage() {
         })
         .finally(() => setOpenLoading(false));
     },
-    [
-      enqueueSnackbar,
-      t,
-    ],
+    [enqueueSnackbar, t]
   );
-  
-  useEffect(() => loadData(id || ''), [
-    loadData,
-    id,
-  ]);
-  
+
+  useEffect(() => loadData(id || ''), [loadData, id]);
+
   function handlePlanUpdate(updatedPlan: PlanUpdateDTO): void {
     setOpenLoading(true);
     PlanService.update(updatedPlan)
@@ -87,7 +63,7 @@ export default function PlanDetailPage() {
       })
       .finally(() => setOpenLoading(false));
   }
-  
+
   const handleEditableChange = () => {
     if (!plan) {
       return;
@@ -105,7 +81,7 @@ export default function PlanDetailPage() {
     }
     setEditable(!editable);
   };
-  
+
   return (
     <Page
       openLoading={openLoading}
@@ -134,10 +110,7 @@ export default function PlanDetailPage() {
           </Grid>
         </Grid>
       )}
-      <Paper
-        variant="outlined"
-        sx={{ my: 0, p: { xs: 2, md: 3 } }}
-      >
+      <Paper sx={{ my: 0, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
         <Box
           component="form"
           noValidate
@@ -160,7 +133,7 @@ export default function PlanDetailPage() {
                   maxRows={20}
                   disabled={!editable}
                   value={description}
-                  onChange={(event) => setDescription(event.target.value)}
+                  onChange={event => setDescription(event.target.value)}
                 />
               </OneRow>
               <Grid
@@ -173,8 +146,8 @@ export default function PlanDetailPage() {
                   <DatePicker
                     label={t('plan-detail-page.fields.target-start-time')}
                     value={fromTime}
-                    sx={{width: "100%"}}
-                    onChange={(newValue) => setFromTime(newValue)}
+                    sx={{ width: '100%' }}
+                    onChange={newValue => setFromTime(newValue)}
                     disabled={!editable}
                   />
                 </HalfRow>
@@ -182,8 +155,8 @@ export default function PlanDetailPage() {
                   <DatePicker
                     label={t('plan-detail-page.fields.target-end-time')}
                     value={toTime}
-                    sx={{width: "100%"}}
-                    onChange={(newValue) => setToTime(newValue)}
+                    sx={{ width: '100%' }}
+                    onChange={newValue => setToTime(newValue)}
                     disabled={!editable}
                   />
                 </HalfRow>
@@ -195,7 +168,7 @@ export default function PlanDetailPage() {
                   value={coverImgUrl}
                   onChange={e => setCoverImgUrl(e.target.value)}
                   disabled={!editable}
-                  />
+                />
               </OneRow>
               <OneRow>
                 <MultipleTagSelecter
@@ -208,12 +181,12 @@ export default function PlanDetailPage() {
           )}
         </Box>
       </Paper>
-      {id &&
+      {id && (
         <PlanProgressModal
           planId={id}
           viewOnly={false}
         />
-      }
+      )}
     </Page>
   );
 }
