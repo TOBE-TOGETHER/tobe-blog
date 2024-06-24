@@ -1,33 +1,12 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Paper,
-  TextField,
-} from '@mui/material';
+import { Box, Button, Grid, Paper, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import {
-  CollectionUpdateDTO,
-  ICollectionDTO,
-  RenderTree,
-  TagOption,
-  TagRelationship
-} from '../../../../global/types';
+import { CollectionUpdateDTO, ICollectionDTO, RenderTree, TagOption, TagRelationship } from '../../../../global/types';
 import { CollectionService, TagRelationshipService } from '../../../../services';
-import {
-  EditIconButton,
-  MultipleTagSelecter,
-  OneRow,
-  TreePanel,
-} from '../../../components';
+import { EditIconButton, MultipleTagSelecter, OneRow, TreePanel } from '../../../components';
 import SingleTagSelecter from './SingleTagSelecter';
 
 export default function CollectionDetailPage() {
@@ -48,14 +27,14 @@ export default function CollectionDetailPage() {
   });
   const [currentNodeId, setCurrentNodeId] = useState<string>(ROOT);
   const [targetTag, setTargetTag] = useState<TagOption | null>(null);
-  
+
   const loadData = useCallback(
     (id: string): void => {
       function convert(tagRelationships: TagRelationship[]): RenderTree[] {
         if (!Array.isArray(tagRelationships) || tagRelationships.length === 0) {
           return [];
         }
-        return tagRelationships.map((t) => {
+        return tagRelationships.map(t => {
           return {
             id: t.id + '',
             name: t.label,
@@ -63,10 +42,10 @@ export default function CollectionDetailPage() {
           };
         });
       }
-      
+
       setOpenLoading(true);
       CollectionService.getById(id)
-        .then((response) => {
+        .then(response => {
           setCollections(response.data);
           setDescription(response.data.description);
           setCoverImgUrl(response.data.coverImgUrl);
@@ -81,18 +60,11 @@ export default function CollectionDetailPage() {
         })
         .finally(() => setOpenLoading(false));
     },
-    [
-      treeData,
-      t,
-      enqueueSnackbar,
-    ],
+    [treeData, t, enqueueSnackbar]
   );
-  
-  useEffect(() => loadData(id || ''), [
-    loadData,
-    id,
-  ]);
-  
+
+  useEffect(() => loadData(id || ''), [loadData, id]);
+
   const handleEditableChange = () => {
     if (!collection) {
       return;
@@ -103,12 +75,12 @@ export default function CollectionDetailPage() {
         title: collection.title,
         description: description || '',
         coverImgUrl: coverImgUrl || '',
-        tags: tagValues
+        tags: tagValues,
       });
     }
     setEditable(!editable);
   };
-  
+
   function handleUpdate(target: CollectionUpdateDTO): void {
     setOpenLoading(true);
     CollectionService.update(target)
@@ -124,11 +96,10 @@ export default function CollectionDetailPage() {
       })
       .finally(() => setOpenLoading(false));
   }
-  
+
   function handleCreateNewRelationship() {
     setOpenLoading(true);
-    const parentId =
-      currentNodeId === ROOT ? null : Number.parseInt(currentNodeId);
+    const parentId = currentNodeId === ROOT ? null : Number.parseInt(currentNodeId);
     if (!targetTag || !id) {
       return;
     }
@@ -142,11 +113,10 @@ export default function CollectionDetailPage() {
       setTargetTag(null);
     });
   }
-  
+
   function handleDeleteRelationship() {
     setOpenLoading(true);
-    const targetId =
-      currentNodeId === ROOT ? null : Number.parseInt(currentNodeId);
+    const targetId = currentNodeId === ROOT ? null : Number.parseInt(currentNodeId);
     if (!targetId || !id) {
       return;
     }
@@ -155,7 +125,7 @@ export default function CollectionDetailPage() {
       setTargetTag(null);
     });
   }
-  
+
   return (
     <Page
       openLoading={openLoading}
@@ -182,10 +152,7 @@ export default function CollectionDetailPage() {
           </Grid>
         </Grid>
       )}
-      <Paper
-        variant="outlined"
-        sx={{ mt: 0, mb: 1, p: { xs: 2, md: 3 } }}
-      >
+      <Paper sx={{ mt: 0, mb: 1, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
         <Box justifyContent="center">
           {collection && (
             <Grid
@@ -194,31 +161,24 @@ export default function CollectionDetailPage() {
             >
               <OneRow>
                 <TextField
-                  id="coverImgUrl"
-                  name="coverImgUrl"
-                  label={t('collection-creation-page.fields.cover-img-url')}
-                  fullWidth
-                  disabled={!editable}
-                  autoComplete="coverImgUrl"
-                  variant="standard"
-                  value={coverImgUrl}
-                  onChange={(event) => setCoverImgUrl(event.target.value)}
-                />
-              </OneRow>
-              <OneRow>
-                <TextField
-                  id="description"
-                  name="description"
                   label={t('collection-creation-page.fields.description')}
                   fullWidth
-                  autoComplete="description"
-                  variant="standard"
                   multiline
                   maxRows={2}
                   minRows={2}
                   disabled={!editable}
                   value={description}
-                  onChange={(event) => setDescription(event.target.value)}
+                  onChange={event => setDescription(event.target.value)}
+                />
+              </OneRow>
+              <OneRow>
+                <TextField
+                  label={t('collection-creation-page.fields.cover-img-url')}
+                  fullWidth
+                  disabled={!editable}
+                  autoComplete="coverImgUrl"
+                  value={coverImgUrl}
+                  onChange={event => setCoverImgUrl(event.target.value)}
                 />
               </OneRow>
               <OneRow>
@@ -235,7 +195,6 @@ export default function CollectionDetailPage() {
       <Grid
         container
         component={Paper}
-        variant="outlined"
       >
         <Grid
           item

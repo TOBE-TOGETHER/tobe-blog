@@ -1,19 +1,7 @@
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-} from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import { ChangeEvent } from 'react';
 import Loading from '../../../components/loading/Loading';
-import {
-  Column,
-  Operation,
-} from '../../../global/types';
+import { Column, Operation } from '../../../global/types';
 import { getButtonByOperationName } from './TobeButton';
 
 interface PagedTableProps {
@@ -32,7 +20,6 @@ interface PagedTableProps {
 export default function PagedTable(props: PagedTableProps) {
   return (
     <Paper
-      variant="outlined"
       sx={{
         ...{
           width: '100%',
@@ -40,6 +27,7 @@ export default function PagedTable(props: PagedTableProps) {
           justifyContent: 'center',
           alignItems: 'center',
           p: { xs: 2, md: 3 },
+          borderRadius: 4,
         },
         ...props.sx,
       }}
@@ -52,7 +40,7 @@ export default function PagedTable(props: PagedTableProps) {
         >
           <TableHead>
             <TableRow>
-              {props.columns.map((column) => (
+              {props.columns.map(column => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -64,7 +52,7 @@ export default function PagedTable(props: PagedTableProps) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.rows.map((row) => {
+            {props.rows.map(row => {
               return (
                 <TableRow
                   hover
@@ -72,7 +60,7 @@ export default function PagedTable(props: PagedTableProps) {
                   tabIndex={-1}
                   key={row.id}
                 >
-                  {props.columns.map((column) => {
+                  {props.columns.map(column => {
                     if (column.id !== 'operation') {
                       const value = row[column.id];
                       return (
@@ -91,12 +79,7 @@ export default function PagedTable(props: PagedTableProps) {
                         >
                           {props.operations?.map(
                             (operation, index) =>
-                              !operation?.hide?.call(null, row) &&
-                              getButtonByOperationName(
-                                operation.name,
-                                () => operation.onClick(row.id),
-                                `${operation.name}_${index}`,
-                              ),
+                              !operation?.hide?.call(null, row) && getButtonByOperationName(operation.name, () => operation.onClick(row.id), `${operation.name}_${index}`)
                           )}
                         </TableCell>
                       );
@@ -109,11 +92,7 @@ export default function PagedTable(props: PagedTableProps) {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[
-          10,
-          25,
-          100,
-        ]}
+        rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={props.totalCount}
         rowsPerPage={props.size}

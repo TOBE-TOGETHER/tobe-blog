@@ -13,6 +13,10 @@ export function dateFormat(time: string | undefined | null | number) {
   return moment(time).format('YYYY-MM-DD');
 }
 
+export function dateMonFormat(time: string | undefined | null | number) {
+  return moment(time).format('DD MMM YYYY');
+}
+
 export function timeFormat(time: string | undefined | null | number) {
   return moment(time).format('hh:mm a');
 }

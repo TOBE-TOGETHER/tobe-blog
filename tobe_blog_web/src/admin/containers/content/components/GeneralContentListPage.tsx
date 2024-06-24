@@ -1,16 +1,11 @@
+import { Box, Tab, Tabs } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { EOperationName } from '../../../../global/enums.ts';
-import {
-  GeneralCardData,
-  Operation,
-} from '../../../../global/types';
+import { GeneralCardData, Operation } from '../../../../global/types';
 import DomainService from '../../../../services/DomainService';
 import GeneralCardView from './GeneralCardView';
 import GeneralContentListPageFunctionBar from './GeneralContentListPageFunctionBar';
@@ -30,62 +25,77 @@ export default function GeneralContentListPage(props: {
   const [data, setData] = useState<GeneralCardData[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const [status, setStatus] = useState<string>('');
+  // the tempData and tempCurrent are defined for avoid the
+  let tempData: GeneralCardData[] = [];
+  let tempCurrent: number = 0;
+
   const loadData = (): void => {
-    setOpenLoading(true);
     props.domainService
-      .get(DEFAULT_PAGE_SIZE, current, '')
-      .then((response) => {
-        setData(data.concat(response.data.records));
-        setCurrent(response.data.current);
+      .get(DEFAULT_PAGE_SIZE, tempCurrent + 1, '', status)
+      .then(response => {
+        // avoid duplicated data issue caused by the exceptional re-render
+        if (tempCurrent == response.data.current && tempCurrent != 0) {
+          return;
+        }
+        tempCurrent = response.data.current;
+        tempData = tempData.concat(response.data.records);
+        setData(tempData);
+        setCurrent(tempCurrent);
         setTotalPage(response.data.pages);
       })
       .catch(() => {
-        enqueueSnackbar(t('domain-page.msg.error'), {
+        enqueueSnackbar(t('contents-page.msg.error'), {
           variant: 'error',
         });
-      })
-      .finally(() => {
-        setOpenLoading(false);
       });
   };
-  
+
+  const handleFilterChange = (v: string): void => {
+    setCurrent(0);
+    setTotalPage(1);
+    setStatus(v);
+    tempData = [];
+    tempCurrent = 0;
+  };
+
   useEffect(() => {
     loadData();
-  }, []);
-  
+  }, [status]);
+
   function releaseById(id: number | string) {
     setOpenLoading(true);
     props.domainService
       .releaseById(id)
-      .then((response) => {
+      .then(response => {
         setData(
-          data.map((d) => {
+          data.map(d => {
             if (d.id === id) {
               d.publicToAll = response.data.publicToAll;
             }
             return d;
-          }),
+          })
         );
       })
-      .catch((error) => console.error(error))
+      .catch(error => console.error(error))
       .finally(() => {
         setOpenLoading(false);
       });
   }
-  
+
   function deleteById(id: number | string) {
     setOpenLoading(true);
     props.domainService
       .deleteById(id)
       .then(() => {
-        setData(data.filter((d) => d.id !== id));
+        setData(data.filter(d => d.id !== id));
       })
-      .catch((error) => console.error(error))
+      .catch(error => console.error(error))
       .finally(() => {
         setOpenLoading(false);
       });
   }
-  
+
   const operations: Operation[] = [
     {
       name: EOperationName.RELEASE,
@@ -97,15 +107,35 @@ export default function GeneralContentListPage(props: {
       onClick: (id: number | string) => deleteById(id),
     },
   ];
-  
+
   return (
     <Page
       openLoading={openLoading}
       pageTitle={props.pageTitle}
     >
-      <GeneralContentListPageFunctionBar
-        createNewAction={() => navigate(props.createPageURL)}
-      />
+      <GeneralContentListPageFunctionBar createNewAction={() => navigate(props.createPageURL)} />
+      <Box sx={{ mb: 1, width: '100%' }}>
+        <Tabs
+          value={status}
+          onChange={(_, v: string) => handleFilterChange(v)}
+        >
+          <Tab
+            disableRipple
+            label={t('contents-page.filter.all')}
+            value=""
+          />
+          <Tab
+            disableRipple
+            label={t('contents-page.filter.published')}
+            value="PUBLISHED"
+          />
+          <Tab
+            disableRipple
+            label={t('contents-page.filter.draft')}
+            value="DRAFT"
+          />
+        </Tabs>
+      </Box>
       <GeneralCardView
         loading={openLoading}
         current={current}
@@ -113,9 +143,7 @@ export default function GeneralContentListPage(props: {
         loadMore={loadData}
         data={props.dataConverter ? props.dataConverter.call(null, data) : data}
         operations={operations}
-        onClick={(id: number | string) =>
-          navigate(props.detailPageURL.replace(':id', id.toString()))
-        }
+        onClick={(id: number | string) => navigate(props.detailPageURL.replace(':id', id.toString()))}
       />
     </Page>
   );

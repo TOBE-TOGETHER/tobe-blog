@@ -1,28 +1,22 @@
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  ListItemIcon,
-  Divider,
-} from "@mui/material";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import Add from "@mui/icons-material/Add";
-import { useNavigate, useLocation } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import { authed, enabled } from "../../../commons";
-import { PageItem } from "../../../global/types";
+import Add from '@mui/icons-material/Add';
+import { Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { authed, enabled } from '../../../commons';
+import { PageItem } from '../../../global/types';
 
 const NavItem = styled(ListItem)(({ theme }) => ({
-  "& .MuiListItemButton-root.Mui-selected": {
-    borderRight: "5px solid",
-    paddingRight: "5px",
-    borderColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.main + " !important",
-    "& .MuiListItemIcon-root": {
-      color: theme.palette.secondary.main + " !important",
+  'padding': '5px 15px',
+  'color': theme.palette.text.secondary,
+
+  '& .MuiListItemButton-root.Mui-selected': {
+    'color': theme.palette.secondary.main + ' !important',
+    'backgroundColor': `${theme.palette.secondary.main}20 !important`,
+    'fontWeight': '500 !important',
+    '& .MuiListItemIcon-root': {
+      color: theme.palette.secondary.main + ' !important',
     },
   },
 }));
@@ -32,14 +26,11 @@ export const NavItems = (props: { pageItems: PageItem[] }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const authedPages = props.pageItems.filter(
-    (pageItem) =>
-      authed(pageItem.requiredRoles) && enabled(pageItem.requiredFeature)
-  );
+  const authedPages = props.pageItems.filter(pageItem => authed(pageItem.requiredRoles) && enabled(pageItem.requiredFeature));
   return (
     <>
       <List>
-        {authedPages?.map((pageItem) => (
+        {authedPages?.map(pageItem => (
           <NavItem
             key={pageItem.label}
             disablePadding
@@ -53,10 +44,10 @@ export const NavItems = (props: { pageItems: PageItem[] }) => {
                   aria-label="Add"
                   sx={{
                     borderRadius: 0,
-                    mr: "2px",
-                    color: "rgba(0,0,0,0.4)",
+                    mr: '2px',
+                    color: 'rgba(0,0,0,0.4)',
                   }}
-                  onClick={() => navigate(pageItem.secondaryUrl || "/")}
+                  onClick={() => navigate(pageItem.secondaryUrl || '/')}
                 >
                   <Add />
                 </IconButton>

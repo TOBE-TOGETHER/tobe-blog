@@ -11,6 +11,7 @@ import lombok.Data;
 public class BaseContentCreationDTO implements Serializable {
     protected String title;
     protected String description;
+    protected String coverImgUrl;
     protected Boolean contentProtected;
     protected List<TagInfoDTO> tags;
 }

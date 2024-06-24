@@ -1,21 +1,9 @@
-import {
-  Box,
-  Divider,
-  Grid,
-  Paper,
-  TextField
-} from '@mui/material';
+import { Box, Divider, Grid, Paper, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import {
-  ReactNode,
-  useState,
-} from 'react';
+import { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from '../../../components/layout';
-import {
-  useAuthDispatch,
-  useAuthState,
-} from '../../../contexts';
+import { useAuthDispatch, useAuthState } from '../../../contexts';
 import { ELocalStorageKeys } from '../../../global/enums.ts';
 import { UserService } from '../../../services';
 import { HalfRow, OneRow, QuarterRow, SaveButtonPanel } from '../../components';
@@ -27,9 +15,9 @@ export default function ProfileSettingPage() {
   const [openLoading, setOpenLoading] = useState(false);
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
-  
+
   const [showAvatars, setShowAvatars] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState<string>(user.avatarUrl)
+  const [avatarUrl, setAvatarUrl] = useState<string>(user.avatarUrl);
   const [firstName, setFirstName] = useState<string>(user.firstName);
   const [lastName, setLastName] = useState<string>(user.lastName);
   const [profession, setProfession] = useState<string>(user.profession);
@@ -40,7 +28,7 @@ export default function ProfileSettingPage() {
   const [introduction, setIntroduction] = useState<string>(user.introduction);
   const [backgroundImg, setBackgroundImg] = useState<string>(user.backgroundImg);
   const [photoImg, setPhotoImg] = useState<string>(user.photoImg);
-  
+
   const handleSubmit = () => {
     setOpenLoading(true);
     UserService.updateUser({
@@ -58,12 +46,9 @@ export default function ProfileSettingPage() {
       backgroundImg: backgroundImg,
       photoImg: photoImg,
     })
-      .then((response) => {
+      .then(response => {
         dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
-        localStorage.setItem(
-          ELocalStorageKeys.CURRENT_USER,
-          JSON.stringify(response.data),
-        );
+        localStorage.setItem(ELocalStorageKeys.CURRENT_USER, JSON.stringify(response.data));
         enqueueSnackbar(t('profile-setting.msg.success'), {
           variant: 'success',
         });
@@ -75,7 +60,7 @@ export default function ProfileSettingPage() {
       })
       .finally(() => setOpenLoading(false));
   };
-  
+
   return (
     <Page
       openLoading={openLoading}
@@ -88,11 +73,12 @@ export default function ProfileSettingPage() {
             xs={12}
             sx={{ mt: -7 }}
           >
-            <AvatarSelector 
-              showAvatars={showAvatars} 
-              setShowAvatars={setShowAvatars} 
-              avatarUrl={avatarUrl} 
-              setAvatarUrl={setAvatarUrl} />
+            <AvatarSelector
+              showAvatars={showAvatars}
+              setShowAvatars={setShowAvatars}
+              avatarUrl={avatarUrl}
+              setAvatarUrl={setAvatarUrl}
+            />
           </Grid>
           <QuarterRow>
             <TextField
@@ -165,9 +151,7 @@ export default function ProfileSettingPage() {
               defaultValue={introduction}
               multiline
               minRows={3}
-              placeholder={t(
-                'profile-setting.fields.introduction-placeholder',
-              )}
+              placeholder={t('profile-setting.fields.introduction-placeholder')}
             />
           </OneRow>
         </InfoSection>
@@ -190,16 +174,21 @@ export default function ProfileSettingPage() {
             />
           </HalfRow>
         </InfoSection>
-        <SaveButtonPanel primaryEvent={handleSubmit}/>
+        <SaveButtonPanel primaryEvent={handleSubmit} />
       </Box>
     </Page>
   );
 }
 
-const InfoSection = (props: { children: ReactNode[], mt?: number }) => {
-  return (<Paper sx={{ mt: props.mt || 2, mb: 2, p: { xs: 2, md: 3 } }} variant="outlined">
-    <Grid container spacing={3}>
-    {props.children}
-    </Grid>
-  </Paper>);
+const InfoSection = (props: { children: ReactNode[]; mt?: number }) => {
+  return (
+    <Paper sx={{ mt: props.mt || 2, mb: 2, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
+      <Grid
+        container
+        spacing={3}
+      >
+        {props.children}
+      </Grid>
+    </Paper>
+  );
 };

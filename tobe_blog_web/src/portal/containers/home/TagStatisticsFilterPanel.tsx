@@ -1,24 +1,12 @@
-import {
-  Checkbox,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { SidePanel } from "../../../components";
-import { EContentType } from "../../../global/enums";
-import { TagStatisticDTO } from "../../../global/types";
-import { PublicDataService } from "../../../services";
+import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { SidePanel } from '../../../components';
+import { EContentType } from '../../../global/enums';
+import { TagStatisticDTO } from '../../../global/types';
+import { PublicDataService } from '../../../services';
 
-export default function TagStatisticsFilterPanel(props: {
-  contentType: EContentType;
-  ownerId: string;
-  checked: string[];
-  setChecked: (newValue: string[]) => void;
-}) {
+export default function TagStatisticsFilterPanel(props: { contentType: EContentType; ownerId: string; checked: string[]; setChecked: (newValue: string[]) => void }) {
   const { t } = useTranslation();
   const [tagStatistics, setTagStatistics] = useState<TagStatisticDTO[]>([]);
 
@@ -37,7 +25,7 @@ export default function TagStatisticsFilterPanel(props: {
   useEffect(() => {
     function loadData(): void {
       PublicDataService.getTagStatistics(props.contentType, props.ownerId)
-        .then((response) => {
+        .then(response => {
           setTagStatistics(response.data);
         })
         .catch(() => {});
@@ -46,12 +34,15 @@ export default function TagStatisticsFilterPanel(props: {
   }, [props.contentType, props.ownerId]);
 
   return tagStatistics.length > 0 ? (
-    <SidePanel title={t("home-page.tag-statistics")}>
-      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        {tagStatistics.map((n) => {
+    <SidePanel title={t('home-page.tag-statistics')}>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        {tagStatistics.map(n => {
           const labelId = `checkbox-list-label-${n.value}`;
           return (
-            <ListItem key={n.value} sx={{ py: 0 }}>
+            <ListItem
+              key={n.value}
+              sx={{ py: 0 }}
+            >
               <ListItemButton
                 role={undefined}
                 onClick={handleToggle(n.value)}
@@ -64,14 +55,14 @@ export default function TagStatisticsFilterPanel(props: {
                     checked={props.checked.indexOf(n.value) !== -1}
                     tabIndex={-1}
                     disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
+                    inputProps={{ 'aria-labelledby': labelId }}
                   />
                 </ListItemIcon>
                 <ListItemText
                   id={labelId}
                   primary={`${n.label}(${n.count})`}
                   sx={{
-                    color: "text.secondary",
+                    color: 'text.secondary',
                   }}
                 />
               </ListItemButton>

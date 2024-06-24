@@ -12,4 +12,9 @@ public class Const {
         VOCABULARY,
         COLLECTION
     }
+
+    public static enum ContentStatus {
+        DRFAT,
+        PUBLISHED
+    }
 }

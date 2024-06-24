@@ -1,9 +1,9 @@
-import { Container, Box, Grid, Typography } from "@mui/material";
-import AwesomeSlider from "react-awesome-slider";
-import withAutoplay from "react-awesome-slider/dist/autoplay";
-import theme from "../../../theme";
-import "react-awesome-slider/dist/styles.css";
-import "./slider.css";
+import { Box, Container, Grid, Typography } from '@mui/material';
+import AwesomeSlider from 'react-awesome-slider';
+import withAutoplay from 'react-awesome-slider/dist/autoplay';
+import 'react-awesome-slider/dist/styles.css';
+import theme from '../../../theme';
+import './slider.css';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
@@ -21,10 +21,10 @@ const Title = (props: any) => {
         sx={{
           fontWeight: 600,
           fontSize: {
-            xs: "1.25rem",
-            sm: "1.5rem",
-            md: "2rem",
-            lg: "3rem",
+            xs: '1.25rem',
+            sm: '1.5rem',
+            md: '2rem',
+            lg: '3rem',
           },
         }}
       >
@@ -38,13 +38,13 @@ const Title = (props: any) => {
           mt: {
             xs: 1,
             md: 2,
-            lg: 3
+            lg: 3,
           },
           fontSize: {
-            xs: "1.25rem",
-            sm: "1.5rem",
-            md: "1.5rem",
-            lg: "3rem",
+            xs: '1.25rem',
+            sm: '1.5rem',
+            md: '1.5rem',
+            lg: '3rem',
           },
         }}
       >
@@ -60,7 +60,10 @@ export default function GreatingSection() {
       <Grid
         container
         sx={{
-          mt: "60px",
+          mt: '60px',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          boxShadow: 'rgba(145, 158, 171, 0.28) 0px 0px 12px 0px, rgba(145, 158, 171, 0.16) 0px 24px 30px -4px',
         }}
       >
         <AutoplaySlider

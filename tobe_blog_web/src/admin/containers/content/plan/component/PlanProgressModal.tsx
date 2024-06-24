@@ -1,54 +1,33 @@
-import {
-  Button,
-  Divider,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Button, Divider, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  FileService,
-  PlanProgressService,
-} from '../../../../../services';
+import { FileService, PlanProgressService } from '../../../../../services';
 import { InputFileUploadButton } from '../../../../components';
 import { ImagesPanel } from './ImagesPanel';
 import PlanProgressItems from './PlanProgressItems.tsx';
 
-export default function PlanProgressModal(props: {
-  planId: string;
-  viewOnly: boolean;
-}) {
+export default function PlanProgressModal(props: { planId: string; viewOnly: boolean }) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [newProgress, setNewProgress] = useState<string>('');
   const [images, setImages] = useState<any>([]);
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [refreshCode, setRefreshCode] = useState<number>(new Date().getTime());
-  
+
   function onImageChange(e: any) {
     setImages([...e.target.files]);
   }
-  
+
   useEffect(() => {
     if (images.length < 1) {
       return;
     }
     const newImageUrls: any = [];
-    images.forEach((image: any) =>
-      newImageUrls.push(URL.createObjectURL(image)),
-    );
+    images.forEach((image: any) => newImageUrls.push(URL.createObjectURL(image)));
     setImageURLs(newImageUrls);
-  }, [
-    props.planId,
-    images,
-  ]);
-  
+  }, [props.planId, images]);
+
   function handleProgressCreation(): void {
     if (!newProgress.trim()) {
       enqueueSnackbar(t('plan-progress.msg.warning'), {
@@ -60,13 +39,9 @@ export default function PlanProgressModal(props: {
       planId: props.planId,
       description: newProgress,
     })
-      .then((response) => {
+      .then(response => {
         if (images.length > 0) {
-          return FileService.batchUpload(
-            response.data.id,
-            'PLAN_PIC',
-            images,
-          );
+          return FileService.batchUpload(response.data.id, 'PLAN_PIC', images);
         }
       })
       .then(() => {
@@ -84,7 +59,7 @@ export default function PlanProgressModal(props: {
         });
       });
   }
-  
+
   return (
     <React.Fragment>
       <Divider sx={{ my: 1 }}>
@@ -95,12 +70,9 @@ export default function PlanProgressModal(props: {
           {t('plan-progress.title')}
         </Typography>
       </Divider>
-      
+
       {!props.viewOnly && (
-        <Paper
-          variant="outlined"
-          sx={{ mt: 2, mb: 2, p: { xs: 2, md: 3 } }}
-        >
+        <Paper sx={{ mt: 2, mb: 2, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
           <Grid
             container
             item
@@ -119,7 +91,7 @@ export default function PlanProgressModal(props: {
                 minRows={3}
                 maxRows={20}
                 value={newProgress}
-                onChange={(event) => {
+                onChange={event => {
                   if (event.target.value.length <= 1000) {
                     setNewProgress(event.target.value);
                   }

@@ -29,6 +29,7 @@ public interface IContentController<
     ResponseEntity<Page<D>> search(
         int current,
         int size,
+        String status,
         String createFrom,
         String createTo,
         String updateFrom,

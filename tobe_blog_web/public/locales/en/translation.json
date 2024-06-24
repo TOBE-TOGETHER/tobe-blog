@@ -48,6 +48,8 @@
       "view-count": "Total view"
     },
     "general-card-view": {
+      "published": "Published",
+      "draft": "Draft",
       "title": {
         "open": "Visible to everyone",
         "private": "Only visible to yourself"
@@ -177,8 +179,12 @@
       "operation": "Operation"
     }
   },
-  "domain-page": {
-    "load-more": "Load more",
+  "contents-page": {
+    "filter": {
+      "all": "All",
+      "published": "Published",
+      "draft": "Draft"
+    },
     "msg": {
       "error": "Operation failed"
     }
@@ -192,7 +198,8 @@
       "name": "Plan Name",
       "description": "Description",
       "target-start-time": "Target start time",
-      "target-end-time": "Target end time"
+      "target-end-time": "Target end time",
+      "cover-img-url": "Cover image URL"
     },
     "back-btn": "Back",
     "submit-btn": "Submit",
@@ -212,7 +219,8 @@
       "name": "Plan name",
       "description": "Description",
       "target-start-time": "Target start time",
-      "target-end-time": "Target end time"
+      "target-end-time": "Target end time",
+      "cover-img-url": "Cover image URL"
     },
     "msg": {
       "error": "Operation failed",
@@ -289,6 +297,7 @@
     "fields": {
       "title": "Title",
       "sub-title": "Subtitle",
+      "cover-img-url": "Cover image URL",
       "description": "Description",
       "tag": "Tag",
       "content-protected": "Only logged in users can read the full content"
@@ -316,7 +325,7 @@
     "fields": {
       "name": "Collection Name",
       "description": "Description",
-      "cover-img-url": "Cover Image URL",
+      "cover-img-url": "Cover image URL",
       "tag": "Tag"
     },
     "msg": {
@@ -362,6 +371,7 @@
       "title": "Title",
       "description": "Description",
       "language": "Language",
+      "cover-img-url": "Cover image URL",
       "tags": "Tags"
     },
     "msg": {

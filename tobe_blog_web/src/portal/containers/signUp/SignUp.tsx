@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Link,
-  Paper,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Container, Grid, Link, Paper, TextField, Typography } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -23,13 +14,13 @@ export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    
+
     if (!validateForm(data)) {
       return;
     }
-    
+
     setOpenLoading(true);
-    
+
     UserService.createUser({
       firstName: data.get('firstName')?.toString(),
       lastName: data.get('lastName')?.toString(),
@@ -46,11 +37,12 @@ export default function SignUp() {
         enqueueSnackbar(t('sign-up.msg.error'), {
           variant: 'error',
         });
-      }).finally(() => {
-      setOpenLoading(false);
-    });
+      })
+      .finally(() => {
+        setOpenLoading(false);
+      });
   };
-  
+
   function validateForm(data: FormData): boolean {
     // validate email template
     const emailReg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
@@ -59,10 +51,7 @@ export default function SignUp() {
       return false;
     }
     // validate the two password
-    if (
-      data.get('password')?.toString() !==
-      data.get('password-confirm')?.toString()
-    ) {
+    if (data.get('password')?.toString() !== data.get('password-confirm')?.toString()) {
       warn('sign-up.msg.warning.two-password-dismatch');
       return false;
     }
@@ -74,13 +63,13 @@ export default function SignUp() {
     }
     return true;
   }
-  
+
   function warn(warningMsg: string): void {
     enqueueSnackbar(t(warningMsg), {
       variant: 'warning',
     });
   }
-  
+
   return (
     <Container
       component="main"
@@ -96,6 +85,7 @@ export default function SignUp() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          borderRadius: 4,
         }}
       >
         <Typography

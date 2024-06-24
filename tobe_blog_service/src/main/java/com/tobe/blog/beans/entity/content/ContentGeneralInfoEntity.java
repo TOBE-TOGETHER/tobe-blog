@@ -22,6 +22,7 @@ public class ContentGeneralInfoEntity extends BaseEntity {
     protected String id;
     protected String title;
     protected String description;
+    protected String coverImgUrl;
     // manipulate if the content can be viewed by others
     protected Boolean publicToAll;
     protected Timestamp publishTime;

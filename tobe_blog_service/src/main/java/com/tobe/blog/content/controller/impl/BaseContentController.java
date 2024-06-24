@@ -76,13 +76,14 @@ public abstract class BaseContentController<
     public ResponseEntity<Page<D>> search(            
         @RequestParam(value = "current", required = false, defaultValue = "1") int current,
         @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+        @RequestParam(value = "status", required = false, defaultValue = "") String status,
         @RequestParam(value = "createFrom", required = false, defaultValue = "") String createFrom,
         @RequestParam(value = "createTo", required = false, defaultValue = "") String createTo,
         @RequestParam(value = "updateFrom", required = false, defaultValue = "") String updateFrom,
         @RequestParam(value = "updateTo", required = false, defaultValue = "") String updateTo,
         @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
         try {
-            final BaseSearchFilter filter = buildSearchFilter(createFrom, createTo, updateFrom, updateTo, keyword);
+            final BaseSearchFilter filter = buildSearchFilter(status, createFrom, createTo, updateFrom, updateTo, keyword);
             return ResponseEntity.ok(this.getConcreteSubContentService().search(current, size, filter));
         } catch (ParseException e) {
             return ResponseEntity.badRequest().build();
@@ -96,12 +97,16 @@ public abstract class BaseContentController<
     }
 
     private BaseSearchFilter buildSearchFilter(
+        String status,
         String createFrom, 
         String createTo, 
         String updateFrom,
         String updateTo, 
         String keyword) throws ParseException {
         final BaseSearchFilter filter = new BaseSearchFilter();
+        if (Strings.isNotBlank(status)) {
+            filter.setStatus(status);
+        }
         if (Strings.isNotBlank(createFrom)) {
             filter.setCreateFrom(sdf.parse(createFrom));
         }

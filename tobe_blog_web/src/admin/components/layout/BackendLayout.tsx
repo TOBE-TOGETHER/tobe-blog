@@ -1,24 +1,24 @@
-import { Box, Stack } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { useState } from "react";
-import BackendHeader from "../header/BackendHeader";
-import { SideNav } from "../navigator";
+import { Box, Stack } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+import BackendHeader from '../header/BackendHeader';
+import { SideNav } from '../navigator';
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
+const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  transition: theme.transitions.create("margin", {
+  transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
 
   ...(open && {
-    transition: theme.transitions.create("margin", {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up('md')]: {
       marginLeft: `${drawerWidth}px`,
     },
   }),
@@ -33,17 +33,15 @@ const drawerWidth = 240;
  */
 export default function BackendLayout({ children }: { children: any }) {
   const [openDrawer, setOpenDrawer] = useState(false);
-
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        minHeight: "100vh",
-        backgroundColor: "#f3f2ef",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       <BackendHeader
@@ -54,13 +52,13 @@ export default function BackendLayout({ children }: { children: any }) {
       <Main open={openDrawer}>
         <Stack
           sx={{
-            minHeight: "100vh",
+            minHeight: '100vh',
           }}
         >
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
             {children}
