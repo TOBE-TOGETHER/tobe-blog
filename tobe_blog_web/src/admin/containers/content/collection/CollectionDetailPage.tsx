@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, TextField } from '@mui/material';
+import { Button, Grid, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,8 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { CollectionUpdateDTO, ICollectionDTO, RenderTree, TagOption, TagRelationship } from '../../../../global/types';
 import { CollectionService, TagRelationshipService } from '../../../../services';
-import { EditIconButton, MultipleTagSelecter, OneRow, TreePanel } from '../../../components';
-import SingleTagSelecter from './SingleTagSelecter';
+import { EditIconButton, FormPanel, MultipleTagSelecter, OneRow, SingleTagSelecter, TreePanel } from '../../../components';
 
 export default function CollectionDetailPage() {
   const ROOT = 'root';
@@ -152,50 +151,40 @@ export default function CollectionDetailPage() {
           </Grid>
         </Grid>
       )}
-      <Paper sx={{ mt: 0, mb: 1, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
-        <Box justifyContent="center">
-          {collection && (
-            <Grid
-              container
-              spacing={3}
-            >
-              <OneRow>
-                <TextField
-                  label={t('collection-creation-page.fields.description')}
-                  fullWidth
-                  multiline
-                  maxRows={2}
-                  minRows={2}
-                  disabled={!editable}
-                  value={description}
-                  onChange={event => setDescription(event.target.value)}
-                />
-              </OneRow>
-              <OneRow>
-                <TextField
-                  label={t('collection-creation-page.fields.cover-img-url')}
-                  fullWidth
-                  disabled={!editable}
-                  autoComplete="coverImgUrl"
-                  value={coverImgUrl}
-                  onChange={event => setCoverImgUrl(event.target.value)}
-                />
-              </OneRow>
-              <OneRow>
-                <MultipleTagSelecter
-                  value={tagValues}
-                  setValue={setTagValues}
-                  disabled={!editable}
-                />
-              </OneRow>
-            </Grid>
-          )}
-        </Box>
-      </Paper>
-      <Grid
-        container
-        component={Paper}
-      >
+      {collection && (
+        <FormPanel sx={{ mt: 1 }}>
+          <OneRow>
+            <TextField
+              label={t('collection-creation-page.fields.description')}
+              fullWidth
+              multiline
+              maxRows={2}
+              minRows={2}
+              disabled={!editable}
+              value={description}
+              onChange={event => setDescription(event.target.value)}
+            />
+          </OneRow>
+          <OneRow>
+            <TextField
+              label={t('collection-creation-page.fields.cover-img-url')}
+              fullWidth
+              disabled={!editable}
+              autoComplete="coverImgUrl"
+              value={coverImgUrl}
+              onChange={event => setCoverImgUrl(event.target.value)}
+            />
+          </OneRow>
+          <OneRow>
+            <MultipleTagSelecter
+              value={tagValues}
+              setValue={setTagValues}
+              disabled={!editable}
+            />
+          </OneRow>
+        </FormPanel>
+      )}
+      <FormPanel sx={{ mt: 1 }}>
         <Grid
           item
           xs={12}
@@ -255,7 +244,7 @@ export default function CollectionDetailPage() {
             </Button>
           </Grid>
         </Grid>
-      </Grid>
+      </FormPanel>
     </Page>
   );
 }

@@ -1,4 +1,4 @@
-import { Grid, Paper, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,7 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { VocabularyService } from '../../../../services';
-import { MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
+import { FormPanel, MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
 
 export default function VOCCreationPage() {
   const { t } = useTranslation();
@@ -48,50 +48,45 @@ export default function VOCCreationPage() {
       openLoading={openLoading}
       pageTitle={t('vocabulary-creation-page.page-main-title')}
     >
-      <Paper sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
-        <Grid
-          container
-          spacing={3}
-        >
-          <OneRow>
-            <TextField
-              label={t('vocabulary-creation-page.fields.title')}
-              fullWidth
-              onChange={e => setTitle(e.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('vocabulary-creation-page.fields.language')}
-              fullWidth
-              onChange={e => setLanguage(e.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('vocabulary-creation-page.fields.description')}
-              fullWidth
-              onChange={e => setDescription(e.target.value)}
-              multiline
-              maxRows={2}
-              minRows={2}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('vocabulary-creation-page.fields.cover-img-url')}
-              fullWidth
-              onChange={e => setCoverImgUrl(e.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <MultipleTagSelecter
-              value={tagValue}
-              setValue={setTagValue}
-            />
-          </OneRow>
-        </Grid>
-      </Paper>
+      <FormPanel>
+        <OneRow>
+          <TextField
+            label={t('vocabulary-creation-page.fields.title')}
+            fullWidth
+            onChange={e => setTitle(e.target.value)}
+          />
+        </OneRow>
+        <OneRow>
+          <TextField
+            label={t('vocabulary-creation-page.fields.language')}
+            fullWidth
+            onChange={e => setLanguage(e.target.value)}
+          />
+        </OneRow>
+        <OneRow>
+          <TextField
+            label={t('vocabulary-creation-page.fields.description')}
+            fullWidth
+            onChange={e => setDescription(e.target.value)}
+            multiline
+            maxRows={2}
+            minRows={2}
+          />
+        </OneRow>
+        <OneRow>
+          <TextField
+            label={t('vocabulary-creation-page.fields.cover-img-url')}
+            fullWidth
+            onChange={e => setCoverImgUrl(e.target.value)}
+          />
+        </OneRow>
+        <OneRow>
+          <MultipleTagSelecter
+            value={tagValue}
+            setValue={setTagValue}
+          />
+        </OneRow>
+      </FormPanel>
       <SaveButtonPanel primaryEvent={handleCreation} />
     </Page>
   );

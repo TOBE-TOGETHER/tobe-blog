@@ -1,4 +1,4 @@
-import { Grid, Paper, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
@@ -8,7 +8,7 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PlanService } from '../../../../services';
-import { HalfRow, MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
+import { FormPanel, HalfRow, MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
 
 export default function PlanCreationPage() {
   const { t } = useTranslation();
@@ -85,61 +85,56 @@ export default function PlanCreationPage() {
       openLoading={openLoading}
       pageTitle={t('plan-creation-page.form-title')}
     >
-      <Paper sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
-        <Grid
-          container
-          spacing={3}
-        >
-          <OneRow>
-            <TextField
-              label={t('plan-creation-page.fields.name')}
-              fullWidth
-              onChange={e => setTitle(e.target.value)}
-            />
-          </OneRow>
-          <HalfRow>
-            <DatePicker
-              disablePast={true}
-              label={t('plan-creation-page.fields.target-start-time')}
-              value={fromTime}
-              sx={{ width: '100%' }}
-              onChange={newValue => setFromTime(newValue)}
-            />
-          </HalfRow>
-          <HalfRow>
-            <DatePicker
-              disablePast={true}
-              label={t('plan-creation-page.fields.target-end-time')}
-              value={toTime}
-              sx={{ width: '100%' }}
-              onChange={newValue => setToTime(newValue)}
-            />
-          </HalfRow>
-          <OneRow>
-            <TextField
-              label={t('plan-creation-page.fields.description')}
-              fullWidth
-              onChange={e => setDescription(e.target.value)}
-              multiline
-              maxRows={4}
-              minRows={4}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('plan-creation-page.fields.cover-img-url')}
-              fullWidth
-              onChange={e => setCoverImgUrl(e.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <MultipleTagSelecter
-              value={tagValue}
-              setValue={setTagValue}
-            />
-          </OneRow>
-        </Grid>
-      </Paper>
+      <FormPanel>
+        <OneRow>
+          <TextField
+            label={t('plan-creation-page.fields.name')}
+            fullWidth
+            onChange={e => setTitle(e.target.value)}
+          />
+        </OneRow>
+        <HalfRow>
+          <DatePicker
+            disablePast={true}
+            label={t('plan-creation-page.fields.target-start-time')}
+            value={fromTime}
+            sx={{ width: '100%' }}
+            onChange={newValue => setFromTime(newValue)}
+          />
+        </HalfRow>
+        <HalfRow>
+          <DatePicker
+            disablePast={true}
+            label={t('plan-creation-page.fields.target-end-time')}
+            value={toTime}
+            sx={{ width: '100%' }}
+            onChange={newValue => setToTime(newValue)}
+          />
+        </HalfRow>
+        <OneRow>
+          <TextField
+            label={t('plan-creation-page.fields.description')}
+            fullWidth
+            onChange={e => setDescription(e.target.value)}
+            multiline
+            maxRows={4}
+            minRows={4}
+          />
+        </OneRow>
+        <OneRow>
+          <TextField
+            label={t('plan-creation-page.fields.cover-img-url')}
+            fullWidth
+            onChange={e => setCoverImgUrl(e.target.value)}
+          />
+        </OneRow>
+        <OneRow>
+          <MultipleTagSelecter
+            value={tagValue}
+            setValue={setTagValue}
+          />
+        </OneRow>
+      </FormPanel>
       <SaveButtonPanel primaryEvent={handleSubmit} />
     </Page>
   );

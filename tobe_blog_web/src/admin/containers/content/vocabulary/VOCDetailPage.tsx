@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, TextField } from '@mui/material';
+import { Grid, Paper, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { TagOption, VocabularyDetailDTO, VocabularyUpdateDTO } from '../../../../global/types';
 import { VocabularyService } from '../../../../services';
-import { EditIconButton, MultipleTagSelecter, OneRow } from '../../../components';
+import { EditIconButton, FormPanel, MultipleTagSelecter, OneRow } from '../../../components';
 import { WordListPanel } from '../components/WordListPanel';
 
 export default function VOCDetailPage() {
@@ -103,55 +103,48 @@ export default function VOCDetailPage() {
           </Grid>
         </Grid>
       )}
-      <Paper sx={{ mt: 0, mb: 1, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
-        <Box justifyContent="center">
-          {vocabulary && (
-            <Grid
-              container
-              spacing={3}
-            >
-              <OneRow>
-                <TextField
-                  label={t('vocabulary-creation-page.fields.language')}
-                  fullWidth
-                  autoComplete="language"
-                  disabled={!editable}
-                  value={language}
-                  onChange={event => setLanguage(event.target.value)}
-                />
-              </OneRow>
-              <OneRow>
-                <TextField
-                  label={t('vocabulary-creation-page.fields.description')}
-                  fullWidth
-                  autoComplete="description"
-                  disabled={!editable}
-                  value={description}
-                  onChange={event => setDescription(event.target.value)}
-                />
-              </OneRow>
-              <OneRow>
-                <TextField
-                  label={t('vocabulary-creation-page.fields.cover-img-url')}
-                  fullWidth
-                  value={coverImgUrl}
-                  onChange={e => setCoverImgUrl(e.target.value)}
-                  disabled={!editable}
-                />
-              </OneRow>
-              <OneRow>
-                <MultipleTagSelecter
-                  value={tagValue}
-                  setValue={setTagValue}
-                  disabled={!editable}
-                />
-              </OneRow>
-            </Grid>
-          )}
-        </Box>
-      </Paper>
+      {vocabulary && (
+        <FormPanel sx={{ mt: 1 }}>
+          <OneRow>
+            <TextField
+              label={t('vocabulary-creation-page.fields.language')}
+              fullWidth
+              autoComplete="language"
+              disabled={!editable}
+              value={language}
+              onChange={event => setLanguage(event.target.value)}
+            />
+          </OneRow>
+          <OneRow>
+            <TextField
+              label={t('vocabulary-creation-page.fields.description')}
+              fullWidth
+              autoComplete="description"
+              disabled={!editable}
+              value={description}
+              onChange={event => setDescription(event.target.value)}
+            />
+          </OneRow>
+          <OneRow>
+            <TextField
+              label={t('vocabulary-creation-page.fields.cover-img-url')}
+              fullWidth
+              value={coverImgUrl}
+              onChange={e => setCoverImgUrl(e.target.value)}
+              disabled={!editable}
+            />
+          </OneRow>
+          <OneRow>
+            <MultipleTagSelecter
+              value={tagValue}
+              setValue={setTagValue}
+              disabled={!editable}
+            />
+          </OneRow>
+        </FormPanel>
+      )}
       {id && (
-        <Paper sx={{ my: 1, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
+        <Paper sx={{ my: 1, p: { xs: 2, md: 3 }, borderRadius: 4, overflow: 'hidden' }}>
           <WordListPanel
             editable={true}
             vocabularyId={id}
