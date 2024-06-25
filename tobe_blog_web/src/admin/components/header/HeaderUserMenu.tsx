@@ -1,56 +1,34 @@
-import {
-  Avatar,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { Avatar, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import React, { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import {
-  authed,
-  enabled,
-} from '../../../commons';
+import { authed, enabled } from '../../../commons';
 import { useAuthState } from '../../../contexts';
 import { pages } from '../../../portal/components/configs';
-import {
-  URL,
-  validateUrl,
-} from '../../../routes';
+import { URL, validateUrl } from '../../../routes';
 import theme from '../../../theme';
 
 export default function HeaderUserMenu() {
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null,
-  );
-  
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>): void => {
     setAnchorElUser(event.currentTarget);
   };
-  
-  const handleCloseUserMenu = (
-    _event: MouseEvent<HTMLElement>,
-    url: string | null,
-  ): void => {
+
+  const handleCloseUserMenu = (_event: MouseEvent<HTMLElement>, url: string | null): void => {
     let target = url || '';
     if (validateUrl(target)) {
       navigate(target, { replace: false });
     }
     setAnchorElUser(null);
   };
-  
+
   const authContext = useAuthState();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  
-  const authedPages = pages.filter(
-    (pageItem) =>
-      authed(pageItem.requiredRoles) && enabled(pageItem.requiredFeature),
-  );
-  
+
+  const authedPages = pages.filter(pageItem => authed(pageItem.requiredRoles) && enabled(pageItem.requiredFeature));
+
   return (
     <>
       {authContext.user ? (
@@ -71,14 +49,14 @@ export default function HeaderUserMenu() {
           onClick={() => navigate(URL.SIGN_IN)}
           size="large"
           sx={{
-            color: theme.palette.secondary.main,
-            fontSize: 18,
-            borderRadius: 0,
-            borderBottom: '3px solid transparent',
-            fontFamily: 'PingFang SC,Roboto, Helvetica, Arial, sans-serif',
-            fontWeight: 700,
+            'color': theme.palette.primary.main,
+            'fontSize': 18,
+            'borderRadius': 0,
+            'borderBottom': '3px solid transparent',
+            'fontFamily': 'PingFang SC,Roboto, Helvetica, Arial, sans-serif',
+            'fontWeight': 700,
             '&:hover': {
-              borderBottom: '3px solid ' + theme.palette.secondary.main,
+              borderBottom: '3px solid ' + theme.palette.primary.main,
             },
           }}
         >
@@ -101,10 +79,10 @@ export default function HeaderUserMenu() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {authedPages.map((page) => (
+        {authedPages.map(page => (
           <MenuItem
             key={page.label}
-            onClick={(e) => handleCloseUserMenu(e, page.url)}
+            onClick={e => handleCloseUserMenu(e, page.url)}
           >
             <Typography textAlign="center">{t(page.label)}</Typography>
           </MenuItem>

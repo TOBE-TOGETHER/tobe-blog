@@ -113,14 +113,14 @@ export default function SideNav(props: SideNavProps) {
             letterSpacing: '.3rem',
             textDecoration: 'none',
             cursor: 'pointer',
-            color: theme.palette.secondary.main,
+            color: theme.palette.primary.main,
           }}
         >
           {plan.name.toUpperCase()}
         </Typography>
         <IconButton
           size="large"
-          sx={{ color: theme.palette.secondary.main }}
+          sx={{ color: theme.palette.primary.main }}
           onClick={() => props.setOpenDrawer(!props.openDrawer)}
         >
           <FirstPage />

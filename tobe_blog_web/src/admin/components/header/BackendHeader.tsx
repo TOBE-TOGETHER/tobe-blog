@@ -37,7 +37,7 @@ const BackendHeader = (props: BackendHeaderProps) => {
     <AppBar
       position="fixed"
       open={props.openDrawer}
-      sx={{ boxShadow: 'none', background: 'none' }}
+      sx={{ boxShadow: 'none', background: theme.palette.background.default, opacity: 0.9 }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -48,7 +48,7 @@ const BackendHeader = (props: BackendHeaderProps) => {
             aria-haspopup="true"
             onClick={() => props.setOpenDrawer(!props.openDrawer)}
             edge="start"
-            sx={{ mr: 2, color: theme.palette.secondary.main, ...(props.openDrawer && { display: 'none' }) }}
+            sx={{ mr: 2, color: theme.palette.primary.main, ...(props.openDrawer && { display: 'none' }) }}
           >
             <MenuIcon
               sx={{

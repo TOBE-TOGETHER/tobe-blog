@@ -41,7 +41,7 @@ export default function HeaderLanguageMenu() {
         aria-haspopup="true"
         onClick={handleOpenLangMenu}
         title={t('app-header.language.btn-label')}
-        sx={{ color: theme.palette.secondary.main }}
+        sx={{ color: theme.palette.primary.main }}
       >
         <TranslateIcon />
       </IconButton>
