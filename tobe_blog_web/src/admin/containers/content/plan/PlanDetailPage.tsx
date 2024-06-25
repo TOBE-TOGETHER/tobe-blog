@@ -1,4 +1,4 @@
-import { Box, Grid, Paper, TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { PlanInfo, PlanUpdateDTO, TagOption } from '../../../../global/types';
 import { PlanService } from '../../../../services';
-import { EditIconButton, HalfRow, MultipleTagSelecter, OneRow } from '../../../components';
+import { EditIconButton, FormPanel, HalfRow, MultipleTagSelecter, OneRow } from '../../../components';
 import PlanProgressModal from './component/PlanProgressModal.tsx';
 import PlanStatusToolbar from './component/PlanStatusToolbar';
 
@@ -110,77 +110,64 @@ export default function PlanDetailPage() {
           </Grid>
         </Grid>
       )}
-      <Paper sx={{ my: 0, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
-        <Box
-          component="form"
-          noValidate
-        >
-          {plan && (
-            <Grid
-              container
-              spacing={3}
-            >
-              <OneRow>
-                <TextField
-                  id="description"
-                  name="description"
-                  label={t('plan-detail-page.fields.description')}
-                  fullWidth
-                  autoComplete="description"
-                  variant="standard"
-                  multiline
-                  minRows={3}
-                  maxRows={20}
-                  disabled={!editable}
-                  value={description}
-                  onChange={event => setDescription(event.target.value)}
-                />
-              </OneRow>
-              <Grid
-                container
-                item
-                xs={12}
-                spacing={3}
-              >
-                <HalfRow>
-                  <DatePicker
-                    label={t('plan-detail-page.fields.target-start-time')}
-                    value={fromTime}
-                    sx={{ width: '100%' }}
-                    onChange={newValue => setFromTime(newValue)}
-                    disabled={!editable}
-                  />
-                </HalfRow>
-                <HalfRow>
-                  <DatePicker
-                    label={t('plan-detail-page.fields.target-end-time')}
-                    value={toTime}
-                    sx={{ width: '100%' }}
-                    onChange={newValue => setToTime(newValue)}
-                    disabled={!editable}
-                  />
-                </HalfRow>
-              </Grid>
-              <OneRow>
-                <TextField
-                  label={t('plan-detail-page.fields.cover-img-url')}
-                  fullWidth
-                  value={coverImgUrl}
-                  onChange={e => setCoverImgUrl(e.target.value)}
-                  disabled={!editable}
-                />
-              </OneRow>
-              <OneRow>
-                <MultipleTagSelecter
-                  value={tagValue}
-                  setValue={setTagValue}
-                  disabled={!editable}
-                />
-              </OneRow>
-            </Grid>
-          )}
-        </Box>
-      </Paper>
+      {plan && (
+        <FormPanel sx={{ mt: 1 }}>
+          <OneRow>
+            <TextField
+              label={t('plan-detail-page.fields.description')}
+              fullWidth
+              autoComplete="description"
+              multiline
+              minRows={3}
+              maxRows={20}
+              disabled={!editable}
+              value={description}
+              onChange={event => setDescription(event.target.value)}
+            />
+          </OneRow>
+          <Grid
+            container
+            item
+            xs={12}
+            spacing={3}
+          >
+            <HalfRow>
+              <DatePicker
+                label={t('plan-detail-page.fields.target-start-time')}
+                value={fromTime}
+                sx={{ width: '100%' }}
+                onChange={newValue => setFromTime(newValue)}
+                disabled={!editable}
+              />
+            </HalfRow>
+            <HalfRow>
+              <DatePicker
+                label={t('plan-detail-page.fields.target-end-time')}
+                value={toTime}
+                sx={{ width: '100%' }}
+                onChange={newValue => setToTime(newValue)}
+                disabled={!editable}
+              />
+            </HalfRow>
+          </Grid>
+          <OneRow>
+            <TextField
+              label={t('plan-detail-page.fields.cover-img-url')}
+              fullWidth
+              value={coverImgUrl}
+              onChange={e => setCoverImgUrl(e.target.value)}
+              disabled={!editable}
+            />
+          </OneRow>
+          <OneRow>
+            <MultipleTagSelecter
+              value={tagValue}
+              setValue={setTagValue}
+              disabled={!editable}
+            />
+          </OneRow>
+        </FormPanel>
+      )}
       {id && (
         <PlanProgressModal
           planId={id}

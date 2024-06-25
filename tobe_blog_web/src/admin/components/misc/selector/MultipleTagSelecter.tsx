@@ -1,30 +1,21 @@
 import { enqueueSnackbar } from 'notistack';
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StylesConfig } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { TagOption } from '../../../../global/types';
 import { TagService } from '../../../../services';
+import { styles } from './StyleConfig';
 
-const styles: StylesConfig<TagOption, true> = {};
-
-export default function SingleTagSelecter(props: {
-  value: TagOption | null;
-  setValue: (newValue: TagOption) => void;
-  disabled?: boolean;
-}) {
+export default function MultipleTagSelecter(props: { value: TagOption[]; setValue: (newValue: TagOption[]) => void; disabled?: boolean }) {
   const [options, setOptions] = useState<TagOption[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();
 
-  useEffect(() => loadTags(""), []);
+  useEffect(() => loadTags(''), []);
 
   function loadTags(inputValue: string) {
     TagService.getTags(inputValue)
-      .then((response) => {
+      .then(response => {
         setOptions(response.data.records);
       })
       .catch(() => {
@@ -35,8 +26,8 @@ export default function SingleTagSelecter(props: {
   const createTag = async (inputValue: string) => {
     setIsLoading(true);
     if (inputValue.length >= 32) {
-      enqueueSnackbar(t("components.tag-select.msg.warning"), {
-        variant: "warning",
+      enqueueSnackbar(t('components.tag-select.msg.warning'), {
+        variant: 'warning',
       });
       return;
     }
@@ -44,23 +35,25 @@ export default function SingleTagSelecter(props: {
     try {
       const response = await TagService.createTag(inputValue);
       if (isInstanceOfTagOption(response.data)) {
-        props.setValue(response.data);
+        props.value.push(response.data);
+        props.setValue(props.value);
         options.push(response.data);
         setOptions(options);
       }
     } catch (error: any) {
-      enqueueSnackbar(error?.response?.data?.message, { variant: "error" });
+      enqueueSnackbar(error?.response?.data?.message, { variant: 'error' });
     } finally {
       setIsLoading(false);
     }
   };
 
   function isInstanceOfTagOption(object: any): object is TagOption {
-    return "label" in object && "value" in object;
+    return 'label' in object && 'value' in object;
   }
 
   return (
     <CreatableSelect
+      isMulti
       onCreateOption={createTag}
       onChange={(newValue: any) => props.setValue(newValue)}
       onInputChange={(newValue: string) => loadTags(newValue)}
@@ -68,7 +61,7 @@ export default function SingleTagSelecter(props: {
       options={options}
       value={props.value}
       styles={styles}
-      placeholder={t("components.tag-select.placeholder")}
+      placeholder={t('components.tag-select.placeholder')}
     />
   );
 }

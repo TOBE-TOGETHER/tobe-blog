@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom/client';
 import { BasicLayout } from './components/layout';
 import { AuthProvider } from './contexts';
 import './i18n';
+import './index.css';
 import { MainRouter } from './routes';
 import theme from './theme.ts';
 
@@ -31,5 +32,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </SnackbarProvider>
       </LocalizationProvider>
     </ThemeProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

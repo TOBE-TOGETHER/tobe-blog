@@ -326,8 +326,8 @@
   "collection-creation-page": {
     "page-main-title": "创建一个合集",
     "fields": {
-      "name": "合集名",
-      "description": "合集",
+      "name": "标题",
+      "description": "描述",
       "cover-img-url": "封面链接",
       "tag": "标签"
     },
@@ -335,7 +335,7 @@
       "success": "创建成功",
       "error": "创建失败",
       "warning": {
-        "name-empty": "合集名不能为空"
+        "name-empty": "标题不能为空"
       }
     },
     "submit-btn": "保存",

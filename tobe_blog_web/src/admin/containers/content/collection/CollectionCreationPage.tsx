@@ -1,4 +1,4 @@
-import { Grid, Paper, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,7 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { CollectionService } from '../../../../services';
 import { URL } from '../../../URL';
-import { MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
+import { FormPanel, MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
 
 export default function CollectionCreationPage() {
   const { t } = useTranslation();
@@ -56,43 +56,38 @@ export default function CollectionCreationPage() {
       openLoading={openLoading}
       pageTitle={t('collection-creation-page.page-main-title')}
     >
-      <Paper sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
-        <Grid
-          container
-          spacing={3}
-        >
-          <OneRow>
-            <TextField
-              label={t('collection-creation-page.fields.name')}
-              fullWidth
-              onChange={e => setTitle(e.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('collection-creation-page.fields.description')}
-              fullWidth
-              onChange={e => setDescription(e.target.value)}
-              multiline
-              maxRows={2}
-              minRows={2}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('collection-creation-page.fields.cover-img-url')}
-              fullWidth
-              onChange={e => setCoverImgUrl(e.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <MultipleTagSelecter
-              value={tagValues}
-              setValue={setTagValues}
-            />
-          </OneRow>
-        </Grid>
-      </Paper>
+      <FormPanel>
+        <OneRow>
+          <TextField
+            label={t('collection-creation-page.fields.name')}
+            fullWidth
+            onChange={e => setTitle(e.target.value)}
+          />
+        </OneRow>
+        <OneRow>
+          <TextField
+            label={t('collection-creation-page.fields.description')}
+            fullWidth
+            onChange={e => setDescription(e.target.value)}
+            multiline
+            maxRows={2}
+            minRows={2}
+          />
+        </OneRow>
+        <OneRow>
+          <TextField
+            label={t('collection-creation-page.fields.cover-img-url')}
+            fullWidth
+            onChange={e => setCoverImgUrl(e.target.value)}
+          />
+        </OneRow>
+        <OneRow>
+          <MultipleTagSelecter
+            value={tagValues}
+            setValue={setTagValues}
+          />
+        </OneRow>
+      </FormPanel>
       <SaveButtonPanel primaryEvent={handleSubmit} />
     </Page>
   );
