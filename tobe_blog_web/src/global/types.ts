@@ -150,12 +150,13 @@ export interface ArticleUpdateDTO extends ArticleCreationDTO {
 export interface ArticleDetailDTO extends GeneralCardData {
   content: string;
   authorName: string;
-  authorId: string;
+  ownerId: string;
   likeCount: number;
   viewCount: number;
   publishTime: string;
   subTitle: string;
   avatarUrl: string;
+  contentProtected: boolean;
 }
 
 export interface VocabularyCreationDTO {
@@ -168,7 +169,7 @@ export interface VocabularyCreationDTO {
 
 export interface VocabularyDetailDTO extends GeneralCardData {
   authorName: string;
-  authorId: string;
+  ownerId: string;
   likeCount: number;
   viewCount: number;
   publishTime: string;

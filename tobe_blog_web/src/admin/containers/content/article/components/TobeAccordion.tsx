@@ -1,9 +1,10 @@
-import { Accordion, AccordionDetails } from "@mui/material";
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from "@mui/material/AccordionSummary";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { styled } from "@mui/material/styles";
+import {
+  Accordion,
+  AccordionDetails,
+} from '@mui/material';
+import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { styled } from '@mui/material/styles';
 
 export const TobeAccordionSummary = styled((props: AccordionSummaryProps) => (
   <MuiAccordionSummary expandIcon={<KeyboardArrowRightIcon />} {...props} />

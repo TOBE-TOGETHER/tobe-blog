@@ -1,9 +1,13 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import Loading from '../components/loading/Loading';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { URL } from './URL';
 import { getAdminRoutes } from '../admin/AdminRoutes';
+import Loading from '../components/loading/Loading';
+import { getPortalRoutes } from '../portal/PortalRoutes';
 
 const HomePage = React.lazy(() => import('../portal/containers/home/Home'));
 
@@ -29,6 +33,7 @@ export function MainRouter() {
             element={<SignUp />}
           />
           {getAdminRoutes()}
+          {getPortalRoutes()}
         </Routes>
       </BrowserRouter>
     </Suspense>

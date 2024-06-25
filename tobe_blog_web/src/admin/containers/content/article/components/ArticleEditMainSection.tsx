@@ -1,10 +1,24 @@
-import { Checkbox, Grid, Paper, TextField, Typography } from '@mui/material';
+import {
+  Checkbox,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TagOption } from '../../../../../global/types';
-import { MultipleTagSelecter, RichContentEditor, SaveButtonPanel } from '../../../../components';
+import {
+  MultipleTagSelecter,
+  RichContentEditor,
+  SaveButtonPanel,
+} from '../../../../components';
 import { FieldWrapper } from './FieldWrapper';
-import { TobeAccordion, TobeAccordionDetails, TobeAccordionSummary } from './TobeAccordion';
+import {
+  TobeAccordion,
+  TobeAccordionDetails,
+  TobeAccordionSummary,
+} from './TobeAccordion';
 
 export interface ArticleEditMainSectionProps {
   title: string;
@@ -66,7 +80,7 @@ export default function ArticleEditMainSection(props: ArticleEditMainSectionProp
         <TobeAccordion
           expanded={expanded}
           onChange={() => setExpanded(!expanded)}
-          variant="outlined"
+          sx={{ borderRadius: '16px !important' }}
         >
           <TobeAccordionSummary>
             <Typography
