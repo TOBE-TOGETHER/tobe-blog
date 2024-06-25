@@ -1,24 +1,8 @@
-import {
-  Checkbox,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from '@mui/material';
-import { useState } from 'react';
+import { Checkbox, Grid, Paper, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { TagOption } from '../../../../../global/types';
-import {
-  MultipleTagSelecter,
-  RichContentEditor,
-  SaveButtonPanel,
-} from '../../../../components';
-import { FieldWrapper } from './FieldWrapper';
-import {
-  TobeAccordion,
-  TobeAccordionDetails,
-  TobeAccordionSummary,
-} from './TobeAccordion';
+import theme from '../../../../../theme';
+import { MultipleTagSelecter, OneRow, RichContentEditor, SaveButtonPanel } from '../../../../components';
 
 export interface ArticleEditMainSectionProps {
   title: string;
@@ -40,122 +24,51 @@ export interface ArticleEditMainSectionProps {
 
 export default function ArticleEditMainSection(props: ArticleEditMainSectionProps) {
   const { t } = useTranslation();
-  const [expanded, setExpanded] = useState<boolean>(false);
   return (
-    <Grid
-      container
-      sx={{ py: 2 }}
-    >
-      <Grid
-        item
-        xs={12}
-        component={Paper}
-        sx={{ width: '100%', py: 2, px: 2, borderRadius: 4 }}
-      >
+    <>
+      <Paper sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
         <Grid
           container
-          item
-          xs={12}
+          spacing={3}
         >
-          <FieldWrapper
-            label={t('article-creation-page.fields.title')}
-            labelPosition="left"
-            children={
-              <TextField
-                fullWidth
-                variant="standard"
-                value={props.title}
-                onChange={v => props.setTitle(v.target.value)}
-                error={props.title.length >= 128}
-              />
-            }
-          />
+          <OneRow>
+            <TextField
+              fullWidth
+              label={t('article-creation-page.fields.title')}
+              value={props.title}
+              onChange={v => props.setTitle(v.target.value)}
+              error={props.title.length >= 128}
+            />
+          </OneRow>
+          <OneRow>
+            <TextField
+              fullWidth
+              label={t('article-creation-page.fields.sub-title')}
+              value={props.subTitle}
+              onChange={v => props.setSubTitle(v.target.value)}
+              error={props.subTitle.length >= 1000}
+            />
+          </OneRow>
+          <OneRow>
+            <TextField
+              fullWidth
+              label={t('article-creation-page.fields.cover-img-url')}
+              value={props.coverImgUrl}
+              onChange={v => props.setCoverImgUrl(v.target.value)}
+              error={props.coverImgUrl?.length >= 2000}
+            />
+          </OneRow>
+          <OneRow>
+            <MultipleTagSelecter
+              value={props.tagValues}
+              setValue={props.setTagValues}
+            />
+          </OneRow>
         </Grid>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        sx={{ mt: 1 }}
-      >
-        <TobeAccordion
-          expanded={expanded}
-          onChange={() => setExpanded(!expanded)}
-          sx={{ borderRadius: '16px !important' }}
-        >
-          <TobeAccordionSummary>
-            <Typography
-              color={'text.secondary'}
-              variant={'body2'}
-              sx={{ textAlign: 'end', flexGrow: 0 }}
-            >
-              {t('article-creation-page.expand-label')}
-            </Typography>
-          </TobeAccordionSummary>
-          <TobeAccordionDetails>
-            <Grid
-              container
-              sx={{ py: 0 }}
-            >
-              <FieldWrapper
-                label={t('article-creation-page.fields.sub-title')}
-                labelPosition="left"
-                children={
-                  <TextField
-                    fullWidth
-                    variant="standard"
-                    value={props.subTitle}
-                    onChange={v => props.setSubTitle(v.target.value)}
-                    error={props.subTitle.length >= 1000}
-                  />
-                }
-              />
-              <FieldWrapper
-                label={t('article-creation-page.fields.cover-img-url')}
-                labelPosition="left"
-                children={
-                  <TextField
-                    fullWidth
-                    variant="standard"
-                    value={props.coverImgUrl}
-                    onChange={v => props.setCoverImgUrl(v.target.value)}
-                    error={props.coverImgUrl?.length >= 2000}
-                  />
-                }
-              />
-              <FieldWrapper
-                label={t('article-creation-page.fields.tag')}
-                labelPosition="left"
-                children={
-                  <MultipleTagSelecter
-                    value={props.tagValues}
-                    setValue={props.setTagValues}
-                  />
-                }
-              />
-              <FieldWrapper
-                label={t('article-creation-page.fields.content-protected')}
-                labelPosition="right"
-                children={
-                  <Checkbox
-                    size="small"
-                    checked={props.contentProtected}
-                    onChange={e => props.setContentProtected(e.target.checked)}
-                  />
-                }
-              />
-            </Grid>
-          </TobeAccordionDetails>
-        </TobeAccordion>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        sx={{ mt: 1 }}
-      >
+
         <Grid
           container
-          sx={{ px: 2, py: 1, borderRadius: 4 }}
-          component={Paper}
+          sx={{ mt: 2, border: '0.5px, solid ' + theme.palette.grey[300], borderRadius: '8px' }}
         >
           <RichContentEditor
             htmlValue={props.htmlValue}
@@ -164,8 +77,18 @@ export default function ArticleEditMainSection(props: ArticleEditMainSectionProp
             setTextValue={props.setTextValue}
           />
         </Grid>
-      </Grid>
+        <Grid container>
+          <OneRow>
+            <Checkbox
+              size="small"
+              aria-label={t('article-creation-page.fields.content-protected')}
+              checked={props.contentProtected}
+              onChange={e => props.setContentProtected(e.target.checked)}
+            />
+          </OneRow>
+        </Grid>
+      </Paper>
       <SaveButtonPanel primaryEvent={props.onClickPrimaryBtn} />
-    </Grid>
+    </>
   );
 }

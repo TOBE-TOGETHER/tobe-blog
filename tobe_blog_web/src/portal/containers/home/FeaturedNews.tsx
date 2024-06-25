@@ -81,8 +81,6 @@ export default function FeaturedArticles(props: {
           },
         }}
         variant="fullWidth"
-        textColor="secondary"
-        indicatorColor="secondary"
       >
         {props.availableContentTypes.includes(EContentType.Article) && (
           <Tab

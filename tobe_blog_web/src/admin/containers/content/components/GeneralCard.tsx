@@ -22,10 +22,10 @@ export function GeneralCard(props: { record: GeneralCardData; onClick?: (id: str
             item
             xs={12}
             sm={12}
-            md={8}
+            md={6}
             lg={8}
             xl={8}
-            sx={{ p: 3, flexDirection: 'column', height: '260px' }}
+            sx={{ p: 3, flexDirection: 'column', maxHeight: '260px', pb: { xs: 0, sm: 0, md: 3 } }}
           >
             <Grid container>
               <Grid flexGrow={1}>
@@ -145,7 +145,7 @@ export function GeneralCard(props: { record: GeneralCardData; onClick?: (id: str
             item
             xs={12}
             sm={12}
-            md={4}
+            md={6}
             lg={4}
             xl={4}
           >
