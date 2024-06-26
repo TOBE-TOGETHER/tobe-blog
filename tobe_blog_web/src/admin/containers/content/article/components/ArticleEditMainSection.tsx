@@ -1,4 +1,4 @@
-import { Checkbox, TextField } from '@mui/material';
+import { FormControlLabel, Switch, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { TagOption } from '../../../../../global/types';
 import { FormPanel, MultipleTagSelecter, OneRow, RichContentEditor, SaveButtonPanel } from '../../../../components';
@@ -68,11 +68,14 @@ export default function ArticleEditMainSection(props: ArticleEditMainSectionProp
           />
         </OneRow>
         <OneRow>
-          <Checkbox
-            size="small"
-            aria-label={t('article-creation-page.fields.content-protected')}
-            checked={props.contentProtected}
-            onChange={e => props.setContentProtected(e.target.checked)}
+          <FormControlLabel
+            control={
+              <Switch
+                checked={props.contentProtected}
+                onChange={e => props.setContentProtected(e.target.checked)}
+              />
+            }
+            label={t('article-creation-page.fields.content-protected')}
           />
         </OneRow>
       </FormPanel>
