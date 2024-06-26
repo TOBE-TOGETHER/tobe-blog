@@ -16,6 +16,7 @@ import com.tobe.blog.analytics.service.AnalyticsService;
 import com.tobe.blog.beans.dto.analytics.UserContentAnalyticsDTO;
 import com.tobe.blog.beans.dto.content.ArticleDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
+import com.tobe.blog.beans.dto.content.CollectionDTO;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressDTO;
 import com.tobe.blog.beans.dto.content.VOCDTO;
@@ -24,6 +25,7 @@ import com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO;
 import com.tobe.blog.beans.dto.user.UserBriefProfileDTO;
 import com.tobe.blog.beans.dto.user.UserFullProfileDTO;
 import com.tobe.blog.content.service.impl.ArticleService;
+import com.tobe.blog.content.service.impl.CollectionService;
 import com.tobe.blog.content.service.impl.PlanProgressService;
 import com.tobe.blog.content.service.impl.PlanService;
 import com.tobe.blog.content.service.impl.VOCService;
@@ -45,6 +47,7 @@ public class PublicApiController {
     private final ArticleService articleService;
     private final PlanService planService;
     private final VOCService vocService;
+    private final CollectionService collectionService;
     private final PlanProgressService progressService;
     private final WordService wordService;
     private final UserService userService;
@@ -78,6 +81,12 @@ public class PublicApiController {
     @GetMapping("/vocabularies/{id}")
     public ResponseEntity<VOCDTO> getVocabularyById(@PathVariable(value = "id") String id) {
         final VOCDTO result = vocService.getDTOByIdAndCount(id);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/collections/{id}")
+    public ResponseEntity<CollectionDTO> getCollectionById(@PathVariable(value = "id") String id) {
+        final CollectionDTO result = collectionService.getDTOByIdAndCount(id);
         return ResponseEntity.ok(result);
     }
 

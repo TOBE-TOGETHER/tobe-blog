@@ -1,6 +1,11 @@
 package com.tobe.blog.beans.consts;
 
 public class Const {
+
+    public static final String CONTENT_VIEW_COUNT_KEY = "CONTENT_VIEW_COUNT";
+
+    public static final String CONTENT_LIKE_COUNT_KEY = "CONTENT_LIKE_COUNT";
+
     public static class Role {
         public static final String ADMIN = "ROLE_ADMIN";
         public static final String BASIC = "ROLE_BASIC";
