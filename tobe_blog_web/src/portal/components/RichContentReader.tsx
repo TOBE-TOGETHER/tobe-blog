@@ -1,8 +1,8 @@
-import "@wangeditor/editor/dist/css/style.css";
+import '@wangeditor/editor/dist/css/style.css';
 
-import { useState, useEffect } from "react";
-import { Editor } from "@wangeditor/editor-for-react";
-import { IDomEditor, IEditorConfig } from "@wangeditor/editor";
+import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
+import { Editor } from '@wangeditor/editor-for-react';
+import { useEffect, useState } from 'react';
 
 interface RichContentEditorReaderProps {
   htmlValue: string;
@@ -25,14 +25,15 @@ function RichContentReader(props: RichContentEditorReaderProps) {
 
   return (
     <Editor
+      className="reader"
       value={props.htmlValue}
       defaultConfig={editorConfig}
       mode="default"
       style={{
-        margin: "0px",
-        padding: "0px",
-        width: "100%",
-        color: "text.secondary",
+        margin: '0px',
+        padding: '0px',
+        width: '100%',
+        color: 'text.secondary',
       }}
     />
   );
