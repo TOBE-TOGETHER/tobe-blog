@@ -1,4 +1,3 @@
-
 export const URL = {
   HOME: '/',
   PERSONAL_PORTAL: '/personal-portal/:id',
