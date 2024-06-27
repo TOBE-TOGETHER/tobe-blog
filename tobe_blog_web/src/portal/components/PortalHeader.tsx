@@ -45,7 +45,7 @@ const PortalHeader = () => {
         sx={{
           boxShadow: 'none',
           color: theme.palette.primary.main,
-          backgroundColor: 'transparent',
+          backgroundColor: 'white',
           borderBottom: 'none',
           position: 'absolute',
         }}

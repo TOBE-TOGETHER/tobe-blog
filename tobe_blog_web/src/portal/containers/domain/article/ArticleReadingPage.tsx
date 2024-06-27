@@ -1,4 +1,4 @@
-import { Container, Divider, Grid, Link, Paper, Typography } from '@mui/material';
+import { Container, Grid, Link, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,7 @@ import { useAuthState } from '../../../../contexts';
 import { ArticleDetailDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PublicDataService } from '../../../../services';
-import { ContentPageBreadcrumbsBar, ContentPageMetaBar, RichContentReader, TagDisplayBar } from '../../../components/index.ts';
+import { ContentPageBreadcrumbsBar, ContentPageMetaBar, FrontendLayout, RichContentReader, TagDisplayBar } from '../../../components/index.ts';
 
 export default function ArticleReadingPage() {
   const { t } = useTranslation();
@@ -33,7 +33,7 @@ export default function ArticleReadingPage() {
   }, [t, id, enqueueSnackbar]);
 
   return (
-    <>
+    <FrontendLayout>
       <Grid
         container
         item
@@ -42,9 +42,9 @@ export default function ArticleReadingPage() {
           position: 'relative',
           width: '100%',
           height: {
-            xs: '20vh',
-            sm: '35vh',
-            md: '40vh',
+            xs: '40vh',
+            sm: '40vh',
+            md: '50vh',
           },
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -55,7 +55,7 @@ export default function ArticleReadingPage() {
         <Container>
           <Typography
             color={'white'}
-            sx={{ mt: 8, overflow: 'hidden', fontSize: { xs: '1.5rem', sm: '2rem' }, textWrap: 'nowrap' }}
+            sx={{ mt: 10, overflow: 'hidden', fontSize: { xs: '1.5rem', sm: '2rem', lineBreak: 'anywhere' } }}
           >
             {article?.title}
           </Typography>
@@ -70,8 +70,7 @@ export default function ArticleReadingPage() {
       </Grid>
       <Container
         sx={{
-          minHeight: '95vh',
-          pt: { sm: '8vh', xs: '6vh' },
+          minHeight: '50vh',
           pb: 2,
         }}
       >
@@ -85,40 +84,6 @@ export default function ArticleReadingPage() {
               viewCount={article.viewCount}
               editLinkUrl={`/my/articles/${article.id}`}
             />
-          )}
-
-          {article?.subTitle && (
-            <>
-              <Grid
-                item
-                xs={12}
-                sx={{ my: 1 }}
-                color="text.secondary"
-              >
-                <Paper
-                  sx={{ py: 1, px: 1, backgroundColor: '#f3f2ef' }}
-                  variant="outlined"
-                >
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                  >
-                    {article?.subTitle}
-                  </Typography>
-                </Paper>
-              </Grid>
-              <Divider />
-            </>
-          )}
-
-          {article?.tags && (
-            <Grid
-              item
-              xs={12}
-              sx={{ mb: 1 }}
-            >
-              <TagDisplayBar tags={article?.tags} />
-            </Grid>
           )}
 
           {article?.content && (
@@ -179,7 +144,16 @@ export default function ArticleReadingPage() {
             </Grid>
           )}
         </Grid>
+        {article?.tags && (
+          <Grid
+            item
+            xs={12}
+            sx={{ mb: 1 }}
+          >
+            <TagDisplayBar tags={article?.tags} />
+          </Grid>
+        )}
       </Container>
-    </>
+    </FrontendLayout>
   );
 }
