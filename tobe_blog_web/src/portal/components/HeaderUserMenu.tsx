@@ -1,10 +1,10 @@
-import { Avatar, Button, IconButton, Menu, MenuItem, Tooltip, Typography, } from '@mui/material';
+import { Avatar, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { authed, enabled, } from '../../commons';
+import { authed, enabled } from '../../commons';
 import { useAuthState } from '../../contexts';
-import { URL, validateUrl, } from '../../routes';
+import { URL, validateUrl } from '../../routes';
 import theme from '../../theme';
 import { pages } from './configs';
 
