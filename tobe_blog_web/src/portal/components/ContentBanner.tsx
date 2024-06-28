@@ -26,19 +26,29 @@ export default function ContentBanner(props: { title: string; subTitle?: string;
           item
           container
         >
-          <Typography
-            color={'white'}
-            sx={{ mt: 10, overflow: 'hidden', fontSize: { xs: '1.5rem', sm: '2rem', lineBreak: 'anywhere' } }}
+          <Grid
+            item
+            xs={12}
           >
-            {props?.title}
-          </Typography>
-          <Typography
-            variant={'h6'}
-            color={'white'}
-            sx={{ mt: 2, overflow: 'hidden', letterSpacing: { xs: 2, sm: 6 }, textWrap: 'nowrap' }}
+            <Typography
+              color={'white'}
+              sx={{ mt: 12, overflow: 'hidden', fontSize: { xs: '1.5rem', sm: '2rem', lineBreak: 'anywhere' } }}
+            >
+              {props?.title}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={12}
           >
-            {props?.subTitle}
-          </Typography>
+            <Typography
+              variant={'h6'}
+              color={'white'}
+              sx={{ mt: 2, overflow: 'hidden', letterSpacing: { xs: 2, sm: 6 }, textWrap: 'nowrap' }}
+            >
+              {props?.subTitle}
+            </Typography>
+          </Grid>
         </Grid>
         <Grid item>
           <ContentPageBreadcrumbsBar />
