@@ -1,14 +1,15 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import plan from '../../../package.json';
+import StrokeText from '../../components/common/StrokeText.tsx';
 import { validateUrl } from '../../routes';
 import theme from '../../theme';
+import { publicPages } from './configs';
 import HeaderLanguageMenu from './HeaderLanguageMenu';
 import HeaderUserMenu from './HeaderUserMenu';
-import { publicPages } from './configs';
 
 const PortalHeader = () => {
   const [yIndex, setYIndex] = useState<number>(0);
@@ -87,23 +88,19 @@ const HeaderContent = () => {
   return (
     <Container maxWidth="xl">
       <Toolbar disableGutters>
-        <Typography
-          variant="h5"
-          noWrap
-          component="a"
+        <Grid
           onClick={() => navigate('/')}
           sx={{
-            mr: 2,
-            color: theme.palette.primary.main,
+            width: '180px',
+            height: '64px',
             display: { xs: 'none', md: 'flex' },
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            textDecoration: 'none',
+            alignItems: 'center',
             cursor: 'pointer',
+            fontSize: 40
           }}
         >
-          {plan.name.toUpperCase()}
-        </Typography>
+          <StrokeText text={plan.name} />
+        </Grid>
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
@@ -170,7 +167,7 @@ const HeaderContent = () => {
           ))}
         </Box>
         <Box sx={{ flexGrow: 0 }}>
-          <HeaderLanguageMenu color={theme.palette.secondary.main} />
+          <HeaderLanguageMenu />
         </Box>
 
         <Box sx={{ flexGrow: 0 }}>

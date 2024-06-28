@@ -7,7 +7,13 @@ import { useAuthState } from '../../../../contexts';
 import { ArticleDetailDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PublicDataService } from '../../../../services';
-import { ContentPageBreadcrumbsBar, ContentPageMetaBar, FrontendLayout, RichContentReader, TagDisplayBar } from '../../../components/index.ts';
+import {
+  ContentPageBreadcrumbsBar,
+  ContentPageMetaBar,
+  FrontendLayout,
+  RichContentReader,
+  TagDisplayBar
+} from '../../../components/index.ts';
 
 export default function ArticleReadingPage() {
   const { t } = useTranslation();
