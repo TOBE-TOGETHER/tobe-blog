@@ -32,7 +32,6 @@ export default function StrokeText(props: {
 
   const Text = styled('text')(() => ({
     fill: 'transparent',
-    fontFamily: 'Times New Roman, Times, serif',
     fontSize: 'inherit',
     fontWeight: 'bold',
     strokeWidth: 2,

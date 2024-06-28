@@ -96,7 +96,8 @@ const HeaderContent = () => {
             display: { xs: 'none', md: 'flex' },
             alignItems: 'center',
             cursor: 'pointer',
-            fontSize: 40
+            fontSize: 40,
+            fontFamily: 'Times New Roman, fantasy, sans-serif'
           }}
         >
           <StrokeText text={plan.name} />
