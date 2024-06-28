@@ -1,5 +1,6 @@
 import { Page, TagDisplayBar } from '../../components/index.ts';
 import AuthorDisplayPanel from './AuthorDisplayPanel';
+import ContentBanner from './ContentBanner.tsx';
 import ContentPageBreadcrumbsBar from './ContentPageBreadcrumbsBar';
 import ContentPageFrame from './ContentPageFrame';
 import ContentPageMetaBar from './ContentPageMetaBar';
@@ -10,13 +11,14 @@ import RichContentReader from './RichContentReader';
 
 export {
   AuthorDisplayPanel,
+  ContentBanner,
   ContentPageBreadcrumbsBar,
   ContentPageFrame,
   ContentPageMetaBar,
   FrontendLayout,
-  RelevantContentPanel,
   Page,
   PortalHeader,
+  RelevantContentPanel,
   RichContentReader,
   TagDisplayBar,
 };
