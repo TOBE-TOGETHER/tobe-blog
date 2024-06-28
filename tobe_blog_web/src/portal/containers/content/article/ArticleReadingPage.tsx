@@ -7,7 +7,7 @@ import { useAuthState } from '../../../../contexts';
 import { ArticleDetailDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PublicDataService } from '../../../../services';
-import { ContentPageBreadcrumbsBar, ContentPageMetaBar, FrontendLayout, RichContentReader, TagDisplayBar } from '../../../components/index.ts';
+import { ContentBanner, ContentPageMetaBar, FrontendLayout, RichContentReader, TagDisplayBar } from '../../../components';
 
 export default function ArticleReadingPage() {
   const { t } = useTranslation();
@@ -34,47 +34,19 @@ export default function ArticleReadingPage() {
 
   return (
     <FrontendLayout>
-      <Grid
-        container
-        item
-        sx={{
-          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url(${article?.coverImgUrl});`,
-          position: 'relative',
-          width: '100%',
-          height: {
-            xs: '40vh',
-            sm: '40vh',
-            md: '50vh',
-          },
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          overflow: 'hidden',
-        }}
-      >
-        <Container>
-          <Typography
-            color={'white'}
-            sx={{ mt: 10, overflow: 'hidden', fontSize: { xs: '1.5rem', sm: '2rem', lineBreak: 'anywhere' } }}
-          >
-            {article?.title}
-          </Typography>
-          <Typography
-            variant={'h6'}
-            color={'white'}
-            sx={{ mt: 2, overflow: 'hidden', letterSpacing: { xs: 2, sm: 6 }, textWrap: 'nowrap' }}
-          >
-            {article?.subTitle}
-          </Typography>
-        </Container>
-      </Grid>
+      {article && (
+        <ContentBanner
+          title={article.title}
+          subTitle={article.subTitle}
+          coverImgUrl={article.coverImgUrl}
+        />
+      )}
       <Container
         sx={{
           minHeight: '50vh',
           pb: 2,
         }}
       >
-        <ContentPageBreadcrumbsBar />
         <Grid container>
           {article && (
             <ContentPageMetaBar
