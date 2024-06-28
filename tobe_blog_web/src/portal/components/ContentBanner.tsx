@@ -21,23 +21,28 @@ export default function ContentBanner(props: { title: string; subTitle?: string;
         overflow: 'hidden',
       }}
     >
-      <Container>
-        <Typography
-          color={'white'}
-          sx={{ mt: 10, overflow: 'hidden', fontSize: { xs: '1.5rem', sm: '2rem', lineBreak: 'anywhere' } }}
+      <Container sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <Grid
+          item
+          container
         >
-          {props?.title}
-        </Typography>
-        <Typography
-          variant={'h6'}
-          color={'white'}
-          sx={{ mt: 2, overflow: 'hidden', letterSpacing: { xs: 2, sm: 6 }, textWrap: 'nowrap' }}
-        >
-          {props?.subTitle}
-        </Typography>
-      </Container>
-      <Container sx={{ alignContent: 'flex-end', mb: '1rem' }}>
-        <ContentPageBreadcrumbsBar />
+          <Typography
+            color={'white'}
+            sx={{ mt: 10, overflow: 'hidden', fontSize: { xs: '1.5rem', sm: '2rem', lineBreak: 'anywhere' } }}
+          >
+            {props?.title}
+          </Typography>
+          <Typography
+            variant={'h6'}
+            color={'white'}
+            sx={{ mt: 2, overflow: 'hidden', letterSpacing: { xs: 2, sm: 6 }, textWrap: 'nowrap' }}
+          >
+            {props?.subTitle}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <ContentPageBreadcrumbsBar />
+        </Grid>
       </Container>
     </Grid>
   );

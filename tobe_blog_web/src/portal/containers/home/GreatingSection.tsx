@@ -60,7 +60,7 @@ export default function GreatingSection() {
       <Grid
         container
         sx={{
-          mt: '60px',
+          mt: '64px',
           borderRadius: '16px',
           overflow: 'hidden',
           boxShadow: 'rgba(145, 158, 171, 0.28) 0px 0px 12px 0px, rgba(145, 158, 171, 0.16) 0px 24px 30px -4px',

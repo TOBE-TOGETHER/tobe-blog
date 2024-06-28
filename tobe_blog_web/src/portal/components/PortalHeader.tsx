@@ -7,9 +7,9 @@ import plan from '../../../package.json';
 import StrokeText from '../../components/common/StrokeText.tsx';
 import { validateUrl } from '../../routes';
 import theme from '../../theme';
-import { publicPages } from './configs';
 import HeaderLanguageMenu from './HeaderLanguageMenu';
 import HeaderUserMenu from './HeaderUserMenu';
+import { publicPages } from './configs';
 
 const PortalHeader = () => {
   const [yIndex, setYIndex] = useState<number>(0);
@@ -97,7 +97,7 @@ const HeaderContent = () => {
             alignItems: 'center',
             cursor: 'pointer',
             fontSize: 40,
-            fontFamily: 'Times New Roman, fantasy, sans-serif'
+            fontFamily: 'Times New Roman, fantasy, sans-serif',
           }}
         >
           <StrokeText text={plan.name} />
@@ -110,10 +110,9 @@ const HeaderContent = () => {
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            color="secondary"
             onClick={handleOpenNavMenu}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: theme.palette.primary.main }} />
           </IconButton>
           {
             <Menu
