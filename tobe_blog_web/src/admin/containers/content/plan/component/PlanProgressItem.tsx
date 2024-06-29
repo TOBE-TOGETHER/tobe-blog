@@ -61,8 +61,8 @@ export default function PlanProgressItem(props: PlanProgressItemProps) {
   return (
     <Paper
       sx={{
-        py: 2,
-        px: { sm: 2, xs: 0 },
+        py: 3,
+        px: { sm: 3, xs: 2 },
         borderWidth: { xs: '0px', sm: '1px' },
         borderBottomWidth: { xs: '1px' },
         borderRadius: 4,

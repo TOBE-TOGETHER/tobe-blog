@@ -3,9 +3,9 @@ import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { WordGeneralDTO } from '../../../../global/types';
-import { PublicDataService, WordService } from '../../../../services';
-import theme from '../../../../theme';
+import { WordGeneralDTO } from '../../../global/types';
+import { PublicDataService, WordService } from '../../../services';
+import theme from '../../../theme';
 import { WordCreateDialog } from './WordCreateDialog';
 import { WordDetailDialog } from './WordDetailDialog';
 import { WordDisplayDialog } from './WordDisplayDialog';
@@ -134,7 +134,7 @@ export function WordListPanel(props: { editable: boolean; vocabularyId: string }
       );
     });
 
-    if (!letterSet || letterSet.size === 0) {
+    if ((!letterSet || letterSet.size === 0) && props.editable) {
       elements.push(
         <Grid
           key={'sec-0'}

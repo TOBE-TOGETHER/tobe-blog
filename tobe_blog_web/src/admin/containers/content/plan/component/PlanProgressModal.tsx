@@ -72,7 +72,7 @@ export default function PlanProgressModal(props: { planId: string; viewOnly: boo
       </Divider>
 
       {!props.viewOnly && (
-        <Paper sx={{ mt: 2, mb: 2, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
+        <Paper sx={{ my: 3, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
           <Grid
             container
             item

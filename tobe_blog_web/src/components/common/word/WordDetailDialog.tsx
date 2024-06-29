@@ -1,8 +1,8 @@
 import { Box, Button, Dialog, DialogContent, DialogTitle, Grid, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { WordGeneralDTO } from '../../../../global/types';
-import { WordService } from '../../../../services';
+import { WordGeneralDTO } from '../../../global/types';
+import { WordService } from '../../../services';
 
 export function WordDetailDialog(props: { word: WordGeneralDTO | null; setWord: (word: WordGeneralDTO | null) => void; loadData: Function; handleDeleteWord: Function }) {
   const { t } = useTranslation();

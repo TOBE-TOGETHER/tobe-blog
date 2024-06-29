@@ -2,8 +2,8 @@ import { Dialog, DialogContent, DialogTitle, Grid, TextField } from '@mui/materi
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { WordService } from '../../../../services';
-import { SaveButtonPanel } from '../../../components';
+import { SaveButtonPanel } from '../../../admin/components';
+import { WordService } from '../../../services';
 
 export function WordCreateDialog(props: { vocabularyId: string; loadData: Function; open: boolean; setOpen: Function }) {
   const { t } = useTranslation();

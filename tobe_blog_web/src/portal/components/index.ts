@@ -1,3 +1,4 @@
+import { WordListPanel } from '../../components';
 import { Page, TagDisplayBar } from '../../components/index.ts';
 import AuthorDisplayPanel from './AuthorDisplayPanel';
 import ContentBanner from './ContentBanner.tsx';
@@ -21,4 +22,5 @@ export {
   RelevantContentPanel,
   RichContentReader,
   TagDisplayBar,
+  WordListPanel,
 };

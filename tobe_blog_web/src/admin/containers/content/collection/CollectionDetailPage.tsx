@@ -201,7 +201,8 @@ export default function CollectionDetailPage() {
           container
           item
           xs={12}
-          sm={6}
+          sm={12}
+          md={6}
           sx={{ p: 2 }}
         >
           <Grid
