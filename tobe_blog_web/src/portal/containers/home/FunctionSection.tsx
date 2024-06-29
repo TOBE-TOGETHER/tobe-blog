@@ -1,14 +1,13 @@
 import { Container, Grid } from '@mui/material';
 import { ReactElement, useState } from 'react';
 
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { getContentTypeFromPath, getPathFromContentType } from '../../../commons';
 import { EContentType } from '../../../global/enums';
 import FeaturedNews from './FeaturedNews';
 import TagStatisticsFilterPanel from './TagStatisticsFilterPanel';
 
 export default function FunctionSection(props: { availableContentTypes: EContentType[]; extraPanels: ReactElement[]; ownerId: string }) {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const paramContentType = searchParams.get('d') || '';
   const [checkedTags, setCheckedTags] = useState<string[]>([]);
@@ -17,7 +16,7 @@ export default function FunctionSection(props: { availableContentTypes: EContent
   function handleContentTypeChange(newValue: EContentType) {
     setCheckedTags([]);
     setContentType(newValue);
-    navigate(`?d=${getPathFromContentType(newValue)}`, { replace: true });
+    window.history.pushState(null, '', `?d=${getPathFromContentType(newValue)}`);
   }
 
   return (
