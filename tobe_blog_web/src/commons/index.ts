@@ -1,4 +1,4 @@
-import { ELocalStorageKeys, EDomain } from '../global/enums.ts';
+import { EContentType, ELocalStorageKeys } from '../global/enums.ts';
 import * as TimeFormat from './TimeFormat';
 
 export function authed(requiredRole?: string[]): boolean {
@@ -31,27 +31,31 @@ export function formatDate(time: string) {
   return time.substring(0, time.indexOf('T'));
 }
 
-export function getDomainFromPath(path: string | undefined): EDomain {
+export function getContentTypeFromPath(path: string | undefined): EContentType {
   switch (path) {
     case 'articles':
-      return EDomain.Article;
+      return EContentType.Article;
     case 'vocabularies':
-      return EDomain.Vocabulary;
-    case 'plan':
-      return EDomain.Plan;
+      return EContentType.Vocabulary;
+    case 'plans':
+      return EContentType.Plan;
+    case 'collections':
+      return EContentType.Collection;
     default:
-      return EDomain.Article;
+      return EContentType.Article;
   }
 }
 
-export function getPathFromDomain(domain: EDomain | string): string {
-  switch (domain) {
-    case EDomain.Article:
+export function getPathFromContentType(contentType: EContentType | string): string {
+  switch (contentType) {
+    case EContentType.Article:
       return 'articles';
-    case EDomain.Plan:
-      return 'plan';
-    case EDomain.Vocabulary:
+    case EContentType.Plan:
+      return 'plans';
+    case EContentType.Vocabulary:
       return 'vocabularies';
+    case EContentType.Collection:
+      return 'collections';
     default:
       return 'articles';
   }

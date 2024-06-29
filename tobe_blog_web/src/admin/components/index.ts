@@ -1,7 +1,7 @@
+import { WordDisplayDialog } from '../../components/common/word/WordDisplayDialog';
+import { WordListPanel } from '../../components/common/word/WordListPanel';
 import { Page, SidePanel } from '../../components/layout';
 import Loading from '../../components/loading/Loading';
-import { WordDisplayDialog } from '../containers/content/components/WordDisplayDialog';
-import { WordListPanel } from '../containers/content/components/WordListPanel';
 import BackendLayout from './layout/BackendLayout';
 import { FormPanel, HalfRow, OneRow, QuarterRow } from './layout/FormLayout';
 import AddIconButton from './misc/AddIconButton';

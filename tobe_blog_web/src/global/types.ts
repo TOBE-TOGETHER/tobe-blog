@@ -23,22 +23,9 @@ export interface UserData {
   phoneNum: string;
 }
 
-export interface PlanInfo {
-  id: string;
-  title: string;
-  description: string;
-  coverImgUrl: string;
-  statusValue: number;
-  ownerName: string;
-  ownerId: string;
-  publicToAll: boolean;
-  publishTime: string;
+export interface PlanInfo extends IBaseUserContentDTO {
   targetStartTime: string;
   targetEndTime: string;
-  tags: TagOption[];
-  viewCount: number;
-  likeCount: number;
-  createTime: string;
 }
 
 export interface PageItem {
@@ -147,15 +134,9 @@ export interface ArticleUpdateDTO extends ArticleCreationDTO {
   id: string;
 }
 
-export interface ArticleDetailDTO extends GeneralCardData {
+export interface ArticleDetailDTO extends IBaseUserContentDTO {
   content: string;
-  authorName: string;
-  ownerId: string;
-  likeCount: number;
-  viewCount: number;
-  publishTime: string;
   subTitle: string;
-  avatarUrl: string;
   contentProtected: boolean;
 }
 
@@ -167,14 +148,8 @@ export interface VocabularyCreationDTO {
   tags: TagOption[];
 }
 
-export interface VocabularyDetailDTO extends GeneralCardData {
-  authorName: string;
-  ownerId: string;
-  likeCount: number;
-  viewCount: number;
-  publishTime: string;
+export interface VocabularyDetailDTO extends IBaseUserContentDTO {
   language: string;
-  avatarUrl: string;
 }
 
 export interface GeneralCardData {
@@ -230,19 +205,10 @@ export interface IBaseUserContentDTO {
   tags: TagOption[];
   createTime: string;
   updateTime: string;
+  contentProtected: boolean;
 }
 
-export interface ICollectionDTO {
-  id: string;
-  title: string;
-  description: string;
-  coverImgUrl: string;
-  ownerId: string;
-  ownerName: string;
-  avatarUrl: string;
-  publicToAll: boolean;
-  publishTime: string;
-  viewCount: number;
+export interface ICollectionDTO extends IBaseUserContentDTO {
   tags: TagOption[];
   tagTree: ITagRelationshipDTO[];
 }
@@ -260,6 +226,7 @@ export interface ITagRelationshipDTO {
   label: string;
   collectionId: string;
   children: ITagRelationshipDTO[];
+  relatedContents: IBaseUserContentDTO[];
 }
 
 export interface RenderTree {

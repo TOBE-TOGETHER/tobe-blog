@@ -1,7 +1,9 @@
 import { Container, Grid, Typography } from '@mui/material';
+import { TagDisplayBar } from '../../components';
+import { TagOption } from '../../global/types';
 import ContentPageBreadcrumbsBar from './ContentPageBreadcrumbsBar';
 
-export default function ContentBanner(props: { title: string; subTitle?: string; coverImgUrl?: string }) {
+export default function ContentBanner(props: { title: string; subTitle?: string; coverImgUrl?: string; tags: TagOption[] }) {
   return (
     <Grid
       container
@@ -51,6 +53,7 @@ export default function ContentBanner(props: { title: string; subTitle?: string;
           </Grid>
         </Grid>
         <Grid item>
+          <TagDisplayBar tags={props.tags} />
           <ContentPageBreadcrumbsBar />
         </Grid>
       </Container>

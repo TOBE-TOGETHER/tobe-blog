@@ -3,11 +3,11 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { WordListPanel } from '../../../../components/common/word/WordListPanel';
 import { Page } from '../../../../components/layout';
 import { TagOption, VocabularyDetailDTO, VocabularyUpdateDTO } from '../../../../global/types';
 import { VocabularyService } from '../../../../services';
 import { EditIconButton, FormPanel, MultipleTagSelecter, OneRow } from '../../../components';
-import { WordListPanel } from '../components/WordListPanel';
 
 export default function VOCDetailPage() {
   const { t } = useTranslation();

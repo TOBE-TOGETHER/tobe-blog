@@ -1,4 +1,3 @@
-
 export const URL = {
   HOME: '/',
   PERSONAL_PORTAL: '/personal-portal/:id',
@@ -30,8 +29,8 @@ export const URL = {
   ARTICLE_DETAIL: '/my/articles/:id',
   CREATE_ARTICLE: '/my/articles/create-article',
 
-  CREATE_SUBJECT: '/my/collections/create-collection',
-  SUBJECT_DETAIL: '/my/collections/:id',
+  CREATE_COLLECTION: '/my/collections/create-collection',
+  COLLECTION_DETAIL: '/my/collections/:id',
   COLLECTIONS: '/my/collections',
 
   CREATE_VOCABULARY: '/my/vocabularies/create-vocabularies',
