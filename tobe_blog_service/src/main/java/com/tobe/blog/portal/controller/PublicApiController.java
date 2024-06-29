@@ -1,9 +1,12 @@
 package com.tobe.blog.portal.controller;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +22,7 @@ import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.CollectionDTO;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressDTO;
+import com.tobe.blog.beans.dto.content.TagRelationshipDTO;
 import com.tobe.blog.beans.dto.content.VOCDTO;
 import com.tobe.blog.beans.dto.content.WordDTO;
 import com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO;
@@ -34,6 +38,7 @@ import com.tobe.blog.core.service.UserService;
 import com.tobe.blog.core.utils.CacheUtil;
 import com.tobe.blog.portal.service.PublicApiService;
 
+import io.jsonwebtoken.lang.Collections;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,8 +65,8 @@ public class PublicApiController {
         @RequestParam(value = "current", required = false, defaultValue = "1") int current,
         @RequestParam(value = "size", required = false, defaultValue = "10") int size,
         @RequestParam(value = "tags", required = false, defaultValue = "") String tags,
-        @RequestParam(value = "ownerId", required = false, defaultValue = "") String ownerId,
-        @RequestParam(value = "contentType", required = false, defaultValue = "ARTICLE") String contentType) {
+        @RequestParam(value = "ownerId", required = false, defaultValue = "") Long ownerId,
+        @RequestParam(value = "contentType", required = false, defaultValue = "") String contentType) {
         final String[] tagFilter = StringUtils.isNotBlank(tags) ? tags.split(",") : new String[]{};
         return ResponseEntity.ok(publicApiService.searchContents(current, size, tagFilter, ownerId, contentType));
     }
@@ -87,6 +92,7 @@ public class PublicApiController {
     @GetMapping("/collections/{id}")
     public ResponseEntity<CollectionDTO> getCollectionById(@PathVariable(value = "id") String id) {
         final CollectionDTO result = collectionService.getDTOByIdAndCount(id);
+        setRelatedContentsForTagTree(result.getTagTree(), result.getOwnerId());
         return ResponseEntity.ok(result);
     }
 
@@ -112,7 +118,7 @@ public class PublicApiController {
 
     @GetMapping("/tag-statistics")
     public ResponseEntity<List<TagInfoStatisticDTO>> getTagInfoStatistics(
-        @RequestParam(value = "ownerId", required = false, defaultValue = "") String ownerId,
+        @RequestParam(value = "ownerId", required = false, defaultValue = "") Long ownerId,
         @RequestParam(value = "contentType", required = false, defaultValue = "ARTICLE") String contentType
     ) {
         return ResponseEntity.ok(publicApiService.getTagInfoStatistics(ownerId, contentType));
@@ -150,4 +156,16 @@ public class PublicApiController {
         }
     }
 
+    private void setRelatedContentsForTagTree(List<TagRelationshipDTO> tagTree, Long ownerId) {
+        tagTree.forEach(node -> {
+            node.setRelatedContents(
+              publicApiService.searchContents(
+                            1, 1000, new String[]{ node.getTagId().toString() }, ownerId, Strings.EMPTY).getRecords()
+                            .stream().sorted(Comparator.comparing(BaseContentDTO::getTitle))
+                            .collect(Collectors.toList()));
+            if (!Collections.isEmpty(node.getChildren())) {
+                setRelatedContentsForTagTree(node.getChildren(), ownerId);
+            }
+        });
+    }
 }

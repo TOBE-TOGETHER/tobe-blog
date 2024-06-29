@@ -1,83 +1,24 @@
 import AbcIcon from '@mui/icons-material/Abc';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import FlagIcon from '@mui/icons-material/Flag';
+import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
 import { Grid, Link, SxProps, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { ICollectionDTO, ITagRelationshipDTO } from '../../../../global/types';
+import { getPathFromContentType } from '../../../../commons';
+import { EContentType } from '../../../../global/enums';
+import { IBaseUserContentDTO, ICollectionDTO, ITagRelationshipDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PublicDataService } from '../../../../services';
 import { ContentReadingPage } from '../ContentReadingPage';
 
 export default function CollectionReadingPage() {
-  const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation();
   const [collection, setCollection] = useState<ICollectionDTO | null>(null);
   const { id } = useParams();
-
-  const Section = (props: { text: string; variant: SectionVariant }) => {
-    return (
-      <Grid
-        item
-        xs={12}
-      >
-        <Typography
-          color={'textSecondary'}
-          sx={props.variant.sx}
-        >
-          {props.text}
-        </Typography>
-      </Grid>
-    );
-  };
-
-  const ArticleLink = (props: { text: string; href: string }) => {
-    return (
-      <Grid
-        item
-        xs={12}
-        sx={{ mt: 1 }}
-      >
-        <Link
-          href={props.href}
-          underline="hover"
-          color={'info.main'}
-        >
-          <ArticleOutlinedIcon sx={{ width: '1rem', height: '1rem' }} /> {props.text}
-        </Link>
-      </Grid>
-    );
-  };
-
-  const VocabularyLink = (props: { text: string; href: string }) => {
-    return (
-      <Grid
-        item
-        xs={12}
-        sx={{ mt: 1 }}
-      >
-        <Link
-          href={props.href}
-          underline="hover"
-          color={'info.main'}
-        >
-          <AbcIcon sx={{ width: '1rem', height: '1rem' }} /> {props.text}
-        </Link>
-      </Grid>
-    );
-  };
-
-  const ToBeContinuedTip = () => {
-    return (
-      <Grid
-        item
-        xs={12}
-      >
-        <Typography color={'textSecondary'}>{t('subject-reading-page.tip.tba')}</Typography>
-      </Grid>
-    );
-  };
 
   function printCollectionTree(collection: ICollectionDTO | null) {
     if (!collection) {
@@ -126,10 +67,11 @@ export default function CollectionReadingPage() {
               lg={6}
               xl={6}
             >
-              <ArticleLink
+              <ContentLink
                 key={a.id}
+                id={a.id}
                 text={a.title}
-                href={URL.NEWS_ARTICLE_DETAIL.replace(':id', a.id) + `?si=${collectionId}&sn=${collectionName}`}
+                contentType={a.contentType}
               />
             </Grid>
           );
@@ -181,7 +123,7 @@ export default function CollectionReadingPage() {
         });
     }
     load();
-  }, [t, enqueueSnackbar, id]);
+  }, [enqueueSnackbar, id]);
 
   return (
     <ContentReadingPage
@@ -236,3 +178,62 @@ const sectionVariants: SectionVariant[] = [
     },
   },
 ];
+
+const Section = (props: { text: string; variant: SectionVariant }) => {
+  return (
+    <Grid
+      item
+      xs={12}
+    >
+      <Typography
+        color={'textSecondary'}
+        sx={props.variant.sx}
+      >
+        {props.text}
+      </Typography>
+    </Grid>
+  );
+};
+
+const ContentLink = (props: { id: string; text: string; contentType: string }) => {
+  function getIconByContentType(_contentType: string): ReactNode {
+    switch (_contentType) {
+      case EContentType.Article:
+        return <ArticleOutlinedIcon sx={{ width: '1rem', height: '1rem' }} />;
+      case EContentType.Vocabulary:
+        return <AbcIcon sx={{ width: '1rem', height: '1rem' }} />;
+      case EContentType.Plan:
+        return <FlagIcon sx={{ width: '1rem', height: '1rem' }} />;
+      case EContentType.Collection:
+        return <FolderSpecialIcon sx={{ width: '1rem', height: '1rem' }} />;
+    }
+  }
+
+  return (
+    <Grid
+      item
+      xs={12}
+      sx={{ mt: 1 }}
+    >
+      <Link
+        href={`/news/${getPathFromContentType(props.contentType)}/${props.id}`}
+        underline="hover"
+        color={'info.main'}
+      >
+        {getIconByContentType(props.contentType)} {props.text}
+      </Link>
+    </Grid>
+  );
+};
+
+const ToBeContinuedTip = () => {
+  const { t } = useTranslation();
+  return (
+    <Grid
+      item
+      xs={12}
+    >
+      <Typography color={'textSecondary'}>{t('collection-reading-page.tip.tba')}</Typography>
+    </Grid>
+  );
+};

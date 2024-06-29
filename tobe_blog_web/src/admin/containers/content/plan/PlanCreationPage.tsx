@@ -1,5 +1,3 @@
-import { TextField } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,17 +6,17 @@ import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PlanService } from '../../../../services';
-import { FormPanel, HalfRow, MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
+import { SaveButtonPanel } from '../../../components';
+import PlanEditMainSection from './components/PlanEditMainSection';
 
 export default function PlanCreationPage() {
   const { t } = useTranslation();
-  const [openLoading, setOpenLoading] = useState<boolean>(false);
-  const [tagValue, setTagValue] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<TagOption[]>([]);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
-  const [coverImgUrl, setCoverImgUrl] = useState<string>('');
+  const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
 
@@ -57,14 +55,13 @@ export default function PlanCreationPage() {
   }
 
   function handlePlanCreation(): void {
-    setOpenLoading(true);
     PlanService.create({
       title: title,
       description: description,
       targetStartTime: fromTime,
       targetEndTime: toTime,
       coverImgUrl: coverImgUrl,
-      tags: tagValue,
+      tags: tagValues,
     })
       .then(() => {
         enqueueSnackbar(t('plan-creation-page.msg.success'), {
@@ -76,65 +73,30 @@ export default function PlanCreationPage() {
         enqueueSnackbar(t('plan-creation-page.msg.error'), {
           variant: 'error',
         });
-      })
-      .finally(() => setOpenLoading(false));
+      });
   }
 
   return (
     <Page
-      openLoading={openLoading}
+      openLoading={false}
       pageTitle={t('plan-creation-page.form-title')}
     >
-      <FormPanel>
-        <OneRow>
-          <TextField
-            label={t('plan-creation-page.fields.name')}
-            fullWidth
-            onChange={e => setTitle(e.target.value)}
-          />
-        </OneRow>
-        <HalfRow>
-          <DatePicker
-            disablePast={true}
-            label={t('plan-creation-page.fields.target-start-time')}
-            value={fromTime}
-            sx={{ width: '100%' }}
-            onChange={newValue => setFromTime(newValue)}
-          />
-        </HalfRow>
-        <HalfRow>
-          <DatePicker
-            disablePast={true}
-            label={t('plan-creation-page.fields.target-end-time')}
-            value={toTime}
-            sx={{ width: '100%' }}
-            onChange={newValue => setToTime(newValue)}
-          />
-        </HalfRow>
-        <OneRow>
-          <TextField
-            label={t('plan-creation-page.fields.description')}
-            fullWidth
-            onChange={e => setDescription(e.target.value)}
-            multiline
-            maxRows={4}
-            minRows={4}
-          />
-        </OneRow>
-        <OneRow>
-          <TextField
-            label={t('plan-creation-page.fields.cover-img-url')}
-            fullWidth
-            onChange={e => setCoverImgUrl(e.target.value)}
-          />
-        </OneRow>
-        <OneRow>
-          <MultipleTagSelecter
-            value={tagValue}
-            setValue={setTagValue}
-          />
-        </OneRow>
-      </FormPanel>
+      <PlanEditMainSection
+        title={title}
+        setTitle={setTitle}
+        description={description}
+        setDescription={setDescription}
+        fromTime={fromTime}
+        setFromTime={setFromTime}
+        toTime={toTime}
+        setToTime={setToTime}
+        coverImgUrl={coverImgUrl}
+        setCoverImgUrl={setCoverImgUrl}
+        tagValues={tagValues}
+        setTagValues={setTagValues}
+        editable={true}
+        sx={{ mt: 6 }}
+      />
       <SaveButtonPanel primaryEvent={handleSubmit} />
     </Page>
   );

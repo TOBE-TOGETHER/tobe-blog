@@ -152,18 +152,6 @@ export interface VocabularyDetailDTO extends IBaseUserContentDTO {
   language: string;
 }
 
-export interface GeneralCardData {
-  id: string;
-  title: string;
-  description: string;
-  coverImgUrl: string;
-  publicToAll: boolean;
-  tags: TagOption[];
-  createTime?: string;
-  viewCount: number;
-  likeCount: number;
-}
-
 export interface VocabularyUpdateDTO extends VocabularyCreationDTO {
   id: string;
 }
@@ -205,6 +193,7 @@ export interface IBaseUserContentDTO {
   tags: TagOption[];
   createTime: string;
   updateTime: string;
+  contentType: string;
   contentProtected: boolean;
 }
 

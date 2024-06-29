@@ -9,6 +9,7 @@ export const URL = {
   NEWS_PLAN_DETAIL: '/news/plans/:id',
   NEWS_ARTICLE_DETAIL: '/news/articles/:id',
   NEWS_VOCABULARY_DETAIL: '/news/vocabularies/:id',
+  NEWS_COLLECTION_DETAIL: '/news/collections/:id',
 
   SUBJECTS_PAGE: '/collections',
   SUBJECT_READING_PAGE: '/collections/:id',

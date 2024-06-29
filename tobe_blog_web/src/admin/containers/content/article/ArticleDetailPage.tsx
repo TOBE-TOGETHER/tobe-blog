@@ -1,14 +1,7 @@
 import { useSnackbar } from 'notistack';
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { TagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
@@ -20,7 +13,6 @@ export default function ArticleDetailPage() {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const [openLoading, setOpenLoading] = useState<boolean>(false);
   const [htmlValue, setHtmlValue] = useState<string>('');
   const [textValue, setTextValue] = useState<string>('');
   const [title, setTitle] = useState<string>('');
@@ -32,13 +24,12 @@ export default function ArticleDetailPage() {
     if (!id) {
       return window.history.back();
     }
-    setOpenLoading(true);
     ArticleService.getById(id)
-      .then((response) => {
+      .then(response => {
         setHtmlValue(response.data.content);
         setTitle(response.data.title);
         setSubTitle(response.data.subTitle);
-        setCoverImgUrl(response.data.coverImgUrl)
+        setCoverImgUrl(response.data.coverImgUrl);
         setTagValues(response.data.tags);
         setContentProtected(response.data.contentProtected);
       })
@@ -46,32 +37,25 @@ export default function ArticleDetailPage() {
         enqueueSnackbar(t('article-creation-page.msg.error'), {
           variant: 'error',
         });
-      })
-      .finally(() => setOpenLoading(false));
-  }, [
-    id,
-    enqueueSnackbar,
-    t,
-  ]);
-  
+      });
+  }, [id, enqueueSnackbar, t]);
+
   useEffect(() => loadData(), [loadData]);
-  
+
   function saveArticle(): void {
     if (!id) {
       return;
     }
-    
-    setOpenLoading(true);
+    if (!title) {
+      return;
+    }
     ArticleService.update({
       id: id,
       title: title,
       subTitle: subTitle,
       coverImgUrl: coverImgUrl,
       content: htmlValue,
-      description:
-        textValue.trim().length >= 500
-          ? textValue.trim().substring(0, 497) + '...'
-          : textValue.trim(),
+      description: textValue.trim().length >= 500 ? textValue.trim().substring(0, 497) + '...' : textValue.trim(),
       tags: tagValues,
       contentProtected: contentProtected,
     })
@@ -85,13 +69,12 @@ export default function ArticleDetailPage() {
         enqueueSnackbar(t('article-creation-page.msg.error'), {
           variant: 'error',
         });
-      })
-      .finally(() => setOpenLoading(false));
+      });
   }
-  
+
   return (
     <Page
-      openLoading={openLoading}
+      openLoading={false}
       pageTitle={t('article-detail-page.page-main-title')}
     >
       <ArticleEditMainSection

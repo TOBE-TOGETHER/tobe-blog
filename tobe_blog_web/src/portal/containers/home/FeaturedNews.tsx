@@ -2,6 +2,7 @@ import { Button, Grid, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { getPathFromContentType } from '../../../commons';
 import { EContentType } from '../../../global/enums';
 import { NewsDTO } from '../../../global/types';
 import { PublicDataService } from '../../../services';
@@ -11,7 +12,7 @@ enum LoadType {
   Replace,
 }
 
-export default function FeaturedArticles(props: {
+export default function FeaturedNews(props: {
   tags: string[];
   ownerId: string;
   contentType: EContentType;
@@ -38,15 +39,6 @@ export default function FeaturedArticles(props: {
       })
       .catch(() => {});
   }, []);
-
-  function getURIbyDomain(contentType: EContentType | string): string {
-    switch (contentType) {
-      case EContentType.Vocabulary:
-        return 'vocabularies';
-      default:
-        return contentType.toLowerCase() + 's';
-    }
-  }
 
   // based on current filters and load more data
   const handleLoadMoreRecords = (): void => {
@@ -86,24 +78,28 @@ export default function FeaturedArticles(props: {
           <Tab
             value={EContentType.Article}
             label={t('home-page.articles')}
+            sx={{ borderRadius: 4 }}
           />
         )}
         {props.availableContentTypes.includes(EContentType.Plan) && (
           <Tab
             value={EContentType.Plan}
             label={t('home-page.plans')}
+            sx={{ borderRadius: 4 }}
           />
         )}
         {props.availableContentTypes.includes(EContentType.Vocabulary) && (
           <Tab
             value={EContentType.Vocabulary}
             label={t('home-page.vocabularies')}
+            sx={{ borderRadius: 4 }}
           />
         )}
         {props.availableContentTypes.includes(EContentType.Vocabulary) && (
           <Tab
             value={EContentType.Collection}
             label={t('home-page.collections')}
+            sx={{ borderRadius: 4 }}
           />
         )}
       </Tabs>
@@ -119,7 +115,7 @@ export default function FeaturedArticles(props: {
               publishTime={n.publishTime}
               viewCount={n.viewCount}
               tags={n.tags}
-              onClick={() => navigate(`/news/${getURIbyDomain(n.contentType)}/${n.id}`)}
+              onClick={() => navigate(`/news/${getPathFromContentType(n.contentType)}/${n.id}`)}
             />
           ))}
           {current >= totalPage ? (
