@@ -2,10 +2,10 @@ import { Grid, Paper, TextField, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TimeFormat } from '../../../../../commons';
-import { PlanProgress } from '../../../../../global/types';
-import { PlanProgressService, PublicDataService } from '../../../../../services';
-import { EditIconButton } from '../../../../components';
+import { EditIconButton } from '../../../admin/components';
+import { TimeFormat } from '../../../commons';
+import { PlanProgress } from '../../../global/types';
+import { PlanProgressService, PublicDataService } from '../../../services';
 import { ImagesPanel } from './ImagesPanel';
 
 interface PlanProgressItemProps {

@@ -2,9 +2,9 @@ import { Button, Divider, Grid, Paper, TextField, Typography } from '@mui/materi
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FileService, PlanProgressService } from '../../../../../services';
-import { InputFileUploadButton } from '../../../../components';
-import { ImagesPanel } from './ImagesPanel';
+import { InputFileUploadButton } from '../../../admin/components';
+import { FileService, PlanProgressService } from '../../../services';
+import { ImagesPanel } from './ImagesPanel.tsx';
 import PlanProgressItems from './PlanProgressItems.tsx';
 
 export default function PlanProgressModal(props: { planId: string; viewOnly: boolean }) {
