@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { PlanInfo, PlanUpdateDTO, TagOption } from '../../../../global/types';
 import { PlanService } from '../../../../services';
-import { PlanProgressModal } from '../../../components';
 import ContentEditBar from '../components/ContentEditBar.tsx';
 import PlanEditMainSection from './components/PlanEditMainSection.tsx';
+import PlanProgressModal from './components/PlanProgressModal.tsx';
 
 export default function PlanDetailPage() {
   const { t } = useTranslation();

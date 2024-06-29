@@ -11,9 +11,6 @@ export const URL = {
   NEWS_VOCABULARY_DETAIL: '/news/vocabularies/:id',
   NEWS_COLLECTION_DETAIL: '/news/collections/:id',
 
-  SUBJECTS_PAGE: '/collections',
-  SUBJECT_READING_PAGE: '/collections/:id',
-
   TOOLS_PAGE: '/tools',
   TOOL_POMODORO: '/tools/pomodoro',
   TOOL_TIME_CONVERTER: '/tools/time-coverter',

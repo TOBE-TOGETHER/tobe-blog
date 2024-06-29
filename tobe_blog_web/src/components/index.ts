@@ -1,6 +1,6 @@
+import PlanProgressModal from '../admin/containers/content/plan/components/PlanProgressModal';
 import InfiniteScrollList from './common/InfiniteScrollList';
 import TagDisplayBar from './common/TagDisplayBar';
-import PlanProgressModal from './common/progress/PlanProgressModal';
 import { WordCreateDialog } from './common/word/WordCreateDialog';
 import { WordDetailDialog } from './common/word/WordDetailDialog';
 import { WordDisplayDialog } from './common/word/WordDisplayDialog';

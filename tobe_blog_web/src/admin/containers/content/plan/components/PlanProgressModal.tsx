@@ -2,8 +2,8 @@ import { Button, Divider, Grid, Paper, TextField, Typography } from '@mui/materi
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputFileUploadButton } from '../../../admin/components';
-import { FileService, PlanProgressService } from '../../../services';
+import { FileService, PlanProgressService } from '../../../../../services/index.ts';
+import { InputFileUploadButton } from '../../../../components/index.ts';
 import { ImagesPanel } from './ImagesPanel.tsx';
 import PlanProgressItems from './PlanProgressItems.tsx';
 

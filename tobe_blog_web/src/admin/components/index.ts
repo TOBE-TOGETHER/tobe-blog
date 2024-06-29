@@ -1,5 +1,4 @@
 import InfiniteScrollList from '../../components/common/InfiniteScrollList';
-import PlanProgressModal from '../../components/common/progress/PlanProgressModal';
 import { WordDisplayDialog } from '../../components/common/word/WordDisplayDialog';
 import { WordListPanel } from '../../components/common/word/WordListPanel';
 import { Page, SidePanel } from '../../components/layout';
@@ -31,7 +30,6 @@ export {
   OneRow,
   Page,
   PagedTable,
-  PlanProgressModal,
   QuarterRow,
   RichContentEditor,
   SaveButtonPanel,
