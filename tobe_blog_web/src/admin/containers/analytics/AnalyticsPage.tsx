@@ -7,8 +7,8 @@ import { enabled } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout/index.ts';
 import { EContentType, EFeatureCode } from '../../../global/enums.ts';
 import { IUserContentAnalyticsDTO } from '../../../global/types.ts';
+import { URL } from '../../../routes';
 import { OverviewService } from '../../../services/index.ts';
-import { URL } from '../../URL';
 
 export default function AnalyticsPage() {
   const { t } = useTranslation();

@@ -1,4 +1,5 @@
 import PlanProgressModal from '../admin/containers/content/plan/components/PlanProgressModal';
+import { EditorStyle } from './common/EditorStyle';
 import InfiniteScrollList from './common/InfiniteScrollList';
 import TagDisplayBar from './common/TagDisplayBar';
 import { WordCreateDialog } from './common/word/WordCreateDialog';
@@ -12,6 +13,7 @@ import Loading from './loading/Loading';
 export {
   AppFooter,
   BasicLayout,
+  EditorStyle,
   FrontendLayout,
   InfiniteScrollList,
   Loading,

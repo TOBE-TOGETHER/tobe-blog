@@ -8,7 +8,6 @@ import ReactDOM from 'react-dom/client';
 import { BasicLayout } from './components/layout';
 import { AuthProvider } from './contexts';
 import './i18n';
-import './index.css';
 import { MainRouter } from './routes';
 import theme from './theme.ts';
 

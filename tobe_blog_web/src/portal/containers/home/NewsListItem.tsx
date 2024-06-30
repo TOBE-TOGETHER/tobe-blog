@@ -2,8 +2,8 @@ import { Grid, Link, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../../commons';
 import { ITagOption } from '../../../global/types';
+import { URL } from '../../../routes';
 import theme from '../../../theme';
-import { URL } from '../../URL';
 import TagDisplayBar from './TagDisplayBar';
 
 export default function NewsListItem(props: {

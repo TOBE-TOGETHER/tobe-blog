@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
+import { URL } from '../../../../routes';
 import { CollectionService } from '../../../../services';
-import { URL } from '../../../URL.ts';
 import GeneralContentListPage from '../components/GeneralContentListPage';
 
 export default function CollectionsPage() {
