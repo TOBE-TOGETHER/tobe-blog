@@ -10,6 +10,8 @@ import { PublicDataService } from '../../../../services';
 import { RichContentReader } from '../../../components';
 import { ContentReadingPage } from '../ContentReadingPage';
 
+// const useStyle = createStyles()
+
 export default function ArticleReadingPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
@@ -77,6 +79,7 @@ export default function ArticleReadingPage() {
         </Grid>
       ) : (
         <Grid
+          className={'111'}
           item
           container
           xs={12}
