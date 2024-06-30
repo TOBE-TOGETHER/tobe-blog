@@ -16,7 +16,7 @@ function RichContentReader(props: RichContentEditorReaderProps) {
 
     '.w-e-text-container [data-slate-editor]': {
       'blockquote': {
-        borderLeftColor: 'rgba(145 158 171 / 0.08)',
+        borderLeftColor: 'rgba(145, 158, 171, 0.08)',
         backgroundColor: 'transparent',
         color: '#637381',
         fontFamily: 'Georgia, serif',
@@ -33,9 +33,17 @@ function RichContentReader(props: RichContentEditorReaderProps) {
         }
       },
 
+      'pre > code': {
+        backgroundColor: 'rgba(60, 71, 112, 0.2)'
+      },
+
       '& > div': {
         display: 'flex',
         alignItems: 'center',
+
+        '.w-e-textarea-divider': {
+          width: '100%'
+        },
 
         'span[data-w-e-reserve=true]': {
           fontSize: '24px',
@@ -46,6 +54,10 @@ function RichContentReader(props: RichContentEditorReaderProps) {
           width: '16px',
           height: '16px',
           marginTop: '6px'
+        },
+
+        'table > tbody > tr > th': {
+          backgroundColor: 'rgba(60, 71, 112, 0.2)'
         }
       },
 
