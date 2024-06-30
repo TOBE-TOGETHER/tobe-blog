@@ -1,9 +1,9 @@
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link, Breadcrumbs as MBreadcrumbs, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { BreadcrumbsNode } from '../../global/types';
+import { IBreadcrumbsNode } from '../../global/types';
 
-export default function Breadcrumbs(props: { nodes?: BreadcrumbsNode[] }) {
+export default function Breadcrumbs(props: { nodes?: IBreadcrumbsNode[] }) {
   const { t } = useTranslation();
   return (
     <MBreadcrumbs

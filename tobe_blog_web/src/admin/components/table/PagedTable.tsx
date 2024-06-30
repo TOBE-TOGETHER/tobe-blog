@@ -1,17 +1,17 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import { ChangeEvent } from 'react';
 import Loading from '../../../components/loading/Loading';
-import { Column, Operation } from '../../../global/types';
+import { IColumn, IOperation } from '../../../global/types';
 import { getButtonByOperationName } from './TobeButton';
 
 interface PagedTableProps {
   openLoading?: boolean;
-  readonly columns: Column[];
+  readonly columns: IColumn[];
   rows: any[] | [];
   totalCount: number | 0;
   size: number | 10;
   current: number | 0;
-  operations?: Operation[];
+  operations?: IOperation[];
   handleChangeCurrent: (event: unknown, newPage: number) => void;
   handleChangeSize: (event: ChangeEvent<HTMLInputElement>) => void;
   sx?: any;

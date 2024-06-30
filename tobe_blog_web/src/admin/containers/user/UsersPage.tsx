@@ -1,35 +1,23 @@
-import {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from '../../../components/layout';
-import {
-  EColumnPosition,
-  EOperationName,
-} from '../../../global/enums.ts';
-import {
-  Column,
-  Operation,
-  UserData,
-} from '../../../global/types';
+import { EColumnPosition, EOperationName } from '../../../global/enums.ts';
+import { IColumn, IUserData, IOperation } from '../../../global/types';
 import { UserService } from '../../../services';
 import { PagedTable } from '../../components';
 
 export default function UsersPage() {
   const [current, setCurrent] = useState<number>(0);
   const [size, setSize] = useState<number>(10);
-  const [rows, setRows] = useState<UserData[]>([]);
+  const [rows, setRows] = useState<IUserData[]>([]);
   const [openLoading, setOpenLoading] = useState(false);
   const [totalCount, setTotalCount] = useState<number>(0);
   const { t } = useTranslation();
-  
+
   const loadUserData = useCallback((): void => {
     setOpenLoading(true);
     UserService.getUsers(size, current)
-      .then((response) => {
+      .then(response => {
         setRows(response.data.records || []);
         setTotalCount(response.data.total);
         setOpenLoading(true);
@@ -38,14 +26,11 @@ export default function UsersPage() {
       .finally(() => {
         setOpenLoading(false);
       });
-  }, [
-    current,
-    size,
-  ]);
-  
+  }, [current, size]);
+
   useEffect(() => loadUserData(), [loadUserData]);
-  
-  const columns: Column[] = [
+
+  const columns: IColumn[] = [
     {
       id: 'id',
       label: t('user-table.label.id'),
@@ -77,7 +62,7 @@ export default function UsersPage() {
       align: EColumnPosition.CENTER,
     },
   ];
-  
+
   function deleteUserDate(id: number | string) {
     setOpenLoading(true);
     UserService.deleteUser(id)
@@ -85,34 +70,32 @@ export default function UsersPage() {
         setOpenLoading(true);
         loadUserData();
       })
-      .catch((error) => console.error(error))
+      .catch(error => console.error(error))
       .finally(() => {
         setOpenLoading(false);
       });
   }
-  
+
   const handleChangeCurrent = (_event: unknown, newPage: number): void => {
     setCurrent(newPage);
   };
-  
-  const handleChangeSize = (
-    event: ChangeEvent<HTMLInputElement>,
-  ): void => {
+
+  const handleChangeSize = (event: ChangeEvent<HTMLInputElement>): void => {
     setSize(+event.target.value);
     setCurrent(0);
   };
-  
+
   const handleDelete = (id: number | string): void => {
     deleteUserDate(id);
   };
-  
-  const operations: Operation[] = [
+
+  const operations: IOperation[] = [
     {
       name: EOperationName.DELETE,
       onClick: (id: number | string) => handleDelete(id),
     },
   ];
-  
+
   return (
     <Page
       pageTitle={t('user-table.title')}

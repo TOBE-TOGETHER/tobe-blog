@@ -3,20 +3,20 @@ import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../../../../commons';
-import { PlanProgress } from '../../../../../global/types';
+import { IPlanProgress } from '../../../../../global/types';
 import { PlanProgressService, PublicDataService } from '../../../../../services';
 import { EditIconButton } from '../../../../components';
 import { ImagesPanel } from './ImagesPanel';
 
 interface PlanProgressItemProps {
-  progress: PlanProgress;
+  progress: IPlanProgress;
   viewOnly: boolean;
 }
 
 export default function PlanProgressItem(props: PlanProgressItemProps) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const [progress, setProgress] = useState<PlanProgress>(props.progress);
+  const [progress, setProgress] = useState<IPlanProgress>(props.progress);
   const [editable, setEditable] = useState<boolean>(false);
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [progressDesc, setProgressDesc] = useState<string>(props.progress.description);

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { TagOption } from '../../../../global/types';
+import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PlanService } from '../../../../services';
 import { SaveButtonPanel } from '../../../components';
@@ -11,7 +11,7 @@ import PlanEditMainSection from './components/PlanEditMainSection';
 
 export default function PlanCreationPage() {
   const { t } = useTranslation();
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [title, setTitle] = useState<string | null>(null);

@@ -1,8 +1,8 @@
 import { StylesConfig } from 'react-select';
-import { TagOption } from '../../../../global/types';
+import { ITagOption } from '../../../../global/types';
 import theme from '../../../../theme';
 
-export const styles: StylesConfig<TagOption, true> = {
+export const styles: StylesConfig<ITagOption, true> = {
   control: baseStyles => ({
     ...baseStyles,
     'height': '56px',

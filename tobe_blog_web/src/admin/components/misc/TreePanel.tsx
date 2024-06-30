@@ -8,10 +8,10 @@ import { TreeItem, TreeItemProps, treeItemClasses } from '@mui/x-tree-view/TreeI
 import { animated, useSpring } from '@react-spring/web';
 
 import { SimpleTreeView } from '@mui/x-tree-view';
-import { RenderTree } from '../../../global/types';
+import { IRenderTree } from '../../../global/types';
 
-export default function TreePanel(props: { nodes: RenderTree; onNodeFocus: (event: React.SyntheticEvent | null, value: string) => void }) {
-  const renderTree = (nodes: RenderTree) => (
+export default function TreePanel(props: { nodes: IRenderTree; onNodeFocus: (event: React.SyntheticEvent | null, value: string) => void }) {
+  const renderTree = (nodes: IRenderTree) => (
     <StyledTreeItem
       key={nodes.id}
       itemId={nodes.id}

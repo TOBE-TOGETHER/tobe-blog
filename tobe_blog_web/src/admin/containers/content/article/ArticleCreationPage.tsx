@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { TagOption } from '../../../../global/types';
+import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { ArticleService } from '../../../../services';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
@@ -18,9 +18,9 @@ export default function ArticleCreationPage() {
   const [title, setTitle] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
   const [coverImgUrl, setCoverImgUrl] = useState<string>('');
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [contentProtected, setContentProtected] = useState<boolean>(false);
-  
+
   function saveArticle(): void {
     setOpenLoading(true);
     ArticleService.create({
@@ -28,10 +28,7 @@ export default function ArticleCreationPage() {
       subTitle: subTitle,
       content: htmlValue,
       coverImgUrl: coverImgUrl,
-      description:
-        textValue.trim().length >= 500
-          ? textValue.trim().substring(0, 497) + '...'
-          : textValue.trim(),
+      description: textValue.trim().length >= 500 ? textValue.trim().substring(0, 497) + '...' : textValue.trim(),
       tags: tagValues,
       contentProtected: contentProtected,
     })
@@ -48,7 +45,7 @@ export default function ArticleCreationPage() {
       })
       .finally(() => setOpenLoading(false));
   }
-  
+
   return (
     <Page
       openLoading={openLoading}

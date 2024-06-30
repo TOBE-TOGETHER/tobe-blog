@@ -2,9 +2,9 @@ import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { IBaseUserContentDTO, Operation } from '../../../global/types';
+import { IBaseUserContentDTO, IOperation } from '../../../global/types';
 
-export default function CardHeaderActionButton(props: { operations: Operation[]; data: IBaseUserContentDTO; color?: string }) {
+export default function CardHeaderActionButton(props: { operations: IOperation[]; data: IBaseUserContentDTO; color?: string }) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorRecordId, setAnchorRecordId] = React.useState<null | string>(null);

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { getPathFromContentType } from '../../../commons';
 import { EContentType } from '../../../global/enums';
-import { NewsDTO } from '../../../global/types';
+import { INewsDTO } from '../../../global/types';
 import { PublicDataService } from '../../../services';
 import NewsListItem from './NewsListItem';
 enum LoadType {
@@ -22,11 +22,11 @@ export default function FeaturedNews(props: {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [newsData, setNewsData] = useState<NewsDTO[]>([]);
+  const [newsData, setNewsData] = useState<INewsDTO[]>([]);
   const [current, setCurrent] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
 
-  const loadNews = useCallback((_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: string[], _newsData: NewsDTO[], _ownerId: string): void => {
+  const loadNews = useCallback((_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: string[], _newsData: INewsDTO[], _ownerId: string): void => {
     PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId)
       .then(response => {
         if (_loadType === LoadType.Append) {

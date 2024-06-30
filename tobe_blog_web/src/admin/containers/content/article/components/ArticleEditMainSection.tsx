@@ -1,6 +1,6 @@
 import { FormControlLabel, Switch, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { TagOption } from '../../../../../global/types';
+import { ITagOption } from '../../../../../global/types';
 import { FormPanel, MultipleTagSelecter, OneRow, RichContentEditor, SaveButtonPanel } from '../../../../components';
 
 export interface ArticleEditMainSectionProps {
@@ -12,8 +12,8 @@ export interface ArticleEditMainSectionProps {
   setCoverImgUrl: (value: string) => void;
   contentProtected: boolean;
   setContentProtected: (value: boolean) => void;
-  tagValues: TagOption[];
-  setTagValues: (value: TagOption[]) => void;
+  tagValues: ITagOption[];
+  setTagValues: (value: ITagOption[]) => void;
   htmlValue: string;
   setHtmlValue: (value: string) => void;
   textValue: string;

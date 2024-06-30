@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PlanProgress } from '../../../../../global/types.ts';
+import { IPlanProgress } from '../../../../../global/types.ts';
 import { PublicDataService } from '../../../../../services/index.ts';
 import { InfiniteScrollList } from '../../../../components/index.ts';
 import PlanProgressItem from './PlanProgressItem.tsx';
@@ -13,13 +13,13 @@ export default function PlanProgressItems(props: { planId: string; viewOnly: boo
   const DEFAULT_PAGE_SIZE: number = 6;
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
-  const [progresses, setProgresses] = useState<PlanProgress[]>([]);
+  const [progresses, setProgresses] = useState<IPlanProgress[]>([]);
 
   useEffect(() => {
     loadProgresses(0, []);
   }, [props.planId, props.refreshCode]);
 
-  const loadProgresses = (_current: number, _progresses: PlanProgress[]): void => {
+  const loadProgresses = (_current: number, _progresses: IPlanProgress[]): void => {
     PublicDataService.getProgressesByPlanId(props.planId, DEFAULT_PAGE_SIZE, _current + 1)
       .then(response => {
         setProgresses(_progresses.concat(response.data.records));
@@ -36,7 +36,7 @@ export default function PlanProgressItems(props: { planId: string; viewOnly: boo
     <InfiniteScrollList
       loading={false}
       dataSource={progresses}
-      renderItem={(progress: PlanProgress) => (
+      renderItem={(progress: IPlanProgress) => (
         <Grid
           item
           xs={12}

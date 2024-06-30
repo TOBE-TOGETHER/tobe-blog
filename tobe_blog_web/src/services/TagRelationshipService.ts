@@ -1,11 +1,11 @@
 import { AxiosPromise } from 'axios';
 
 import { server } from '.';
-import { TagRelationshipCreateDTO } from '../global/types';
+import { ITagRelationshipCreateDTO } from '../global/types';
 
 const TAG_RELATIONSHIP_URI = 'v1/tag-relationships';
 
-export function createRelationship(target: TagRelationshipCreateDTO): AxiosPromise {
+export function createRelationship(target: ITagRelationshipCreateDTO): AxiosPromise {
   return server.post(`/${TAG_RELATIONSHIP_URI}`, target);
 }
 

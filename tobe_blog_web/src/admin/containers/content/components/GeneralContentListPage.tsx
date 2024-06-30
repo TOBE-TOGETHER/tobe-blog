@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { EOperationName } from '../../../../global/enums.ts';
-import { IBaseUserContentDTO, Operation } from '../../../../global/types';
+import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
 import DomainService from '../../../../services/DomainService';
 import GeneralCardView from './GeneralCardView';
 import GeneralContentListPageFunctionBar from './GeneralContentListPageFunctionBar';
@@ -20,7 +20,7 @@ export default function GeneralContentListPage(props: { domainService: DomainSer
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [status, setStatus] = useState<string>('');
-  // the tempData and tempCurrent are defined for avoid the
+  // the tempData and tempCurrent are defined for avoid data duplicated issue
   let tempData: IBaseUserContentDTO[] = [];
   let tempCurrent: number = 0;
 
@@ -90,7 +90,7 @@ export default function GeneralContentListPage(props: { domainService: DomainSer
       });
   }
 
-  const operations: Operation[] = [
+  const operations: IOperation[] = [
     {
       name: EOperationName.RELEASE,
       onClick: (id: number | string) => releaseById(id),

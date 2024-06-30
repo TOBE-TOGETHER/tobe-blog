@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { CollectionUpdateDTO, ICollectionDTO, RenderTree, TagOption, TagRelationship } from '../../../../global/types';
+import { ICollectionDTO, ICollectionUpdateDTO, IRenderTree, ITagOption, ITagRelationship } from '../../../../global/types';
 import { CollectionService } from '../../../../services';
 import ContentEditBar from '../components/ContentEditBar';
 import CollectionContentPanel from './components/CollectionContentPanel';
@@ -20,8 +20,8 @@ export default function CollectionDetailPage() {
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
-  const [treeData, setTreeData] = useState<RenderTree>({
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
+  const [treeData, setTreeData] = useState<IRenderTree>({
     id: ROOT,
     name: 'ROOT',
     children: [],
@@ -29,7 +29,7 @@ export default function CollectionDetailPage() {
 
   const loadData = useCallback(
     (id: string): void => {
-      function convert(tagRelationships: TagRelationship[]): RenderTree[] {
+      function convert(tagRelationships: ITagRelationship[]): IRenderTree[] {
         if (!Array.isArray(tagRelationships) || tagRelationships.length === 0) {
           return [];
         }
@@ -84,7 +84,7 @@ export default function CollectionDetailPage() {
     setEditable(!editable);
   };
 
-  function handleUpdate(target: CollectionUpdateDTO): void {
+  function handleUpdate(target: ICollectionUpdateDTO): void {
     setOpenLoading(true);
     CollectionService.update(target)
       .then(() => {

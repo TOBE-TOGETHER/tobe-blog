@@ -1,6 +1,6 @@
 import { SxProps, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { TagOption } from '../../../../../global/types';
+import { ITagOption } from '../../../../../global/types';
 import { FormPanel, MultipleTagSelecter, OneRow } from '../../../../components';
 
 export interface ContentEditMainSectionProps {
@@ -10,8 +10,8 @@ export interface ContentEditMainSectionProps {
   setDescription: (value: string) => void;
   coverImgUrl: string | null;
   setCoverImgUrl: (value: string) => void;
-  tagValues: TagOption[];
-  setTagValues: (value: TagOption[]) => void;
+  tagValues: ITagOption[];
+  setTagValues: (value: ITagOption[]) => void;
   editable: boolean;
   sx?: SxProps;
 }

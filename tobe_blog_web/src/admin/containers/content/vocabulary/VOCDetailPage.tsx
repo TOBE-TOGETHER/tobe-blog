@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { WordListPanel } from '../../../../components/common/word/WordListPanel';
 import { Page } from '../../../../components/layout';
-import { TagOption, VocabularyDetailDTO, VocabularyUpdateDTO } from '../../../../global/types';
+import { IVocabularyDetailDTO, IVocabularyUpdateDTO, ITagOption } from '../../../../global/types';
 import { VocabularyService } from '../../../../services';
 import ContentEditBar from '../components/ContentEditBar';
 import VOCEditMainSection from './components/VOCEditMainSection';
@@ -15,12 +15,12 @@ export default function VOCDetailPage() {
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
   const [editable, setEditable] = useState<boolean>(false);
-  const [vocabulary, setVocabulary] = useState<VocabularyDetailDTO | null>(null);
+  const [vocabulary, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [language, setLanguage] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
 
   const loadData = useCallback(
     (vocabularyId: string): void => {
@@ -64,7 +64,7 @@ export default function VOCDetailPage() {
     setEditable(!editable);
   };
 
-  function handleUpdate(updateDTO: VocabularyUpdateDTO): void {
+  function handleUpdate(updateDTO: IVocabularyUpdateDTO): void {
     VocabularyService.update(updateDTO)
       .then(() => {
         enqueueSnackbar(t('vocabulary-detail-page.msg.success'), {

@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { TagOption } from '../../../../global/types';
+import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { ArticleService } from '../../../../services';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
@@ -18,7 +18,7 @@ export default function ArticleDetailPage() {
   const [title, setTitle] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
   const [coverImgUrl, setCoverImgUrl] = useState<string>('');
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [contentProtected, setContentProtected] = useState<boolean>(false);
   const loadData = useCallback((): void => {
     if (!id) {

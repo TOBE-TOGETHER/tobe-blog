@@ -1,7 +1,7 @@
 import { Grid, SxProps, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { useTranslation } from 'react-i18next';
-import { TagOption } from '../../../../../global/types';
+import { ITagOption } from '../../../../../global/types';
 import { FormPanel, HalfRow, MultipleTagSelecter, OneRow } from '../../../../components';
 
 interface IPlanEditMainSectionProps {
@@ -15,8 +15,8 @@ interface IPlanEditMainSectionProps {
   setToTime: (value: Date | null) => void;
   coverImgUrl: string | null;
   setCoverImgUrl: (value: string) => void;
-  tagValues: TagOption[];
-  setTagValues: (value: TagOption[]) => void;
+  tagValues: ITagOption[];
+  setTagValues: (value: ITagOption[]) => void;
   editable: boolean;
   sx?: SxProps;
 }

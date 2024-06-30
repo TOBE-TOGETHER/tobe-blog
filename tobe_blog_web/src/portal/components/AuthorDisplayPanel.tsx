@@ -1,31 +1,20 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { Avatar, Grid, Link, Paper, Tooltip, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Avatar,
-  Tooltip,
-  Grid,
-  Link,
-  Paper,
-  Typography,
-} from '@mui/material';
-import { UserBriefProfileDTO } from '../../global/types';
-import { PublicDataService } from '../../services';
 import { useNavigate } from 'react-router-dom';
+import { IUserBriefProfileDTO } from '../../global/types';
 import { URL } from '../../routes';
+import { PublicDataService } from '../../services';
 
 export default function AuthorDisplayPanel(props: { userId: string }) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const [profile, setProfile] = useState<UserBriefProfileDTO | null>(null);
+  const [profile, setProfile] = useState<IUserBriefProfileDTO | null>(null);
   const loadProfile = useCallback((): void => {
     PublicDataService.getBriefProfileByUserId(props.userId)
-      .then((response) => {
+      .then(response => {
         setProfile(response.data);
       })
       .catch(() => {
@@ -33,12 +22,8 @@ export default function AuthorDisplayPanel(props: { userId: string }) {
           variant: 'error',
         });
       });
-  }, [
-    enqueueSnackbar,
-    t,
-    props.userId,
-  ]);
-  
+  }, [enqueueSnackbar, t, props.userId]);
+
   useEffect(() => loadProfile(), [loadProfile]);
   return profile ? (
     <Paper
@@ -61,19 +46,17 @@ export default function AuthorDisplayPanel(props: { userId: string }) {
               borderBottom: '1px solid rgba(0,0,0,0.12)',
               pb: 1,
             }}
-            onClick={() =>
-              navigate(URL.PERSONAL_PORTAL.replace(':id', profile.id))
-            }
+            onClick={() => navigate(URL.PERSONAL_PORTAL.replace(':id', profile.id))}
           >
             <Avatar
               alt={profile.firstName || ''}
               src={profile.avatarUrl || ''}
               sx={{
-                width: 60,
-                height: 60,
-                m: '0 auto',
-                my: 2,
-                cursor: 'pointer',
+                'width': 60,
+                'height': 60,
+                'm': '0 auto',
+                'my': 2,
+                'cursor': 'pointer',
                 '&:hover': {
                   backgroundColor: 'rgba(0, 0, 0, 0.04)',
                 },
@@ -122,7 +105,7 @@ export default function AuthorDisplayPanel(props: { userId: string }) {
             </Tooltip>
           </Grid>
         </Grid>
-        
+
         {profile.blog && (
           <Grid
             item
@@ -144,7 +127,7 @@ export default function AuthorDisplayPanel(props: { userId: string }) {
             </Typography>
           </Grid>
         )}
-        
+
         {profile.introduction && (
           <Grid
             item

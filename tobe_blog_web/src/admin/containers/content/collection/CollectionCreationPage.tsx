@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { TagOption } from '../../../../global/types';
+import { ITagOption } from '../../../../global/types';
 import { CollectionService } from '../../../../services';
 import { URL } from '../../../URL';
 import { SaveButtonPanel } from '../../../components';
@@ -13,7 +13,7 @@ export default function CollectionCreationPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [title, setTitle] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);

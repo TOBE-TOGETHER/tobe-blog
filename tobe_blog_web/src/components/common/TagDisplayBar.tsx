@@ -1,13 +1,13 @@
 import { Chip, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { TagOption } from '../../global/types';
+import { ITagOption } from '../../global/types';
 
 const ListItem = styled('li')(({ theme }) => ({
   marginRight: theme.spacing(0.5),
   marginTop: theme.spacing(1),
 }));
 
-export default function TagDisplayBar(props: { tags: TagOption[] }) {
+export default function TagDisplayBar(props: { tags: ITagOption[] }) {
   return (
     <Grid
       sx={{

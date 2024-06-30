@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { PlanInfo, PlanUpdateDTO, TagOption } from '../../../../global/types';
+import { IPlanInfo, IPlanUpdateDTO, ITagOption } from '../../../../global/types';
 import { PlanService } from '../../../../services';
 import ContentEditBar from '../components/ContentEditBar.tsx';
 import PlanEditMainSection from './components/PlanEditMainSection.tsx';
@@ -14,13 +14,13 @@ export default function PlanDetailPage() {
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
   const [editable, setEditable] = useState<boolean>(false);
-  const [plan, setPlan] = useState<PlanInfo | null>(null);
+  const [plan, setPlan] = useState<IPlanInfo | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
 
   const loadData = useCallback(
     (id: string): void => {
@@ -45,7 +45,7 @@ export default function PlanDetailPage() {
 
   useEffect(() => loadData(id || ''), [loadData, id]);
 
-  function handlePlanUpdate(updatedPlan: PlanUpdateDTO): void {
+  function handlePlanUpdate(updatedPlan: IPlanUpdateDTO): void {
     PlanService.update(updatedPlan)
       .then(() => {
         enqueueSnackbar(t('plan-detail-page.msg.success'), {

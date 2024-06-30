@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import { IBaseUserContentDTO, Operation } from '../../../../global/types';
+import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
 import { InfiniteScrollList } from '../../../components';
 import { GeneralCard } from './GeneralCard';
 
@@ -8,7 +8,7 @@ export default function GeneralCardView(props: {
   data: IBaseUserContentDTO[];
   current: number;
   totalPage: number;
-  operations: Operation[];
+  operations: IOperation[];
   loadMore: () => void;
   onClick?: (id: number | string) => void;
 }) {

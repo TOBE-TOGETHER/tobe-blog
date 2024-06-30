@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { TagOption } from '../../../../global/types';
+import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { VocabularyService } from '../../../../services';
 import { SaveButtonPanel } from '../../../components';
@@ -17,7 +17,7 @@ export default function VOCCreationPage() {
   const [description, setDescription] = useState<string | null>(null);
   const [language, setLanguage] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
 
   function handleCreation(): void {
     VocabularyService.create({
