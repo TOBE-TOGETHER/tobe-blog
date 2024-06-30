@@ -2,12 +2,12 @@ import { enqueueSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CreatableSelect from 'react-select/creatable';
-import { TagOption } from '../../../../global/types';
+import { ITagOption } from '../../../../global/types';
 import { TagService } from '../../../../services';
 import { styles } from './StyleConfig';
 
-export default function SingleTagSelecter(props: { value: TagOption | null; setValue: (newValue: TagOption) => void; disabled?: boolean }) {
-  const [options, setOptions] = useState<TagOption[]>([]);
+export default function SingleTagSelecter(props: { value: ITagOption | null; setValue: (newValue: ITagOption) => void; disabled?: boolean }) {
+  const [options, setOptions] = useState<ITagOption[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();
 
@@ -46,7 +46,7 @@ export default function SingleTagSelecter(props: { value: TagOption | null; setV
     }
   };
 
-  function isInstanceOfTagOption(object: any): object is TagOption {
+  function isInstanceOfTagOption(object: any): object is ITagOption {
     return 'label' in object && 'value' in object;
   }
 

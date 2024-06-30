@@ -10,12 +10,12 @@ import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import plan from '../../../../package.json';
 import { EAuthority, EFeatureCode } from '../../../global/enums.ts';
-import { PageItem } from '../../../global/types';
+import { IPageItem } from '../../../global/types';
 import theme from '../../../theme';
 import { URL } from '../../URL';
 import { NavItems } from './NavItems';
 
-const basicPageItems: PageItem[] = [
+const basicPageItems: IPageItem[] = [
   {
     label: 'dashboard-nav.pages.analytics',
     icon: <DashboardIcon />,
@@ -55,7 +55,7 @@ const basicPageItems: PageItem[] = [
   },
 ];
 
-const adminPageItems: PageItem[] = [
+const adminPageItems: IPageItem[] = [
   {
     label: 'dashboard-nav.pages.users',
     icon: <Groups />,

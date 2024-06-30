@@ -1,8 +1,8 @@
 import { Dialog, DialogContent, Grid, Typography } from '@mui/material';
 import Speech from 'react-text-to-speech';
-import { WordGeneralDTO } from '../../../global/types';
+import { IWordGeneralDTO } from '../../../global/types';
 
-export function WordDisplayDialog(props: { word: WordGeneralDTO | null; setWord: (word: WordGeneralDTO | null) => void }) {
+export function WordDisplayDialog(props: { word: IWordGeneralDTO | null; setWord: (word: IWordGeneralDTO | null) => void }) {
   return (
     <Grid
       item

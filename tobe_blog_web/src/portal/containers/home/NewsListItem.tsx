@@ -1,7 +1,7 @@
 import { Grid, Link, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../../commons';
-import { TagOption } from '../../../global/types';
+import { ITagOption } from '../../../global/types';
 import theme from '../../../theme';
 import { URL } from '../../URL';
 import TagDisplayBar from './TagDisplayBar';
@@ -13,7 +13,7 @@ export default function NewsListItem(props: {
   description: string;
   publishTime: string | null;
   viewCount: number;
-  tags: TagOption[];
+  tags: ITagOption[];
   onClick: () => void;
 }) {
   const { t } = useTranslation();

@@ -1,43 +1,43 @@
-import { Grid, Paper, TextField } from '@mui/material';
+import { Paper } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { WordListPanel } from '../../../../components/common/word/WordListPanel';
 import { Page } from '../../../../components/layout';
-import { TagOption, VocabularyDetailDTO, VocabularyUpdateDTO } from '../../../../global/types';
+import { IVocabularyDetailDTO, IVocabularyUpdateDTO, ITagOption } from '../../../../global/types';
 import { VocabularyService } from '../../../../services';
-import { EditIconButton, FormPanel, MultipleTagSelecter, OneRow } from '../../../components';
+import ContentEditBar from '../components/ContentEditBar';
+import VOCEditMainSection from './components/VOCEditMainSection';
 
 export default function VOCDetailPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
-  const [openLoading, setOpenLoading] = useState<boolean>(false);
   const [editable, setEditable] = useState<boolean>(false);
-  const [vocabulary, setVocabulary] = useState<VocabularyDetailDTO | null>(null);
+  const [vocabulary, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [language, setLanguage] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
-  const [tagValue, setTagValue] = useState<TagOption[]>([]);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
 
   const loadData = useCallback(
     (vocabularyId: string): void => {
-      setOpenLoading(true);
       VocabularyService.getById(vocabularyId)
         .then(response => {
           setVocabulary(response.data);
+          setTitle(response.data.title);
           setDescription(response.data.description);
           setLanguage(response.data.language);
           setCoverImgUrl(response.data.coverImgUrl);
-          setTagValue(response.data.tags);
+          setTagValues(response.data.tags);
         })
         .catch(() => {
           enqueueSnackbar(t('vocabulary-detail-page.msg.error'), {
             variant: 'error',
           });
-        })
-        .finally(() => setOpenLoading(false));
+        });
     },
     [enqueueSnackbar, t]
   );
@@ -48,21 +48,23 @@ export default function VOCDetailPage() {
     if (!vocabulary) {
       return;
     }
+    if (!title) {
+      return;
+    }
     if (editable) {
       handleUpdate({
         id: vocabulary.id,
-        title: vocabulary.title,
+        title: title || '',
         description: description || '',
         language: language || '',
         coverImgUrl: coverImgUrl || '',
-        tags: tagValue,
+        tags: tagValues,
       });
     }
     setEditable(!editable);
   };
 
-  function handleUpdate(updateDTO: VocabularyUpdateDTO): void {
-    setOpenLoading(true);
+  function handleUpdate(updateDTO: IVocabularyUpdateDTO): void {
     VocabularyService.update(updateDTO)
       .then(() => {
         enqueueSnackbar(t('vocabulary-detail-page.msg.success'), {
@@ -73,76 +75,31 @@ export default function VOCDetailPage() {
         enqueueSnackbar(t('vocabulary-detail-page.msg.error'), {
           variant: 'error',
         });
-      })
-      .finally(() => setOpenLoading(false));
+      });
   }
 
-  return (
+  return vocabulary ? (
     <Page
-      openLoading={openLoading}
-      pageTitle={vocabulary?.title || ''}
+      openLoading={false}
+      pageTitle={title || ''}
     >
-      {vocabulary && (
-        <Grid
-          container
-          sx={{ my: 0, pr: { xs: 0.5, md: 1 }, py: { xs: 0.5, md: 1 } }}
-          alignItems="center"
-        >
-          <Grid
-            item
-            flexGrow={1}
-          ></Grid>
-          <Grid
-            item
-            flexGrow={0}
-          >
-            <EditIconButton
-              editable={editable}
-              handleEditableChange={handleEditableChange}
-            />
-          </Grid>
-        </Grid>
-      )}
-      {vocabulary && (
-        <FormPanel sx={{ mt: 1 }}>
-          <OneRow>
-            <TextField
-              label={t('vocabulary-creation-page.fields.language')}
-              fullWidth
-              autoComplete="language"
-              disabled={!editable}
-              value={language}
-              onChange={event => setLanguage(event.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('vocabulary-creation-page.fields.description')}
-              fullWidth
-              autoComplete="description"
-              disabled={!editable}
-              value={description}
-              onChange={event => setDescription(event.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('vocabulary-creation-page.fields.cover-img-url')}
-              fullWidth
-              value={coverImgUrl}
-              onChange={e => setCoverImgUrl(e.target.value)}
-              disabled={!editable}
-            />
-          </OneRow>
-          <OneRow>
-            <MultipleTagSelecter
-              value={tagValue}
-              setValue={setTagValue}
-              disabled={!editable}
-            />
-          </OneRow>
-        </FormPanel>
-      )}
+      <ContentEditBar
+        editable={editable}
+        handleEditableChange={handleEditableChange}
+      />
+      <VOCEditMainSection
+        title={title}
+        setTitle={setTitle}
+        description={description}
+        setDescription={setDescription}
+        language={language}
+        setLanguage={setLanguage}
+        coverImgUrl={coverImgUrl}
+        setCoverImgUrl={setCoverImgUrl}
+        tagValues={tagValues}
+        setTagValues={setTagValues}
+        editable={editable}
+      />
       {id && (
         <Paper sx={{ my: 1, p: { xs: 2, md: 3 }, borderRadius: 4, overflow: 'hidden' }}>
           <WordListPanel
@@ -152,5 +109,7 @@ export default function VOCDetailPage() {
         </Paper>
       )}
     </Page>
+  ) : (
+    <></>
   );
 }

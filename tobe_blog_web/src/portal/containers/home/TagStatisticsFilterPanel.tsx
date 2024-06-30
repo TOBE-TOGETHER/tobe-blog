@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SidePanel } from '../../../components';
 import { EContentType } from '../../../global/enums';
-import { TagStatisticDTO } from '../../../global/types';
+import { ITagStatisticDTO } from '../../../global/types';
 import { PublicDataService } from '../../../services';
 
 export default function TagStatisticsFilterPanel(props: { contentType: EContentType; ownerId: string; checked: string[]; setChecked: (newValue: string[]) => void }) {
   const { t } = useTranslation();
-  const [tagStatistics, setTagStatistics] = useState<TagStatisticDTO[]>([]);
+  const [tagStatistics, setTagStatistics] = useState<ITagStatisticDTO[]>([]);
 
   const handleToggle = (value: string) => () => {
     const currentIndex = props.checked.indexOf(value);

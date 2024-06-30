@@ -1,12 +1,13 @@
-import { Button, Grid, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { CollectionUpdateDTO, ICollectionDTO, RenderTree, TagOption, TagRelationship } from '../../../../global/types';
-import { CollectionService, TagRelationshipService } from '../../../../services';
-import { EditIconButton, FormPanel, MultipleTagSelecter, OneRow, SingleTagSelecter, TreePanel } from '../../../components';
+import { ICollectionDTO, ICollectionUpdateDTO, IRenderTree, ITagOption, ITagRelationship } from '../../../../global/types';
+import { CollectionService } from '../../../../services';
+import ContentEditBar from '../components/ContentEditBar';
+import CollectionContentPanel from './components/CollectionContentPanel';
+import ContentEditMainSection from './components/CollectionEditMainSection';
 
 export default function CollectionDetailPage() {
   const ROOT = 'root';
@@ -16,20 +17,19 @@ export default function CollectionDetailPage() {
   const [editable, setEditable] = useState<boolean>(false);
   const [openLoading, setOpenLoading] = useState<boolean>(false);
   const [collection, setCollections] = useState<ICollectionDTO | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
-  const [treeData, setTreeData] = useState<RenderTree>({
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
+  const [treeData, setTreeData] = useState<IRenderTree>({
     id: ROOT,
     name: 'ROOT',
     children: [],
   });
-  const [currentNodeId, setCurrentNodeId] = useState<string>(ROOT);
-  const [targetTag, setTargetTag] = useState<TagOption | null>(null);
 
   const loadData = useCallback(
     (id: string): void => {
-      function convert(tagRelationships: TagRelationship[]): RenderTree[] {
+      function convert(tagRelationships: ITagRelationship[]): IRenderTree[] {
         if (!Array.isArray(tagRelationships) || tagRelationships.length === 0) {
           return [];
         }
@@ -41,11 +41,10 @@ export default function CollectionDetailPage() {
           };
         });
       }
-
-      setOpenLoading(true);
       CollectionService.getById(id)
         .then(response => {
           setCollections(response.data);
+          setTitle(response.data.title);
           setDescription(response.data.description);
           setCoverImgUrl(response.data.coverImgUrl);
           setTagValues(response.data.tags);
@@ -56,8 +55,7 @@ export default function CollectionDetailPage() {
           enqueueSnackbar(t('collection-detail-page.msg.error'), {
             variant: 'error',
           });
-        })
-        .finally(() => setOpenLoading(false));
+        });
     },
     [treeData, t, enqueueSnackbar]
   );
@@ -68,10 +66,16 @@ export default function CollectionDetailPage() {
     if (!collection) {
       return;
     }
+    if (!title) {
+      enqueueSnackbar(t('collection-creation-page.msg.warning.name-empty'), {
+        variant: 'warning',
+      });
+      return;
+    }
     if (editable) {
       handleUpdate({
         id: collection.id,
-        title: collection.title,
+        title: title || '',
         description: description || '',
         coverImgUrl: coverImgUrl || '',
         tags: tagValues,
@@ -80,7 +84,7 @@ export default function CollectionDetailPage() {
     setEditable(!editable);
   };
 
-  function handleUpdate(target: CollectionUpdateDTO): void {
+  function handleUpdate(target: ICollectionUpdateDTO): void {
     setOpenLoading(true);
     CollectionService.update(target)
       .then(() => {
@@ -96,156 +100,33 @@ export default function CollectionDetailPage() {
       .finally(() => setOpenLoading(false));
   }
 
-  function handleCreateNewRelationship() {
-    setOpenLoading(true);
-    const parentId = currentNodeId === ROOT ? null : Number.parseInt(currentNodeId);
-    if (!targetTag || !id) {
-      return;
-    }
-    const tagId = Number.parseInt(targetTag.value);
-    TagRelationshipService.createRelationship({
-      parentId,
-      tagId,
-      collectionId: id,
-    }).then(() => {
-      loadData(id);
-      setTargetTag(null);
-    });
-  }
-
-  function handleDeleteRelationship() {
-    setOpenLoading(true);
-    const targetId = currentNodeId === ROOT ? null : Number.parseInt(currentNodeId);
-    if (!targetId || !id) {
-      return;
-    }
-    TagRelationshipService.deleteRelationship(targetId).then(() => {
-      loadData(id);
-      setTargetTag(null);
-    });
-  }
-
-  return (
+  return collection ? (
     <Page
       openLoading={openLoading}
-      pageTitle={collection?.title || ''}
+      pageTitle={title || ''}
     >
-      {collection && (
-        <Grid
-          container
-          sx={{ m: 0, p: { xs: 0.5, md: 1 } }}
-          alignItems="center"
-        >
-          <Grid
-            item
-            flexGrow={1}
-          ></Grid>
-          <Grid
-            item
-            flexGrow={0}
-          >
-            <EditIconButton
-              editable={editable}
-              handleEditableChange={handleEditableChange}
-            />
-          </Grid>
-        </Grid>
-      )}
-      {collection && (
-        <FormPanel sx={{ mt: 1 }}>
-          <OneRow>
-            <TextField
-              label={t('collection-creation-page.fields.description')}
-              fullWidth
-              multiline
-              maxRows={2}
-              minRows={2}
-              disabled={!editable}
-              value={description}
-              onChange={event => setDescription(event.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('collection-creation-page.fields.cover-img-url')}
-              fullWidth
-              disabled={!editable}
-              autoComplete="coverImgUrl"
-              value={coverImgUrl}
-              onChange={event => setCoverImgUrl(event.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <MultipleTagSelecter
-              value={tagValues}
-              setValue={setTagValues}
-              disabled={!editable}
-            />
-          </OneRow>
-        </FormPanel>
-      )}
-      <FormPanel sx={{ mt: 1 }}>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          sx={{ p: 2 }}
-        >
-          <TreePanel
-            nodes={treeData}
-            onNodeFocus={(_event, id) => setCurrentNodeId(id)}
-          />
-        </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          sx={{ p: 2 }}
-        >
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            sx={{ alignSelf: 'flex-start', p: 1 }}
-          >
-            <SingleTagSelecter
-              value={targetTag}
-              setValue={setTargetTag}
-            />
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            sx={{ alignSelf: 'flex-end', p: 1 }}
-          >
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={handleCreateNewRelationship}
-            >
-              {t('collection-detail-page.btn.add')}
-            </Button>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            sx={{ alignSelf: 'flex-end', p: 1 }}
-          >
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={handleDeleteRelationship}
-            >
-              {t('collection-detail-page.btn.delete')}
-            </Button>
-          </Grid>
-        </Grid>
-      </FormPanel>
+      <ContentEditBar
+        editable={editable}
+        handleEditableChange={handleEditableChange}
+      />
+      <ContentEditMainSection
+        title={title}
+        setTitle={setTitle}
+        description={description}
+        setDescription={setDescription}
+        coverImgUrl={coverImgUrl}
+        setCoverImgUrl={setCoverImgUrl}
+        tagValues={tagValues}
+        setTagValues={setTagValues}
+        editable={editable}
+      />
+      <CollectionContentPanel
+        collectionId={collection.id}
+        loadData={loadData}
+        treeData={treeData}
+      />
     </Page>
+  ) : (
+    <></>
   );
 }

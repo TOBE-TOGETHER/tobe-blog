@@ -1,17 +1,22 @@
 import { Container, Grid } from '@mui/material';
 import { ReactElement, useState } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
+import { getContentTypeFromPath, getPathFromContentType } from '../../../commons';
 import { EContentType } from '../../../global/enums';
 import FeaturedNews from './FeaturedNews';
 import TagStatisticsFilterPanel from './TagStatisticsFilterPanel';
 
 export default function FunctionSection(props: { availableContentTypes: EContentType[]; extraPanels: ReactElement[]; ownerId: string }) {
+  const [searchParams] = useSearchParams();
+  const paramContentType = searchParams.get('d') || '';
   const [checkedTags, setCheckedTags] = useState<string[]>([]);
-  const [contentType, setContentType] = useState<EContentType>(EContentType.Article);
+  const [contentType, setContentType] = useState<EContentType>(getContentTypeFromPath(paramContentType));
 
   function handleContentTypeChange(newValue: EContentType) {
     setCheckedTags([]);
     setContentType(newValue);
+    window.history.pushState(null, '', `?d=${getPathFromContentType(newValue)}`);
   }
 
   return (

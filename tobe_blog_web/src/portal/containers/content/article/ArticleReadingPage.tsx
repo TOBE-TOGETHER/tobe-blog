@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useAuthState } from '../../../../contexts';
-import { ArticleDetailDTO } from '../../../../global/types';
+import { IArticleDetailDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { PublicDataService } from '../../../../services';
 import { RichContentReader } from '../../../components';
@@ -15,7 +15,7 @@ export default function ArticleReadingPage() {
   const { enqueueSnackbar } = useSnackbar();
   const authState = useAuthState();
   const { id } = useParams();
-  const [article, setArticle] = useState<ArticleDetailDTO | null>(null);
+  const [article, setArticle] = useState<IArticleDetailDTO | null>(null);
 
   useEffect(() => {
     function loadArticle(): void {

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { authed, enabled } from '../../../commons';
-import { PageItem } from '../../../global/types';
+import { IPageItem } from '../../../global/types';
 
 const NavItem = styled(ListItem)(({ theme }) => ({
   'padding': '5px 15px',
@@ -21,7 +21,7 @@ const NavItem = styled(ListItem)(({ theme }) => ({
   },
 }));
 
-export const NavItems = (props: { pageItems: PageItem[] }) => {
+export const NavItems = (props: { pageItems: IPageItem[] }) => {
   let location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();

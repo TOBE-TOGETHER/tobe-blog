@@ -27,11 +27,11 @@ public class PublicApiService {
      * @param contentType: ARTICLE, PLAN, VOCABULARY or COLLECTION
      * @return A page of user contents of given ownerId and contentType
      */
-    public Page<BaseContentDTO> searchContents(int current, int size, String[] tags, String ownerId, String contentType) {
+    public Page<BaseContentDTO> searchContents(int current, int size, String[] tags, Long ownerId, String contentType) {
         return this.apiMapper.searchContents(new Page<>(current, size), tags, ownerId, contentType);
     }
 
-    public List<TagInfoStatisticDTO> getTagInfoStatistics(String ownerId, String contentType) {
+    public List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType) {
         return apiMapper.getTagInfoStatistics(ownerId, contentType);
     }
 

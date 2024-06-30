@@ -1,3 +1,4 @@
+import InfiniteScrollList from '../../components/common/InfiniteScrollList';
 import { WordDisplayDialog } from '../../components/common/word/WordDisplayDialog';
 import { WordListPanel } from '../../components/common/word/WordListPanel';
 import { Page, SidePanel } from '../../components/layout';
@@ -7,7 +8,6 @@ import { FormPanel, HalfRow, OneRow, QuarterRow } from './layout/FormLayout';
 import AddIconButton from './misc/AddIconButton';
 import CardHeaderActionButton from './misc/CardHeaderActionButton';
 import EditIconButton from './misc/EditIconButton';
-import InfiniteScrollList from './misc/InfiniteScrollList';
 import InputFileUploadButton from './misc/InputFileUploadButton';
 import RichContentEditor from './misc/RichContentEditor';
 import SaveButtonPanel from './misc/SaveButtonPanel';

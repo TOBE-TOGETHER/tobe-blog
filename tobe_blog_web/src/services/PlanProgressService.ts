@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
 
 import { server } from '.';
-import { PlanProgressCreationDTO, PlanProgressUpdateDTO } from '../global/types';
+import { IPlanProgressCreationDTO, IPlanProgressUpdateDTO } from '../global/types';
 
 const options = {
   headers: {
@@ -11,11 +11,11 @@ const options = {
 
 const PROGRESSES_URI = 'v1/plan-progresses';
 
-export function createProgress(newProgress: PlanProgressCreationDTO): AxiosPromise {
+export function createProgress(newProgress: IPlanProgressCreationDTO): AxiosPromise {
   return server.post(`/${PROGRESSES_URI}`, newProgress, options);
 }
 
-export function updateProgress(updatedProgress: PlanProgressUpdateDTO): AxiosPromise {
+export function updateProgress(updatedProgress: IPlanProgressUpdateDTO): AxiosPromise {
   return server.put(
     `/${PROGRESSES_URI}/${updatedProgress.id}`,
     {

@@ -1,9 +1,9 @@
 import { Container, Grid, Typography } from '@mui/material';
 import { TagDisplayBar } from '../../components';
-import { TagOption } from '../../global/types';
+import { ITagOption } from '../../global/types';
 import ContentPageBreadcrumbsBar from './ContentPageBreadcrumbsBar';
 
-export default function ContentBanner(props: { title: string; subTitle?: string; coverImgUrl?: string; tags: TagOption[] }) {
+export default function ContentBanner(props: { title: string; subTitle?: string; coverImgUrl?: string; tags: ITagOption[] }) {
   return (
     <Grid
       container

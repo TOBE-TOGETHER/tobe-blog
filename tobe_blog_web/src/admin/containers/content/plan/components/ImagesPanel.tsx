@@ -1,12 +1,6 @@
-import {
-  Grid,
-  Link,
-} from '@mui/material';
+import { Grid, Link } from '@mui/material';
 
-export const ImagesPanel = (props: {
-  keyPrefix: string;
-  imageURLs: string[];
-}) =>
+export const ImagesPanel = (props: { keyPrefix: string; imageURLs: string[] }) =>
   props.imageURLs.length > 0 ? (
     <Grid
       container

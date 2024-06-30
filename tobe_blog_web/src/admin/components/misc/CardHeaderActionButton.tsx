@@ -1,27 +1,15 @@
-import MoreHoriz from "@mui/icons-material/MoreHoriz";
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import {
-  GeneralCardData,
-  Operation,
-} from "../../../global/types";
+import MoreHoriz from '@mui/icons-material/MoreHoriz';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { IBaseUserContentDTO, IOperation } from '../../../global/types';
 
-export default function CardHeaderActionButton(props: {
-  operations: Operation[];
-  data: GeneralCardData;
-  color?: string;
-}) {
+export default function CardHeaderActionButton(props: { operations: IOperation[]; data: IBaseUserContentDTO; color?: string }) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [anchorRecordId, setAnchorRecordId] = React.useState<null | string>(
-    null
-  );
+  const [anchorRecordId, setAnchorRecordId] = React.useState<null | string>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    id: string
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
     setAnchorEl(event.currentTarget);
     setAnchorRecordId(id);
   };
@@ -31,21 +19,21 @@ export default function CardHeaderActionButton(props: {
   };
   function getMenuItem(operationName: string) {
     switch (operationName) {
-      case "release":
-        return t("components.standard-button.release");
-      case "delete":
-        return t("components.standard-button.delete");
-      case "detail":
-        return t("components.standard-button.detail");
+      case 'release':
+        return t('components.standard-button.release');
+      case 'delete':
+        return t('components.standard-button.delete');
+      case 'detail':
+        return t('components.standard-button.detail');
     }
   }
   return (
     <>
       <IconButton
-        aria-controls={open ? "basic-menu" : undefined}
+        aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={(event) => handleClick(event, props.data.id)}
+        aria-expanded={open ? 'true' : undefined}
+        onClick={event => handleClick(event, props.data.id)}
       >
         <MoreHoriz
           sx={{
@@ -58,22 +46,22 @@ export default function CardHeaderActionButton(props: {
         onClose={handleClose}
         anchorEl={anchorEl}
         MenuListProps={{
-          "aria-labelledby": "basic-button",
+          'aria-labelledby': 'basic-button',
         }}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "left",
+          vertical: 'top',
+          horizontal: 'left',
         }}
         transformOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
+          vertical: 'bottom',
+          horizontal: 'left',
         }}
       >
         {props.operations?.map(
           (operation, index) =>
             !operation?.hide?.call(null, props.data) && (
               <MenuItem
-                key={props.data.id + "-" + index}
+                key={props.data.id + '-' + index}
                 onClick={() => operation.onClick(props.data.id)}
               >
                 {getMenuItem(operation.name)}

@@ -3,7 +3,7 @@ import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { WordGeneralDTO } from '../../../global/types';
+import { IWordGeneralDTO } from '../../../global/types';
 import { PublicDataService, WordService } from '../../../services';
 import theme from '../../../theme';
 import { WordCreateDialog } from './WordCreateDialog';
@@ -14,8 +14,8 @@ export function WordListPanel(props: { editable: boolean; vocabularyId: string }
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState<boolean>(false);
-  const [openedWord, setOpenedWord] = useState<WordGeneralDTO | null>(null);
-  const [words, setWords] = useState<WordGeneralDTO[]>([]);
+  const [openedWord, setOpenedWord] = useState<IWordGeneralDTO | null>(null);
+  const [words, setWords] = useState<IWordGeneralDTO[]>([]);
 
   const loadWordsData = useCallback(
     (vocabularyId: string): void => {
@@ -51,7 +51,7 @@ export function WordListPanel(props: { editable: boolean; vocabularyId: string }
       });
   }
 
-  function render(words: WordGeneralDTO[]) {
+  function render(words: IWordGeneralDTO[]) {
     const letterSet: Set<string> = new Set(words.map(w => w.text[0].toUpperCase()).sort());
     const elements: JSX.Element[] = [];
     Array.from(letterSet).forEach(l => {
