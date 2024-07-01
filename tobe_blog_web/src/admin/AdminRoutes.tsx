@@ -4,7 +4,7 @@ import { useAuthDispatch, useAuthState } from '../contexts';
 import { ELocalStorageKeys } from '../global/enums.ts';
 import { BackendLayout } from './components';
 
-import { URL } from './URL';
+import { URL } from '../routes';
 
 const SignInPage = React.lazy(() => import('../portal/containers/signIn/SignIn'));
 const ProfileSettingPage = React.lazy(() => import('./containers/profileSettingPage/ProfileSettingPage'));

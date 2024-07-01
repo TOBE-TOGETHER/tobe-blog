@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
+import { URL } from '../../../../routes';
 import { CollectionService } from '../../../../services';
-import { URL } from '../../../URL';
 import { SaveButtonPanel } from '../../../components';
 import ContentEditMainSection from './components/CollectionEditMainSection';
 

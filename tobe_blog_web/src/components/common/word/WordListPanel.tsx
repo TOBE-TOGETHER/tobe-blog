@@ -52,7 +52,19 @@ export function WordListPanel(props: { editable: boolean; vocabularyId: string }
   }
 
   function render(words: IWordGeneralDTO[]) {
-    const letterSet: Set<string> = new Set(words.map(w => w.text[0].toUpperCase()).sort());
+    const letterSet: Set<string> = new Set(
+      words
+        .map(w => w.text[0].toUpperCase())
+        .sort((w1, w2) => {
+          if (w1 > w2) {
+            return 1;
+          } else if (w1 < w2) {
+            return -1;
+          } else {
+            return 0;
+          }
+        })
+    );
     const elements: JSX.Element[] = [];
     Array.from(letterSet).forEach(l => {
       let groupedWords = words

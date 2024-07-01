@@ -12,8 +12,8 @@ import plan from '../../../../package.json';
 import StrokeText from '../../../components/common/StrokeText.tsx';
 import { EAuthority, EFeatureCode } from '../../../global/enums.ts';
 import { IPageItem } from '../../../global/types';
+import { URL } from '../../../routes';
 import theme from '../../../theme';
-import { URL } from '../../URL';
 import { NavItems } from './NavItems';
 
 const basicPageItems: IPageItem[] = [
@@ -111,7 +111,7 @@ export default function SideNav(props: SideNavProps) {
             alignItems: 'center',
             cursor: 'pointer',
             fontSize: 40,
-            fontFamily: 'fantasy,Times New Roman, sans-serif'
+            fontFamily: 'fantasy,Times New Roman, sans-serif',
           }}
         >
           <StrokeText text={plan.name} />

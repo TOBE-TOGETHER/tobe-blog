@@ -5,6 +5,7 @@ import { IDomEditor, IEditorConfig, IToolbarConfig, SlateElement, i18nGetResourc
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { EditorStyle } from '../../../components';
 import theme from '../../../theme';
 
 type ImageElement = SlateElement & {
@@ -77,6 +78,7 @@ function RichContentEditor(props: RichContentEditorProps) {
   return (
     <Grid
       sx={{
+        ...EditorStyle,
         'borderRadius': '4px',
         'width': '100%',
         'border': '1px, solid ' + theme.palette.grey[300],
@@ -103,7 +105,7 @@ function RichContentEditor(props: RichContentEditorProps) {
           props.setTextValue(editor.getText());
         }}
         mode="default"
-        style={{ height: '500px', overflowY: 'hidden', width: '100%', backgroundColor: '#f1f3f5' }}
+        style={{ height: '500px', overflowY: 'hidden', width: '100%', backgroundColor: '#f1f3f5', padding: '8px' }}
       />
     </Grid>
   );

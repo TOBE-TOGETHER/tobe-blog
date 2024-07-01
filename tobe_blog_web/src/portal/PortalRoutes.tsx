@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
-import { URL } from './URL';
+import { URL } from '../routes';
 
 const ArticleReadingPage = React.lazy(() => import('./containers/content/article/ArticleReadingPage'));
 const PlanReadingPage = React.lazy(() => import('./containers/content/plan/PlanReadingPage'));
