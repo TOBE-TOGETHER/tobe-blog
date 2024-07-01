@@ -153,7 +153,7 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
         featureEntity.setUserId(userId);
         userFeatureService.saveOrUpdate(featureEntity);
         return userFeatureService
-                .getOneOpt(new LambdaQueryWrapper<UserFeatureEntity>().eq(UserFeatureEntity::getUserId, dto.getId()))
+                .getOneOpt(new LambdaQueryWrapper<UserFeatureEntity>().eq(UserFeatureEntity::getUserId, userId))
                 .map(e -> BasicConverter.convert(e, UserFeatureDTO.class)).orElse(null);
     }
 }
