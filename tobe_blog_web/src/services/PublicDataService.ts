@@ -48,7 +48,7 @@ export function getBriefProfileByUserId(userId: string | number): AxiosPromise {
 }
 
 export function getFullProfileByUserId(userId: string | number): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/detail-profile/${userId}`);
+  return server.get(`/${API_DATA_URI}/full-profile/${userId}`);
 }
 
 export function getTagStatistics(contentType: EContentType, ownerId: string) {

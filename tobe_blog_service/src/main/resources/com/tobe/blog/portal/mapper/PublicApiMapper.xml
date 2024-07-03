@@ -49,14 +49,13 @@
             JOIN TOBE_CONTENT_GENERAL_INFO tcgi ON tct.CONTENT_ID = tcgi.ID AND tcgi.CONTENT_TYPE = #{contentType}
             WHERE tcgi.DELETED=0 AND tcgi.PUBLIC_TO_ALL=1
             <if test="ownerId != null and ownerId != ''">
-                tcgi.OWNER_ID = #{ownerId}
+                AND tcgi.OWNER_ID = #{ownerId}
             </if>
             GROUP BY tct.TAG_ID
         )
         SELECT tti.KEYWORD as LABEL,
         tti.ID as VALUE,
-        ct.COUNT as COUNT
-        FROM TOBE_TAG_INFO tti JOIN COUNT_TABLE ct ON ct.TAG_ID = tti.ID AND tti.DELETED=0
+        ct.COUNT FROM TOBE_TAG_INFO tti JOIN COUNT_TABLE ct ON ct.TAG_ID = tti.ID AND tti.DELETED=0
         ORDER BY ct.COUNT DESC, tti.KEYWORD DESC
     </select>
 </mapper>

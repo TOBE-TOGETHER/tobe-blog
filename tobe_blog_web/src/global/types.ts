@@ -68,13 +68,13 @@ export interface IUserBriefProfileDTO {
   avatarUrl: string;
   blog: string;
   introduction: string;
-  publicCreationCount: number;
+  publicContentCount: number;
   viewCount: number;
 }
 
 export interface IUserFullProfileDTO extends IUserBriefProfileDTO {
   address: string;
-  position: string;
+  profession: string;
   backgroundImg: string;
   photoImg: string;
   features: IUserFeatureDTO;
