@@ -43,9 +43,9 @@ export default function IntroducationSection(props: { profile: IUserFullProfileD
               container
               sx={{
                 background: 'white',
-                borderRadius: '70px',
-                width: '140px',
-                height: '140px',
+                borderRadius: '60px',
+                width: '120px',
+                height: '120px',
                 border: '5px solid white',
                 backgroundImage: `url(${props.profile?.photoImg || props.profile?.avatarUrl})`,
                 backgroundRepeat: 'round',
