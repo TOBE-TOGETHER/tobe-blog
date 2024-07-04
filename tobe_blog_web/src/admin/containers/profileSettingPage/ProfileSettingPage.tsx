@@ -1,14 +1,14 @@
-import {Box, Divider, FormControlLabel, FormGroup, Grid, Paper, TextField} from '@mui/material';
-import {useSnackbar} from 'notistack';
-import {ReactNode, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Page} from '../../../components/layout';
-import {useAuthDispatch, useAuthState} from '../../../contexts';
-import {ELocalStorageKeys} from '../../../global/enums.ts';
-import {UserService} from '../../../services';
-import {HalfRow, OneRow, QuarterRow, SaveButtonPanel} from '../../components';
-import AvatarSelector from './AvatarSelector.tsx';
+import { Box, Divider, FormControlLabel, FormGroup, Grid, Paper, TextField, Typography } from '@mui/material';
 import Switch from '@mui/material/Switch';
+import { useSnackbar } from 'notistack';
+import { ReactNode, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Page } from '../../../components/layout';
+import { useAuthDispatch, useAuthState } from '../../../contexts';
+import { ELocalStorageKeys } from '../../../global/enums.ts';
+import { UserService } from '../../../services';
+import { HalfRow, OneRow, QuarterRow, SaveButtonPanel } from '../../components';
+import AvatarSelector from './AvatarSelector.tsx';
 
 export default function ProfileSettingPage() {
   const { t } = useTranslation();
@@ -55,7 +55,7 @@ export default function ProfileSettingPage() {
         articleModule: articleModule,
         planModule: planModule,
         vocabularyModule: vocabularyModule,
-        collectionModule: collectionModule
+        collectionModule: collectionModule,
       },
     })
       .then(response => {
@@ -167,46 +167,16 @@ export default function ProfileSettingPage() {
             />
           </OneRow>
         </InfoSection>
-        <Divider/>
-        <InfoSection>
-          <QuarterRow>
-            <FormControlLabel control={<Switch color="primary"
-                                               checked={articleModule}
-                                               onChange={e => setArticleModule(e.target.checked)}/>}
-                              label={t('breadcrumbs.articles')}
-            />
-          </QuarterRow>
-          <QuarterRow>
-            <FormGroup>
-              <FormControlLabel control={<Switch color="primary"
-                                                 checked={planModule}
-                                                 onChange={e => setPlanModule(e.target.checked)}/>}
-
-                                label={t('breadcrumbs.plans')}
-              />
-            </FormGroup>
-          </QuarterRow>
-          <QuarterRow>
-            <FormGroup>
-              <FormControlLabel control={<Switch color="primary"
-                                                 checked={vocabularyModule}
-                                                 onChange={e => setVocabularyModule(e.target.checked)}/>}
-                                label={t('breadcrumbs.vocabularies')}
-              />
-            </FormGroup>
-          </QuarterRow>
-          <QuarterRow>
-            <FormGroup>
-              <FormControlLabel control={<Switch color="primary"
-                                                 checked={collectionModule}
-                                                 onChange={e => setCollectionModule(e.target.checked)}/>}
-                                label={t('breadcrumbs.collections')}
-              />
-            </FormGroup>
-          </QuarterRow>
-        </InfoSection>
         <Divider />
         <InfoSection>
+          <OneRow>
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+            >
+              {t('profile-setting.fields.customized-settings')}
+            </Typography>
+          </OneRow>
           <HalfRow>
             <TextField
               label={t('profile-setting.fields.background-img')}
@@ -223,6 +193,68 @@ export default function ProfileSettingPage() {
               defaultValue={photoImg}
             />
           </HalfRow>
+          <OneRow>
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+            >
+              {t('profile-setting.fields.module-switch')}
+            </Typography>
+          </OneRow>
+          <QuarterRow>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="primary"
+                  checked={articleModule}
+                  onChange={e => setArticleModule(e.target.checked)}
+                />
+              }
+              label={t('breadcrumbs.articles')}
+            />
+          </QuarterRow>
+          <QuarterRow>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="primary"
+                    checked={planModule}
+                    onChange={e => setPlanModule(e.target.checked)}
+                  />
+                }
+                label={t('breadcrumbs.plans')}
+              />
+            </FormGroup>
+          </QuarterRow>
+          <QuarterRow>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="primary"
+                    checked={vocabularyModule}
+                    onChange={e => setVocabularyModule(e.target.checked)}
+                  />
+                }
+                label={t('breadcrumbs.vocabularies')}
+              />
+            </FormGroup>
+          </QuarterRow>
+          <QuarterRow>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    color="primary"
+                    checked={collectionModule}
+                    onChange={e => setCollectionModule(e.target.checked)}
+                  />
+                }
+                label={t('breadcrumbs.collections')}
+              />
+            </FormGroup>
+          </QuarterRow>
         </InfoSection>
         <SaveButtonPanel primaryEvent={handleSubmit} />
       </Box>

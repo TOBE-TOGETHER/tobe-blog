@@ -150,8 +150,10 @@
       "introduction": "个人介绍",
       "introduction-placeholder": "让大家更了解你...",
       "profession": "职业",
-      "background-img": "主页背景图片",
-      "photo-img": "个人头像照片"
+      "customized-settings": "定制化设置",
+      "module-switch": "模块开关",
+      "background-img": "主页背景图片链接",
+      "photo-img": "个人头像照片链接"
     },
     "back-btn": "返回",
     "submit-btn": "提交",

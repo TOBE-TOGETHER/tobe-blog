@@ -1,21 +1,21 @@
 import { Container, Typography } from '@mui/material';
 import { useEffect } from 'react';
 
-import plan from '../../../package.json';
+import config from '../../../customization.json';
 import Loading from '../loading/Loading';
 
-interface PageProps {
+interface IPageProps {
   openLoading?: boolean;
   pageTitle?: string;
   children: any;
   sx?: any;
 }
 
-export default function Page(props: PageProps) {
+export default function Page(props: IPageProps) {
   useEffect(() => {
-    window.document.title = `${plan.name.toUpperCase()} ${props.pageTitle ? ' | ' + props.pageTitle : ''}`;
+    window.document.title = `${config.projectName.toUpperCase()} ${props.pageTitle ? ' | ' + props.pageTitle : ''}`;
     return function restoreTitle() {
-      window.document.title = `${plan.name.toUpperCase()}`;
+      window.document.title = `${config.projectName.toUpperCase()}`;
     };
   });
 
