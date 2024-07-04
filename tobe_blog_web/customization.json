@@ -1,0 +1,18 @@
+{
+  "projectName": "TOBE",
+  "home": {
+    "banners": [
+      {
+        "imgUrl": "https://images.pexels.com/photos/3355755/pexels-photo-3355755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "main": "No gain is too slight to bother with",
+        "secondary": "不积跬步无以至千里"
+      },
+      {
+        "imgUrl": "https://images.pexels.com/photos/7539496/pexels-photo-7539496.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "main": "Either travelling or reading, body and soul, there must be one on the road"
+      }
+    ]
+  },
+  "defaultContentCoverImgUrl": "https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "defaultPersonalProfileCoverImgUrl": "https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+}

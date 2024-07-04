@@ -2,6 +2,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Chip, Grid, Paper, Tooltip, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import config from '../../../../../customization.json';
 import { dateMonFormat } from '../../../../commons/TimeFormat';
 import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
 import theme from '../../../../theme';
@@ -160,7 +161,7 @@ export function GeneralCard(props: { record: IBaseUserContentDTO; onClick?: (id:
                 style={{ objectFit: 'cover', verticalAlign: 'bottom', borderRadius: '16px' }}
                 width="100%"
                 height="100%"
-                src={props.record.coverImgUrl || 'https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}
+                src={props.record.coverImgUrl || config.defaultContentCoverImgUrl}
               />
             </Grid>
           </Grid>
