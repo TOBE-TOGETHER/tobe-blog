@@ -170,7 +170,7 @@ export default function ProfileSettingPage() {
         <Divider/>
         <InfoSection>
           <QuarterRow>
-            <FormControlLabel control={<Switch color="secondary"
+            <FormControlLabel control={<Switch color="primary"
                                                checked={articleModule}
                                                onChange={e => setArticleModule(e.target.checked)}/>}
                               label={t('breadcrumbs.articles')}
@@ -178,7 +178,7 @@ export default function ProfileSettingPage() {
           </QuarterRow>
           <QuarterRow>
             <FormGroup>
-              <FormControlLabel control={<Switch color="secondary"
+              <FormControlLabel control={<Switch color="primary"
                                                  checked={planModule}
                                                  onChange={e => setPlanModule(e.target.checked)}/>}
 
@@ -188,7 +188,7 @@ export default function ProfileSettingPage() {
           </QuarterRow>
           <QuarterRow>
             <FormGroup>
-              <FormControlLabel control={<Switch color="secondary"
+              <FormControlLabel control={<Switch color="primary"
                                                  checked={vocabularyModule}
                                                  onChange={e => setVocabularyModule(e.target.checked)}/>}
                                 label={t('breadcrumbs.vocabularies')}
@@ -197,7 +197,7 @@ export default function ProfileSettingPage() {
           </QuarterRow>
           <QuarterRow>
             <FormGroup>
-              <FormControlLabel control={<Switch color="secondary"
+              <FormControlLabel control={<Switch color="primary"
                                                  checked={collectionModule}
                                                  onChange={e => setCollectionModule(e.target.checked)}/>}
                                 label={t('breadcrumbs.collections')}
