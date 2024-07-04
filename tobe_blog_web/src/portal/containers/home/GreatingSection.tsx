@@ -2,9 +2,9 @@ import { Box, Container, Grid, Typography } from '@mui/material';
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
+import config from '../../../../customization.json';
 import theme from '../../../theme';
 import './slider.css';
-
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const Title = (props: any) => {
@@ -66,28 +66,31 @@ export default function GreatingSection() {
           boxShadow: 'rgba(145, 158, 171, 0.28) 0px 0px 12px 0px, rgba(145, 158, 171, 0.16) 0px 24px 30px -4px',
         }}
       >
-        <AutoplaySlider
-          play={true}
-          cancelOnInteraction={false}
-          interval={30000}
-          style={{
-            color: theme.palette.background.paper,
-          }}
-        >
-          <div data-src="https://images.pexels.com/photos/3355755/pexels-photo-3355755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
-            <Title
-              main="No gain is too slight to bother with"
-              secondary="不积跬步无以至千里"
-              sx={{ color: theme.palette.background.paper }}
-            />
-          </div>
-          <div data-src="https://images.pexels.com/photos/7539496/pexels-photo-7539496.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
-            <Title
-              main="Either travelling or reading, body and soul, there must be one on the road"
-              sx={{ color: theme.palette.background.paper }}
-            />
-          </div>
-        </AutoplaySlider>
+        {config?.home?.banners && (
+          <AutoplaySlider
+            play={true}
+            cancelOnInteraction={false}
+            interval={30000}
+            style={{
+              color: theme.palette.background.paper,
+            }}
+          >
+            {config.home.banners.map(i => {
+              return (
+                <div
+                  data-src={i.imgUrl}
+                  key={i.imgUrl}
+                >
+                  <Title
+                    main={i.main}
+                    secondary={i.secondary}
+                    sx={{ color: theme.palette.background.paper }}
+                  />
+                </div>
+              );
+            })}
+          </AutoplaySlider>
+        )}
       </Grid>
     </Container>
   );

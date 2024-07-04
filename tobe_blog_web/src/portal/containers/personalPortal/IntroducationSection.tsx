@@ -1,5 +1,6 @@
 import { Container, Grid, Paper, Tooltip, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import config from '../../../../customization.json';
 import { IUserFullProfileDTO } from '../../../global/types';
 
 export default function IntroducationSection(props: { profile: IUserFullProfileDTO | null }) {
@@ -21,9 +22,7 @@ export default function IntroducationSection(props: { profile: IUserFullProfileD
             mb: { xs: -12, lg: -10 },
             backgroundSize: 'cover',
             backgroundPosition: 'center 40%',
-            backgroundImage: `url(${
-              props.profile?.backgroundImg || 'https://images.pexels.com/photos/3560168/pexels-photo-3560168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-            })`,
+            backgroundImage: `url(${props.profile?.backgroundImg || config.defaultPersonalProfileCoverImgUrl})`,
           }}
         />
         <Grid container>
