@@ -1,18 +1,22 @@
-import {Box, Divider, FormControlLabel, FormGroup, Grid, Paper, TextField} from '@mui/material';
-import {useSnackbar} from 'notistack';
-import {ReactNode, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Page} from '../../../components/layout';
-import {useAuthDispatch, useAuthState} from '../../../contexts';
-import {ELocalStorageKeys} from '../../../global/enums.ts';
-import {UserService} from '../../../services';
-import {HalfRow, OneRow, QuarterRow, SaveButtonPanel} from '../../components';
-import AvatarSelector from './AvatarSelector.tsx';
+import LaunchOutlinedIcon from '@mui/icons-material/LaunchOutlined';
+import { Box, Divider, FormControlLabel, FormGroup, Grid, IconButton, Paper, TextField, Typography } from '@mui/material';
 import Switch from '@mui/material/Switch';
+import { useSnackbar } from 'notistack';
+import { ReactNode, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { Page } from '../../../components/layout';
+import { useAuthDispatch, useAuthState } from '../../../contexts';
+import { ELocalStorageKeys } from '../../../global/enums.ts';
+import { URL } from '../../../routes/URL.ts';
+import { UserService } from '../../../services';
+import { HalfRow, OneRow, QuarterRow, SaveButtonPanel } from '../../components';
+import AvatarSelector from './AvatarSelector.tsx';
 
 export default function ProfileSettingPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
   const [openLoading, setOpenLoading] = useState(false);
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
@@ -55,7 +59,7 @@ export default function ProfileSettingPage() {
         articleModule: articleModule,
         planModule: planModule,
         vocabularyModule: vocabularyModule,
-        collectionModule: collectionModule
+        collectionModule: collectionModule,
       },
     })
       .then(response => {
@@ -167,46 +171,30 @@ export default function ProfileSettingPage() {
             />
           </OneRow>
         </InfoSection>
-        <Divider/>
-        <InfoSection>
-          <QuarterRow>
-            <FormControlLabel control={<Switch color="primary"
-                                               checked={articleModule}
-                                               onChange={e => setArticleModule(e.target.checked)}/>}
-                              label={t('breadcrumbs.articles')}
-            />
-          </QuarterRow>
-          <QuarterRow>
-            <FormGroup>
-              <FormControlLabel control={<Switch color="primary"
-                                                 checked={planModule}
-                                                 onChange={e => setPlanModule(e.target.checked)}/>}
-
-                                label={t('breadcrumbs.plans')}
-              />
-            </FormGroup>
-          </QuarterRow>
-          <QuarterRow>
-            <FormGroup>
-              <FormControlLabel control={<Switch color="primary"
-                                                 checked={vocabularyModule}
-                                                 onChange={e => setVocabularyModule(e.target.checked)}/>}
-                                label={t('breadcrumbs.vocabularies')}
-              />
-            </FormGroup>
-          </QuarterRow>
-          <QuarterRow>
-            <FormGroup>
-              <FormControlLabel control={<Switch color="primary"
-                                                 checked={collectionModule}
-                                                 onChange={e => setCollectionModule(e.target.checked)}/>}
-                                label={t('breadcrumbs.collections')}
-              />
-            </FormGroup>
-          </QuarterRow>
-        </InfoSection>
         <Divider />
         <InfoSection>
+          <OneRow sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+            >
+              {t('profile-setting.fields.personal-portal')}
+            </Typography>
+            <IconButton
+              onClick={() => navigate(URL.PERSONAL_PORTAL.replace(':id', user.id))}
+              title={t('profile-setting.view-btn')}
+            >
+              <LaunchOutlinedIcon sx={{ color: 'textSecondary' }} />
+            </IconButton>
+          </OneRow>
+          <OneRow>
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+            >
+              {t('profile-setting.fields.customized-settings')}
+            </Typography>
+          </OneRow>
           <HalfRow>
             <TextField
               label={t('profile-setting.fields.background-img')}
@@ -223,12 +211,65 @@ export default function ProfileSettingPage() {
               defaultValue={photoImg}
             />
           </HalfRow>
+          <OneRow>
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+            >
+              {t('profile-setting.fields.module-switch')}
+            </Typography>
+          </OneRow>
+          <QuarterRow>
+            <SwitchGroup
+              value={articleModule}
+              setValue={setArticleModule}
+              label={t('breadcrumbs.articles')}
+            />
+          </QuarterRow>
+          <QuarterRow>
+            <SwitchGroup
+              value={planModule}
+              setValue={setPlanModule}
+              label={t('breadcrumbs.plans')}
+            />
+          </QuarterRow>
+          <QuarterRow>
+            <SwitchGroup
+              value={vocabularyModule}
+              setValue={setVocabularyModule}
+              label={t('breadcrumbs.vocabularies')}
+            />
+          </QuarterRow>
+          <QuarterRow>
+            <SwitchGroup
+              value={collectionModule}
+              setValue={setCollectionModule}
+              label={t('breadcrumbs.collections')}
+            />
+          </QuarterRow>
         </InfoSection>
         <SaveButtonPanel primaryEvent={handleSubmit} />
       </Box>
     </Page>
   );
 }
+
+const SwitchGroup = (props: { value: boolean; setValue: (newValue: boolean) => void; label: string }) => {
+  return (
+    <FormGroup sx={{ alignContent: { xs: 'center', sm: 'start' } }}>
+      <FormControlLabel
+        control={
+          <Switch
+            color="primary"
+            checked={props.value}
+            onChange={e => props.setValue(e.target.checked)}
+          />
+        }
+        label={props.label}
+      />
+    </FormGroup>
+  );
+};
 
 const InfoSection = (props: { children: ReactNode[]; mt?: number }) => {
   return (
