@@ -1,12 +1,13 @@
-import { Button, Grid, Paper, Tab, Tabs, Typography } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { getPathFromContentType } from '../../../commons';
-import { EContentType } from '../../../global/enums';
-import { INewsDTO } from '../../../global/types';
-import { PublicDataService } from '../../../services';
+import {Button, Grid, Paper, Tab, Tabs, Typography} from '@mui/material';
+import {useCallback, useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useNavigate} from 'react-router-dom';
+import {getPathFromContentType} from '../../../commons';
+import {EContentType} from '../../../global/enums';
+import {INewsDTO} from '../../../global/types';
+import {PublicDataService} from '../../../services';
 import NewsListItem from './NewsListItem';
+
 enum LoadType {
   Append,
   Replace,
@@ -95,7 +96,7 @@ export default function FeaturedNews(props: {
             sx={{ borderRadius: 4 }}
           />
         )}
-        {props.availableContentTypes.includes(EContentType.Vocabulary) && (
+        {props.availableContentTypes.includes(EContentType.Collection) && (
           <Tab
             value={EContentType.Collection}
             label={t('home-page.collections')}

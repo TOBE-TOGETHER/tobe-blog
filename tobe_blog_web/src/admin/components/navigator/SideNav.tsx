@@ -5,16 +5,16 @@ import FirstPage from '@mui/icons-material/FirstPage';
 import FlagIcon from '@mui/icons-material/Flag';
 import FolderIcon from '@mui/icons-material/Folder';
 import Groups from '@mui/icons-material/Groups';
-import { Drawer, Grid, IconButton, useMediaQuery } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import {Drawer, Grid, IconButton, useMediaQuery} from '@mui/material';
+import {styled} from '@mui/material/styles';
+import {useNavigate} from 'react-router-dom';
 import plan from '../../../../package.json';
 import StrokeText from '../../../components/common/StrokeText.tsx';
-import { EAuthority, EFeatureCode } from '../../../global/enums.ts';
-import { IPageItem } from '../../../global/types';
-import { URL } from '../../../routes';
+import {EAuthority, EFeatureCode} from '../../../global/enums.ts';
+import {IPageItem} from '../../../global/types';
+import {URL} from '../../../routes';
 import theme from '../../../theme';
-import { NavItems } from './NavItems';
+import {NavItems} from './NavItems';
 
 const basicPageItems: IPageItem[] = [
   {
@@ -53,6 +53,7 @@ const basicPageItems: IPageItem[] = [
     url: URL.COLLECTIONS,
     secondaryUrl: URL.CREATE_COLLECTION,
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+    requiredFeature: EFeatureCode.COLLECTION_MODULE,
   },
 ];
 
