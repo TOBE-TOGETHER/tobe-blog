@@ -3,7 +3,7 @@ import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, Toolb
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import plan from '../../../package.json';
+import config from '../../../customization.json';
 import StrokeText from '../../components/common/StrokeText.tsx';
 import { validateUrl } from '../../routes';
 import theme from '../../theme';
@@ -100,7 +100,7 @@ const HeaderContent = () => {
             fontFamily: 'Times New Roman, fantasy, sans-serif',
           }}
         >
-          <StrokeText text={plan.name} />
+          <StrokeText text={config.projectName} />
         </Grid>
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

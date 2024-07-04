@@ -150,12 +150,15 @@
       "introduction": "个人介绍",
       "introduction-placeholder": "让大家更了解你...",
       "profession": "职业",
-      "background-img": "主页背景图片",
-      "photo-img": "个人头像照片"
+      "personal-portal": "个人主页设置",
+      "customized-settings": "定制化设置",
+      "module-switch": "模块开关设置",
+      "background-img": "主页背景图片链接",
+      "photo-img": "个人头像图片链接"
     },
     "back-btn": "返回",
     "submit-btn": "提交",
-    "preview-btn": "预览",
+    "view-btn": "浏览",
     "msg": {
       "success": "更新成功",
       "error": "更新失败"
