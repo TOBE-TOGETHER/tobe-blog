@@ -27,6 +27,7 @@ export enum EFeatureCode {
   ARTICLE_MODULE = 'articleModule',
   PLAN_MODULE = 'planModule',
   VOCABULARY_MODULE = 'vocabularyModule',
+  COLLECTION_MODULE = 'collectionModule',
 }
 
 export enum ELocalStorageKeys {

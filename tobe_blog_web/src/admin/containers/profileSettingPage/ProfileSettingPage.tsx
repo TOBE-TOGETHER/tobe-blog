@@ -33,6 +33,7 @@ export default function ProfileSettingPage() {
   const [articleModule, setArticleModule] = useState<boolean>(user.features.articleModule);
   const [planModule, setPlanModule] = useState<boolean>(user.features.planModule);
   const [vocabularyModule, setVocabularyModule] = useState<boolean>(user.features.vocabularyModule);
+  const [collectionModule, setCollectionModule] = useState<boolean>(user.features.collectionModule);
 
   const handleSubmit = () => {
     setOpenLoading(true);
@@ -53,7 +54,8 @@ export default function ProfileSettingPage() {
       features: {
         articleModule: articleModule,
         planModule: planModule,
-        vocabularyModule: vocabularyModule
+        vocabularyModule: vocabularyModule,
+        collectionModule: collectionModule
       },
     })
       .then(response => {
@@ -190,6 +192,15 @@ export default function ProfileSettingPage() {
                                                  checked={vocabularyModule}
                                                  onChange={e => setVocabularyModule(e.target.checked)}/>}
                                 label={t('breadcrumbs.vocabularies')}
+              />
+            </FormGroup>
+          </QuarterRow>
+          <QuarterRow>
+            <FormGroup>
+              <FormControlLabel control={<Switch color="secondary"
+                                                 checked={collectionModule}
+                                                 onChange={e => setCollectionModule(e.target.checked)}/>}
+                                label={t('breadcrumbs.collections')}
               />
             </FormGroup>
           </QuarterRow>

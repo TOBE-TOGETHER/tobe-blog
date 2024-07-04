@@ -1,15 +1,14 @@
 package com.tobe.blog;
 
-import java.util.List;
-
+import com.tobe.blog.beans.consts.Const;
+import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
+import com.tobe.blog.beans.dto.user.UserGeneralDTO;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import com.tobe.blog.beans.consts.Const;
-import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
-import com.tobe.blog.beans.dto.user.UserGeneralDTO;
+import java.util.List;
 
 public class DefaultTestData {
     public class DefaultUser {
@@ -29,6 +28,7 @@ public class DefaultTestData {
         public static final Boolean ARTICLE_MODULE = true;
         public static final Boolean PLAN_MODULE = false;
         public static final Boolean VOCABULARY_MODULE = true;
+        public static final Boolean COLLECTION_MODULE = true;
 
     }
 

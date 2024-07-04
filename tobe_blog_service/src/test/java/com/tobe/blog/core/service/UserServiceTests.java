@@ -240,6 +240,7 @@ public class UserServiceTests {
         featureDTO.setArticleModule(ARTICLE_MODULE);
         featureDTO.setPlanModule(PLAN_MODULE);
         featureDTO.setVocabularyModule(VOCABULARY_MODULE);
+        featureDTO.setCollectionModule(COLLECTION_MODULE);
         updateDTO.setFeatures(featureDTO);
         // all fields should be update correctly
         UserGeneralDTO updatedUser = userService.updateUser(updateDTO);
@@ -258,6 +259,7 @@ public class UserServiceTests {
         Assertions.assertEquals(DefaultUser.ARTICLE_MODULE, updatedUser.getFeatures().getArticleModule());
         Assertions.assertEquals(DefaultUser.PLAN_MODULE, updatedUser.getFeatures().getPlanModule());
         Assertions.assertEquals(DefaultUser.VOCABULARY_MODULE, updatedUser.getFeatures().getVocabularyModule());
+        Assertions.assertEquals(COLLECTION_MODULE, updatedUser.getFeatures().getVocabularyModule());
     }
 
     @Test

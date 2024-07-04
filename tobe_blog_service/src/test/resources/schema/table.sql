@@ -36,6 +36,7 @@ CREATE TABLE `tobe_core_user_feature`
     `ARTICLE_MODULE`    bit(1)      DEFAULT TRUE,
     `PLAN_MODULE`       bit(1)      DEFAULT TRUE,
     `VOCABULARY_MODULE` bit(1)      DEFAULT TRUE,
+    `COLLECTION_MODULE` bit(1)      DEFAULT TRUE,
     `CREATE_TIME`       datetime    DEFAULT NULL,
     `CREATE_BY`         varchar(30) DEFAULT NULL,
     `UPDATE_TIME`       datetime    DEFAULT NULL,
