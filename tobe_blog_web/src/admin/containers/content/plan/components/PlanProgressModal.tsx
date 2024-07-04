@@ -2,9 +2,9 @@ import { Button, Divider, Grid, Paper, TextField, Typography } from '@mui/materi
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FileService, PlanProgressService } from '../../../../../services';
-import { InputFileUploadButton } from '../../../../components';
-import { ImagesPanel } from './ImagesPanel';
+import { FileService, PlanProgressService } from '../../../../../services/index.ts';
+import { InputFileUploadButton } from '../../../../components/index.ts';
+import { ImagesPanel } from './ImagesPanel.tsx';
 import PlanProgressItems from './PlanProgressItems.tsx';
 
 export default function PlanProgressModal(props: { planId: string; viewOnly: boolean }) {
@@ -72,7 +72,7 @@ export default function PlanProgressModal(props: { planId: string; viewOnly: boo
       </Divider>
 
       {!props.viewOnly && (
-        <Paper sx={{ mt: 2, mb: 2, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
+        <Paper sx={{ my: 3, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
           <Grid
             container
             item

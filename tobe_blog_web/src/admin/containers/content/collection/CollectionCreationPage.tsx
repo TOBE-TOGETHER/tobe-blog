@@ -1,23 +1,22 @@
-import { Grid, Paper, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { TagOption } from '../../../../global/types';
+import { ITagOption } from '../../../../global/types';
+import { URL } from '../../../../routes';
 import { CollectionService } from '../../../../services';
-import { URL } from '../../../URL';
-import { MultipleTagSelecter, OneRow, SaveButtonPanel } from '../../../components';
+import { SaveButtonPanel } from '../../../components';
+import ContentEditMainSection from './components/CollectionEditMainSection';
 
 export default function CollectionCreationPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const [openLoading, setOpenLoading] = useState<boolean>(false);
-  const [tagValues, setTagValues] = useState<TagOption[]>([]);
-  const [title, setTitle] = useState<string>();
-  const [coverImgUrl, setCoverImgUrl] = useState<string>();
-  const [description, setDescription] = useState<string>();
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
+  const [title, setTitle] = useState<string | null>(null);
+  const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
+  const [description, setDescription] = useState<string | null>(null);
 
   const handleSubmit = () => {
     if (!title) {
@@ -30,7 +29,6 @@ export default function CollectionCreationPage() {
   };
 
   function handleCreation(): void {
-    setOpenLoading(true);
     CollectionService.create({
       title: title,
       description: description,
@@ -47,52 +45,26 @@ export default function CollectionCreationPage() {
         enqueueSnackbar(t('collection-creation-page.msg.error'), {
           variant: 'error',
         });
-      })
-      .finally(() => setOpenLoading(false));
+      });
   }
 
   return (
     <Page
-      openLoading={openLoading}
+      openLoading={false}
       pageTitle={t('collection-creation-page.page-main-title')}
     >
-      <Paper sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
-        <Grid
-          container
-          spacing={3}
-        >
-          <OneRow>
-            <TextField
-              label={t('collection-creation-page.fields.name')}
-              fullWidth
-              onChange={e => setTitle(e.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('collection-creation-page.fields.description')}
-              fullWidth
-              onChange={e => setDescription(e.target.value)}
-              multiline
-              maxRows={2}
-              minRows={2}
-            />
-          </OneRow>
-          <OneRow>
-            <TextField
-              label={t('collection-creation-page.fields.cover-img-url')}
-              fullWidth
-              onChange={e => setCoverImgUrl(e.target.value)}
-            />
-          </OneRow>
-          <OneRow>
-            <MultipleTagSelecter
-              value={tagValues}
-              setValue={setTagValues}
-            />
-          </OneRow>
-        </Grid>
-      </Paper>
+      <ContentEditMainSection
+        title={title}
+        setTitle={setTitle}
+        description={description}
+        setDescription={setDescription}
+        coverImgUrl={coverImgUrl}
+        setCoverImgUrl={setCoverImgUrl}
+        tagValues={tagValues}
+        setTagValues={setTagValues}
+        editable={true}
+        sx={{ mt: 6 }}
+      />
       <SaveButtonPanel primaryEvent={handleSubmit} />
     </Page>
   );

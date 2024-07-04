@@ -1,42 +1,26 @@
 import Add from '@mui/icons-material/Add';
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { WordGeneralDTO } from '../../../../global/types';
-import {
-  PublicDataService,
-  WordService,
-} from '../../../../services';
-import theme from '../../../../theme';
+import { IWordGeneralDTO } from '../../../global/types';
+import { PublicDataService, WordService } from '../../../services';
+import theme from '../../../theme';
 import { WordCreateDialog } from './WordCreateDialog';
 import { WordDetailDialog } from './WordDetailDialog';
 import { WordDisplayDialog } from './WordDisplayDialog';
 
-export function WordListPanel(props: {
-  editable: boolean;
-  vocabularyId: string;
-}) {
+export function WordListPanel(props: { editable: boolean; vocabularyId: string }) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState<boolean>(false);
-  const [openedWord, setOpenedWord] = useState<WordGeneralDTO | null>(null);
-  const [words, setWords] = useState<WordGeneralDTO[]>([]);
-  
+  const [openedWord, setOpenedWord] = useState<IWordGeneralDTO | null>(null);
+  const [words, setWords] = useState<IWordGeneralDTO[]>([]);
+
   const loadWordsData = useCallback(
     (vocabularyId: string): void => {
       PublicDataService.getWordsByVocabularyId(vocabularyId)
-        .then((response) => {
+        .then(response => {
           setWords(response.data);
         })
         .catch(() => {
@@ -46,20 +30,11 @@ export function WordListPanel(props: {
         })
         .finally();
     },
-    [
-      enqueueSnackbar,
-      t,
-    ],
+    [enqueueSnackbar, t]
   );
-  
-  useEffect(
-    () => loadWordsData(props.vocabularyId || ''),
-    [
-      props.vocabularyId,
-      loadWordsData,
-    ],
-  );
-  
+
+  useEffect(() => loadWordsData(props.vocabularyId || ''), [props.vocabularyId, loadWordsData]);
+
   function handleDeleteWord(wordId: number) {
     WordService.deleteWordById(wordId)
       .then(() => {
@@ -75,15 +50,25 @@ export function WordListPanel(props: {
         });
       });
   }
-  
-  function render(words: WordGeneralDTO[]) {
+
+  function render(words: IWordGeneralDTO[]) {
     const letterSet: Set<string> = new Set(
-      words.map((w) => w.text[0].toUpperCase()).sort(),
+      words
+        .map(w => w.text[0].toUpperCase())
+        .sort((w1, w2) => {
+          if (w1 > w2) {
+            return 1;
+          } else if (w1 < w2) {
+            return -1;
+          } else {
+            return 0;
+          }
+        })
     );
     const elements: JSX.Element[] = [];
-    Array.from(letterSet).forEach((l) => {
+    Array.from(letterSet).forEach(l => {
       let groupedWords = words
-        .filter((w) => w.text.toUpperCase().startsWith(l))
+        .filter(w => w.text.toUpperCase().startsWith(l))
         .sort((w1, w2) => {
           if (w1.text > w2.text) {
             return 1;
@@ -101,10 +86,10 @@ export function WordListPanel(props: {
         >
           <Typography variant="h6">{`${l} - ${groupedWords.length}`}</Typography>
           <Divider />
-        </Grid>,
+        </Grid>
       );
       const wordEles: JSX.Element[] = [];
-      groupedWords.forEach((w) => {
+      groupedWords.forEach(w => {
         wordEles.push(
           <Grid
             item
@@ -123,57 +108,17 @@ export function WordListPanel(props: {
             >
               {w.text}
             </Button>
-          </Grid>,
+          </Grid>
         );
       });
       props.editable &&
-      wordEles.push(
-        <Grid
-          item
-          key={'add-btn-' + l}
-          flexGrow={1}
-          sx={{
-            opacity: 0,
-            '&:hover': {
-              opacity: 100,
-            },
-          }}
-        >
-          <Button
-            variant="text"
-            onClick={() => setOpen(true)}
-            size="large"
-            sx={{ color: 'rgba(0,0,0,0.4)' }}
-          >
-            <Add />
-          </Button>
-        </Grid>,
-      );
-      elements.push(
-        <Grid
-          key={'sec-' + elements.length}
-          item
-          container
-          sx={{ m: 0.5 }}
-        >
-          {wordEles}
-        </Grid>,
-      );
-    });
-
-    if (!letterSet || letterSet.size === 0) {
-      elements.push(<Grid
-          key={'sec-0'}
-          item
-          container
-          sx={{ m: 0.5 }}
-        >
+        wordEles.push(
           <Grid
             item
-            key={'add-btn-0'}
+            key={'add-btn-' + l}
             flexGrow={1}
             sx={{
-              opacity: 0,
+              'opacity': 0,
               '&:hover': {
                 opacity: 100,
               },
@@ -188,12 +133,53 @@ export function WordListPanel(props: {
               <Add />
             </Button>
           </Grid>
-        </Grid>)
+        );
+      elements.push(
+        <Grid
+          key={'sec-' + elements.length}
+          item
+          container
+          sx={{ m: 0.5 }}
+        >
+          {wordEles}
+        </Grid>
+      );
+    });
+
+    if ((!letterSet || letterSet.size === 0) && props.editable) {
+      elements.push(
+        <Grid
+          key={'sec-0'}
+          item
+          container
+          sx={{ m: 0.5 }}
+        >
+          <Grid
+            item
+            key={'add-btn-0'}
+            flexGrow={1}
+            sx={{
+              'opacity': 0,
+              '&:hover': {
+                opacity: 100,
+              },
+            }}
+          >
+            <Button
+              variant="text"
+              onClick={() => setOpen(true)}
+              size="large"
+              sx={{ color: 'rgba(0,0,0,0.4)' }}
+            >
+              <Add />
+            </Button>
+          </Grid>
+        </Grid>
+      );
     }
-    
     return elements;
   }
-  
+
   return (
     <Box justifyContent="center">
       <Grid

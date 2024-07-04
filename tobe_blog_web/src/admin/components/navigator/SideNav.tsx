@@ -5,17 +5,18 @@ import FirstPage from '@mui/icons-material/FirstPage';
 import FlagIcon from '@mui/icons-material/Flag';
 import FolderIcon from '@mui/icons-material/Folder';
 import Groups from '@mui/icons-material/Groups';
-import { Drawer, IconButton, Typography, useMediaQuery } from '@mui/material';
+import { Drawer, Grid, IconButton, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import plan from '../../../../package.json';
+import StrokeText from '../../../components/common/StrokeText.tsx';
 import { EAuthority, EFeatureCode } from '../../../global/enums.ts';
-import { PageItem } from '../../../global/types';
+import { IPageItem } from '../../../global/types';
+import { URL } from '../../../routes';
 import theme from '../../../theme';
-import { URL } from '../../URL';
 import { NavItems } from './NavItems';
 
-const basicPageItems: PageItem[] = [
+const basicPageItems: IPageItem[] = [
   {
     label: 'dashboard-nav.pages.analytics',
     icon: <DashboardIcon />,
@@ -55,7 +56,7 @@ const basicPageItems: PageItem[] = [
   },
 ];
 
-const adminPageItems: PageItem[] = [
+const adminPageItems: IPageItem[] = [
   {
     label: 'dashboard-nav.pages.users',
     icon: <Groups />,
@@ -101,23 +102,21 @@ export default function SideNav(props: SideNavProps) {
       onClose={() => props.setOpenDrawer(false)}
     >
       <DrawerHeader sx={{ background: 'transparent' }}>
-        <Typography
-          variant="h6"
-          noWrap
-          component="a"
+        <Grid
           onClick={() => navigate('/')}
           sx={{
-            ml: 2,
-            display: { xs: 'flex' },
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            textDecoration: 'none',
+            width: '180px',
+            height: '64px',
+            display: { xs: 'none', md: 'flex' },
+            alignItems: 'center',
             cursor: 'pointer',
-            color: theme.palette.primary.main,
+            fontSize: 40,
+            fontFamily: 'fantasy,Times New Roman, sans-serif',
           }}
         >
-          {plan.name.toUpperCase()}
-        </Typography>
+          <StrokeText text={plan.name} />
+        </Grid>
+
         <IconButton
           size="large"
           sx={{ color: theme.palette.primary.main }}

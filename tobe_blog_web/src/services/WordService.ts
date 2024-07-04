@@ -1,15 +1,15 @@
 import { AxiosPromise } from 'axios';
 
 import { server } from '.';
-import { WordCreateDTO, WordUpdateDTO } from '../global/types';
+import { IWordCreateDTO, IWordUpdateDTO } from '../global/types';
 
 const WORD_URI = 'v1/words';
 
-export function createWord(target: WordCreateDTO): AxiosPromise {
+export function createWord(target: IWordCreateDTO): AxiosPromise {
   return server.post(`/${WORD_URI}`, target);
 }
 
-export function updateWord(target: WordUpdateDTO): AxiosPromise {
+export function updateWord(target: IWordUpdateDTO): AxiosPromise {
   return server.put(`/${WORD_URI}/${target.id}`, target);
 }
 

@@ -58,7 +58,7 @@ server.interceptors.response.use(
         // if successfully get the new accessToken, save in localStorage
         if (res.data) {
           // save new access token back to local storage
-          localStorage.setItem(ELocalStorageKeys.ACCESS_TOKEN, res.data);
+          localStorage.setItem(ELocalStorageKeys.ACCESS_TOKEN, JSON.stringify(res.data));
           // update the Authorization header value
           error.config.headers.Authorization = res.data;
           return server(error.config);

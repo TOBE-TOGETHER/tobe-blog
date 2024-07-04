@@ -1,34 +1,16 @@
 import { useTranslation } from 'react-i18next';
-import { GeneralCardData, IBaseUserContentDTO } from '../../../../global/types.ts';
+import { URL } from '../../../../routes';
 import { CollectionService } from '../../../../services';
-import { URL } from '../../../URL.ts';
-import GeneralContentListPage from '../components/GeneralContentListPage.tsx';
+import GeneralContentListPage from '../components/GeneralContentListPage';
 
 export default function CollectionsPage() {
   const { t } = useTranslation();
-  
-  function convertToGeneralCardData(data: IBaseUserContentDTO[]): GeneralCardData[] {
-    return data.map((d) => {
-      return {
-        id: d.id,
-        title: d.title,
-        description: d.description,
-        publicToAll: d.publicToAll,
-        coverImgUrl: d.coverImgUrl,
-        tags: d.tags,
-        createTime: d.createTime,
-        likeCount: d.likeCount,
-        viewCount: d.viewCount
-      };
-    });
-  }
   return (
     <GeneralContentListPage
       domainService={CollectionService}
       pageTitle={t('collections-page.page-main-title')}
       detailPageURL={URL.COLLECTION_DETAIL}
       createPageURL={URL.CREATE_COLLECTION}
-      dataConverter={convertToGeneralCardData}
     />
   );
 }

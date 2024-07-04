@@ -1,14 +1,14 @@
 import { Grid } from '@mui/material';
-import { GeneralCardData, Operation } from '../../../../global/types';
+import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
 import { InfiniteScrollList } from '../../../components';
 import { GeneralCard } from './GeneralCard';
 
 export default function GeneralCardView(props: {
   loading: boolean;
-  data: GeneralCardData[];
+  data: IBaseUserContentDTO[];
   current: number;
   totalPage: number;
-  operations: Operation[];
+  operations: IOperation[];
   loadMore: () => void;
   onClick?: (id: number | string) => void;
 }) {
@@ -19,7 +19,7 @@ export default function GeneralCardView(props: {
         dataSource={props.data}
         hasMore={props.current < props.totalPage}
         loadMore={props.loadMore}
-        renderItem={(record: GeneralCardData) => (
+        renderItem={(record: IBaseUserContentDTO) => (
           <GeneralCard
             key={`item-${record.id}`}
             record={record}

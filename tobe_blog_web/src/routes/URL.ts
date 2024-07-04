@@ -1,4 +1,3 @@
-
 export const URL = {
   HOME: '/',
   PERSONAL_PORTAL: '/personal-portal/:id',
@@ -10,9 +9,7 @@ export const URL = {
   NEWS_PLAN_DETAIL: '/news/plans/:id',
   NEWS_ARTICLE_DETAIL: '/news/articles/:id',
   NEWS_VOCABULARY_DETAIL: '/news/vocabularies/:id',
-
-  SUBJECTS_PAGE: '/collections',
-  SUBJECT_READING_PAGE: '/collections/:id',
+  NEWS_COLLECTION_DETAIL: '/news/collections/:id',
 
   TOOLS_PAGE: '/tools',
   TOOL_POMODORO: '/tools/pomodoro',
@@ -30,8 +27,8 @@ export const URL = {
   ARTICLE_DETAIL: '/my/articles/:id',
   CREATE_ARTICLE: '/my/articles/create-article',
 
-  CREATE_SUBJECT: '/my/collections/create-collection',
-  SUBJECT_DETAIL: '/my/collections/:id',
+  CREATE_COLLECTION: '/my/collections/create-collection',
+  COLLECTION_DETAIL: '/my/collections/:id',
   COLLECTIONS: '/my/collections',
 
   CREATE_VOCABULARY: '/my/vocabularies/create-vocabularies',

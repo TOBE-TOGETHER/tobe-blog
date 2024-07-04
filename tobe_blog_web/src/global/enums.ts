@@ -20,7 +20,7 @@ export enum EContentType {
   Article = 'ARTICLE',
   Plan = 'PLAN',
   Vocabulary = 'VOCABULARY',
-  Collection = 'COLLECTION'
+  Collection = 'COLLECTION',
 }
 
 export enum EFeatureCode {

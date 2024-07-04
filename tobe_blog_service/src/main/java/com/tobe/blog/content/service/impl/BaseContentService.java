@@ -2,6 +2,7 @@ package com.tobe.blog.content.service.impl;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,6 @@ public abstract class BaseContentService<
     U extends BaseContentUpdateDTO, 
     E extends BaseContentEntity, 
     M extends BaseContentMapper<D, E>> extends ServiceImpl<M, E> implements IContentService<D, C, U, E, M> {
-
-    private static final String CONTENT_VIEW_COUNT = "CONTENT_VIEW_COUNT";
     @Autowired
     private ContentGeneralInfoService generalInfoService;
     @Autowired
@@ -118,7 +117,10 @@ public abstract class BaseContentService<
     @Override
     public D getDTOByIdAndCount(String id) {
         D result = this.getDTOById(id);
-        result.setViewCount(result.getViewCount() + cacheUtil.hIncr(CONTENT_VIEW_COUNT, id, 1L));
+        if (Objects.isNull(result)) {
+            return null;
+        }
+        result.setViewCount(result.getViewCount() + cacheUtil.hIncr(Const.CONTENT_VIEW_COUNT_KEY, id, 1L));
         return result;
     }
 

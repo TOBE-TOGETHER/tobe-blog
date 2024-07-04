@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { URL } from "../../../URL";
+import { URL } from '../../../../routes';
 import { VocabularyService } from '../../../../services';
 import GeneralContentListPage from '../components/GeneralContentListPage';
 

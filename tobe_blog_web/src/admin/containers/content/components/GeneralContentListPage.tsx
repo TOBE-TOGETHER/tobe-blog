@@ -5,29 +5,23 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { EOperationName } from '../../../../global/enums.ts';
-import { GeneralCardData, Operation } from '../../../../global/types';
+import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
 import DomainService from '../../../../services/DomainService';
 import GeneralCardView from './GeneralCardView';
 import GeneralContentListPageFunctionBar from './GeneralContentListPageFunctionBar';
 
-export default function GeneralContentListPage(props: {
-  domainService: DomainService;
-  pageTitle: string;
-  detailPageURL: string;
-  createPageURL: string;
-  dataConverter?: (d: any[]) => GeneralCardData[];
-}) {
+export default function GeneralContentListPage(props: { domainService: DomainService; pageTitle: string; detailPageURL: string; createPageURL: string }) {
   const DEFAULT_PAGE_SIZE: number = 16;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
-  const [data, setData] = useState<GeneralCardData[]>([]);
+  const [data, setData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [status, setStatus] = useState<string>('');
-  // the tempData and tempCurrent are defined for avoid the
-  let tempData: GeneralCardData[] = [];
+  // the tempData and tempCurrent are defined for avoid data duplicated issue
+  let tempData: IBaseUserContentDTO[] = [];
   let tempCurrent: number = 0;
 
   const loadData = (): void => {
@@ -96,7 +90,7 @@ export default function GeneralContentListPage(props: {
       });
   }
 
-  const operations: Operation[] = [
+  const operations: IOperation[] = [
     {
       name: EOperationName.RELEASE,
       onClick: (id: number | string) => releaseById(id),
@@ -141,7 +135,7 @@ export default function GeneralContentListPage(props: {
         current={current}
         totalPage={totalPage}
         loadMore={loadData}
-        data={props.dataConverter ? props.dataConverter.call(null, data) : data}
+        data={data}
         operations={operations}
         onClick={(id: number | string) => navigate(props.detailPageURL.replace(':id', id.toString()))}
       />

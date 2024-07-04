@@ -1,4 +1,4 @@
-import { ELocalStorageKeys } from '../global/enums.ts';
+import { EContentType, ELocalStorageKeys } from '../global/enums.ts';
 import * as TimeFormat from './TimeFormat';
 
 export function authed(requiredRole?: string[]): boolean {
@@ -29,6 +29,36 @@ export function enabled(requiredFeature?: string): boolean {
 
 export function formatDate(time: string) {
   return time.substring(0, time.indexOf('T'));
+}
+
+export function getContentTypeFromPath(path: string | undefined): EContentType {
+  switch (path) {
+    case 'articles':
+      return EContentType.Article;
+    case 'vocabularies':
+      return EContentType.Vocabulary;
+    case 'plans':
+      return EContentType.Plan;
+    case 'collections':
+      return EContentType.Collection;
+    default:
+      return EContentType.Article;
+  }
+}
+
+export function getPathFromContentType(contentType: EContentType | string): string {
+  switch (contentType) {
+    case EContentType.Article:
+      return 'articles';
+    case EContentType.Plan:
+      return 'plans';
+    case EContentType.Vocabulary:
+      return 'vocabularies';
+    case EContentType.Collection:
+      return 'collections';
+    default:
+      return 'articles';
+  }
 }
 
 export { TimeFormat };
