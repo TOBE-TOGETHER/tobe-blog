@@ -1,11 +1,14 @@
-import { Box, Divider, FormControlLabel, FormGroup, Grid, Paper, TextField, Typography } from '@mui/material';
+import LaunchOutlinedIcon from '@mui/icons-material/LaunchOutlined';
+import { Box, Divider, FormControlLabel, FormGroup, Grid, IconButton, Paper, TextField, Typography } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import { useSnackbar } from 'notistack';
 import { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../components/layout';
 import { useAuthDispatch, useAuthState } from '../../../contexts';
 import { ELocalStorageKeys } from '../../../global/enums.ts';
+import { URL } from '../../../routes/URL.ts';
 import { UserService } from '../../../services';
 import { HalfRow, OneRow, QuarterRow, SaveButtonPanel } from '../../components';
 import AvatarSelector from './AvatarSelector.tsx';
@@ -13,6 +16,7 @@ import AvatarSelector from './AvatarSelector.tsx';
 export default function ProfileSettingPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
   const [openLoading, setOpenLoading] = useState(false);
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
@@ -169,6 +173,20 @@ export default function ProfileSettingPage() {
         </InfoSection>
         <Divider />
         <InfoSection>
+          <OneRow sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+            >
+              {t('profile-setting.fields.personal-portal')}
+            </Typography>
+            <IconButton
+              onClick={() => navigate(URL.PERSONAL_PORTAL.replace(':id', user.id))}
+              title={t('profile-setting.view-btn')}
+            >
+              <LaunchOutlinedIcon sx={{ color: 'textSecondary' }} />
+            </IconButton>
+          </OneRow>
           <OneRow>
             <Typography
               variant="subtitle1"
@@ -202,58 +220,32 @@ export default function ProfileSettingPage() {
             </Typography>
           </OneRow>
           <QuarterRow>
-            <FormControlLabel
-              control={
-                <Switch
-                  color="primary"
-                  checked={articleModule}
-                  onChange={e => setArticleModule(e.target.checked)}
-                />
-              }
+            <SwitchGroup
+              value={articleModule}
+              setValue={setArticleModule}
               label={t('breadcrumbs.articles')}
             />
           </QuarterRow>
           <QuarterRow>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    color="primary"
-                    checked={planModule}
-                    onChange={e => setPlanModule(e.target.checked)}
-                  />
-                }
-                label={t('breadcrumbs.plans')}
-              />
-            </FormGroup>
+            <SwitchGroup
+              value={planModule}
+              setValue={setPlanModule}
+              label={t('breadcrumbs.plans')}
+            />
           </QuarterRow>
           <QuarterRow>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    color="primary"
-                    checked={vocabularyModule}
-                    onChange={e => setVocabularyModule(e.target.checked)}
-                  />
-                }
-                label={t('breadcrumbs.vocabularies')}
-              />
-            </FormGroup>
+            <SwitchGroup
+              value={vocabularyModule}
+              setValue={setVocabularyModule}
+              label={t('breadcrumbs.vocabularies')}
+            />
           </QuarterRow>
           <QuarterRow>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    color="primary"
-                    checked={collectionModule}
-                    onChange={e => setCollectionModule(e.target.checked)}
-                  />
-                }
-                label={t('breadcrumbs.collections')}
-              />
-            </FormGroup>
+            <SwitchGroup
+              value={collectionModule}
+              setValue={setCollectionModule}
+              label={t('breadcrumbs.collections')}
+            />
           </QuarterRow>
         </InfoSection>
         <SaveButtonPanel primaryEvent={handleSubmit} />
@@ -261,6 +253,23 @@ export default function ProfileSettingPage() {
     </Page>
   );
 }
+
+const SwitchGroup = (props: { value: boolean; setValue: (newValue: boolean) => void; label: string }) => {
+  return (
+    <FormGroup sx={{ alignContent: { xs: 'center', sm: 'start' } }}>
+      <FormControlLabel
+        control={
+          <Switch
+            color="primary"
+            checked={props.value}
+            onChange={e => props.setValue(e.target.checked)}
+          />
+        }
+        label={props.label}
+      />
+    </FormGroup>
+  );
+};
 
 const InfoSection = (props: { children: ReactNode[]; mt?: number }) => {
   return (

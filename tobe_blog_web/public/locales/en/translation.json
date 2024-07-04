@@ -150,13 +150,14 @@
       "introduction": "Introduction",
       "introduction-placeholder": "Let others know more about you...",
       "profession": "Profession",
+      "personal-portal": "Personal Portal",
       "customized-settings": "Customized settings",
       "module-switch": "Module switch",
       "background-img": "Portal background image URL",
       "photo-img": "Personal photo image URL"
     },
     "back-btn": "Back",
-    "preview-btn": "Preview",
+    "view-btn": "View",
     "submit-btn": "Submit",
     "msg": {
       "success": "Updated",
