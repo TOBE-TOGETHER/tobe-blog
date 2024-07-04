@@ -19,4 +19,5 @@ public class UserFeatureEntity extends BaseEntity {
     private Boolean articleModule;
     private Boolean planModule;
     private Boolean vocabularyModule;
+    private Boolean collectionModule;
 }

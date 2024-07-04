@@ -84,6 +84,7 @@ export interface IUserFeatureDTO {
   articleModule: boolean;
   planModule: boolean;
   vocabularyModule: boolean;
+  collectionModule: boolean;
 }
 
 export interface ITagOption {
