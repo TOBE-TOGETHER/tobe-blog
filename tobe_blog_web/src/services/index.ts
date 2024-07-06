@@ -1,4 +1,5 @@
 import * as AuthService from './AuthService';
+import * as ContentAdminService from './ContentAdminService';
 import * as FileService from './FileService';
 import * as OverviewService from './OverviewService';
 import * as PlanProgressService from './PlanProgressService';
@@ -14,12 +15,16 @@ export {
   ArticleService,
   AuthService,
   CollectionService,
+  ContentAdminService,
   FileService,
   OverviewService,
   PlanProgressService,
   PlanService,
-  PublicDataService, TagRelationshipService, TagService,
+  PublicDataService,
+  TagRelationshipService,
+  TagService,
   UserService,
-  VocabularyService, WordService, server
+  VocabularyService,
+  WordService,
+  server,
 };
-

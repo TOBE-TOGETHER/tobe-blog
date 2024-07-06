@@ -19,6 +19,7 @@ export const URL = {
   ANALYTICS: '/my/analytics',
   PROFILE: '/my/profile',
   USERS: '/my/users',
+  ADMIN: '/my/admin',
   PLANS: '/my/plans',
   PLAN_DETAIL: '/my/plans/:id',
   CREATE_PLAN: '/my/plans/create-plan',

@@ -21,7 +21,9 @@
       "detail": "Detail",
       "delete": "Delete",
       "create": "Create",
-      "release": "Release"
+      "release": "Release",
+      "ban": "Ban",
+      "recommend": "Recommend"
     },
     "rich-editor": {
       "placeholder": "Please input content..."
@@ -182,6 +184,18 @@
       "operation": "Operation"
     }
   },
+  "admin-table": {
+    "title": "Audit",
+    "label": {
+      "title": "Title",
+      "owner-name": "Owner",
+      "content-type": "Content Type",
+      "banned": "Banned",
+      "recommended": "Recommended",
+      "reason": "Reason",
+      "operation": "Operation"
+    }
+  },
   "contents-page": {
     "filter": {
       "all": "All",
@@ -247,7 +261,8 @@
       "plans": "Plans",
       "articles": "Articles",
       "vocabularies": "Vocabularies",
-      "collections": "Collections"
+      "collections": "Collections",
+      "admin": "Administration"
     }
   },
   "analytics-page": {

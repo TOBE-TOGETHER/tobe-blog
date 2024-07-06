@@ -18,6 +18,7 @@ import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.dto.content.BaseSearchFilter;
 import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 import com.tobe.blog.beans.entity.content.BaseContentEntity;
+import com.tobe.blog.beans.entity.content.ContentAdminEntity;
 import com.tobe.blog.beans.entity.content.ContentGeneralInfoEntity;
 import com.tobe.blog.beans.entity.content.ContentTagEntity;
 import com.tobe.blog.content.mapper.BaseContentMapper;
@@ -49,16 +50,17 @@ public abstract class BaseContentService<
     @Autowired
     private ContentGeneralInfoService generalInfoService;
     @Autowired
+    private ContentAdminService contentAdminService;
+    @Autowired
     private ContentTagService tagService;
     @Autowired
     private CacheUtil cacheUtil;
-    
 
     @Override
     @Transactional
     public D save(C creationDTO) {
         // save content level data
-        ContentGeneralInfoEntity contentEntity = new ContentGeneralInfoEntity();
+        final ContentGeneralInfoEntity contentEntity = new ContentGeneralInfoEntity();
         BeanUtils.copyProperties(creationDTO, contentEntity);
         contentEntity.setContentType(getContentType().name());
         contentEntity.setDeleted(Boolean.FALSE);
@@ -75,6 +77,11 @@ public abstract class BaseContentService<
         this.save(concreteEntity);
         // save tag info
         saveContentTag(contentEntity.getId(), creationDTO.getTags());
+        // save admin info
+        final ContentAdminEntity contentAdmin = new ContentAdminEntity();
+        contentAdmin.setContentId(contentEntity.getId());
+        contentAdmin.setDeleted(Boolean.FALSE);
+        contentAdminService.save(contentAdmin);
         return this.getDTOById(contentEntity.getId());
     }
 
@@ -109,15 +116,29 @@ public abstract class BaseContentService<
                 SecurityUtil.getUserId(), filter);
     }
 
+    /**
+     * Used by admin web for getting user content details
+     */
     @Override
     public D getDTOById(String id) {
         return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
     }
 
+    /**
+     * Used by portal web for getting user content details
+     * The view count will increased with every request
+     * The content can be viewed only if the content is published by owner and not banned by admin
+     */
     @Override
     public D getDTOByIdAndCount(String id) {
         D result = this.getDTOById(id);
         if (Objects.isNull(result)) {
+            return null;
+        }
+        if (!result.getPublicToAll()) {
+            return null;
+        }
+        if (result.getBanned()) {
             return null;
         }
         result.setViewCount(result.getViewCount() + cacheUtil.hIncr(Const.CONTENT_VIEW_COUNT_KEY, id, 1L));

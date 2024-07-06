@@ -5,6 +5,7 @@ import FirstPage from '@mui/icons-material/FirstPage';
 import FlagIcon from '@mui/icons-material/Flag';
 import FolderIcon from '@mui/icons-material/Folder';
 import Groups from '@mui/icons-material/Groups';
+import RuleOutlinedIcon from '@mui/icons-material/RuleOutlined';
 import { Drawer, Grid, IconButton, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
@@ -62,6 +63,12 @@ const adminPageItems: IPageItem[] = [
     label: 'dashboard-nav.pages.users',
     icon: <Groups />,
     url: URL.USERS,
+    requiredRoles: [EAuthority.ROLE_ADMIN],
+  },
+  {
+    label: 'dashboard-nav.pages.admin',
+    icon: <RuleOutlinedIcon />,
+    url: URL.ADMIN,
     requiredRoles: [EAuthority.ROLE_ADMIN],
   },
 ];

@@ -51,10 +51,12 @@
             tcci.*,
             CONCAT(tcu.FIRST_NAME, ' ', tcu.LAST_NAME) as OWNER_NAME,
             tcu.ID as OWNER_ID,
-            tcu.AVATAR_URL as AVATAR_URL
+            tcu.AVATAR_URL as AVATAR_URL,
+            tca.*
         FROM TOBE_CONTENT_GENERAL_INFO tcgi
         JOIN ${tableName} tcci ON tcci.CONTENT_ID = tcgi.ID AND tcgi.DELETED = 0
         JOIN TOBE_CORE_USER tcu ON tcgi.OWNER_ID = tcu.ID AND tcgi.DELETED = 0
+        JOIN TOBE_CONTENT_ADMIN tca ON tca.CONTENT_ID = tcgi.ID AND tcgi.DELETED = 0
     </sql>
 
     <resultMap id="general_dto_result_map" type="com.tobe.blog.beans.dto.content.BaseContentDTO">

@@ -6,4 +6,26 @@
         SET ${column} = #{newValue}
         WHERE ID = #{id}
     </update>
+
+    <select id="pagePublishedContentDTOs" resultType="com.tobe.blog.beans.dto.content.BaseContentDTO">
+        SELECT
+            tcgi.*,
+            CONCAT(tcu.FIRST_NAME, ' ', tcu.LAST_NAME) as OWNER_NAME,
+            tcu.ID as OWNER_ID,
+            tcu.AVATAR_URL as AVATAR_URL,
+            tca.*
+        FROM TOBE_CONTENT_GENERAL_INFO tcgi
+        JOIN TOBE_CORE_USER tcu ON tcgi.OWNER_ID = tcu.ID
+        JOIN TOBE_CONTENT_ADMIN tca ON tca.CONTENT_ID = tcgi.ID
+        WHERE 1=1
+        AND tcgi.DELETED = false 
+        AND tcgi.PUBLIC_TO_ALL = true
+        <if test="keyword != null and keyword != ''" >
+            AND (
+                tcgi.TITLE LIKE CONCAT('%', #{keyword}, '%')
+                OR tcgi.DESCRIPTION LIKE CONCAT('%', #{keyword}, '%')
+            )
+        </if>
+        ORDER BY tcgi.CREATE_TIME DESC
+    </select>
 </mapper>

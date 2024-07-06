@@ -21,7 +21,9 @@
       "detail": "详情",
       "delete": "删除",
       "create": "新增",
-      "release": "公开"
+      "release": "公开",
+      "ban": "封禁",
+      "recommend": "推荐"
     },
     "rich-editor": {
       "placeholder": "请输入内容..."
@@ -182,6 +184,18 @@
       "operation": "操作"
     }
   },
+  "admin-table": {
+    "title": "监管",
+    "label": {
+      "title": "标题",
+      "owner-name": "作者",
+      "content-type": "内容类型",
+      "banned": "封禁",
+      "recommended": "推荐",
+      "reason": "原因",
+      "operation": "操作"
+    }
+  },
   "contents-page": {
     "filter": {
       "all": "全部",
@@ -247,7 +261,8 @@
       "plans": "计划",
       "articles": "笔记",
       "vocabularies": "词汇",
-      "collections": "合集"
+      "collections": "合集",
+      "admin": "监管"
     },
     "msg": {
       "error": "获取数据失败"

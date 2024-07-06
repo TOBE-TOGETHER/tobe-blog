@@ -44,7 +44,6 @@ export default function PagedTable(props: PagedTableProps) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>
@@ -79,7 +78,7 @@ export default function PagedTable(props: PagedTableProps) {
                         >
                           {props.operations?.map(
                             (operation, index) =>
-                              !operation?.hide?.call(null, row) && getButtonByOperationName(operation.name, () => operation.onClick(row.id), `${operation.name}_${index}`)
+                              !operation?.hide?.call(null, row) && getButtonByOperationName(operation.name, () => operation.onClick(row.id, row), `${operation.name}_${index}`)
                           )}
                         </TableCell>
                       );

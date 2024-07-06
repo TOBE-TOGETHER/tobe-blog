@@ -9,6 +9,7 @@ import { URL } from '../routes';
 const SignInPage = React.lazy(() => import('../portal/containers/signIn/SignIn'));
 const ProfileSettingPage = React.lazy(() => import('./containers/profileSettingPage/ProfileSettingPage'));
 const UsersPage = React.lazy(() => import('./containers/user/UsersPage'));
+const ContentAdminPage = React.lazy(() => import('./containers/contentAdmin/ContentAdminPage'));
 const AnalyticsPage = React.lazy(() => import('./containers/analytics/AnalyticsPage'));
 
 const ArticlesPage = React.lazy(() => import('./containers/content/article/ArticlesPage'));
@@ -44,6 +45,10 @@ export function getAdminRoutes(): React.ReactNode[] {
       <Route
         path={URL.USERS}
         element={<UsersPage />}
+      />
+      <Route
+        path={URL.ADMIN}
+        element={<ContentAdminPage />}
       />
       <Route
         path={URL.ANALYTICS}

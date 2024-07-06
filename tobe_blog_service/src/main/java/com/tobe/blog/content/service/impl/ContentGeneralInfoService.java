@@ -4,8 +4,10 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tobe.blog.beans.consts.Const;
+import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.entity.content.ContentGeneralInfoEntity;
 import com.tobe.blog.content.mapper.ContentGeneralInfoMapper;
 import com.tobe.blog.core.exception.TobeRuntimeException;
@@ -39,6 +41,10 @@ public class ContentGeneralInfoService extends ServiceImpl<ContentGeneralInfoMap
                 log.error("Wrong type key is given during sink count into DB: " + TypeKey);
             }
         }
+    }
+
+    public Page<BaseContentDTO> searchPublishedContentDTOs(int current, int size, String keyword) {
+        return this.baseMapper.pagePublishedContentDTOs(new Page<>(current, size), keyword);
     }
 
     protected ContentGeneralInfoEntity getAndValidateContent(String id) {
