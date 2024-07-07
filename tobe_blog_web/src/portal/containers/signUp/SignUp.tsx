@@ -1,11 +1,13 @@
-import { Box, Button, Container, Grid, Link, Paper, TextField, Typography } from '@mui/material';
+import { Button, Link, TextField } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../../../components/loading/Loading.tsx';
+import config from '../../../../customization.json';
+import { HalfRow, OneRow } from '../../../admin/components/index.ts';
 import { URL } from '../../../routes';
 import { UserService } from '../../../services';
+import SingleBoxLayout from '../../components/layout/SingleBoxLayout.tsx';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -71,133 +73,78 @@ export default function SignUp() {
   }
 
   return (
-    <Container
-      component="main"
-      maxWidth="sm"
-      sx={{ mb: 4, mt: '15vh' }}
+    <SingleBoxLayout
+      title={t('sign-up.title') + ' ' + config.projectName}
+      handleSubmit={handleSubmit}
+      openLoading={openLoading}
     >
-      <Loading open={openLoading} />
-      <Paper
-        variant="outlined"
-        sx={{
-          my: { xs: 3, md: 6 },
-          p: { xs: 2, md: 3 },
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          borderRadius: 4,
-        }}
-      >
-        <Typography
-          component="h1"
-          variant="h5"
+      <HalfRow>
+        <TextField
+          autoComplete="given-name"
+          name="firstName"
+          fullWidth
+          id="firstName"
+          label={t('sign-up.fields.first-name')}
+        />
+      </HalfRow>
+      <HalfRow>
+        <TextField
+          fullWidth
+          id="lastName"
+          label={t('sign-up.fields.last-name')}
+          name="lastName"
+          autoComplete="family-name"
+        />
+      </HalfRow>
+      <OneRow>
+        <TextField
+          required
+          fullWidth
+          id="email"
+          label={t('sign-up.fields.email')}
+          name="email"
+          autoComplete="email"
+        />
+      </OneRow>
+      <OneRow>
+        <TextField
+          required
+          fullWidth
+          name="password"
+          label={t('sign-up.fields.password')}
+          type="password"
+          id="password"
+          autoComplete="new-password"
+        />
+      </OneRow>
+      <OneRow>
+        <TextField
+          required
+          fullWidth
+          name="password-confirm"
+          label={t('sign-up.fields.password-confirm')}
+          type="password"
+          id="password-confirm"
+          autoComplete="new-password"
+        />
+      </OneRow>
+      <OneRow>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
         >
-          {t('sign-up.title')}
-        </Typography>
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          sx={{ mt: 1 }}
+          {t('sign-up.sign-up-btn')}
+        </Button>
+      </OneRow>
+      <OneRow>
+        <Link
+          href={URL.SIGN_IN}
+          variant="body2"
         >
-          <Grid
-            container
-            spacing={2}
-          >
-            <Grid
-              item
-              xs={6}
-            >
-              <TextField
-                autoComplete="given-name"
-                name="firstName"
-                fullWidth
-                id="firstName"
-                label={t('sign-up.fields.first-name')}
-                variant="standard"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={6}
-            >
-              <TextField
-                fullWidth
-                id="lastName"
-                label={t('sign-up.fields.last-name')}
-                name="lastName"
-                autoComplete="family-name"
-                variant="standard"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label={t('sign-up.fields.email')}
-                name="email"
-                autoComplete="email"
-                variant="standard"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label={t('sign-up.fields.password')}
-                type="password"
-                id="password"
-                autoComplete="new-password"
-                variant="standard"
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
-              <TextField
-                required
-                fullWidth
-                name="password-confirm"
-                label={t('sign-up.fields.password-confirm')}
-                type="password"
-                id="password-confirm"
-                autoComplete="new-password"
-                variant="standard"
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            {t('sign-up.sign-up-btn')}
-          </Button>
-          <Grid
-            container
-            justifyContent="flex-end"
-          >
-            <Grid item>
-              <Link
-                href={URL.SIGN_IN}
-                variant="body2"
-              >
-                {t('sign-up.sign-in-btn')}
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-      </Paper>
-    </Container>
+          {t('sign-up.sign-in-btn')}
+        </Link>
+      </OneRow>
+    </SingleBoxLayout>
   );
 }

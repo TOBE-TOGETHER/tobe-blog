@@ -1,13 +1,11 @@
 import { Container, Grid } from '@mui/material';
 import { ReactNode } from 'react';
 import { IBaseUserContentDTO } from '../../../global/types';
-import ContentBanner from '../../components/ContentBanner';
-import ContentPageMetaBar from '../../components/ContentPageMetaBar';
-import FrontendLayout from '../../components/FrontendLayout';
+import { ContentBanner, ContentPageMetaBar, PortalLayout } from '../../components';
 
 export function ContentReadingPage(props: { content: IBaseUserContentDTO | null; subTitle?: string; editLinkUrlPrefix: string; children: ReactNode }) {
   return (
-    <FrontendLayout>
+    <PortalLayout>
       {props.content && (
         <ContentBanner
           title={props.content.title}
@@ -43,6 +41,6 @@ export function ContentReadingPage(props: { content: IBaseUserContentDTO | null;
           )}
         </Grid>
       </Container>
-    </FrontendLayout>
+    </PortalLayout>
   );
 }

@@ -1,5 +1,5 @@
-import { EAuthority, EFeatureCode } from '../../global/enums.ts';
-import { URL } from '../../routes';
+import { EAuthority, EFeatureCode } from '../../../global/enums';
+import { URL } from '../../../routes/URL';
 
 export const pages: Array<{
   label: string;
@@ -14,7 +14,7 @@ export const pages: Array<{
   },
   {
     label: 'app-header.settings.my-zone',
-    url: URL.MY_ZONE,
+    url: URL.ANALYTICS,
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
   },
   {

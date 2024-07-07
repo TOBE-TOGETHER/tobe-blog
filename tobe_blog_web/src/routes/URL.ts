@@ -15,10 +15,10 @@ export const URL = {
   TOOL_POMODORO: '/tools/pomodoro',
   TOOL_TIME_CONVERTER: '/tools/time-coverter',
 
-  MY_ZONE: '/my/analytics',
   ANALYTICS: '/my/analytics',
   PROFILE: '/my/profile',
   USERS: '/my/users',
+  ADMIN: '/my/admin',
   PLANS: '/my/plans',
   PLAN_DETAIL: '/my/plans/:id',
   CREATE_PLAN: '/my/plans/create-plan',

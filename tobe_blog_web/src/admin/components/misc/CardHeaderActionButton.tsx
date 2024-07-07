@@ -62,7 +62,7 @@ export default function CardHeaderActionButton(props: { operations: IOperation[]
             !operation?.hide?.call(null, props.data) && (
               <MenuItem
                 key={props.data.id + '-' + index}
-                onClick={() => operation.onClick(props.data.id)}
+                onClick={() => operation.onClick(props.data.id, props.data)}
               >
                 {getMenuItem(operation.name)}
               </MenuItem>

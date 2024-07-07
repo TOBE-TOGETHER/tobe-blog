@@ -3,7 +3,7 @@ import { WordDisplayDialog } from '../../components/common/word/WordDisplayDialo
 import { WordListPanel } from '../../components/common/word/WordListPanel';
 import { Page, SidePanel } from '../../components/layout';
 import Loading from '../../components/loading/Loading';
-import BackendLayout from './layout/BackendLayout';
+import AdminLayout from './layout/AdminLayout';
 import { FormPanel, HalfRow, OneRow, QuarterRow } from './layout/FormLayout';
 import AddIconButton from './misc/AddIconButton';
 import CardHeaderActionButton from './misc/CardHeaderActionButton';
@@ -18,7 +18,7 @@ import PagedTable from './table/PagedTable';
 
 export {
   AddIconButton,
-  BackendLayout,
+  AdminLayout,
   CardHeaderActionButton,
   EditIconButton,
   FormPanel,

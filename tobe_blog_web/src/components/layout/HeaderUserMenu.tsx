@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { authed, enabled } from '../../commons';
 import { useAuthState } from '../../contexts';
+import { pages } from '../../portal/components/layout/configs';
 import { URL, validateUrl } from '../../routes';
 import theme from '../../theme';
-import { pages } from './configs';
 
 export default function HeaderUserMenu() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);

@@ -2,7 +2,7 @@ import { Box, Stack } from '@mui/material';
 
 import PortalHeader from './PortalHeader';
 
-export default function FrontendLayout({ children }: { children: any }) {
+export default function PortalLayout({ children }: { children: any }) {
   return (
     <Box
       sx={{

@@ -94,6 +94,24 @@ create table tobe_content_general_info
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS tobe_content_admin;
+-- user content admin table 
+create table tobe_content_admin
+(
+    CONTENT_ID                varchar(32)                      not null
+        primary key,
+    RECOMMENDED       bit default false                        not null,
+    BANNED            bit default false                        not null,
+    REASON            varchar(200)                             null,
+    DELETED           bit default false                        not null,
+    CREATE_BY         varchar(64)                              null,
+    CREATE_TIME       datetime                                 null,
+    UPDATE_BY         varchar(64)                              null,
+    UPDATE_TIME       datetime                                 null
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
 DROP TABLE IF EXISTS tobe_article_info;
 -- base article info
 create table tobe_article_info

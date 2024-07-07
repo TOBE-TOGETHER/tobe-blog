@@ -3,14 +3,13 @@ import { EAuthority, EColumnPosition, EFeatureCode, EOperationName } from './enu
 export interface IColumn {
   id: string;
   label: string;
-  minWidth?: number;
   align?: EColumnPosition;
   format?: (value: any) => string;
 }
 
 export interface IOperation {
   name: EOperationName;
-  onClick: (id: number | string) => void;
+  onClick: (id: number | string, data: any) => void;
   hide?: (data: any) => boolean;
 }
 
@@ -172,6 +171,9 @@ export interface IBaseUserContentDTO {
   updateTime: string;
   contentType: string;
   contentProtected: boolean;
+  banned: boolean;
+  recommended: boolean;
+  reason: string;
 }
 
 export interface ICollectionDTO extends IBaseUserContentDTO {

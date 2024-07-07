@@ -21,7 +21,9 @@
       "detail": "详情",
       "delete": "删除",
       "create": "新增",
-      "release": "公开"
+      "release": "公开",
+      "ban": "封禁",
+      "recommend": "推荐"
     },
     "rich-editor": {
       "placeholder": "请输入内容..."
@@ -73,7 +75,7 @@
     "tag-statistics": "标签筛选"
   },
   "sign-in": {
-    "title": "欢迎登陆 TOBE",
+    "title": "欢迎登陆",
     "sign-in-btn": "登录",
     "forget-pw-btn": "忘记密码?",
     "sign-up-btn": "注册账号",
@@ -88,7 +90,7 @@
     }
   },
   "sign-up": {
-    "title": "欢迎加入 TOBE",
+    "title": "欢迎加入",
     "sign-up-btn": "注册",
     "sign-in-btn": "已有账号? 登录",
     "fields": {
@@ -182,6 +184,18 @@
       "operation": "操作"
     }
   },
+  "admin-table": {
+    "title": "监管",
+    "label": {
+      "title": "标题",
+      "owner-name": "作者",
+      "content-type": "内容类型",
+      "banned": "封禁",
+      "recommended": "推荐",
+      "reason": "原因",
+      "operation": "操作"
+    }
+  },
   "contents-page": {
     "filter": {
       "all": "全部",
@@ -247,7 +261,8 @@
       "plans": "计划",
       "articles": "笔记",
       "vocabularies": "词汇",
-      "collections": "合集"
+      "collections": "合集",
+      "admin": "监管"
     },
     "msg": {
       "error": "获取数据失败"

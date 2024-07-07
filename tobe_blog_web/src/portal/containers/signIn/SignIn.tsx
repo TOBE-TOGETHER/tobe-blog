@@ -1,12 +1,13 @@
-import { Box, Button, Container, Grid, Link, Paper, TextField, Typography } from '@mui/material';
+import { Button, Grid, Link, TextField } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../../../components/loading/Loading.tsx';
-
+import config from '../../../../customization.json';
+import { OneRow } from '../../../admin/components';
 import { loginUser, useAuthDispatch } from '../../../contexts';
 import { URL } from '../../../routes';
+import { SingleBoxLayout } from '../../components';
 
 export default function SignIn() {
   const dispatch = useAuthDispatch();
@@ -40,85 +41,65 @@ export default function SignIn() {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="sm"
-      sx={{ mb: 4, mt: '15vh' }}
+    <SingleBoxLayout
+      title={t('sign-in.title') + ' ' + config.projectName}
+      handleSubmit={handleSubmit}
+      openLoading={openLoading}
     >
-      <Loading open={openLoading} />
-      <Paper
-        variant="outlined"
-        sx={{
-          my: { xs: 3, md: 6 },
-          p: { xs: 2, md: 3 },
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          borderRadius: 4,
-        }}
-      >
-        <Typography
-          component="h1"
-          variant="h5"
+      <OneRow>
+        <TextField
+          required
+          fullWidth
+          id="email"
+          label={t('sign-in.description.email')}
+          name="email"
+          autoComplete="email"
+          autoFocus
+        />
+      </OneRow>
+      <OneRow>
+        <TextField
+          required
+          fullWidth
+          name="password"
+          label={t('sign-in.description.password')}
+          type="password"
+          id="password"
+          autoComplete="current-password"
+        />
+      </OneRow>
+      <OneRow>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
         >
-          {t('sign-in.title')}
-        </Typography>
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          sx={{ mt: 1 }}
-        >
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label={t('sign-in.description.email')}
-            name="email"
-            autoComplete="email"
-            autoFocus
-            variant="standard"
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label={t('sign-in.description.password')}
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            variant="standard"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+          {t('sign-in.sign-in-btn')}
+        </Button>
+      </OneRow>
+      <OneRow>
+        <Grid container>
+          <Grid
+            item
+            xs
           >
-            {t('sign-in.sign-in-btn')}
-          </Button>
-          <Grid container>
-            <Grid
-              item
-              xs
+            <Link
+              href="#"
+              variant="body2"
             >
-              <Link
-                href="#"
-                variant="body2"
-              >
-                {t('sign-in.forget-pw-btn')}
-              </Link>
-            </Grid>
-            {/* <Grid item>
-              <Link href={URL.SIGN_UP} variant="body2">
-                {t("sign-in.sign-up-btn")}
-              </Link>
-            </Grid> */}
+              {t('sign-in.forget-pw-btn')}
+            </Link>
           </Grid>
-        </Box>
-      </Paper>
-    </Container>
+          <Grid item>
+            <Link
+              href={URL.SIGN_UP}
+              variant="body2"
+            >
+              {t('sign-in.sign-up-btn')}
+            </Link>
+          </Grid>
+        </Grid>
+      </OneRow>
+    </SingleBoxLayout>
   );
 }

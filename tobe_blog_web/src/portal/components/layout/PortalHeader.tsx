@@ -3,13 +3,13 @@ import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, Toolb
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import config from '../../../customization.json';
-import StrokeText from '../../components/common/StrokeText.tsx';
-import { validateUrl } from '../../routes';
-import theme from '../../theme';
-import HeaderLanguageMenu from './HeaderLanguageMenu';
-import HeaderUserMenu from './HeaderUserMenu';
-import { publicPages } from './configs';
+import config from '../../../../customization.json';
+import StrokeText from '../../../components/common/StrokeText.tsx';
+import HeaderLanguageMenu from '../../../components/layout/HeaderLanguageMenu.tsx';
+import HeaderUserMenu from '../../../components/layout/HeaderUserMenu.tsx';
+import { validateUrl } from '../../../routes/index.ts';
+import theme from '../../../theme.ts';
+import { publicPages } from './configs.ts';
 
 const PortalHeader = () => {
   const [yIndex, setYIndex] = useState<number>(0);

@@ -2,11 +2,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Box, Container, IconButton, Toolbar } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
-import HeaderLanguageMenu from '../../../portal/components/HeaderLanguageMenu';
+import { HeaderLanguageMenu, HeaderUserMenu } from '../../../components/layout';
 import theme from '../../../theme';
-import HeaderUserMenu from './HeaderUserMenu';
 
-interface BackendHeaderProps {
+interface IAdminHeaderProps {
   setOpenDrawer: (newValue: boolean) => void;
   openDrawer: boolean;
   drawerWidth: number;
@@ -16,7 +15,7 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
-const BackendHeader = (props: BackendHeaderProps) => {
+const AdminHeader = (props: IAdminHeaderProps) => {
   const AppBar = styled(MuiAppBar, {
     shouldForwardProp: prop => prop !== 'open',
   })<AppBarProps>(({ theme, open }) => ({
@@ -70,4 +69,4 @@ const BackendHeader = (props: BackendHeaderProps) => {
   );
 };
 
-export default BackendHeader;
+export default AdminHeader;

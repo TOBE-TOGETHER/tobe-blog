@@ -29,5 +29,7 @@ public class BaseContentDTO implements Serializable {
     protected List<TagInfoDTO> tags;
     protected Timestamp createTime;
     protected Timestamp updateTime;
-
+    protected Boolean banned;
+    protected Boolean recommended;
+    protected String reason;
 }
