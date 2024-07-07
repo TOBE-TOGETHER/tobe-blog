@@ -2,8 +2,7 @@ import { Button } from '@mui/material';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export function getButtonByOperationName(name: string, handleOnClick: () => void, key?: string | number | undefined): ReactNode {
-  const { t } = useTranslation();
+export function getButtonByOperationName(name: string, handleOnClick: () => void, key?: string | number): ReactNode {
   switch (name) {
     case 'detail':
       return (
@@ -12,7 +11,7 @@ export function getButtonByOperationName(name: string, handleOnClick: () => void
           key={key}
           color="info"
           variant="text"
-          label={t('components.standard-button.detail')}
+          label={'components.standard-button.detail'}
         />
       );
     case 'delete':
@@ -22,7 +21,7 @@ export function getButtonByOperationName(name: string, handleOnClick: () => void
           key={key}
           color="error"
           variant="text"
-          label={t('components.standard-button.delete')}
+          label={'components.standard-button.delete'}
         />
       );
     case 'release':
@@ -32,7 +31,7 @@ export function getButtonByOperationName(name: string, handleOnClick: () => void
           key={key}
           color="warning"
           variant="text"
-          label={t('components.standard-button.release')}
+          label={'components.standard-button.release'}
         />
       );
     case 'ban':
@@ -42,7 +41,7 @@ export function getButtonByOperationName(name: string, handleOnClick: () => void
           key={key}
           color="error"
           variant="text"
-          label={t('components.standard-button.ban')}
+          label={'components.standard-button.ban'}
         />
       );
     case 'recommend':
@@ -52,27 +51,29 @@ export function getButtonByOperationName(name: string, handleOnClick: () => void
           key={key}
           color="success"
           variant="text"
-          label={t('components.standard-button.recommend')}
+          label={'components.standard-button.recommend'}
         />
       );
   }
 }
 
 interface ITableButtonProps {
-  label?: string | undefined;
-  handleOnClick?: () => void | undefined;
-  color?: 'info' | 'success' | 'error' | 'warning' | 'primary' | 'secondary' | 'inherit' | undefined;
-  variant?: 'text' | 'outlined' | 'contained' | undefined;
+  label: string;
+  handleOnClick: () => void;
+  color?: 'info' | 'success' | 'error' | 'warning' | 'primary' | 'secondary' | 'inherit';
+  variant?: 'text' | 'outlined' | 'contained';
 }
 
 export const TableButton = (props: ITableButtonProps) => {
+  const { t } = useTranslation();
+
   return (
     <Button
-      color={props?.color || 'info'}
+      color={props?.color ?? 'info'}
       onClick={props?.handleOnClick}
-      variant={props?.variant || 'text'}
+      variant={props?.variant ?? 'text'}
     >
-      {props?.label}
+      {t(props.label)}
     </Button>
   );
 };
