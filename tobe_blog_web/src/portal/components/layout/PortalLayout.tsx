@@ -8,7 +8,7 @@ export default function PortalLayout({ children }: { children: any }) {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
+        minHeight: '100vh'
       }}
     >
       <PortalHeader />

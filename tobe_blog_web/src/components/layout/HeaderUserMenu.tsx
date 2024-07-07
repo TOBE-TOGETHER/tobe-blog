@@ -16,7 +16,7 @@ export default function HeaderUserMenu() {
   };
 
   const handleCloseUserMenu = (_event: React.MouseEvent<HTMLElement>, url: string | null): void => {
-    let target = url || '';
+    let target = url ?? '';
     if (validateUrl(target)) {
       navigate(target, { replace: false });
     }
