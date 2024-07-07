@@ -7,7 +7,7 @@ import config from '../../../../customization.json';
 import StrokeText from '../../../components/common/StrokeText.tsx';
 import HeaderLanguageMenu from '../../../components/layout/HeaderLanguageMenu.tsx';
 import HeaderUserMenu from '../../../components/layout/HeaderUserMenu.tsx';
-import { validateUrl } from '../../../routes/index.ts';
+import { validateUrl } from '../../../routes';
 import theme from '../../../theme.ts';
 import { publicPages } from './configs.ts';
 
@@ -21,17 +21,18 @@ const PortalHeader = () => {
     if (document.documentElement.scrollTop > 80) {
       setShouldShowHeader(true);
     }
+
     // if scroll to the top, then reset the shouldShowHeader flag
     if (document.documentElement.scrollTop === 0) {
       setShouldShowHeader(false);
     }
+
     if (document.documentElement.scrollTop - yIndex > 0 || (document.documentElement.scrollTop - yIndex < 0 && document.documentElement.scrollTop <= 0)) {
       setShowFixedHeader(false);
-    } else {
-      if (shouldShowHeader) {
-        setShowFixedHeader(true);
-      }
+    } else if (shouldShowHeader) {
+      setShowFixedHeader(true);
     }
+
     setYIndex(document.documentElement.scrollTop);
   }
 
@@ -78,7 +79,7 @@ const HeaderContent = () => {
     setAnchorElNav(event.currentTarget);
   };
   const handleCloseNavMenu = (_event: React.MouseEvent<HTMLElement>, url: string | null): void => {
-    let target = url || '';
+    let target = url ?? '';
     if (validateUrl(target)) {
       navigate(target, { replace: false });
     }

@@ -1,5 +1,5 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import Loading from '../../../components/loading/Loading';
 import { IColumn, IOperation } from '../../../global/types';
 import { getButtonByOperationName } from './TableButton';
@@ -18,6 +18,10 @@ interface PagedTableProps {
 }
 
 export default function PagedTable(props: PagedTableProps) {
+  function generateBtn(operation: IOperation, index: number, row: any): ReactNode {
+    return !operation?.hide?.call(null, row) && getButtonByOperationName(operation.name, () => operation.onClick(row.id, row), `${operation.name}_${index}`)
+  }
+
   return (
     <Paper
       sx={{
@@ -77,8 +81,7 @@ export default function PagedTable(props: PagedTableProps) {
                           align={column.align}
                         >
                           {props.operations?.map(
-                            (operation, index) =>
-                              !operation?.hide?.call(null, row) && getButtonByOperationName(operation.name, () => operation.onClick(row.id, row), `${operation.name}_${index}`)
+                            (operation, index) => generateBtn(operation, index, row)
                           )}
                         </TableCell>
                       );
