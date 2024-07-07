@@ -1,5 +1,4 @@
 import { Box, Stack } from '@mui/material';
-
 import PortalHeader from './PortalHeader';
 
 export default function PortalLayout({ children }: { children: any }) {
