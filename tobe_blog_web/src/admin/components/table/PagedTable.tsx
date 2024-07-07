@@ -2,7 +2,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePag
 import { ChangeEvent } from 'react';
 import Loading from '../../../components/loading/Loading';
 import { IColumn, IOperation } from '../../../global/types';
-import { getButtonByOperationName } from './TobeButton';
+import { getButtonByOperationName } from './TableButton';
 
 interface PagedTableProps {
   openLoading?: boolean;

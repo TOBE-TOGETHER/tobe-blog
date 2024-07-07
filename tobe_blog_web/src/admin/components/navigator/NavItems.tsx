@@ -10,7 +10,6 @@ import { IPageItem } from '../../../global/types';
 const NavItem = styled(ListItem)(({ theme }) => ({
   'padding': '5px 15px',
   'color': theme.palette.text.primary,
-
   '& .MuiListItemButton-root.Mui-selected': {
     'color': theme.palette.primary.main + ' !important',
     'backgroundColor': `${theme.palette.primary.main}20 !important`,
