@@ -75,7 +75,7 @@
     "tag-statistics": "Featured tags"
   },
   "sign-in": {
-    "title": "Sign In TOBE",
+    "title": "Sign In",
     "sign-in-btn": "Sign In",
     "forget-pw-btn": "Forget password?",
     "sign-up-btn": "Don't have an account? Sign Up",
@@ -90,7 +90,7 @@
     }
   },
   "sign-up": {
-    "title": "Join TOBE",
+    "title": "Join",
     "sign-up-btn": "Sign Up",
     "sign-in-btn": "Already have an account? Sign in",
     "fields": {

@@ -75,7 +75,7 @@
     "tag-statistics": "标签筛选"
   },
   "sign-in": {
-    "title": "欢迎登陆 TOBE",
+    "title": "欢迎登陆",
     "sign-in-btn": "登录",
     "forget-pw-btn": "忘记密码?",
     "sign-up-btn": "注册账号",
@@ -90,7 +90,7 @@
     }
   },
   "sign-up": {
-    "title": "欢迎加入 TOBE",
+    "title": "欢迎加入",
     "sign-up-btn": "注册",
     "sign-in-btn": "已有账号? 登录",
     "fields": {

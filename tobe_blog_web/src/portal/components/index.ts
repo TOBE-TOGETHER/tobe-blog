@@ -1,26 +1,23 @@
-import { WordListPanel } from '../../components';
-import { Page, TagDisplayBar } from '../../components/index.ts';
-import AuthorDisplayPanel from './AuthorDisplayPanel';
-import ContentBanner from './ContentBanner.tsx';
+import { Page, TagDisplayBar, WordListPanel } from '../../components';
+import ContentBanner from './ContentBanner';
 import ContentPageBreadcrumbsBar from './ContentPageBreadcrumbsBar';
 import ContentPageFrame from './ContentPageFrame';
 import ContentPageMetaBar from './ContentPageMetaBar';
-import FrontendLayout from './FrontendLayout';
-import PortalHeader from './PortalHeader';
-import RelevantContentPanel from './RelevantContentPanel';
 import RichContentReader from './RichContentReader';
+import PortalHeader from './layout/PortalHeader';
+import PortalLayout from './layout/PortalLayout';
+import SingleBoxLayout from './layout/SingleBoxLayout';
 
 export {
-  AuthorDisplayPanel,
   ContentBanner,
   ContentPageBreadcrumbsBar,
   ContentPageFrame,
   ContentPageMetaBar,
-  FrontendLayout,
   Page,
   PortalHeader,
-  RelevantContentPanel,
+  PortalLayout,
   RichContentReader,
+  SingleBoxLayout,
   TagDisplayBar,
   WordListPanel,
 };

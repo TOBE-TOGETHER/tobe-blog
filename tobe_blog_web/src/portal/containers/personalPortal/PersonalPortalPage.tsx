@@ -1,12 +1,13 @@
-import {Grid} from '@mui/material';
-import {enqueueSnackbar} from 'notistack';
-import {useCallback, useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {useParams} from 'react-router-dom';
-import {FrontendLayout, Loading} from '../../../components';
-import {EContentType} from '../../../global/enums';
-import {IUserFullProfileDTO} from '../../../global/types';
-import {PublicDataService} from '../../../services';
+import { Grid } from '@mui/material';
+import { enqueueSnackbar } from 'notistack';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
+import { Loading } from '../../../components';
+import { EContentType } from '../../../global/enums';
+import { IUserFullProfileDTO } from '../../../global/types';
+import { PublicDataService } from '../../../services';
+import { PortalLayout } from '../../components';
 import FunctionSection from '../home/FunctionSection';
 import IntroducationSection from './IntroducationSection';
 
@@ -36,11 +37,11 @@ export default function PersonalPortalPage() {
     profile?.features.articleModule && availableContentTypes.push(EContentType.Article);
     profile?.features.planModule && availableContentTypes.push(EContentType.Plan);
     profile?.features.vocabularyModule && availableContentTypes.push(EContentType.Vocabulary);
-      profile?.features.collectionModule && availableContentTypes.push(EContentType.Collection);
+    profile?.features.collectionModule && availableContentTypes.push(EContentType.Collection);
     return availableContentTypes;
   }
   return (
-    <FrontendLayout>
+    <PortalLayout>
       <Loading open={loading} />
       {profile ? (
         <>
@@ -59,6 +60,6 @@ export default function PersonalPortalPage() {
           justifyContent="center"
         ></Grid>
       )}
-    </FrontendLayout>
+    </PortalLayout>
   );
 }

@@ -1,7 +1,7 @@
 import { Box, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
-import BackendHeader from '../header/BackendHeader';
+import AdminHeader from '../header/AdminHeader';
 import { SideNav } from '../navigator';
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })<{
@@ -26,12 +26,7 @@ const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })<{
 
 const drawerWidth = 240;
 
-/**
- * a flex container with the basic header, footer and side navigator
- *
- * 一个带有网站页头和页脚的流式布局容器
- */
-export default function BackendLayout({ children }: { children: any }) {
+export default function AdminLayout({ children }: { children: any }) {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <Box
@@ -44,7 +39,7 @@ export default function BackendLayout({ children }: { children: any }) {
         backgroundPosition: 'center',
       }}
     >
-      <BackendHeader
+      <AdminHeader
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
         drawerWidth={drawerWidth}

@@ -2,9 +2,8 @@ import React from 'react';
 import { Navigate, Outlet, Route, useLocation } from 'react-router-dom';
 import { useAuthDispatch, useAuthState } from '../contexts';
 import { ELocalStorageKeys } from '../global/enums.ts';
-import { BackendLayout } from './components';
-
 import { URL } from '../routes';
+import { AdminLayout } from './components/index.ts';
 
 const SignInPage = React.lazy(() => import('../portal/containers/signIn/SignIn'));
 const ProfileSettingPage = React.lazy(() => import('./containers/profileSettingPage/ProfileSettingPage'));
@@ -115,9 +114,9 @@ const useAuth = (): boolean => {
 function ProtectedRoutes(): React.ReactElement | null {
   const location = useLocation();
   return useAuth() ? (
-    <BackendLayout>
+    <AdminLayout>
       <Outlet />
-    </BackendLayout>
+    </AdminLayout>
   ) : (
     <Navigate
       replace={true}

@@ -15,7 +15,6 @@ export const URL = {
   TOOL_POMODORO: '/tools/pomodoro',
   TOOL_TIME_CONVERTER: '/tools/time-coverter',
 
-  MY_ZONE: '/my/analytics',
   ANALYTICS: '/my/analytics',
   PROFILE: '/my/profile',
   USERS: '/my/users',

@@ -1,24 +1,10 @@
 import Add from '@mui/icons-material/Add';
-import { Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { authed, enabled } from '../../../commons';
 import { IPageItem } from '../../../global/types';
-
-const NavItem = styled(ListItem)(({ theme }) => ({
-  'padding': '5px 15px',
-  'color': theme.palette.text.primary,
-  '& .MuiListItemButton-root.Mui-selected': {
-    'color': theme.palette.primary.main + ' !important',
-    'backgroundColor': `${theme.palette.primary.main}20 !important`,
-    'fontWeight': '500 !important',
-    '& .MuiListItemIcon-root': {
-      color: theme.palette.primary.main + ' !important',
-    },
-  },
-}));
 
 export const NavItems = (props: { pageItems: IPageItem[] }) => {
   let location = useLocation();
@@ -67,3 +53,15 @@ export const NavItems = (props: { pageItems: IPageItem[] }) => {
     </>
   );
 };
+const NavItem = styled(ListItem)(({ theme }) => ({
+  'padding': '5px 15px',
+  'color': theme.palette.text.primary,
+  '& .MuiListItemButton-root.Mui-selected': {
+    'color': theme.palette.primary.main + ' !important',
+    'backgroundColor': `${theme.palette.primary.main}20 !important`,
+    'fontWeight': '500 !important',
+    '& .MuiListItemIcon-root': {
+      color: theme.palette.primary.main + ' !important',
+    },
+  },
+}));
