@@ -115,7 +115,7 @@ export default function SideNav(props: SideNavProps) {
           sx={{
             width: '180px',
             height: '64px',
-            display: { xs: 'none', md: 'flex' },
+            display: { xs: 'flex' },
             alignItems: 'center',
             cursor: 'pointer',
             fontSize: 40,

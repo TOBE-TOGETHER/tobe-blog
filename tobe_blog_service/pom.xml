@@ -11,7 +11,7 @@
     <groupId>com.tobe</groupId>
     <artifactId>tobe_blog_service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>tobe_blog_service</name>
     <description>tobe_blog_service</description>
     <properties>
