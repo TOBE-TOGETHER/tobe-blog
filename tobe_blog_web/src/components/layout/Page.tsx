@@ -24,7 +24,7 @@ export default function Page(props: IPageProps) {
       sx={{
         ...{
           minHeight: '95vh',
-          pt: { sm: '8vh', xs: '6vh' },
+          pt: { xs: '64px' },
           pb: 2,
         },
         ...props.sx,
