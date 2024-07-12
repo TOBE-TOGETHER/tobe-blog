@@ -44,7 +44,7 @@ Of course, you are allowed to fork this repository and set up a blog website tha
 
 ## Others
 
-Currently, this project is still in the development stage, we are trying our best to enrich the functions and constantly polish the details to present a better experience to users. You can go to [project page](https://github.com/orgs/TOBE-TOGETHER/projects/1) to see the latest development plan and progress, also raise [issues](https://github.com/TOBE-TOGETHER/tobe-blog/issues) to let us know if any features or helps you need.
+Currently, this project is still in the development stage, we are trying our best to enrich the functions and constantly polish the details to present a better experience to users. You can go to [project page](https://github.com/orgs/TOBE-TOGETHER/projects/1) to see the latest development plan and progress, or raise [issues](https://github.com/TOBE-TOGETHER/tobe-blog/issues) to let us know if any features or helps you need.
 
 ## Contact
 
