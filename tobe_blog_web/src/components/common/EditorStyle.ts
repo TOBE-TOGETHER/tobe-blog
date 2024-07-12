@@ -1,4 +1,5 @@
 import { SxProps, Theme } from '@mui/material';
+import theme from '../../theme';
 
 export const EditorStyle: SxProps<Theme> = {
   'width': '100%',
@@ -15,7 +16,7 @@ export const EditorStyle: SxProps<Theme> = {
       '&::before': {
         left: '16px',
         content: `'“'`,
-        paddingRight: '24px',
+        paddingRight: '8px',
       },
     },
 
@@ -48,7 +49,7 @@ export const EditorStyle: SxProps<Theme> = {
     },
 
     '& > p > a': {
-      color: '#00A76F',
+      color: theme.palette.primary.dark,
     },
   },
 };
