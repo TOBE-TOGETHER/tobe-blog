@@ -48,7 +48,7 @@ Currently, this project is still in the development stage, we are trying our bes
 
 ## Contact
 
-Wechat: LucienChen_Chenxi
+Wechat: LucienChen_Chenxi  
 LinkedIn: [Lucien Chen](https://www.linkedin.com/in/lucien-chen-219ab6175/)
 
 ## Thanks
