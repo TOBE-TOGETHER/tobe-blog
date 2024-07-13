@@ -53,7 +53,7 @@ LinkedIn: [Lucien Chen](https://www.linkedin.com/in/lucien-chen-219ab6175/)
 
 ## Thanks
 
-Sincere thanks to the developers who worked on this project!  
+Sincere thanks to the developers who contribute to this project!  
 [![](https://avatars.githubusercontent.com/u/44730766?size=50)](https://github.com/LucienChenXi92) 
 [![](https://avatars.githubusercontent.com/u/39786600?size=50)](https://github.com/sunxu42) 
 [![](https://avatars.githubusercontent.com/u/92359037?size=50)](https://github.com/LouisHongYi) 
