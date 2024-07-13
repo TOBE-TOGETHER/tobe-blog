@@ -1,6 +1,6 @@
 # tobe-blog
 
-tobe-blog is an open-source SaaS blog website based on spring-boot and React framework. 
+tobe-blog is an open-source SaaS blog website based on spring-boot and React framework.  
 <img src=https://github.com/user-attachments/assets/f5b366a1-5b43-4792-be72-ff2ea5b8027c width=48% /> 
 <img src=https://github.com/user-attachments/assets/a9f013bc-3f2b-4f20-aff6-b84de54c21d0 width=48% /> 
 
