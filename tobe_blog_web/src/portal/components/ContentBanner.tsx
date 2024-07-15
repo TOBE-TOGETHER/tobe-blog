@@ -13,7 +13,7 @@ export default function ContentBanner(props: { title: string; subTitle?: string;
         position: 'relative',
         width: '100%',
         height: {
-          xs: '350px',
+          xs: '320px',
           sm: '350px',
           md: '45vh',
         },

@@ -1,9 +1,11 @@
 import { SxProps, Theme } from '@mui/material';
+import theme from '../../theme';
 
 export const EditorStyle: SxProps<Theme> = {
   'width': '100%',
   '.w-e-text-container': {
     backgroundColor: 'transparent',
+    fontFamily: 'Georgia, serif',
   },
   '.w-e-text-container [data-slate-editor]': {
     'padding': '0px',
@@ -11,17 +13,10 @@ export const EditorStyle: SxProps<Theme> = {
       'borderLeftColor': 'rgba(145, 158, 171, 0.08)',
       'backgroundColor': 'transparent',
       'color': '#637381',
-      'fontFamily': 'Georgia, serif',
-
       '&::before': {
         left: '16px',
         content: `'“'`,
-        fontSize: '2em',
-        paddingRight: '24px',
-      },
-
-      'p': {
-        fontSize: '1.5em',
+        paddingRight: '8px',
       },
     },
 
@@ -32,7 +27,6 @@ export const EditorStyle: SxProps<Theme> = {
 
     '& > div': {
       'display': 'flex',
-      'alignItems': 'center',
 
       '.w-e-textarea-divider': {
         width: '100%',
@@ -55,7 +49,7 @@ export const EditorStyle: SxProps<Theme> = {
     },
 
     '& > p > a': {
-      color: '#00A76F',
+      color: theme.palette.primary.dark,
     },
   },
 };

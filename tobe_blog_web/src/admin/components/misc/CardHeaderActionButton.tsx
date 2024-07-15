@@ -17,6 +17,10 @@ export default function CardHeaderActionButton(props: { operations: IOperation[]
     setAnchorEl(null);
     setAnchorRecordId(null);
   };
+  const handleItemOnClick = (id: number | string, data: any, operation: IOperation) => {
+    operation.onClick(id, data);
+    handleClose();
+  };
   function getMenuItem(operationName: string) {
     switch (operationName) {
       case 'release':
@@ -62,7 +66,7 @@ export default function CardHeaderActionButton(props: { operations: IOperation[]
             !operation?.hide?.call(null, props.data) && (
               <MenuItem
                 key={props.data.id + '-' + index}
-                onClick={() => operation.onClick(props.data.id, props.data)}
+                onClick={() => handleItemOnClick(props.data.id, props.data, operation)}
               >
                 {getMenuItem(operation.name)}
               </MenuItem>
