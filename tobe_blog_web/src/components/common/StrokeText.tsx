@@ -3,7 +3,7 @@ import theme from '../../theme.ts';
 
 export default function StrokeText(props: { text: string; color?: string; viewBoxWidth?: number; viewBoxHeight?: number }) {
   const color = props.color || theme.palette.primary.main;
-  const width = props.viewBoxWidth ?? 250;
+  const width = props.viewBoxWidth ?? 260;
   const height = props.viewBoxHeight ?? 50;
   const viewBox = `0 0 ${width} ${height}`;
 
@@ -32,14 +32,12 @@ export default function StrokeText(props: { text: string; color?: string; viewBo
     strokeLinecap: 'round',
     strokeDashoffset: '170',
     strokeDasharray: '170 170',
-    textAnchor: 'start',
-    alignmentBaseline: 'text-before-edge',
-    animation: `${textAnimation} .5s ease-in forwards`,
+    animation: `${textAnimation} .5s ease-in forwards`
   }));
 
   return (
-    <svg viewBox={viewBox}>
-      <Text>{props.text}</Text>
+    <svg width={width} height={height} viewBox={viewBox}>
+      <Text y={'75%'}>{props.text}</Text>
     </svg>
   );
 }
