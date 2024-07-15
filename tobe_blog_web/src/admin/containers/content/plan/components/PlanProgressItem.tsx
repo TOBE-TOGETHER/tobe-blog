@@ -46,13 +46,13 @@ export default function PlanProgressItem(props: PlanProgressItemProps) {
       description: progressDesc,
     })
       .then(response => {
-        enqueueSnackbar(t('plan-detail-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         setProgress(response.data);
       })
       .catch(() => {
-        enqueueSnackbar(t('plan-detail-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

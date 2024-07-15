@@ -48,12 +48,12 @@ export default function PlanDetailPage() {
   function handlePlanUpdate(updatedPlan: IPlanUpdateDTO): void {
     PlanService.update(updatedPlan)
       .then(() => {
-        enqueueSnackbar(t('plan-detail-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('plan-detail-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

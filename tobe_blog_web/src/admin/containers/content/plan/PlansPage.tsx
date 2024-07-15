@@ -9,7 +9,7 @@ export default function PlansPage() {
   return (
     <GeneralContentListPage
       domainService={PlanService}
-      pageTitle={t('plans-page.page-main-title')}
+      pageTitle={t('admin-pages-title.plans')}
       detailPageURL={URL.PLAN_DETAIL}
       createPageURL={URL.CREATE_PLAN}
     />

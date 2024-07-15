@@ -8,7 +8,7 @@ export default function VOCsPage() {
   return (
     <GeneralContentListPage
       domainService={VocabularyService}
-      pageTitle={t('vocabularies-page.page-main-title')}
+      pageTitle={t('admin-pages-title.vocabularies')}
       detailPageURL={URL.VOCABULARY_DETAIL}
       createPageURL={URL.CREATE_VOCABULARY}
     />

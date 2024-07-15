@@ -8,7 +8,7 @@ export default function ArticlesPage() {
   return (
     <GeneralContentListPage
       domainService={ArticleService}
-      pageTitle={t('articles-page.page-main-title')}
+      pageTitle={t('admin-pages-title.articles')}
       detailPageURL={URL.ARTICLE_DETAIL}
       createPageURL={URL.CREATE_ARTICLE}
     />
