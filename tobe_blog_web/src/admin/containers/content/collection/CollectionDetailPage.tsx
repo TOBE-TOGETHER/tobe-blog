@@ -50,9 +50,6 @@ export default function CollectionDetailPage() {
           setTagValues(response.data.tags);
           treeData.children = convert(response.data.tagTree);
           setTreeData(treeData);
-          enqueueSnackbar(t('msg.success'), {
-            variant: 'success',
-          });
         })
         .catch(() => {
           enqueueSnackbar(t('msg.error'), {
