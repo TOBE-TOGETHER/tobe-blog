@@ -1,7 +1,6 @@
 import { AxiosPromise } from 'axios';
-
-import { server } from '.';
-import { IPlanProgressCreationDTO, IPlanProgressUpdateDTO } from '../global/types';
+import { IPlanProgressCreationDTO, IPlanProgressUpdateDTO } from '../../../../../global/types';
+import server from '../../../../../services/server';
 
 const options = {
   headers: {

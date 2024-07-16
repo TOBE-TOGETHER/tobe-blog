@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Loading } from '../../../components';
 import { EContentType } from '../../../global/enums';
 import { IUserFullProfileDTO } from '../../../global/types';
-import { PublicDataService } from '../../../services';
+import * as PublicDataService from '../../../services/PublicDataService.ts';
 import { PortalLayout } from '../../components';
 import FunctionSection from '../home/FunctionSection';
 import IntroducationSection from './IntroducationSection';

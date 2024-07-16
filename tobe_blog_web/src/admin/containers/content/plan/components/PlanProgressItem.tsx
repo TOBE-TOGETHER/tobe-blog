@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../../../../commons';
 import { IPlanProgress } from '../../../../../global/types';
-import { PlanProgressService, PublicDataService } from '../../../../../services';
+import * as PublicDataService from '../../../../../services/PublicDataService.ts';
 import { EditIconButton } from '../../../../components';
 import { ImagesPanel } from './ImagesPanel';
+import * as PlanProgressService from './PlanProgressService.ts';
 
 interface PlanProgressItemProps {
   progress: IPlanProgress;

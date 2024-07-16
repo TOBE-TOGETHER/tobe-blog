@@ -1,7 +1,6 @@
 import { AxiosPromise } from 'axios';
-
-import { server } from '.';
 import { IUserFeatureDTO } from '../global/types.ts';
+import server from '../services/server.ts';
 
 const USER_URI = 'v1/users';
 

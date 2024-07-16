@@ -8,7 +8,7 @@ import { Page } from '../../../components/layout/index.ts';
 import { EContentType, EFeatureCode } from '../../../global/enums.ts';
 import { IUserContentAnalyticsDTO } from '../../../global/types.ts';
 import { URL } from '../../../routes';
-import { OverviewService } from '../../../services/index.ts';
+import * as OverviewService from './OverviewService.ts';
 
 export default function AnalyticsPage() {
   const { t } = useTranslation();

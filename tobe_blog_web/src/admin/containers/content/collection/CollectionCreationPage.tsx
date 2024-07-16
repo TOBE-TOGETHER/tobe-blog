@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { CollectionService } from '../../../../services';
 import { SaveButtonPanel } from '../../../components';
+import { CollectionService } from '../UserContentService';
 import ContentEditMainSection from './components/CollectionEditMainSection';
 
 export default function CollectionCreationPage() {

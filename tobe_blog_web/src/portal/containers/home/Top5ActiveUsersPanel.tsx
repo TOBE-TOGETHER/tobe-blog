@@ -2,11 +2,10 @@ import { Avatar, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-
 import { SidePanel } from '../../../components';
 import { IUserBriefProfileDTO } from '../../../global/types';
 import { URL } from '../../../routes';
-import { PublicDataService } from '../../../services';
+import * as PublicDataService from '../../../services/PublicDataService';
 
 export default function Top5ActiveUsersPanel() {
   const { t } = useTranslation();

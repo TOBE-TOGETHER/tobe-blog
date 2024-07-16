@@ -1,7 +1,8 @@
 import { SxProps, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { FormPanel, OneRow } from '../../../../../components';
 import { ITagOption } from '../../../../../global/types';
-import { FormPanel, MultipleTagSelecter, OneRow } from '../../../../components';
+import { MultipleTagSelecter } from '../../../../components';
 
 interface IVOCEditMainSectionProps {
   title: string | null;

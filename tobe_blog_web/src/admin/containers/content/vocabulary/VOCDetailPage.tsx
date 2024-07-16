@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { WordListPanel } from '../../../../components/common/word/WordListPanel';
 import { Page } from '../../../../components/layout';
 import { ITagOption, IVocabularyDetailDTO, IVocabularyUpdateDTO } from '../../../../global/types';
-import { VocabularyService } from '../../../../services';
+import { VocabularyService } from '../UserContentService';
 import ContentEditBar from '../components/ContentEditBar';
 import VOCEditMainSection from './components/VOCEditMainSection';
 

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { IPlanInfo, IPlanUpdateDTO, ITagOption } from '../../../../global/types';
-import { PlanService } from '../../../../services';
+import { PlanService } from '../UserContentService.ts';
 import ContentEditBar from '../components/ContentEditBar.tsx';
 import PlanEditMainSection from './components/PlanEditMainSection.tsx';
 import PlanProgressModal from './components/PlanProgressModal.tsx';

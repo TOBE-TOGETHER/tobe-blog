@@ -11,8 +11,8 @@ import { getPathFromContentType } from '../../../../commons';
 import { EContentType } from '../../../../global/enums';
 import { IBaseUserContentDTO, ICollectionDTO, ITagRelationshipDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { PublicDataService } from '../../../../services';
-import { ContentReadingPage } from '../ContentReadingPage';
+import * as PublicDataService from '../../../../services/PublicDataService.ts';
+import ContentReadingPage from '../ContentReadingPage';
 
 export default function CollectionReadingPage() {
   const { enqueueSnackbar } = useSnackbar();

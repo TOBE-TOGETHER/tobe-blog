@@ -2,9 +2,9 @@ import { Grid } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { InfiniteScrollList } from '../../../../../components';
 import { IPlanProgress } from '../../../../../global/types.ts';
-import { PublicDataService } from '../../../../../services/index.ts';
-import { InfiniteScrollList } from '../../../../components/index.ts';
+import * as PublicDataService from '../../../../../services/PublicDataService.ts';
 import PlanProgressItem from './PlanProgressItem.tsx';
 
 export default function PlanProgressItems(props: { planId: string; viewOnly: boolean; refreshCode: number }) {

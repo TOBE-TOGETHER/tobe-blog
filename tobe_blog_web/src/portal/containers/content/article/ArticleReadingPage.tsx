@@ -6,9 +6,9 @@ import { useParams } from 'react-router-dom';
 import { useAuthState } from '../../../../contexts';
 import { IArticleDetailDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { PublicDataService } from '../../../../services';
-import { RichContentReader } from '../../../components';
-import { ContentReadingPage } from '../ContentReadingPage';
+import * as PublicDataService from '../../../../services/PublicDataService.ts';
+import ContentReadingPage from '../ContentReadingPage.tsx';
+import RichContentReader from './RichContentReader.tsx';
 
 export default function ArticleReadingPage() {
   const { t } = useTranslation();

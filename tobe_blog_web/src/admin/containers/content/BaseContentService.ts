@@ -1,8 +1,7 @@
 import { AxiosPromise } from 'axios';
+import server from '../../../services/server';
 
-import { server } from '.';
-
-export default class DomainService {
+export default class BaseContentService {
   baseUri: string = '';
 
   constructor(baseUri: string) {

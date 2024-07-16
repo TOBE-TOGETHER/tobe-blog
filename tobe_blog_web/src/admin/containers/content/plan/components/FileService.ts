@@ -1,7 +1,6 @@
 import { AxiosPromise } from 'axios';
 import Compressor from 'compressorjs';
-
-import { server } from '.';
+import server from '../../../../../services/server';
 
 const FILE_URI = 'v1/files';
 

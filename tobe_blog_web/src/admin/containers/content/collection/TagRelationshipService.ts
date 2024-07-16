@@ -1,7 +1,6 @@
 import { AxiosPromise } from 'axios';
-
-import { server } from '.';
-import { ITagRelationshipCreateDTO } from '../global/types';
+import { ITagRelationshipCreateDTO } from '../../../../global/types';
+import server from '../../../../services/server';
 
 const TAG_RELATIONSHIP_URI = 'v1/tag-relationships';
 

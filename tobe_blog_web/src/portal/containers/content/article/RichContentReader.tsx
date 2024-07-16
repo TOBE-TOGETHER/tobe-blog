@@ -3,7 +3,7 @@ import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
 import { Editor } from '@wangeditor/editor-for-react';
 import '@wangeditor/editor/dist/css/style.css';
 import { useEffect, useState } from 'react';
-import { EditorStyle } from '../../components';
+import { EditorStyle } from '../../../../components/common/EditorStyle';
 
 interface RichContentEditorReaderProps {
   htmlValue: string;

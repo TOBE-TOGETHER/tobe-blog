@@ -1,7 +1,9 @@
 import { FormControlLabel, Switch, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { FormPanel, OneRow } from '../../../../../components';
 import { ITagOption } from '../../../../../global/types';
-import { FormPanel, MultipleTagSelecter, OneRow, RichContentEditor, SaveButtonPanel } from '../../../../components';
+import { MultipleTagSelecter, SaveButtonPanel } from '../../../../components';
+import RichContentEditor from './RichContentEditor';
 
 export interface ArticleEditMainSectionProps {
   title: string;

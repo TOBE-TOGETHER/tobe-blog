@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CreatableSelect from 'react-select/creatable';
 import { ITagOption } from '../../../../global/types';
-import { TagService } from '../../../../services';
 import { styles } from './StyleConfig';
+import * as TagService from './TagService';
 
 export default function SingleTagSelecter(props: { value: ITagOption | null; setValue: (newValue: ITagOption) => void; disabled?: boolean }) {
   const [options, setOptions] = useState<ITagOption[]>([]);

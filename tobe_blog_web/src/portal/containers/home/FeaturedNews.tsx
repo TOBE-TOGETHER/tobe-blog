@@ -1,11 +1,11 @@
-import {Button, Grid, Paper, Tab, Tabs, Typography} from '@mui/material';
-import {useCallback, useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {useNavigate} from 'react-router-dom';
-import {getPathFromContentType} from '../../../commons';
-import {EContentType} from '../../../global/enums';
-import {INewsDTO} from '../../../global/types';
-import {PublicDataService} from '../../../services';
+import { Button, Grid, Paper, Tab, Tabs, Typography } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { getPathFromContentType } from '../../../commons';
+import { EContentType } from '../../../global/enums';
+import { INewsDTO } from '../../../global/types';
+import * as PublicDataService from '../../../services/PublicDataService.ts';
 import NewsListItem from './NewsListItem';
 
 enum LoadType {

@@ -5,8 +5,8 @@ import { IDomEditor, IEditorConfig, IToolbarConfig, SlateElement, i18nGetResourc
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { EditorStyle } from '../../../components';
-import theme from '../../../theme';
+import { EditorStyle } from '../../../../../components';
+import theme from '../../../../../theme';
 
 type ImageElement = SlateElement & {
   src: string;

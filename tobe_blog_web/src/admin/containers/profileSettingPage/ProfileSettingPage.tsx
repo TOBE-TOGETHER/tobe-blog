@@ -1,16 +1,16 @@
 import LaunchOutlinedIcon from '@mui/icons-material/LaunchOutlined';
-import { Box, Divider, FormControlLabel, FormGroup, Grid, IconButton, Paper, TextField, Typography } from '@mui/material';
-import Switch from '@mui/material/Switch';
+import { Box, Divider, FormControlLabel, FormGroup, Grid, IconButton, Paper, Switch, TextField, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { HalfRow, OneRow, QuarterRow } from '../../../components';
 import { Page } from '../../../components/layout';
 import { useAuthDispatch, useAuthState } from '../../../contexts';
 import { ELocalStorageKeys } from '../../../global/enums.ts';
 import { URL } from '../../../routes/URL.ts';
-import { UserService } from '../../../services';
-import { HalfRow, OneRow, QuarterRow, SaveButtonPanel } from '../../components';
+import * as UserService from '../../../services/UserService.ts';
+import { SaveButtonPanel } from '../../components';
 import AvatarSelector from './AvatarSelector.tsx';
 
 export default function ProfileSettingPage() {

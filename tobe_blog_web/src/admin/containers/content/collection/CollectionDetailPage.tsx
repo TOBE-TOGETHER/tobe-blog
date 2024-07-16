@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ICollectionDTO, ICollectionUpdateDTO, IRenderTree, ITagOption, ITagRelationship } from '../../../../global/types';
-import { CollectionService } from '../../../../services';
+import { CollectionService } from '../UserContentService';
 import ContentEditBar from '../components/ContentEditBar';
 import CollectionContentPanel from './components/CollectionContentPanel';
 import ContentEditMainSection from './components/CollectionEditMainSection';

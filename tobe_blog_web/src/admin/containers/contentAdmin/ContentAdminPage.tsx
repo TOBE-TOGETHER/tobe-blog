@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { getPathFromContentType } from '../../../commons/index.ts';
 import { EColumnPosition, EOperationName } from '../../../global/enums.ts';
 import { IColumn, IOperation, IUserData } from '../../../global/types.ts';
-import { ContentAdminService } from '../../../services/index.ts';
 import { Page, PagedTable } from '../../components/index.ts';
+import * as ContentAdminService from './ContentAdminService.ts';
 
 export default function AdminPage() {
   const [current, setCurrent] = useState<number>(0);

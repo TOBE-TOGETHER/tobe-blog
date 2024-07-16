@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { VocabularyService } from '../../../../services';
 import { SaveButtonPanel } from '../../../components';
+import { VocabularyService } from '../UserContentService';
 import VOCEditMainSection from './components/VOCEditMainSection';
 
 export default function VOCCreationPage() {

@@ -2,8 +2,8 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from '../../../components/layout';
 import { EColumnPosition, EOperationName } from '../../../global/enums.ts';
-import { IColumn, IUserData, IOperation } from '../../../global/types';
-import { UserService } from '../../../services';
+import { IColumn, IOperation, IUserData } from '../../../global/types';
+import * as UserService from '../../../services/UserService.ts';
 import { PagedTable } from '../../components';
 
 export default function UsersPage() {

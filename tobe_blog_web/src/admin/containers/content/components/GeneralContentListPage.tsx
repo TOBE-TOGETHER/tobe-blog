@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { EOperationName } from '../../../../global/enums.ts';
 import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
-import DomainService from '../../../../services/DomainService';
+import BaseContentService from '../BaseContentService';
 import GeneralCardView from './GeneralCardView';
 import GeneralContentListPageFunctionBar from './GeneralContentListPageFunctionBar';
 
-export default function GeneralContentListPage(props: { domainService: DomainService; pageTitle: string; detailPageURL: string; createPageURL: string }) {
+export default function GeneralContentListPage(props: { contentService: BaseContentService; pageTitle: string; detailPageURL: string; createPageURL: string }) {
   const DEFAULT_PAGE_SIZE: number = 16;
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function GeneralContentListPage(props: { domainService: DomainSer
   let tempCurrent: number = 0;
 
   const loadData = (): void => {
-    props.domainService
+    props.contentService
       .get(DEFAULT_PAGE_SIZE, tempCurrent + 1, '', status)
       .then(response => {
         // avoid duplicated data issue caused by the exceptional re-render
@@ -59,7 +59,7 @@ export default function GeneralContentListPage(props: { domainService: DomainSer
 
   function releaseById(id: number | string) {
     setOpenLoading(true);
-    props.domainService
+    props.contentService
       .releaseById(id)
       .then(response => {
         setData(
@@ -79,7 +79,7 @@ export default function GeneralContentListPage(props: { domainService: DomainSer
 
   function deleteById(id: number | string) {
     setOpenLoading(true);
-    props.domainService
+    props.contentService
       .deleteById(id)
       .then(() => {
         setData(data.filter(d => d.id !== id));
