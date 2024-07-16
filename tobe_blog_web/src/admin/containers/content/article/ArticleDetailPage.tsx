@@ -60,13 +60,13 @@ export default function ArticleDetailPage() {
       contentProtected: contentProtected,
     })
       .then(() => {
-        enqueueSnackbar(t('article-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.ARTICLES);
       })
       .catch(() => {
-        enqueueSnackbar(t('article-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });
@@ -75,7 +75,7 @@ export default function ArticleDetailPage() {
   return (
     <Page
       openLoading={false}
-      pageTitle={t('article-detail-page.page-main-title')}
+      pageTitle={t('admin-pages-title.article-edit')}
     >
       <ArticleEditMainSection
         title={title}

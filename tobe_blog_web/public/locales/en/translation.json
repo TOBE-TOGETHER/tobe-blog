@@ -36,11 +36,6 @@
         "warning": "Tag name is too long"
       }
     },
-    "function-bar": {
-      "recent-only": "Recent only",
-      "card-view-btn": "Simple View",
-      "search-box-placeholder": "Search..."
-    },
     "meta-bar": {
       "view": "View",
       "edit-btn": "Edit"
@@ -62,16 +57,12 @@
     "plans": "Plans",
     "articles": "Articles",
     "vocabularies": "Vocabularies",
-    "workout": "Workout",
-    "activities": "Activities",
     "collections": "Collections",
-    "tools": "Tools",
     "view-count": "View",
     "end-line": "No more content",
     "load-more": "Load more",
     "no-content": "No available content",
     "top5-active-users": "Top 5 active users",
-    "top5-popular-collections": "Top 5 popular collections",
     "tag-statistics": "Featured tags"
   },
   "sign-in": {
@@ -118,13 +109,12 @@
       "about": "About",
       "article": "Article",
       "vocabulary": "Vocabulary",
-      "collection": "Collection",
-      "tool": "Tool"
+      "collection": "Collection"
     },
     "settings": {
       "btn-tooltip": "Open settings",
       "profile": "User Profile",
-      "my-zone": "Analytics",
+      "analytics": "Analytics",
       "plans": "Plans",
       "articles": "Articles",
       "vocabularies": "Vocabularies",
@@ -132,7 +122,6 @@
       "sign-out": "Sign Out"
     },
     "language": {
-      "btn-label": "Lang",
       "btn-tooltip": "Switch language",
       "options": {
         "zh": "中文",
@@ -158,18 +147,10 @@
       "background-img": "Portal background image URL",
       "photo-img": "Personal photo image URL"
     },
-    "back-btn": "Back",
     "view-btn": "View",
-    "submit-btn": "Submit",
     "msg": {
       "success": "Updated",
       "error": "Update failed"
-    }
-  },
-  "my-menu": {
-    "actions": {
-      "share": "Share",
-      "create-plan": "Create a plan"
     }
   },
   "user-table": {
@@ -203,11 +184,19 @@
       "draft": "Draft"
     },
     "msg": {
-      "error": "Operation failed"
+      "error": "Failed to fetch contents"
     }
   },
-  "plans-page": {
-    "page-main-title": "Plans"
+  "msg": {
+    "success": "Operation successful",
+    "error": "Operation failed"
+  },
+  "admin-pages-title": {
+    "plans": "Plans",
+    "articles": "Articles",
+    "collections": "Collections",
+    "vocabularies": "Vocabularies",
+    "article-edit": "Edit article"
   },
   "plan-creation-page": {
     "form-title": "Create a new plan",
@@ -218,11 +207,7 @@
       "target-end-time": "Target end time",
       "cover-img-url": "Cover image URL"
     },
-    "back-btn": "Back",
-    "submit-btn": "Submit",
     "msg": {
-      "success": "Created",
-      "error": "Creation failed",
       "warning": {
         "name-empty": "Plan name cannot be empty",
         "target-start-time-empty": "Target start time cannot be empty",
@@ -238,10 +223,6 @@
       "target-start-time": "Target start time",
       "target-end-time": "Target end time",
       "cover-img-url": "Cover image URL"
-    },
-    "msg": {
-      "error": "Operation failed",
-      "success": "Operation success"
     }
   },
   "plan-progress": {
@@ -249,9 +230,7 @@
     "add-new-tip": "Any fresh news to share?",
     "send-btn": "Send",
     "msg": {
-      "error": "Operation failed",
-      "warning": "Please type in valid context",
-      "success": "Operation success"
+      "warning": "Please type in valid context"
     }
   },
   "dashboard-nav": {
@@ -283,32 +262,6 @@
       "error": "Failed to fetch data"
     }
   },
-  "news-page": {
-    "page-main-title": "Fresh News",
-    "update-at": "Updated at ",
-    "publish-at": "Published at ",
-    "news-types": {
-      "plan": "Plan",
-      "article": "Article"
-    }
-  },
-  "about-page": {
-    "page-main-title": "About",
-    "about-tobe": {
-      "title": "Hi traveler!",
-      "p1": "TOBE is a small website focused on personal growth, accumulation, and experience sharing. Leave some space in this chaotic world to calm down and settle yourself. If you happen to find this place and find something that interests you or is helpful, it means you have a wonderful connection with this place.",
-      "p2": "Of course, you are more than welcome to become a sharer. You can contact me on WeChat to register an account for login this website or get the source code to build your own TOBE."
-    },
-    "contact": {
-      "title": "Contact",
-      "wechat": "Wechat: LucienChen_ChenXi",
-      "email": "Email: 474504303@qq.com",
-      "linkedin": "Linkedin: "
-    }
-  },
-  "articles-page": {
-    "page-main-title": "Articles"
-  },
   "article-creation-page": {
     "page-main-title": "Create a new article",
     "expand-label": "Other secondary info",
@@ -319,20 +272,9 @@
       "description": "Description",
       "tag": "Tag",
       "content-protected": "Only logged in users can read the full content"
-    },
-    "submit-btn": "Save",
-    "back-btn": "Back",
-    "msg": {
-      "success": "Operation success",
-      "error": "Operation failed"
     }
   },
-  "article-detail-page": {
-    "page-main-title": "Edit article"
-  },
   "article-reading-page": {
-    "back-btn": "Back",
-    "relevant-articles": "Relevant articles",
     "content-protected": "Please log in to read the full content",
     "msg": {
       "error": "Failed to fetch data"
@@ -347,32 +289,15 @@
       "tag": "Tag"
     },
     "msg": {
-      "success": "Created",
-      "error": "Creation failed",
       "warning": {
         "name-empty": "Collection name cannot be empty"
       }
-    },
-    "submit-btn": "Save",
-    "back-btn": "Back"
+    }
   },
   "collection-detail-page": {
     "btn": {
       "add": "Add",
       "delete": "Delete"
-    },
-    "msg": {
-      "success": "Operation success",
-      "error": "Operation failed"
-    }
-  },
-  "collections-page": {
-    "page-main-title": "Collections"
-  },
-  "collections-list-page": {
-    "page-main-title": "Collections",
-    "msg": {
-      "error": "Failed to fetch data"
     }
   },
   "collection-reading-page": {
@@ -391,58 +316,7 @@
       "language": "Language",
       "cover-img-url": "Cover image URL",
       "tags": "Tags"
-    },
-    "msg": {
-      "success": "Created",
-      "error": "Creation failed"
-    },
-    "submit-btn": "Save",
-    "back-btn": "Back"
-  },
-  "vocabularies-page": {
-    "page-main-title": "Vocabularies",
-    "vocabulary-table": {
-      "label": {
-        "title": "Title",
-        "description": "Description",
-        "createTime": "Create time",
-        "updateTime": "Update time",
-        "operation": "Operation"
-      }
-    },
-    "recent-only": "Recent only",
-    "search-box-placeholder": "Search..."
-  },
-  "tools-list-page": {
-    "page-main-title": "Tools",
-    "pomodoro": {
-      "name": "Pomodoro",
-      "desc": "A timer based on the Pomodoro time management technique."
-    },
-    "time-converter": {
-      "name": "Time Coverter",
-      "desc": "An easy-use tool for time-zone and timestamp converting."
     }
-  },
-  "tools-pomodoro": {
-    "page-main-title": "Pomodoro",
-    "tip": {
-      "start": "Start a countdown"
-    },
-    "btn": {
-      "start": "Start",
-      "pause": "Pause",
-      "reset": "Reset"
-    }
-  },
-  "tools-time-converter": {
-    "page-main-title": "Time Converter",
-    "curent-timestamp": "Current Timestamp",
-    "timestamp-label": "Timestamp(Unix)",
-    "tip": ", click button to get your current local time",
-    "time-label": "Local Time",
-    "timestamp-input-helper": "Please input timestamp",
-    "time-input-helper": "Please input time"
   },
   "word-dialog": {
     "add": "Add",
@@ -455,10 +329,6 @@
     },
     "save": "Save",
     "back": "Back",
-    "delete": "Delete",
-    "msg": {
-      "error": "Operation failed",
-      "success": "Operation success"
-    }
+    "delete": "Delete"
   }
 }

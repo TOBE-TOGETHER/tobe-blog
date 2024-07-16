@@ -28,13 +28,13 @@ export default function VOCCreationPage() {
       tags: tagValues,
     })
       .then(() => {
-        enqueueSnackbar(t('vocabulary-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.VOCABULARIES);
       })
       .catch(() => {
-        enqueueSnackbar(t('vocabulary-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

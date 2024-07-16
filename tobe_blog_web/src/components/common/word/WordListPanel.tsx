@@ -24,7 +24,7 @@ export function WordListPanel(props: { editable: boolean; vocabularyId: string }
           setWords(response.data);
         })
         .catch(() => {
-          enqueueSnackbar(t('word-dialog.msg.error'), {
+          enqueueSnackbar(t('msg.error'), {
             variant: 'error',
           });
         })
@@ -38,14 +38,14 @@ export function WordListPanel(props: { editable: boolean; vocabularyId: string }
   function handleDeleteWord(wordId: number) {
     WordService.deleteWordById(wordId)
       .then(() => {
-        enqueueSnackbar(t('word-dialog.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         loadWordsData(props.vocabularyId || '');
         setOpenedWord(null);
       })
       .catch(() => {
-        enqueueSnackbar(t('word-dialog.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

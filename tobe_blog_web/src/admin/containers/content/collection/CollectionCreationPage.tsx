@@ -36,13 +36,13 @@ export default function CollectionCreationPage() {
       tags: tagValues,
     })
       .then(() => {
-        enqueueSnackbar(t('collection-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.COLLECTIONS);
       })
       .catch(() => {
-        enqueueSnackbar(t('collection-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

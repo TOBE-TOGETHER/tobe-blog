@@ -52,7 +52,7 @@ export default function CollectionDetailPage() {
           setTreeData(treeData);
         })
         .catch(() => {
-          enqueueSnackbar(t('collection-detail-page.msg.error'), {
+          enqueueSnackbar(t('msg.error'), {
             variant: 'error',
           });
         });
@@ -88,12 +88,12 @@ export default function CollectionDetailPage() {
     setOpenLoading(true);
     CollectionService.update(target)
       .then(() => {
-        enqueueSnackbar(t('collection-detail-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('collection-detail-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       })

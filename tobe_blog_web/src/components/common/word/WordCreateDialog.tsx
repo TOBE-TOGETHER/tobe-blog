@@ -30,14 +30,14 @@ export function WordCreateDialog(props: { vocabularyId: string; loadData: Functi
       meaningInEnglish: meaningInEnglish,
     })
       .then(() => {
-        enqueueSnackbar(t('word-dialog.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         handleClose();
         props.loadData(props.vocabularyId);
       })
       .catch(() => {
-        enqueueSnackbar(t('word-dialog.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

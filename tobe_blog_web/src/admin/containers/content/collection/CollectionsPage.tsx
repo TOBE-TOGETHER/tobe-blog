@@ -8,7 +8,7 @@ export default function CollectionsPage() {
   return (
     <GeneralContentListPage
       domainService={CollectionService}
-      pageTitle={t('collections-page.page-main-title')}
+      pageTitle={t('admin-pages-title.collections')}
       detailPageURL={URL.COLLECTION_DETAIL}
       createPageURL={URL.CREATE_COLLECTION}
     />

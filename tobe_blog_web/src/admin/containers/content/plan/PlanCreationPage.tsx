@@ -64,13 +64,13 @@ export default function PlanCreationPage() {
       tags: tagValues,
     })
       .then(() => {
-        enqueueSnackbar(t('plan-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.PLANS);
       })
       .catch(() => {
-        enqueueSnackbar(t('plan-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

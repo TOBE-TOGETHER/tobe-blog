@@ -21,14 +21,14 @@ export function WordDetailDialog(props: { word: IWordGeneralDTO | null; setWord:
       meaningInEnglish: props.word?.meaningInEnglish || '',
     })
       .then(() => {
-        enqueueSnackbar(t('word-dialog.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         handleClose();
         props.loadData(props.word?.vocabularyId);
       })
       .catch(() => {
-        enqueueSnackbar(t('word-dialog.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

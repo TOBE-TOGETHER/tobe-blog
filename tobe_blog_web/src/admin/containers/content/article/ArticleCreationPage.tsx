@@ -33,13 +33,13 @@ export default function ArticleCreationPage() {
       contentProtected: contentProtected,
     })
       .then(() => {
-        enqueueSnackbar(t('article-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.ARTICLES);
       })
       .catch(() => {
-        enqueueSnackbar(t('article-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       })

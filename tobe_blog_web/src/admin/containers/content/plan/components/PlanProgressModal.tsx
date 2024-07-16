@@ -49,12 +49,12 @@ export default function PlanProgressModal(props: { planId: string; viewOnly: boo
         setImages([]);
         setImageURLs([]);
         setRefreshCode(new Date().getTime());
-        enqueueSnackbar(t('plan-progress.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('plan-progress.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });
