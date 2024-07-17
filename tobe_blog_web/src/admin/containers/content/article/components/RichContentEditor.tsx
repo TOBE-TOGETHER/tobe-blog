@@ -23,7 +23,7 @@ function getLocale(): 'en' | 'zh-CN' {
   }
 }
 
-function RichContentEditor(props: { htmlValue: string; setHtmlValue: (value: string) => void; setTextValue: (value: string) => void }) {
+function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (value: string) => void; setTextValue: (value: string) => void }>) {
   const { t } = useTranslation();
   const [editor, setEditor] = useState<IDomEditor | null>(null);
 
