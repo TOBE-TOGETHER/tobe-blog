@@ -13,6 +13,7 @@ export default function NewsListItem(props: {
   description: string;
   publishTime: string | null;
   viewCount: number;
+  isRecommended?: boolean;
   tags: ITagOption[];
   onClick: () => void;
 }) {
@@ -87,9 +88,13 @@ export default function NewsListItem(props: {
       <Grid
         container
         item
+        sx={{
+          justifyContent: 'space-between'
+        }}
         xs={12}
       >
         <TagDisplayBar tags={props.tags} />
+        {props.isRecommended && <TagDisplayBar tags={[{ label: 'Recommended', value: 'recommended' }]} />}
       </Grid>
     </Grid>
   );

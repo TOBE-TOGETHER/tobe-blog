@@ -47,6 +47,8 @@
     "general-card-view": {
       "published": "Published",
       "draft": "Draft",
+      "recommended-tip": "The cream always rises to the top",
+      "banned-tip": "Due to the potential discomfort or controversy that this content might cause, we have decided to impose a restriction",
       "title": {
         "open": "Visible to everyone",
         "private": "Only visible to yourself"

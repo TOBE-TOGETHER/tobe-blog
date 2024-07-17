@@ -108,6 +108,7 @@ export default function FeaturedNews(props: {
         <>
           {newsData.map(n => (
             <NewsListItem
+              isRecommended={n.recommended}
               key={n.id}
               owner={n.ownerName}
               ownerId={n.ownerId}

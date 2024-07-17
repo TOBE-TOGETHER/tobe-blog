@@ -98,7 +98,7 @@ const HeaderContent = () => {
             alignItems: 'center',
             cursor: 'pointer',
             fontSize: 40,
-            fontFamily: 'Times New Roman, fantasy, sans-serif',
+            fontFamily: 'Times New Roman, fantasy, San Francisco, sans-serif'
           }}
         >
           <StrokeText text={config.projectName} />

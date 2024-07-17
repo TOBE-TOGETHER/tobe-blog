@@ -47,6 +47,8 @@
     "general-card-view": {
       "published": "已发布",
       "draft": "草稿",
+      "recommended-tip": "是金子总会发光",
+      "banned-tip": "鉴于该内容可能会引发不适或争议，现决定进行封禁处理",
       "title": {
         "open": "所有人可见",
         "private": "仅自己可见"

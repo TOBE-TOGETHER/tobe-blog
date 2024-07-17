@@ -55,6 +55,7 @@ export interface INewsDTO {
   avatarUrl: string;
   createTime: string;
   updateTime: string | null;
+  recommended: boolean;
   publishTime: string | null;
   viewCount: number;
   tags: ITagOption[];

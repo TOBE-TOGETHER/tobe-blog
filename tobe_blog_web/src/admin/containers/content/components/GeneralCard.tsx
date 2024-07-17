@@ -1,4 +1,6 @@
+import BlockIcon from '@mui/icons-material/Block';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import RecommendIcon from '@mui/icons-material/Recommend';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Chip, Grid, Paper, Tooltip, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -29,7 +31,13 @@ export function GeneralCard(props: { record: IBaseUserContentDTO; onClick?: (id:
             sx={{ p: 3, flexDirection: 'column', pb: { xs: 0, sm: 0, md: 3 } }}
           >
             <Grid container>
-              <Grid flexGrow={1}>
+              <Grid
+                container
+                flexGrow={1}
+                sx={{
+                  alignItems: 'center',
+                }}
+              >
                 {props.record.publicToAll ? (
                   <Tooltip title={t('components.general-card-view.title.open')}>
                     <Chip
@@ -42,6 +50,26 @@ export function GeneralCard(props: { record: IBaseUserContentDTO; onClick?: (id:
                     <Chip
                       sx={{ borderRadius: 1, height: '28px', p: 0, fontWeight: 800, color: theme.palette.text.secondary }}
                       label={t('components.general-card-view.draft')}
+                    />
+                  </Tooltip>
+                )}
+                {props.record.recommended && (
+                  <Tooltip title={t('components.general-card-view.banned-tip')}>
+                    <BlockIcon
+                      sx={{
+                        ml: 1,
+                        color: '#F08080',
+                      }}
+                    />
+                  </Tooltip>
+                )}
+                {props.record.recommended && (
+                  <Tooltip title={t('components.general-card-view.recommended-tip')}>
+                    <RecommendIcon
+                      sx={{
+                        ml: 1,
+                        color: '#FFD700',
+                      }}
                     />
                   </Tooltip>
                 )}
