@@ -1,3 +1,4 @@
+import { useSnackbar } from 'notistack';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +8,8 @@ import { IColumn, IOperation, IUserData } from '../../../global/types.ts';
 import { Page, PagedTable } from '../../components/index.ts';
 import * as ContentAdminService from './ContentAdminService.ts';
 
-export default function AdminPage() {
+export default function ContentAdminPage() {
+  const { enqueueSnackbar } = useSnackbar();
   const [current, setCurrent] = useState<number>(0);
   const [size, setSize] = useState<number>(10);
   const [rows, setRows] = useState<IUserData[]>([]);
@@ -21,7 +23,11 @@ export default function AdminPage() {
         setRows(response.data.records || []);
         setTotalCount(response.data.total);
       })
-      .catch(() => {});
+      .catch(() => {
+        enqueueSnackbar(t('msg.error'), {
+          variant: 'error',
+        });
+      });
   }, [current, size]);
 
   useEffect(() => loadData(), [loadData]);
@@ -66,15 +72,23 @@ export default function AdminPage() {
   };
 
   const handleBanContent = (id: number | string): void => {
-    ContentAdminService.banContent(id + '').then(() => {
-      loadData();
-    });
+    ContentAdminService.banContent(id + '')
+      .then(() => loadData())
+      .catch(() => {
+        enqueueSnackbar(t('msg.error'), {
+          variant: 'error',
+        });
+      });
   };
 
   const handleRecommendContent = (id: number | string): void => {
-    ContentAdminService.recommendContent(id + '').then(() => {
-      loadData();
-    });
+    ContentAdminService.recommendContent(id + '')
+      .then(() => loadData())
+      .catch(() => {
+        enqueueSnackbar(t('msg.error'), {
+          variant: 'error',
+        });
+      });
   };
 
   const operations: IOperation[] = [
