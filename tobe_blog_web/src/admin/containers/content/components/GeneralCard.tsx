@@ -64,7 +64,7 @@ export function GeneralCard(props: { record: IBaseUserContentDTO; onClick?: (id:
                   </Tooltip>
                 )}
                 {props.record.recommended && (
-                  <Tooltip title={t('components.general-card-view.recommend-tip')}>
+                  <Tooltip title={t('components.general-card-view.recommended-tip')}>
                     <RecommendIcon
                       sx={{
                         ml: 1,

@@ -6,6 +6,7 @@ export default function StrokeText(props: { text: string; color?: string; viewBo
   const width = props.viewBoxWidth ?? 260;
   const height = props.viewBoxHeight ?? 50;
   const viewBox = `0 0 ${width} ${height}`;
+  const isSafari = window.navigator.userAgent.toLowerCase().includes('safari');
 
   const textAnimation = keyframes`
     0% {
@@ -28,6 +29,7 @@ export default function StrokeText(props: { text: string; color?: string; viewBo
     fontSize: 'inherit',
     fontWeight: 'bold',
     strokeWidth: 2,
+    fontFamily: isSafari ? '"Times New Roman, San Francisco, PingFang SC"' : 'inherit',
     stroke: color,
     strokeLinecap: 'round',
     strokeDashoffset: '170',
