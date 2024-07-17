@@ -128,6 +128,7 @@ export default function CollectionReadingPage() {
   return (
     <ContentReadingPage
       content={collection}
+      subTitle={collection?.description}
       editLinkUrlPrefix={URL.COLLECTION_DETAIL}
     >
       {printCollectionTree(collection)}
@@ -218,7 +219,7 @@ const ContentLink = (props: { id: string; text: string; contentType: string }) =
       <Link
         href={`/news/${getPathFromContentType(props.contentType)}/${props.id}`}
         underline="hover"
-        color={'info.main'}
+        color={'text.secondary'}
       >
         {getIconByContentType(props.contentType)} {props.text}
       </Link>

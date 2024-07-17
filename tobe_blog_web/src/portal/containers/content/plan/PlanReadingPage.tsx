@@ -35,6 +35,7 @@ export default function PlanReadingPage() {
   return (
     <ContentReadingPage
       content={plan}
+      subTitle={plan?.description}
       editLinkUrlPrefix={URL.PLAN_DETAIL}
     >
       <Grid container>

@@ -34,6 +34,7 @@ export default function VocabularyReadingPage() {
   return (
     <ContentReadingPage
       content={vocabualry}
+      subTitle={vocabualry?.description}
       editLinkUrlPrefix={URL.VOCABULARY_DETAIL}
     >
       {vocabualry && (
