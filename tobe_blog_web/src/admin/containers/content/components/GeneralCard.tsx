@@ -36,6 +36,7 @@ export function GeneralCard(props: { record: IBaseUserContentDTO; onClick?: (id:
                 flexGrow={1}
                 sx={{
                   alignItems: 'center',
+                  width: 'fit-content',
                 }}
               >
                 {props.record.publicToAll ? (
@@ -53,7 +54,7 @@ export function GeneralCard(props: { record: IBaseUserContentDTO; onClick?: (id:
                     />
                   </Tooltip>
                 )}
-                {props.record.recommended && (
+                {props.record.banned && (
                   <Tooltip title={t('components.general-card-view.banned-tip')}>
                     <BlockIcon
                       sx={{
