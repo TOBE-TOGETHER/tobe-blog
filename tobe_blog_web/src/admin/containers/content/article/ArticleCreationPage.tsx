@@ -64,7 +64,6 @@ export default function ArticleCreationPage() {
         setContentProtected={setContentProtected}
         htmlValue={htmlValue}
         setHtmlValue={setHtmlValue}
-        textValue={textValue}
         setTextValue={setTextValue}
         onClickPrimaryBtn={saveArticle}
       />

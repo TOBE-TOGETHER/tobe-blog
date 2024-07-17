@@ -35,7 +35,7 @@ function compressImages(files: File[]): Promise<File[]> {
     for (let i = 0; i < numImagesToProcess; i++) {
       const file = files[i];
       await new Promise(resolve => {
-        new Compressor(file, {
+        const com = new Compressor(file, {
           quality: 0.5,
           success(result: File) {
             files[i] = result;
@@ -45,6 +45,7 @@ function compressImages(files: File[]): Promise<File[]> {
             resolve('Failed');
           },
         });
+        com.abort();
       });
       processedImages += 1;
     }

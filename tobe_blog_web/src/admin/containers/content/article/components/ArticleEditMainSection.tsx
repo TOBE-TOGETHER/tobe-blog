@@ -18,7 +18,6 @@ export interface ArticleEditMainSectionProps {
   setTagValues: (value: ITagOption[]) => void;
   htmlValue: string;
   setHtmlValue: (value: string) => void;
-  textValue: string;
   setTextValue: (value: string) => void;
   onClickPrimaryBtn: () => void;
 }
@@ -64,7 +63,6 @@ export default function ArticleEditMainSection(props: ArticleEditMainSectionProp
         <OneRow>
           <RichContentEditor
             htmlValue={props.htmlValue}
-            textValue={props.textValue}
             setHtmlValue={props.setHtmlValue}
             setTextValue={props.setTextValue}
           />

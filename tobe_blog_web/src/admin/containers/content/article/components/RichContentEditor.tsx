@@ -15,13 +15,6 @@ type ImageElement = SlateElement & {
   href: string;
 };
 
-interface RichContentEditorProps {
-  htmlValue: string;
-  textValue: string;
-  setHtmlValue: (value: string) => void;
-  setTextValue: (value: string) => void;
-}
-
 function getLocale(): 'en' | 'zh-CN' {
   if (localStorage.getItem('i18nextLng') === 'en') {
     return 'en';
@@ -30,7 +23,7 @@ function getLocale(): 'en' | 'zh-CN' {
   }
 }
 
-function RichContentEditor(props: RichContentEditorProps) {
+function RichContentEditor(props: { htmlValue: string; setHtmlValue: (value: string) => void; setTextValue: (value: string) => void }) {
   const { t } = useTranslation();
   const [editor, setEditor] = useState<IDomEditor | null>(null);
 

@@ -90,7 +90,6 @@ export default function ArticleDetailPage() {
         setContentProtected={setContentProtected}
         htmlValue={htmlValue}
         setHtmlValue={setHtmlValue}
-        textValue={textValue}
         setTextValue={setTextValue}
         onClickPrimaryBtn={saveArticle}
       />
