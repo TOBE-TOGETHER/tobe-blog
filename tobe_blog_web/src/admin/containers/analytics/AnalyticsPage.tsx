@@ -1,14 +1,14 @@
-import {Grid, Paper, Typography} from '@mui/material';
-import {useSnackbar} from 'notistack';
-import {useCallback, useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {useNavigate} from 'react-router-dom';
-import {enabled} from '../../../commons/index.ts';
-import {Page} from '../../../components/layout/index.ts';
-import {EContentType, EFeatureCode} from '../../../global/enums.ts';
-import {IUserContentAnalyticsDTO} from '../../../global/types.ts';
-import {URL} from '../../../routes';
-import {OverviewService} from '../../../services/index.ts';
+import { Grid, Paper, Typography } from '@mui/material';
+import { useSnackbar } from 'notistack';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { enabled } from '../../../commons/index.ts';
+import { Page } from '../../../components/layout/index.ts';
+import { EContentType, EFeatureCode } from '../../../global/enums.ts';
+import { IUserContentAnalyticsDTO } from '../../../global/types.ts';
+import { URL } from '../../../routes';
+import * as OverviewService from './OverviewService.ts';
 
 export default function AnalyticsPage() {
   const { t } = useTranslation();
@@ -91,11 +91,11 @@ export default function AnalyticsPage() {
           />
         )}
         {enabled(EFeatureCode.COLLECTION_MODULE) && (
-            <UserContentAnalyticsPanel
-                contentType={EContentType.Collection}
-                data={colData}
-                link={URL.COLLECTIONS}
-            />
+          <UserContentAnalyticsPanel
+            contentType={EContentType.Collection}
+            data={colData}
+            link={URL.COLLECTIONS}
+          />
         )}
       </Grid>
     </Page>

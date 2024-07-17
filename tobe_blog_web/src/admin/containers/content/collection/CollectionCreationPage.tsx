@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { CollectionService } from '../../../../services';
 import { SaveButtonPanel } from '../../../components';
+import { CollectionService } from '../UserContentService';
 import ContentEditMainSection from './components/CollectionEditMainSection';
 
 export default function CollectionCreationPage() {
@@ -36,13 +36,13 @@ export default function CollectionCreationPage() {
       tags: tagValues,
     })
       .then(() => {
-        enqueueSnackbar(t('collection-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.COLLECTIONS);
       })
       .catch(() => {
-        enqueueSnackbar(t('collection-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

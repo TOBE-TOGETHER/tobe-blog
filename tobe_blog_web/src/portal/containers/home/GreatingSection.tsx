@@ -5,6 +5,7 @@ import 'react-awesome-slider/dist/styles.css';
 import config from '../../../../customization.json';
 import theme from '../../../theme';
 import './slider.css';
+
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const Title = (props: any) => {

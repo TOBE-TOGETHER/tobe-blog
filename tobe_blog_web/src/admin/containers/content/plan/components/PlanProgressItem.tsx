@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../../../../commons';
 import { IPlanProgress } from '../../../../../global/types';
-import { PlanProgressService, PublicDataService } from '../../../../../services';
+import * as PublicDataService from '../../../../../services/PublicDataService.ts';
 import { EditIconButton } from '../../../../components';
 import { ImagesPanel } from './ImagesPanel';
+import * as PlanProgressService from './PlanProgressService.ts';
 
 interface PlanProgressItemProps {
   progress: IPlanProgress;
@@ -46,13 +47,13 @@ export default function PlanProgressItem(props: PlanProgressItemProps) {
       description: progressDesc,
     })
       .then(response => {
-        enqueueSnackbar(t('plan-detail-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         setProgress(response.data);
       })
       .catch(() => {
-        enqueueSnackbar(t('plan-detail-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

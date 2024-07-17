@@ -13,7 +13,7 @@ export const pages: Array<{
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
   },
   {
-    label: 'app-header.settings.my-zone',
+    label: 'app-header.settings.analytics',
     url: URL.ANALYTICS,
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
   },

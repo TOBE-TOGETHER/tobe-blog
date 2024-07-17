@@ -36,11 +36,6 @@
         "warning": "名字长度过长"
       }
     },
-    "function-bar": {
-      "recent-only": "最新内容",
-      "card-view-btn": "精简模式",
-      "search-box-placeholder": "搜索..."
-    },
     "meta-bar": {
       "view": "阅读量",
       "edit-btn": "编辑"
@@ -64,16 +59,12 @@
     "plans": "计划",
     "articles": "笔记",
     "vocabularies": "词汇",
-    "workout": "锻炼",
-    "activities": "活动",
     "view-count": "阅读量",
     "collections": "合集",
-    "tools": "工具",
     "end-line": "实在是没有了。。。",
     "load-more": "加载更多",
     "no-content": "找不到相关内容",
     "top5-active-users": "活跃排行榜",
-    "top5-popular-collections": "合集排行榜",
     "tag-statistics": "标签筛选"
   },
   "sign-in": {
@@ -118,15 +109,14 @@
       "home": "首页",
       "news": "近期动态",
       "about": "关于",
-      "article": "文章",
+      "article": "笔记",
       "vocabulary": "单词",
-      "collection": "合集",
-      "tool": "工具"
+      "collection": "合集"
     },
     "settings": {
       "btn-tooltip": "打开设置",
       "profile": "用户信息",
-      "my-zone": "分析",
+      "analytics": "分析",
       "plans": "计划",
       "articles": "笔记",
       "vocabularies": "单词",
@@ -134,7 +124,6 @@
       "sign-out": "登出系统"
     },
     "language": {
-      "btn-label": "语言",
       "btn-tooltip": "切换语言",
       "options": {
         "zh": "中文",
@@ -160,18 +149,10 @@
       "background-img": "主页背景图片链接",
       "photo-img": "个人头像图片链接"
     },
-    "back-btn": "返回",
-    "submit-btn": "提交",
     "view-btn": "浏览",
     "msg": {
       "success": "更新成功",
       "error": "更新失败"
-    }
-  },
-  "my-menu": {
-    "actions": {
-      "share": "分享",
-      "create-plan": "创建项目"
     }
   },
   "user-table": {
@@ -205,26 +186,30 @@
       "draft": "草稿"
     },
     "msg": {
-      "error": "操作失败"
+      "error": "未能获取内容"
     }
   },
-  "plans-page": {
-    "page-main-title": "计划"
+  "msg": {
+    "success": "操作成功",
+    "error": "操作失败"
+  },
+  "admin-pages-title": {
+    "plans": "计划",
+    "articles": "笔记",
+    "collections": "合集",
+    "vocabularies": "词汇",
+    "article-edit": "编辑笔记"
   },
   "plan-creation-page": {
-    "form-title": "创建新的项目",
+    "form-title": "创建新的计划",
     "fields": {
-      "name": "项目名称",
-      "description": "项目描述",
+      "name": "计划名称",
+      "description": "计划描述",
       "target-start-time": "计划开始时间",
       "target-end-time": "计划结束时间",
       "cover-img-url": "封面链接"
     },
-    "back-btn": "返回",
-    "submit-btn": "提交",
     "msg": {
-      "success": "创建成功",
-      "error": "创建失败",
       "warning": {
         "name-empty": "项目名称不能为空",
         "target-start-time-empty": "计划开始时间不可以为空",
@@ -235,15 +220,11 @@
   },
   "plan-detail-page": {
     "fields": {
-      "name": "项目名称",
-      "description": "项目描述",
+      "name": "计划名称",
+      "description": "计划描述",
       "target-start-time": "计划开始时间",
       "target-end-time": "计划结束时间",
       "cover-img-url": "封面链接"
-    },
-    "msg": {
-      "error": "操作失败",
-      "success": "操作成功"
     }
   },
   "plan-progress": {
@@ -251,9 +232,7 @@
     "add-new-tip": "有任何进展可以分享么？",
     "send-btn": "发布",
     "msg": {
-      "error": "操作失败",
-      "warning": "请输入有效内容",
-      "success": "操作成功"
+      "warning": "请输入有效内容"
     }
   },
   "dashboard-nav": {
@@ -288,32 +267,6 @@
       "error": "获取数据失败"
     }
   },
-  "news-page": {
-    "page-main-title": "近期动态",
-    "update-at": "更新于 ",
-    "publish-at": "发表于 ",
-    "news-types": {
-      "plan": "计划",
-      "article": "笔记"
-    }
-  },
-  "about-page": {
-    "page-main-title": "关于",
-    "about-tobe": {
-      "title": "你好啊旅行者",
-      "p1": "TOBE 是一个专注个人成长，积累，经验分享的小站。在这纷杂的世界中留出一片空间，静下心来沉淀自己。如果你碰巧发现这里，而且能找到让你感兴趣或是有帮助的东西，那说明你与这里有着美妙的缘分。",
-      "p2": "当然，这里非常欢迎你成为一位分享者。你可以微信联系我注册账号或是获取源码搭建属于自己的 TOBE。"
-    },
-    "contact": {
-      "title": "联系我们",
-      "wechat": "微信：LucienChen_ChenXi",
-      "email": "邮箱：474504303@qq.com",
-      "linkedin": "领英："
-    }
-  },
-  "articles-page": {
-    "page-main-title": "笔记"
-  },
   "article-creation-page": {
     "page-main-title": "创建新的笔记",
     "expand-label": "其他补充信息",
@@ -323,21 +276,10 @@
       "cover-img-url": "封面链接",
       "description": "简述",
       "tag": "标签",
-      "content-protected": "该篇文章只有登录用户才能看到完整内容"
-    },
-    "submit-btn": "保存",
-    "back-btn": "返回",
-    "msg": {
-      "success": "操作成功",
-      "error": "操作失败"
+      "content-protected": "该篇笔记只有登录用户才能看到完整内容"
     }
   },
-  "article-detail-page": {
-    "page-main-title": "编辑笔记"
-  },
   "article-reading-page": {
-    "back-btn": "返回",
-    "relevant-articles": "相关内容",
     "content-protected": "请登录以阅读此文",
     "msg": {
       "error": "加载数据失败"
@@ -352,32 +294,15 @@
       "tag": "标签"
     },
     "msg": {
-      "success": "创建成功",
-      "error": "创建失败",
       "warning": {
         "name-empty": "标题不能为空"
       }
-    },
-    "submit-btn": "保存",
-    "back-btn": "返回"
+    }
   },
   "collection-detail-page": {
     "btn": {
       "add": "新增",
       "delete": "删除"
-    },
-    "msg": {
-      "success": "操作成功",
-      "error": "操作失败"
-    }
-  },
-  "collections-page": {
-    "page-main-title": "合集"
-  },
-  "collections-list-page": {
-    "page-main-title": "合集",
-    "msg": {
-      "error": "加载数据失败"
     }
   },
   "collection-reading-page": {
@@ -396,56 +321,7 @@
       "language": "语言",
       "cover-img-url": "封面链接",
       "tags": "标签"
-    },
-    "msg": {
-      "success": "创建成功",
-      "error": "创建失败"
-    },
-    "submit-btn": "保存",
-    "back-btn": "返回"
-  },
-  "vocabularies-page": {
-    "page-main-title": "词汇",
-    "vocabulary-table": {
-      "label": {
-        "title": "标题",
-        "description": "简述",
-        "createTime": "创建时间",
-        "updateTime": "更新时间",
-        "operation": "操作"
-      }
     }
-  },
-  "tools-list-page": {
-    "page-main-title": "工具",
-    "pomodoro": {
-      "name": "番茄时钟",
-      "desc": "一款基于番茄时间管理理论的闹钟"
-    },
-    "time-converter": {
-      "name": "时间转换工具",
-      "desc": "一款便于使用的时间戳转换工具"
-    }
-  },
-  "tools-pomodoro": {
-    "page-main-title": "番茄时钟",
-    "tip": {
-      "start": "开始一轮工作倒计时"
-    },
-    "btn": {
-      "start": "开始",
-      "pause": "暂停",
-      "reset": "重置"
-    }
-  },
-  "tools-time-converter": {
-    "page-main-title": "时间转换",
-    "curent-timestamp": "当前时间戳（Timestamp）",
-    "tip": ", 点击右侧按键查询当前时间",
-    "timestamp-label": "时间戳(Unix)",
-    "time-label": "本地时间",
-    "timestamp-input-helper": "请输入时间戳",
-    "time-input-helper": "请输入时间"
   },
   "word-dialog": {
     "add": "新增",
@@ -458,10 +334,6 @@
     },
     "save": "保存",
     "back": "返回",
-    "delete": "删除",
-    "msg": {
-      "error": "操作失败",
-      "success": "操作成功"
-    }
+    "delete": "删除"
   }
 }

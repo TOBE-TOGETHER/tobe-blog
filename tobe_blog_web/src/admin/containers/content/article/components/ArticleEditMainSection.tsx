@@ -1,7 +1,9 @@
 import { FormControlLabel, Switch, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { FormPanel, OneRow } from '../../../../../components';
 import { ITagOption } from '../../../../../global/types';
-import { FormPanel, MultipleTagSelecter, OneRow, RichContentEditor, SaveButtonPanel } from '../../../../components';
+import { MultipleTagSelecter, SaveButtonPanel } from '../../../../components';
+import RichContentEditor from './RichContentEditor';
 
 export interface ArticleEditMainSectionProps {
   title: string;
@@ -16,7 +18,6 @@ export interface ArticleEditMainSectionProps {
   setTagValues: (value: ITagOption[]) => void;
   htmlValue: string;
   setHtmlValue: (value: string) => void;
-  textValue: string;
   setTextValue: (value: string) => void;
   onClickPrimaryBtn: () => void;
 }
@@ -62,7 +63,6 @@ export default function ArticleEditMainSection(props: ArticleEditMainSectionProp
         <OneRow>
           <RichContentEditor
             htmlValue={props.htmlValue}
-            textValue={props.textValue}
             setHtmlValue={props.setHtmlValue}
             setTextValue={props.setTextValue}
           />

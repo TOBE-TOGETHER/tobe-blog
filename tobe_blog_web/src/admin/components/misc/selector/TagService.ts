@@ -1,6 +1,5 @@
 import { AxiosPromise } from 'axios';
-
-import { server } from '.';
+import server from '../../../../services/server';
 
 const USER_URI = 'v1/tags';
 

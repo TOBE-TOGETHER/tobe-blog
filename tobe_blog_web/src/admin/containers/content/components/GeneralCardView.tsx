@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
+import { InfiniteScrollList } from '../../../../components';
 import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
-import { InfiniteScrollList } from '../../../components';
 import { GeneralCard } from './GeneralCard';
 
 export default function GeneralCardView(props: {

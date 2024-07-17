@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { PlanService } from '../../../../services';
 import { SaveButtonPanel } from '../../../components';
+import { PlanService } from '../UserContentService.ts';
 import PlanEditMainSection from './components/PlanEditMainSection';
 
 export default function PlanCreationPage() {
@@ -64,13 +64,13 @@ export default function PlanCreationPage() {
       tags: tagValues,
     })
       .then(() => {
-        enqueueSnackbar(t('plan-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.PLANS);
       })
       .catch(() => {
-        enqueueSnackbar(t('plan-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

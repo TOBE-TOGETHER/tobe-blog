@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { WordListPanel } from '../../../../components/common/word/WordListPanel';
 import { Page } from '../../../../components/layout';
-import { IVocabularyDetailDTO, IVocabularyUpdateDTO, ITagOption } from '../../../../global/types';
-import { VocabularyService } from '../../../../services';
+import { ITagOption, IVocabularyDetailDTO, IVocabularyUpdateDTO } from '../../../../global/types';
+import { VocabularyService } from '../UserContentService';
 import ContentEditBar from '../components/ContentEditBar';
 import VOCEditMainSection from './components/VOCEditMainSection';
 
@@ -67,12 +67,12 @@ export default function VOCDetailPage() {
   function handleUpdate(updateDTO: IVocabularyUpdateDTO): void {
     VocabularyService.update(updateDTO)
       .then(() => {
-        enqueueSnackbar(t('vocabulary-detail-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('vocabulary-detail-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

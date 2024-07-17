@@ -1,7 +1,6 @@
 import { AxiosPromise } from 'axios';
-
-import { server } from '.';
-import { IWordCreateDTO, IWordUpdateDTO } from '../global/types';
+import { IWordCreateDTO, IWordUpdateDTO } from '../../../global/types';
+import server from '../../../services/server';
 
 const WORD_URI = 'v1/words';
 

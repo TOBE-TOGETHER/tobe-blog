@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { ArticleService } from '../../../../services';
+import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
 
 export default function ArticleDetailPage() {
@@ -60,13 +60,13 @@ export default function ArticleDetailPage() {
       contentProtected: contentProtected,
     })
       .then(() => {
-        enqueueSnackbar(t('article-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.ARTICLES);
       })
       .catch(() => {
-        enqueueSnackbar(t('article-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });
@@ -75,7 +75,7 @@ export default function ArticleDetailPage() {
   return (
     <Page
       openLoading={false}
-      pageTitle={t('article-detail-page.page-main-title')}
+      pageTitle={t('admin-pages-title.article-edit')}
     >
       <ArticleEditMainSection
         title={title}
@@ -90,7 +90,6 @@ export default function ArticleDetailPage() {
         setContentProtected={setContentProtected}
         htmlValue={htmlValue}
         setHtmlValue={setHtmlValue}
-        textValue={textValue}
         setTextValue={setTextValue}
         onClickPrimaryBtn={saveArticle}
       />

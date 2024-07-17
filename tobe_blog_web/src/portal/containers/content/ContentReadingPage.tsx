@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout } from '../../components';
 
-export function ContentReadingPage(props: { content: IBaseUserContentDTO | null; subTitle?: string; editLinkUrlPrefix: string; children: ReactNode }) {
+export default function ContentReadingPage(props: { content: IBaseUserContentDTO | null; subTitle?: string; editLinkUrlPrefix: string; children: ReactNode }) {
   return (
     <PortalLayout>
       {props.content && (

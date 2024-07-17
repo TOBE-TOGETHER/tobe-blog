@@ -2,10 +2,11 @@ import { Button, Divider, Grid, Paper, TextField, Typography } from '@mui/materi
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FileService, PlanProgressService } from '../../../../../services/index.ts';
 import { InputFileUploadButton } from '../../../../components/index.ts';
+import * as FileService from './FileService.ts';
 import { ImagesPanel } from './ImagesPanel.tsx';
 import PlanProgressItems from './PlanProgressItems.tsx';
+import * as PlanProgressService from './PlanProgressService.ts';
 
 export default function PlanProgressModal(props: { planId: string; viewOnly: boolean }) {
   const { t } = useTranslation();
@@ -49,12 +50,12 @@ export default function PlanProgressModal(props: { planId: string; viewOnly: boo
         setImages([]);
         setImageURLs([]);
         setRefreshCode(new Date().getTime());
-        enqueueSnackbar(t('plan-progress.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('plan-progress.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

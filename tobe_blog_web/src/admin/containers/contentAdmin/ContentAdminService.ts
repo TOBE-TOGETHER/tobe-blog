@@ -1,6 +1,5 @@
 import { AxiosPromise } from 'axios';
-
-import { server } from '.';
+import server from '../../../services/server';
 
 const CONTENT_URI = 'v1/contents';
 const CONTENT_ADMIN_URI = 'v1/content-admin';

@@ -1,6 +1,5 @@
 import { Container, Grid } from '@mui/material';
 import { ReactElement, useState } from 'react';
-
 import { useSearchParams } from 'react-router-dom';
 import { getContentTypeFromPath, getPathFromContentType } from '../../../commons';
 import { EContentType } from '../../../global/enums';

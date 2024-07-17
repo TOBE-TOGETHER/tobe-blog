@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { IPlanInfo, IPlanUpdateDTO, ITagOption } from '../../../../global/types';
-import { PlanService } from '../../../../services';
+import { PlanService } from '../UserContentService.ts';
 import ContentEditBar from '../components/ContentEditBar.tsx';
 import PlanEditMainSection from './components/PlanEditMainSection.tsx';
 import PlanProgressModal from './components/PlanProgressModal.tsx';
@@ -48,12 +48,12 @@ export default function PlanDetailPage() {
   function handlePlanUpdate(updatedPlan: IPlanUpdateDTO): void {
     PlanService.update(updatedPlan)
       .then(() => {
-        enqueueSnackbar(t('plan-detail-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
       })
       .catch(() => {
-        enqueueSnackbar(t('plan-detail-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

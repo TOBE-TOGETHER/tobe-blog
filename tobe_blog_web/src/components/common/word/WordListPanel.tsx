@@ -4,11 +4,12 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IWordGeneralDTO } from '../../../global/types';
-import { PublicDataService, WordService } from '../../../services';
+import * as PublicDataService from '../../../services/PublicDataService';
 import theme from '../../../theme';
 import { WordCreateDialog } from './WordCreateDialog';
 import { WordDetailDialog } from './WordDetailDialog';
 import { WordDisplayDialog } from './WordDisplayDialog';
+import * as WordService from './WordService';
 
 export function WordListPanel(props: { editable: boolean; vocabularyId: string }) {
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ export function WordListPanel(props: { editable: boolean; vocabularyId: string }
           setWords(response.data);
         })
         .catch(() => {
-          enqueueSnackbar(t('word-dialog.msg.error'), {
+          enqueueSnackbar(t('msg.error'), {
             variant: 'error',
           });
         })
@@ -38,14 +39,14 @@ export function WordListPanel(props: { editable: boolean; vocabularyId: string }
   function handleDeleteWord(wordId: number) {
     WordService.deleteWordById(wordId)
       .then(() => {
-        enqueueSnackbar(t('word-dialog.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         loadWordsData(props.vocabularyId || '');
         setOpenedWord(null);
       })
       .catch(() => {
-        enqueueSnackbar(t('word-dialog.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       });

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { ArticleService } from '../../../../services';
+import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
 
 export default function ArticleCreationPage() {
@@ -33,13 +33,13 @@ export default function ArticleCreationPage() {
       contentProtected: contentProtected,
     })
       .then(() => {
-        enqueueSnackbar(t('article-creation-page.msg.success'), {
+        enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
         navigate(URL.ARTICLES);
       })
       .catch(() => {
-        enqueueSnackbar(t('article-creation-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
       })
@@ -64,7 +64,6 @@ export default function ArticleCreationPage() {
         setContentProtected={setContentProtected}
         htmlValue={htmlValue}
         setHtmlValue={setHtmlValue}
-        textValue={textValue}
         setTextValue={setTextValue}
         onClickPrimaryBtn={saveArticle}
       />

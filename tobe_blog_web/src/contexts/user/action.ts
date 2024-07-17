@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ELocalStorageKeys } from '../../global/enums.ts';
-import { AuthService } from '../../services';
+import * as AuthService from '../../services/AuthService.ts';
 import { Action } from '../types';
 
 export async function loginUser(dispatch: React.Dispatch<Action>, signInPayload: any) {
