@@ -5,8 +5,8 @@ import { IDomEditor, IEditorConfig, IToolbarConfig, SlateElement, i18nGetResourc
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { EditorStyle } from '../../../components';
-import theme from '../../../theme';
+import { EditorStyle } from '../../../../../components';
+import theme from '../../../../../theme';
 
 type ImageElement = SlateElement & {
   src: string;
@@ -14,13 +14,6 @@ type ImageElement = SlateElement & {
   url: string;
   href: string;
 };
-
-interface RichContentEditorProps {
-  htmlValue: string;
-  textValue: string;
-  setHtmlValue: (value: string) => void;
-  setTextValue: (value: string) => void;
-}
 
 function getLocale(): 'en' | 'zh-CN' {
   if (localStorage.getItem('i18nextLng') === 'en') {
@@ -30,7 +23,7 @@ function getLocale(): 'en' | 'zh-CN' {
   }
 }
 
-function RichContentEditor(props: RichContentEditorProps) {
+function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (value: string) => void; setTextValue: (value: string) => void }>) {
   const { t } = useTranslation();
   const [editor, setEditor] = useState<IDomEditor | null>(null);
 

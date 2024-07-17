@@ -7,8 +7,8 @@ import { TimeFormat } from '../../../../commons';
 import { PlanProgressModal } from '../../../../components';
 import { IPlanInfo } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { PublicDataService } from '../../../../services';
-import { ContentReadingPage } from '../ContentReadingPage';
+import * as PublicDataService from '../../../../services/PublicDataService.ts';
+import ContentReadingPage from '../ContentReadingPage';
 
 export default function PlanReadingPage() {
   const { t } = useTranslation();

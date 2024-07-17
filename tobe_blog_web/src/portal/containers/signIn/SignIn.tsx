@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../../customization.json';
-import { OneRow } from '../../../admin/components';
+import { OneRow } from '../../../components';
 import { loginUser, useAuthDispatch } from '../../../contexts';
 import { URL } from '../../../routes';
-import { SingleBoxLayout } from '../../components';
+import SingleBoxLayout from '../../components/layout/SingleBoxLayout.tsx';
 
 export default function SignIn() {
   const dispatch = useAuthDispatch();

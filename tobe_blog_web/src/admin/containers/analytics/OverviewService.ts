@@ -1,7 +1,6 @@
 import { AxiosPromise } from 'axios';
-
-import { server } from '.';
-import { EContentType } from '../global/enums.ts';
+import { EContentType } from '../../../global/enums';
+import server from '../../../services/server';
 
 const OVERVIEW_URI = 'v1/analytics';
 

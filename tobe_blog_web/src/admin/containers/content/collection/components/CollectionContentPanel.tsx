@@ -1,9 +1,10 @@
 import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FormPanel } from '../../../../../components';
 import { IRenderTree, ITagOption } from '../../../../../global/types';
-import { TagRelationshipService } from '../../../../../services';
-import { FormPanel, SingleTagSelecter, TreePanel } from '../../../../components';
+import { SingleTagSelecter, TreePanel } from '../../../../components';
+import * as TagRelationshipService from '../TagRelationshipService.ts';
 
 export default function CollectionContentPanel(props: { collectionId: string; loadData: (id: string) => void; treeData: IRenderTree }) {
   const ROOT = 'root';

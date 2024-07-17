@@ -1,30 +1,30 @@
+import { useSnackbar } from 'notistack';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Page } from '../../../components/layout';
 import { EColumnPosition, EOperationName } from '../../../global/enums.ts';
-import { IColumn, IUserData, IOperation } from '../../../global/types';
-import { UserService } from '../../../services';
+import { IColumn, IOperation, IUserData } from '../../../global/types';
+import * as UserService from '../../../services/UserService.ts';
 import { PagedTable } from '../../components';
 
 export default function UsersPage() {
+  const { enqueueSnackbar } = useSnackbar();
   const [current, setCurrent] = useState<number>(0);
   const [size, setSize] = useState<number>(10);
   const [rows, setRows] = useState<IUserData[]>([]);
-  const [openLoading, setOpenLoading] = useState(false);
   const [totalCount, setTotalCount] = useState<number>(0);
   const { t } = useTranslation();
 
   const loadUserData = useCallback((): void => {
-    setOpenLoading(true);
     UserService.getUsers(size, current)
       .then(response => {
         setRows(response.data.records || []);
         setTotalCount(response.data.total);
-        setOpenLoading(true);
       })
-      .catch(() => {})
-      .finally(() => {
-        setOpenLoading(false);
+      .catch(() => {
+        enqueueSnackbar(t('msg.error'), {
+          variant: 'error',
+        });
       });
   }, [current, size]);
 
@@ -64,16 +64,9 @@ export default function UsersPage() {
   ];
 
   function deleteUserDate(id: number | string) {
-    setOpenLoading(true);
     UserService.deleteUser(id)
-      .then(() => {
-        setOpenLoading(true);
-        loadUserData();
-      })
-      .catch(error => console.error(error))
-      .finally(() => {
-        setOpenLoading(false);
-      });
+      .then(() => loadUserData())
+      .catch(() => enqueueSnackbar(t('msg.error'), { variant: 'error' }));
   }
 
   const handleChangeCurrent = (_event: unknown, newPage: number): void => {
@@ -99,7 +92,7 @@ export default function UsersPage() {
   return (
     <Page
       pageTitle={t('user-table.title')}
-      openLoading={openLoading}
+      openLoading={false}
     >
       <PagedTable
         columns={columns}

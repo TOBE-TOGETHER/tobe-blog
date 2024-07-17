@@ -1,5 +1,6 @@
 import PlanProgressModal from '../admin/containers/content/plan/components/PlanProgressModal';
 import { EditorStyle } from './common/EditorStyle';
+import { FormPanel, HalfRow, OneRow, QuarterRow } from './common/FormLayout';
 import InfiniteScrollList from './common/InfiniteScrollList';
 import TagDisplayBar from './common/TagDisplayBar';
 import { WordCreateDialog } from './common/word/WordCreateDialog';
@@ -14,10 +15,14 @@ export {
   AppFooter,
   BasicLayout,
   EditorStyle,
+  FormPanel,
+  HalfRow,
   InfiniteScrollList,
   Loading,
+  OneRow,
   Page,
   PlanProgressModal,
+  QuarterRow,
   SidePanel,
   TagDisplayBar,
   WordCreateDialog,

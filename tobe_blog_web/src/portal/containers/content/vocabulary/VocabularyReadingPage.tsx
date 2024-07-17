@@ -3,11 +3,11 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { WordListPanel } from '../../../../admin/components';
+import { WordListPanel } from '../../../../components/common/word/WordListPanel';
 import { IVocabularyDetailDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { PublicDataService } from '../../../../services';
-import { ContentReadingPage } from '../ContentReadingPage';
+import * as PublicDataService from '../../../../services/PublicDataService';
+import ContentReadingPage from '../ContentReadingPage';
 
 export default function VocabularyReadingPage() {
   const { t } = useTranslation();

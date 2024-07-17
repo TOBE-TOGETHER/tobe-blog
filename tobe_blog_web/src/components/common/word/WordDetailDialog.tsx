@@ -2,7 +2,7 @@ import { Box, Button, Dialog, DialogContent, DialogTitle, Grid, TextField } from
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
 import { IWordGeneralDTO } from '../../../global/types';
-import { WordService } from '../../../services';
+import * as WordService from './WordService';
 
 export function WordDetailDialog(props: { word: IWordGeneralDTO | null; setWord: (word: IWordGeneralDTO | null) => void; loadData: Function; handleDeleteWord: Function }) {
   const { t } = useTranslation();

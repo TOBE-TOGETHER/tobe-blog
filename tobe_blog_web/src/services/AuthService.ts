@@ -1,6 +1,5 @@
 import { AxiosPromise } from 'axios';
-
-import { server } from '.';
+import server from './server.ts';
 
 const AUTH_URI = 'v1/auth';
 const requestOptions = {

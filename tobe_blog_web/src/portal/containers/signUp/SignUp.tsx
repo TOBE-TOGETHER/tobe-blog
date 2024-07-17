@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../../customization.json';
-import { HalfRow, OneRow } from '../../../admin/components/index.ts';
+import { HalfRow, OneRow } from '../../../components';
 import { URL } from '../../../routes';
-import { UserService } from '../../../services';
+import * as UserService from '../../../services/UserService.ts';
 import SingleBoxLayout from '../../components/layout/SingleBoxLayout.tsx';
 
 export default function SignUp() {

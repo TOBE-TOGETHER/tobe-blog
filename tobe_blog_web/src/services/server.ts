@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { AuthService } from '.';
 import { ELocalStorageKeys } from '../global/enums.ts';
 import { URL } from '../routes';
+import * as AuthService from './AuthService.ts';
 
 const server = axios.create({
   baseURL: import.meta.env.VITE_SERVER_ROOT_URL,

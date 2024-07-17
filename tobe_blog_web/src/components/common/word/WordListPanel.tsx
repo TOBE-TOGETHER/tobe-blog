@@ -4,11 +4,12 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IWordGeneralDTO } from '../../../global/types';
-import { PublicDataService, WordService } from '../../../services';
+import * as PublicDataService from '../../../services/PublicDataService';
 import theme from '../../../theme';
 import { WordCreateDialog } from './WordCreateDialog';
 import { WordDetailDialog } from './WordDetailDialog';
 import { WordDisplayDialog } from './WordDisplayDialog';
+import * as WordService from './WordService';
 
 export function WordListPanel(props: { editable: boolean; vocabularyId: string }) {
   const { t } = useTranslation();

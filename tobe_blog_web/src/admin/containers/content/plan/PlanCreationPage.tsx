@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
-import { PlanService } from '../../../../services';
 import { SaveButtonPanel } from '../../../components';
+import { PlanService } from '../UserContentService.ts';
 import PlanEditMainSection from './components/PlanEditMainSection';
 
 export default function PlanCreationPage() {

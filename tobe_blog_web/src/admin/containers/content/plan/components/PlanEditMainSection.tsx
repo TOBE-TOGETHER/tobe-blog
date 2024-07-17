@@ -1,8 +1,9 @@
 import { Grid, SxProps, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { useTranslation } from 'react-i18next';
+import { FormPanel, HalfRow, OneRow } from '../../../../../components';
 import { ITagOption } from '../../../../../global/types';
-import { FormPanel, HalfRow, MultipleTagSelecter, OneRow } from '../../../../components';
+import { MultipleTagSelecter } from '../../../../components';
 
 interface IPlanEditMainSectionProps {
   title: string | null;
