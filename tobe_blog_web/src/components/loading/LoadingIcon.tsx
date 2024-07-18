@@ -3,14 +3,14 @@ export default function LoadingIcon() {
     <svg
       width="100"
       height="150"
-      viewBox="0 0 100 150"
+      viewBox="0 0 70 120"
       xmlns="http://www.w3.org/2000/svg"
-      color={'red'}
     >
       <text
         x="10"
         y="40"
         fontSize="30"
+        fontFamily="fantasy, Times New Roman, San Francisco, sans-serif"
         fill="#3c4770"
       >
         T
@@ -29,6 +29,7 @@ export default function LoadingIcon() {
         x="40"
         y="60"
         fontSize="30"
+        fontFamily="fantasy, Times New Roman, San Francisco, sans-serif"
         fill="#3c4770"
       >
         O
@@ -47,6 +48,7 @@ export default function LoadingIcon() {
         x="10"
         y="80"
         fontSize="30"
+        fontFamily="fantasy, Times New Roman, San Francisco, sans-serif"
         fill="#3c4770"
       >
         B
@@ -65,6 +67,7 @@ export default function LoadingIcon() {
         x="40"
         y="100"
         fontSize="30"
+        fontFamily="fantasy, Times New Roman, San Francisco, sans-serif"
         fill="#3c4770"
       >
         E
