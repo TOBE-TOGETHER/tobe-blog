@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tobe.blog.content.mapper.ArticleMapper">
-    <select id="pageDTOsByUserId" resultMap="article_result_map">
+    <select id="pageDTOsByUserId" resultMap="article_results_map">
         <include refid="com.tobe.blog.content.mapper.BaseContentMapper.base_content_select_by_filter"></include>
     </select>
 
@@ -12,5 +12,13 @@
     <resultMap id="article_result_map"
         extends="com.tobe.blog.content.mapper.BaseContentMapper.general_dto_result_map" 
         type="com.tobe.blog.beans.dto.content.ArticleDTO">
+    </resultMap>
+
+    <resultMap id="article_results_map"
+        extends="com.tobe.blog.content.mapper.BaseContentMapper.general_dto_result_map" 
+        type="com.tobe.blog.beans.dto.content.ArticleDTO">
+        <!--Considering the performance when the contents are very large, only return the description values-->
+        <result property="content" column="description" />
+        <result property="description" column="description" />
     </resultMap>
 </mapper>

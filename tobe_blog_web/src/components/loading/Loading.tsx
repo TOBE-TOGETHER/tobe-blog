@@ -1,21 +1,19 @@
-import { Backdrop, CircularProgress } from '@mui/material';
-
+import { Backdrop } from '@mui/material';
+import LoadingIcon from './LoadingIcon';
 interface Props {
   open: boolean | undefined;
 }
 
-/**
- * Loading component, used when process a async request
- *
- * ’加载中‘组件，
- */
-export default function Loading(props: Props) {
+export default function Loading(props: Readonly<Props>) {
   return (
     <Backdrop
-      sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
+      sx={{
+        color: theme => theme.palette.primary.light,
+        zIndex: theme => theme.zIndex.drawer + 1,
+      }}
       open={props.open || false}
     >
-      <CircularProgress color="inherit" />
+      <LoadingIcon />
     </Backdrop>
   );
 }

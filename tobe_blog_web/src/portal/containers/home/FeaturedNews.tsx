@@ -22,7 +22,6 @@ export default function FeaturedNews(props: {
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
   const [newsData, setNewsData] = useState<INewsDTO[]>([]);
   const [current, setCurrent] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);

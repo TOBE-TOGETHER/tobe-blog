@@ -11,8 +11,9 @@ import VOCEditMainSection from './components/VOCEditMainSection';
 
 export default function VOCCreationPage() {
   const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState<boolean>(false);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [language, setLanguage] = useState<string | null>(null);
@@ -20,6 +21,7 @@ export default function VOCCreationPage() {
   const [tagValues, setTagValues] = useState<ITagOption[]>([]);
 
   function handleCreation(): void {
+    setLoading(true);
     VocabularyService.create({
       title: title,
       description: description,
@@ -37,12 +39,13 @@ export default function VOCCreationPage() {
         enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   return (
     <Page
-      openLoading={false}
+      openLoading={loading}
       pageTitle={t('vocabulary-creation-page.page-main-title')}
     >
       <VOCEditMainSection

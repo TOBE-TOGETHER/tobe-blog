@@ -13,6 +13,7 @@ export default function CollectionCreationPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
   const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [title, setTitle] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
@@ -29,6 +30,7 @@ export default function CollectionCreationPage() {
   };
 
   function handleCreation(): void {
+    setLoading(true);
     CollectionService.create({
       title: title,
       description: description,
@@ -45,12 +47,13 @@ export default function CollectionCreationPage() {
         enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   return (
     <Page
-      openLoading={false}
+      openLoading={loading}
       pageTitle={t('collection-creation-page.page-main-title')}
     >
       <ContentEditMainSection

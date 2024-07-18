@@ -12,7 +12,7 @@ export default function ArticleCreationPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const [openLoading, setOpenLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [htmlValue, setHtmlValue] = useState<string>('');
   const [textValue, setTextValue] = useState<string>('');
   const [title, setTitle] = useState<string>('');
@@ -22,7 +22,7 @@ export default function ArticleCreationPage() {
   const [contentProtected, setContentProtected] = useState<boolean>(false);
 
   function saveArticle(): void {
-    setOpenLoading(true);
+    setLoading(true);
     ArticleService.create({
       title: title,
       subTitle: subTitle,
@@ -43,12 +43,12 @@ export default function ArticleCreationPage() {
           variant: 'error',
         });
       })
-      .finally(() => setOpenLoading(false));
+      .finally(() => setLoading(false));
   }
 
   return (
     <Page
-      openLoading={openLoading}
+      openLoading={loading}
       pageTitle={t('article-creation-page.page-main-title')}
     >
       <ArticleEditMainSection

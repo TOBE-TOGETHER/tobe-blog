@@ -13,6 +13,7 @@ import VOCEditMainSection from './components/VOCEditMainSection';
 export default function VOCDetailPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
   const [editable, setEditable] = useState<boolean>(false);
   const [vocabulary, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
@@ -24,6 +25,7 @@ export default function VOCDetailPage() {
 
   const loadData = useCallback(
     (vocabularyId: string): void => {
+      setLoading(true);
       VocabularyService.getById(vocabularyId)
         .then(response => {
           setVocabulary(response.data);
@@ -37,7 +39,8 @@ export default function VOCDetailPage() {
           enqueueSnackbar(t('vocabulary-detail-page.msg.error'), {
             variant: 'error',
           });
-        });
+        })
+        .finally(() => setLoading(false));
     },
     [enqueueSnackbar, t]
   );
@@ -65,6 +68,7 @@ export default function VOCDetailPage() {
   };
 
   function handleUpdate(updateDTO: IVocabularyUpdateDTO): void {
+    setLoading(true);
     VocabularyService.update(updateDTO)
       .then(() => {
         enqueueSnackbar(t('msg.success'), {
@@ -75,12 +79,13 @@ export default function VOCDetailPage() {
         enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   return vocabulary ? (
     <Page
-      openLoading={false}
+      openLoading={loading}
       pageTitle={title || ''}
     >
       <ContentEditBar
