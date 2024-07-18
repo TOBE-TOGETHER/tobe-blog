@@ -10,8 +10,8 @@ export default function LoadingIcon() {
         x="10"
         y="40"
         fontSize="30"
-        fontFamily="fantasy, Times New Roman, San Francisco, sans-serif"
-        fill="#3c4770"
+        fontFamily="Times New Roman, San Francisco, PingFang SC"
+        fill="rgb(60, 71, 112)"
       >
         T
         <animate
@@ -29,8 +29,8 @@ export default function LoadingIcon() {
         x="40"
         y="60"
         fontSize="30"
-        fontFamily="fantasy, Times New Roman, San Francisco, sans-serif"
-        fill="#3c4770"
+        fontFamily="Times New Roman, San Francisco, PingFang SC"
+        fill="rgb(60, 71, 112)"
       >
         O
         <animate
@@ -48,8 +48,8 @@ export default function LoadingIcon() {
         x="10"
         y="80"
         fontSize="30"
-        fontFamily="fantasy, Times New Roman, San Francisco, sans-serif"
-        fill="#3c4770"
+        fontFamily="Times New Roman, San Francisco, PingFang SC"
+        fill="rgb(60, 71, 112)"
       >
         B
         <animate
@@ -67,8 +67,8 @@ export default function LoadingIcon() {
         x="40"
         y="100"
         fontSize="30"
-        fontFamily="fantasy, Times New Roman, San Francisco, sans-serif"
-        fill="#3c4770"
+        fontFamily="Times New Roman, San Francisco, PingFang SC"
+        fill="rgb(60, 71, 112)"
       >
         E
         <animate

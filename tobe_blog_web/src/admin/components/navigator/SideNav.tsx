@@ -119,7 +119,7 @@ export default function SideNav(props: SideNavProps) {
             alignItems: 'center',
             cursor: 'pointer',
             fontSize: 40,
-            fontFamily: 'fantasy, Times New Roman, San Francisco, sans-serif'
+            fontFamily: 'Times New Roman, San Francisco, sans-serif',
           }}
         >
           <StrokeText text={config.projectName} />
