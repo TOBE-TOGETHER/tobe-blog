@@ -12,6 +12,7 @@ export default function ArticleDetailPage() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const [htmlValue, setHtmlValue] = useState<string>('');
   const [textValue, setTextValue] = useState<string>('');
@@ -24,6 +25,7 @@ export default function ArticleDetailPage() {
     if (!id) {
       return window.history.back();
     }
+    setLoading(true);
     ArticleService.getById(id)
       .then(response => {
         setHtmlValue(response.data.content);
@@ -37,7 +39,8 @@ export default function ArticleDetailPage() {
         enqueueSnackbar(t('article-creation-page.msg.error'), {
           variant: 'error',
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }, [id, enqueueSnackbar, t]);
 
   useEffect(() => loadData(), [loadData]);
@@ -49,6 +52,7 @@ export default function ArticleDetailPage() {
     if (!title) {
       return;
     }
+    setLoading(true);
     ArticleService.update({
       id: id,
       title: title,
@@ -69,12 +73,13 @@ export default function ArticleDetailPage() {
         enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   return (
     <Page
-      openLoading={false}
+      openLoading={loading}
       pageTitle={t('admin-pages-title.article-edit')}
     >
       <ArticleEditMainSection

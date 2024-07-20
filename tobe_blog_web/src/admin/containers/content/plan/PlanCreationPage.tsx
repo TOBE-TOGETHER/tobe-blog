@@ -11,9 +11,10 @@ import PlanEditMainSection from './components/PlanEditMainSection';
 
 export default function PlanCreationPage() {
   const { t } = useTranslation();
-  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
@@ -55,6 +56,7 @@ export default function PlanCreationPage() {
   }
 
   function handlePlanCreation(): void {
+    setLoading(true);
     PlanService.create({
       title: title,
       description: description,
@@ -73,12 +75,13 @@ export default function PlanCreationPage() {
         enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   return (
     <Page
-      openLoading={false}
+      openLoading={loading}
       pageTitle={t('plan-creation-page.form-title')}
     >
       <PlanEditMainSection

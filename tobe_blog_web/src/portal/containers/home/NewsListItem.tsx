@@ -89,12 +89,38 @@ export default function NewsListItem(props: {
         container
         item
         sx={{
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          overflow: 'hidden',
+          position: 'relative',
+          zIndex: 0,
         }}
         xs={12}
       >
         <TagDisplayBar tags={props.tags} />
-        {props.isRecommended && <TagDisplayBar tags={[{ label: 'Recommended', value: 'recommended' }]} />}
+        {props.isRecommended && (
+          <Typography
+            alignContent="end"
+            color="primary"
+          >
+            RECOMMEND
+          </Typography>
+        )}
+        {props.isRecommended && (
+          <Grid
+            item
+            sx={{
+              top: '-10px',
+              width: '100px',
+              zIndex: '-1',
+              height: '100px',
+              right: '-80px',
+              opacity: '0.12',
+              position: 'absolute',
+              transform: 'rotate(45deg)',
+              background: 'blue',
+            }}
+          />
+        )}
       </Grid>
     </Grid>
   );

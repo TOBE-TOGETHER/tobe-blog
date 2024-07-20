@@ -15,7 +15,7 @@ export default function CollectionDetailPage() {
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
   const [editable, setEditable] = useState<boolean>(false);
-  const [openLoading, setOpenLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [collection, setCollections] = useState<ICollectionDTO | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
@@ -41,6 +41,7 @@ export default function CollectionDetailPage() {
           };
         });
       }
+      setLoading(true);
       CollectionService.getById(id)
         .then(response => {
           setCollections(response.data);
@@ -55,7 +56,8 @@ export default function CollectionDetailPage() {
           enqueueSnackbar(t('msg.error'), {
             variant: 'error',
           });
-        });
+        })
+        .finally(() => setLoading(false));
     },
     [treeData, t, enqueueSnackbar]
   );
@@ -85,7 +87,7 @@ export default function CollectionDetailPage() {
   };
 
   function handleUpdate(target: ICollectionUpdateDTO): void {
-    setOpenLoading(true);
+    setLoading(true);
     CollectionService.update(target)
       .then(() => {
         enqueueSnackbar(t('msg.success'), {
@@ -97,12 +99,12 @@ export default function CollectionDetailPage() {
           variant: 'error',
         });
       })
-      .finally(() => setOpenLoading(false));
+      .finally(() => setLoading(false));
   }
 
   return collection ? (
     <Page
-      openLoading={openLoading}
+      openLoading={loading}
       pageTitle={title || ''}
     >
       <ContentEditBar

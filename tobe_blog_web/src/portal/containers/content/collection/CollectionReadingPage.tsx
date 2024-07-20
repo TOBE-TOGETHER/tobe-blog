@@ -81,6 +81,7 @@ export default function CollectionReadingPage() {
             <Grid
               container
               flexDirection="row"
+              key={`row-${n.label}`}
             >
               {eles}
             </Grid>

@@ -1,5 +1,6 @@
 import { Container, Grid } from '@mui/material';
 import { ReactNode } from 'react';
+import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout } from '../../components';
 
@@ -20,6 +21,7 @@ export default function ContentReadingPage(props: { content: IBaseUserContentDTO
           pb: 2,
         }}
       >
+        <Loading open={props.content ? false : true} />
         <Grid container>
           {props.content && (
             <ContentPageMetaBar

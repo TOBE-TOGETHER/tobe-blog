@@ -13,6 +13,7 @@ export default function PlanDetailPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
+  const [loading, setLoading] = useState<boolean>(false);
   const [editable, setEditable] = useState<boolean>(false);
   const [plan, setPlan] = useState<IPlanInfo | null>(null);
   const [title, setTitle] = useState<string | null>(null);
@@ -24,6 +25,7 @@ export default function PlanDetailPage() {
 
   const loadData = useCallback(
     (id: string): void => {
+      setLoading(true);
       PlanService.getById(id)
         .then(response => {
           setPlan(response.data);
@@ -35,10 +37,11 @@ export default function PlanDetailPage() {
           setTagValues(response.data.tags);
         })
         .catch(() => {
-          enqueueSnackbar(t('plan-detail-page.msg.error'), {
+          enqueueSnackbar(t('msg.error'), {
             variant: 'error',
           });
-        });
+        })
+        .finally(() => setLoading(false));
     },
     [enqueueSnackbar, t]
   );
@@ -46,6 +49,7 @@ export default function PlanDetailPage() {
   useEffect(() => loadData(id || ''), [loadData, id]);
 
   function handlePlanUpdate(updatedPlan: IPlanUpdateDTO): void {
+    setLoading(true);
     PlanService.update(updatedPlan)
       .then(() => {
         enqueueSnackbar(t('msg.success'), {
@@ -56,7 +60,8 @@ export default function PlanDetailPage() {
         enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
-      });
+      })
+      .finally(() => setLoading(false));
   }
 
   const handleEditableChange = () => {
@@ -82,7 +87,7 @@ export default function PlanDetailPage() {
 
   return plan ? (
     <Page
-      openLoading={false}
+      openLoading={loading}
       pageTitle={title || ''}
     >
       <ContentEditBar
