@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class ViewCountSinkingJob {
+public class ViewAndLikeCountSinkingJob {
 
     private final ContentGeneralInfoService contentGeneralInfoService;
     private final CacheUtil cacheUtil;
@@ -37,9 +37,10 @@ public class ViewCountSinkingJob {
             try {
                 Long increasedCount = Long.valueOf(String.valueOf(cacheUtil.hGet(typeKey, id)));
                 contentGeneralInfoService.sinkViewCountToDB(typeKey, id, increasedCount);
-                cacheUtil.hDel(typeKey, id);
             } catch (Exception ex) {
                 log.error(String.format("Error happens when sink the %s count to DB for content id: %s", typeKey, id), ex);
+            } finally {
+                cacheUtil.hDel(typeKey, id);
             }
         });
     }

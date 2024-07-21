@@ -1,5 +1,4 @@
-import moment from 'moment';
-import 'moment/locale/zh-cn.js';
+import moment from 'moment/min/moment-with-locales';
 
 function getLocale(): 'en' | 'zh-cn' {
   if (localStorage.getItem('i18nextLng') === 'en') {

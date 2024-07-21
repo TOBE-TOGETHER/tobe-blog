@@ -35,6 +35,7 @@ export enum ELocalStorageKeys {
   ACCESS_TOKEN = 'accessToken',
   REFRESH_TOKEN = 'refreshToken',
   AUTHORITIES = 'authorities',
+  LIKED_CONTENTS = 'likedContents',
 }
 
 export enum EOperationName {

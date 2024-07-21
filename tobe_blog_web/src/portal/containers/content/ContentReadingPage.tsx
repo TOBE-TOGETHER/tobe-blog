@@ -9,6 +9,7 @@ export default function ContentReadingPage(props: { content: IBaseUserContentDTO
     <PortalLayout>
       {props.content && (
         <ContentBanner
+          contentId={props.content.id}
           title={props.content.title}
           subTitle={props.subTitle}
           coverImgUrl={props.content.coverImgUrl}
@@ -26,9 +27,10 @@ export default function ContentReadingPage(props: { content: IBaseUserContentDTO
           {props.content && (
             <ContentPageMetaBar
               ownerId={props.content.ownerId}
-              authorName={props.content.ownerName}
+              ownerName={props.content.ownerName}
               publishTime={props.content.publishTime}
               viewCount={props.content.viewCount}
+              likeCount={props.content.likeCount}
               editLinkUrl={props.editLinkUrlPrefix.replace(':id', props.content.id)}
             />
           )}

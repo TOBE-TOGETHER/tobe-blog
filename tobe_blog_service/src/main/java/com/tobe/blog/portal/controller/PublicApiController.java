@@ -10,6 +10,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +37,14 @@ import com.tobe.blog.content.service.impl.VOCService;
 import com.tobe.blog.content.service.impl.WordService;
 import com.tobe.blog.core.service.UserService;
 import com.tobe.blog.core.utils.CacheUtil;
+import com.tobe.blog.core.utils.IpUtil;
 import com.tobe.blog.portal.service.PublicApiService;
 
 import io.jsonwebtoken.lang.Collections;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 
 @Slf4j
 @RestController
@@ -109,6 +113,12 @@ public class PublicApiController {
         return ResponseEntity.ok(wordService.getWordsByVOCId(id));
     }
 
+    @PostMapping("/like-content/{id}")
+    public ResponseEntity<Boolean> likeContent(@PathVariable(value = "id") String id, HttpServletRequest request) {
+        final String ip = IpUtil.getClientIpAddress(request);
+        return ResponseEntity.ok(publicApiService.likeContent(ip, id));
+    }
+    
     @GetMapping("/full-profile/{id}")
     public ResponseEntity<UserFullProfileDTO> getUserFullProfile(@PathVariable long id) {
         UserFullProfileDTO result = userService.getUserFullProfile(id);

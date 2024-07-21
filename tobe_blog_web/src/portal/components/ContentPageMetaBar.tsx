@@ -1,20 +1,10 @@
-import {
-  Grid,
-  Link,
-  Typography,
-} from '@mui/material';
-import { useAuthState } from '../../contexts';
+import { Grid, Link, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../commons';
+import { useAuthState } from '../../contexts';
 import { URL } from '../../routes';
 
-export default function ContentPageMetaBar(props: {
-  authorName: string;
-  ownerId: number | string;
-  publishTime: string;
-  viewCount: number;
-  editLinkUrl: string;
-}) {
+export default function ContentPageMetaBar(props: { ownerName: string; ownerId: number | string; publishTime: string; viewCount: number; likeCount: number; editLinkUrl: string }) {
   const { t } = useTranslation();
   const authState = useAuthState();
   return (
@@ -35,28 +25,24 @@ export default function ContentPageMetaBar(props: {
           target="blank"
           color="text.secondary"
         >
-          {props.authorName}
+          {props.ownerName}
         </Link>{' '}
-        · {TimeFormat.dateAndTimeFormat(props.publishTime)} ·{' '}
-        {t('components.meta-bar.view')} {props.viewCount}
+        · {TimeFormat.briefDateFormat(props.publishTime)}· {t('components.meta-bar.view')} {props.viewCount}· {t('components.meta-bar.like')} {props.likeCount}
       </Typography>
-      {authState?.user?.id ===
-        (typeof props.ownerId === 'string'
-          ? Number.parseInt(props.ownerId)
-          : props.ownerId) && (
-          <Link
-            href={props.editLinkUrl}
-            sx={{ flexGrow: 0 }}
+      {authState?.user?.id === (typeof props.ownerId === 'string' ? Number.parseInt(props.ownerId) : props.ownerId) && (
+        <Link
+          href={props.editLinkUrl}
+          sx={{ flexGrow: 0 }}
+        >
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ flexGrow: 1 }}
           >
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ flexGrow: 1 }}
-            >
-              {t('components.meta-bar.edit-btn')}
-            </Typography>
-          </Link>
-        )}
+            {t('components.meta-bar.edit-btn')}
+          </Typography>
+        </Link>
+      )}
     </Grid>
   );
 }

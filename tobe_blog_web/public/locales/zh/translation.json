@@ -37,7 +37,8 @@
       }
     },
     "meta-bar": {
-      "view": "阅读量",
+      "view": "阅读",
+      "like": "点赞",
       "edit-btn": "编辑"
     },
     "author-panel": {
@@ -59,7 +60,8 @@
     "plans": "计划",
     "articles": "笔记",
     "vocabularies": "词汇",
-    "view-count": "阅读量",
+    "view-count": "阅读",
+    "like-count": "点赞",
     "collections": "合集",
     "end-line": "实在是没有了。。。",
     "load-more": "加载更多",

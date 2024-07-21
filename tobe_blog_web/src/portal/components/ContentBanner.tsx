@@ -1,9 +1,10 @@
 import { Container, Grid, Typography } from '@mui/material';
 import { TagDisplayBar } from '../../components';
 import { ITagOption } from '../../global/types';
+import ContentLikeButton from './ContentLikeButton';
 import ContentPageBreadcrumbsBar from './ContentPageBreadcrumbsBar';
 
-export default function ContentBanner(props: { title: string; subTitle?: string; coverImgUrl?: string; tags: ITagOption[] }) {
+export default function ContentBanner(props: { contentId: string; title: string; subTitle?: string; coverImgUrl?: string; tags: ITagOption[] }) {
   return (
     <Grid
       container
@@ -23,7 +24,7 @@ export default function ContentBanner(props: { title: string; subTitle?: string;
         overflow: 'hidden',
       }}
     >
-      <Container sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Container sx={{ position: 'relative', display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'space-between' }}>
         <Grid
           item
           container
@@ -55,6 +56,12 @@ export default function ContentBanner(props: { title: string; subTitle?: string;
         <Grid item>
           <TagDisplayBar tags={props.tags} />
           <ContentPageBreadcrumbsBar />
+        </Grid>
+        <Grid
+          item
+          sx={{ position: 'absolute', mr: 2, right: 2, bottom: 0.5 }}
+        >
+          <ContentLikeButton contentId={props.contentId} />
         </Grid>
       </Container>
     </Grid>

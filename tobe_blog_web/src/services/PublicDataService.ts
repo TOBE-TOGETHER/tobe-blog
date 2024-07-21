@@ -61,3 +61,7 @@ export function getTop5ActiveUsers() {
 export function getBySrcIdAndFileType(srcId: string, fileType: string) {
   return server.get(`/${API_DATA_URI}/files?srcId=${srcId}&fileType=${fileType}`);
 }
+
+export function likeContent(contentId: string) {
+  return server.post(`/${API_DATA_URI}/like-content/${contentId}`);
+}

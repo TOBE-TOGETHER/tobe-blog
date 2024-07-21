@@ -8,11 +8,12 @@ import TagDisplayBar from './TagDisplayBar';
 
 export default function NewsListItem(props: {
   owner: string;
-  ownerId: number;
+  ownerId: number | string;
   title: string;
   description: string;
   publishTime: string | null;
   viewCount: number;
+  likeCount: number;
   isRecommended?: boolean;
   tags: ITagOption[];
   onClick: () => void;
@@ -82,7 +83,7 @@ export default function NewsListItem(props: {
           >
             {props.owner}
           </Link>{' '}
-          · {TimeFormat.briefDateFormat(props.publishTime)} · {t('home-page.view-count')} {props.viewCount}
+          · {TimeFormat.briefDateFormat(props.publishTime)} · {t('home-page.view-count')} {props.viewCount} · {t('home-page.like-count')} {props.likeCount}
         </Typography>
       </Grid>
       <Grid

@@ -38,6 +38,7 @@
     },
     "meta-bar": {
       "view": "View",
+      "like": "Like",
       "edit-btn": "Edit"
     },
     "author-panel": {
@@ -61,6 +62,7 @@
     "vocabularies": "Vocabularies",
     "collections": "Collections",
     "view-count": "View",
+    "like-count": "Like",
     "end-line": "No more content",
     "load-more": "Load more",
     "no-content": "No available content",
