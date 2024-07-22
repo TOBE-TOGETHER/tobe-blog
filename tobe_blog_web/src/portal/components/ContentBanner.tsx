@@ -4,7 +4,7 @@ import { ITagOption } from '../../global/types';
 import ContentLikeButton from './ContentLikeButton';
 import ContentPageBreadcrumbsBar from './ContentPageBreadcrumbsBar';
 
-export default function ContentBanner(props: { contentId: string; title: string; subTitle?: string; coverImgUrl?: string; tags: ITagOption[] }) {
+export default function ContentBanner(props: Readonly<{ contentId: string; title: string; subTitle?: string; coverImgUrl?: string; tags: ITagOption[] }>) {
   return (
     <Grid
       container

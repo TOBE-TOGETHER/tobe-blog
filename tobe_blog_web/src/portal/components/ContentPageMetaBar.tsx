@@ -4,7 +4,9 @@ import { TimeFormat } from '../../commons';
 import { useAuthState } from '../../contexts';
 import { URL } from '../../routes';
 
-export default function ContentPageMetaBar(props: { ownerName: string; ownerId: number | string; publishTime: string; viewCount: number; likeCount: number; editLinkUrl: string }) {
+export default function ContentPageMetaBar(
+  props: Readonly<{ ownerName: string; ownerId: number | string; publishTime: string; viewCount: number; likeCount: number; editLinkUrl: string }>
+) {
   const { t } = useTranslation();
   const authState = useAuthState();
   return (
