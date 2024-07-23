@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { getPathFromContentType } from '../../../commons';
 import { EContentType } from '../../../global/enums';
-import { INewsDTO } from '../../../global/types';
+import { IBaseUserContentDTO } from '../../../global/types';
 import * as PublicDataService from '../../../services/PublicDataService.ts';
 import NewsListItem from './NewsListItem';
 
@@ -22,23 +22,26 @@ export default function FeaturedNews(props: {
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [newsData, setNewsData] = useState<INewsDTO[]>([]);
+  const [newsData, setNewsData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
 
-  const loadNews = useCallback((_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: string[], _newsData: INewsDTO[], _ownerId: string): void => {
-    PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId)
-      .then(response => {
-        if (_loadType === LoadType.Append) {
-          setNewsData(_newsData.concat(response.data.records));
-        } else {
-          setNewsData(response.data.records);
-        }
-        setCurrent(response.data.current);
-        setTotalPage(response.data.pages);
-      })
-      .catch(() => {});
-  }, []);
+  const loadNews = useCallback(
+    (_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: string[], _newsData: IBaseUserContentDTO[], _ownerId: string): void => {
+      PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId)
+        .then(response => {
+          if (_loadType === LoadType.Append) {
+            setNewsData(_newsData.concat(response.data.records));
+          } else {
+            setNewsData(response.data.records);
+          }
+          setCurrent(response.data.current);
+          setTotalPage(response.data.pages);
+        })
+        .catch(() => {});
+    },
+    []
+  );
 
   // based on current filters and load more data
   const handleLoadMoreRecords = (): void => {
@@ -115,6 +118,7 @@ export default function FeaturedNews(props: {
               description={n.description}
               publishTime={n.publishTime}
               viewCount={n.viewCount}
+              likeCount={n.likeCount}
               tags={n.tags}
               onClick={() => navigate(`/news/${getPathFromContentType(n.contentType)}/${n.id}`)}
             />

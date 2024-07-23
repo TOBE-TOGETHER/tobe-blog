@@ -187,7 +187,7 @@ const UserContentAnalyticsPanel = (props: { data: IUserContentAnalyticsDTO; link
           link={props.link}
         />
         <StandardSmallWidget
-          value={(props.data.totalViewCount / 1000).toFixed(1)}
+          value={(props.data.totalLikeCount / 1000).toFixed(1)}
           label={t('analytics-page.content.like-count')}
           link={props.link}
         />
