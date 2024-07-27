@@ -11,13 +11,13 @@ export default function SingleBoxLayout(props: {
   return (
     <Grid container sx={{
       width: '100%', 
-      height: '100vh', 
+      minHeight: '100vh', 
       position: 'relative',
       background: `linear-gradient(to right top, rgba(99, 107, 140, 0.4) 10%, 50%, rgb(224, 202, 179, 0.4))70%, 90%`  }}>
       <Container
         component="main"
         maxWidth="lg"
-        sx={{ pb: '2vh', pt: { xs: '20vh', sm: '15vh', md: '10vh'}, height: '100vh', position: 'relative', overflow: 'hidden'}}
+        sx={{ pb: '2vh', pt: { xs: '15vh', sm: '15vh', md: '10vh'}, minHeight: '100vh', position: 'relative', overflow: 'hidden'}}
       >
         <Loading open={props.openLoading} />
         <Paper
@@ -27,7 +27,7 @@ export default function SingleBoxLayout(props: {
             position: 'relative',
             my: { xs: 3, md: 3 },
             p: { xs: 2, md: 3 },
-            height: { md: '60vh', sm: 'none'} ,
+            height: { md: '500px', sm: 'none'} ,
             display: 'flex',
             alignItems: 'center',
             borderRadius: 4,
