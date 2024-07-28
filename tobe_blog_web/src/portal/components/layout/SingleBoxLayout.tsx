@@ -36,7 +36,7 @@ export default function SingleBoxLayout(props: {
           }}
         >
           <Grid item container sm={6} md={6} lg={6} xl={6} sx={{ height: '100%', width: '100%', display: {xs: 'none', sm: 'flex', md: 'flex'}}}>
-            <img src="images/login.png" width='100%'></img>
+            <img src='images/login.png' alt='login-img' width='100%'></img>
           </Grid>
           <Grid item container xs={12} sm={6} md={6} lg={6} xl={6} sx={{height: '100%'}} justifyContent='center' alignItems='center'>
             <Typography
