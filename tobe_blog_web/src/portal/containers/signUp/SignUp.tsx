@@ -58,7 +58,7 @@ export default function SignUp() {
       return false;
     }
     // validate password length
-    let passwordLength = data.get('password')?.toString().length || 0;
+    let passwordLength = data.get('password')?.toString().length ?? 0;
     if (passwordLength < 6 || passwordLength > 64) {
       warn('sign-up.msg.warning.invalid-password-length');
       return false;

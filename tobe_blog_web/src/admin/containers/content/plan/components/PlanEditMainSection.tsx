@@ -22,7 +22,7 @@ interface IPlanEditMainSectionProps {
   sx?: SxProps;
 }
 
-export default function PlanEditMainSection(props: IPlanEditMainSectionProps) {
+export default function PlanEditMainSection(props: Readonly<IPlanEditMainSectionProps>) {
   const { t } = useTranslation();
   return (
     <FormPanel sx={{ mt: 1, ...props.sx }}>

@@ -4,7 +4,7 @@ import Loading from '../../../components/loading/Loading';
 import { IColumn, IOperation } from '../../../global/types';
 import { getButtonByOperationName } from './TableButton';
 
-interface PagedTableProps {
+interface IPagedTableProps {
   openLoading?: boolean;
   readonly columns: IColumn[];
   rows: any[] | [];
@@ -17,7 +17,7 @@ interface PagedTableProps {
   sx?: any;
 }
 
-export default function PagedTable(props: PagedTableProps) {
+export default function PagedTable(props: Readonly<IPagedTableProps>) {
   function generateBtn(operation: IOperation, index: number, row: any): ReactNode {
     return !operation?.hide?.call(null, row) && getButtonByOperationName(operation.name, () => operation.onClick(row.id, row), `${operation.name}_${index}`)
   }

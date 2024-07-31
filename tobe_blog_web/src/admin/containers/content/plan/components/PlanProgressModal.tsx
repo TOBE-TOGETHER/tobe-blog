@@ -8,7 +8,7 @@ import { ImagesPanel } from './ImagesPanel.tsx';
 import PlanProgressItems from './PlanProgressItems.tsx';
 import * as PlanProgressService from './PlanProgressService.ts';
 
-export default function PlanProgressModal(props: { planId: string; viewOnly: boolean }) {
+export default function PlanProgressModal(props: Readonly<{ planId: string, viewOnly: boolean }>) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [newProgress, setNewProgress] = useState<string>('');

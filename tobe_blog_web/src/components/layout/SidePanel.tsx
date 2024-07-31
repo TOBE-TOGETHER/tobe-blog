@@ -1,7 +1,7 @@
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import { Grid, Link, Paper, Typography } from '@mui/material';
 
-export default function SidePanel(props: { title: string; readMoreUrl?: string; children: any }) {
+export default function SidePanel(props: Readonly<{ title: string, readMoreUrl?: string, children: any }>) {
   return (
     <Paper sx={{ p: 1, borderRadius: 4 }}>
       <Grid

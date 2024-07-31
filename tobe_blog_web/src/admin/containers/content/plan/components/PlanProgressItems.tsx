@@ -7,7 +7,7 @@ import { IPlanProgress } from '../../../../../global/types.ts';
 import * as PublicDataService from '../../../../../services/PublicDataService.ts';
 import PlanProgressItem from './PlanProgressItem.tsx';
 
-export default function PlanProgressItems(props: { planId: string; viewOnly: boolean; refreshCode: number }) {
+export default function PlanProgressItems(props: Readonly<{ planId: string, viewOnly: boolean, refreshCode: number }>) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const DEFAULT_PAGE_SIZE: number = 6;

@@ -4,12 +4,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import EditIcon from "@mui/icons-material/Edit";
 import { MouseEventHandler } from "react";
 
-interface EditIconButtonProps {
-  editable: boolean;
-  handleEditableChange: MouseEventHandler;
-}
-
-export default function EditIconButton(props: EditIconButtonProps) {
+export default function EditIconButton(props: Readonly<{ editable: boolean, handleEditableChange: MouseEventHandler}>) {
   const { t } = useTranslation();
   return (
     <Tooltip

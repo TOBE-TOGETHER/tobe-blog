@@ -32,7 +32,7 @@ export const NavItems = (props: { pageItems: IPageItem[] }) => {
                     mr: '2px',
                     color: 'rgba(0,0,0,0.4)',
                   }}
-                  onClick={() => navigate(pageItem.secondaryUrl || '/')}
+                  onClick={() => navigate(pageItem.secondaryUrl ?? '/')}
                 >
                   <Add />
                 </IconButton>

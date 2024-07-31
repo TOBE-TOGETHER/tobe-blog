@@ -26,7 +26,7 @@ const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })<{
 
 const drawerWidth = 240;
 
-export default function AdminLayout({ children }: { children: any }) {
+export default function AdminLayout({ children }: Readonly<{ children: any }>) {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <Box

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { SaveButtonPanel } from '../../../admin/components';
 import * as WordService from './WordService';
 
-export function WordCreateDialog(props: { vocabularyId: string; loadData: Function; open: boolean; setOpen: Function }) {
+export function WordCreateDialog(props: Readonly<{ vocabularyId: string, loadData: Function, open: boolean, setOpen: Function }>) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [text, setText] = useState<string>('');

@@ -11,7 +11,7 @@ import { WordDetailDialog } from './WordDetailDialog';
 import { WordDisplayDialog } from './WordDisplayDialog';
 import * as WordService from './WordService';
 
-export function WordListPanel(props: { editable: boolean; vocabularyId: string }) {
+export function WordListPanel(props: Readonly<{ editable: boolean, vocabularyId: string }>) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState<boolean>(false);

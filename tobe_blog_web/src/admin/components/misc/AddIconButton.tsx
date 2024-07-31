@@ -1,7 +1,7 @@
 import { Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
-export default function AddIconButton(props: { onClick: () => void }) {
+export default function AddIconButton(props: Readonly<{ onClick: () => void }>) {
   return (
     <Button
       onClick={props.onClick}

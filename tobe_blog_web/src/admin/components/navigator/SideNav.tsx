@@ -88,7 +88,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start',
 }));
 
-export default function SideNav(props: SideNavProps) {
+export default function SideNav(props: Readonly<SideNavProps>) {
   const navigate = useNavigate();
   const underSmScreen = useMediaQuery(theme.breakpoints.down('md'));
   return (

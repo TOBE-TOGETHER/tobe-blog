@@ -273,7 +273,7 @@ const SwitchGroup = (props: { value: boolean; setValue: (newValue: boolean) => v
 
 const InfoSection = (props: { children: ReactNode[]; mt?: number }) => {
   return (
-    <Paper sx={{ mt: props.mt || 2, mb: 2, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
+    <Paper sx={{ mt: props.mt ?? 2, mb: 2, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
       <Grid
         container
         spacing={3}

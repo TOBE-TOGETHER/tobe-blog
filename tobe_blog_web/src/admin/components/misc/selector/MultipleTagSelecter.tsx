@@ -6,7 +6,7 @@ import { ITagOption } from '../../../../global/types';
 import { styles } from './StyleConfig';
 import * as TagService from './TagService';
 
-export default function MultipleTagSelecter(props: { value: ITagOption[]; setValue: (newValue: ITagOption[]) => void; disabled?: boolean }) {
+export default function MultipleTagSelecter(props: Readonly<{ value: ITagOption[], setValue: (newValue: ITagOption[]) => void, disabled?: boolean }>) {
   const [options, setOptions] = useState<ITagOption[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();

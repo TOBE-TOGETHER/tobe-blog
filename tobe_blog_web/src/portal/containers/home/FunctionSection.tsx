@@ -6,7 +6,11 @@ import { EContentType } from '../../../global/enums';
 import FeaturedNews from './FeaturedNews';
 import TagStatisticsFilterPanel from './TagStatisticsFilterPanel';
 
-export default function FunctionSection(props: { availableContentTypes: EContentType[]; extraPanels: ReactElement[]; ownerId: string }) {
+export default function FunctionSection(props: Readonly<{ 
+  availableContentTypes: EContentType[],
+  extraPanels: ReactElement[],
+  ownerId: string }>
+) {
   const [searchParams] = useSearchParams();
   const paramContentType = searchParams.get('d') || '';
   const [checkedTags, setCheckedTags] = useState<string[]>([]);

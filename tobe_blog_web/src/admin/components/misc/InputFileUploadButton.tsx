@@ -14,9 +14,7 @@ const VisuallyHiddenInput = styled("input")`
   width: 1px;
 `;
 
-export default function InputFileUploadButton(props: {
-  onImageChange: Function;
-}) {
+export default function InputFileUploadButton(props: Readonly<{ onImageChange: Function }>) {
   const { t } = useTranslation();
   return (
     <Button

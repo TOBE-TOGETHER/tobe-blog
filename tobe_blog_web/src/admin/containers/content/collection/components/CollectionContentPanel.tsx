@@ -6,7 +6,7 @@ import { IRenderTree, ITagOption } from '../../../../../global/types';
 import { SingleTagSelecter, TreePanel } from '../../../../components';
 import * as TagRelationshipService from '../TagRelationshipService.ts';
 
-export default function CollectionContentPanel(props: { collectionId: string; loadData: (id: string) => void; treeData: IRenderTree }) {
+export default function CollectionContentPanel(props: Readonly<{ collectionId: string, loadData: (id: string) => void, treeData: IRenderTree }>) {
   const ROOT = 'root';
   const { t } = useTranslation();
   const [currentNodeId, setCurrentNodeId] = useState<string>(ROOT);

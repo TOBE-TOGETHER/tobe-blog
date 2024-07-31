@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { EditIconButton } from '../../../components';
 
-export default function ComtentEditBar(props: { editable: boolean; handleEditableChange: () => void }) {
+export default function ComtentEditBar(props: Readonly<{ editable: boolean, handleEditableChange: () => void }>) {
   return (
     <Grid
       container

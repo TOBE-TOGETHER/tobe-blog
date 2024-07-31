@@ -102,7 +102,7 @@ export default function AnalyticsPage() {
   );
 }
 
-const StandardSmallWidget = (props: { value: number | string; label: string; link: string }) => {
+const StandardSmallWidget = (props: Readonly<{ value: number | string; label: string }>) => {
   return (
     <Grid
       item
@@ -138,7 +138,7 @@ const StandardSmallWidget = (props: { value: number | string; label: string; lin
   );
 };
 
-const UserContentAnalyticsPanel = (props: { data: IUserContentAnalyticsDTO; link: string; contentType: EContentType }) => {
+const UserContentAnalyticsPanel = (props: Readonly<{ data: IUserContentAnalyticsDTO; link: string; contentType: EContentType }>) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
@@ -179,22 +179,18 @@ const UserContentAnalyticsPanel = (props: { data: IUserContentAnalyticsDTO; link
         <StandardSmallWidget
           value={props.data.publicCount}
           label={t('analytics-page.content.public')}
-          link={props.link}
         />
         <StandardSmallWidget
           value={props.data.totalCount}
           label={t('analytics-page.content.all')}
-          link={props.link}
         />
         <StandardSmallWidget
           value={(props.data.totalLikeCount / 1000).toFixed(1)}
           label={t('analytics-page.content.like-count')}
-          link={props.link}
         />
         <StandardSmallWidget
           value={(props.data.totalViewCount / 1000).toFixed(1)}
           label={t('analytics-page.content.view-count')}
-          link={props.link}
         />
         <DecordateBox
           color={'red'}

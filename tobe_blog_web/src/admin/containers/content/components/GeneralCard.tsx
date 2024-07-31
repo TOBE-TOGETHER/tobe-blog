@@ -10,7 +10,7 @@ import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
 import theme from '../../../../theme';
 import { CardHeaderActionButton } from '../../../components';
 
-export function GeneralCard(props: { record: IBaseUserContentDTO; onClick?: (id: string | number) => void; operations: IOperation[] }) {
+export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO, onClick?: (id: string | number) => void, operations: IOperation[] }>) {
   const { t } = useTranslation();
   return (
     <Grid

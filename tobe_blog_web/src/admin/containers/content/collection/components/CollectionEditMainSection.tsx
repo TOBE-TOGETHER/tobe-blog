@@ -4,7 +4,7 @@ import { FormPanel, OneRow } from '../../../../../components';
 import { ITagOption } from '../../../../../global/types';
 import { MultipleTagSelecter } from '../../../../components';
 
-export interface ContentEditMainSectionProps {
+export interface IContentEditMainSectionProps {
   title: string | null;
   setTitle: (value: string) => void;
   description: string | null;
@@ -17,7 +17,7 @@ export interface ContentEditMainSectionProps {
   sx?: SxProps;
 }
 
-export default function ContentEditMainSection(props: ContentEditMainSectionProps) {
+export default function ContentEditMainSection(props: Readonly<IContentEditMainSectionProps>) {
   const { t } = useTranslation();
   return (
     <FormPanel sx={{ mt: 1, ...props.sx }}>

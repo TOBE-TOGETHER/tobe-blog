@@ -4,7 +4,12 @@ import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout } from '../../components';
 
-export default function ContentReadingPage(props: { content: IBaseUserContentDTO | null; subTitle?: string; editLinkUrlPrefix: string; children: ReactNode }) {
+export default function ContentReadingPage(props: Readonly<{ 
+  content: IBaseUserContentDTO | null, 
+  subTitle?: string, 
+  editLinkUrlPrefix: string,
+  children: ReactNode }>
+) {
   return (
     <PortalLayout>
       {props.content && (

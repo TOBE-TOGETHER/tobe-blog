@@ -2,12 +2,12 @@ import { Box, Container, Grid, Paper, Typography } from '@mui/material';
 import { FormEvent, ReactNode } from 'react';
 import { Loading } from '../../../components';
 
-export default function SingleBoxLayout(props: {
-  openLoading: Readonly<boolean>;
-  title: Readonly<string>;
-  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+export default function SingleBoxLayout(props: Readonly<{
+  openLoading: Readonly<boolean>,
+  title: Readonly<string>,
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void,
   children: Readonly<ReactNode[]>
-}) {
+}>) {
   return (
     <Grid container sx={{
       width: '100%', 

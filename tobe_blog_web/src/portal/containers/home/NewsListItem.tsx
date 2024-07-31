@@ -6,18 +6,18 @@ import { URL } from '../../../routes';
 import theme from '../../../theme';
 import TagDisplayBar from './TagDisplayBar';
 
-export default function NewsListItem(props: {
-  owner: string;
-  ownerId: number | string;
-  title: string;
-  description: string;
-  publishTime: string | null;
-  viewCount: number;
-  likeCount: number;
-  isRecommended?: boolean;
-  tags: ITagOption[];
-  onClick: () => void;
-}) {
+export default function NewsListItem(props: Readonly<{
+  owner: string,
+  ownerId: number | string,
+  title: string,
+  description: string,
+  publishTime: string | null,
+  viewCount: number,
+  likeCount: number,
+  isRecommended?: boolean,
+  tags: ITagOption[],
+  onClick: () => void
+}>) {
   const { t } = useTranslation();
   return (
     <Grid
