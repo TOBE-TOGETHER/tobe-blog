@@ -1,8 +1,8 @@
 import { keyframes, styled } from '@mui/material';
 import theme from '../../theme.ts';
 
-export default function StrokeText(props: { text: string; color?: string; viewBoxWidth?: number; viewBoxHeight?: number }) {
-  const color = props.color || theme.palette.primary.main;
+export default function StrokeText(props: Readonly<{ text: string, color?: string, viewBoxWidth?: number, viewBoxHeight?: number }>) {
+  const color = props.color ?? theme.palette.primary.main;
   const width = props.viewBoxWidth ?? 260;
   const height = props.viewBoxHeight ?? 50;
   const viewBox = `0 0 ${width} ${height}`;

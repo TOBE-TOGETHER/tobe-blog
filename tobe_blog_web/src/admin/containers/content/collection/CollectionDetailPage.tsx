@@ -16,7 +16,7 @@ export default function CollectionDetailPage() {
   const { id } = useParams();
   const [editable, setEditable] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [collection, setCollections] = useState<ICollectionDTO | null>(null);
+  const [collection, setCollection] = useState<ICollectionDTO | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
@@ -44,7 +44,7 @@ export default function CollectionDetailPage() {
       setLoading(true);
       CollectionService.getById(id)
         .then(response => {
-          setCollections(response.data);
+          setCollection(response.data);
           setTitle(response.data.title);
           setDescription(response.data.description);
           setCoverImgUrl(response.data.coverImgUrl);

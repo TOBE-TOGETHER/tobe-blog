@@ -6,11 +6,10 @@ import { alpha, styled } from '@mui/material/styles';
 import { TransitionProps } from '@mui/material/transitions';
 import { TreeItem, TreeItemProps, treeItemClasses } from '@mui/x-tree-view/TreeItem';
 import { animated, useSpring } from '@react-spring/web';
-
 import { SimpleTreeView } from '@mui/x-tree-view';
 import { IRenderTree } from '../../../global/types';
 
-export default function TreePanel(props: { nodes: IRenderTree; onNodeFocus: (event: React.SyntheticEvent | null, value: string) => void }) {
+export default function TreePanel(props: Readonly<{ nodes: IRenderTree, onNodeFocus: (event: React.SyntheticEvent | null, value: string) => void }>) {
   const renderTree = (nodes: IRenderTree) => (
     <StyledTreeItem
       key={nodes.id}

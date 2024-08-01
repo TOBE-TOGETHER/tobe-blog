@@ -10,7 +10,7 @@ import BaseContentService from '../BaseContentService';
 import GeneralCardView from './GeneralCardView';
 import GeneralContentListPageFunctionBar from './GeneralContentListPageFunctionBar';
 
-export default function GeneralContentListPage(props: { contentService: BaseContentService; pageTitle: string; detailPageURL: string; createPageURL: string }) {
+export default function GeneralContentListPage(props: Readonly<{ contentService: BaseContentService, pageTitle: string, detailPageURL: string, createPageURL: string }>) {
   const DEFAULT_PAGE_SIZE: number = 16;
   const { t } = useTranslation();
   const navigate = useNavigate();

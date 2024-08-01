@@ -24,7 +24,7 @@ server.interceptors.request.use(
     // @ts-expect-error, refresh token request NOT need to be authed
     if (!config.headers['Refresh-Token']) {
       // @ts-expect-error, the header exist
-      config.headers.common['Authorization'] = getAccessToken() || '';
+      config.headers.common['Authorization'] = getAccessToken() ?? '';
     }
     return config;
   },
@@ -71,7 +71,6 @@ server.interceptors.response.use(
         console.error('Server error: ' + JSON.stringify(error));
       }
     }
-    return Promise.reject(error);
   }
 );
 

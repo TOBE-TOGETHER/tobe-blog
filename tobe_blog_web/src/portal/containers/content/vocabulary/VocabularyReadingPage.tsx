@@ -13,7 +13,7 @@ export default function VocabularyReadingPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
-  const [vocabualry, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
+  const [vocabulary, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
 
   const loadData = useCallback((): void => {
     PublicDataService.getVocabularyById(id || '')
@@ -33,11 +33,11 @@ export default function VocabularyReadingPage() {
 
   return (
     <ContentReadingPage
-      content={vocabualry}
-      subTitle={vocabualry?.description}
+      content={vocabulary}
+      subTitle={vocabulary?.description}
       editLinkUrlPrefix={URL.VOCABULARY_DETAIL}
     >
-      {vocabualry && (
+      {vocabulary && (
         <Grid
           item
           xs={12}

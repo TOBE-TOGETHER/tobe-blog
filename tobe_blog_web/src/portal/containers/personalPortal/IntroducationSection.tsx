@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import config from '../../../../customization.json';
 import { IUserFullProfileDTO } from '../../../global/types';
 
-export default function IntroducationSection(props: { profile: IUserFullProfileDTO | null }) {
+export default function IntroducationSection(props: Readonly<{ profile: IUserFullProfileDTO | null }>) {
   const { t } = useTranslation();
   return (
     <Container sx={{ mt: '64px' }}>
@@ -22,7 +22,7 @@ export default function IntroducationSection(props: { profile: IUserFullProfileD
             mb: { xs: -12, lg: -10 },
             backgroundSize: 'cover',
             backgroundPosition: 'center 40%',
-            backgroundImage: `url(${props.profile?.backgroundImg || config.defaultPersonalProfileCoverImgUrl})`,
+            backgroundImage: `url(${props.profile?.backgroundImg ?? config.defaultPersonalProfileCoverImgUrl})`,
           }}
         />
         <Grid container>
@@ -46,7 +46,7 @@ export default function IntroducationSection(props: { profile: IUserFullProfileD
                 width: '120px',
                 height: '120px',
                 border: '5px solid white',
-                backgroundImage: `url(${props.profile?.photoImg || props.profile?.avatarUrl})`,
+                backgroundImage: `url(${props.profile?.photoImg ?? props.profile?.avatarUrl})`,
                 backgroundRepeat: 'round',
               }}
             />
@@ -130,7 +130,7 @@ export default function IntroducationSection(props: { profile: IUserFullProfileD
                     color="text.secondary"
                     sx={{ textAlign: 'center' }}
                   >
-                    {props.profile?.publicContentCount || 0}
+                    {props.profile?.publicContentCount ?? 0}
                   </Typography>
                 </Grid>
               </Tooltip>
@@ -144,7 +144,7 @@ export default function IntroducationSection(props: { profile: IUserFullProfileD
                     color="text.secondary"
                     sx={{ textAlign: 'center' }}
                   >
-                    {props.profile?.viewCount || 0}
+                    {props.profile?.viewCount ?? 0}
                   </Typography>
                 </Grid>
               </Tooltip>

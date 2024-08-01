@@ -11,14 +11,14 @@ import SingleBoxLayout from '../../components/layout/SingleBoxLayout.tsx';
 
 export default function SignIn() {
   const dispatch = useAuthDispatch();
-  const [openLoading, updateOpenLoading] = useState(false);
+  const [openLoading, setOpenLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    updateOpenLoading(true);
+    setOpenLoading(true);
 
     loginUser(dispatch, {
       username: data.get('email'),
@@ -36,7 +36,7 @@ export default function SignIn() {
         });
       })
       .finally(() => {
-        updateOpenLoading(false);
+        setOpenLoading(false);
       });
   };
 

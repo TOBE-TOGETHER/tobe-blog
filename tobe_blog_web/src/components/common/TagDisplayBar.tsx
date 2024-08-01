@@ -7,7 +7,7 @@ const ListItem = styled('li')(({ theme }) => ({
   marginTop: theme.spacing(1),
 }));
 
-export default function TagDisplayBar(props: { tags: ITagOption[] }) {
+export default function TagDisplayBar(props: Readonly<{ tags: ITagOption[] }>) {
   return (
     <Grid
       sx={{

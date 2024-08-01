@@ -2,7 +2,7 @@ import { Dialog, DialogContent, Grid, Typography } from '@mui/material';
 import Speech from 'react-text-to-speech';
 import { IWordGeneralDTO } from '../../../global/types';
 
-export function WordDisplayDialog(props: { word: IWordGeneralDTO | null; setWord: (word: IWordGeneralDTO | null) => void }) {
+export function WordDisplayDialog(props: Readonly<{ word: IWordGeneralDTO | null, setWord: (word: IWordGeneralDTO | null) => void }>) {
   return (
     <Grid
       item
@@ -35,8 +35,8 @@ export function WordDisplayDialog(props: { word: IWordGeneralDTO | null; setWord
                   {props.word?.text}
                 </Typography>
                 <Speech
-                  id={props.word?.id || ''}
-                  text={props.word?.text || 'Unknown'}
+                  id={props.word?.id ?? ''}
+                  text={props.word?.text ?? 'Unknown'}
                   useStopOverPause={true}
                   rate={0.8}
                   volume={10}

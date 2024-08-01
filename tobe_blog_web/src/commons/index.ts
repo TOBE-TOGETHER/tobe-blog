@@ -2,7 +2,7 @@ import { EContentType, ELocalStorageKeys } from '../global/enums.ts';
 import * as TimeFormat from './TimeFormat';
 
 export function authed(requiredRole?: string[]): boolean {
-  const userAuthorities = JSON.parse(localStorage.getItem(ELocalStorageKeys.AUTHORITIES) || '[]');
+  const userAuthorities = JSON.parse(localStorage.getItem(ELocalStorageKeys.AUTHORITIES) ?? '[]');
   // if no role required, then return true directly
   if (requiredRole) {
     let isValid: boolean = false;
@@ -19,7 +19,7 @@ export function authed(requiredRole?: string[]): boolean {
 }
 
 export function enabled(requiredFeature?: string): boolean {
-  const userProfile = JSON.parse(localStorage.getItem(ELocalStorageKeys.CURRENT_USER) || '{}');
+  const userProfile = JSON.parse(localStorage.getItem(ELocalStorageKeys.CURRENT_USER) ?? '{}');
   // if no feature code required, then return true directly
   if (!requiredFeature) {
     return true;

@@ -9,12 +9,12 @@ import { EditIconButton } from '../../../../components';
 import { ImagesPanel } from './ImagesPanel';
 import * as PlanProgressService from './PlanProgressService.ts';
 
-interface PlanProgressItemProps {
+interface IPlanProgressItemProps {
   progress: IPlanProgress;
   viewOnly: boolean;
 }
 
-export default function PlanProgressItem(props: PlanProgressItemProps) {
+export default function PlanProgressItem(props: Readonly<IPlanProgressItemProps>) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [progress, setProgress] = useState<IPlanProgress>(props.progress);

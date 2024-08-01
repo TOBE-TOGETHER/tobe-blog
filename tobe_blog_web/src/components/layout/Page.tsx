@@ -11,7 +11,7 @@ interface IPageProps {
   sx?: any;
 }
 
-export default function Page(props: IPageProps) {
+export default function Page(props: Readonly<IPageProps>) {
   useEffect(() => {
     window.document.title = `${config.projectName.toUpperCase()} ${props.pageTitle ? ' | ' + props.pageTitle : ''}`;
     return function restoreTitle() {

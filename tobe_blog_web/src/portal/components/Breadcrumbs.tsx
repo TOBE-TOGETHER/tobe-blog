@@ -3,7 +3,7 @@ import { Link, Breadcrumbs as MBreadcrumbs, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { IBreadcrumbsNode } from '../../global/types';
 
-export default function Breadcrumbs(props: { nodes?: IBreadcrumbsNode[] }) {
+export default function Breadcrumbs(props: Readonly<{ nodes?: IBreadcrumbsNode[] }>) {
   const { t } = useTranslation();
   return (
     <MBreadcrumbs

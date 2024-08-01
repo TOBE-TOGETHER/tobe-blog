@@ -14,11 +14,11 @@ export function WordDetailDialog(props: { word: IWordGeneralDTO | null; setWord:
 
   function handleSave() {
     WordService.updateWord({
-      id: props.word?.id || 0,
-      text: props.word?.text || '',
-      partOfSpeech: props.word?.partOfSpeech || '',
-      meaningInChinese: props.word?.meaningInChinese || '',
-      meaningInEnglish: props.word?.meaningInEnglish || '',
+      id: props.word?.id ?? 0,
+      text: props.word?.text ?? '',
+      partOfSpeech: props.word?.partOfSpeech ?? '',
+      meaningInChinese: props.word?.meaningInChinese ?? '',
+      meaningInEnglish: props.word?.meaningInEnglish ?? '',
     })
       .then(() => {
         enqueueSnackbar(t('msg.success'), {

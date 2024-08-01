@@ -19,7 +19,7 @@ interface IVOCEditMainSectionProps {
   sx?: SxProps;
 }
 
-export default function VOCEditMainSection(props: IVOCEditMainSectionProps) {
+export default function VOCEditMainSection(props: Readonly<IVOCEditMainSectionProps>) {
   const { t } = useTranslation();
   return (
     <FormPanel sx={{ mt: 1, ...props.sx }}>

@@ -3,7 +3,7 @@ import { InfiniteScrollList } from '../../../../components';
 import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
 import { GeneralCard } from './GeneralCard';
 
-export default function GeneralCardView(props: {
+interface IGeneralCardViewProps {
   loading: boolean;
   data: IBaseUserContentDTO[];
   current: number;
@@ -11,7 +11,9 @@ export default function GeneralCardView(props: {
   operations: IOperation[];
   loadMore: () => void;
   onClick?: (id: number | string) => void;
-}) {
+}
+
+export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) {
   return (
     <Grid container>
       <InfiniteScrollList

@@ -5,7 +5,7 @@ import { ITagOption } from '../../../../../global/types';
 import { MultipleTagSelecter, SaveButtonPanel } from '../../../../components';
 import RichContentEditor from './RichContentEditor';
 
-export interface ArticleEditMainSectionProps {
+export interface IArticleEditMainSectionProps {
   title: string;
   setTitle: (value: string) => void;
   subTitle: string;
@@ -22,7 +22,7 @@ export interface ArticleEditMainSectionProps {
   onClickPrimaryBtn: () => void;
 }
 
-export default function ArticleEditMainSection(props: ArticleEditMainSectionProps) {
+export default function ArticleEditMainSection(props: Readonly<IArticleEditMainSectionProps>) {
   const { t } = useTranslation();
   return (
     <>
