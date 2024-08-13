@@ -5,17 +5,25 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { EOperationName } from '../../../../global/enums.ts';
-import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
+import { IBaseUserContentDTO, IOperation, ITagOption } from '../../../../global/types';
 import BaseContentService from '../BaseContentService';
 import GeneralCardView from './GeneralCardView';
 import GeneralContentListPageFunctionBar from './GeneralContentListPageFunctionBar';
 
-export default function GeneralContentListPage(props: Readonly<{ contentService: BaseContentService, pageTitle: string, detailPageURL: string, createPageURL: string }>) {
+export default function GeneralContentListPage(
+  props: Readonly<{
+    contentService: BaseContentService;
+    pageTitle: string;
+    detailPageURL: string;
+    createPageURL: string;
+  }>
+) {
   const DEFAULT_PAGE_SIZE: number = 16;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
+  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [data, setData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -26,7 +34,13 @@ export default function GeneralContentListPage(props: Readonly<{ contentService:
 
   const loadData = (): void => {
     props.contentService
-      .get(DEFAULT_PAGE_SIZE, tempCurrent + 1, '', status)
+      .get(
+        DEFAULT_PAGE_SIZE,
+        tempCurrent + 1,
+        '',
+        status,
+        tagValues.map(t => t.value)
+      )
       .then(response => {
         // avoid duplicated data issue caused by the exceptional re-render
         if (tempCurrent == response.data.current && tempCurrent != 0) {
@@ -55,7 +69,7 @@ export default function GeneralContentListPage(props: Readonly<{ contentService:
 
   useEffect(() => {
     loadData();
-  }, [status]);
+  }, [status, tagValues]);
 
   function releaseById(id: number | string) {
     setOpenLoading(true);
@@ -107,7 +121,11 @@ export default function GeneralContentListPage(props: Readonly<{ contentService:
       openLoading={openLoading}
       pageTitle={props.pageTitle}
     >
-      <GeneralContentListPageFunctionBar createNewAction={() => navigate(props.createPageURL)} />
+      <GeneralContentListPageFunctionBar
+        createNewAction={() => navigate(props.createPageURL)}
+        tagValues={tagValues}
+        setTagValues={setTagValues}
+      />
       <Box sx={{ mb: 1, width: '100%' }}>
         <Tabs
           value={status}

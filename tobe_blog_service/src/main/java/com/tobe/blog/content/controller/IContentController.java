@@ -34,6 +34,7 @@ public interface IContentController<
         String createTo,
         String updateFrom,
         String updateTo,
+        String tags,
         String keyword);
 
     ResponseEntity<D> release(String id);

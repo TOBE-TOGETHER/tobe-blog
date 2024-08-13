@@ -11,5 +11,6 @@ public class BaseSearchFilter {
     private Date createTo;
     private Date updateFrom;
     private Date updateTo;
+    private String[] tags;
     private String keyword;
 }
