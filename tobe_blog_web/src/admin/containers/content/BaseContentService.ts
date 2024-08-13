@@ -8,8 +8,8 @@ export default class BaseContentService {
     this.baseUri = baseUri;
   }
 
-  get(size: number, current: number, keyword: string, status: string): AxiosPromise {
-    return server.get(`/${this.baseUri}?size=${size}&current=${current}&keyword=${keyword}&status=${status}`);
+  get(size: number, current: number, keyword: string, status: string, tags: string[]): AxiosPromise {
+    return server.get(`/${this.baseUri}?size=${size}&current=${current}&keyword=${keyword}&status=${status}&tags=${tags}`);
   }
 
   getById(id: string): AxiosPromise {

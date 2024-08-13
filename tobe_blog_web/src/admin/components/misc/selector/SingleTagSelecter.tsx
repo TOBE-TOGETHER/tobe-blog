@@ -1,12 +1,20 @@
 import { enqueueSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { StylesConfig } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { ITagOption } from '../../../../global/types';
 import { styles } from './StyleConfig';
 import * as TagService from './TagService';
 
-export default function SingleTagSelecter(props: Readonly<{ value: ITagOption | null, setValue: (newValue: ITagOption) => void, disabled?: boolean }>) {
+export default function SingleTagSelecter(
+  props: Readonly<{
+    value: ITagOption | null;
+    setValue: (newValue: ITagOption) => void;
+    disabled?: boolean;
+    styles?: StylesConfig<ITagOption, true>;
+  }>
+) {
   const [options, setOptions] = useState<ITagOption[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();

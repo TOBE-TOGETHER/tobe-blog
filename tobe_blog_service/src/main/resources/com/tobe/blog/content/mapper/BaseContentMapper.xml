@@ -2,7 +2,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tobe.blog.content.mapper.BaseContentMapper">
     <sql id="base_content_select_by_filter">
+        <if test="filter.tags != null and filter.tags.length > 0">
+          WITH TAG_FILTERED_TABLE AS (
+              SELECT DISTINCT tct.CONTENT_ID AS ID FROM TOBE_CONTENT_TAG tct
+              JOIN TOBE_TAG_INFO tti ON tti.ID = tct.TAG_ID
+              WHERE 1=1
+              AND tti.DELETED=0
+              AND tti.ID IN
+              <foreach item="tag" collection="filter.tags" open="(" separator="," close=")">#{tag}</foreach>
+          )
+        </if>
         <include refid="com.tobe.blog.content.mapper.BaseContentMapper.select_clause"></include>
+        <if test="filter.tags != null and filter.tags.length > 0">
+            JOIN TAG_FILTERED_TABLE tfat ON tfat.ID = tcgi.ID
+        </if>
         WHERE 1=1
         <if test="userId != null and userId != ''" >
             AND tcu.ID = #{userId}

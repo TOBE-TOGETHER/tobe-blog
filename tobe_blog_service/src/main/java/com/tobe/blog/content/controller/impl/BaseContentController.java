@@ -3,6 +3,7 @@ package com.tobe.blog.content.controller.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -81,9 +82,10 @@ public abstract class BaseContentController<
         @RequestParam(value = "createTo", required = false, defaultValue = "") String createTo,
         @RequestParam(value = "updateFrom", required = false, defaultValue = "") String updateFrom,
         @RequestParam(value = "updateTo", required = false, defaultValue = "") String updateTo,
+        @RequestParam(value = "tags", required = false, defaultValue = "") String tags,
         @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
         try {
-            final BaseSearchFilter filter = buildSearchFilter(status, createFrom, createTo, updateFrom, updateTo, keyword);
+            final BaseSearchFilter filter = buildSearchFilter(status, createFrom, createTo, updateFrom, updateTo, tags, keyword);
             return ResponseEntity.ok(this.getConcreteSubContentService().search(current, size, filter));
         } catch (ParseException e) {
             return ResponseEntity.badRequest().build();
@@ -102,6 +104,7 @@ public abstract class BaseContentController<
         String createTo, 
         String updateFrom,
         String updateTo, 
+        String tags,
         String keyword) throws ParseException {
         final BaseSearchFilter filter = new BaseSearchFilter();
         if (Strings.isNotBlank(status)) {
@@ -118,6 +121,9 @@ public abstract class BaseContentController<
         }
         if (Strings.isNotBlank(updateTo)) {
             filter.setUpdateTo(sdf.parse(updateTo));
+        }
+        if (StringUtils.isNotBlank(tags))  {
+            filter.setTags(tags.split(","));
         }
         if (Strings.isNotBlank(keyword)) {
             filter.setKeyword(keyword);
