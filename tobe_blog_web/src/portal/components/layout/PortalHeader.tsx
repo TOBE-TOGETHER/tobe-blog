@@ -1,3 +1,4 @@
+import GitHubIcon from '@mui/icons-material/GitHub';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
@@ -167,6 +168,20 @@ const HeaderContent = () => {
             </Button>
           ))}
         </Box>
+
+        {config.githubLink && (
+          <Box sx={{ flexGrow: 0 }}>
+            <IconButton
+              size="large"
+              title="Github"
+              sx={{ color: theme.palette.primary.main }}
+              href={config.githubLink}
+            >
+              <GitHubIcon sx={{ color: theme.palette.primary.main }} />
+            </IconButton>
+          </Box>
+        )}
+
         <Box sx={{ flexGrow: 0 }}>
           <HeaderLanguageMenu />
         </Box>
