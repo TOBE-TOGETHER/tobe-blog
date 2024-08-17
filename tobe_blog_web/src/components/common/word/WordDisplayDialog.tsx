@@ -35,7 +35,7 @@ export function WordDisplayDialog(props: Readonly<{ word: IWordGeneralDTO | null
                   {props.word?.text}
                 </Typography>
                 <Speech
-                  id={props.word?.id + '' ?? ''}
+                  id={props.word?.id + ''}
                   text={props.word?.text ?? 'Unknown'}
                   useStopOverPause={true}
                   rate={0.8}
