@@ -1,28 +1,31 @@
 import { Grid } from '@mui/material';
 import { ReactNode, useEffect } from 'react';
 
-export default function InfiniteScrollList<T>(props: Readonly<{
-  loading: boolean;
-  dataSource: Array<T>;
-  renderItem: (data: T) => ReactNode;
-  renderSkeleton?: () => ReactNode;
-  hasMore: boolean;
-  loadMore: () => void;
-}>) {
-  const { loading, dataSource, renderItem, renderSkeleton, loadMore, hasMore } = props;
+export default function InfiniteScrollList<T>(
+  props: Readonly<{
+    loading: boolean;
+    dataSource: Array<T>;
+    renderItem: (data: T) => ReactNode;
+    renderSkeleton?: () => ReactNode;
+    hasMore: boolean;
+    loadMore: (filter: any) => void;
+    filter: any;
+  }>
+) {
+  const { loading, dataSource, renderItem, renderSkeleton, loadMore, hasMore, filter } = props;
 
   useEffect(() => {
     const scrollEvent = () => {
       if (!hasMore || loading) return;
       if (document.documentElement.scrollHeight <= document.documentElement.clientHeight + document.documentElement.scrollTop) {
-        loadMore();
+        loadMore(filter);
       }
     };
     window.addEventListener('scroll', scrollEvent);
     return () => {
       window.removeEventListener('scroll', scrollEvent);
     };
-  }, [hasMore, loading]);
+  }, [hasMore, loading, filter]);
 
   return (
     <Grid
