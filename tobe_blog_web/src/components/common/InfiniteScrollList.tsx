@@ -9,23 +9,23 @@ export default function InfiniteScrollList<T>(
     renderSkeleton?: () => ReactNode;
     hasMore: boolean;
     loadMore: (filter: any) => void;
-    filter: any;
+    option: any;
   }>
 ) {
-  const { loading, dataSource, renderItem, renderSkeleton, loadMore, hasMore, filter } = props;
+  const { loading, dataSource, renderItem, renderSkeleton, loadMore, hasMore, option } = props;
 
   useEffect(() => {
     const scrollEvent = () => {
       if (!hasMore || loading) return;
       if (document.documentElement.scrollHeight <= document.documentElement.clientHeight + document.documentElement.scrollTop) {
-        loadMore(filter);
+        loadMore(option);
       }
     };
     window.addEventListener('scroll', scrollEvent);
     return () => {
       window.removeEventListener('scroll', scrollEvent);
     };
-  }, [hasMore, loading, filter]);
+  }, [hasMore, loading, option]);
 
   return (
     <Grid

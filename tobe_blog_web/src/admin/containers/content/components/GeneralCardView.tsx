@@ -17,6 +17,12 @@ interface IGeneralCardViewProps {
   onClick?: (id: number | string) => void;
 }
 
+interface ILoadDataOption {
+  status: string;
+  tagValues: ITagOption[];
+  reset: boolean;
+}
+
 export default function GeneralCardView(props: IGeneralCardViewProps) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
@@ -25,25 +31,17 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
 
-  // the tempData and tempCurrent are defined for avoid data duplicated issue
-  let tempData: IBaseUserContentDTO[] = [];
-  let tempCurrent: number = 0;
-
-  function loadData(filter: { status: string; tagValues: ITagOption[] }): void {
+  function loadData(option: ILoadDataOption): void {
     props.contentService
       .get(
         DEFAULT_PAGE_SIZE,
-        current + 1,
+        option.reset ? 1 : current + 1,
         '',
-        filter.status,
-        filter.tagValues.map(t => t.value)
+        option.status,
+        option.tagValues.map(t => t.value)
       )
       .then(response => {
-        // avoid duplicated data issue caused by the exceptional re-render
-        if (current == response.data.current && current != 0) {
-          return;
-        }
-        setData(data.concat(response.data.records));
+        setData(option.reset ? response.data.records : data.concat(response.data.records));
         setCurrent(response.data.current);
         setTotalPage(response.data.pages);
       })
@@ -55,7 +53,7 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
   }
 
   useEffect(() => {
-    loadData({ status: props.status, tagValues: props.tagValues });
+    loadData({ status: props.status, tagValues: props.tagValues, reset: true });
   }, [props.status, props.tagValues]);
 
   function releaseById(id: number | string) {
@@ -107,7 +105,7 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
     <Grid container>
       <InfiniteScrollList
         loading={props.loading}
-        filter={{ status: props.status, tagValues: props.tagValues }}
+        option={{ status: props.status, tagValues: props.tagValues, reset: false }}
         dataSource={data}
         hasMore={current < totalPage}
         loadMore={loadData}
