@@ -334,5 +334,13 @@
     "save": "Save",
     "back": "Back",
     "delete": "Delete"
+  },
+  "dialog": {
+    "delete": {
+      "title": "Confirm to delete?",
+      "content": "Once deleted, this operation cannot be undone. Please confirm whether to continue deleting."
+    },
+    "cancel": "Cancel",
+    "confirm": "Confirm"
   }
 }
