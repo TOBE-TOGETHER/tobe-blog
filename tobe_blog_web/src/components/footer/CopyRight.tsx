@@ -1,38 +1,31 @@
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import config from '../../../customization.json';
 
-import plan from '../../../package.json';
-
-/**
- * Copyright component
- *
- * 著作权组件
- */
-function Copyright(props: any) {
-  const license = import.meta.env.VITE_WEB_REGISTER_LICENSE;
+function Copyright() {
+  const { webRegisterLicense, projectName } = config;
   return (
     <Typography
       variant="body2"
       color="text.secondary"
       align="center"
-      {...props}
     >
       {'Copyright © '}
+      {new Date().getFullYear()}{' '}
       <Link
         color="inherit"
         href="/"
       >
-        <strong>{plan.name.toUpperCase()}</strong>
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {license && (
+        <strong>{projectName.toUpperCase()}</strong>
+      </Link>
+      {webRegisterLicense && (
         <>
           {' · '}
           <Link
             color="inherit"
             href="https://beian.miit.gov.cn"
           >
-            {license}
+            {webRegisterLicense}
           </Link>
         </>
       )}
