@@ -1,9 +1,9 @@
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
-import {IconButton, Menu, MenuItem} from '@mui/material';
-import React, {useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {IBaseUserContentDTO, IOperation} from '../../../global/types';
-import Dialogx from "../Dialog/Dialogx.tsx";
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { IBaseUserContentDTO, IOperation } from '../../../global/types';
+import Dialogx from '../Dialog/Dialogx.tsx';
 
 export default function CardHeaderActionButton(props: Readonly<{ operations: IOperation[]; data: IBaseUserContentDTO; color?: string }>) {
   const { t } = useTranslation();
@@ -21,7 +21,6 @@ export default function CardHeaderActionButton(props: Readonly<{ operations: IOp
     setAnchorRecordId(null);
   };
   const handleItemOnClick = (id: number | string, data: any, operation: IOperation) => {
-    debugger
     if (operation.name === 'delete') {
       setCurrentOperation(operation);
       handleClose();
@@ -100,9 +99,13 @@ export default function CardHeaderActionButton(props: Readonly<{ operations: IOp
         )}
       </Menu>
       <Dialogx
-          open={openDialog}
-          onClose={handleDialogClose}
-          onAction={() => currentOperation && handleDialogAction(props.data.id, props.data, currentOperation)}
+        title={t('dialog.delete.title')}
+        content={t('dialog.delete.content')}
+        open={openDialog}
+        onClose={handleDialogClose}
+        closeBtnText={t('dialog.cancel')}
+        onAction={() => currentOperation && handleDialogAction(props.data.id, props.data, currentOperation)}
+        actionBtnText={t('dialog.confirm')}
       />
     </>
   );

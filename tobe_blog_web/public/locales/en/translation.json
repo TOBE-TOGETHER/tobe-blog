@@ -338,7 +338,7 @@
   "dialog": {
     "delete": {
       "title": "Confirm to delete?",
-      "content": "Once deleted, this operation cannot be undone. Please confirm whether to continue deleting."
+      "content": "This operation cannot be undone, please double confirm if you want to delete"
     },
     "cancel": "Cancel",
     "confirm": "Confirm"
