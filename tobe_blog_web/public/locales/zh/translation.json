@@ -337,5 +337,13 @@
     "save": "保存",
     "back": "返回",
     "delete": "删除"
+  },
+  "dialog": {
+    "delete": {
+      "title": "确定删除吗？",
+      "content": "此操作无法撤销，请确认是否继续删除操作？"
+    },
+    "cancel": "取消",
+    "confirm": "确定"
   }
 }

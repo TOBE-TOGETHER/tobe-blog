@@ -1,14 +1,17 @@
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import { IconButton, Menu, MenuItem } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IBaseUserContentDTO, IOperation } from '../../../global/types';
+import Dialogx from '../Dialog/Dialogx.tsx';
 
 export default function CardHeaderActionButton(props: Readonly<{ operations: IOperation[]; data: IBaseUserContentDTO; color?: string }>) {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorRecordId, setAnchorRecordId] = React.useState<null | string>(null);
   const open = Boolean(anchorEl);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [currentOperation, setCurrentOperation] = useState<IOperation | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
     setAnchorEl(event.currentTarget);
     setAnchorRecordId(id);
@@ -18,9 +21,31 @@ export default function CardHeaderActionButton(props: Readonly<{ operations: IOp
     setAnchorRecordId(null);
   };
   const handleItemOnClick = (id: number | string, data: any, operation: IOperation) => {
-    operation.onClick(id, data);
-    handleClose();
+    if (operation.name === 'delete') {
+      setCurrentOperation(operation);
+      handleClose();
+      handleDialogOpen();
+    } else {
+      operation.onClick(id, data);
+      handleClose();
+    }
   };
+
+  const handleDialogOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+    setCurrentOperation(null);
+  };
+
+  const handleDialogAction = (id: number | string, data: any, operation: IOperation) => {
+    operation.onClick(id, data);
+    setOpenDialog(false);
+    setCurrentOperation(null);
+  };
+
   function getMenuItem(operationName: string) {
     switch (operationName) {
       case 'release':
@@ -73,6 +98,15 @@ export default function CardHeaderActionButton(props: Readonly<{ operations: IOp
             )
         )}
       </Menu>
+      <Dialogx
+        title={t('dialog.delete.title')}
+        content={t('dialog.delete.content')}
+        open={openDialog}
+        onClose={handleDialogClose}
+        closeBtnText={t('dialog.cancel')}
+        onAction={() => currentOperation && handleDialogAction(props.data.id, props.data, currentOperation)}
+        actionBtnText={t('dialog.confirm')}
+      />
     </>
   );
 }

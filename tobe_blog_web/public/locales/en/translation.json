@@ -334,5 +334,13 @@
     "save": "Save",
     "back": "Back",
     "delete": "Delete"
+  },
+  "dialog": {
+    "delete": {
+      "title": "Confirm to delete?",
+      "content": "This operation cannot be undone, please double confirm if you want to delete"
+    },
+    "cancel": "Cancel",
+    "confirm": "Confirm"
   }
 }
