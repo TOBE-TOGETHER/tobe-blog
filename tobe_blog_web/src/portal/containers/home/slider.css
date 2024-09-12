@@ -11,9 +11,15 @@ nav.awssld__bullets {
   max-height: 35vh;
 }
 
+@media (max-width: 900px) {
+  .awssld {
+    max-height: 30vh;
+  }
+}
+
 @media (max-width: 720px) {
   .awssld {
-    max-height: 20vh;
+    max-height: 24vh;
   }
 }
 

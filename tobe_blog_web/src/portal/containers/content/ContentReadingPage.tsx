@@ -1,15 +1,24 @@
 import { Container, Grid } from '@mui/material';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
+import config from '../../../../customization.json';
 import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout } from '../../components';
 
-export default function ContentReadingPage(props: Readonly<{ 
-  content: IBaseUserContentDTO | null, 
-  subTitle?: string, 
-  editLinkUrlPrefix: string,
-  children: ReactNode }>
+export default function ContentReadingPage(
+  props: Readonly<{
+    content: IBaseUserContentDTO | null;
+    subTitle?: string;
+    editLinkUrlPrefix: string;
+    children: ReactNode;
+  }>
 ) {
+  useEffect(() => {
+    window.document.title = `${props.content?.title ? props.content?.title + ' | ' : ''}${config.projectName.toUpperCase()}`;
+    return function restoreTitle() {
+      window.document.title = `${config.projectName.toUpperCase()}`;
+    };
+  });
   return (
     <PortalLayout>
       {props.content && (

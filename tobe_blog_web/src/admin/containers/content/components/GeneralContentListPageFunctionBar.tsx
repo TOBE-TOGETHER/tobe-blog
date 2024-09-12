@@ -31,7 +31,7 @@ export default function GeneralContentListPageFunctionBar(
               ...baseStyles,
               'marginLeft': '4px',
               'height': '42px',
-              'minWidth': '240px',
+              'minWidth': '285px',
               'border': '1px solid rgba(0,0,0,0.12)',
               'color': 'rgba(0,0,0,0.4)',
               'fontSize': '14px',
