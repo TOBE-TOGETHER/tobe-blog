@@ -156,7 +156,7 @@ const UserContentAnalyticsPanel = (props: Readonly<{ data: IUserContentAnalytics
           variant="h6"
           sx={{
             'mt': 2,
-            'mb': 0,
+            'mb': 1,
             'cursor': 'pointer',
             ':hover': { fontWeight: 550 },
           }}

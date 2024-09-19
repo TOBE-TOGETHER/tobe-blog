@@ -8,6 +8,7 @@ export default function AddIconButton(props: Readonly<{ onClick: () => void }>) 
       sx={{
         border: '1px solid rgba(0,0,0,0.12)',
         color: 'rgba(0,0,0,0.4)',
+        height: '42px',
       }}
     >
       <Add />

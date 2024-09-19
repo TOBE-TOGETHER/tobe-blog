@@ -113,12 +113,13 @@ export default function SideNav(props: Readonly<SideNavProps>) {
         <Grid
           onClick={() => navigate('/')}
           sx={{
-            width: '180px',
+            width: '150px',
             height: '64px',
+            ml: 3,
             display: { xs: 'flex' },
             alignItems: 'center',
             cursor: 'pointer',
-            fontSize: 40,
+            fontSize: 34,
             fontFamily: 'Times New Roman, San Francisco, sans-serif',
           }}
         >

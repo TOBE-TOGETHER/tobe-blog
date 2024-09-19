@@ -13,13 +13,15 @@ enum LoadType {
   Replace,
 }
 
-export default function FeaturedNews(props: Readonly<{
-  tags: string[],
-  ownerId: string,
-  contentType: EContentType,
-  availableContentTypes: EContentType[],
-  handleContentTypeChange: (newValue: EContentType) => void
-}>) {
+export default function FeaturedNews(
+  props: Readonly<{
+    tags: string[];
+    ownerId: string;
+    contentType: EContentType;
+    availableContentTypes: EContentType[];
+    handleContentTypeChange: (newValue: EContentType) => void;
+  }>
+) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [newsData, setNewsData] = useState<IBaseUserContentDTO[]>([]);

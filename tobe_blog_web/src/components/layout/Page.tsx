@@ -1,4 +1,4 @@
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import { useEffect } from 'react';
 
 import config from '../../../customization.json';
@@ -13,7 +13,7 @@ interface IPageProps {
 
 export default function Page(props: Readonly<IPageProps>) {
   useEffect(() => {
-    window.document.title = `${config.projectName.toUpperCase()} ${props.pageTitle ? ' | ' + props.pageTitle : ''}`;
+    window.document.title = `${props.pageTitle ? props.pageTitle + ' | ' : ''}${config.projectName.toUpperCase()}`;
     return function restoreTitle() {
       window.document.title = `${config.projectName.toUpperCase()}`;
     };
@@ -24,14 +24,13 @@ export default function Page(props: Readonly<IPageProps>) {
       sx={{
         ...{
           minHeight: '95vh',
-          pt: { xs: '64px' },
+          pt: { xs: '70px' },
           pb: 2,
         },
         ...props.sx,
       }}
     >
       <Loading open={props.openLoading} />
-      {props.pageTitle && <Typography sx={{ fontSize: { xs: '1.2rem', sm: '1.3rem', md: '1.5rem' } }}>{props.pageTitle}</Typography>}
       {props.children}
     </Container>
   );
