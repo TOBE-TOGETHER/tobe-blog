@@ -5,25 +5,28 @@ import { ELocalStorageKeys } from '../global/enums.ts';
 import { URL } from '../routes';
 import { AdminLayout } from './components/index.ts';
 
+// preloading following pages for smoother experience
+import AnalyticsPage from './containers/analytics/AnalyticsPage';
+import ArticlesPage from './containers/content/article/ArticlesPage';
+import CollectionsPage from './containers/content/collection/CollectionsPage';
+import PlansPage from './containers/content/plan/PlansPage.tsx';
+import VOCsPage from './containers/content/vocabulary/VOCsPage';
+
+// lazy loading following secondary pages
 const SignInPage = React.lazy(() => import('../portal/containers/signIn/SignIn'));
 const ProfileSettingPage = React.lazy(() => import('./containers/profileSettingPage/ProfileSettingPage'));
 const UsersPage = React.lazy(() => import('./containers/user/UsersPage'));
 const ContentAdminPage = React.lazy(() => import('./containers/contentAdmin/ContentAdminPage'));
-const AnalyticsPage = React.lazy(() => import('./containers/analytics/AnalyticsPage'));
 
-const ArticlesPage = React.lazy(() => import('./containers/content/article/ArticlesPage'));
 const ArticleCreationPage = React.lazy(() => import('./containers/content/article/ArticleCreationPage'));
 const ArticleDetailPage = React.lazy(() => import('./containers/content/article/ArticleDetailPage'));
 
 const PlanCreationPage = React.lazy(() => import('./containers/content/plan/PlanCreationPage.tsx'));
 const PlanDetailPage = React.lazy(() => import('./containers/content/plan/PlanDetailPage.tsx'));
-const PlansPage = React.lazy(() => import('./containers/content/plan/PlansPage.tsx'));
 
-const VOCsPage = React.lazy(() => import('./containers/content/vocabulary/VOCsPage'));
 const VOCDetailPage = React.lazy(() => import('./containers/content/vocabulary/VOCDetailPage'));
 const VOCCreationPage = React.lazy(() => import('./containers/content/vocabulary/VOCCreationPage'));
 
-const CollectionsPage = React.lazy(() => import('./containers/content/collection/CollectionsPage'));
 const CollectionCreationPage = React.lazy(() => import('./containers/content/collection/CollectionCreationPage'));
 const CollectionDetailPage = React.lazy(() => import('./containers/content/collection/CollectionDetailPage'));
 
