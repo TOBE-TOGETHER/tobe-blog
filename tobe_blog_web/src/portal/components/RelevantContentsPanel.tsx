@@ -4,7 +4,7 @@ import { IBaseUserContentDTO } from '../../global/types';
 import * as PublicDataService from '../../services/PublicDataService';
 import RelevantContentItem from './RelvantContentIteam';
 
-export default function RelevantContentsPanel(props: { content: IBaseUserContentDTO }) {
+export default function RelevantContentsPanel(props: Readonly<{ content: IBaseUserContentDTO }>) {
   const [relevantContents, setRelevantContents] = useState<IBaseUserContentDTO[]>([]);
 
   useEffect(() => {
@@ -20,13 +20,20 @@ export default function RelevantContentsPanel(props: { content: IBaseUserContent
     });
   }, [props.content]);
 
-  return (
+  return relevantContents.length > 0 ? (
     <Grid
       container
       spacing={2}
       sx={{ mt: 10 }}
     >
-      {relevantContents.length > 0 && relevantContents.map((c: IBaseUserContentDTO) => <RelevantContentItem content={c} />)}
+      {relevantContents.map((c: IBaseUserContentDTO) => (
+        <RelevantContentItem
+          content={c}
+          key={`relevant-item-${c.id}`}
+        />
+      ))}
     </Grid>
+  ) : (
+    <></>
   );
 }

@@ -5,7 +5,7 @@ import { getPathFromContentType, TimeFormat } from '../../commons';
 import { IBaseUserContentDTO } from '../../global/types';
 import theme from '../../theme';
 
-export default function RelevantContentItem(props: { content: IBaseUserContentDTO }) {
+export default function RelevantContentItem(props: Readonly<{ content: IBaseUserContentDTO }>) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   return (
