@@ -13,7 +13,7 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
       container
       item
       xs={12}
-      sm={12}
+      sm={6}
       md={6}
       lg={4}
       xl={3}
@@ -38,10 +38,12 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
             backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url(${props.content.coverImgUrl});`,
             position: 'relative',
             width: '100%',
+            maxHeight: '160px',
             height: {
-              xs: '220px',
-              sm: '170px',
-              md: '100px',
+              xs: '160px',
+              sm: '140px',
+              md: '130px',
+              lg: '120px',
             },
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
@@ -49,43 +51,44 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
             overflow: 'hidden',
           }}
         />
+
         <Grid
           container
-          sx={{
-            position: 'relative',
-            left: '25px',
-            width: '50px',
-            height: '50px',
-            overflow: 'hidden',
-            backgroundColor: theme.palette.common.white,
-            mt: '-20px',
-            borderRadius: '25px',
-          }}
-        >
-          <Grid
-            sx={{
-              backgroundImage: `url(${props.content.avatarUrl});`,
-              mt: '5px',
-              ml: '5px',
-              width: '40px',
-              height: '40px',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-            }}
-          />
-        </Grid>
-        <Grid
-          container
-          sx={{ px: 2, mt: '-25px' }}
-          justifyContent={'flex-end'}
+          sx={{ px: 2 }}
+          justifyContent={'space-between'}
         >
           <Typography
             variant="subtitle2"
             color="textSecondary"
+            sx={{ fontWeight: '800', mt: 1 }}
           >
             {props.content.ownerName}
           </Typography>
+          <Grid
+            container
+            sx={{
+              position: 'relative',
+              width: '50px',
+              height: '50px',
+              overflow: 'hidden',
+              backgroundColor: theme.palette.common.white,
+              mt: '-25px',
+              borderRadius: '30px',
+            }}
+          >
+            <Grid
+              sx={{
+                backgroundImage: `url(${props.content.avatarUrl});`,
+                mt: '8px',
+                ml: '5px',
+                width: '40px',
+                height: '40px',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }}
+            />
+          </Grid>
         </Grid>
         <Grid
           sx={{ px: 2, mt: 1 }}
@@ -108,7 +111,8 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
         <Grid sx={{ p: 2 }}>
           <Typography
             variant="subtitle2"
-            sx={{ maxHeight: '180px', overflow: 'hidden', textOverflow: 'ellipsis' }}
+            color="textSecondary"
+            sx={{ maxHeight: '150px', overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
             {props.content.title} : {props.content.description}
           </Typography>
