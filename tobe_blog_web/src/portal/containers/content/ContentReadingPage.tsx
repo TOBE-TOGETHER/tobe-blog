@@ -3,7 +3,7 @@ import { ReactNode, useEffect } from 'react';
 import config from '../../../../customization.json';
 import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
-import { ContentBanner, ContentPageMetaBar, PortalLayout } from '../../components';
+import { ContentBanner, ContentPageMetaBar, PortalLayout, RelevantContentsPanel } from '../../components';
 
 export default function ContentReadingPage(
   props: Readonly<{
@@ -15,6 +15,7 @@ export default function ContentReadingPage(
 ) {
   useEffect(() => {
     window.document.title = `${props.content?.title ? props.content?.title + ' | ' : ''}${config.projectName.toUpperCase()}`;
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     return function restoreTitle() {
       window.document.title = `${config.projectName.toUpperCase()}`;
     };
@@ -58,6 +59,8 @@ export default function ContentReadingPage(
             </Grid>
           )}
         </Grid>
+
+        {props.content && <RelevantContentsPanel content={props.content} />}
       </Container>
     </PortalLayout>
   );

@@ -10,7 +10,7 @@ const options = {
   },
 };
 
-export function getNewsByTags(contentType: EContentType, size: number, current: number, tags: string[], ownerId: string): AxiosPromise {
+export function getNewsByTags(contentType: EContentType | string, size: number, current: number, tags: string[], ownerId: string): AxiosPromise {
   return server.get(`/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}`, options);
 }
 
