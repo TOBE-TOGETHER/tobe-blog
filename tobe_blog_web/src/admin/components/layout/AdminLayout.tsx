@@ -2,7 +2,7 @@ import { Box, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import AdminHeader from '../header/AdminHeader';
-import { SideNav } from '../navigator';
+import SideNav from '../navigator/SideNav.tsx';
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })<{
   open?: boolean;
