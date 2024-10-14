@@ -78,7 +78,7 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
           >
             <Grid
               sx={{
-                backgroundImage: `url(${props.content.avatarUrl});`,
+                background: `url(${props.content.avatarUrl}); no-repeat center/cover`,
                 mt: '8px',
                 ml: '5px',
                 width: '40px',
