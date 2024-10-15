@@ -45,22 +45,6 @@ export interface IPlanProgress {
   updateTime: string;
 }
 
-export interface INewsDTO {
-  id: string;
-  title: string;
-  contentType: string;
-  description: string;
-  ownerId: number;
-  ownerName: string;
-  avatarUrl: string;
-  createTime: string;
-  updateTime: string | null;
-  recommended: boolean;
-  publishTime: string | null;
-  viewCount: number;
-  tags: ITagOption[];
-}
-
 export interface IUserBriefProfileDTO {
   id: string;
   firstName: string;
