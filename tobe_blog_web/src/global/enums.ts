@@ -10,12 +10,6 @@ export enum EColumnPosition {
   RIGHT = 'right',
 }
 
-export enum EDomain {
-  Article = 'ARTICLE',
-  Plan = 'Plan',
-  Vocabulary = 'VOCABULARY',
-}
-
 export enum EContentType {
   Article = 'ARTICLE',
   Plan = 'PLAN',

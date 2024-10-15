@@ -24,10 +24,6 @@ export function dateAndTimeFormat(time: string | undefined | null | number) {
   return moment(time).format('YYYY-MM-DD HH:mm:ss');
 }
 
-export function timestamp(time: string | undefined | null | number) {
-  return moment(time).unix();
-}
-
 export function briefDateFormat(time: string | undefined | null | number) {
   return moment(time).locale(getLocale()).fromNow();
 }
