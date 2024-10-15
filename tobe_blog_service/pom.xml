@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.tobe</groupId>
     <artifactId>tobe_blog_service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <name>tobe_blog_service</name>
     <description>tobe_blog_service</description>
