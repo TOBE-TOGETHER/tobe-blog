@@ -1,13 +1,12 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { IconButton } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ELocalStorageKeys } from '../../global/enums';
 import * as PublicDataService from '../../services/PublicDataService';
 
 export default function ContentLikeButton(props: { contentId: string }) {
-  const localValue = localStorage.getItem(`${ELocalStorageKeys.LIKED_CONTENTS}:${props.contentId}`);
-  const [liked, setLiked] = useState<boolean>(Boolean(localValue));
+  const [liked, setLiked] = useState<boolean>(false);
   function handleLikeContent() {
     PublicDataService.likeContent(props.contentId).then(response => {
       if (response.data) {
@@ -16,6 +15,12 @@ export default function ContentLikeButton(props: { contentId: string }) {
       }
     });
   }
+
+  useEffect(() => {
+    const localValue = localStorage.getItem(`${ELocalStorageKeys.LIKED_CONTENTS}:${props.contentId}`);
+    setLiked(Boolean(localValue));
+  });
+
   return liked ? (
     <IconButton disabled>
       <FavoriteIcon sx={{ color: 'red' }} />
