@@ -15,7 +15,7 @@ enum LoadType {
 
 export default function FeaturedNews(
   props: Readonly<{
-    tags: string[];
+    tags: number[];
     ownerId: string;
     contentType: EContentType;
     availableContentTypes: EContentType[];
@@ -29,7 +29,7 @@ export default function FeaturedNews(
   const [totalPage, setTotalPage] = useState<number>(1);
 
   const loadNews = useCallback(
-    (_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: string[], _newsData: IBaseUserContentDTO[], _ownerId: string): void => {
+    (_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: number[], _newsData: IBaseUserContentDTO[], _ownerId: string): void => {
       PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId)
         .then(response => {
           if (_loadType === LoadType.Append) {
