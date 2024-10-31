@@ -128,8 +128,6 @@ export default function ProfileSettingPage() {
               InputLabelProps={{ shrink: true }}
               label={t('profile-setting.fields.email')}
               fullWidth
-              type="email"
-              autoComplete="email"
               onChange={e => setEmail(e.target.value)}
               defaultValue={email}
             />
