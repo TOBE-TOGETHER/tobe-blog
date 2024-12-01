@@ -6,7 +6,9 @@ import { getPathFromContentType } from '../../../commons';
 import { EContentType } from '../../../global/enums';
 import { IBaseUserContentDTO } from '../../../global/types';
 import * as PublicDataService from '../../../services/PublicDataService.ts';
+import LoadingNewsSkeleton from './LoadingNewsSkeleton.tsx';
 import NewsListItem from './NewsListItem';
+import NoContentNewsItem from './NoContentNewsItem.tsx';
 
 enum LoadType {
   Append,
@@ -24,12 +26,14 @@ export default function FeaturedNews(
 ) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [newsData, setNewsData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
 
   const loadNews = useCallback(
     (_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: number[], _newsData: IBaseUserContentDTO[], _ownerId: string): void => {
+      setIsLoading(true);
       PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId)
         .then(response => {
           if (_loadType === LoadType.Append) {
@@ -40,7 +44,12 @@ export default function FeaturedNews(
           setCurrent(response.data.current);
           setTotalPage(response.data.pages);
         })
-        .catch(() => {});
+        .catch(err => {
+          console.error(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     },
     []
   );
@@ -108,7 +117,9 @@ export default function FeaturedNews(
           />
         )}
       </Tabs>
-      {newsData.length > 0 ? (
+      {isLoading ? (
+        <LoadingNewsSkeleton />
+      ) : newsData.length > 0 ? (
         <>
           {newsData.map(n => (
             <NewsListItem
@@ -158,21 +169,7 @@ export default function FeaturedNews(
           )}
         </>
       ) : (
-        <Grid
-          container
-          item
-          xs={12}
-          justifyContent="center"
-          alignContent="center"
-          sx={{ my: 1, minHeight: '100px' }}
-        >
-          <Typography
-            color="text.secondary"
-            variant="body2"
-          >
-            {t('home-page.no-content')}
-          </Typography>
-        </Grid>
+        <NoContentNewsItem />
       )}
     </Grid>
   );
