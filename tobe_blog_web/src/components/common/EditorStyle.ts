@@ -19,7 +19,9 @@ export const EditorStyle: SxProps<Theme> = {
         paddingRight: '8px',
       },
     },
-
+    '.w-e-image-container': {
+      maxWidth: '98%',
+    },
     'pre > code': {
       borderRadius: '8px',
       // backgroundColor: 'rgba(60, 71, 112, 0.2)',

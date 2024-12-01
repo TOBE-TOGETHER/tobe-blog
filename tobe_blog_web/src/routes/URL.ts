@@ -19,13 +19,14 @@ export const URL = {
   PROFILE: '/my/profile',
   USERS: '/my/users',
   ADMIN: '/my/admin',
-  PLANS: '/my/plans',
-  PLAN_DETAIL: '/my/plans/:id',
-  CREATE_PLAN: '/my/plans/create-plan',
 
-  ARTICLES: '/my/articles',
-  ARTICLE_DETAIL: '/my/articles/:id',
+  CREATE_PLAN: '/my/plans/create-plan',
+  PLAN_DETAIL: '/my/plans/:id',
+  PLANS: '/my/plans',
+
   CREATE_ARTICLE: '/my/articles/create-article',
+  ARTICLE_DETAIL: '/my/articles/:id',
+  ARTICLES: '/my/articles',
 
   CREATE_COLLECTION: '/my/collections/create-collection',
   COLLECTION_DETAIL: '/my/collections/:id',

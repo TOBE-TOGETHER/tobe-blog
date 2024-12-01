@@ -4,17 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InputFileUploadButton } from '../../../../components/index.ts';
 import * as FileService from './FileService.ts';
-import { ImagesPanel } from './ImagesPanel.tsx';
 import PlanProgressItems from './PlanProgressItems.tsx';
 import * as PlanProgressService from './PlanProgressService.ts';
 
-export default function PlanProgressModal(props: Readonly<{ planId: string, viewOnly: boolean }>) {
+export default function PlanProgressModal(props: Readonly<{ planId: string; viewOnly: boolean }>) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const [newProgress, setNewProgress] = useState<string>('');
   const [images, setImages] = useState<any>([]);
-  const [imageURLs, setImageURLs] = useState<string[]>([]);
-  const [refreshCode, setRefreshCode] = useState<number>(new Date().getTime());
+  // const [imageURLs, setImageURLs] = useState<string[]>([]);
 
   function onImageChange(e: any) {
     setImages([...e.target.files]);
@@ -24,9 +22,9 @@ export default function PlanProgressModal(props: Readonly<{ planId: string, view
     if (images.length < 1) {
       return;
     }
-    const newImageUrls: any = [];
-    images.forEach((image: any) => newImageUrls.push(URL.createObjectURL(image)));
-    setImageURLs(newImageUrls);
+    // const newImageUrls: any = [];
+    // images.forEach((image: any) => newImageUrls.push(URL.createObjectURL(image)));
+    // setImageURLs(newImageUrls);
   }, [props.planId, images]);
 
   function handleProgressCreation(): void {
@@ -48,8 +46,7 @@ export default function PlanProgressModal(props: Readonly<{ planId: string, view
       .then(() => {
         setNewProgress('');
         setImages([]);
-        setImageURLs([]);
-        setRefreshCode(new Date().getTime());
+        // setImageURLs([]);
         enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
@@ -63,7 +60,7 @@ export default function PlanProgressModal(props: Readonly<{ planId: string, view
 
   return (
     <React.Fragment>
-      <Divider sx={{ my: 1 }}>
+      <Divider sx={{ my: 1, width: '100%' }}>
         <Typography
           variant="subtitle1"
           color="text.secondary"
@@ -71,7 +68,6 @@ export default function PlanProgressModal(props: Readonly<{ planId: string, view
           {t('plan-progress.title')}
         </Typography>
       </Divider>
-
       {!props.viewOnly && (
         <Paper sx={{ my: 3, p: { xs: 2, md: 3 }, borderRadius: 4 }}>
           <Grid
@@ -130,16 +126,15 @@ export default function PlanProgressModal(props: Readonly<{ planId: string, view
               </Button>
             </Grid>
           </Grid>
-          <ImagesPanel
+          {/* <ImagesPanel
             keyPrefix={'new_progress'}
             imageURLs={imageURLs}
-          />
+          /> */}
         </Paper>
       )}
       <PlanProgressItems
         planId={props.planId}
         viewOnly={props.viewOnly}
-        refreshCode={refreshCode}
       />
     </React.Fragment>
   );

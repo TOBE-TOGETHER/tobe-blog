@@ -7,7 +7,11 @@ import { IPlanProgress } from '../../../../../global/types.ts';
 import * as PublicDataService from '../../../../../services/PublicDataService.ts';
 import PlanProgressItem from './PlanProgressItem.tsx';
 
-export default function PlanProgressItems(props: Readonly<{ planId: string; viewOnly: boolean; refreshCode: number }>) {
+interface ILoadDataOption {
+  reset: boolean;
+}
+
+export default function PlanProgressItems(props: Readonly<{ planId: string; viewOnly: boolean }>) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const DEFAULT_PAGE_SIZE: number = 6;
@@ -16,13 +20,13 @@ export default function PlanProgressItems(props: Readonly<{ planId: string; view
   const [progresses, setProgresses] = useState<IPlanProgress[]>([]);
 
   useEffect(() => {
-    loadProgresses(0, []);
-  }, [props.planId, props.refreshCode]);
+    loadProgresses({ reset: true });
+  }, [props.planId]);
 
-  const loadProgresses = (_current: number, _progresses: IPlanProgress[]): void => {
-    PublicDataService.getProgressesByPlanId(props.planId, DEFAULT_PAGE_SIZE, _current + 1)
+  const loadProgresses = (option: ILoadDataOption) => {
+    PublicDataService.getProgressesByPlanId(props.planId, DEFAULT_PAGE_SIZE, option.reset ? 1 : current + 1)
       .then(response => {
-        setProgresses(_progresses.concat(response.data.records));
+        setProgresses(progresses.concat(response.data.records));
         setCurrent(response.data.current);
         setTotalPage(response.data.pages);
       })
@@ -40,10 +44,6 @@ export default function PlanProgressItems(props: Readonly<{ planId: string; view
         <Grid
           item
           xs={12}
-          sm={12}
-          md={12}
-          lg={12}
-          xl={12}
           key={`infinite-scroll-item-${progress.id}`}
         >
           <PlanProgressItem
@@ -53,9 +53,9 @@ export default function PlanProgressItems(props: Readonly<{ planId: string; view
           />
         </Grid>
       )}
-      option={null}
+      option={{ reset: false }}
       hasMore={current < totalPage}
-      loadMore={() => loadProgresses(current, progresses)}
+      loadMore={loadProgresses}
     />
   );
 }

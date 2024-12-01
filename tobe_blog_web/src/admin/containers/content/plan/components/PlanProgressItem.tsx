@@ -4,9 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TimeFormat } from '../../../../../commons';
 import { IPlanProgress } from '../../../../../global/types';
-import * as PublicDataService from '../../../../../services/PublicDataService.ts';
 import { EditIconButton } from '../../../../components';
-import { ImagesPanel } from './ImagesPanel';
 import * as PlanProgressService from './PlanProgressService.ts';
 
 interface IPlanProgressItemProps {
@@ -19,7 +17,7 @@ export default function PlanProgressItem(props: Readonly<IPlanProgressItemProps>
   const { enqueueSnackbar } = useSnackbar();
   const [progress, setProgress] = useState<IPlanProgress>(props.progress);
   const [editable, setEditable] = useState<boolean>(false);
-  const [imageURLs, setImageURLs] = useState<string[]>([]);
+  // const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [progressDesc, setProgressDesc] = useState<string>(props.progress.description);
 
   const handleEditableChange = () => {
@@ -30,14 +28,13 @@ export default function PlanProgressItem(props: Readonly<IPlanProgressItemProps>
   };
 
   useEffect(() => {
-    function loadImages() {
-      PublicDataService.getBySrcIdAndFileType(props.progress.id, 'PLAN_PIC').then(response => {
-        let imageUrls = response.data.map((f: { downloadURL: string }) => f.downloadURL);
-        setImageURLs(imageUrls);
-      });
-    }
-
-    loadImages();
+    // function loadImages() {
+    //   PublicDataService.getBySrcIdAndFileType(props.progress.id, 'PLAN_PIC').then(response => {
+    //     let imageUrls = response.data.map((f: { downloadURL: string }) => f.downloadURL);
+    //     setImageURLs(imageUrls);
+    //   });
+    // }
+    // loadImages();
   }, [props.progress.id]);
 
   function handleProgressUpdate(): void {
@@ -118,10 +115,10 @@ export default function PlanProgressItem(props: Readonly<IPlanProgressItemProps>
             </Typography>
           )}
         </Grid>
-        <ImagesPanel
+        {/* <ImagesPanel
           keyPrefix={props.progress.id}
           imageURLs={imageURLs}
-        />
+        /> */}
       </Grid>
     </Paper>
   );
