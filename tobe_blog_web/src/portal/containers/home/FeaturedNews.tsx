@@ -25,15 +25,14 @@ export default function FeaturedNews(
   }>
 ) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [newsData, setNewsData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
 
   const loadNews = useCallback(
-    (_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: number[], _newsData: IBaseUserContentDTO[], _ownerId: string): void => {
-      setIsLoading(true);
+    (_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: number[], _newsData: IBaseUserContentDTO[], _ownerId: string, _withLoading: boolean): void => {
+      _withLoading && setIsLoading(true);
       PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId)
         .then(response => {
           if (_loadType === LoadType.Append) {
@@ -48,7 +47,7 @@ export default function FeaturedNews(
           console.error(err);
         })
         .finally(() => {
-          setIsLoading(false);
+          _withLoading && setIsLoading(false);
         });
     },
     []
@@ -56,13 +55,13 @@ export default function FeaturedNews(
 
   // based on current filters and load more data
   const handleLoadMoreRecords = (): void => {
-    loadNews(props.contentType, LoadType.Append, current + 1, props.tags, newsData, props.ownerId);
+    loadNews(props.contentType, LoadType.Append, current + 1, props.tags, newsData, props.ownerId, false);
   };
 
   useEffect(() => {
     // reset filter and load the first page data
     const handleTagFilterChange = (): void => {
-      loadNews(props.contentType, LoadType.Replace, 1, props.tags, newsData, props.ownerId);
+      loadNews(props.contentType, LoadType.Replace, 1, props.tags, newsData, props.ownerId, true);
     };
     handleTagFilterChange();
   }, [props.contentType, props.tags, loadNews]); // eslint-disable-line
@@ -119,58 +118,72 @@ export default function FeaturedNews(
       </Tabs>
       {isLoading ? (
         <LoadingNewsSkeleton />
-      ) : newsData.length > 0 ? (
-        <>
-          {newsData.map(n => (
-            <NewsListItem
-              isRecommended={n.recommended}
-              key={n.id}
-              owner={n.ownerName}
-              ownerId={n.ownerId}
-              title={n.title}
-              description={n.description}
-              publishTime={n.publishTime}
-              viewCount={n.viewCount}
-              likeCount={n.likeCount}
-              tags={n.tags}
-              onClick={() => navigate(`/news/${getPathFromContentType(n.contentType)}/${n.id}`)}
-            />
-          ))}
-          {current >= totalPage ? (
-            <Grid
-              container
-              item
-              xs={12}
-              justifyContent="center"
-              sx={{ my: 1 }}
-            >
-              <Typography
-                color="text.secondary"
-                variant="body2"
-              >
-                {t('home-page.end-line')}
-              </Typography>
-            </Grid>
-          ) : (
-            <Grid
-              container
-              item
-              xs={12}
-              justifyContent="center"
-              sx={{ my: 1 }}
-            >
-              <Button
-                variant="text"
-                onClick={handleLoadMoreRecords}
-              >
-                {t('home-page.load-more')}
-              </Button>
-            </Grid>
-          )}
-        </>
       ) : (
-        <NoContentNewsItem />
+        <NewsList
+          newsData={newsData}
+          totalPage={totalPage}
+          current={current}
+          handleLoadMoreRecords={handleLoadMoreRecords}
+        />
       )}
     </Grid>
   );
 }
+
+const NewsList = (props: { newsData: IBaseUserContentDTO[]; totalPage: number; current: number; handleLoadMoreRecords: () => void }) => {
+  const { newsData, totalPage, current, handleLoadMoreRecords } = props;
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  return newsData.length > 0 ? (
+    <>
+      {newsData.map(n => (
+        <NewsListItem
+          isRecommended={n.recommended}
+          key={n.id}
+          owner={n.ownerName}
+          ownerId={n.ownerId}
+          title={n.title}
+          description={n.description}
+          publishTime={n.publishTime}
+          viewCount={n.viewCount}
+          likeCount={n.likeCount}
+          tags={n.tags}
+          onClick={() => navigate(`/news/${getPathFromContentType(n.contentType)}/${n.id}`)}
+        />
+      ))}
+      {current >= totalPage ? (
+        <Grid
+          container
+          item
+          xs={12}
+          justifyContent="center"
+          sx={{ my: 1 }}
+        >
+          <Typography
+            color="text.secondary"
+            variant="body2"
+          >
+            {t('home-page.end-line')}
+          </Typography>
+        </Grid>
+      ) : (
+        <Grid
+          container
+          item
+          xs={12}
+          justifyContent="center"
+          sx={{ my: 1 }}
+        >
+          <Button
+            variant="text"
+            onClick={handleLoadMoreRecords}
+          >
+            {t('home-page.load-more')}
+          </Button>
+        </Grid>
+      )}
+    </>
+  ) : (
+    <NoContentNewsItem />
+  );
+};

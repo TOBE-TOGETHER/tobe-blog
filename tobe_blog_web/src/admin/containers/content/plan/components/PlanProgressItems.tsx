@@ -11,22 +11,22 @@ interface ILoadDataOption {
   reset: boolean;
 }
 
-export default function PlanProgressItems(props: Readonly<{ planId: string; viewOnly: boolean }>) {
+export default function PlanProgressItems(props: Readonly<{ planId: string; viewOnly: boolean; refreshCode: number }>) {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const DEFAULT_PAGE_SIZE: number = 6;
+  const [progresses, setProgresses] = useState<IPlanProgress[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
-  const [progresses, setProgresses] = useState<IPlanProgress[]>([]);
 
   useEffect(() => {
     loadProgresses({ reset: true });
-  }, [props.planId]);
+  }, [props.planId, props.refreshCode]);
 
   const loadProgresses = (option: ILoadDataOption) => {
     PublicDataService.getProgressesByPlanId(props.planId, DEFAULT_PAGE_SIZE, option.reset ? 1 : current + 1)
       .then(response => {
-        setProgresses(progresses.concat(response.data.records));
+        setProgresses(option.reset ? response.data.records : progresses.concat(response.data.records));
         setCurrent(response.data.current);
         setTotalPage(response.data.pages);
       })
@@ -36,6 +36,7 @@ export default function PlanProgressItems(props: Readonly<{ planId: string; view
         });
       });
   };
+
   return (
     <InfiniteScrollList
       loading={false}

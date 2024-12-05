@@ -12,6 +12,7 @@ export default function PlanProgressModal(props: Readonly<{ planId: string; view
   const { enqueueSnackbar } = useSnackbar();
   const [newProgress, setNewProgress] = useState<string>('');
   const [images, setImages] = useState<any>([]);
+  const [refreshCode, setRefreshCode] = useState<number>(new Date().getTime());
   // const [imageURLs, setImageURLs] = useState<string[]>([]);
 
   function onImageChange(e: any) {
@@ -47,6 +48,7 @@ export default function PlanProgressModal(props: Readonly<{ planId: string; view
         setNewProgress('');
         setImages([]);
         // setImageURLs([]);
+        setRefreshCode(new Date().getTime());
         enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
@@ -135,6 +137,7 @@ export default function PlanProgressModal(props: Readonly<{ planId: string; view
       <PlanProgressItems
         planId={props.planId}
         viewOnly={props.viewOnly}
+        refreshCode={refreshCode}
       />
     </React.Fragment>
   );
