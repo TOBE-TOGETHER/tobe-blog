@@ -1,5 +1,8 @@
 {
   "projectName": "TOBE-BLOG",
+  "slogan": "Have fun together, grow up together",
+  "description": "A website that advocates continuous learning and growth - Articles, Plans, Vocabularies, etc. Let's have fun together, grow up together!",
+  "keywords": "博客, Blog, TOBE, TOBE-BLOG, 成长, 英语, 笔记, 计划, 词汇, Articles, Plans, Vocabularies",
   "githubLink": "https://github.com/TOBE-TOGETHER/tobe-blog",
   "home": {
     "banners": [
