@@ -17,7 +17,7 @@ export default function InfiniteScrollList<T>(
   useEffect(() => {
     const scrollEvent = () => {
       if (!hasMore || loading) return;
-      if (document.documentElement.scrollHeight <= document.documentElement.clientHeight + document.documentElement.scrollTop) {
+      if (document.documentElement.scrollHeight * 0.8 <= document.documentElement.clientHeight + document.documentElement.scrollTop) {
         loadMore(option);
       }
     };

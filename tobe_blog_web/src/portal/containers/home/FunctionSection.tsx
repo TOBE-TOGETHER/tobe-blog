@@ -4,22 +4,35 @@ import { useSearchParams } from 'react-router-dom';
 import { getContentTypeFromPath, getPathFromContentType } from '../../../commons';
 import { EContentType } from '../../../global/enums';
 import FeaturedNews from './FeaturedNews';
-import TagStatisticsFilterPanel from './TagStatisticsFilterPanel';
+import TagFilterPanel from './TagFilterPanel';
 
-export default function FunctionSection(props: Readonly<{ 
-  availableContentTypes: EContentType[],
-  extraPanels: ReactElement[],
-  ownerId: string }>
+export default function FunctionSection(
+  props: Readonly<{
+    availableContentTypes: EContentType[];
+    extraPanels: ReactElement[];
+    ownerId: string;
+  }>
 ) {
   const [searchParams] = useSearchParams();
-  const paramContentType = searchParams.get('d') || '';
-  const [checkedTags, setCheckedTags] = useState<string[]>([]);
+  const paramContentType: string = searchParams.get('t') || '';
+  const paramTags: string = searchParams.get('g') || '';
+  const [checkedTags, setCheckedTags] = useState<number[]>(
+    paramTags
+      .split(',')
+      .filter(i => !isNaN(Number.parseInt(i)))
+      .map(i => Number.parseInt(i))
+  );
   const [contentType, setContentType] = useState<EContentType>(getContentTypeFromPath(paramContentType));
 
   function handleContentTypeChange(newValue: EContentType) {
     setCheckedTags([]);
     setContentType(newValue);
-    window.history.pushState(null, '', `?d=${getPathFromContentType(newValue)}`);
+    window.history.pushState(null, '', `?t=${getPathFromContentType(newValue)}`);
+  }
+
+  function handleContentTagsChange(newValue: number[]) {
+    setCheckedTags(newValue);
+    window.history.pushState(null, '', `?t=${getPathFromContentType(contentType)}&g=${newValue}`);
   }
 
   return (
@@ -52,10 +65,10 @@ export default function FunctionSection(props: Readonly<{
             direction="column"
           >
             <Grid item>
-              <TagStatisticsFilterPanel
+              <TagFilterPanel
                 contentType={contentType}
                 checked={checkedTags}
-                setChecked={setCheckedTags}
+                setChecked={handleContentTagsChange}
                 ownerId={props.ownerId}
               />
             </Grid>

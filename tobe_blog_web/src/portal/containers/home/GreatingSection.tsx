@@ -21,6 +21,7 @@ const Title = (props: any) => {
         align="center"
         sx={{
           fontWeight: 600,
+          fontFamily: '"Borel", cursive',
           fontSize: {
             xs: '1.25rem',
             sm: '1.5rem',
@@ -36,6 +37,7 @@ const Title = (props: any) => {
         align="center"
         sx={{
           fontWeight: 500,
+          fontFamily: '"Borel", cursive',
           mt: {
             xs: 1,
             md: 2,

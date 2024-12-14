@@ -8,6 +8,7 @@
     "vocabularies": "Vocabularies"
   },
   "components": {
+    "relevant-contents": "Relevant Contents",
     "upload-pics": "Upload Pictures",
     "edit-icon-button": {
       "save": "Save",

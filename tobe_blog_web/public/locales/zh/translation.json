@@ -8,6 +8,7 @@
     "vocabularies": "词汇"
   },
   "components": {
+    "relevant-contents": "相关内容",
     "upload-pics": "上传图片",
     "edit-icon-button": {
       "save": "保存",
