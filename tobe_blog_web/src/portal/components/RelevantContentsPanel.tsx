@@ -48,7 +48,6 @@ export default function RelevantContentsPanel(props: Readonly<{ content: IBaseUs
       </Divider>
       <Grid
         container
-        spacing={2}
         sx={{ mt: 5 }}
       >
         <InfiniteScrollList

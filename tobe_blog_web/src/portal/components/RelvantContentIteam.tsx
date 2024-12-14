@@ -112,7 +112,7 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
           <Typography
             variant="subtitle2"
             color="textSecondary"
-            sx={{ maxHeight: '150px', overflow: 'hidden', textOverflow: 'ellipsis' }}
+            sx={{ maxHeight: '110px', overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
             {props.content.title} : {props.content.description}
           </Typography>
