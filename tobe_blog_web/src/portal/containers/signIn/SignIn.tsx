@@ -42,7 +42,7 @@ export default function SignIn() {
 
   return (
     <SingleBoxLayout
-      title={t('sign-in.title') + ' ' + config.projectName}
+      title={t('sign-in.title') + ' ' + config.title}
       handleSubmit={handleSubmit}
       openLoading={openLoading}
     >

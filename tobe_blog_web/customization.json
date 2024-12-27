@@ -1,11 +1,18 @@
 {
   "projectName": "TOBE-BLOG",
+  "title": "Tobe Blog",
+  "image": "https://tobetogether.xyz/images/avatars/avatar3.png",
   "slogan": "Have fun together, grow up together",
   "description": "A website that advocates continuous learning and growth - Articles, Plans, Vocabularies, etc. Let's have fun together, grow up together!",
-  "keywords": "博客, Blog, TOBE, TOBE-BLOG, 成长, 英语, 笔记, 计划, 词汇, Articles, Plans, Vocabularies",
+  "keywords": "博客, Blog, TOBE, TOBE-BLOG, Tobe Blog, 成长, 英语, 笔记, 计划, 词汇, Articles, Plans, Vocabularies",
   "githubLink": "https://github.com/TOBE-TOGETHER/tobe-blog",
   "home": {
     "banners": [
+      {
+        "imgUrl": "https://images.pexels.com/photos/5779181/pexels-photo-5779181.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "main": "2025, Happy new year!",
+        "secondary": "新年快乐！"
+      },
       {
         "imgUrl": "https://images.pexels.com/photos/3355755/pexels-photo-3355755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         "main": "No gain is too slight to bother with",

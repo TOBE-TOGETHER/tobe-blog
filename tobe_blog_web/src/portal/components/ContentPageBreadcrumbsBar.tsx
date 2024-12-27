@@ -16,7 +16,7 @@ export default function ContentPageBreadcrumbsBar() {
   if (path) {
     breadcrumbs.push({
       label: t(`breadcrumbs.${path}`),
-      href: pid ? `/personal-portal/${pid}/?d=${path}` : `/?d=${path}`,
+      href: pid ? `/personal-portal/${pid}/?t=${path}` : `/?t=${path}`,
     });
   }
 

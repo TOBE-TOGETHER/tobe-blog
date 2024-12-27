@@ -102,7 +102,7 @@ const HeaderContent = () => {
             fontFamily: 'Times New Roman, fantasy, San Francisco, sans-serif',
           }}
         >
-          <StrokeText text={config.projectName} />
+          <StrokeText text={config.title} />
         </Grid>
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

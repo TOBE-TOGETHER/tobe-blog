@@ -74,7 +74,7 @@ export default function SignUp() {
 
   return (
     <SingleBoxLayout
-      title={t('sign-up.title') + ' ' + config.projectName}
+      title={t('sign-up.title') + ' ' + config.title}
       handleSubmit={handleSubmit}
       openLoading={openLoading}
     >

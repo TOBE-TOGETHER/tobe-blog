@@ -14,10 +14,10 @@ export default function ContentReadingPage(
   }>
 ) {
   useEffect(() => {
-    window.document.title = `${props.content?.title ? props.content?.title + ' | ' : ''}${config.projectName.toUpperCase()}`;
+    window.document.title = `${props.content?.title ? props.content?.title + ' | ' : ''}${config.title}`;
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     return function restoreTitle() {
-      window.document.title = `${config.projectName.toUpperCase()}`;
+      window.document.title = `${config.title}`;
     };
   });
   return (

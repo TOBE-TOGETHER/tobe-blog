@@ -49,7 +49,7 @@ export default function SideNav(props: Readonly<ISideNavProps>) {
             fontFamily: 'Times New Roman, San Francisco, sans-serif',
           }}
         >
-          <StrokeText text={config.projectName} />
+          <StrokeText text={config.title} />
         </Grid>
 
         <IconButton
