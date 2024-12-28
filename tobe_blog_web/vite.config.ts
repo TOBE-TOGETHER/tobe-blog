@@ -9,11 +9,11 @@ function buildInjectedScript(): string {
 
 function buildGoogleTagScript(): string {
   return `<meta name="og:title" content="${config.slogan} ｜ ${config.title}" />
-    <meta property="og:site_name" content="${config.title}" />
-    <meta property="og:type" content="article" />
-    <meta property="og:description" content="${config.description}" />
-    <meta property="og:image" content="${config.image}" />
-    <meta property="og:url" content="/" />
+    <meta name="og:site_name" content="${config.title}" />
+    <meta name="og:type" content="article" />
+    <meta name="og:description" content="${config.description}" />
+    <meta name="og:image" content="${config.image}" />
+    <meta name="og:url" content="/" />
     <meta name="keywords" content="${config.keywords}" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=${config.googleAnalyticsId}"></script>
     <script>

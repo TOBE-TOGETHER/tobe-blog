@@ -14,10 +14,29 @@ export default function ContentReadingPage(
   }>
 ) {
   useEffect(() => {
-    window.document.title = `${props.content?.title ? props.content?.title + ' | ' : ''}${config.title}`;
+    const originTitle = window.document.title;
+    const titleMeta: Element | null = document.querySelector('META[name="og:title"]');
+    const originTitleValue: string | undefined | null = titleMeta?.getAttribute('content');
+    const descMeta: Element | null = document.querySelector('META[name="og:description"]');
+    const originDescValue: string | undefined | null = descMeta?.getAttribute('content');
+    const imageMeta: Element | null = document.querySelector('META[name="og:image"]');
+    const originImageValue: string | undefined | null = imageMeta?.getAttribute('content');
+    const urlMeta: Element | null = document.querySelector('META[name="og:url"]');
+    const originUrlValue: string | undefined | null = urlMeta?.getAttribute('content');
+    
+    window.document.title = props.content?.title ? props.content?.title : originTitle;
+    titleMeta?.setAttribute('content', `${props.content?.title}`);
+    descMeta?.setAttribute('content', `${props.content?.description}`)
+    imageMeta?.setAttribute('content', `${props.content?.coverImgUrl}`)
+    urlMeta?.setAttribute('content', window.location.href);
+
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    return function restoreTitle() {
-      window.document.title = `${config.title}`;
+    return function restoreTitleAndMeta() {
+      window.document.title = `${originTitle}`;
+      titleMeta?.setAttribute('content', `${originTitleValue}`);
+      descMeta?.setAttribute('content', `${originDescValue}`);
+      imageMeta?.setAttribute('content', `${originImageValue}`);
+      urlMeta?.setAttribute('content', `${originUrlValue}`);
     };
   });
   return (
