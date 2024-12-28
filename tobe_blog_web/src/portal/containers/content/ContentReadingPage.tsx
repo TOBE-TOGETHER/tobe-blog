@@ -1,6 +1,5 @@
 import { Container, Grid } from '@mui/material';
 import { ReactNode, useEffect } from 'react';
-import config from '../../../../customization.json';
 import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout, RelevantContentsPanel } from '../../components';
