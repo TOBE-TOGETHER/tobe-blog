@@ -1,5 +1,6 @@
 import { Container, Grid } from '@mui/material';
 import { ReactNode, useEffect } from 'react';
+import { IMeta, switchMetas } from '../../../commons';
 import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout, RelevantContentsPanel } from '../../components';
@@ -14,28 +15,19 @@ export default function ContentReadingPage(
 ) {
   useEffect(() => {
     const originTitle = window.document.title;
-    const titleMeta: Element | null = document.querySelector('META[name="og:title"]');
-    const originTitleValue: string | undefined | null = titleMeta?.getAttribute('content');
-    const descMeta: Element | null = document.querySelector('META[name="og:description"]');
-    const originDescValue: string | undefined | null = descMeta?.getAttribute('content');
-    const imageMeta: Element | null = document.querySelector('META[name="og:image"]');
-    const originImageValue: string | undefined | null = imageMeta?.getAttribute('content');
-    const urlMeta: Element | null = document.querySelector('META[name="og:url"]');
-    const originUrlValue: string | undefined | null = urlMeta?.getAttribute('content');
-    
+    const metas: IMeta[] = [
+      { name: 'og:title', content: props.content?.title },
+      { name: 'og:description', content: props.content?.description },
+      { name: 'description', content: props.content?.description },
+      { name: 'og:image', content: props.content?.coverImgUrl },
+      { name: 'og:url', content: window.location.href + 'v?=' + new Date().getTime() },
+    ];
+    switchMetas(metas);
     window.document.title = props.content?.title ? props.content?.title : originTitle;
-    titleMeta?.setAttribute('content', `${props.content?.title}`);
-    descMeta?.setAttribute('content', `${props.content?.description}`)
-    imageMeta?.setAttribute('content', `${props.content?.coverImgUrl}`)
-    urlMeta?.setAttribute('content', window.location.href);
-
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     return function restoreTitleAndMeta() {
       window.document.title = `${originTitle}`;
-      titleMeta?.setAttribute('content', `${originTitleValue}`);
-      descMeta?.setAttribute('content', `${originDescValue}`);
-      imageMeta?.setAttribute('content', `${originImageValue}`);
-      urlMeta?.setAttribute('content', `${originUrlValue}`);
+      switchMetas(metas);
     };
   });
   return (

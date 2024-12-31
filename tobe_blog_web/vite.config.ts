@@ -12,6 +12,7 @@ function buildGoogleTagScript(): string {
     <meta name="og:site_name" content="${config.title}" />
     <meta name="og:type" content="article" />
     <meta name="og:description" content="${config.description}" />
+    <meta name="description" content="${config.description}" />
     <meta name="og:image" content="${config.image}" />
     <meta name="og:url" content="/" />
     <meta name="keywords" content="${config.keywords}" />

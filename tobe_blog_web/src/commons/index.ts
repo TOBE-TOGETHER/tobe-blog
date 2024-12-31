@@ -61,4 +61,23 @@ export function getPathFromContentType(contentType: EContentType | string): stri
   }
 }
 
+export interface IMeta {
+  name: string;
+  content: string | undefined | null;
+}
+
+/**
+ * This is a common function to switch meta values of the page,
+ * The target values should be declared in the client component and passed into this function
+ * The meta values can be restore by re-run this function, espectially can be used in effect function return body.
+ */
+export function switchMetas(metas: IMeta[]) {
+  metas.forEach(m => {
+    const tm: Element | null = document.querySelector(`META[name="${m.name}"]`);
+    const originValue: string | undefined | null = tm?.getAttribute('content');
+    tm?.setAttribute('content', `${m.content}`);
+    m.content = originValue;
+  });
+}
+
 export { TimeFormat };
