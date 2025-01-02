@@ -23,11 +23,12 @@ function getLocale(): 'en' | 'zh-CN' {
   }
 }
 
-function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (value: string) => void; setTextValue: (value: string) => void }>) {
+function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (value: string) => void; setTextValue: (value: string) => void; editable: boolean }>) {
   const { t } = useTranslation();
   const [editor, setEditor] = useState<IDomEditor | null>(null);
 
   const editorConfig: Partial<IEditorConfig> = {
+    readOnly: !props.editable,
     MENU_CONF: {
       insertImage: {
         onInsertedImage(imageNode: ImageElement | null) {
@@ -65,7 +66,7 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
       editor.destroy();
       setEditor(null);
     };
-  }, [editor]);
+  }, [editor, props.editable]);
   i18nGetResources(getLocale());
 
   return (
@@ -76,8 +77,8 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
         'width': '100%',
         'border': '1px, solid ' + theme.palette.grey[300],
         'overflow': 'hidden',
-        '&:hover': { boxShadow: '0 0 0 1px ' + theme.palette.primary.dark },
-        '&:focus-within': { boxShadow: '0 0 0 1px ' + theme.palette.primary.dark, borderColor: theme.palette.primary.dark },
+        '&:hover': { boxShadow: props.editable ? '0 0 0 1px ' + theme.palette.primary.dark : 'none' },
+        '&:focus-within': { boxShadow: props.editable ? '0 0 0 1px ' + theme.palette.primary.dark : 'none', borderColor: props.editable ? theme.palette.primary.dark : 'none' },
       }}
     >
       <Toolbar
@@ -98,7 +99,7 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
           props.setTextValue(editor.getText());
         }}
         mode="default"
-        style={{ height: '500px', overflowY: 'hidden', width: '100%', backgroundColor: '#f1f3f5', padding: '8px' }}
+        style={{ minHeight: '500px', width: '100%', backgroundColor: '#f1f3f5', padding: '8px' }}
       />
     </Grid>
   );

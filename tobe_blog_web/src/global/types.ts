@@ -108,6 +108,20 @@ export interface IArticleDetailDTO extends IBaseUserContentDTO {
   contentProtected: boolean;
 }
 
+export interface IArticleCreationDTO {
+  title: string;
+  description: string;
+  coverImgUrl: string;
+  content: string;
+  subTitle: string;
+  contentProtected: boolean;
+  tags: ITagOption[];
+}
+
+export interface IArticleUpdateDTO extends IArticleCreationDTO {
+  id: string;
+}
+
 export interface IVocabularyCreationDTO {
   title: string;
   description: string;

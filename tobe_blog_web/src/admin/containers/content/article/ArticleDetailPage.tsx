@@ -1,10 +1,10 @@
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { ITagOption } from '../../../../global/types';
-import { URL } from '../../../../routes';
+import { IArticleUpdateDTO, ITagOption } from '../../../../global/types';
+import ContentEditBar from '../components/ContentEditBar';
 import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
 
@@ -13,7 +13,6 @@ export default function ArticleDetailPage() {
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
   const [htmlValue, setHtmlValue] = useState<string>('');
   const [textValue, setTextValue] = useState<string>('');
   const [title, setTitle] = useState<string>('');
@@ -21,6 +20,7 @@ export default function ArticleDetailPage() {
   const [coverImgUrl, setCoverImgUrl] = useState<string>('');
   const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [contentProtected, setContentProtected] = useState<boolean>(false);
+  const [editable, setEditable] = useState<boolean>(false);
   const loadData = useCallback((): void => {
     if (!id) {
       return window.history.back();
@@ -45,29 +45,13 @@ export default function ArticleDetailPage() {
 
   useEffect(() => loadData(), [loadData]);
 
-  function saveArticle(): void {
-    if (!id) {
-      return;
-    }
-    if (!title) {
-      return;
-    }
+  function saveArticle(updateDTO: IArticleUpdateDTO): void {
     setLoading(true);
-    ArticleService.update({
-      id: id,
-      title: title,
-      subTitle: subTitle,
-      coverImgUrl: coverImgUrl,
-      content: htmlValue,
-      description: textValue.trim().length >= 500 ? textValue.trim().substring(0, 497) + '...' : textValue.trim(),
-      tags: tagValues,
-      contentProtected: contentProtected,
-    })
+    ArticleService.update(updateDTO)
       .then(() => {
         enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
-        navigate(URL.ARTICLES);
       })
       .catch(() => {
         enqueueSnackbar(t('msg.error'), {
@@ -77,11 +61,37 @@ export default function ArticleDetailPage() {
       .finally(() => setLoading(false));
   }
 
+  const handleEditableChange = () => {
+    if (!id) {
+      return;
+    }
+    if (!title) {
+      return;
+    }
+    if (editable) {
+      saveArticle({
+        id: id,
+        title: title,
+        subTitle: subTitle,
+        coverImgUrl: coverImgUrl,
+        content: htmlValue,
+        description: textValue.trim().length >= 500 ? textValue.trim().substring(0, 497) + '...' : textValue.trim(),
+        tags: tagValues,
+        contentProtected: contentProtected,
+      });
+    }
+    setEditable(!editable);
+  };
+
   return (
     <Page
       openLoading={loading}
       pageTitle={t('admin-pages-title.article-edit')}
     >
+      <ContentEditBar
+        editable={editable}
+        handleEditableChange={handleEditableChange}
+      />
       <ArticleEditMainSection
         title={title}
         setTitle={setTitle}
@@ -96,7 +106,7 @@ export default function ArticleDetailPage() {
         htmlValue={htmlValue}
         setHtmlValue={setHtmlValue}
         setTextValue={setTextValue}
-        onClickPrimaryBtn={saveArticle}
+        editable={editable}
       />
     </Page>
   );

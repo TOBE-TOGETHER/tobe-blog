@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
+import { SaveButtonPanel } from '../../../components';
 import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
 
@@ -65,8 +66,9 @@ export default function ArticleCreationPage() {
         htmlValue={htmlValue}
         setHtmlValue={setHtmlValue}
         setTextValue={setTextValue}
-        onClickPrimaryBtn={saveArticle}
+        editable={true}
       />
+      <SaveButtonPanel primaryEvent={saveArticle} />
     </Page>
   );
 }
