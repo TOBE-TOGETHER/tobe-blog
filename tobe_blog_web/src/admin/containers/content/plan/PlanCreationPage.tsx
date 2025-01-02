@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { SaveButtonPanel } from '../../../components';
+import { useCommonContentState } from '../commons.ts';
 import { PlanService } from '../UserContentService.ts';
 import PlanEditMainSection from './components/PlanEditMainSection';
 
@@ -13,13 +13,9 @@ export default function PlanCreationPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
-  const [title, setTitle] = useState<string | null>(null);
-  const [description, setDescription] = useState<string | null>(null);
-  const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
+  const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
 
   const handleSubmit = () => {
     if (!validateForm()) {

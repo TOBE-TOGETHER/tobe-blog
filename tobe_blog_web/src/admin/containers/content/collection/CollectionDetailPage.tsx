@@ -2,10 +2,10 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { Page } from '../../../../components/layout';
-import { ICollectionDTO, ICollectionUpdateDTO, IRenderTree, ITagOption, ITagRelationship } from '../../../../global/types';
+import { ICollectionDTO, ICollectionUpdateDTO, IRenderTree, ITagRelationship } from '../../../../global/types';
+import { useCommonContentState } from '../commons';
+import BaseContentPage from '../components/ContentPage';
 import { CollectionService } from '../UserContentService';
-import ContentEditBar from '../components/ContentEditBar';
 import CollectionContentPanel from './components/CollectionContentPanel';
 import ContentEditMainSection from './components/CollectionEditMainSection';
 
@@ -14,18 +14,14 @@ export default function CollectionDetailPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
-  const [editable, setEditable] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
   const [collection, setCollection] = useState<ICollectionDTO | null>(null);
-  const [title, setTitle] = useState<string | null>(null);
-  const [description, setDescription] = useState<string | null>(null);
-  const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
-  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [treeData, setTreeData] = useState<IRenderTree>({
     id: ROOT,
     name: 'ROOT',
     children: [],
   });
+  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } =
+    useCommonContentState();
 
   const loadData = useCallback(
     (id: string): void => {
@@ -77,9 +73,9 @@ export default function CollectionDetailPage() {
     if (editable) {
       handleUpdate({
         id: collection.id,
-        title: title || '',
-        description: description || '',
-        coverImgUrl: coverImgUrl || '',
+        title: title,
+        description: description,
+        coverImgUrl: coverImgUrl,
         tags: tagValues,
       });
     }
@@ -103,14 +99,12 @@ export default function CollectionDetailPage() {
   }
 
   return collection ? (
-    <Page
-      openLoading={loading}
-      pageTitle={title || ''}
+    <BaseContentPage
+      loading={loading}
+      title={title}
+      editable={editable}
+      handleEditableChange={handleEditableChange}
     >
-      <ContentEditBar
-        editable={editable}
-        handleEditableChange={handleEditableChange}
-      />
       <ContentEditMainSection
         title={title}
         setTitle={setTitle}
@@ -127,7 +121,7 @@ export default function CollectionDetailPage() {
         loadData={loadData}
         treeData={treeData}
       />
-    </Page>
+    </BaseContentPage>
   ) : (
     <></>
   );

@@ -1,22 +1,12 @@
-import { SxProps, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { FormPanel, OneRow } from '../../../../../components';
-import { ITagOption } from '../../../../../global/types';
 import { MultipleTagSelecter } from '../../../../components';
+import { IContentMainSectionProps } from '../../commons';
 
-interface IVOCEditMainSectionProps {
-  title: string | null;
-  setTitle: (value: string) => void;
-  description: string | null;
-  setDescription: (value: string) => void;
+interface IVOCEditMainSectionProps extends IContentMainSectionProps {
   language: string | null;
   setLanguage: (value: string) => void;
-  coverImgUrl: string | null;
-  setCoverImgUrl: (value: string) => void;
-  tagValues: ITagOption[];
-  setTagValues: (value: ITagOption[]) => void;
-  editable: boolean;
-  sx?: SxProps;
 }
 
 export default function VOCEditMainSection(props: Readonly<IVOCEditMainSectionProps>) {

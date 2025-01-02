@@ -4,24 +4,20 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { WordListPanel } from '../../../../components/common/word/WordListPanel';
-import { Page } from '../../../../components/layout';
-import { ITagOption, IVocabularyDetailDTO, IVocabularyUpdateDTO } from '../../../../global/types';
+import { IVocabularyDetailDTO, IVocabularyUpdateDTO } from '../../../../global/types';
+import { useCommonContentState } from '../commons';
+import BaseContentPage from '../components/ContentPage';
 import { VocabularyService } from '../UserContentService';
-import ContentEditBar from '../components/ContentEditBar';
 import VOCEditMainSection from './components/VOCEditMainSection';
 
 export default function VOCDetailPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
-  const [editable, setEditable] = useState<boolean>(false);
   const [vocabulary, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
-  const [title, setTitle] = useState<string | null>(null);
-  const [description, setDescription] = useState<string | null>(null);
-  const [language, setLanguage] = useState<string | null>(null);
-  const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
-  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
+  const [language, setLanguage] = useState<string>('');
+  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } =
+    useCommonContentState();
 
   const loadData = useCallback(
     (vocabularyId: string): void => {
@@ -57,10 +53,10 @@ export default function VOCDetailPage() {
     if (editable) {
       handleUpdate({
         id: vocabulary.id,
-        title: title || '',
-        description: description || '',
-        language: language || '',
-        coverImgUrl: coverImgUrl || '',
+        title: title,
+        description: description,
+        language: language,
+        coverImgUrl: coverImgUrl,
         tags: tagValues,
       });
     }
@@ -84,14 +80,12 @@ export default function VOCDetailPage() {
   }
 
   return vocabulary ? (
-    <Page
-      openLoading={loading}
-      pageTitle={title || ''}
+    <BaseContentPage
+      loading={loading}
+      title={title}
+      editable={editable}
+      handleEditableChange={handleEditableChange}
     >
-      <ContentEditBar
-        editable={editable}
-        handleEditableChange={handleEditableChange}
-      />
       <VOCEditMainSection
         title={title}
         setTitle={setTitle}
@@ -113,7 +107,7 @@ export default function VOCDetailPage() {
           />
         </Paper>
       )}
-    </Page>
+    </BaseContentPage>
   ) : (
     <></>
   );

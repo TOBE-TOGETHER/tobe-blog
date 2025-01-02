@@ -2,9 +2,9 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { Page } from '../../../../components/layout';
-import { IArticleUpdateDTO, ITagOption } from '../../../../global/types';
-import ContentEditBar from '../components/ContentEditBar';
+import { IArticleUpdateDTO } from '../../../../global/types';
+import { useCommonContentState } from '../commons';
+import BaseContentPage from '../components/ContentPage';
 import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
 
@@ -12,15 +12,12 @@ export default function ArticleDetailPage() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
-  const [loading, setLoading] = useState<boolean>(false);
   const [htmlValue, setHtmlValue] = useState<string>('');
   const [textValue, setTextValue] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
-  const [coverImgUrl, setCoverImgUrl] = useState<string>('');
-  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [contentProtected, setContentProtected] = useState<boolean>(false);
-  const [editable, setEditable] = useState<boolean>(false);
+  const { loading, setLoading, editable, setEditable, title, setTitle, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
+
   const loadData = useCallback((): void => {
     if (!id) {
       return window.history.back();
@@ -84,14 +81,12 @@ export default function ArticleDetailPage() {
   };
 
   return (
-    <Page
-      openLoading={loading}
-      pageTitle={t('admin-pages-title.article-edit')}
+    <BaseContentPage
+      loading={loading}
+      title={title}
+      editable={editable}
+      handleEditableChange={handleEditableChange}
     >
-      <ContentEditBar
-        editable={editable}
-        handleEditableChange={handleEditableChange}
-      />
       <ArticleEditMainSection
         title={title}
         setTitle={setTitle}
@@ -107,7 +102,9 @@ export default function ArticleDetailPage() {
         setHtmlValue={setHtmlValue}
         setTextValue={setTextValue}
         editable={editable}
+        description={''}
+        setDescription={() => {}}
       />
-    </Page>
+    </BaseContentPage>
   );
 }

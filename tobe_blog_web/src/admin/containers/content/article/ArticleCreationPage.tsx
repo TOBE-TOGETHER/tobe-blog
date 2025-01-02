@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Page } from '../../../../components/layout';
-import { ITagOption } from '../../../../global/types';
 import { URL } from '../../../../routes';
 import { SaveButtonPanel } from '../../../components';
+import { useCommonContentState } from '../commons';
 import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
 
@@ -13,14 +13,11 @@ export default function ArticleCreationPage() {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState<boolean>(false);
   const [htmlValue, setHtmlValue] = useState<string>('');
   const [textValue, setTextValue] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
-  const [coverImgUrl, setCoverImgUrl] = useState<string>('');
-  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [contentProtected, setContentProtected] = useState<boolean>(false);
+  const { loading, setLoading, title, setTitle, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
 
   function saveArticle(): void {
     setLoading(true);
@@ -67,6 +64,8 @@ export default function ArticleCreationPage() {
         setHtmlValue={setHtmlValue}
         setTextValue={setTextValue}
         editable={true}
+        description={''}
+        setDescription={() => {}}
       />
       <SaveButtonPanel primaryEvent={saveArticle} />
     </Page>

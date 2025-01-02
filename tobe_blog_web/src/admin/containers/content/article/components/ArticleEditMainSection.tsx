@@ -1,26 +1,18 @@
-import { FormControlLabel, Switch, SxProps, TextField } from '@mui/material';
+import { FormControlLabel, Switch, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { FormPanel, OneRow } from '../../../../../components';
-import { ITagOption } from '../../../../../global/types';
 import { MultipleTagSelecter } from '../../../../components';
+import { IContentMainSectionProps } from '../../commons';
 import RichContentEditor from './RichContentEditor';
 
-export interface IArticleEditMainSectionProps {
-  title: string;
-  setTitle: (value: string) => void;
+export interface IArticleEditMainSectionProps extends IContentMainSectionProps {
   subTitle: string;
   setSubTitle: (value: string) => void;
-  coverImgUrl: string;
-  setCoverImgUrl: (value: string) => void;
   contentProtected: boolean;
   setContentProtected: (value: boolean) => void;
-  tagValues: ITagOption[];
-  setTagValues: (value: ITagOption[]) => void;
   htmlValue: string;
   setHtmlValue: (value: string) => void;
   setTextValue: (value: string) => void;
-  editable: boolean;
-  sx?: SxProps;
 }
 
 export default function ArticleEditMainSection(props: Readonly<IArticleEditMainSectionProps>) {
