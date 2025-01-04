@@ -40,7 +40,7 @@ export const NavItems = (props: { pageItems: IPageItem[] }) => {
           >
             <ListItemButton
               onClick={() => navigate(pageItem.url)}
-              selected={pageItem.url === location.pathname}
+              selected={location.pathname.includes(pageItem.url)}
             >
               <ListItemIcon>{pageItem.icon}</ListItemIcon>
               <ListItemText primary={t(pageItem.label)} />

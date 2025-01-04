@@ -62,6 +62,7 @@ export default function ArticleCreationPage() {
         editable={true}
         description={''}
         setDescription={() => {}}
+        sx={{ mt: 6 }}
       />
       <SaveButtonPanel primaryEvent={saveArticle} />
     </Page>

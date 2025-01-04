@@ -99,7 +99,7 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
           props.setTextValue(editor.getText());
         }}
         mode="default"
-        style={{ minHeight: '500px', width: '100%', backgroundColor: '#f1f3f5', padding: '8px' }}
+        style={{ minHeight: '200px', width: '100%', backgroundColor: '#f1f3f5', padding: '8px' }}
       />
     </Grid>
   );
