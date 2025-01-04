@@ -1,8 +1,8 @@
 import FirstPage from '@mui/icons-material/FirstPage';
 import { Drawer, Grid, IconButton, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
 import config from '../../../../customization.json';
+import { useCommonUtils } from '../../../commons';
 import StrokeText from '../../../components/common/StrokeText';
 import theme from '../../../theme';
 import { adminPageItems, basicPageItems } from './NavConfigs';
@@ -15,7 +15,7 @@ interface ISideNavProps {
 }
 
 export default function SideNav(props: Readonly<ISideNavProps>) {
-  const navigate = useNavigate();
+  const { navigate } = useCommonUtils();
   const underSmScreen = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <Drawer

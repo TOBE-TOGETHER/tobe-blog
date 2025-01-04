@@ -1,7 +1,6 @@
-import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons';
 import { ICollectionDTO, ICollectionUpdateDTO, IRenderTree, ITagRelationship } from '../../../../global/types';
 import { useCommonContentState } from '../commons';
 import BaseContentPage from '../components/ContentPage';
@@ -11,9 +10,8 @@ import ContentEditMainSection from './components/CollectionEditMainSection';
 
 export default function CollectionDetailPage() {
   const ROOT = 'root';
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [collection, setCollection] = useState<ICollectionDTO | null>(null);
   const [treeData, setTreeData] = useState<IRenderTree>({
     id: ROOT,

@@ -1,12 +1,10 @@
 import { Box, Button, Dialog, DialogContent, DialogTitle, Grid, TextField } from '@mui/material';
-import { useSnackbar } from 'notistack';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../commons';
 import { IWordGeneralDTO } from '../../../global/types';
 import * as WordService from './WordService';
 
 export function WordDetailDialog(props: { word: IWordGeneralDTO | null; setWord: (word: IWordGeneralDTO | null) => void; loadData: Function; handleDeleteWord: Function }) {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
 
   function handleClose() {
     props.setWord(null);

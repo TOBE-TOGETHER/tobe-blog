@@ -1,7 +1,6 @@
-import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons';
 import { IArticleUpdateDTO } from '../../../../global/types';
 import { useCommonContentState } from '../commons';
 import BaseContentPage from '../components/ContentPage';
@@ -9,9 +8,8 @@ import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
 
 export default function ArticleDetailPage() {
-  const { t } = useTranslation();
   const { id } = useParams();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [htmlValue, setHtmlValue] = useState<string>('');
   const [textValue, setTextValue] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');

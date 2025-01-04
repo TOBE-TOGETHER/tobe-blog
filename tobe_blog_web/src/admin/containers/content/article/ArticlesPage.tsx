@@ -1,10 +1,10 @@
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../commons';
 import { URL } from '../../../../routes';
 import { ArticleService } from '../UserContentService';
 import GeneralContentListPage from '../components/GeneralContentListPage';
 
 export default function ArticlesPage() {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <GeneralContentListPage
       contentService={ArticleService}

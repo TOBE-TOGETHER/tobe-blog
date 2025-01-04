@@ -1,9 +1,7 @@
 import { Grid, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { TimeFormat } from '../../../../commons';
+import { TimeFormat, useCommonUtils } from '../../../../commons';
 import { PlanProgressModal } from '../../../../components';
 import { IPlanInfo } from '../../../../global/types';
 import { URL } from '../../../../routes';
@@ -11,10 +9,8 @@ import * as PublicDataService from '../../../../services/PublicDataService.ts';
 import ContentReadingPage from '../ContentReadingPage';
 
 export default function PlanReadingPage() {
-  const { t } = useTranslation();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const { id } = useParams();
-
-  const { enqueueSnackbar } = useSnackbar();
   const [plan, setPlan] = useState<IPlanInfo | null>(null);
 
   useEffect(() => {

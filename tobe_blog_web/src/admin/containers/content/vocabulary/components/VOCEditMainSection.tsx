@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../../commons';
 import { FormPanel, OneRow } from '../../../../../components';
 import { MultipleTagSelecter } from '../../../../components';
 import { IContentMainSectionProps } from '../../commons';
@@ -10,7 +10,7 @@ interface IVOCEditMainSectionProps extends IContentMainSectionProps {
 }
 
 export default function VOCEditMainSection(props: Readonly<IVOCEditMainSectionProps>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <FormPanel sx={{ mt: 1, ...props.sx }}>
       <OneRow>

@@ -3,15 +3,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import RecommendIcon from '@mui/icons-material/Recommend';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Chip, Grid, Paper, Tooltip, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import config from '../../../../../customization.json';
+import { useCommonUtils } from '../../../../commons';
 import { dateMonFormat } from '../../../../commons/TimeFormat';
 import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
 import theme from '../../../../theme';
 import { CardHeaderActionButton } from '../../../components';
 
 export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onClick?: (id: string | number) => void; operations: IOperation[] }>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <Grid
       item

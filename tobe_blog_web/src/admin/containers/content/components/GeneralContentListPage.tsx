@@ -1,7 +1,6 @@
 import { Box, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons';
 import { Page } from '../../../../components/layout';
 import { ITagOption } from '../../../../global/types';
 import BaseContentService from '../BaseContentService';
@@ -16,8 +15,7 @@ export default function GeneralContentListPage(
     createPageURL: string;
   }>
 ) {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { t, navigate } = useCommonUtils();
   const [openLoading, setOpenLoading] = useState<boolean>(false);
   const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [status, setStatus] = useState<string>('');

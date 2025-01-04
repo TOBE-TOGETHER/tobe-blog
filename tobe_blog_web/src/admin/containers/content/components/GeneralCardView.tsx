@@ -1,7 +1,6 @@
 import { Grid } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../commons';
 import { InfiniteScrollList } from '../../../../components';
 import { EOperationName } from '../../../../global/enums';
 import { IBaseUserContentDTO, IOperation, ITagOption } from '../../../../global/types';
@@ -24,8 +23,7 @@ interface ILoadDataOption {
 }
 
 export default function GeneralCardView(props: IGeneralCardViewProps) {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const DEFAULT_PAGE_SIZE: number = 8;
   const [data, setData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(0);

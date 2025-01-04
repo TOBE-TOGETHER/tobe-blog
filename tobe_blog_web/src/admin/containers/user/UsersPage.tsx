@@ -1,6 +1,5 @@
-import { useSnackbar } from 'notistack';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
 import { EColumnPosition, EOperationName } from '../../../global/enums.ts';
 import { IColumn, IOperation, IUserData } from '../../../global/types';
@@ -8,12 +7,11 @@ import * as UserService from '../../../services/UserService.ts';
 import { PagedTable } from '../../components';
 
 export default function UsersPage() {
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [current, setCurrent] = useState<number>(0);
   const [size, setSize] = useState<number>(10);
   const [rows, setRows] = useState<IUserData[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const { t } = useTranslation();
 
   const loadUserData = useCallback((): void => {
     UserService.getUsers(size, current)

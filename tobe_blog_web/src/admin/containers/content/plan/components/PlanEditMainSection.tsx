@@ -1,6 +1,6 @@
 import { Grid, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../../commons';
 import { FormPanel, HalfRow, OneRow } from '../../../../../components';
 import { MultipleTagSelecter } from '../../../../components';
 import { IContentMainSectionProps } from '../../commons';
@@ -13,7 +13,7 @@ interface IPlanEditMainSectionProps extends IContentMainSectionProps {
 }
 
 export default function PlanEditMainSection(props: Readonly<IPlanEditMainSectionProps>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <FormPanel sx={{ mt: 1, ...props.sx }}>
       <OneRow>

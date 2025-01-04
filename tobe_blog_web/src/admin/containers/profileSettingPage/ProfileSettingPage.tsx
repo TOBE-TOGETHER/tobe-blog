@@ -1,9 +1,7 @@
 import LaunchOutlinedIcon from '@mui/icons-material/LaunchOutlined';
 import { Box, Divider, FormControlLabel, FormGroup, Grid, IconButton, Paper, Switch, TextField, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { ReactNode, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../../commons/index.ts';
 import { HalfRow, OneRow, QuarterRow } from '../../../components';
 import { Page } from '../../../components/layout';
 import { useAuthDispatch, useAuthState } from '../../../contexts';
@@ -14,9 +12,7 @@ import { SaveButtonPanel } from '../../components';
 import AvatarSelector from './AvatarSelector.tsx';
 
 export default function ProfileSettingPage() {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
+  const { t, enqueueSnackbar, navigate } = useCommonUtils();
   const [openLoading, setOpenLoading] = useState(false);
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();

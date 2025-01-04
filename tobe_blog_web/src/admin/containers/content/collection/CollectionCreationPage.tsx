@@ -1,6 +1,4 @@
-import { useSnackbar } from 'notistack';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons';
 import { Page } from '../../../../components/layout';
 import { URL } from '../../../../routes';
 import { SaveButtonPanel } from '../../../components';
@@ -9,9 +7,7 @@ import { CollectionService } from '../UserContentService';
 import ContentEditMainSection from './components/CollectionEditMainSection';
 
 export default function CollectionCreationPage() {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
+  const { t, enqueueSnackbar, navigate } = useCommonUtils();
   const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
 
   const handleSubmit = () => {

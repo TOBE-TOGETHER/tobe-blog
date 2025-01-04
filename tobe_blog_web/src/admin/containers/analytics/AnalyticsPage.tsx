@@ -1,9 +1,6 @@
 import { Grid, Paper, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { enabled } from '../../../commons/index.ts';
+import { enabled, useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout/index.ts';
 import { EContentType, EFeatureCode } from '../../../global/enums.ts';
 import { IUserContentAnalyticsDTO } from '../../../global/types.ts';
@@ -11,8 +8,7 @@ import { URL } from '../../../routes';
 import * as OverviewService from './OverviewService.ts';
 
 export default function AnalyticsPage() {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [planData, setPlanData] = useState<IUserContentAnalyticsDTO>({
     totalCount: 0,
     publicCount: 0,
@@ -139,8 +135,7 @@ const StandardSmallWidget = (props: Readonly<{ value: number | string; label: st
 };
 
 const UserContentAnalyticsPanel = (props: Readonly<{ data: IUserContentAnalyticsDTO; link: string; contentType: EContentType }>) => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { t, navigate } = useCommonUtils();
   return (
     <Grid
       container

@@ -1,7 +1,5 @@
-import { useSnackbar } from 'notistack';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons';
 import { Page } from '../../../../components/layout';
 import { URL } from '../../../../routes';
 import { SaveButtonPanel } from '../../../components';
@@ -10,9 +8,7 @@ import { VocabularyService } from '../UserContentService';
 import VOCEditMainSection from './components/VOCEditMainSection';
 
 export default function VOCCreationPage() {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar, navigate } = useCommonUtils();
   const [language, setLanguage] = useState<string>('');
   const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
 

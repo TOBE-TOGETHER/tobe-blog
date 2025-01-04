@@ -1,13 +1,11 @@
 import { Dialog, DialogContent, DialogTitle, Grid, TextField } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { SaveButtonPanel } from '../../../admin/components';
+import { useCommonUtils } from '../../../commons';
 import * as WordService from './WordService';
 
-export function WordCreateDialog(props: Readonly<{ vocabularyId: string, loadData: Function, open: boolean, setOpen: Function }>) {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+export function WordCreateDialog(props: Readonly<{ vocabularyId: string; loadData: Function; open: boolean; setOpen: Function }>) {
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [text, setText] = useState<string>('');
   const [partOfSpeech, setPartOfSpeech] = useState<string>('');
   const [meaningInChinese, setMeaningInChinese] = useState<string>('');

@@ -1,12 +1,12 @@
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../commons/index.ts';
 import { IBaseUserContentDTO, IOperation } from '../../../global/types';
 import Dialogx from '../dialog/Dialogx.tsx';
 
 export default function CardHeaderActionButton(props: Readonly<{ operations: IOperation[]; data: IBaseUserContentDTO; color?: string }>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorRecordId, setAnchorRecordId] = React.useState<null | string>(null);
   const open = Boolean(anchorEl);

@@ -1,8 +1,7 @@
 import { Grid } from '@mui/material';
-import { enqueueSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useCommonUtils } from '../../../commons/index.ts';
 import { Loading } from '../../../components';
 import { EContentType } from '../../../global/enums';
 import { IUserFullProfileDTO } from '../../../global/types';
@@ -13,8 +12,8 @@ import IntroducationSection from './IntroducationSection';
 
 export default function PersonalPortalPage() {
   const { id } = useParams();
-  const { t } = useTranslation();
-  let [loading, setLoading] = useState<boolean>(false);
+  const { t, enqueueSnackbar } = useCommonUtils();
+  const [loading, setLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<IUserFullProfileDTO | null>(null);
   const loadProfile = useCallback((): void => {
     setLoading(true);

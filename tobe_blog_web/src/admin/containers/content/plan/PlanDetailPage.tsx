@@ -1,7 +1,6 @@
-import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons/index.ts';
 import { IPlanInfo, IPlanUpdateDTO } from '../../../../global/types';
 import { useCommonContentState } from '../commons.ts';
 import BaseContentPage from '../components/ContentPage.tsx';
@@ -10,8 +9,7 @@ import PlanEditMainSection from './components/PlanEditMainSection.tsx';
 import PlanProgressModal from './components/PlanProgressModal.tsx';
 
 export default function PlanDetailPage() {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const { id } = useParams();
   const [plan, setPlan] = useState<IPlanInfo | null>(null);
   const [fromTime, setFromTime] = useState<Date | null>(null);

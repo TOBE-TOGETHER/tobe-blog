@@ -1,7 +1,6 @@
 import { Grid } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../../commons/index.ts';
 import { InfiniteScrollList } from '../../../../../components';
 import { IPlanProgress } from '../../../../../global/types.ts';
 import * as PublicDataService from '../../../../../services/PublicDataService.ts';
@@ -12,8 +11,7 @@ interface ILoadDataOption {
 }
 
 export default function PlanProgressItems(props: Readonly<{ planId: string; viewOnly: boolean; refreshCode: number }>) {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const DEFAULT_PAGE_SIZE: number = 6;
   const [progresses, setProgresses] = useState<IPlanProgress[]>([]);
   const [current, setCurrent] = useState<number>(0);

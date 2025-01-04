@@ -1,5 +1,5 @@
 import { FormControlLabel, Switch, TextField } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../../commons';
 import { FormPanel, OneRow } from '../../../../../components';
 import { MultipleTagSelecter } from '../../../../components';
 import { IContentMainSectionProps } from '../../commons';
@@ -16,7 +16,7 @@ export interface IArticleEditMainSectionProps extends IContentMainSectionProps {
 }
 
 export default function ArticleEditMainSection(props: Readonly<IArticleEditMainSectionProps>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <FormPanel sx={{ mt: 1, ...props.sx }}>
       <OneRow>

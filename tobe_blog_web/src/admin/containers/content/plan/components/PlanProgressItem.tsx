@@ -1,8 +1,6 @@
 import { Grid, Paper, TextField, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { TimeFormat } from '../../../../../commons';
+import { TimeFormat, useCommonUtils } from '../../../../../commons';
 import { IPlanProgress } from '../../../../../global/types';
 import { EditIconButton } from '../../../../components';
 import * as PlanProgressService from './PlanProgressService.ts';
@@ -13,8 +11,7 @@ interface IPlanProgressItemProps {
 }
 
 export default function PlanProgressItem(props: Readonly<IPlanProgressItemProps>) {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [progress, setProgress] = useState<IPlanProgress>(props.progress);
   const [editable, setEditable] = useState<boolean>(false);
   // const [imageURLs, setImageURLs] = useState<string[]>([]);

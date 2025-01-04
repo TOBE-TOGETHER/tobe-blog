@@ -1,7 +1,5 @@
-import { useSnackbar } from 'notistack';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons/index.ts';
 import { Page } from '../../../../components/layout';
 import { URL } from '../../../../routes';
 import { SaveButtonPanel } from '../../../components';
@@ -10,9 +8,7 @@ import { PlanService } from '../UserContentService.ts';
 import PlanEditMainSection from './components/PlanEditMainSection';
 
 export default function PlanCreationPage() {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar, navigate } = useCommonUtils();
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
   const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();

@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import { IDomEditor, IEditorConfig, IToolbarConfig, SlateElement, i18nGetResources } from '@wangeditor/editor';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../../commons';
 import { EditorStyle } from '../../../../../components';
 import theme from '../../../../../theme';
 
@@ -24,7 +24,7 @@ function getLocale(): 'en' | 'zh-CN' {
 }
 
 function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (value: string) => void; setTextValue: (value: string) => void; editable: boolean }>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   const [editor, setEditor] = useState<IDomEditor | null>(null);
 
   const editorConfig: Partial<IEditorConfig> = {

@@ -3,11 +3,9 @@ import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import FlagIcon from '@mui/icons-material/Flag';
 import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
 import { Grid, Link, SxProps, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { ReactNode, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { getPathFromContentType } from '../../../../commons';
+import { getPathFromContentType, useCommonUtils } from '../../../../commons';
 import { EContentType } from '../../../../global/enums';
 import { IBaseUserContentDTO, ICollectionDTO, ITagRelationshipDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
@@ -15,8 +13,7 @@ import * as PublicDataService from '../../../../services/PublicDataService.ts';
 import ContentReadingPage from '../ContentReadingPage';
 
 export default function CollectionReadingPage() {
-  const { enqueueSnackbar } = useSnackbar();
-  const { t } = useTranslation();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [collection, setCollection] = useState<ICollectionDTO | null>(null);
   const { id } = useParams();
 
@@ -229,7 +226,7 @@ const ContentLink = (props: { id: string; text: string; contentType: string }) =
 };
 
 const ToBeContinuedTip = () => {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <Grid
       item

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../commons';
 
 export function getButtonByOperationName(name: string, handleOnClick: () => void, key?: string | number): ReactNode {
   switch (name) {
@@ -65,7 +65,7 @@ interface ITableButtonProps {
 }
 
 export const TableButton = (props: ITableButtonProps) => {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
 
   return (
     <Button

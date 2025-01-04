@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../commons';
 
 export default function NoContentNewsItem() {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <Grid
       container

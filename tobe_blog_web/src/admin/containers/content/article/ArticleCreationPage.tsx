@@ -1,7 +1,5 @@
-import { useSnackbar } from 'notistack';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons';
 import { Page } from '../../../../components/layout';
 import { URL } from '../../../../routes';
 import { SaveButtonPanel } from '../../../components';
@@ -10,9 +8,7 @@ import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
 
 export default function ArticleCreationPage() {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
+  const { t, enqueueSnackbar, navigate } = useCommonUtils();
   const [htmlValue, setHtmlValue] = useState<string>('');
   const [textValue, setTextValue] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');

@@ -1,5 +1,15 @@
+import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { EContentType, ELocalStorageKeys } from '../global/enums.ts';
 import * as TimeFormat from './TimeFormat';
+
+export const useCommonUtils = () => {
+  const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  return { t, enqueueSnackbar, navigate };
+};
 
 export function authed(requiredRole?: string[]): boolean {
   const userAuthorities = JSON.parse(localStorage.getItem(ELocalStorageKeys.AUTHORITIES) ?? '[]');

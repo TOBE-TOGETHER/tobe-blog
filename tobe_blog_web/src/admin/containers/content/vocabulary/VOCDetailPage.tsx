@@ -1,8 +1,7 @@
 import { Paper } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons';
 import { WordListPanel } from '../../../../components/common/word/WordListPanel';
 import { IVocabularyDetailDTO, IVocabularyUpdateDTO } from '../../../../global/types';
 import { useCommonContentState } from '../commons';
@@ -11,8 +10,7 @@ import { VocabularyService } from '../UserContentService';
 import VOCEditMainSection from './components/VOCEditMainSection';
 
 export default function VOCDetailPage() {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const { id } = useParams();
   const [vocabulary, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
   const [language, setLanguage] = useState<string>('');

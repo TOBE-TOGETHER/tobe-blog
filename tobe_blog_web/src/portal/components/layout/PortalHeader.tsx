@@ -2,9 +2,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import config from '../../../../customization.json';
+import { useCommonUtils } from '../../../commons/index.ts';
 import StrokeText from '../../../components/common/StrokeText.tsx';
 import HeaderLanguageMenu from '../../../components/layout/HeaderLanguageMenu.tsx';
 import HeaderUserMenu from '../../../components/layout/HeaderUserMenu.tsx';
@@ -73,8 +72,7 @@ const PortalHeader = () => {
 };
 
 const HeaderContent = () => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, navigate } = useCommonUtils();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);

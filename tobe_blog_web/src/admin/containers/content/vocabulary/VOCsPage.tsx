@@ -1,10 +1,10 @@
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../commons';
 import { URL } from '../../../../routes';
 import { VocabularyService } from '../UserContentService';
 import GeneralContentListPage from '../components/GeneralContentListPage';
 
 export default function VOCsPage() {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <GeneralContentListPage
       contentService={VocabularyService}

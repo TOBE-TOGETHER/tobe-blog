@@ -1,6 +1,5 @@
 import { Grid, Link, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { TimeFormat } from '../../../commons';
+import { TimeFormat, useCommonUtils } from '../../../commons';
 import { ITagOption } from '../../../global/types';
 import { URL } from '../../../routes';
 import theme from '../../../theme';
@@ -20,7 +19,7 @@ export default function NewsListItem(
     onClick: () => void;
   }>
 ) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <Grid
       container
