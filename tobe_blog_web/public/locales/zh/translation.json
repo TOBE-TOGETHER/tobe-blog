@@ -10,6 +10,10 @@
   "components": {
     "relevant-contents": "相关内容",
     "upload-pics": "上传图片",
+    "visibility-switch": {
+      "release": "草稿，点击发布",
+      "retract": "已发布，点击撤回"
+    },
     "edit-icon-button": {
       "save": "保存",
       "edit": "修改"
@@ -23,6 +27,7 @@
       "delete": "删除",
       "create": "新增",
       "release": "公开",
+      "retract": "撤回",
       "ban": "封禁",
       "recommend": "推荐"
     },

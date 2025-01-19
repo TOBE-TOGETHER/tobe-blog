@@ -22,4 +22,9 @@ public class Const {
         DRFAT,
         PUBLISHED
     }
+
+    public static enum Visibility {
+        PUBLIC,
+        PRIVATE
+    }
 }

@@ -50,6 +50,8 @@ export default function CardHeaderActionButton(props: Readonly<{ operations: IOp
     switch (operationName) {
       case 'release':
         return t('components.standard-button.release');
+      case 'retract':
+        return t('components.standard-button.retract');
       case 'delete':
         return t('components.standard-button.delete');
       case 'detail':

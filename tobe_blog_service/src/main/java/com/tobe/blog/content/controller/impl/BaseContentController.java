@@ -19,6 +19,7 @@ import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.dto.content.BaseSearchFilter;
+import com.tobe.blog.beans.dto.content.ContentVisibilityUpdateDTO;
 import com.tobe.blog.beans.entity.content.BaseContentEntity;
 import com.tobe.blog.content.controller.IContentController;
 import com.tobe.blog.content.mapper.BaseContentMapper;
@@ -93,9 +94,9 @@ public abstract class BaseContentController<
     }
 
     @Override
-    @PutMapping("/{id}/release")
-    public ResponseEntity<D> release(@PathVariable String id) {
-        return ResponseEntity.ok(this.getConcreteSubContentService().release(id));
+    @PutMapping("/{id}/visibility")
+    public ResponseEntity<D> updatVisibility(@PathVariable String id, @RequestBody ContentVisibilityUpdateDTO updateDTO) {
+        return ResponseEntity.ok(this.getConcreteSubContentService().updatVisibility(id, updateDTO));
     }
 
     private BaseSearchFilter buildSearchFilter(

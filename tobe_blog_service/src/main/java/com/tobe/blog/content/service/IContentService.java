@@ -5,6 +5,7 @@ import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.dto.content.BaseSearchFilter;
+import com.tobe.blog.beans.dto.content.ContentVisibilityUpdateDTO;
 import com.tobe.blog.beans.entity.content.BaseContentEntity;
 import com.tobe.blog.content.mapper.BaseContentMapper;
 
@@ -27,6 +28,6 @@ public interface IContentService<
 
     D getDTOByIdAndCount(String id);
 
-    D release(String id);
+    D updatVisibility(String id, ContentVisibilityUpdateDTO updateDTO);
 
 }

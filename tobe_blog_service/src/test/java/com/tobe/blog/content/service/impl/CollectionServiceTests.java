@@ -14,9 +14,11 @@ import org.springframework.test.context.ActiveProfiles;
 import com.tobe.blog.DefaultTestData;
 import com.tobe.blog.DefaultTestData.DefaultUser;
 import com.tobe.blog.beans.consts.Const.ContentType;
+import com.tobe.blog.beans.consts.Const.Visibility;
 import com.tobe.blog.beans.dto.content.CollectionCreationDTO;
 import com.tobe.blog.beans.dto.content.CollectionDTO;
 import com.tobe.blog.beans.dto.content.CollectionUpdateDTO;
+import com.tobe.blog.beans.dto.content.ContentVisibilityUpdateDTO;
 import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 import com.tobe.blog.core.utils.SecurityUtil;
 
@@ -104,11 +106,12 @@ public class CollectionServiceTests {
         dto.setTitle("Collection To Be Released");
         final CollectionDTO saveResult = collectionService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
-        final CollectionDTO releaseResult = collectionService.release(saveResult.getId());
+        final ContentVisibilityUpdateDTO visibilityUpdateDTO = ContentVisibilityUpdateDTO.builder().id(saveResult.getId()).visibility(Visibility.PUBLIC).build();
+        final CollectionDTO releaseResult = collectionService.updatVisibility(saveResult.getId(), visibilityUpdateDTO);
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
-        Assertions.assertThrows(RuntimeException.class, () -> collectionService.release(saveResult.getId()));
+        Assertions.assertThrows(RuntimeException.class, () -> collectionService.updatVisibility(saveResult.getId(), visibilityUpdateDTO));
     }
 
     @Test

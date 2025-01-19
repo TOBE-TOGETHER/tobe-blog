@@ -12,10 +12,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tobe.blog.beans.consts.Const;
+import com.tobe.blog.beans.consts.Const.Visibility;
 import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
 import com.tobe.blog.beans.dto.content.BaseSearchFilter;
+import com.tobe.blog.beans.dto.content.ContentVisibilityUpdateDTO;
 import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 import com.tobe.blog.beans.entity.content.BaseContentEntity;
 import com.tobe.blog.beans.entity.content.ContentAdminEntity;
@@ -146,13 +148,22 @@ public abstract class BaseContentService<
     }
 
     @Override
-    public D release(String id) {
+    public D updatVisibility(String id, ContentVisibilityUpdateDTO updateDTO) {
         final ContentGeneralInfoEntity entity = generalInfoService.getAndValidateContent(id);
-        if (entity.getPublicToAll()) {
-            throw new TobeRuntimeException("Content has already been released");
+        if (updateDTO.getVisibility() == Visibility.PUBLIC) {
+            if (entity.getPublicToAll()) {
+                throw new TobeRuntimeException("Content has already been released");
+            } else {
+                entity.setPublicToAll(Boolean.TRUE);
+                entity.setPublishTime(new Timestamp(System.currentTimeMillis()));
+            }
+        } else {
+            if (!entity.getPublicToAll()) {
+                throw new TobeRuntimeException("Content has already been private");
+            } else {
+                entity.setPublicToAll(Boolean.FALSE);
+            }
         }
-        entity.setPublicToAll(Boolean.TRUE);
-        entity.setPublishTime(new Timestamp(System.currentTimeMillis()));
         generalInfoService.updateById(entity);
         return this.baseMapper.getDTOById(getConcreteEntity().getTableName(), id);
     }

@@ -79,7 +79,6 @@ export default function GeneralContentListPage(
         contentService={props.contentService}
         status={status}
         tagValues={tagValues}
-        recordFound={recordFound}
         setRecordFound={setRecordFound}
         onClick={(id: number | string) => navigate(props.detailPageURL.replace(':id', id.toString()))}
       />

@@ -38,6 +38,7 @@ export enum EOperationName {
   DELETE = 'delete',
   DETAIL = 'detail',
   RELEASE = 'release',
+  RETRACT = 'retract',
   BAN = 'ban',
   RECOMMEND = 'recommend',
 }

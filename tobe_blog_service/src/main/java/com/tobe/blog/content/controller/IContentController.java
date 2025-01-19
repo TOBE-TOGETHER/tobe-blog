@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
+import com.tobe.blog.beans.dto.content.ContentVisibilityUpdateDTO;
 import com.tobe.blog.beans.entity.content.BaseContentEntity;
 import com.tobe.blog.content.mapper.BaseContentMapper;
 import com.tobe.blog.content.service.IContentService;
@@ -37,6 +38,6 @@ public interface IContentController<
         String tags,
         String keyword);
 
-    ResponseEntity<D> release(String id);
+    ResponseEntity<D> updatVisibility(String id, ContentVisibilityUpdateDTO updateDTO);
 
 }
