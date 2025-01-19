@@ -1,8 +1,6 @@
 import { Button, Grid, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { getPathFromContentType } from '../../../commons';
+import { getPathFromContentType, useCommonUtils } from '../../../commons';
 import { EContentType } from '../../../global/enums';
 import { IBaseUserContentDTO } from '../../../global/types';
 import * as PublicDataService from '../../../services/PublicDataService.ts';
@@ -24,7 +22,7 @@ export default function FeaturedNews(
     handleContentTypeChange: (newValue: EContentType) => void;
   }>
 ) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [newsData, setNewsData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(1);
@@ -132,8 +130,7 @@ export default function FeaturedNews(
 
 const NewsList = (props: { newsData: IBaseUserContentDTO[]; totalPage: number; current: number; handleLoadMoreRecords: () => void }) => {
   const { newsData, totalPage, current, handleLoadMoreRecords } = props;
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, navigate } = useCommonUtils();
   return newsData.length > 0 ? (
     <>
       {newsData.map(n => (

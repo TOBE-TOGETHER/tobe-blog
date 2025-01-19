@@ -1,8 +1,7 @@
 import Add from '@mui/icons-material/Add';
 import { Box, Button, Divider, Grid, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../commons';
 import { IWordGeneralDTO } from '../../../global/types';
 import * as PublicDataService from '../../../services/PublicDataService';
 import theme from '../../../theme';
@@ -11,9 +10,8 @@ import { WordDetailDialog } from './WordDetailDialog';
 import { WordDisplayDialog } from './WordDisplayDialog';
 import * as WordService from './WordService';
 
-export function WordListPanel(props: Readonly<{ editable: boolean, vocabularyId: string }>) {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+export function WordListPanel(props: Readonly<{ editable: boolean; vocabularyId: string }>) {
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [open, setOpen] = useState<boolean>(false);
   const [openedWord, setOpenedWord] = useState<IWordGeneralDTO | null>(null);
   const [words, setWords] = useState<IWordGeneralDTO[]>([]);

@@ -1,13 +1,13 @@
 import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Skeleton } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../commons/index.ts';
 import { SidePanel } from '../../../components/index.ts';
 import { EContentType } from '../../../global/enums.ts';
 import { ITagStatisticDTO } from '../../../global/types.ts';
 import * as PublicDataService from '../../../services/PublicDataService.ts';
 
 export default function TagFilterPanel(props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void }>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   const [tagStatistics, setTagStatistics] = useState<ITagStatisticDTO[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 

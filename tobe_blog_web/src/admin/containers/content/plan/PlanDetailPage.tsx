@@ -1,27 +1,21 @@
-import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { Page } from '../../../../components/layout';
-import { IPlanInfo, IPlanUpdateDTO, ITagOption } from '../../../../global/types';
+import { useCommonUtils } from '../../../../commons/index.ts';
+import { IPlanInfo, IPlanUpdateDTO } from '../../../../global/types';
+import { useCommonContentState } from '../commons.ts';
+import BaseContentPage from '../components/ContentPage.tsx';
 import { PlanService } from '../UserContentService.ts';
-import ContentEditBar from '../components/ContentEditBar.tsx';
 import PlanEditMainSection from './components/PlanEditMainSection.tsx';
 import PlanProgressModal from './components/PlanProgressModal.tsx';
 
 export default function PlanDetailPage() {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const { id } = useParams();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [editable, setEditable] = useState<boolean>(false);
   const [plan, setPlan] = useState<IPlanInfo | null>(null);
-  const [title, setTitle] = useState<string | null>(null);
-  const [description, setDescription] = useState<string | null>(null);
-  const [coverImgUrl, setCoverImgUrl] = useState<string | null>(null);
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
-  const [tagValues, setTagValues] = useState<ITagOption[]>([]);
+  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } =
+    useCommonContentState();
 
   const loadData = useCallback(
     (id: string): void => {
@@ -85,15 +79,13 @@ export default function PlanDetailPage() {
     setEditable(!editable);
   };
 
-  return plan ? (
-    <Page
-      openLoading={loading}
-      pageTitle={title || ''}
+  return (
+    <BaseContentPage
+      loading={loading}
+      title={title}
+      editable={editable}
+      handleEditableChange={handleEditableChange}
     >
-      <ContentEditBar
-        editable={editable}
-        handleEditableChange={handleEditableChange}
-      />
       <PlanEditMainSection
         title={title}
         setTitle={setTitle}
@@ -115,8 +107,6 @@ export default function PlanDetailPage() {
           viewOnly={false}
         />
       )}
-    </Page>
-  ) : (
-    <></>
+    </BaseContentPage>
   );
 }

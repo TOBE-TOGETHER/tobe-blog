@@ -1,29 +1,19 @@
-import { Grid, SxProps, TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../../commons';
 import { FormPanel, HalfRow, OneRow } from '../../../../../components';
-import { ITagOption } from '../../../../../global/types';
 import { MultipleTagSelecter } from '../../../../components';
+import { IContentMainSectionProps } from '../../commons';
 
-interface IPlanEditMainSectionProps {
-  title: string | null;
-  setTitle: (value: string) => void;
-  description: string | null;
-  setDescription: (value: string) => void;
+interface IPlanEditMainSectionProps extends IContentMainSectionProps {
   fromTime: Date | null;
   setFromTime: (value: Date | null) => void;
   toTime: Date | null;
   setToTime: (value: Date | null) => void;
-  coverImgUrl: string | null;
-  setCoverImgUrl: (value: string) => void;
-  tagValues: ITagOption[];
-  setTagValues: (value: ITagOption[]) => void;
-  editable: boolean;
-  sx?: SxProps;
 }
 
 export default function PlanEditMainSection(props: Readonly<IPlanEditMainSectionProps>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <FormPanel sx={{ mt: 1, ...props.sx }}>
       <OneRow>

@@ -1,17 +1,15 @@
 import { Button, Link, TextField } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import config from '../../../../customization.json';
+import { useCommonUtils } from '../../../commons/index.ts';
 import { HalfRow, OneRow } from '../../../components';
 import { URL } from '../../../routes';
 import * as UserService from '../../../services/UserService.ts';
 import SingleBoxLayout from '../../components/layout/SingleBoxLayout.tsx';
 
 export default function SignUp() {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, navigate } = useCommonUtils();
   const [openLoading, setOpenLoading] = useState(false);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,7 +72,7 @@ export default function SignUp() {
 
   return (
     <SingleBoxLayout
-      title={t('sign-up.title') + ' ' + config.projectName}
+      title={t('sign-up.title') + ' ' + config.title}
       handleSubmit={handleSubmit}
       openLoading={openLoading}
     >

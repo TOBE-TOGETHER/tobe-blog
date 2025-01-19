@@ -1,8 +1,7 @@
 import { Grid, Link, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useCommonUtils } from '../../../../commons/index.ts';
 import { useAuthState } from '../../../../contexts';
 import { IArticleDetailDTO } from '../../../../global/types';
 import { URL } from '../../../../routes';
@@ -11,8 +10,7 @@ import ContentReadingPage from '../ContentReadingPage.tsx';
 import RichContentReader from './RichContentReader.tsx';
 
 export default function ArticleReadingPage() {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const authState = useAuthState();
   const { id } = useParams();
   const [article, setArticle] = useState<IArticleDetailDTO | null>(null);

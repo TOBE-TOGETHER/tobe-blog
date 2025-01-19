@@ -1,16 +1,14 @@
 import { Avatar, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../../commons';
 import { SidePanel } from '../../../components';
 import { IUserBriefProfileDTO } from '../../../global/types';
 import { URL } from '../../../routes';
 import * as PublicDataService from '../../../services/PublicDataService';
 
 export default function Top5ActiveUsersPanel() {
-  const { t } = useTranslation();
+  const { t, navigate } = useCommonUtils();
   const [userData, setUserData] = useState<IUserBriefProfileDTO[]>([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     function loadUsers(): void {

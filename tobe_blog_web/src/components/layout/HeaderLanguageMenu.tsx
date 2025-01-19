@@ -2,11 +2,12 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import { Grid, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import { changeLanguage } from 'i18next';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../commons';
 import { LANGUAGE } from '../../i18n';
 import theme from '../../theme';
 
 export default function HeaderLanguageMenu() {
+  const { t } = useCommonUtils();
   const availableLangs: Array<{ label: string; value: string }> = [
     { label: 'app-header.language.options.zh', value: LANGUAGE.ZH },
     { label: 'app-header.language.options.en', value: LANGUAGE.EN },
@@ -31,7 +32,6 @@ export default function HeaderLanguageMenu() {
     return false;
   }
 
-  const { t } = useTranslation();
   return (
     <Grid container>
       <IconButton

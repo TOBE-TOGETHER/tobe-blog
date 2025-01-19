@@ -1,10 +1,10 @@
 import { Container, Grid, Paper, Tooltip, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import config from '../../../../customization.json';
+import { useCommonUtils } from '../../../commons';
 import { IUserFullProfileDTO } from '../../../global/types';
 
 export default function IntroducationSection(props: Readonly<{ profile: IUserFullProfileDTO | null }>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <Container sx={{ mt: '64px' }}>
       <Grid

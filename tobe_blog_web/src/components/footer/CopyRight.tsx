@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import config from '../../../customization.json';
 
 function Copyright() {
-  const { cnWebRegisterLicense, projectName } = config;
+  const { cnWebRegisterLicense, title } = config;
   return (
     <Grid>
       <Typography
@@ -18,7 +18,7 @@ function Copyright() {
           color="inherit"
           href="/"
         >
-          <strong>{projectName.toUpperCase()}</strong>
+          <strong>{title.toUpperCase()}</strong>
         </Link>
       </Typography>
       {cnWebRegisterLicense && (

@@ -1,11 +1,11 @@
-import { useTranslation } from 'react-i18next';
 import { URL } from '../../../../routes';
 import { PlanService } from '../UserContentService.ts';
 
+import { useCommonUtils } from '../../../../commons/index.ts';
 import GeneralContentListPage from '../components/GeneralContentListPage';
 
 export default function PlansPage() {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <GeneralContentListPage
       contentService={PlanService}

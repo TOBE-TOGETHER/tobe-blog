@@ -1,24 +1,11 @@
-import { SxProps, TextField } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { TextField } from '@mui/material';
+import { useCommonUtils } from '../../../../../commons';
 import { FormPanel, OneRow } from '../../../../../components';
-import { ITagOption } from '../../../../../global/types';
 import { MultipleTagSelecter } from '../../../../components';
+import { IContentMainSectionProps } from '../../commons';
 
-export interface IContentEditMainSectionProps {
-  title: string | null;
-  setTitle: (value: string) => void;
-  description: string | null;
-  setDescription: (value: string) => void;
-  coverImgUrl: string | null;
-  setCoverImgUrl: (value: string) => void;
-  tagValues: ITagOption[];
-  setTagValues: (value: ITagOption[]) => void;
-  editable: boolean;
-  sx?: SxProps;
-}
-
-export default function ContentEditMainSection(props: Readonly<IContentEditMainSectionProps>) {
-  const { t } = useTranslation();
+export default function ContentEditMainSection(props: Readonly<IContentMainSectionProps>) {
+  const { t } = useCommonUtils();
   return (
     <FormPanel sx={{ mt: 1, ...props.sx }}>
       <OneRow>

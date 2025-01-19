@@ -188,6 +188,7 @@
       "published": "Published",
       "draft": "Draft"
     },
+    "record-found": "Number of records found",
     "msg": {
       "error": "Failed to fetch contents"
     }

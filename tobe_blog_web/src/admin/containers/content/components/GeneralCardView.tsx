@@ -1,7 +1,6 @@
 import { Grid } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../commons';
 import { InfiniteScrollList } from '../../../../components';
 import { EOperationName } from '../../../../global/enums';
 import { IBaseUserContentDTO, IOperation, ITagOption } from '../../../../global/types';
@@ -14,6 +13,7 @@ interface IGeneralCardViewProps {
   contentService: BaseContentService;
   status: string;
   tagValues: ITagOption[];
+  setRecordFound: (v: number) => void;
   onClick?: (id: number | string) => void;
 }
 
@@ -24,14 +24,14 @@ interface ILoadDataOption {
 }
 
 export default function GeneralCardView(props: IGeneralCardViewProps) {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const DEFAULT_PAGE_SIZE: number = 8;
   const [data, setData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
 
   function loadData(option: ILoadDataOption): void {
+    option.reset && props.setLoading(true);
     props.contentService
       .get(
         DEFAULT_PAGE_SIZE,
@@ -44,11 +44,15 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
         setData(option.reset ? response.data.records : data.concat(response.data.records));
         setCurrent(response.data.current);
         setTotalPage(response.data.pages);
+        props.setRecordFound(response.data.total);
       })
       .catch(() => {
         enqueueSnackbar(t('contents-page.msg.error'), {
           variant: 'error',
         });
+      })
+      .finally(() => {
+        props.setLoading(false);
       });
   }
 

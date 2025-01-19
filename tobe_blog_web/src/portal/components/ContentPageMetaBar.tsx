@@ -1,13 +1,12 @@
 import { Grid, Link, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { TimeFormat } from '../../commons';
+import { TimeFormat, useCommonUtils } from '../../commons';
 import { useAuthState } from '../../contexts';
 import { URL } from '../../routes';
 
 export default function ContentPageMetaBar(
   props: Readonly<{ ownerName: string; ownerId: number | string; publishTime: string; viewCount: number; likeCount: number; editLinkUrl: string }>
 ) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   const authState = useAuthState();
   return (
     <Grid

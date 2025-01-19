@@ -1,21 +1,16 @@
-import { useSnackbar } from 'notistack';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { getPathFromContentType } from '../../../commons/index.ts';
+import { getPathFromContentType, useCommonUtils } from '../../../commons/index.ts';
 import { EColumnPosition, EOperationName } from '../../../global/enums.ts';
 import { IColumn, IOperation, IUserData } from '../../../global/types.ts';
 import { Page, PagedTable } from '../../components/index.ts';
 import * as ContentAdminService from './ContentAdminService.ts';
 
 export default function ContentAdminPage() {
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar, navigate } = useCommonUtils();
   const [current, setCurrent] = useState<number>(0);
   const [size, setSize] = useState<number>(10);
   const [rows, setRows] = useState<IUserData[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const loadData = useCallback((): void => {
     ContentAdminService.getContents(size, current)

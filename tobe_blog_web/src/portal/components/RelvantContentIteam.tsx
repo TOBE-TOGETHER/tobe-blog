@@ -1,13 +1,10 @@
 import { Grid, Paper, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { getPathFromContentType, TimeFormat } from '../../commons';
+import { getPathFromContentType, TimeFormat, useCommonUtils } from '../../commons';
 import { IBaseUserContentDTO } from '../../global/types';
 import theme from '../../theme';
 
 export default function RelevantContentItem(props: Readonly<{ content: IBaseUserContentDTO }>) {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, navigate } = useCommonUtils();
   return (
     <Grid
       container

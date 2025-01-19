@@ -1,16 +1,14 @@
 import Add from '@mui/icons-material/Add';
 import { Divider, IconButton, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { authed, enabled } from '../../../commons';
+import { useLocation } from 'react-router-dom';
+import { authed, enabled, useCommonUtils } from '../../../commons';
 import { IPageItem } from '../../../global/types';
 import { NavItem } from './NavItem';
 
 export const NavItems = (props: { pageItems: IPageItem[] }) => {
   let location = useLocation();
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, navigate } = useCommonUtils();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const authedPages = props.pageItems.filter(pageItem => authed(pageItem.requiredRoles) && enabled(pageItem.requiredFeature));
   return (
@@ -42,7 +40,7 @@ export const NavItems = (props: { pageItems: IPageItem[] }) => {
           >
             <ListItemButton
               onClick={() => navigate(pageItem.url)}
-              selected={pageItem.url === location.pathname}
+              selected={location.pathname.includes(pageItem.url)}
             >
               <ListItemIcon>{pageItem.icon}</ListItemIcon>
               <ListItemText primary={t(pageItem.label)} />

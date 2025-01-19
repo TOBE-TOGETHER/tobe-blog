@@ -1,14 +1,14 @@
 import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../../commons/index.ts';
 import { FormPanel } from '../../../../../components';
 import { IRenderTree, ITagOption } from '../../../../../global/types';
 import { SingleTagSelecter, TreePanel } from '../../../../components';
 import * as TagRelationshipService from '../TagRelationshipService.ts';
 
-export default function CollectionContentPanel(props: Readonly<{ collectionId: string, loadData: (id: string) => void, treeData: IRenderTree }>) {
+export default function CollectionContentPanel(props: Readonly<{ collectionId: string; loadData: (id: string) => void; treeData: IRenderTree }>) {
   const ROOT = 'root';
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   const [currentNodeId, setCurrentNodeId] = useState<string>(ROOT);
   const [targetTag, setTargetTag] = useState<ITagOption | null>(null);
   function handleCreateNewRelationship() {

@@ -1,6 +1,6 @@
 import { Container, Grid } from '@mui/material';
 import { ReactNode, useEffect } from 'react';
-import config from '../../../../customization.json';
+import { IMeta, switchMetas } from '../../../commons';
 import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout, RelevantContentsPanel } from '../../components';
@@ -14,10 +14,20 @@ export default function ContentReadingPage(
   }>
 ) {
   useEffect(() => {
-    window.document.title = `${props.content?.title ? props.content?.title + ' | ' : ''}${config.projectName.toUpperCase()}`;
+    const originTitle = window.document.title;
+    const metas: IMeta[] = [
+      { name: 'og:title', content: props.content?.title },
+      { name: 'og:description', content: props.content?.description },
+      { name: 'description', content: props.content?.description },
+      { name: 'og:image', content: props.content?.coverImgUrl },
+      { name: 'og:url', content: window.location.href + 'v?=' + new Date().getTime() },
+    ];
+    switchMetas(metas);
+    window.document.title = props.content?.title ? props.content?.title : originTitle;
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    return function restoreTitle() {
-      window.document.title = `${config.projectName.toUpperCase()}`;
+    return function restoreTitleAndMeta() {
+      window.document.title = `${originTitle}`;
+      switchMetas(metas);
     };
   });
   return (

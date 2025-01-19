@@ -1,8 +1,8 @@
-import { Button } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { useTranslation } from "react-i18next";
+import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { useCommonUtils } from '../../../commons';
 
-const VisuallyHiddenInput = styled("input")`
+const VisuallyHiddenInput = styled('input')`
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
@@ -15,7 +15,7 @@ const VisuallyHiddenInput = styled("input")`
 `;
 
 export default function InputFileUploadButton(props: Readonly<{ onImageChange: Function }>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   return (
     <Button
       component="label"
@@ -24,12 +24,12 @@ export default function InputFileUploadButton(props: Readonly<{ onImageChange: F
       variant="contained"
       size="small"
     >
-      {t("components.upload-pics")}
+      {t('components.upload-pics')}
       <VisuallyHiddenInput
         type="file"
         multiple
         accept="image/*"
-        onChange={(e) => props.onImageChange(e)}
+        onChange={e => props.onImageChange(e)}
       />
     </Button>
   );

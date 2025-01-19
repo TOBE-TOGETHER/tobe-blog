@@ -1,13 +1,13 @@
 import { Divider, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../commons';
 import { InfiniteScrollList } from '../../components';
 import { IBaseUserContentDTO } from '../../global/types';
 import * as PublicDataService from '../../services/PublicDataService';
 import RelevantContentItem from './RelvantContentIteam';
 
 export default function RelevantContentsPanel(props: Readonly<{ content: IBaseUserContentDTO }>) {
-  const { t } = useTranslation();
+  const { t } = useCommonUtils();
   const DEFAULT_PAGE_SIZE: number = 12;
   const [relevantContents, setRelevantContents] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(0);

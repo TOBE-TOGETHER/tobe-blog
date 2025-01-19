@@ -1,15 +1,13 @@
 import { Button, Divider, Grid, Paper, TextField, Typography } from '@mui/material';
-import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCommonUtils } from '../../../../../commons/index.ts';
 import { InputFileUploadButton } from '../../../../components/index.ts';
 import * as FileService from './FileService.ts';
 import PlanProgressItems from './PlanProgressItems.tsx';
 import * as PlanProgressService from './PlanProgressService.ts';
 
 export default function PlanProgressModal(props: Readonly<{ planId: string; viewOnly: boolean }>) {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
+  const { t, enqueueSnackbar } = useCommonUtils();
   const [newProgress, setNewProgress] = useState<string>('');
   const [images, setImages] = useState<any>([]);
   const [refreshCode, setRefreshCode] = useState<number>(new Date().getTime());
