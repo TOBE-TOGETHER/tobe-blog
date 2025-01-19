@@ -1,7 +1,9 @@
 import { Grid } from '@mui/material';
 import { EditIconButton } from '../../../components';
+import BaseContentService from '../BaseContentService';
+import { VisibilitySwitch } from './VisibilitySwitch';
 
-export default function ComtentEditBar(props: Readonly<{ editable: boolean; handleEditableChange: () => void }>) {
+export default function ComtentEditBar(props: Readonly<{ id: string | undefined; editable: boolean; handleEditableChange: () => void; service: BaseContentService }>) {
   return (
     <Grid
       container
@@ -12,6 +14,15 @@ export default function ComtentEditBar(props: Readonly<{ editable: boolean; hand
         item
         flexGrow={1}
       ></Grid>
+      <Grid
+        item
+        flexGrow={0}
+      >
+        <VisibilitySwitch
+          id={props.id}
+          service={props.service}
+        />
+      </Grid>
       <Grid
         item
         flexGrow={0}

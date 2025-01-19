@@ -82,8 +82,10 @@ export default function ArticleDetailPage() {
     <BaseContentPage
       loading={loading}
       title={title}
+      id={id}
       editable={editable}
       handleEditableChange={handleEditableChange}
+      service={ArticleService}
     >
       <ArticleEditMainSection
         title={title}

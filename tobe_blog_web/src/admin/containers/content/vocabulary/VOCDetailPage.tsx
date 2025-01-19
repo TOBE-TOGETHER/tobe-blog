@@ -80,9 +80,11 @@ export default function VOCDetailPage() {
   return vocabulary ? (
     <BaseContentPage
       loading={loading}
+      id={id}
       title={title}
       editable={editable}
       handleEditableChange={handleEditableChange}
+      service={VocabularyService}
     >
       <VOCEditMainSection
         title={title}

@@ -16,8 +16,8 @@ export default class BaseContentService {
     return server.get(`/${this.baseUri}/${id}`);
   }
 
-  releaseById(id: string | number): AxiosPromise {
-    return server.put(`/${this.baseUri}/${id}/release`);
+  updateVisibility(id: string | number, visibility: 'PUBLIC' | 'PRIVATE'): AxiosPromise {
+    return server.put(`/${this.baseUri}/${id}/visibility`, { visibility: visibility, id: id });
   }
 
   deleteById(id: string | number): AxiosPromise {

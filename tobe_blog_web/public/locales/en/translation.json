@@ -14,6 +14,10 @@
       "save": "Save",
       "edit": "Edit"
     },
+    "visibility-switch": {
+      "release": "Draft, click to release",
+      "retract": "Released, click to retract"
+    },
     "save-btn-panel": {
       "save": "Save",
       "back": "Back"
@@ -23,6 +27,7 @@
       "delete": "Delete",
       "create": "Create",
       "release": "Release",
+      "retract": "Retract",
       "ban": "Ban",
       "recommend": "Recommend"
     },

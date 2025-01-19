@@ -99,9 +99,11 @@ export default function CollectionDetailPage() {
   return collection ? (
     <BaseContentPage
       loading={loading}
+      id={id}
       title={title}
       editable={editable}
       handleEditableChange={handleEditableChange}
+      service={CollectionService}
     >
       <ContentEditMainSection
         title={title}

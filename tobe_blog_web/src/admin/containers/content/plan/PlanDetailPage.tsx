@@ -82,9 +82,11 @@ export default function PlanDetailPage() {
   return (
     <BaseContentPage
       loading={loading}
+      id={id}
       title={title}
       editable={editable}
       handleEditableChange={handleEditableChange}
+      service={PlanService}
     >
       <PlanEditMainSection
         title={title}

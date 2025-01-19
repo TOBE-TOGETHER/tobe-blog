@@ -60,10 +60,10 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
     loadData({ status: props.status, tagValues: props.tagValues, reset: true });
   }, [props.status, props.tagValues]);
 
-  function releaseById(id: number | string) {
+  function updateVisibility(id: number | string, visibility: 'PUBLIC' | 'PRIVATE') {
     props.setLoading(true);
     props.contentService
-      .releaseById(id)
+      .updateVisibility(id, visibility)
       .then(response => {
         setData(
           data.map(d => {
@@ -96,8 +96,13 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
   const operations: IOperation[] = [
     {
       name: EOperationName.RELEASE,
-      onClick: (id: number | string) => releaseById(id),
+      onClick: (id: number | string) => updateVisibility(id, 'PUBLIC'),
       hide: (data: any) => data.publicToAll,
+    },
+    {
+      name: EOperationName.RETRACT,
+      onClick: (id: number | string) => updateVisibility(id, 'PRIVATE'),
+      hide: (data: any) => !data.publicToAll,
     },
     {
       name: EOperationName.DELETE,

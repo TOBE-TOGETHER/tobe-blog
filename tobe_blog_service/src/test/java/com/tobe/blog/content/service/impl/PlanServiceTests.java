@@ -15,6 +15,8 @@ import org.springframework.test.context.ActiveProfiles;
 import com.tobe.blog.DefaultTestData;
 import com.tobe.blog.DefaultTestData.DefaultUser;
 import com.tobe.blog.beans.consts.Const.ContentType;
+import com.tobe.blog.beans.consts.Const.Visibility;
+import com.tobe.blog.beans.dto.content.ContentVisibilityUpdateDTO;
 import com.tobe.blog.beans.dto.content.PlanCreationDTO;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanUpdateDTO;
@@ -102,11 +104,13 @@ public class PlanServiceTests {
         dto.setTitle("Plan To Be Released");
         final PlanDTO saveResult = planService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
-        final PlanDTO releaseResult = planService.release(saveResult.getId());
+        final ContentVisibilityUpdateDTO visibilityUpdateDTO = ContentVisibilityUpdateDTO.builder().id(saveResult.getId()).visibility(Visibility.PUBLIC).build();
+        final PlanDTO releaseResult = planService.updatVisibility(
+            saveResult.getId(), visibilityUpdateDTO);
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
-        Assertions.assertThrows(RuntimeException.class, () -> planService.release(saveResult.getId()));
+        Assertions.assertThrows(RuntimeException.class, () -> planService.updatVisibility(saveResult.getId(), visibilityUpdateDTO));
     }
 
     @Test
