@@ -12,7 +12,7 @@ export function VisibilitySwitch(props: { id: string | undefined; service: BaseC
   }, [props.id]);
 
   function loadVisibility() {
-    props.service.getById(props.id || '').then(resp => {
+    props.service.getById(props.id ?? '').then(resp => {
       setVisible(resp.data.publicToAll);
     });
   }
