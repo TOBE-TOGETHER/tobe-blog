@@ -13,7 +13,6 @@ interface IGeneralCardViewProps {
   contentService: BaseContentService;
   status: string;
   tagValues: ITagOption[];
-  recordFound: number;
   setRecordFound: (v: number) => void;
   onClick?: (id: number | string) => void;
 }
