@@ -13,6 +13,8 @@ interface IGeneralCardViewProps {
   contentService: BaseContentService;
   status: string;
   tagValues: ITagOption[];
+  recordFound: number;
+  setRecordFound: (v: number) => void;
   onClick?: (id: number | string) => void;
 }
 
@@ -30,6 +32,7 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
   const [totalPage, setTotalPage] = useState<number>(1);
 
   function loadData(option: ILoadDataOption): void {
+    option.reset && props.setLoading(true);
     props.contentService
       .get(
         DEFAULT_PAGE_SIZE,
@@ -42,11 +45,15 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
         setData(option.reset ? response.data.records : data.concat(response.data.records));
         setCurrent(response.data.current);
         setTotalPage(response.data.pages);
+        props.setRecordFound(response.data.total);
       })
       .catch(() => {
         enqueueSnackbar(t('contents-page.msg.error'), {
           variant: 'error',
         });
+      })
+      .finally(() => {
+        props.setLoading(false);
       });
   }
 

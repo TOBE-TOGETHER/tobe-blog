@@ -188,6 +188,7 @@
       "published": "已发布",
       "draft": "草稿"
     },
+    "record-found": "找到的内容数量",
     "msg": {
       "error": "未能获取内容"
     }
