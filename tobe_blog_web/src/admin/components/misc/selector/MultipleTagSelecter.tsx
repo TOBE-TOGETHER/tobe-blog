@@ -47,7 +47,7 @@ export default function MultipleTagSelecter(
         props.setValue(props.value);
         const newOptions = options;
         newOptions.push(response.data);
-        setOptions(options);
+        setOptions(newOptions);
       }
     } catch (error: any) {
       enqueueSnackbar(error?.response?.data?.message, { variant: 'error' });

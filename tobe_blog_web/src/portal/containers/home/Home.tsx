@@ -9,7 +9,7 @@ export default function Home() {
     <PortalLayout>
       <GreatingSection />
       <FunctionSection
-        extraPanels={[<Top5ActiveUsersPanel />]}
+        extraPanels={[<Top5ActiveUsersPanel key="top-5-active-user-panel" />]}
         ownerId={''}
         availableContentTypes={[EContentType.Article, EContentType.Plan, EContentType.Vocabulary, EContentType.Collection]}
       />
