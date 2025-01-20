@@ -47,7 +47,7 @@ export default function SingleTagSelecter(
         options.push(response.data);
         const newOptions = options;
         newOptions.push(response.data);
-        setOptions(options);
+        setOptions(newOptions);
       }
     } catch (error: any) {
       enqueueSnackbar(error?.response?.data?.message, { variant: 'error' });
