@@ -58,13 +58,12 @@ export default function AvatarSelector(
       }}
     >
       {props.avatarUrl ? (
-        <Grid onClick={handleShowAvatarsChange}>
-          <img
-            src={props.avatarUrl}
-            width="100%"
-            alt={props.avatarUrl}
-          ></img>
-        </Grid>
+        <img
+          src={props.avatarUrl}
+          width="100%"
+          onClick={handleShowAvatarsChange}
+          alt={props.avatarUrl}
+        ></img>
       ) : (
         <PersonIcon
           sx={{ width: '100%', height: '100%' }}
