@@ -8,9 +8,9 @@ interface IPagedTableProps {
   openLoading?: boolean;
   readonly columns: IColumn[];
   rows: any[] | [];
-  totalCount: number | 0;
-  size: number | 10;
-  current: number | 0;
+  totalCount: number;
+  size: number;
+  current: number;
   operations?: IOperation[];
   handleChangeCurrent: (event: unknown, newPage: number) => void;
   handleChangeSize: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -19,7 +19,7 @@ interface IPagedTableProps {
 
 export default function PagedTable(props: Readonly<IPagedTableProps>) {
   function generateBtn(operation: IOperation, index: number, row: any): ReactNode {
-    return !operation?.hide?.call(null, row) && getButtonByOperationName(operation.name, () => operation.onClick(row.id, row), `${operation.name}_${index}`)
+    return !operation?.hide?.call(null, row) && getButtonByOperationName(operation.name, () => operation.onClick(row.id, row), `${operation.name}_${index}`);
   }
 
   return (
@@ -80,9 +80,7 @@ export default function PagedTable(props: Readonly<IPagedTableProps>) {
                           key={column.id}
                           align={column.align}
                         >
-                          {props.operations?.map(
-                            (operation, index) => generateBtn(operation, index, row)
-                          )}
+                          {props.operations?.map((operation, index) => generateBtn(operation, index, row))}
                         </TableCell>
                       );
                     }

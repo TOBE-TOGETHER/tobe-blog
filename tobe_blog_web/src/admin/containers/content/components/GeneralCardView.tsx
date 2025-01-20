@@ -23,7 +23,7 @@ interface ILoadDataOption {
   reset: boolean;
 }
 
-export default function GeneralCardView(props: IGeneralCardViewProps) {
+export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) {
   const { t, enqueueSnackbar } = useCommonUtils();
   const DEFAULT_PAGE_SIZE: number = 8;
   const [data, setData] = useState<IBaseUserContentDTO[]>([]);

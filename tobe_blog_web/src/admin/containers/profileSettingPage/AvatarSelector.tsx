@@ -1,7 +1,9 @@
 import PersonIcon from '@mui/icons-material/Person';
 import { Avatar, Box, ClickAwayListener, Grid, Paper } from '@mui/material';
 
-export default function AvatarSelector(props: Readonly<{ showAvatars: boolean, setShowAvatars: (newValue: boolean) => void, avatarUrl: string, setAvatarUrl: (newValue: string) => void }>) {
+export default function AvatarSelector(
+  props: Readonly<{ showAvatars: boolean; setShowAvatars: (newValue: boolean) => void; avatarUrl: string; setAvatarUrl: (newValue: string) => void }>
+) {
   const avatars: { alt: string; src: string }[] = initAvatars();
 
   function initAvatars() {
@@ -56,12 +58,13 @@ export default function AvatarSelector(props: Readonly<{ showAvatars: boolean, s
       }}
     >
       {props.avatarUrl ? (
-        <img
-          src={props.avatarUrl}
-          width="100%"
-          onClick={handleShowAvatarsChange}
-          alt={props.avatarUrl}
-        ></img>
+        <Grid onClick={handleShowAvatarsChange}>
+          <img
+            src={props.avatarUrl}
+            width="100%"
+            alt={props.avatarUrl}
+          ></img>
+        </Grid>
       ) : (
         <PersonIcon
           sx={{ width: '100%', height: '100%' }}

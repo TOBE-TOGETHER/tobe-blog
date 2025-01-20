@@ -187,6 +187,7 @@ export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onCli
               sx={{ maxHeight: { xs: '160px', sm: '160px', md: '252px' } }}
             >
               <img
+                alt="cover picture"
                 style={{ objectFit: 'cover', verticalAlign: 'bottom', borderRadius: '16px' }}
                 width="100%"
                 height="100%"

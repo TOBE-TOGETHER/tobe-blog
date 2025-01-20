@@ -8,22 +8,24 @@ function getLocale(): 'en' | 'zh-cn' {
   }
 }
 
-export function dateFormat(time: string | undefined | null | number) {
+type Time = string | undefined | null | number;
+
+export function dateFormat(time: Time) {
   return moment(time).format('YYYY-MM-DD');
 }
 
-export function dateMonFormat(time: string | undefined | null | number) {
+export function dateMonFormat(time: Time) {
   return moment(time).format('DD MMM YYYY');
 }
 
-export function timeFormat(time: string | undefined | null | number) {
+export function timeFormat(time: Time) {
   return moment(time).format('hh:mm a');
 }
 
-export function dateAndTimeFormat(time: string | undefined | null | number) {
+export function dateAndTimeFormat(time: Time) {
   return moment(time).format('YYYY-MM-DD HH:mm:ss');
 }
 
-export function briefDateFormat(time: string | undefined | null | number) {
+export function briefDateFormat(time: Time) {
   return moment(time).locale(getLocale()).fromNow();
 }

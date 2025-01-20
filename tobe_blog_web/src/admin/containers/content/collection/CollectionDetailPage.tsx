@@ -43,8 +43,9 @@ export default function CollectionDetailPage() {
           setDescription(response.data.description);
           setCoverImgUrl(response.data.coverImgUrl);
           setTagValues(response.data.tags);
-          treeData.children = convert(response.data.tagTree);
-          setTreeData(treeData);
+          const newTreeData = treeData;
+          newTreeData.children = convert(response.data.tagTree);
+          setTreeData(newTreeData);
         })
         .catch(() => {
           enqueueSnackbar(t('msg.error'), {

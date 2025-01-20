@@ -47,7 +47,7 @@ export default function ContentReadingPage(
           pb: 2,
         }}
       >
-        <Loading open={props.content ? false : true} />
+        <Loading open={!props.content} />
         <Grid container>
           {props.content && (
             <ContentPageMetaBar
