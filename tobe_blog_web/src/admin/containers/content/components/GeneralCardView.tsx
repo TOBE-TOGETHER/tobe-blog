@@ -23,7 +23,7 @@ interface ILoadDataOption {
   reset: boolean;
 }
 
-export default function GeneralCardView(props: IGeneralCardViewProps) {
+export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) {
   const { t, enqueueSnackbar } = useCommonUtils();
   const DEFAULT_PAGE_SIZE: number = 8;
   const [data, setData] = useState<IBaseUserContentDTO[]>([]);
@@ -31,7 +31,6 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
   const [totalPage, setTotalPage] = useState<number>(1);
 
   function loadData(option: ILoadDataOption): void {
-    option.reset && props.setLoading(true);
     props.contentService
       .get(
         DEFAULT_PAGE_SIZE,
@@ -50,9 +49,6 @@ export default function GeneralCardView(props: IGeneralCardViewProps) {
         enqueueSnackbar(t('contents-page.msg.error'), {
           variant: 'error',
         });
-      })
-      .finally(() => {
-        props.setLoading(false);
       });
   }
 

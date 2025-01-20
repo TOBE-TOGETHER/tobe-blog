@@ -45,6 +45,8 @@ export default function SingleTagSelecter(
       if (isInstanceOfTagOption(response.data)) {
         props.setValue(response.data);
         options.push(response.data);
+        const newOptions = options;
+        newOptions.push(response.data);
         setOptions(options);
       }
     } catch (error: any) {

@@ -54,7 +54,7 @@ server.interceptors.response.use(
     if (error.response.status === 401 && error.config.url.indexOf('login') === -1) {
       try {
         // try to renewal access token with the refresh token
-        const res = await AuthService.refreshToken(getRefreshToken() || '');
+        const res = await AuthService.refreshToken(getRefreshToken() ?? '');
         // if successfully get the new accessToken, save in localStorage
         if (res.data) {
           // save new access token back to local storage

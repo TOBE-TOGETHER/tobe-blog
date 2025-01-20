@@ -16,5 +16,4 @@ export async function loginUser(dispatch: React.Dispatch<Action>, signInPayload:
     localStorage.setItem(ELocalStorageKeys.AUTHORITIES, JSON.stringify(data.authorities));
     return data.userProfile;
   }
-  return;
 }

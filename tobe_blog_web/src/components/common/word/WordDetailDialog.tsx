@@ -116,7 +116,7 @@ export function WordDetailDialog(props: { word: IWordGeneralDTO | null; setWord:
               </Grid>
             </Grid>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-              <Button onClick={() => props.handleDeleteWord && props.handleDeleteWord(props.word?.id)}>{t('word-dialog.delete')}</Button>
+              <Button onClick={() => props.handleDeleteWord?.(props.word?.id)}>{t('word-dialog.delete')}</Button>
               <Button
                 onClick={handleSave}
                 variant="contained"

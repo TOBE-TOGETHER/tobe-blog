@@ -20,7 +20,6 @@ export function authed(requiredRole?: string[]): boolean {
     userAuthorities?.forEach((a: { authority: string }) => {
       if (requiredRole.indexOf(a.authority) > -1) {
         isValid = true;
-        return;
       }
     });
     return isValid;
