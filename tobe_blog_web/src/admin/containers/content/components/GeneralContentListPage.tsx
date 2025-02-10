@@ -16,13 +16,12 @@ export default function GeneralContentListPage(
   }>
 ) {
   const { t, navigate } = useCommonUtils();
-  const [openLoading, setOpenLoading] = useState<boolean>(false);
   const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [recordFound, setRecordFound] = useState<number>(0);
   const [status, setStatus] = useState<string>('');
   return (
     <Page
-      openLoading={openLoading}
+      openLoading={false}
       pageTitle={props.pageTitle}
     >
       <GeneralContentListPageFunctionBar
@@ -74,8 +73,6 @@ export default function GeneralContentListPage(
         </Grid>
       </Grid>
       <GeneralCardView
-        loading={openLoading}
-        setLoading={setOpenLoading}
         contentService={props.contentService}
         status={status}
         tagValues={tagValues}
