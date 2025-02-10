@@ -8,8 +8,6 @@ import BaseContentService from '../BaseContentService';
 import { GeneralCard } from './GeneralCard';
 
 interface IGeneralCardViewProps {
-  loading: boolean;
-  setLoading: (v: boolean) => void;
   contentService: BaseContentService;
   status: string;
   tagValues: ITagOption[];
@@ -29,8 +27,10 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
   const [data, setData] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   function loadData(option: ILoadDataOption): void {
+    setLoading(true);
     props.contentService
       .get(
         DEFAULT_PAGE_SIZE,
@@ -46,9 +46,12 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
         props.setRecordFound(response.data.total);
       })
       .catch(() => {
-        enqueueSnackbar(t('contents-page.msg.error'), {
+        enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -57,7 +60,7 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
   }, [props.status, props.tagValues]);
 
   function updateVisibility(id: number | string, visibility: 'PUBLIC' | 'PRIVATE') {
-    props.setLoading(true);
+    setLoading(true);
     props.contentService
       .updateVisibility(id, visibility)
       .then(response => {
@@ -69,23 +72,39 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
             return d;
           })
         );
+        enqueueSnackbar(t('msg.success'), {
+          variant: 'success',
+        });
       })
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.error(error);
+        enqueueSnackbar(t('msg.error'), {
+          variant: 'error',
+        });
+      })
       .finally(() => {
-        props.setLoading(false);
+        setLoading(false);
       });
   }
 
   function deleteById(id: number | string) {
-    props.setLoading(true);
+    setLoading(true);
     props.contentService
       .deleteById(id)
       .then(() => {
         setData(data.filter(d => d.id !== id));
+        enqueueSnackbar(t('msg.success'), {
+          variant: 'success',
+        });
       })
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.error(error);
+        enqueueSnackbar(t('msg.error'), {
+          variant: 'error',
+        });
+      })
       .finally(() => {
-        props.setLoading(false);
+        setLoading(false);
       });
   }
 
@@ -109,7 +128,7 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
   return (
     <Grid container>
       <InfiniteScrollList
-        loading={props.loading}
+        loading={loading}
         option={{ status: props.status, tagValues: props.tagValues, reset: false }}
         dataSource={data}
         hasMore={current < totalPage}

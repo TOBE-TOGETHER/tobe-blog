@@ -16,12 +16,14 @@ export default function PlanProgressItems(props: Readonly<{ planId: string; view
   const [progresses, setProgresses] = useState<IPlanProgress[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     loadProgresses({ reset: true });
   }, [props.planId, props.refreshCode]);
 
   const loadProgresses = (option: ILoadDataOption) => {
+    setLoading(true);
     PublicDataService.getProgressesByPlanId(props.planId, DEFAULT_PAGE_SIZE, option.reset ? 1 : current + 1)
       .then(response => {
         setProgresses(option.reset ? response.data.records : progresses.concat(response.data.records));
@@ -32,12 +34,15 @@ export default function PlanProgressItems(props: Readonly<{ planId: string; view
         enqueueSnackbar(t('plan-progress.msg.error'), {
           variant: 'error',
         });
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   return (
     <InfiniteScrollList
-      loading={false}
+      loading={loading}
       dataSource={progresses}
       renderItem={(progress: IPlanProgress) => (
         <Grid

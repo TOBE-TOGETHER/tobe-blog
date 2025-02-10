@@ -12,24 +12,30 @@ export default function RelevantContentsPanel(props: Readonly<{ content: IBaseUs
   const [relevantContents, setRelevantContents] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     loadData({ reset: true });
   }, [props.content]);
 
   function loadData(option: { reset: boolean }): void {
+    setLoading(true);
     PublicDataService.getNewsByTags(
       props.content.contentType,
       DEFAULT_PAGE_SIZE,
       option.reset ? 1 : current + 1,
       props.content.tags.map(t => Number.parseInt(t.value)),
       ''
-    ).then(response => {
-      let records = response.data.records.filter((r: IBaseUserContentDTO) => r.id !== props.content.id);
-      setRelevantContents(relevantContents.concat(records));
-      setCurrent(response.data.current);
-      setTotalPage(response.data.pages);
-    });
+    )
+      .then(response => {
+        let records = response.data.records.filter((r: IBaseUserContentDTO) => r.id !== props.content.id);
+        setRelevantContents(relevantContents.concat(records));
+        setCurrent(response.data.current);
+        setTotalPage(response.data.pages);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return relevantContents.length > 0 ? (
@@ -51,7 +57,7 @@ export default function RelevantContentsPanel(props: Readonly<{ content: IBaseUs
         sx={{ mt: 5 }}
       >
         <InfiniteScrollList
-          loading={false}
+          loading={loading}
           option={{ reset: false }}
           dataSource={relevantContents}
           hasMore={current < totalPage}
