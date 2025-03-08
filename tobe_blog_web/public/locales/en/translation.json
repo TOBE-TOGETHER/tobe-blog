@@ -73,7 +73,10 @@
     "load-more": "Load more",
     "no-content": "No available content",
     "top5-active-users": "Top 5 active users",
-    "tag-statistics": "Featured tags"
+    "tag-statistics": "Featured tags",
+    "greating1": "Any inspiration today?",
+    "greating2": "Let's start the creation journey",
+    "entrance": "Enter"
   },
   "sign-in": {
     "title": "Sign In",

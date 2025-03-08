@@ -73,7 +73,10 @@
     "load-more": "加载更多",
     "no-content": "找不到相关内容",
     "top5-active-users": "活跃排行榜",
-    "tag-statistics": "标签筛选"
+    "tag-statistics": "标签筛选",
+    "greating1": "有什么新灵感么？",
+    "greating2": "一起开启创作之旅吧",
+    "entrance": "进入"
   },
   "sign-in": {
     "title": "欢迎登陆",
