@@ -1,6 +1,6 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, SxProps, Toolbar, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import config from '../../../../customization.json';
 import { useCommonUtils } from '../../../commons/index.ts';
@@ -11,7 +11,7 @@ import { validateUrl } from '../../../routes';
 import theme from '../../../theme.ts';
 import { publicPages } from './configs.ts';
 
-const PortalHeader = () => {
+const PortalHeader = (props: {styles?: SxProps}) => {
   const [yIndex, setYIndex] = useState<number>(0);
   const [showFixedHeader, setShowFixedHeader] = useState<boolean>(false);
   const [shouldShowHeader, setShouldShowHeader] = useState<boolean>(false);
@@ -50,6 +50,7 @@ const PortalHeader = () => {
           backgroundColor: 'white',
           borderBottom: 'none',
           position: 'absolute',
+          ...props.styles
         }}
       >
         <HeaderContent />

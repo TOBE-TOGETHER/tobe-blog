@@ -1,18 +1,18 @@
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, SxProps } from '@mui/material';
 import PortalHeader from './PortalHeader';
 
-export default function PortalLayout({ children }: Readonly<{ children: any }>) {
+export default function PortalLayout({ children, headerStyles, bodyStyles }: Readonly<{ children: any, headerStyles?: SxProps, bodyStyles?: SxProps }>) {
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)',
+        ...bodyStyles
       }}
     >
-      <PortalHeader />
-      <Box>
+      <PortalHeader styles={headerStyles}/>
+      <Box sx={bodyStyles}>
         <Stack
           justifyContent="start"
           alignItems="center"

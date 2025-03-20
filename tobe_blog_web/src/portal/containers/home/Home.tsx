@@ -6,7 +6,7 @@ import Top5ActiveUsersPanel from './Top5ActiveUsersPanel';
 
 export default function Home() {
   return (
-    <PortalLayout>
+    <PortalLayout headerStyles={{backgroundColor: 'transparent'}} bodyStyles={{background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)',}}>
       <GreatingSection />
       <FunctionSection
         extraPanels={[<Top5ActiveUsersPanel key="top-5-active-user-panel" />]}
