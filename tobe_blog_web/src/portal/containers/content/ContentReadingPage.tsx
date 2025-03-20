@@ -45,6 +45,7 @@ export default function ContentReadingPage(
         sx={{
           minHeight: '50vh',
           pb: 2,
+          backgroundColor: 'white',
         }}
       >
         <Loading open={!props.content} />

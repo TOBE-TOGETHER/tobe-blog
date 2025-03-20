@@ -7,7 +7,8 @@ export default function PortalLayout({ children }: Readonly<{ children: any }>) 
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh'
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)',
       }}
     >
       <PortalHeader />

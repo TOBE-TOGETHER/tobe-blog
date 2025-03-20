@@ -36,7 +36,7 @@ const AdminHeader = (props: IAdminHeaderProps) => {
     <AppBar
       position="fixed"
       open={props.openDrawer}
-      sx={{ boxShadow: 'none', background: theme.palette.background.default, opacity: 0.9 }}
+      sx={{ boxShadow: 'none', background: theme.palette.background.default, opacity: 0.8 }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>

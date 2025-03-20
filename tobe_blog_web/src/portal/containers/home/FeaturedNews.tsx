@@ -127,7 +127,6 @@ export default function FeaturedNews(
     </Grid>
   );
 }
-
 const NewsList = (props: { newsData: IBaseUserContentDTO[]; totalPage: number; current: number; handleLoadMoreRecords: () => void }) => {
   const { newsData, totalPage, current, handleLoadMoreRecords } = props;
   const { t, navigate } = useCommonUtils();
@@ -184,3 +183,4 @@ const NewsList = (props: { newsData: IBaseUserContentDTO[]; totalPage: number; c
     <NoContentNewsItem />
   );
 };
+

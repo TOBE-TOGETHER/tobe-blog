@@ -20,7 +20,7 @@ export default function SingleBoxLayout(
         width: '100%',
         minHeight: '100vh',
         position: 'relative',
-        background: `linear-gradient(to right top, rgba(99, 107, 140, 0.4) 10%, 50%, rgb(224, 202, 179, 0.4))70%, 90%`,
+        background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)',
       }}
     >
       <Container

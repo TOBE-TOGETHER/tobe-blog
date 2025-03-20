@@ -18,7 +18,7 @@ export default function GreatingSection() {
       <Grid
         container
         spacing={1}
-        sx={{ mt: '64px' }}
+        sx={{ mt: '80px' }}
       >
         <Grid
           item
@@ -63,6 +63,7 @@ export default function GreatingSection() {
             lg={3}
             xl={3}
             sx={{
+              overflow: 'hidden',
               display: {
                 xs: 'none',
                 sm: 'none',
