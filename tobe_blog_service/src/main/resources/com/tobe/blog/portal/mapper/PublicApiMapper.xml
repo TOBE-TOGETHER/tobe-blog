@@ -52,7 +52,10 @@
             resultType="com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO">
         WITH COUNT_TABLE AS (
             SELECT tct.TAG_ID, count(*) as COUNT FROM TOBE_CONTENT_TAG tct
-            JOIN TOBE_CONTENT_GENERAL_INFO tcgi ON tct.CONTENT_ID = tcgi.ID AND tcgi.CONTENT_TYPE = #{contentType} AND tcgi.TOPIC = #{topic}
+            JOIN TOBE_CONTENT_GENERAL_INFO tcgi ON tct.CONTENT_ID = tcgi.ID AND tcgi.CONTENT_TYPE = #{contentType}
+            <if test="topic != null">
+                AND tcgi.TOPIC = #{topic}
+            </if>
             JOIN TOBE_CONTENT_ADMIN tca ON tca.CONTENT_ID = tcgi.ID
             WHERE tcgi.DELETED=0 AND tcgi.PUBLIC_TO_ALL=1 AND tca.BANNED=false
             <if test="ownerId != null and ownerId != ''">
