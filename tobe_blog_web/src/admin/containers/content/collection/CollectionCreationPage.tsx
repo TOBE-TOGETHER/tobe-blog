@@ -8,7 +8,7 @@ import ContentEditMainSection from './components/CollectionEditMainSection';
 
 export default function CollectionCreationPage() {
   const { t, enqueueSnackbar, navigate } = useCommonUtils();
-  const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
+  const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } = useCommonContentState();
 
   const handleSubmit = () => {
     if (!title) {
@@ -27,6 +27,7 @@ export default function CollectionCreationPage() {
       description: description,
       coverImgUrl: coverImgUrl,
       tags: tagValues,
+      topic: topic,
     })
       .then(() => {
         enqueueSnackbar(t('msg.success'), {
@@ -58,6 +59,8 @@ export default function CollectionCreationPage() {
         setTagValues={setTagValues}
         editable={true}
         sx={{ mt: 6 }}
+        topic={topic}
+        setTopic={setTopic}
       />
       <SaveButtonPanel primaryEvent={handleSubmit} />
     </Page>

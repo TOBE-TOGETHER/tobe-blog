@@ -47,6 +47,7 @@ export default function PersonalPortalPage() {
           <IntroducationSection profile={profile} />
           <FunctionSection
             extraPanels={[]}
+            topic={null}
             ownerId={profile.id}
             availableContentTypes={getAvailableContentTypes(profile)}
           />

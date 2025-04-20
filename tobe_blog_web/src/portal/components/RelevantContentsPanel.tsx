@@ -25,6 +25,7 @@ export default function RelevantContentsPanel(props: Readonly<{ content: IBaseUs
       DEFAULT_PAGE_SIZE,
       option.reset ? 1 : current + 1,
       props.content.tags.map(t => Number.parseInt(t.value)),
+      '',
       ''
     )
       .then(response => {
