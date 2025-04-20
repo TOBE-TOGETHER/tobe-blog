@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
 import { URL } from '../routes';
 const HomePage = React.lazy(() => import('./containers/home/Home'));
+const TopicPage = React.lazy(() => import('./containers/topic/TopicContentPage'));
 const SignUp = React.lazy(() => import('./containers/signUp/SignUp'));
 const SignIn = React.lazy(() => import('./containers/signIn/SignIn'));
 const PersonalPortalPage = React.lazy(() => import('./containers/personalPortal/PersonalPortalPage'));
@@ -16,6 +17,11 @@ export default function getPortalRoutes(): ReactNode[] {
       key={URL.HOME}
       path={URL.HOME}
       element={<HomePage />}
+    />,
+    <Route
+      key={URL.TOPIC}
+      path={URL.TOPIC}
+      element={<TopicPage />}
     />,
     <Route
       key={URL.SIGN_IN}

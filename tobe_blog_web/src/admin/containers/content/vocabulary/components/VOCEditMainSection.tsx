@@ -1,8 +1,9 @@
 import { TextField } from '@mui/material';
 import { useCommonUtils } from '../../../../../commons';
-import { FormPanel, OneRow } from '../../../../../components';
+import { FormPanel, HalfRow, OneRow } from '../../../../../components';
 import { MultipleTagSelecter } from '../../../../components';
 import { IContentMainSectionProps } from '../../commons';
+import TopicSelector from '../../components/TopicSelector';
 
 interface IVOCEditMainSectionProps extends IContentMainSectionProps {
   language: string | null;
@@ -42,7 +43,7 @@ export default function VOCEditMainSection(props: Readonly<IVOCEditMainSectionPr
           onChange={event => props.setDescription(event.target.value)}
         />
       </OneRow>
-      <OneRow>
+      <HalfRow>
         <TextField
           label={t('vocabulary-creation-page.fields.cover-img-url')}
           fullWidth
@@ -50,7 +51,14 @@ export default function VOCEditMainSection(props: Readonly<IVOCEditMainSectionPr
           onChange={e => props.setCoverImgUrl(e.target.value)}
           disabled={!props.editable}
         />
-      </OneRow>
+      </HalfRow>
+      <HalfRow>
+        <TopicSelector
+          editable={props.editable}
+          topic={props.topic}
+          setTopic={props.setTopic}
+        />
+      </HalfRow>
       <OneRow>
         <MultipleTagSelecter
           value={props.tagValues}

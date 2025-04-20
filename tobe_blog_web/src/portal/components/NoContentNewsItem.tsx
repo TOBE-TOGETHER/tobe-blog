@@ -1,5 +1,5 @@
 import { Grid, Typography } from '@mui/material';
-import { useCommonUtils } from '../../../commons';
+import { useCommonUtils } from '../../commons';
 
 export default function NoContentNewsItem() {
   const { t } = useCommonUtils();

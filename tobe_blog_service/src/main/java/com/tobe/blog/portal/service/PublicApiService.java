@@ -32,8 +32,8 @@ public class PublicApiService {
      * @param contentType: ARTICLE, PLAN, VOCABULARY or COLLECTION
      * @return A page of user contents of given ownerId and contentType
      */
-    public Page<BaseContentDTO> searchContents(int current, int size, String[] tags, Long ownerId, String contentType) {
-        return this.apiMapper.searchContents(new Page<>(current, size), tags, ownerId, contentType);
+    public Page<BaseContentDTO> searchContents(int current, int size, String[] tags, Long ownerId, String contentType, Const.Topic topic) {
+        return this.apiMapper.searchContents(new Page<>(current, size), tags, ownerId, contentType, topic);
     }
 
     public Boolean likeContent(String ip, String contentId) {
@@ -46,8 +46,8 @@ public class PublicApiService {
         return Boolean.TRUE;
     }
 
-    public List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType) {
-        return apiMapper.getTagInfoStatistics(ownerId, contentType);
+    public List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType, Const.Topic topic) {
+        return apiMapper.getTagInfoStatistics(ownerId, contentType, topic);
     }
 
     public List<UserBriefProfileDTO> getTop5ActiveUsers() {

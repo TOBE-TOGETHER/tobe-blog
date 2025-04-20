@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.tobe.blog.beans.consts.Const.Topic;
 import com.tobe.blog.beans.entity.BaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -32,4 +33,5 @@ public class ContentGeneralInfoEntity extends BaseEntity {
     protected String contentType;
     // manipulate if the content require login to view
     protected Boolean contentProtected;
+    protected Topic topic;
 }

@@ -87,6 +87,7 @@ export interface IPlanCreationDTO {
   targetStartTime: Date | null;
   targetEndTime: Date | null;
   tags: ITagOption[];
+  topic: ETopic | string | null;
 }
 
 export interface IPlanUpdateDTO extends IPlanCreationDTO {
@@ -116,6 +117,7 @@ export interface IArticleCreationDTO {
   subTitle: string;
   contentProtected: boolean;
   tags: ITagOption[];
+  topic: ETopic | string | null;
 }
 
 export interface IArticleUpdateDTO extends IArticleCreationDTO {
@@ -128,6 +130,7 @@ export interface IVocabularyCreationDTO {
   language: string;
   coverImgUrl: string;
   tags: ITagOption[];
+  topic: ETopic | string | null;
 }
 
 export interface IVocabularyDetailDTO extends IBaseUserContentDTO {
@@ -151,6 +154,7 @@ export interface ICollectionUpdateDTO {
   description: string;
   coverImgUrl?: string;
   tags: ITagOption[];
+  topic: ETopic | string | null;
 }
 
 export interface IBaseUserContentDTO {
@@ -237,4 +241,12 @@ export interface IWordUpdateDTO {
   partOfSpeech: string;
   meaningInChinese: string;
   meaningInEnglish: string;
+}
+
+export enum ETopic {
+  READING,
+  LANGUAGE,
+  TECHNICAL,
+  LIFE,
+  OTHER,
 }

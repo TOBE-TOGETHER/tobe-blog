@@ -105,12 +105,12 @@ public class PlanServiceTests {
         final PlanDTO saveResult = planService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         final ContentVisibilityUpdateDTO visibilityUpdateDTO = ContentVisibilityUpdateDTO.builder().id(saveResult.getId()).visibility(Visibility.PUBLIC).build();
-        final PlanDTO releaseResult = planService.updatVisibility(
+        final PlanDTO releaseResult = planService.updateVisibility(
             saveResult.getId(), visibilityUpdateDTO);
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
-        Assertions.assertThrows(RuntimeException.class, () -> planService.updatVisibility(saveResult.getId(), visibilityUpdateDTO));
+        Assertions.assertThrows(RuntimeException.class, () -> planService.updateVisibility(saveResult.getId(), visibilityUpdateDTO));
     }
 
     @Test

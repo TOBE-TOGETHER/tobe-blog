@@ -2,6 +2,7 @@ package com.tobe.blog.content.controller.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
@@ -75,7 +77,7 @@ public abstract class BaseContentController<
 
     @Override
     @GetMapping
-    public ResponseEntity<Page<D>> search(            
+    public ResponseEntity<Page<D>> search(
         @RequestParam(value = "current", required = false, defaultValue = "1") int current,
         @RequestParam(value = "size", required = false, defaultValue = "10") int size,
         @RequestParam(value = "status", required = false, defaultValue = "") String status,
@@ -84,9 +86,10 @@ public abstract class BaseContentController<
         @RequestParam(value = "updateFrom", required = false, defaultValue = "") String updateFrom,
         @RequestParam(value = "updateTo", required = false, defaultValue = "") String updateTo,
         @RequestParam(value = "tags", required = false, defaultValue = "") String tags,
-        @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+        @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+        @RequestParam(value = "topic", required = false, defaultValue = "") Const.Topic topic) {
         try {
-            final BaseSearchFilter filter = buildSearchFilter(status, createFrom, createTo, updateFrom, updateTo, tags, keyword);
+            final BaseSearchFilter filter = buildSearchFilter(status, createFrom, createTo, updateFrom, updateTo, tags, keyword, topic);
             return ResponseEntity.ok(this.getConcreteSubContentService().search(current, size, filter));
         } catch (ParseException e) {
             return ResponseEntity.badRequest().build();
@@ -95,18 +98,19 @@ public abstract class BaseContentController<
 
     @Override
     @PutMapping("/{id}/visibility")
-    public ResponseEntity<D> updatVisibility(@PathVariable String id, @RequestBody ContentVisibilityUpdateDTO updateDTO) {
-        return ResponseEntity.ok(this.getConcreteSubContentService().updatVisibility(id, updateDTO));
+    public ResponseEntity<D> updateVisibility(@PathVariable String id, @RequestBody ContentVisibilityUpdateDTO updateDTO) {
+        return ResponseEntity.ok(this.getConcreteSubContentService().updateVisibility(id, updateDTO));
     }
 
     private BaseSearchFilter buildSearchFilter(
         String status,
-        String createFrom, 
-        String createTo, 
+        String createFrom,
+        String createTo,
         String updateFrom,
-        String updateTo, 
+        String updateTo,
         String tags,
-        String keyword) throws ParseException {
+        String keyword,
+        Const.Topic topic) throws ParseException {
         final BaseSearchFilter filter = new BaseSearchFilter();
         if (Strings.isNotBlank(status)) {
             filter.setStatus(status);
@@ -128,6 +132,9 @@ public abstract class BaseContentController<
         }
         if (Strings.isNotBlank(keyword)) {
             filter.setKeyword(keyword);
+        }
+        if (!Objects.isNull(topic)) {
+            filter.setTopic(topic);
         }
         return filter;
     }

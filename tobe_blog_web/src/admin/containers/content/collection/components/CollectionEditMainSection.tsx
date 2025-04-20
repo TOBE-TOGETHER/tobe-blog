@@ -1,8 +1,9 @@
 import { TextField } from '@mui/material';
 import { useCommonUtils } from '../../../../../commons';
-import { FormPanel, OneRow } from '../../../../../components';
+import { FormPanel, HalfRow, OneRow } from '../../../../../components';
 import { MultipleTagSelecter } from '../../../../components';
 import { IContentMainSectionProps } from '../../commons';
+import TopicSelector from '../../components/TopicSelector';
 
 export default function ContentEditMainSection(props: Readonly<IContentMainSectionProps>) {
   const { t } = useCommonUtils();
@@ -26,7 +27,7 @@ export default function ContentEditMainSection(props: Readonly<IContentMainSecti
           onChange={event => props.setDescription(event.target.value)}
         />
       </OneRow>
-      <OneRow>
+      <HalfRow>
         <TextField
           label={t('collection-creation-page.fields.cover-img-url')}
           fullWidth
@@ -35,7 +36,14 @@ export default function ContentEditMainSection(props: Readonly<IContentMainSecti
           value={props.coverImgUrl}
           onChange={event => props.setCoverImgUrl(event.target.value)}
         />
-      </OneRow>
+      </HalfRow>
+      <HalfRow>
+        <TopicSelector
+          editable={props.editable}
+          topic={props.topic}
+          setTopic={props.setTopic}
+        />
+      </HalfRow>
       <OneRow>
         <MultipleTagSelecter
           value={props.tagValues}

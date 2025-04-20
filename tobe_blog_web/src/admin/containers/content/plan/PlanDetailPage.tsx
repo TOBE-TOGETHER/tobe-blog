@@ -14,7 +14,7 @@ export default function PlanDetailPage() {
   const [plan, setPlan] = useState<IPlanInfo | null>(null);
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
-  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } =
+  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } =
     useCommonContentState();
 
   const loadData = useCallback(
@@ -29,6 +29,7 @@ export default function PlanDetailPage() {
           setDescription(response.data.description);
           setCoverImgUrl(response.data.coverImgUrl);
           setTagValues(response.data.tags);
+          setTopic(response.data.topic);
         })
         .catch(() => {
           enqueueSnackbar(t('msg.error'), {
@@ -74,6 +75,7 @@ export default function PlanDetailPage() {
         targetStartTime: fromTime,
         targetEndTime: toTime,
         tags: tagValues,
+        topic: topic,
       });
     }
     setEditable(!editable);
@@ -102,6 +104,8 @@ export default function PlanDetailPage() {
         tagValues={tagValues}
         setTagValues={setTagValues}
         editable={editable}
+        topic={topic}
+        setTopic={setTopic}
       />
       {id && (
         <PlanProgressModal

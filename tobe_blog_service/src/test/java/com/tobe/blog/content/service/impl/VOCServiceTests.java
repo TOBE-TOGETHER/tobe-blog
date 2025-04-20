@@ -116,11 +116,11 @@ public class VOCServiceTests {
         final VOCDTO saveResult = vocService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         final ContentVisibilityUpdateDTO visibilityUpdateDTO = ContentVisibilityUpdateDTO.builder().id(saveResult.getId()).visibility(Visibility.PUBLIC).build();
-        final VOCDTO releaseResult = vocService.updatVisibility(saveResult.getId(), visibilityUpdateDTO);
+        final VOCDTO releaseResult = vocService.updateVisibility(saveResult.getId(), visibilityUpdateDTO);
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
-        Assertions.assertThrows(RuntimeException.class, () -> vocService.updatVisibility(saveResult.getId(), visibilityUpdateDTO));
+        Assertions.assertThrows(RuntimeException.class, () -> vocService.updateVisibility(saveResult.getId(), visibilityUpdateDTO));
     }
 
     @Test

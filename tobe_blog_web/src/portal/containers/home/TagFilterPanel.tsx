@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { SidePanel } from '../../../components/index.ts';
 import { EContentType } from '../../../global/enums.ts';
-import { ITagStatisticDTO } from '../../../global/types.ts';
+import { ETopic, ITagStatisticDTO } from '../../../global/types.ts';
 import * as PublicDataService from '../../../services/PublicDataService.ts';
 
-export default function TagFilterPanel(props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void }>) {
+export default function TagFilterPanel(
+  props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void; topic: string | ETopic | null | undefined }>
+) {
   const { t } = useCommonUtils();
   const [tagStatistics, setTagStatistics] = useState<ITagStatisticDTO[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -25,7 +27,7 @@ export default function TagFilterPanel(props: Readonly<{ contentType: EContentTy
   useEffect(() => {
     function loadData(): void {
       setIsLoading(true);
-      PublicDataService.getTagStatistics(props.contentType, props.ownerId)
+      PublicDataService.getTagStatistics(props.contentType, props.ownerId, props.topic)
         .then(response => {
           setTagStatistics(response.data);
         })

@@ -18,7 +18,7 @@ export default function CollectionDetailPage() {
     name: 'ROOT',
     children: [],
   });
-  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } =
+  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } =
     useCommonContentState();
 
   const loadData = useCallback(
@@ -43,6 +43,7 @@ export default function CollectionDetailPage() {
           setDescription(response.data.description);
           setCoverImgUrl(response.data.coverImgUrl);
           setTagValues(response.data.tags);
+          setTopic(response.data.topic);
           const newTreeData = treeData;
           newTreeData.children = convert(response.data.tagTree);
           setTreeData(newTreeData);
@@ -76,6 +77,7 @@ export default function CollectionDetailPage() {
         description: description,
         coverImgUrl: coverImgUrl,
         tags: tagValues,
+        topic: topic,
       });
     }
     setEditable(!editable);
@@ -116,6 +118,8 @@ export default function CollectionDetailPage() {
         tagValues={tagValues}
         setTagValues={setTagValues}
         editable={editable}
+        topic={topic}
+        setTopic={setTopic}
       />
       <CollectionContentPanel
         collectionId={collection.id}

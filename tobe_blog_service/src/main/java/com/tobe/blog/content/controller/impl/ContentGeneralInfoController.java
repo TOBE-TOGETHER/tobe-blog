@@ -30,7 +30,8 @@ public class ContentGeneralInfoController {
     public ResponseEntity<Page<BaseContentDTO>> searchPublishedContents(
         @RequestParam(value = "current", required = false, defaultValue = "1") int current,
         @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-        @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+        @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+        @RequestParam(value = "topic", required = false, defaultValue = "") String topic) {
         return ResponseEntity.ok(contentService.searchPublishedContentDTOs(current, size, keyword));
     }
     

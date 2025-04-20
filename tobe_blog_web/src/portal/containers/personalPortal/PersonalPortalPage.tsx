@@ -7,7 +7,7 @@ import { EContentType } from '../../../global/enums';
 import { IUserFullProfileDTO } from '../../../global/types';
 import * as PublicDataService from '../../../services/PublicDataService.ts';
 import { PortalLayout } from '../../components';
-import FunctionSection from '../home/FunctionSection';
+import FunctionSection from '../../components/FunctionSection.tsx';
 import IntroducationSection from './IntroducationSection';
 
 export default function PersonalPortalPage() {

@@ -130,11 +130,11 @@ public class ArticleServiceTests {
         ArticleDTO saveResult = articleService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         final ContentVisibilityUpdateDTO visibilityUpdateDTO = ContentVisibilityUpdateDTO.builder().id(saveResult.getId()).visibility(Visibility.PUBLIC).build();
-        ArticleDTO releaseResult = articleService.updatVisibility(saveResult.getId(), visibilityUpdateDTO);
+        ArticleDTO releaseResult = articleService.updateVisibility(saveResult.getId(), visibilityUpdateDTO);
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
         // should not be able to repeatly release 
-        Assertions.assertThrows(RuntimeException.class, () -> articleService.updatVisibility(saveResult.getId(), visibilityUpdateDTO));
+        Assertions.assertThrows(RuntimeException.class, () -> articleService.updateVisibility(saveResult.getId(), visibilityUpdateDTO));
     }
 
     @Test

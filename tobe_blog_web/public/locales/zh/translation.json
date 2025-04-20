@@ -332,7 +332,8 @@
       "description": "描述",
       "language": "语言",
       "cover-img-url": "封面链接",
-      "tags": "标签"
+      "tags": "标签",
+      "topic": "主题"
     }
   },
   "word-dialog": {
@@ -355,5 +356,13 @@
     },
     "cancel": "取消",
     "confirm": "确定"
+  },
+  "topic": {
+    "label": "主题",
+    "READING": "读书",
+    "LANGUAGE": "外语",
+    "TECHNICAL": "科技",
+    "LIFE": "生活",
+    "OTHER": "其他"
   }
 }

@@ -1,16 +1,19 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, SxProps } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getContentTypeFromPath, getPathFromContentType } from '../../../commons';
-import { EContentType } from '../../../global/enums';
+import { getContentTypeFromPath, getPathFromContentType } from '../../commons';
+import { EContentType } from '../../global/enums';
+import { ETopic } from '../../global/types';
+import TagFilterPanel from '../containers/home/TagFilterPanel';
 import FeaturedNews from './FeaturedNews';
-import TagFilterPanel from './TagFilterPanel';
 
 export default function FunctionSection(
   props: Readonly<{
     availableContentTypes: EContentType[];
     extraPanels: ReactElement[];
+    topic: string | ETopic | null | undefined;
     ownerId: string;
+    sx?: SxProps;
   }>
 ) {
   const [searchParams] = useSearchParams();
@@ -36,7 +39,7 @@ export default function FunctionSection(
   }
 
   return (
-    <Container sx={{ my: 1 }}>
+    <Container sx={{ my: 1, ...props.sx }}>
       {props.availableContentTypes && props.availableContentTypes.length > 0 && (
         <Grid
           container
@@ -52,6 +55,7 @@ export default function FunctionSection(
               ownerId={props.ownerId}
               tags={checkedTags}
               contentType={contentType}
+              topic={props.topic}
               availableContentTypes={props.availableContentTypes}
               handleContentTypeChange={handleContentTypeChange}
             />
@@ -70,6 +74,7 @@ export default function FunctionSection(
                 checked={checkedTags}
                 setChecked={handleContentTagsChange}
                 ownerId={props.ownerId}
+                topic={props.topic}
               />
             </Grid>
             {props.extraPanels.map((c, i) => (

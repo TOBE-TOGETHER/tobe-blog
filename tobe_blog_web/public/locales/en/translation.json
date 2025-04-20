@@ -329,7 +329,8 @@
       "description": "Description",
       "language": "Language",
       "cover-img-url": "Cover image URL",
-      "tags": "Tags"
+      "tags": "Tags",
+      "topic": "Topic"
     }
   },
   "word-dialog": {
@@ -352,5 +353,13 @@
     },
     "cancel": "Cancel",
     "confirm": "Confirm"
+  },
+  "topic": {
+    "label": "Topic",
+    "READING": "Reading",
+    "LANGUAGE": "Language",
+    "TECHNICAL": "Technology",
+    "LIFE": "Life",
+    "OTHER": "Other"
   }
 }

@@ -1,11 +1,11 @@
 import { Button, Grid, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import { getPathFromContentType, useCommonUtils } from '../../../commons';
-import { EContentType } from '../../../global/enums';
-import { IBaseUserContentDTO } from '../../../global/types';
-import * as PublicDataService from '../../../services/PublicDataService.ts';
+import { getPathFromContentType, useCommonUtils } from '../../commons/index.ts';
+import { EContentType } from '../../global/enums.ts';
+import { ETopic, IBaseUserContentDTO } from '../../global/types.ts';
+import * as PublicDataService from '../../services/PublicDataService.ts';
 import LoadingNewsSkeleton from './LoadingNewsSkeleton.tsx';
-import NewsListItem from './NewsListItem';
+import NewsListItem from './NewsListItem.tsx';
 import NoContentNewsItem from './NoContentNewsItem.tsx';
 
 enum LoadType {
@@ -18,6 +18,7 @@ export default function FeaturedNews(
     tags: number[];
     ownerId: string;
     contentType: EContentType;
+    topic?: string | ETopic | null | undefined;
     availableContentTypes: EContentType[];
     handleContentTypeChange: (newValue: EContentType) => void;
   }>
@@ -29,9 +30,18 @@ export default function FeaturedNews(
   const [totalPage, setTotalPage] = useState<number>(1);
 
   const loadNews = useCallback(
-    (_contentType: EContentType, _loadType: LoadType, _currentPage: number, _tags: number[], _newsData: IBaseUserContentDTO[], _ownerId: string, _withLoading: boolean): void => {
+    (
+      _contentType: EContentType,
+      _loadType: LoadType,
+      _currentPage: number,
+      _tags: number[],
+      _newsData: IBaseUserContentDTO[],
+      _ownerId: string,
+      _withLoading: boolean,
+      _topic: string | ETopic | null | undefined
+    ): void => {
       _withLoading && setIsLoading(true);
-      PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId)
+      PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId, _topic)
         .then(response => {
           if (_loadType === LoadType.Append) {
             setNewsData(_newsData.concat(response.data.records));
@@ -53,13 +63,13 @@ export default function FeaturedNews(
 
   // based on current filters and load more data
   const handleLoadMoreRecords = (): void => {
-    loadNews(props.contentType, LoadType.Append, current + 1, props.tags, newsData, props.ownerId, false);
+    loadNews(props.contentType, LoadType.Append, current + 1, props.tags, newsData, props.ownerId, false, props.topic);
   };
 
   useEffect(() => {
     // reset filter and load the first page data
     const handleTagFilterChange = (): void => {
-      loadNews(props.contentType, LoadType.Replace, 1, props.tags, newsData, props.ownerId, true);
+      loadNews(props.contentType, LoadType.Replace, 1, props.tags, newsData, props.ownerId, true, props.topic);
     };
     handleTagFilterChange();
   }, [props.contentType, props.tags, loadNews]); // eslint-disable-line
@@ -127,6 +137,7 @@ export default function FeaturedNews(
     </Grid>
   );
 }
+
 const NewsList = (props: { newsData: IBaseUserContentDTO[]; totalPage: number; current: number; handleLoadMoreRecords: () => void }) => {
   const { newsData, totalPage, current, handleLoadMoreRecords } = props;
   const { t, navigate } = useCommonUtils();
@@ -183,4 +194,3 @@ const NewsList = (props: { newsData: IBaseUserContentDTO[]; totalPage: number; c
     <NoContentNewsItem />
   );
 };
-

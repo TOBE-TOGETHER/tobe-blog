@@ -27,4 +27,12 @@ public class Const {
         PUBLIC,
         PRIVATE
     }
+
+    public static enum Topic {
+        READING,
+        LANGUAGE,
+        TECHNICAL,
+        LIFE,
+        OTHER
+    }
 }

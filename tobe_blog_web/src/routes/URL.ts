@@ -1,5 +1,10 @@
 export const URL = {
   HOME: '/',
+  TOPIC: '/topic/:id',
+  TOPIC_READING: '/topic/READING',
+  TOPIC_LANGUAGE: '/topic/LANGUAGE',
+  TOPIC_TECHNICAL: '/topic/TECHNICAL',
+  TOPIC_LIFE: '/topic/LIFE',
   PERSONAL_PORTAL: '/personal-portal/:id',
   SIGN_IN: '/sign-in',
   SIGN_OUT: '/sign-out',
