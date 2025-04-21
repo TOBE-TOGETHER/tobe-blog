@@ -23,7 +23,7 @@ export default function ContentReadingPage(
       { name: 'og:url', content: window.location.href + 'v?=' + new Date().getTime() },
     ];
     switchMetas(metas);
-    window.document.title = props.content?.title ? props.content?.title : originTitle;
+    window.document.title = props.content?.title ?? originTitle;
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     return function restoreTitleAndMeta() {
       window.document.title = `${originTitle}`;

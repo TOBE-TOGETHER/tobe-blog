@@ -17,7 +17,7 @@ export default function PersonalPortalPage() {
   const [profile, setProfile] = useState<IUserFullProfileDTO | null>(null);
   const loadProfile = useCallback((): void => {
     setLoading(true);
-    PublicDataService.getFullProfileByUserId(id || '')
+    PublicDataService.getFullProfileByUserId(id ?? '')
       .then(response => {
         setProfile(response.data);
       })

@@ -2,6 +2,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, SxProps, Toolbar, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import config from '../../../../customization.json';
 import { useCommonUtils } from '../../../commons/index.ts';
 import StrokeText from '../../../components/common/StrokeText.tsx';
@@ -11,7 +12,7 @@ import { validateUrl } from '../../../routes';
 import theme from '../../../theme.ts';
 import { publicPages } from './configs.ts';
 
-const PortalHeader = (props: {styles?: SxProps}) => {
+const PortalHeader = (props: { styles?: SxProps }) => {
   const [yIndex, setYIndex] = useState<number>(0);
   const [showFixedHeader, setShowFixedHeader] = useState<boolean>(false);
   const [shouldShowHeader, setShouldShowHeader] = useState<boolean>(false);
@@ -50,7 +51,7 @@ const PortalHeader = (props: {styles?: SxProps}) => {
           backgroundColor: 'white',
           borderBottom: 'none',
           position: 'absolute',
-          ...props.styles
+          ...props.styles,
         }}
       >
         <HeaderContent />
@@ -74,6 +75,7 @@ const PortalHeader = (props: {styles?: SxProps}) => {
 
 const HeaderContent = () => {
   const { t, navigate } = useCommonUtils();
+  let location = useLocation();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
@@ -153,9 +155,9 @@ const HeaderContent = () => {
               onClick={event => handleCloseNavMenu(event, page.url)}
               sx={{
                 'color': theme.palette.primary.main,
+                'borderBottom': location.pathname === page.url ? '3px solid ' + theme.palette.primary.main : '3px solid transparent',
                 'fontSize': 18,
                 'borderRadius': 0,
-                'borderBottom': '3px solid transparent',
                 'fontFamily': 'PingFang SC,Roboto, Helvetica, Arial, sans-serif',
                 'fontWeight': 700,
                 '&:hover': {

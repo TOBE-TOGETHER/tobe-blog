@@ -16,8 +16,8 @@ export default function FunctionSection(
   }>
 ) {
   const [searchParams] = useSearchParams();
-  const paramContentType: string = searchParams.get('t') || '';
-  const paramTags: string = searchParams.get('g') || '';
+  const paramContentType: string = searchParams.get('t') ?? '';
+  const paramTags: string = searchParams.get('g') ?? '';
   const [checkedTags, setCheckedTags] = useState<number[]>(
     paramTags
       .split(',')

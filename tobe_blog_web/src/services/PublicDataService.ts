@@ -12,7 +12,7 @@ const options = {
 };
 
 export function getNewsByTags(contentType: EContentType | string, size: number, current: number, tags: number[], ownerId: string, topic: TopicPropsType): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}&topic=${topic || ''}`, options);
+  return server.get(`/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}`, options);
 }
 
 export function getSubjects(size: number, current: number): AxiosPromise {
@@ -52,7 +52,7 @@ export function getFullProfileByUserId(userId: string | number): AxiosPromise {
 }
 
 export function getTagStatistics(contentType: EContentType, ownerId: string, topic: string | ETopic | null | undefined): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}&topic=${topic || ''}`);
+  return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}`);
 }
 
 export function getTop5ActiveUsers() {
