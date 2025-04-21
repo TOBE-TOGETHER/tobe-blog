@@ -58,7 +58,7 @@ export default function CollectionDetailPage() {
     [treeData, t, enqueueSnackbar]
   );
 
-  useEffect(() => loadData(id || ''), [loadData, id]);
+  useEffect(() => loadData(id ?? ''), [loadData, id]);
 
   const handleEditableChange = () => {
     if (!collection) {

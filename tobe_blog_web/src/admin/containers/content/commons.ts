@@ -1,6 +1,6 @@
 import { SxProps } from '@mui/material';
 import { useState } from 'react';
-import { ETopic, ITagOption } from '../../../global/types';
+import { ITagOption, TopicPropsType } from '../../../global/types';
 
 export const useCommonContentState = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -9,7 +9,7 @@ export const useCommonContentState = () => {
   const [description, setDescription] = useState<string>('');
   const [coverImgUrl, setCoverImgUrl] = useState<string>('');
   const [tagValues, setTagValues] = useState<ITagOption[]>([]);
-  const [topic, setTopic] = useState<ETopic | string | null>(null);
+  const [topic, setTopic] = useState<TopicPropsType>(null);
   return { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic };
 };
 
@@ -22,8 +22,8 @@ export interface IContentMainSectionProps {
   setCoverImgUrl: (value: string) => void;
   tagValues: ITagOption[];
   setTagValues: (value: ITagOption[]) => void;
-  topic: ETopic | string | null;
-  setTopic: (value: ETopic | string | null) => void;
+  topic: TopicPropsType;
+  setTopic: (value: TopicPropsType) => void;
   editable: boolean;
   sx?: SxProps;
 }

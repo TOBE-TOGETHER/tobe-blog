@@ -41,7 +41,7 @@ export default function PlanDetailPage() {
     [enqueueSnackbar, t]
   );
 
-  useEffect(() => loadData(id || ''), [loadData, id]);
+  useEffect(() => loadData(id ?? ''), [loadData, id]);
 
   function handlePlanUpdate(updatedPlan: IPlanUpdateDTO): void {
     setLoading(true);
@@ -69,9 +69,9 @@ export default function PlanDetailPage() {
     if (editable) {
       handlePlanUpdate({
         id: plan.id,
-        title: title || '',
-        description: description || '',
-        coverImgUrl: coverImgUrl || '',
+        title: title ?? '',
+        description: description ?? '',
+        coverImgUrl: coverImgUrl ?? '',
         targetStartTime: fromTime,
         targetEndTime: toTime,
         tags: tagValues,

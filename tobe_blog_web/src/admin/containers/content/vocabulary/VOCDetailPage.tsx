@@ -40,7 +40,7 @@ export default function VOCDetailPage() {
     [enqueueSnackbar, t]
   );
 
-  useEffect(() => loadData(id || ''), [id, loadData]);
+  useEffect(() => loadData(id ?? ''), [id, loadData]);
 
   const handleEditableChange = () => {
     if (!vocabulary) {

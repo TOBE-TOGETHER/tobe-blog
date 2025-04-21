@@ -2,7 +2,7 @@ import { Button, Grid, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { getPathFromContentType, useCommonUtils } from '../../commons/index.ts';
 import { EContentType } from '../../global/enums.ts';
-import { ETopic, IBaseUserContentDTO } from '../../global/types.ts';
+import { IBaseUserContentDTO, TopicPropsType } from '../../global/types.ts';
 import * as PublicDataService from '../../services/PublicDataService.ts';
 import LoadingNewsSkeleton from './LoadingNewsSkeleton.tsx';
 import NewsListItem from './NewsListItem.tsx';
@@ -18,7 +18,7 @@ export default function FeaturedNews(
     tags: number[];
     ownerId: string;
     contentType: EContentType;
-    topic?: string | ETopic | null | undefined;
+    topic?: TopicPropsType;
     availableContentTypes: EContentType[];
     handleContentTypeChange: (newValue: EContentType) => void;
   }>
@@ -38,7 +38,7 @@ export default function FeaturedNews(
       _newsData: IBaseUserContentDTO[],
       _ownerId: string,
       _withLoading: boolean,
-      _topic: string | ETopic | null | undefined
+      _topic: TopicPropsType
     ): void => {
       _withLoading && setIsLoading(true);
       PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId, _topic)

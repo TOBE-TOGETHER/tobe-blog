@@ -1,5 +1,6 @@
 import { AxiosPromise } from 'axios';
 import { EContentType, ETopic } from '../global/enums.ts';
+import { TopicPropsType } from '../global/types.ts';
 import server from './server.ts';
 
 const API_DATA_URI = 'v1/api';
@@ -10,14 +11,7 @@ const options = {
   },
 };
 
-export function getNewsByTags(
-  contentType: EContentType | string,
-  size: number,
-  current: number,
-  tags: number[],
-  ownerId: string,
-  topic: string | ETopic | null | undefined
-): AxiosPromise {
+export function getNewsByTags(contentType: EContentType | string, size: number, current: number, tags: number[], ownerId: string, topic: TopicPropsType): AxiosPromise {
   return server.get(`/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}&topic=${topic || ''}`, options);
 }
 

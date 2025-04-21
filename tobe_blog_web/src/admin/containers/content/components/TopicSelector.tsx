@@ -1,8 +1,9 @@
 import { MenuItem, TextField } from '@mui/material';
 import { useCommonUtils } from '../../../../commons';
 import { ETopic } from '../../../../global/enums';
+import { TopicPropsType } from '../../../../global/types';
 
-export default function TopicSelector(props: { editable: boolean; topic: ETopic | string | null; setTopic: (value: ETopic | string | null) => void }) {
+export default function TopicSelector(props: { editable: boolean; topic: TopicPropsType; setTopic: (value: TopicPropsType) => void }) {
   const { t } = useCommonUtils();
   return (
     <TextField
