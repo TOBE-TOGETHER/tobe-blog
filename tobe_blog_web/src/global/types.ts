@@ -1,4 +1,4 @@
-import { EAuthority, EColumnPosition, EFeatureCode, EOperationName } from './enums.ts';
+import { EAuthority, EColumnPosition, EFeatureCode, EOperationName, ETopic } from './enums.ts';
 
 export interface IColumn {
   id: string;
@@ -242,11 +242,4 @@ export interface IWordUpdateDTO {
   meaningInChinese: string;
   meaningInEnglish: string;
 }
-
-export enum ETopic {
-  READING,
-  LANGUAGE,
-  TECHNICAL,
-  LIFE,
-  OTHER,
-}
+export { ETopic };

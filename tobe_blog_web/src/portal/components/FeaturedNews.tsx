@@ -72,7 +72,7 @@ export default function FeaturedNews(
       loadNews(props.contentType, LoadType.Replace, 1, props.tags, newsData, props.ownerId, true, props.topic);
     };
     handleTagFilterChange();
-  }, [props.contentType, props.tags, loadNews]); // eslint-disable-line
+  }, [props.contentType, props.tags, loadNews, props.topic]); // eslint-disable-line
 
   return (
     <Grid

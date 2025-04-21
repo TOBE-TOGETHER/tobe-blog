@@ -1,6 +1,5 @@
 import { AxiosPromise } from 'axios';
-import { EContentType } from '../global/enums.ts';
-import { ETopic } from '../global/types.ts';
+import { EContentType, ETopic } from '../global/enums.ts';
 import server from './server.ts';
 
 const API_DATA_URI = 'v1/api';

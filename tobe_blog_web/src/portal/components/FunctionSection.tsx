@@ -2,10 +2,9 @@ import { Container, Grid, SxProps } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getContentTypeFromPath, getPathFromContentType } from '../../commons';
-import { EContentType } from '../../global/enums';
-import { ETopic } from '../../global/types';
-import TagFilterPanel from '../containers/home/TagFilterPanel';
+import { EContentType, ETopic } from '../../global/enums';
 import FeaturedNews from './FeaturedNews';
+import TagFilterPanel from './TagFilterPanel';
 
 export default function FunctionSection(
   props: Readonly<{

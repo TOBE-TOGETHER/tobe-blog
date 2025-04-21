@@ -250,3 +250,5 @@ create table tobe_content_tag
     CONTENT_ID  varchar(32)       not null,
     TAG_ID      int               not null
 );
+
+ALTER TABLE `tobe_content_general_info` ADD INDEX (`TOPIC`);

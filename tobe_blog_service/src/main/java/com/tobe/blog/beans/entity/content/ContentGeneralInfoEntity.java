@@ -3,6 +3,7 @@ package com.tobe.blog.beans.entity.content;
 import java.sql.Timestamp;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.tobe.blog.beans.consts.Const.Topic;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.EnumTypeHandler;
 
 @Data
 @NoArgsConstructor
@@ -33,5 +35,7 @@ public class ContentGeneralInfoEntity extends BaseEntity {
     protected String contentType;
     // manipulate if the content require login to view
     protected Boolean contentProtected;
+
+    @TableField(value = "topic", typeHandler = EnumTypeHandler.class)
     protected Topic topic;
 }

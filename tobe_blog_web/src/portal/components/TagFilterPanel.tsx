@@ -1,10 +1,10 @@
 import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Skeleton } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useCommonUtils } from '../../../commons/index.ts';
-import { SidePanel } from '../../../components/index.ts';
-import { EContentType } from '../../../global/enums.ts';
-import { ETopic, ITagStatisticDTO } from '../../../global/types.ts';
-import * as PublicDataService from '../../../services/PublicDataService.ts';
+import { useCommonUtils } from '../../commons';
+import { SidePanel } from '../../components';
+import { EContentType, ETopic } from '../../global/enums';
+import { ITagStatisticDTO } from '../../global/types';
+import * as PublicDataService from '../../services/PublicDataService';
 
 export default function TagFilterPanel(
   props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void; topic: string | ETopic | null | undefined }>
@@ -39,7 +39,7 @@ export default function TagFilterPanel(
         });
     }
     loadData();
-  }, [props.contentType, props.ownerId]);
+  }, [props.contentType, props.ownerId, props.topic]);
 
   return (
     <SidePanel title={t('home-page.tag-statistics')}>

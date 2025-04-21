@@ -45,8 +45,8 @@ export const pages: Array<{
 
 export const publicPages: Array<{ label: string; url: string }> = [
   { label: 'app-header.pages.home', url: URL.HOME },
-  { label: 'topic.READING', url: URL.TOPIC_READING },
-  { label: 'topic.LANGUAGE', url: URL.TOPIC_LANGUAGE },
   { label: 'topic.TECHNICAL', url: URL.TOPIC_TECHNICAL },
+  { label: 'topic.READING', url: URL.TOPIC_READING },
   { label: 'topic.LIFE', url: URL.TOPIC_LIFE },
+  { label: 'topic.LANGUAGE', url: URL.TOPIC_LANGUAGE },
 ];
