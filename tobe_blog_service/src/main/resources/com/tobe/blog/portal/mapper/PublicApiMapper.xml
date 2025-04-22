@@ -41,17 +41,6 @@
         ORDER BY tcgi.CREATE_TIME DESC, tcgi.VIEW_COUNT DESC, tcgi.UPDATE_TIME DESC
     </select>
 
-    <select id="getTop5ActiveUsers" resultType="com.tobe.blog.beans.dto.user.UserBriefProfileDTO">
-        SELECT tcu.*, content.CONTENT_COUNT AS SCORE
-        FROM TOBE_CORE_USER tcu LEFT JOIN (
-          SELECT tcu.id, COUNT(1) as CONTENT_COUNT
-              FROM TOBE_CORE_USER tcu JOIN TOBE_CONTENT_GENERAL_INFO tcgi ON tcu.ID = tcgi.OWNER_ID
-              AND tcgi.DELETED = 0 AND tcgi.PUBLIC_TO_ALL = 1
-              WHERE tcgi.id is not null GROUP BY tcu.id) as content ON content.id = tcu.id
-        ORDER BY SCORE DESC, tcu.CREATE_TIME DESC
-        LIMIT 5
-    </select>
-
     <select id="getTagInfoStatistics"
             resultType="com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO">
         WITH COUNT_TABLE AS (

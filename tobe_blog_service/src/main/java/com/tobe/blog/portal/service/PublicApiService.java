@@ -9,7 +9,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO;
-import com.tobe.blog.beans.dto.user.UserBriefProfileDTO;
 import com.tobe.blog.core.utils.CacheUtil;
 import com.tobe.blog.portal.mapper.PublicApiMapper;
 
@@ -49,9 +48,4 @@ public class PublicApiService {
     public List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType, Const.Topic topic, String keyword) {
         return apiMapper.getTagInfoStatistics(ownerId, contentType, topic, keyword);
     }
-
-    public List<UserBriefProfileDTO> getTop5ActiveUsers() {
-        return apiMapper.getTop5ActiveUsers();
-    }
-  
 }

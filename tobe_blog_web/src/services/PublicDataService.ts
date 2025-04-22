@@ -66,10 +66,6 @@ export function getTagStatistics(contentType: EContentType, ownerId: string, top
   return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`);
 }
 
-export function getTop5ActiveUsers() {
-  return server.get(`/${API_DATA_URI}/top5-active-users`);
-}
-
 export function getBySrcIdAndFileType(srcId: string, fileType: string) {
   return server.get(`/${API_DATA_URI}/files?srcId=${srcId}&fileType=${fileType}`);
 }

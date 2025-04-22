@@ -6,12 +6,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO;
-import com.tobe.blog.beans.dto.user.UserBriefProfileDTO;
 
 public interface PublicApiMapper {
     Page<BaseContentDTO> searchContents(Page<BaseContentDTO> page, String[] tags, Long ownerId, String contentType, Const.Topic topic, String keyword);
 
     List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType, Const.Topic topic, String keyword);
 
-    List<UserBriefProfileDTO> getTop5ActiveUsers();
 }

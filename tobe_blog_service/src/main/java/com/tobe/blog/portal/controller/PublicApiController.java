@@ -139,11 +139,6 @@ public class PublicApiController {
         return ResponseEntity.ok(publicApiService.getTagInfoStatistics(ownerId, contentType, topic, keyword));
     }
 
-    @GetMapping("/top5-active-users")
-    public ResponseEntity<List<UserBriefProfileDTO>> getTop5ActiveUsers() {
-        return ResponseEntity.ok(publicApiService.getTop5ActiveUsers());
-    }
-
     @GetMapping("/brief-profile/{id}")
     public ResponseEntity<UserBriefProfileDTO> getUserBasicProfile(@PathVariable long id) {
         UserBriefProfileDTO result = null;
