@@ -33,6 +33,10 @@
         <if test="topic != null">
             AND tcgi.TOPIC = #{topic}
         </if>
+        <if test="keyword != null and keyword != ''">
+            AND (tcgi.TITLE LIKE CONCAT('%', #{keyword}, '%')
+            OR tcgi.DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
         AND tca.BANNED = false
         ORDER BY tcgi.CREATE_TIME DESC, tcgi.VIEW_COUNT DESC, tcgi.UPDATE_TIME DESC
     </select>
@@ -55,6 +59,10 @@
             JOIN TOBE_CONTENT_GENERAL_INFO tcgi ON tct.CONTENT_ID = tcgi.ID AND tcgi.CONTENT_TYPE = #{contentType}
             <if test="topic != null">
                 AND tcgi.TOPIC = #{topic}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (tcgi.TITLE LIKE CONCAT('%', #{keyword}, '%')
+                OR tcgi.DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
             </if>
             JOIN TOBE_CONTENT_ADMIN tca ON tca.CONTENT_ID = tcgi.ID
             WHERE tcgi.DELETED=0 AND tcgi.PUBLIC_TO_ALL=1 AND tca.BANNED=false

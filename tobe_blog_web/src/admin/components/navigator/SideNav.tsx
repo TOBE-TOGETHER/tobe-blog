@@ -35,7 +35,7 @@ export default function SideNav(props: Readonly<ISideNavProps>) {
       open={props.openDrawer}
       onClose={() => props.setOpenDrawer(false)}
     >
-      <DrawerHeader sx={{ background: 'transparent' }}>
+      <DrawerHeader>
         <Grid
           onClick={() => navigate('/')}
           sx={{

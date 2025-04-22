@@ -49,6 +49,7 @@ export default function PersonalPortalPage() {
             extraPanels={[]}
             topic={null}
             ownerId={profile.id}
+            keyword={''}
             availableContentTypes={getAvailableContentTypes(profile)}
           />
         </>

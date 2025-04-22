@@ -9,9 +9,9 @@ import com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO;
 import com.tobe.blog.beans.dto.user.UserBriefProfileDTO;
 
 public interface PublicApiMapper {
-    Page<BaseContentDTO> searchContents(Page<BaseContentDTO> page, String[] tags, Long ownerId, String contentType, Const.Topic topic);
+    Page<BaseContentDTO> searchContents(Page<BaseContentDTO> page, String[] tags, Long ownerId, String contentType, Const.Topic topic, String keyword);
 
-    List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType, Const.Topic topic);
+    List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType, Const.Topic topic, String keyword);
 
     List<UserBriefProfileDTO> getTop5ActiveUsers();
 }

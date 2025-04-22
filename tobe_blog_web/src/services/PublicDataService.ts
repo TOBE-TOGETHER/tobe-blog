@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios';
-import { EContentType, ETopic } from '../global/enums.ts';
+import { EContentType } from '../global/enums.ts';
 import { TopicPropsType } from '../global/types.ts';
 import server from './server.ts';
 
@@ -11,8 +11,19 @@ const options = {
   },
 };
 
-export function getNewsByTags(contentType: EContentType | string, size: number, current: number, tags: number[], ownerId: string, topic: TopicPropsType): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}`, options);
+export function getNewsByTags(
+  contentType: EContentType | string,
+  size: number,
+  current: number,
+  tags: number[],
+  ownerId: string,
+  topic: TopicPropsType,
+  keyword: string
+): AxiosPromise {
+  return server.get(
+    `/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`,
+    options
+  );
 }
 
 export function getSubjects(size: number, current: number): AxiosPromise {
@@ -51,8 +62,8 @@ export function getFullProfileByUserId(userId: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/full-profile/${userId}`);
 }
 
-export function getTagStatistics(contentType: EContentType, ownerId: string, topic: string | ETopic | null | undefined): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}`);
+export function getTagStatistics(contentType: EContentType, ownerId: string, topic: TopicPropsType, keyword: string): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`);
 }
 
 export function getTop5ActiveUsers() {

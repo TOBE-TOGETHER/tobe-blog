@@ -74,9 +74,25 @@
     "no-content": "找不到相关内容",
     "top5-active-users": "活跃排行榜",
     "tag-statistics": "标签筛选",
-    "greating1": "有什么新灵感么？",
-    "greating2": "一起开启创作之旅吧",
-    "entrance": "进入"
+    "slogan": "记录成长，分享点滴",
+    "categories": {
+      "tech-news": {
+        "title": "科技新闻",
+        "description": "紧跟科技前沿，分享最新动态与见解"
+      },
+      "book-notes": {
+        "title": "读书笔记",
+        "description": "与你分享精彩书籍，共同探讨成长感悟"
+      },
+      "life-tips": {
+        "title": "生活点滴",
+        "description": "记录美好生活，分享生活智慧"
+      },
+      "language-learning": {
+        "title": "外语学习",
+        "description": "语言学习经验与资源分享"
+      }
+    }
   },
   "sign-in": {
     "title": "欢迎登陆",

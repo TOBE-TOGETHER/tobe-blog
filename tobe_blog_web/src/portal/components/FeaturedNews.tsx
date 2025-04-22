@@ -19,6 +19,7 @@ export default function FeaturedNews(
     ownerId: string;
     contentType: EContentType;
     topic?: TopicPropsType;
+    keyword: string;
     availableContentTypes: EContentType[];
     handleContentTypeChange: (newValue: EContentType) => void;
   }>
@@ -38,10 +39,11 @@ export default function FeaturedNews(
       _newsData: IBaseUserContentDTO[],
       _ownerId: string,
       _withLoading: boolean,
-      _topic: TopicPropsType
+      _topic: TopicPropsType,
+      _keyword: string
     ): void => {
       _withLoading && setIsLoading(true);
-      PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId, _topic)
+      PublicDataService.getNewsByTags(_contentType, 10, _currentPage, _tags, _ownerId, _topic, _keyword)
         .then(response => {
           if (_loadType === LoadType.Append) {
             setNewsData(_newsData.concat(response.data.records));
@@ -63,16 +65,16 @@ export default function FeaturedNews(
 
   // based on current filters and load more data
   const handleLoadMoreRecords = (): void => {
-    loadNews(props.contentType, LoadType.Append, current + 1, props.tags, newsData, props.ownerId, false, props.topic);
+    loadNews(props.contentType, LoadType.Append, current + 1, props.tags, newsData, props.ownerId, false, props.topic, props.keyword);
   };
 
   useEffect(() => {
     // reset filter and load the first page data
     const handleTagFilterChange = (): void => {
-      loadNews(props.contentType, LoadType.Replace, 1, props.tags, newsData, props.ownerId, true, props.topic);
+      loadNews(props.contentType, LoadType.Replace, 1, props.tags, newsData, props.ownerId, true, props.topic, props.keyword);
     };
     handleTagFilterChange();
-  }, [props.contentType, props.tags, loadNews, props.topic]); // eslint-disable-line
+  }, [props.contentType, props.tags, loadNews, props.topic, props.keyword]); // eslint-disable-line
 
   return (
     <Grid

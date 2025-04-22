@@ -72,11 +72,26 @@
     "end-line": "No more content",
     "load-more": "Load more",
     "no-content": "No available content",
-    "top5-active-users": "Top 5 active users",
     "tag-statistics": "Featured tags",
-    "greating1": "Any inspiration today?",
-    "greating2": "Let's start the creation journey",
-    "entrance": "Enter"
+    "slogan": "Record growth and share every little bit",
+    "categories": {
+      "tech-news": {
+        "title": "Tech News",
+        "description": "Stay updated with tech trends and insights"
+      },
+      "book-notes": {
+        "title": "Reading Notes",
+        "description": "Share your reading notes and insights"
+      },
+      "life-tips": {
+        "title": "Life Tips",
+        "description": "Record beautiful moments and share life wisdom"
+      },
+      "language-learning": {
+        "title": "Language Learning",
+        "description": "Share language learning experiences and resources"
+      }
+    }
   },
   "sign-in": {
     "title": "Sign In",
@@ -358,7 +373,7 @@
     "label": "Topic",
     "READING": "Reading",
     "LANGUAGE": "Language",
-    "TECHNICAL": "Technology",
+    "TECHNICAL": "Tech",
     "LIFE": "Life",
     "OTHER": "Other"
   }

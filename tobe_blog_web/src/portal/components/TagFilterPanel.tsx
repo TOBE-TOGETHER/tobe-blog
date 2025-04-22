@@ -2,12 +2,12 @@ import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText, S
 import { useEffect, useState } from 'react';
 import { useCommonUtils } from '../../commons';
 import { SidePanel } from '../../components';
-import { EContentType, ETopic } from '../../global/enums';
-import { ITagStatisticDTO } from '../../global/types';
+import { EContentType } from '../../global/enums';
+import { ITagStatisticDTO, TopicPropsType } from '../../global/types';
 import * as PublicDataService from '../../services/PublicDataService';
 
 export default function TagFilterPanel(
-  props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void; topic: string | ETopic | null | undefined }>
+  props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void; topic: TopicPropsType; keyword: string }>
 ) {
   const { t } = useCommonUtils();
   const [tagStatistics, setTagStatistics] = useState<ITagStatisticDTO[]>([]);
@@ -27,7 +27,7 @@ export default function TagFilterPanel(
   useEffect(() => {
     function loadData(): void {
       setIsLoading(true);
-      PublicDataService.getTagStatistics(props.contentType, props.ownerId, props.topic)
+      PublicDataService.getTagStatistics(props.contentType, props.ownerId, props.topic, props.keyword)
         .then(response => {
           setTagStatistics(response.data);
         })
@@ -39,7 +39,7 @@ export default function TagFilterPanel(
         });
     }
     loadData();
-  }, [props.contentType, props.ownerId, props.topic]);
+  }, [props.contentType, props.ownerId, props.topic, props.keyword]);
 
   return (
     <SidePanel title={t('home-page.tag-statistics')}>

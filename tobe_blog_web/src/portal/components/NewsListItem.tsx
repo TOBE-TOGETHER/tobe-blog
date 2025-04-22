@@ -3,7 +3,7 @@ import { TimeFormat, useCommonUtils } from '../../commons';
 import { ITagOption } from '../../global/types';
 import { URL } from '../../routes';
 import theme from '../../theme';
-import TagDisplayBar from '../containers/home/TagDisplayBar';
+import TagDisplayBar from './TagDisplayBar';
 
 export default function NewsListItem(
   props: Readonly<{
