@@ -48,8 +48,9 @@
       "edit-btn": "Edit"
     },
     "author-panel": {
-      "public-creation-count": "Published content",
-      "view-count": "Total view"
+      "public-creation-count": "Public Creations",
+      "view-count": "Total Views",
+      "visit-blog": "Visit Blog"
     },
     "general-card-view": {
       "published": "Published",
@@ -75,19 +76,19 @@
     "tag-statistics": "Featured tags",
     "slogan": "Record growth and share every little bit",
     "categories": {
-      "tech-news": {
+      "TECHNICAL": {
         "title": "Tech News",
         "description": "Stay updated with tech trends and insights"
       },
-      "book-notes": {
-        "title": "Reading Notes",
+      "READING": {
+        "title": "Book Notes",
         "description": "Share your reading notes and insights"
       },
-      "life-tips": {
+      "LIFE": {
         "title": "Life Tips",
         "description": "Record beautiful moments and share life wisdom"
       },
-      "language-learning": {
+      "LANGUAGE": {
         "title": "Language Learning",
         "description": "Share language learning experiences and resources"
       }
@@ -371,8 +372,8 @@
   },
   "topic": {
     "label": "Topic",
-    "READING": "Reading",
-    "LANGUAGE": "Language",
+    "READING": "Books",
+    "LANGUAGE": "Lang",
     "TECHNICAL": "Tech",
     "LIFE": "Life",
     "OTHER": "Other"

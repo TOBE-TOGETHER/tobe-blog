@@ -48,8 +48,9 @@
       "edit-btn": "编辑"
     },
     "author-panel": {
-      "public-creation-count": "公开内容数",
-      "view-count": "累积阅读量"
+      "public-creation-count": "公开内容",
+      "view-count": "总浏览量",
+      "visit-blog": "访问博客"
     },
     "general-card-view": {
       "published": "已发布",
@@ -76,19 +77,19 @@
     "tag-statistics": "标签筛选",
     "slogan": "记录成长，分享点滴",
     "categories": {
-      "tech-news": {
+      "TECHNICAL": {
         "title": "科技新闻",
         "description": "紧跟科技前沿，分享最新动态与见解"
       },
-      "book-notes": {
+      "READING": {
         "title": "读书笔记",
         "description": "与你分享精彩书籍，共同探讨成长感悟"
       },
-      "life-tips": {
+      "LIFE": {
         "title": "生活点滴",
         "description": "记录美好生活，分享生活智慧"
       },
-      "language-learning": {
+      "LANGUAGE": {
         "title": "外语学习",
         "description": "语言学习经验与资源分享"
       }

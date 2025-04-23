@@ -47,7 +47,7 @@ export default function ContentBanner(props: Readonly<{ contentId: string; title
             <Typography
               variant={'h6'}
               color={'white'}
-              sx={{ mt: 2, overflow: 'hidden', letterSpacing: { xs: 2, sm: 6 }, textWrap: 'nowrap' }}
+              sx={{ mt: 2, overflow: 'hidden', textWrap: 'nowrap' }}
             >
               {props?.subTitle}
             </Typography>

@@ -108,8 +108,7 @@ const HeaderContent = () => {
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
-            size="small"
-            sx={{ border: '1px solid rgba(0,0,0,0.12)', borderRadius: '4px' }}
+            size="large"
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"

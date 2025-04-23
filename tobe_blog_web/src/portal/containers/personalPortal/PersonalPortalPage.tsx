@@ -40,7 +40,10 @@ export default function PersonalPortalPage() {
     return availableContentTypes;
   }
   return (
-    <PortalLayout>
+    <PortalLayout
+      headerStyles={{ backgroundColor: 'transparent' }}
+      bodyStyles={{ background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)' }}
+    >
       <Loading open={loading} />
       {profile ? (
         <>

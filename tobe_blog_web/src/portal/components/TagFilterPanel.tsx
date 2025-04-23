@@ -5,6 +5,7 @@ import { SidePanel } from '../../components';
 import { EContentType } from '../../global/enums';
 import { ITagStatisticDTO, TopicPropsType } from '../../global/types';
 import * as PublicDataService from '../../services/PublicDataService';
+import NoContentNewsItem from './NoContentNewsItem';
 
 export default function TagFilterPanel(
   props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void; topic: TopicPropsType; keyword: string }>
@@ -100,6 +101,6 @@ const TagList = (props: { tagStatistics: ITagStatisticDTO[]; handleToggle: (valu
       })}
     </List>
   ) : (
-    <></>
+    <NoContentNewsItem />
   );
 };

@@ -4,6 +4,7 @@ import { Box, Container, Grid, IconButton, Paper, Typography } from '@mui/materi
 import { FormEvent, ReactNode } from 'react';
 import config from '../../../../customization.json';
 import { Loading } from '../../../components';
+import { HeaderLanguageMenu } from '../../../components/layout';
 
 export default function SingleBoxLayout(
   props: Readonly<{
@@ -76,14 +77,23 @@ export default function SingleBoxLayout(
               justifyContent="flex-end"
               px={2}
             >
-              <IconButton href="/">
-                <HomeIcon color="primary" />
-              </IconButton>
               {config.githubLink && (
-                <IconButton href={config.githubLink}>
+                <IconButton
+                  href={config.githubLink}
+                  size="large"
+                >
                   <GitHubIcon color="primary" />
                 </IconButton>
               )}
+              <IconButton
+                href="/"
+                size="large"
+              >
+                <HomeIcon color="primary" />
+              </IconButton>
+              <Box sx={{ flexGrow: 0 }}>
+                <HeaderLanguageMenu />
+              </Box>
             </Grid>
             <Typography
               component="h1"
