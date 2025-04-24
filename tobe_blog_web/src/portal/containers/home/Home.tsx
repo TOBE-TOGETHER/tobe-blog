@@ -1,16 +1,11 @@
-import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Container, Typography } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 import { useCommonUtils } from '../../../commons';
 import { PortalLayout } from '../../components';
-import FloatingElementContainer from './FloatingElementContainer';
+import FloatingElementContainer from '../../components/FloatingElementContainer';
+import { shine } from '../../components/StyledComponents';
 import TopicSection from './TopicSection';
-
-const shine = keyframes`
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-`;
 
 const HeroSection = styled('div')`
   text-align: center;

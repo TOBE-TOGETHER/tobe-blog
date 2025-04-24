@@ -1,12 +1,16 @@
-import { Button, Link, TextField } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import HomeIcon from '@mui/icons-material/Home';
+import { Box, Button, Container, Grid, IconButton, Link, Paper, TextField, Typography } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 import config from '../../../../customization.json';
 import { useCommonUtils } from '../../../commons/index.ts';
-import { HalfRow, OneRow } from '../../../components';
+import { Loading } from '../../../components';
+import { HeaderLanguageMenu } from '../../../components/layout';
 import { URL } from '../../../routes';
 import * as UserService from '../../../services/UserService.ts';
-import SingleBoxLayout from '../../components/layout/SingleBoxLayout.tsx';
+import FloatingElementContainer from '../../components/FloatingElementContainer.tsx';
+import { HeroSection, LogoText, PageContainer } from '../../components/StyledComponents.tsx';
 
 export default function SignUp() {
   const { t, navigate } = useCommonUtils();
@@ -71,78 +75,262 @@ export default function SignUp() {
   }
 
   return (
-    <SingleBoxLayout
-      title={t('sign-up.title') + ' ' + config.title}
-      handleSubmit={handleSubmit}
-      openLoading={openLoading}
-    >
-      <HalfRow>
-        <TextField
-          autoComplete="given-name"
-          name="firstName"
-          fullWidth
-          id="firstName"
-          label={t('sign-up.fields.first-name')}
-        />
-      </HalfRow>
-      <HalfRow>
-        <TextField
-          fullWidth
-          id="lastName"
-          label={t('sign-up.fields.last-name')}
-          name="lastName"
-          autoComplete="family-name"
-        />
-      </HalfRow>
-      <OneRow>
-        <TextField
-          required
-          fullWidth
-          id="email"
-          label={t('sign-up.fields.email')}
-          name="email"
-          autoComplete="email"
-        />
-      </OneRow>
-      <OneRow>
-        <TextField
-          required
-          fullWidth
-          name="password"
-          label={t('sign-up.fields.password')}
-          type="password"
-          id="password"
-          autoComplete="new-password"
-        />
-      </OneRow>
-      <OneRow>
-        <TextField
-          required
-          fullWidth
-          name="password-confirm"
-          label={t('sign-up.fields.password-confirm')}
-          type="password"
-          id="password-confirm"
-          autoComplete="new-password"
-        />
-      </OneRow>
-      <OneRow>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-        >
-          {t('sign-up.sign-up-btn')}
-        </Button>
-      </OneRow>
-      <OneRow>
-        <Link
-          href={URL.SIGN_IN}
-          variant="body2"
-        >
-          {t('sign-up.sign-in-btn')}
-        </Link>
-      </OneRow>
-    </SingleBoxLayout>
+    <PageContainer container>
+      <FloatingElementContainer />
+      <Container
+        component="main"
+        maxWidth="sm"
+        sx={{
+          pb: '2vh',
+          pt: '8vh',
+          minHeight: '100vh',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
+        <Loading open={openLoading} />
+        <HeroSection>
+          <Paper
+            elevation={0}
+            sx={{
+              position: 'relative',
+              my: { xs: 3, md: 3 },
+              p: { xs: 5, md: 6 },
+              borderRadius: 4,
+              zIndex: 2,
+              boxShadow: 'rgba(145, 158, 171, 0.28) 0px 0px 2px 0px, rgba(145, 158, 171, 0.16) 0px 12px 24px -4px',
+              backdropFilter: 'blur(8px)',
+              background: 'rgba(255, 255, 255, 0.9)',
+            }}
+          >
+            <Grid
+              container
+              justifyContent="flex-end"
+              mb={3}
+              spacing={1}
+            >
+              <Grid item>
+                <IconButton
+                  href="/"
+                  size="large"
+                >
+                  <HomeIcon color="primary" />
+                </IconButton>
+              </Grid>
+              {config.githubLink && (
+                <Grid item>
+                  <IconButton
+                    href={config.githubLink}
+                    size="large"
+                  >
+                    <GitHubIcon color="primary" />
+                  </IconButton>
+                </Grid>
+              )}
+              <Grid item>
+                <Box sx={{ flexGrow: 0 }}>
+                  <HeaderLanguageMenu />
+                </Box>
+              </Grid>
+            </Grid>
+
+            <Box sx={{ textAlign: 'center', mb: 5 }}>
+              <LogoText variant="h1">Tobe Blog</LogoText>
+              <Typography
+                variant="h5"
+                sx={{
+                  color: 'text.secondary',
+                  fontWeight: 500,
+                  fontSize: { xs: '1.2rem', md: '1.4rem' },
+                  textShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                  mt: 1,
+                }}
+              >
+                {t('sign-up.title')}
+              </Typography>
+            </Box>
+
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
+              <Grid
+                container
+                spacing={2}
+              >
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                >
+                  <TextField
+                    autoComplete="given-name"
+                    name="firstName"
+                    fullWidth
+                    id="firstName"
+                    label={t('sign-up.fields.first-name')}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: '12px',
+                      },
+                      '& .MuiInputLabel-root': {
+                        fontSize: '1rem',
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        padding: '14px 16px',
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                >
+                  <TextField
+                    fullWidth
+                    id="lastName"
+                    label={t('sign-up.fields.last-name')}
+                    name="lastName"
+                    autoComplete="family-name"
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: '12px',
+                      },
+                      '& .MuiInputLabel-root': {
+                        fontSize: '1rem',
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        padding: '14px 16px',
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                >
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label={t('sign-up.fields.email')}
+                    name="email"
+                    autoComplete="email"
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: '12px',
+                      },
+                      '& .MuiInputLabel-root': {
+                        fontSize: '1rem',
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        padding: '14px 16px',
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                >
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label={t('sign-up.fields.password')}
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: '12px',
+                      },
+                      '& .MuiInputLabel-root': {
+                        fontSize: '1rem',
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        padding: '14px 16px',
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                >
+                  <TextField
+                    required
+                    fullWidth
+                    name="password-confirm"
+                    label={t('sign-up.fields.password-confirm')}
+                    type="password"
+                    id="password-confirm"
+                    autoComplete="new-password"
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: '12px',
+                      },
+                      '& .MuiInputLabel-root': {
+                        fontSize: '1rem',
+                      },
+                      '& .MuiOutlinedInput-input': {
+                        padding: '14px 16px',
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                >
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    sx={{
+                      'borderRadius': '12px',
+                      'py': 1.8,
+                      'fontWeight': 600,
+                      'fontSize': '1.1rem',
+                      'boxShadow': '0 8px 16px rgba(0, 0, 0, 0.1)',
+                      'mt': 1,
+                      'mb': 2,
+                      '&:hover': {
+                        boxShadow: '0 12px 20px rgba(0, 0, 0, 0.15)',
+                      },
+                    }}
+                  >
+                    {t('sign-up.sign-up-btn')}
+                  </Button>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sx={{ textAlign: 'center' }}
+                >
+                  <Link
+                    href={URL.SIGN_IN}
+                    variant="body2"
+                    sx={{
+                      'color': 'text.secondary',
+                      'fontSize': '0.95rem',
+                      '&:hover': {
+                        color: 'primary.main',
+                      },
+                    }}
+                  >
+                    {t('sign-up.sign-in-btn')}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Paper>
+        </HeroSection>
+      </Container>
+    </PageContainer>
   );
 }

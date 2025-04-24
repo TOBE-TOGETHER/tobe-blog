@@ -82,7 +82,7 @@
       },
       "READING": {
         "title": "Book Notes",
-        "description": "Share your reading notes and insights"
+        "description": "Read the classic and record your thoughts"
       },
       "LIFE": {
         "title": "Life Tips",
@@ -98,7 +98,7 @@
     "title": "Sign In",
     "sign-in-btn": "Sign In",
     "forget-pw-btn": "Forget password?",
-    "sign-up-btn": "Don't have an account? Sign Up",
+    "sign-up-btn": "Sign up",
     "remember-me-btn": "Remember me",
     "description": {
       "email": "Email Address",
@@ -110,7 +110,7 @@
     }
   },
   "sign-up": {
-    "title": "Join",
+    "title": "Join us",
     "sign-up-btn": "Sign Up",
     "sign-in-btn": "Already have an account? Sign in",
     "fields": {

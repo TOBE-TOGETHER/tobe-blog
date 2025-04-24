@@ -82,8 +82,8 @@ export default function TopicSection() {
     <Container
       maxWidth="lg"
       sx={{
+        mt: { xs: 8, sm: 0 },
         mb: 12,
-        mt: 4,
         position: 'relative',
         zIndex: 1,
         px: { xs: 2, sm: 3 },
@@ -131,7 +131,12 @@ export default function TopicSection() {
                   lineHeight: 1.6,
                 }}
               >
-                {category.description}
+                {category.description.split('，').map((line, index) => (
+                  <span key={index}>
+                    {line.trim()}
+                    <br />
+                  </span>
+                ))}
               </Typography>
             </GlowingCard>
           </Grid>

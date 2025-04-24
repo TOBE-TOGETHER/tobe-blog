@@ -79,11 +79,11 @@
     "categories": {
       "TECHNICAL": {
         "title": "科技新闻",
-        "description": "紧跟科技前沿，分享最新动态与见解"
+        "description": "紧跟科技前沿，分享最新动态"
       },
       "READING": {
         "title": "读书笔记",
-        "description": "与你分享精彩书籍，共同探讨成长感悟"
+        "description": "品读传世经典，记录感悟与思考"
       },
       "LIFE": {
         "title": "生活点滴",
@@ -91,7 +91,7 @@
       },
       "LANGUAGE": {
         "title": "外语学习",
-        "description": "语言学习经验与资源分享"
+        "description": "与世界相连，分享经验与资源"
       }
     }
   },
