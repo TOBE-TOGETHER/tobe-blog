@@ -82,8 +82,8 @@ export default function SignUp() {
         maxWidth="sm"
         sx={{
           pb: '2vh',
-          pt: '8vh',
-          minHeight: '100vh',
+          pt: { xs: '6vh', sm: '8vh' },
+          minHeight: '300px',
           position: 'relative',
           zIndex: 1,
         }}

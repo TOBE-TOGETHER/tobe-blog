@@ -14,6 +14,7 @@ export default function TopicContentPage() {
   const { t } = useCommonUtils();
   useEffect(() => {
     window.document.title = `${config.title} - ${t(`home-page.categories.${id}.title`)}`;
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     return () => {
       window.document.title = window.document.title = `${config.title}`;
     };

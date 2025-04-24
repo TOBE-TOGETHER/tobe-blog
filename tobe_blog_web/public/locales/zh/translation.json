@@ -73,25 +73,41 @@
     "end-line": "实在是没有了。。。",
     "load-more": "加载更多",
     "no-content": "找不到相关内容",
-    "top5-active-users": "活跃排行榜",
     "tag-statistics": "标签筛选",
     "slogan": "记录成长，分享点滴",
+    "advantages": {
+      "title": "为什么选择 Tobe Blog",
+      "items": {
+        "ai": {
+          "title": "AI 技术加持",
+          "description": "我们的博客平台由AI技术加持，加速迭代和更新，不断优化用户体验。同时，AI系统将为创作者提供创作辅助，以及更加智能的索引，轻松打造个人或团队的知识库。"
+        },
+        "community": {
+          "title": "社区完善",
+          "description": "加入Tobe Blog，您将成为一个充满活力的创作社区的一员。我们汇集了各行各业的优秀创作者，内容覆盖科技、阅读、生活和语言学习等多个领域。保证您阅读到的每一篇文章都值得您的时间和关注。"
+        },
+        "copyright": {
+          "title": "尊重创作",
+          "description": "在Tobe Blog，我们坚信创作者的权益应当得到充分尊重。您发布的所有内容版权完全归您所有，我们提供完善的版权保护机制，让您可以安心创作，自由分享，同时获得应有的尊重与回报。"
+        }
+      }
+    },
     "categories": {
       "TECHNICAL": {
-        "title": "科技新闻",
-        "description": "紧跟科技前沿，分享最新动态"
+        "title": "技术宝典",
+        "description": "紧跟科技前沿，传播最新动态"
       },
       "READING": {
         "title": "读书笔记",
-        "description": "品读传世经典，记录感悟与思考"
+        "description": "品读传世经典，记录思考感悟"
       },
       "LIFE": {
         "title": "生活点滴",
-        "description": "记录美好生活，分享生活智慧"
+        "description": "体会美好生活，分享人生智慧"
       },
       "LANGUAGE": {
         "title": "外语学习",
-        "description": "与世界相连，分享经验与资源"
+        "description": "着眼广阔世界，共享经验资源"
       }
     }
   },

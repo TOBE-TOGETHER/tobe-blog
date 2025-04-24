@@ -75,9 +75,26 @@
     "no-content": "No available content",
     "tag-statistics": "Featured tags",
     "slogan": "Record growth and share every little bit",
+    "advantages": {
+      "title": "Why Choose Tobe Blog",
+      "items": {
+        "ai": {
+          "title": "AI-Powered Technology",
+          "description": "Our blog platform is powered by AI technology, accelerating iteration and updates, continuously optimizing user experience. The AI system also provides creative assistance and smart indexing, making it easy to build personal or team knowledge bases."
+        },
+        "community": {
+          "title": "Vibrant Community",
+          "description": "Join Tobe Blog and become part of a vibrant creative community. We bring together exceptional creators from various industries, with content covering technology, reading, lifestyle, and language learning. We ensure that every article you read is worth your time and attention."
+        },
+        "copyright": {
+          "title": "Respect for Creators",
+          "description": "At Tobe Blog, we firmly believe that creators' rights should be fully respected. All content you publish belongs entirely to you. We provide comprehensive copyright protection mechanisms, allowing you to create with peace of mind, share freely, and receive the respect and rewards you deserve."
+        }
+      }
+    },
     "categories": {
       "TECHNICAL": {
-        "title": "Tech News",
+        "title": "Tech Blog",
         "description": "Stay updated with tech trends and insights"
       },
       "READING": {
