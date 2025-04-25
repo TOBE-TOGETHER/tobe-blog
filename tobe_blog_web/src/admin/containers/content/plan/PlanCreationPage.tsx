@@ -56,6 +56,7 @@ export default function PlanCreationPage() {
       targetEndTime: toTime,
       coverImgUrl: coverImgUrl,
       tags: tagValues,
+      topic: topic,
     })
       .then(() => {
         enqueueSnackbar(t('msg.success'), {

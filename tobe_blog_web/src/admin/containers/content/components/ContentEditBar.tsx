@@ -1,4 +1,5 @@
-import { Grid } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { Grid, IconButton } from '@mui/material';
 import { EditIconButton } from '../../../components';
 import BaseContentService from '../BaseContentService';
 import { VisibilitySwitch } from './VisibilitySwitch';
@@ -14,6 +15,14 @@ export default function ComtentEditBar(props: Readonly<{ id: string | undefined;
         item
         flexGrow={1}
       ></Grid>
+      <Grid
+        item
+        flexGrow={0}
+      >
+        <IconButton onClick={() => window.history.back()}>
+          <ArrowBackIosNewIcon />
+        </IconButton>
+      </Grid>
       <Grid
         item
         flexGrow={0}

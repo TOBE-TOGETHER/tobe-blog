@@ -8,6 +8,11 @@ const pulse = keyframes`
   50% { opacity: 1; }
 `;
 
+const enlarge = keyframes`
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+`;
+
 const float = keyframes`
   0% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(5deg); }
@@ -38,6 +43,30 @@ const GradientBackground = styled.div`
   animation: ${pulse} 2s ease-in-out infinite;
 `;
 
+const LetterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+`;
+
+interface LetterProps {
+  active: boolean;
+}
+
+const Letter = styled.div<LetterProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 42px;
+  color: #64b5f6;
+  animation: ${props => (props.active ? enlarge : 'none')} 0.6s ease-in-out;
+  margin: 0 2px;
+`;
+
 const FloatingElement = styled.div<{ delay: string; duration: string; isReverse?: boolean; top: string; left?: string; right?: string }>`
   position: absolute;
   top: ${props => props.top};
@@ -45,6 +74,7 @@ const FloatingElement = styled.div<{ delay: string; duration: string; isReverse?
   right: ${props => props.right};
   animation: ${props => (props.isReverse ? floatReverse : float)} ${props => props.duration} ease-in-out infinite;
   animation-delay: ${props => props.delay};
+  z-index: 1;
 `;
 
 const CircleElement = styled.div<{ size: string; color: string; opacity: string }>`
@@ -72,62 +102,25 @@ const DiamondElement = styled.div<{ size: string; color: string; opacity: string
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 `;
 
-const TextContainer = styled.div`
-  position: relative;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 800;
-  font-size: 42px;
-  color: #64b5f6;
-  z-index: 2;
-`;
-
-const Cursor = styled.div`
-  width: 20px;
-  height: 3px;
-  background-color: #64b5f6;
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  animation: blink 1.5s infinite;
-
-  @keyframes blink {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-  }
-`;
-
 export default function LoadingIcon() {
-  const [text, setText] = useState('');
-  const [cursorPosition, setCursorPosition] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const positions = [5, 35, 63, 93, 120];
-    const texts = ['', 'T', 'TO', 'TOB', 'TOBE'];
-    let index = 0;
-
     const interval = setInterval(() => {
-      setText(texts[index]);
-      setCursorPosition(positions[index]);
-      index = (index + 1) % positions.length;
-    }, 1000);
+      setActiveIndex(prev => (prev + 1) % 4);
+    }, 500); // Faster animation (from 1000ms to 500ms)
 
     return () => clearInterval(interval);
   }, []);
+
+  // Letters in order: T, O, B, E
+  const letters = ['T', 'O', 'B', 'E'];
 
   return (
     <LoadingContainer>
       <GradientBackground />
 
-      {/* Floating elements around the text */}
+      {/* Floating background elements */}
       <FloatingElement
         delay="0.5s"
         duration="4s"
@@ -161,8 +154,8 @@ export default function LoadingIcon() {
         delay="0.8s"
         duration="4.5s"
         isReverse={false}
-        top="120px"
-        left="30px"
+        top="140px"
+        left="20px"
       >
         <DiamondElement
           size="28px"
@@ -185,11 +178,16 @@ export default function LoadingIcon() {
         />
       </FloatingElement>
 
-      {/* Text with cursor */}
-      <TextContainer>
-        {text}
-        <Cursor style={{ left: `${cursorPosition}px` }} />
-      </TextContainer>
+      <LetterContainer>
+        {letters.map((letter, index) => (
+          <Letter
+            key={index}
+            active={activeIndex === index}
+          >
+            {letter}
+          </Letter>
+        ))}
+      </LetterContainer>
     </LoadingContainer>
   );
 }

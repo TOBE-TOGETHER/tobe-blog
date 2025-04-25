@@ -1,3 +1,5 @@
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Grid, IconButton } from '@mui/material';
 import { useState } from 'react';
 import { useCommonUtils } from '../../../../commons';
 import { Page } from '../../../../components/layout';
@@ -46,6 +48,28 @@ export default function ArticleCreationPage() {
       openLoading={loading}
       pageTitle={t('article-creation-page.page-main-title')}
     >
+      <Grid
+        container
+        sx={{ m: 0, p: { xs: 0.5, md: 1 } }}
+        alignItems="center"
+      >
+        <Grid
+          item
+          flexGrow={1}
+        ></Grid>
+        <Grid
+          item
+          flexGrow={0}
+        >
+          <IconButton
+            onClick={() => window.history.back()}
+            sx={{ mr: 2, mb: 2 }}
+            size="medium"
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
       <ArticleEditMainSection
         title={title}
         setTitle={setTitle}

@@ -14,6 +14,13 @@ export function SearchBox(props: { setKeyword: (keyword: string) => void }) {
     console.log('Searching for:', searchValue);
     props.setKeyword(searchValue);
   };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <Container sx={{ mt: 1 }}>
       <Box sx={{ width: '100%', borderRadius: 4 }}>
@@ -23,6 +30,7 @@ export function SearchBox(props: { setKeyword: (keyword: string) => void }) {
           variant="outlined"
           placeholder="Search..."
           onChange={e => setSearchValue(e.target.value)}
+          onKeyDown={handleKeyDown}
           InputProps={{
             sx: {
               pl: 3,
