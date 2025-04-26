@@ -12,6 +12,22 @@ spring:
       host: 127.0.0.1
       port: 6379
       connect-timeout: 3000
+  mail:
+    host: smtp.qq.com    # Change to actual SMTP server
+    port: 587            # Common SMTP port
+    username: ${MAIL_USERNAME}  # Replace with actual email
+    password: ${MAIL_PASSWORD}  # Replace with actual password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          timeout: 5000
+          connectiontimeout: 5000
+          writetimeout: 5000
+
 springdoc:
   swagger-ui:
     path: /swagger-ui
@@ -36,3 +52,5 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-delete-value: 1
       logic-not-delete-value: 0
+mail:
+  mail-from: 474504303@qq.com

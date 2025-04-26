@@ -2,9 +2,12 @@ package com.tobe.blog.portal.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.UUID;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +15,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO;
+import com.tobe.blog.core.service.EmailService;
 import com.tobe.blog.core.service.UserService;
 import com.tobe.blog.core.utils.CacheUtil;
 import com.tobe.blog.portal.mapper.PublicApiMapper;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -27,10 +27,13 @@ public class PublicApiService {
     private final PublicApiMapper apiMapper;
     private final CacheUtil cacheUtil;
     private final UserService userService;
+    private final EmailService emailService;
 
     @Value("${app.frontend-url}")
     private String frontendUrl;
-    
+
+    private static final String RESET_PASSWORD_EMAIL_TEMPLATE = "password-reset-email";
+    private static final String RESET_PASSWORD_EMAIL_SUBJECT = "Password Reset - Tobe Blog";
     private static final String LIKE_COUNT_UNI_KEY = "LIKE_COUNT_UNI_KEY";
     private static final String PASSWORD_RESET_TOKEN_KEY = "PASSWORD_RESET_TOKEN_";
     private static final long PASSWORD_RESET_TOKEN_EXPIRY = TimeUnit.MINUTES.toSeconds(5);
@@ -90,9 +93,22 @@ public class PublicApiService {
             String resetUrl = String.format("%s/reset-password?email=%s&token=%s",
                     frontendUrl, email, resetToken);
 
-            Map<String, String> param = Map.of("resetUrl", resetUrl, "name", name);
+            // Prepare email parameters
+            Map<String, Object> params = new HashMap<>();
+            params.put("resetUrl", resetUrl);
+            params.put("name", name);
+            params.put("email", email);
+            params.put("expiryMinutes", 5); // Same as TOKEN_EXPIRY
 
-            // TODO: Send email with token
+            // Send email with token
+            emailService.sendTemplateEmail(
+                email,
+                    RESET_PASSWORD_EMAIL_TEMPLATE,
+                    RESET_PASSWORD_EMAIL_SUBJECT,
+                params
+            );
+            
+            log.info("Password reset email sent to: {}", email);
         } catch (Exception e) {
             log.error("Error processing password reset request for email: {}", email, e);
         }
