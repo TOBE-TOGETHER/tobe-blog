@@ -83,33 +83,3 @@ export function resetPassword(email: string, token: string, newPassword: string)
     }
   });
 }
-
-export function searchContents(
-  current: number,
-  size: number,
-  tags?: string,
-  ownerId?: number,
-  contentType?: string,
-  topic?: string,
-  keyword?: string,
-): AxiosPromise {
-  return server.get(
-    `/${API_DATA_URI}/contents?current=${current}&size=${size}${tags ? '&tags=' + tags : ''}${
-      ownerId ? '&ownerId=' + ownerId : ''
-    }${contentType ? '&contentType=' + contentType : ''}${topic ? '&topic=' + topic : ''}${
-      keyword ? '&keyword=' + keyword : ''
-    }`,
-  );
-}
-
-export function getCollectionById(id: string | number): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/collections/${id}`);
-}
-
-export function getUserFullProfile(id: number): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/full-profile/${id}`);
-}
-
-export function getUserBriefProfile(id: number): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/brief-profile/${id}`);
-}

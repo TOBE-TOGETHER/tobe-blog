@@ -18,7 +18,7 @@ export function WordListPanel(props: Readonly<{ editable: boolean; vocabularyId:
 
   const loadWordsData = useCallback(
     (vocabularyId: string): void => {
-      PublicDataService.getWordsByVocabularyId(vocabularyId)
+      PublicDataService.getWordsByVOCId(vocabularyId)
         .then(response => {
           setWords(response.data);
         })
