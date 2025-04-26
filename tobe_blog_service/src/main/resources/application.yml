@@ -13,10 +13,10 @@ spring:
       port: 6379
       connect-timeout: 3000
   mail:
-    host: smtp.qq.com    # Change to actual SMTP server
-    port: 587            # Common SMTP port
-    username: ${MAIL_USERNAME}  # Replace with actual email
-    password: ${MAIL_PASSWORD}  # Replace with actual password
+    host: smtp.qq.com # Change to actual SMTP server
+    port: 587 # Common SMTP port
+    username: ${MAIL_USERNAME} # Replace with actual email
+    password: ${MAIL_PASSWORD} # Replace with actual password
     properties:
       mail:
         smtp:

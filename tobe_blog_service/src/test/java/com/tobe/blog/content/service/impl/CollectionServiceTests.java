@@ -110,7 +110,7 @@ public class CollectionServiceTests {
         final CollectionDTO releaseResult = collectionService.updateVisibility(saveResult.getId(), visibilityUpdateDTO);
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
-        // should not be able to repeatly release 
+        // should not be able to repeatedly release
         Assertions.assertThrows(RuntimeException.class, () -> collectionService.updateVisibility(saveResult.getId(), visibilityUpdateDTO));
     }
 

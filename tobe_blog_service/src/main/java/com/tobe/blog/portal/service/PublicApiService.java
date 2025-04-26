@@ -84,7 +84,7 @@ public class PublicApiService {
             cacheUtil.set(PASSWORD_RESET_TOKEN_KEY + email, resetToken, PASSWORD_RESET_TOKEN_EXPIRY);
 
             // Get username
-            String name = userService.getUsernameByEmail(email);
+            String name = userService.getFirstNameByEmail(email);
             if (name == null || name.isEmpty()) {
                 name = "User"; // Default name if not found
             }
@@ -103,8 +103,8 @@ public class PublicApiService {
             // Send email with token
             emailService.sendTemplateEmail(
                 email,
-                    RESET_PASSWORD_EMAIL_TEMPLATE,
                     RESET_PASSWORD_EMAIL_SUBJECT,
+                    RESET_PASSWORD_EMAIL_TEMPLATE,
                 params
             );
             

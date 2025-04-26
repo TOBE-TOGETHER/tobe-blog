@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:local_test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_ON_EXIT=FALSE;NON_KEYWORDS=VALUE
+    url: jdbc:h2:mem:local_test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_ON_EXIT=TRUE;NON_KEYWORDS=VALUE
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -56,7 +56,7 @@ jwt:
     access: 86400000
     refresh: 864000000
 mail:
-  mail-from: test@example.com
+  mail-from: 474504303@qq.com
 app:
   frontend-url: http://localhost:3000
 security-context:

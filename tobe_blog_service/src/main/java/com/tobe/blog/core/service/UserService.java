@@ -177,15 +177,15 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
     }
 
     /**
-     * Gets a username by email
+     * Gets a firstname by email
      *
      * @param email The user's email
-     * @return The username associated with the email, or null if not found
+     * @return The firstname associated with the email, or null if not found
      */
-    public String getUsernameByEmail(String email) {
+    public String getFirstNameByEmail(String email) {
         return this.getOneOpt(
                 new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getEmail, email))
-                .map(UserEntity::getUsername)
+                .map(UserEntity::getFirstName)
                 .orElse(null);
     }
 
