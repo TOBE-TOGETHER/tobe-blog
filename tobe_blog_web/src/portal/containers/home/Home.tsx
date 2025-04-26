@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { Container, Typography } from '@mui/material';
 import { Theme } from '@mui/material/styles';
-import { useEffect } from 'react';
 import { useCommonUtils } from '../../../commons';
 import { PortalLayout } from '../../components';
 import FloatingElementContainer from '../../components/FloatingElementContainer';
@@ -56,9 +55,6 @@ const LogoText = styled.h1`
 
 export default function Home() {
   const { t } = useCommonUtils();
-  useEffect(() => {
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-  }, []);
   return (
     <PortalLayout
       headerStyles={{ backgroundColor: 'transparent' }}

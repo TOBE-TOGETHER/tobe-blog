@@ -24,7 +24,6 @@ export default function ContentReadingPage(
     ];
     switchMetas(metas);
     window.document.title = props.content?.title ?? originTitle;
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
     return function restoreTitleAndMeta() {
       window.document.title = `${originTitle}`;
       switchMetas(metas);
