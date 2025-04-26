@@ -42,3 +42,11 @@ export enum EOperationName {
   BAN = 'ban',
   RECOMMEND = 'recommend',
 }
+
+export enum ETopic {
+  TECHNICAL,
+  READING,
+  LIFE,
+  LANGUAGE,
+  OTHER,
+}

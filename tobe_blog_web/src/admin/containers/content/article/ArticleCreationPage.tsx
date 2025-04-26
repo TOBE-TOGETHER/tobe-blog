@@ -13,7 +13,7 @@ export default function ArticleCreationPage() {
   const [textValue, setTextValue] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
   const [contentProtected, setContentProtected] = useState<boolean>(false);
-  const { loading, setLoading, title, setTitle, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
+  const { loading, setLoading, title, setTitle, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } = useCommonContentState();
 
   function saveArticle(): void {
     setLoading(true);
@@ -25,6 +25,7 @@ export default function ArticleCreationPage() {
       description: textValue.trim().length >= 500 ? textValue.trim().substring(0, 497) + '...' : textValue.trim(),
       tags: tagValues,
       contentProtected: contentProtected,
+      topic: topic,
     })
       .then(() => {
         enqueueSnackbar(t('msg.success'), {
@@ -63,6 +64,8 @@ export default function ArticleCreationPage() {
         description={''}
         setDescription={() => {}}
         sx={{ mt: 6 }}
+        topic={topic}
+        setTopic={setTopic}
       />
       <SaveButtonPanel primaryEvent={saveArticle} />
     </Page>

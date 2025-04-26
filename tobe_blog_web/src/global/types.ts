@@ -1,4 +1,4 @@
-import { EAuthority, EColumnPosition, EFeatureCode, EOperationName } from './enums.ts';
+import { EAuthority, EColumnPosition, EFeatureCode, EOperationName, ETopic } from './enums.ts';
 
 export interface IColumn {
   id: string;
@@ -87,6 +87,7 @@ export interface IPlanCreationDTO {
   targetStartTime: Date | null;
   targetEndTime: Date | null;
   tags: ITagOption[];
+  topic: TopicPropsType;
 }
 
 export interface IPlanUpdateDTO extends IPlanCreationDTO {
@@ -116,6 +117,7 @@ export interface IArticleCreationDTO {
   subTitle: string;
   contentProtected: boolean;
   tags: ITagOption[];
+  topic: TopicPropsType;
 }
 
 export interface IArticleUpdateDTO extends IArticleCreationDTO {
@@ -128,6 +130,7 @@ export interface IVocabularyCreationDTO {
   language: string;
   coverImgUrl: string;
   tags: ITagOption[];
+  topic: TopicPropsType;
 }
 
 export interface IVocabularyDetailDTO extends IBaseUserContentDTO {
@@ -151,6 +154,7 @@ export interface ICollectionUpdateDTO {
   description: string;
   coverImgUrl?: string;
   tags: ITagOption[];
+  topic: TopicPropsType;
 }
 
 export interface IBaseUserContentDTO {
@@ -238,3 +242,5 @@ export interface IWordUpdateDTO {
   meaningInChinese: string;
   meaningInEnglish: string;
 }
+
+export type TopicPropsType = ETopic | string | null | undefined;

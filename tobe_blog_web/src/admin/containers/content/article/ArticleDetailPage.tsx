@@ -14,7 +14,7 @@ export default function ArticleDetailPage() {
   const [textValue, setTextValue] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
   const [contentProtected, setContentProtected] = useState<boolean>(false);
-  const { loading, setLoading, editable, setEditable, title, setTitle, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
+  const { loading, setLoading, editable, setEditable, title, setTitle, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } = useCommonContentState();
 
   const loadData = useCallback((): void => {
     if (!id) {
@@ -29,6 +29,7 @@ export default function ArticleDetailPage() {
         setCoverImgUrl(response.data.coverImgUrl);
         setTagValues(response.data.tags);
         setContentProtected(response.data.contentProtected);
+        setTopic(response.data.topic);
       })
       .catch(() => {
         enqueueSnackbar(t('article-creation-page.msg.error'), {
@@ -73,6 +74,7 @@ export default function ArticleDetailPage() {
         description: textValue.trim().length >= 500 ? textValue.trim().substring(0, 497) + '...' : textValue.trim(),
         tags: tagValues,
         contentProtected: contentProtected,
+        topic: topic,
       });
     }
     setEditable(!editable);
@@ -104,6 +106,8 @@ export default function ArticleDetailPage() {
         editable={editable}
         description={''}
         setDescription={() => {}}
+        topic={topic}
+        setTopic={setTopic}
       />
     </BaseContentPage>
   );

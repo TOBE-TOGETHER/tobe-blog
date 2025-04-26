@@ -1,10 +1,10 @@
-import { Avatar, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { Login } from '@mui/icons-material';
+import { Avatar, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import React from 'react';
 import { authed, enabled, useCommonUtils } from '../../commons';
 import { useAuthState } from '../../contexts';
 import { pages } from '../../portal/components/layout/configs';
 import { URL, validateUrl } from '../../routes';
-import theme from '../../theme';
 
 export default function HeaderUserMenu() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -33,6 +33,7 @@ export default function HeaderUserMenu() {
           <IconButton
             onClick={handleOpenUserMenu}
             sx={{ p: 0.5 }}
+            size="small"
           >
             <Avatar
               alt={authContext.user.firstName}
@@ -41,24 +42,15 @@ export default function HeaderUserMenu() {
           </IconButton>
         </Tooltip>
       ) : (
-        <Button
-          key={URL.SIGN_IN}
-          onClick={() => navigate(URL.SIGN_IN)}
-          size="small"
-          sx={{
-            'color': theme.palette.primary.main,
-            'fontSize': 18,
-            'borderRadius': 0,
-            'borderBottom': '3px solid transparent',
-            'fontFamily': 'PingFang SC,Roboto, Helvetica, Arial, sans-serif',
-            'fontWeight': 700,
-            '&:hover': {
-              borderBottom: '3px solid ' + theme.palette.primary.main,
-            },
-          }}
-        >
-          {t('app-header.sign-in-btn')}
-        </Button>
+        <Tooltip title={t('app-header.sign-in-btn')}>
+          <IconButton
+            key={URL.SIGN_IN}
+            onClick={() => navigate(URL.SIGN_IN)}
+            size="large"
+          >
+            <Login color="primary" />
+          </IconButton>
+        </Tooltip>
       )}
       <Menu
         sx={{ mt: '45px' }}

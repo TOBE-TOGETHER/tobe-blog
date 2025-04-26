@@ -28,6 +28,6 @@ public interface IContentService<
 
     D getDTOByIdAndCount(String id);
 
-    D updatVisibility(String id, ContentVisibilityUpdateDTO updateDTO);
+    D updateVisibility(String id, ContentVisibilityUpdateDTO updateDTO);
 
 }

@@ -1,8 +1,9 @@
 import { FormControlLabel, Switch, TextField } from '@mui/material';
 import { useCommonUtils } from '../../../../../commons';
-import { FormPanel, OneRow } from '../../../../../components';
+import { FormPanel, HalfRow, OneRow } from '../../../../../components';
 import { MultipleTagSelecter } from '../../../../components';
 import { IContentMainSectionProps } from '../../commons';
+import TopicSelector from '../../components/TopicSelector';
 import RichContentEditor from './RichContentEditor';
 
 export interface IArticleEditMainSectionProps extends IContentMainSectionProps {
@@ -39,7 +40,7 @@ export default function ArticleEditMainSection(props: Readonly<IArticleEditMainS
           error={props.subTitle.length >= 1000}
         />
       </OneRow>
-      <OneRow>
+      <HalfRow>
         <TextField
           fullWidth
           label={t('article-creation-page.fields.cover-img-url')}
@@ -48,7 +49,14 @@ export default function ArticleEditMainSection(props: Readonly<IArticleEditMainS
           onChange={v => props.setCoverImgUrl(v.target.value)}
           error={props.coverImgUrl?.length >= 2000}
         />
-      </OneRow>
+      </HalfRow>
+      <HalfRow>
+        <TopicSelector
+          editable={props.editable}
+          topic={props.topic}
+          setTopic={props.setTopic}
+        />
+      </HalfRow>
       <OneRow>
         <MultipleTagSelecter
           disabled={!props.editable}

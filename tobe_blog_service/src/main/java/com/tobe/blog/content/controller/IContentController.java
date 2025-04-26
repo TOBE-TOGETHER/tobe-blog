@@ -3,6 +3,7 @@ package com.tobe.blog.content.controller;
 import org.springframework.http.ResponseEntity;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.content.BaseContentCreationDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.BaseContentUpdateDTO;
@@ -36,8 +37,9 @@ public interface IContentController<
         String updateFrom,
         String updateTo,
         String tags,
-        String keyword);
+        String keyword,
+        Const.Topic topic);
 
-    ResponseEntity<D> updatVisibility(String id, ContentVisibilityUpdateDTO updateDTO);
+    ResponseEntity<D> updateVisibility(String id, ContentVisibilityUpdateDTO updateDTO);
 
 }

@@ -1,12 +1,15 @@
 import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Skeleton } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useCommonUtils } from '../../../commons/index.ts';
-import { SidePanel } from '../../../components/index.ts';
-import { EContentType } from '../../../global/enums.ts';
-import { ITagStatisticDTO } from '../../../global/types.ts';
-import * as PublicDataService from '../../../services/PublicDataService.ts';
+import { useCommonUtils } from '../../commons';
+import { SidePanel } from '../../components';
+import { EContentType } from '../../global/enums';
+import { ITagStatisticDTO, TopicPropsType } from '../../global/types';
+import * as PublicDataService from '../../services/PublicDataService';
+import NoContentNewsItem from './NoContentNewsItem';
 
-export default function TagFilterPanel(props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void }>) {
+export default function TagFilterPanel(
+  props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void; topic: TopicPropsType; keyword: string }>
+) {
   const { t } = useCommonUtils();
   const [tagStatistics, setTagStatistics] = useState<ITagStatisticDTO[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -25,7 +28,7 @@ export default function TagFilterPanel(props: Readonly<{ contentType: EContentTy
   useEffect(() => {
     function loadData(): void {
       setIsLoading(true);
-      PublicDataService.getTagStatistics(props.contentType, props.ownerId)
+      PublicDataService.getTagStatistics(props.contentType, props.ownerId, props.topic, props.keyword)
         .then(response => {
           setTagStatistics(response.data);
         })
@@ -37,7 +40,7 @@ export default function TagFilterPanel(props: Readonly<{ contentType: EContentTy
         });
     }
     loadData();
-  }, [props.contentType, props.ownerId]);
+  }, [props.contentType, props.ownerId, props.topic, props.keyword]);
 
   return (
     <SidePanel title={t('home-page.tag-statistics')}>
@@ -98,6 +101,6 @@ const TagList = (props: { tagStatistics: ITagStatisticDTO[]; handleToggle: (valu
       })}
     </List>
   ) : (
-    <></>
+    <NoContentNewsItem />
   );
 };

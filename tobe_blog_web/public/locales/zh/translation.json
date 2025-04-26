@@ -48,8 +48,9 @@
       "edit-btn": "编辑"
     },
     "author-panel": {
-      "public-creation-count": "公开内容数",
-      "view-count": "累积阅读量"
+      "public-creation-count": "公开内容",
+      "view-count": "总浏览量",
+      "visit-blog": "访问博客"
     },
     "general-card-view": {
       "published": "已发布",
@@ -72,8 +73,43 @@
     "end-line": "实在是没有了。。。",
     "load-more": "加载更多",
     "no-content": "找不到相关内容",
-    "top5-active-users": "活跃排行榜",
-    "tag-statistics": "标签筛选"
+    "tag-statistics": "标签筛选",
+    "slogan": "记录成长，分享点滴",
+    "advantages": {
+      "title": "为什么选择 Tobe Blog",
+      "items": {
+        "ai": {
+          "title": "AI 技术加持",
+          "description": "我们的博客平台由AI技术加持，加速迭代和更新，不断优化用户体验。同时，AI系统将为创作者提供创作辅助，以及更加智能的索引，轻松打造个人或团队的知识库。"
+        },
+        "community": {
+          "title": "社区完善",
+          "description": "加入Tobe Blog，您将成为一个充满活力的创作社区的一员。我们汇集了各行各业的优秀创作者，内容覆盖科技、阅读、生活和语言学习等多个领域。保证您阅读到的每一篇文章都值得您的时间和关注。"
+        },
+        "copyright": {
+          "title": "尊重创作",
+          "description": "在Tobe Blog，我们坚信创作者的权益应当得到充分尊重。您发布的所有内容版权完全归您所有，我们提供完善的版权保护机制，让您可以安心创作，自由分享，同时获得应有的尊重与回报。"
+        }
+      }
+    },
+    "categories": {
+      "TECHNICAL": {
+        "title": "技术宝典",
+        "description": "紧跟科技前沿，传播最新动态"
+      },
+      "READING": {
+        "title": "读书笔记",
+        "description": "品读传世经典，记录思考感悟"
+      },
+      "LIFE": {
+        "title": "生活点滴",
+        "description": "体会美好生活，分享人生智慧"
+      },
+      "LANGUAGE": {
+        "title": "外语学习",
+        "description": "着眼广阔世界，共享经验资源"
+      }
+    }
   },
   "sign-in": {
     "title": "欢迎登陆",
@@ -87,7 +123,29 @@
     },
     "msg": {
       "success": "登录成功",
-      "error": "登录失败，请再次确认您的用户名密码"
+      "error": "登录失败，请再次确认您的用户名密码",
+      "invalid-email": "请输入有效的邮箱地址",
+      "password-reset-sent": "密码重置链接已发送到您的邮箱",
+      "password-reset-error": "发送密码重置邮件失败，请重试"
+    },
+    "reset-password-title": "重置密码",
+    "reset-password-message": "请输入您的邮箱地址，我们将向您发送密码重置邮件",
+    "cancel-btn": "取消",
+    "send-reset-btn": "发送"
+  },
+  "reset-password": {
+    "title": "重置您的密码",
+    "subtitle": "为您的账户设置新密码",
+    "new-password": "新密码",
+    "confirm-password": "确认新密码",
+    "submit-btn": "重置密码",
+    "back-to-login": "返回登录",
+    "msg": {
+      "success": "密码重置成功",
+      "error": "密码重置失败，请重试或请求新的重置链接",
+      "token-expired": "您的重置链接已过期，请重新获取",
+      "passwords-not-match": "两次输入的密码不一致",
+      "invalid-password-length": "密码长度至少为6个字符"
     }
   },
   "sign-up": {
@@ -329,7 +387,8 @@
       "description": "描述",
       "language": "语言",
       "cover-img-url": "封面链接",
-      "tags": "标签"
+      "tags": "标签",
+      "topic": "主题"
     }
   },
   "word-dialog": {
@@ -352,5 +411,13 @@
     },
     "cancel": "取消",
     "confirm": "确定"
+  },
+  "topic": {
+    "label": "主题",
+    "READING": "读书",
+    "LANGUAGE": "外语",
+    "TECHNICAL": "科技",
+    "LIFE": "生活",
+    "OTHER": "其他"
   }
 }

@@ -44,10 +44,10 @@ import io.netty.util.internal.StringUtil;
  * @param <M> Mapper used for manipulating data, providing common CRUD methods
  */
 public abstract class BaseContentService<
-    D extends BaseContentDTO, 
-    C extends BaseContentCreationDTO, 
-    U extends BaseContentUpdateDTO, 
-    E extends BaseContentEntity, 
+    D extends BaseContentDTO,
+    C extends BaseContentCreationDTO,
+    U extends BaseContentUpdateDTO,
+    E extends BaseContentEntity,
     M extends BaseContentMapper<D, E>> extends ServiceImpl<M, E> implements IContentService<D, C, U, E, M> {
     @Autowired
     private ContentGeneralInfoService generalInfoService;
@@ -148,7 +148,7 @@ public abstract class BaseContentService<
     }
 
     @Override
-    public D updatVisibility(String id, ContentVisibilityUpdateDTO updateDTO) {
+    public D updateVisibility(String id, ContentVisibilityUpdateDTO updateDTO) {
         final ContentGeneralInfoEntity entity = generalInfoService.getAndValidateContent(id);
         if (updateDTO.getVisibility() == Visibility.PUBLIC) {
             if (entity.getPublicToAll()) {

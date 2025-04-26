@@ -31,6 +31,9 @@
             <!-- DO NOTHING -->
           </otherwise>
         </choose>
+        <if test="filter.topic != null" >
+            AND tcgi.topic = #{filter.topic}
+        </if>
         <if test="filter.createFrom != null" >
             AND tcgi.CREATE_TIME &gt;= #{filter.createFrom}
         </if>

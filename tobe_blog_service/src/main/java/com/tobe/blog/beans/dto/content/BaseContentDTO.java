@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.tag.TagInfoDTO;
 
 import lombok.Data;
@@ -27,6 +28,7 @@ public class BaseContentDTO implements Serializable {
     // manipulate if the content require login to view
     protected Boolean contentProtected;
     protected List<TagInfoDTO> tags;
+    protected Const.Topic topic;
     protected Timestamp createTime;
     protected Timestamp updateTime;
     protected Boolean banned;

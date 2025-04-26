@@ -7,7 +7,7 @@ import { EContentType } from '../../../global/enums';
 import { IUserFullProfileDTO } from '../../../global/types';
 import * as PublicDataService from '../../../services/PublicDataService.ts';
 import { PortalLayout } from '../../components';
-import FunctionSection from '../home/FunctionSection';
+import FunctionSection from '../../components/FunctionSection.tsx';
 import IntroducationSection from './IntroducationSection';
 
 export default function PersonalPortalPage() {
@@ -17,7 +17,7 @@ export default function PersonalPortalPage() {
   const [profile, setProfile] = useState<IUserFullProfileDTO | null>(null);
   const loadProfile = useCallback((): void => {
     setLoading(true);
-    PublicDataService.getFullProfileByUserId(id || '')
+    PublicDataService.getFullProfileByUserId(id ?? '')
       .then(response => {
         setProfile(response.data);
       })
@@ -40,14 +40,19 @@ export default function PersonalPortalPage() {
     return availableContentTypes;
   }
   return (
-    <PortalLayout>
+    <PortalLayout
+      headerStyles={{ backgroundColor: 'transparent' }}
+      bodyStyles={{ background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)' }}
+    >
       <Loading open={loading} />
       {profile ? (
         <>
           <IntroducationSection profile={profile} />
           <FunctionSection
             extraPanels={[]}
+            topic={null}
             ownerId={profile.id}
+            keyword={''}
             availableContentTypes={getAvailableContentTypes(profile)}
           />
         </>

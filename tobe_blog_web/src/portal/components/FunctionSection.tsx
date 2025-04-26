@@ -1,8 +1,9 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, SxProps } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getContentTypeFromPath, getPathFromContentType } from '../../../commons';
-import { EContentType } from '../../../global/enums';
+import { getContentTypeFromPath, getPathFromContentType } from '../../commons';
+import { EContentType } from '../../global/enums';
+import { TopicPropsType } from '../../global/types';
 import FeaturedNews from './FeaturedNews';
 import TagFilterPanel from './TagFilterPanel';
 
@@ -10,12 +11,15 @@ export default function FunctionSection(
   props: Readonly<{
     availableContentTypes: EContentType[];
     extraPanels: ReactElement[];
+    topic: TopicPropsType;
     ownerId: string;
+    keyword: string;
+    sx?: SxProps;
   }>
 ) {
   const [searchParams] = useSearchParams();
-  const paramContentType: string = searchParams.get('t') || '';
-  const paramTags: string = searchParams.get('g') || '';
+  const paramContentType: string = searchParams.get('t') ?? '';
+  const paramTags: string = searchParams.get('g') ?? '';
   const [checkedTags, setCheckedTags] = useState<number[]>(
     paramTags
       .split(',')
@@ -36,7 +40,7 @@ export default function FunctionSection(
   }
 
   return (
-    <Container sx={{ my: 1 }}>
+    <Container sx={{ my: 1, ...props.sx }}>
       {props.availableContentTypes && props.availableContentTypes.length > 0 && (
         <Grid
           container
@@ -52,6 +56,8 @@ export default function FunctionSection(
               ownerId={props.ownerId}
               tags={checkedTags}
               contentType={contentType}
+              topic={props.topic}
+              keyword={props.keyword}
               availableContentTypes={props.availableContentTypes}
               handleContentTypeChange={handleContentTypeChange}
             />
@@ -70,6 +76,8 @@ export default function FunctionSection(
                 checked={checkedTags}
                 setChecked={handleContentTagsChange}
                 ownerId={props.ownerId}
+                topic={props.topic}
+                keyword={props.keyword}
               />
             </Grid>
             {props.extraPanels.map((c, i) => (

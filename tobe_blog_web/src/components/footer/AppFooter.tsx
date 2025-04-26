@@ -13,7 +13,6 @@ export default function AppFooter() {
         px: 2,
         paddingTop: '15px',
         paddingBottom: '10px',
-        backgroundColor: theme => (theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[800]),
       }}
     >
       <Container fixed>

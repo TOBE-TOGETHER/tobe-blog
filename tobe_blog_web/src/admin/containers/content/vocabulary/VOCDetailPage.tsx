@@ -14,7 +14,7 @@ export default function VOCDetailPage() {
   const { id } = useParams();
   const [vocabulary, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
   const [language, setLanguage] = useState<string>('');
-  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } =
+  const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } =
     useCommonContentState();
 
   const loadData = useCallback(
@@ -28,6 +28,7 @@ export default function VOCDetailPage() {
           setLanguage(response.data.language);
           setCoverImgUrl(response.data.coverImgUrl);
           setTagValues(response.data.tags);
+          setTopic(response.data.topic);
         })
         .catch(() => {
           enqueueSnackbar(t('vocabulary-detail-page.msg.error'), {
@@ -39,7 +40,7 @@ export default function VOCDetailPage() {
     [enqueueSnackbar, t]
   );
 
-  useEffect(() => loadData(id || ''), [id, loadData]);
+  useEffect(() => loadData(id ?? ''), [id, loadData]);
 
   const handleEditableChange = () => {
     if (!vocabulary) {
@@ -56,6 +57,7 @@ export default function VOCDetailPage() {
         language: language,
         coverImgUrl: coverImgUrl,
         tags: tagValues,
+        topic: topic,
       });
     }
     setEditable(!editable);
@@ -97,6 +99,8 @@ export default function VOCDetailPage() {
         setCoverImgUrl={setCoverImgUrl}
         tagValues={tagValues}
         setTagValues={setTagValues}
+        topic={topic}
+        setTopic={setTopic}
         editable={editable}
       />
       {id && (

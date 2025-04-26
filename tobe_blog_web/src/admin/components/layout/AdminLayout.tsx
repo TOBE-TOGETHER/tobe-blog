@@ -37,6 +37,7 @@ export default function AdminLayout({ children }: Readonly<{ children: any }>) {
         minHeight: '100vh',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)',
       }}
     >
       <AdminHeader

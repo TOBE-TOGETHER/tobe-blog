@@ -48,8 +48,9 @@
       "edit-btn": "Edit"
     },
     "author-panel": {
-      "public-creation-count": "Published content",
-      "view-count": "Total view"
+      "public-creation-count": "Public Creations",
+      "view-count": "Total Views",
+      "visit-blog": "Visit Blog"
     },
     "general-card-view": {
       "published": "Published",
@@ -72,14 +73,49 @@
     "end-line": "No more content",
     "load-more": "Load more",
     "no-content": "No available content",
-    "top5-active-users": "Top 5 active users",
-    "tag-statistics": "Featured tags"
+    "tag-statistics": "Featured tags",
+    "slogan": "Record growth and share every little bit",
+    "advantages": {
+      "title": "Why Choose Tobe Blog",
+      "items": {
+        "ai": {
+          "title": "AI-Powered Technology",
+          "description": "Our blog platform is powered by AI technology, accelerating iteration and updates, continuously optimizing user experience. The AI system also provides creative assistance and smart indexing, making it easy to build personal or team knowledge bases."
+        },
+        "community": {
+          "title": "Vibrant Community",
+          "description": "Join Tobe Blog and become part of a vibrant creative community. We bring together exceptional creators from various industries, with content covering technology, reading, lifestyle, and language learning. We ensure that every article you read is worth your time and attention."
+        },
+        "copyright": {
+          "title": "Respect for Creators",
+          "description": "At Tobe Blog, we firmly believe that creators' rights should be fully respected. All content you publish belongs entirely to you. We provide comprehensive copyright protection mechanisms, allowing you to create with peace of mind, share freely, and receive the respect and rewards you deserve."
+        }
+      }
+    },
+    "categories": {
+      "TECHNICAL": {
+        "title": "Tech Blog",
+        "description": "Stay updated with tech trends and insights"
+      },
+      "READING": {
+        "title": "Book Notes",
+        "description": "Read the classic and record your thoughts"
+      },
+      "LIFE": {
+        "title": "Life Tips",
+        "description": "Record beautiful moments and share life wisdom"
+      },
+      "LANGUAGE": {
+        "title": "Language Learning",
+        "description": "Share language learning experiences and resources"
+      }
+    }
   },
   "sign-in": {
     "title": "Sign In",
     "sign-in-btn": "Sign In",
     "forget-pw-btn": "Forget password?",
-    "sign-up-btn": "Don't have an account? Sign Up",
+    "sign-up-btn": "Sign up",
     "remember-me-btn": "Remember me",
     "description": {
       "email": "Email Address",
@@ -87,11 +123,33 @@
     },
     "msg": {
       "success": "Sign in successfully",
-      "error": "Please double check your password and username"
+      "error": "Please double check your password and username",
+      "invalid-email": "Please enter a valid email address",
+      "password-reset-sent": "Password reset link has been sent to your email",
+      "password-reset-error": "Failed to send password reset email. Please try again."
+    },
+    "reset-password-title": "Reset Password",
+    "reset-password-message": "Enter your email address and we will send you an email to reset your password.",
+    "cancel-btn": "Cancel",
+    "send-reset-btn": "Send"
+  },
+  "reset-password": {
+    "title": "Reset Your Password",
+    "subtitle": "Enter a new password for your account",
+    "new-password": "New Password",
+    "confirm-password": "Confirm New Password",
+    "submit-btn": "Reset Password",
+    "back-to-login": "Back to Login",
+    "msg": {
+      "success": "Password has been reset successfully",
+      "error": "Failed to reset password. Please try again or request a new reset link.",
+      "token-expired": "Your reset link has expired. Please request a new one.",
+      "passwords-not-match": "Passwords do not match",
+      "invalid-password-length": "Password must be at least 6 characters long"
     }
   },
   "sign-up": {
-    "title": "Join",
+    "title": "Join us",
     "sign-up-btn": "Sign Up",
     "sign-in-btn": "Already have an account? Sign in",
     "fields": {
@@ -326,7 +384,8 @@
       "description": "Description",
       "language": "Language",
       "cover-img-url": "Cover image URL",
-      "tags": "Tags"
+      "tags": "Tags",
+      "topic": "Topic"
     }
   },
   "word-dialog": {
@@ -349,5 +408,13 @@
     },
     "cancel": "Cancel",
     "confirm": "Confirm"
+  },
+  "topic": {
+    "label": "Topic",
+    "READING": "Books",
+    "LANGUAGE": "Lang",
+    "TECHNICAL": "Tech",
+    "LIFE": "Life",
+    "OTHER": "Other"
   }
 }

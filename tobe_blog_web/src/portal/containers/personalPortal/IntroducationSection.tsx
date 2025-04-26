@@ -1,4 +1,5 @@
-import { Container, Grid, Paper, Tooltip, Typography } from '@mui/material';
+import RssFeedIcon from '@mui/icons-material/RssFeed';
+import { Container, Grid, Link, Paper, Tooltip, Typography } from '@mui/material';
 import config from '../../../../customization.json';
 import { useCommonUtils } from '../../../commons';
 import { IUserFullProfileDTO } from '../../../global/types';
@@ -50,12 +51,36 @@ export default function IntroducationSection(props: Readonly<{ profile: IUserFul
                 backgroundRepeat: 'round',
               }}
             />
-            <Grid item>
+            <Grid
+              item
+              container
+            >
               <Typography
                 variant="h5"
-                sx={{ fontWeight: 600 }}
+                sx={{ fontWeight: 600, mr: 1, alignContent: 'center' }}
               >{`${props.profile?.firstName} ${props.profile?.lastName}`}</Typography>
+              {props.profile?.blog && (
+                <Link
+                  href={props.profile.blog}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    'display': 'flex',
+                    'alignItems': 'center',
+                    'color': 'primary.main',
+                    'textDecoration': 'none',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    },
+                  }}
+                >
+                  <Tooltip title={t('components.author-panel.visit-blog')}>
+                    <RssFeedIcon color="info" />
+                  </Tooltip>
+                </Link>
+              )}
             </Grid>
+
             <Grid item>
               <Typography variant="h6">{props.profile?.profession}</Typography>
             </Grid>

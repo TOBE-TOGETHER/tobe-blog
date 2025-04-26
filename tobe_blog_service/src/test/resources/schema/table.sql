@@ -85,6 +85,7 @@ create table tobe_content_general_info
     PUBLIC_TO_ALL     bit default false                        not null,
     PUBLISH_TIME      datetime                                 null,
     CONTENT_PROTECTED bit default false                        not null,
+    TOPIC             varchar(32)                              null,
     DELETED           bit default false                        not null,
     CREATE_BY         varchar(64)                              null,
     CREATE_TIME       datetime                                 null,
@@ -249,3 +250,5 @@ create table tobe_content_tag
     CONTENT_ID  varchar(32)       not null,
     TAG_ID      int               not null
 );
+
+ALTER TABLE `tobe_content_general_info` ADD INDEX (`TOPIC`);

@@ -10,7 +10,7 @@ import VOCEditMainSection from './components/VOCEditMainSection';
 export default function VOCCreationPage() {
   const { t, enqueueSnackbar, navigate } = useCommonUtils();
   const [language, setLanguage] = useState<string>('');
-  const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
+  const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } = useCommonContentState();
 
   function handleCreation(): void {
     setLoading(true);
@@ -20,6 +20,7 @@ export default function VOCCreationPage() {
       language: language,
       coverImgUrl: coverImgUrl,
       tags: tagValues,
+      topic: topic,
     })
       .then(() => {
         enqueueSnackbar(t('msg.success'), {
@@ -53,6 +54,8 @@ export default function VOCCreationPage() {
         setTagValues={setTagValues}
         editable={true}
         sx={{ mt: 6 }}
+        topic={topic}
+        setTopic={setTopic}
       />
       <SaveButtonPanel primaryEvent={handleCreation} />
     </Page>

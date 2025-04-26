@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${subject} ?: 'Notification from Tobe Blog'">Notification from Tobe Blog</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .header h1 {
+            color: #3f51b5;
+            margin: 0;
+            font-weight: 600;
+            font-size: 24px;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 20px 0;
+            background-color: #3f51b5;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #303f9f;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+            border-top: 1px solid #eeeeee;
+        }
+        .highlight {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-left: 4px solid #3f51b5;
+            margin: 15px 0;
+        }
+        .note {
+            font-size: 14px;
+            font-style: italic;
+            color: #666666;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #eeeeee;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tobe Blog</h1>
+        </div>
+        <div class="content">
+            <h2 th:text="${heading} ?: 'Notification'">Notification</h2>
+            <p>Hello <span th:text="${name} ?: 'User'">User</span>,</p>
+            
+            <!-- Main message content -->
+            <div th:utext="${message}">
+                <p>This is a notification from Tobe Blog.</p>
+            </div>
+            
+            <!-- Optional call to action button -->
+            <div th:if="${actionUrl}" style="text-align: center;">
+                <a class="button" th:href="${actionUrl}" th:text="${actionText} ?: 'View Details'">View Details</a>
+            </div>
+            
+            <!-- Optional highlighted content -->
+            <div class="highlight" th:if="${highlightContent}">
+                <span th:utext="${highlightContent}">Important information may appear here.</span>
+            </div>
+            
+            <!-- Optional note -->
+            <p class="note" th:if="${noteText}">
+                <span th:text="${noteText}">Additional notes may appear here.</span>
+            </p>
+            
+            <p>If you have any questions, please contact our support team at <a href="mailto:support@tobeblog.com">support@tobeblog.com</a>.</p>
+            
+            <p>Best Regards,<br>
+            The Tobe Blog Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2023</span> Tobe Blog. All rights reserved.</p>
+            <p>This email was sent to <span th:text="${email} ?: 'your registered email'">your registered email</span>.</p>
+            <p>You're receiving this email because you have an account with Tobe Blog.</p>
+        </div>
+    </div>
+</body>
+</html> 

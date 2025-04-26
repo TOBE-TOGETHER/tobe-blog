@@ -1,5 +1,6 @@
 import { AxiosPromise } from 'axios';
 import { EContentType } from '../global/enums.ts';
+import { TopicPropsType } from '../global/types.ts';
 import server from './server.ts';
 
 const API_DATA_URI = 'v1/api';
@@ -10,8 +11,19 @@ const options = {
   },
 };
 
-export function getNewsByTags(contentType: EContentType | string, size: number, current: number, tags: number[], ownerId: string): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}`, options);
+export function getNewsByTags(
+  contentType: EContentType | string,
+  size: number,
+  current: number,
+  tags: number[],
+  ownerId: string,
+  topic: TopicPropsType,
+  keyword: string
+): AxiosPromise {
+  return server.get(
+    `/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`,
+    options
+  );
 }
 
 export function getSubjects(size: number, current: number): AxiosPromise {
@@ -38,7 +50,7 @@ export function getProgressesByPlanId(planId: string, size: number, current: num
   return server.get(`/${API_DATA_URI}/plans/${planId}/progresses?size=${size}&current=${current}`);
 }
 
-export function getWordsByVocabularyId(id: string): AxiosPromise {
+export function getWordsByVOCId(id: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/vocabularies/${id}/words`);
 }
 
@@ -50,18 +62,24 @@ export function getFullProfileByUserId(userId: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/full-profile/${userId}`);
 }
 
-export function getTagStatistics(contentType: EContentType, ownerId: string) {
-  return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}`);
+export function getTagStatistics(contentType: EContentType, ownerId: string, topic: TopicPropsType, keyword: string): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`);
 }
 
-export function getTop5ActiveUsers() {
-  return server.get(`/${API_DATA_URI}/top5-active-users`);
-}
-
-export function getBySrcIdAndFileType(srcId: string, fileType: string) {
-  return server.get(`/${API_DATA_URI}/files?srcId=${srcId}&fileType=${fileType}`);
-}
-
-export function likeContent(contentId: string) {
+export function likeContent(contentId: string): AxiosPromise {
   return server.post(`/${API_DATA_URI}/like-content/${contentId}`);
+}
+
+export function requestPasswordReset(email: string): AxiosPromise {
+  return server.post(`/${API_DATA_URI}/request-password-reset?email=${encodeURIComponent(email)}`);
+}
+
+export function resetPassword(email: string, token: string, newPassword: string): AxiosPromise {
+  return server.post(`/${API_DATA_URI}/reset-password`, null, {
+    params: {
+      email: email,
+      token: token,
+      newPassword: newPassword
+    }
+  });
 }

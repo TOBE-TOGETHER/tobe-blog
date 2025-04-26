@@ -11,7 +11,7 @@ export default function PlanCreationPage() {
   const { t, enqueueSnackbar, navigate } = useCommonUtils();
   const [fromTime, setFromTime] = useState<Date | null>(null);
   const [toTime, setToTime] = useState<Date | null>(null);
-  const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues } = useCommonContentState();
+  const { loading, setLoading, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } = useCommonContentState();
 
   const handleSubmit = () => {
     if (!validateForm()) {
@@ -56,6 +56,7 @@ export default function PlanCreationPage() {
       targetEndTime: toTime,
       coverImgUrl: coverImgUrl,
       tags: tagValues,
+      topic: topic,
     })
       .then(() => {
         enqueueSnackbar(t('msg.success'), {
@@ -91,6 +92,8 @@ export default function PlanCreationPage() {
         setTagValues={setTagValues}
         editable={true}
         sx={{ mt: 6 }}
+        topic={topic}
+        setTopic={setTopic}
       />
       <SaveButtonPanel primaryEvent={handleSubmit} />
     </Page>

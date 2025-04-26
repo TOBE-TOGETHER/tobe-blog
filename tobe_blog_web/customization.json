@@ -2,29 +2,10 @@
   "projectName": "TOBE-BLOG",
   "title": "Tobe Blog",
   "image": "https://tobetogether.xyz/images/avatars/avatar3.png",
-  "slogan": "Have fun together, grow up together",
+  "slogan": "Record growth and share every little bit",
   "description": "A website that advocates continuous learning and growth - Articles, Plans, Vocabularies, etc. Let's have fun together, grow up together!",
   "keywords": "博客, Blog, TOBE, TOBE-BLOG, Tobe Blog, 成长, 英语, 笔记, 计划, 词汇, Articles, Plans, Vocabularies",
   "githubLink": "https://github.com/TOBE-TOGETHER/tobe-blog",
-  "home": {
-    "banners": [
-      {
-        "imgUrl": "https://images.pexels.com/photos/5779181/pexels-photo-5779181.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "main": "2025, Happy new year!",
-        "secondary": "新年快乐！"
-      },
-      {
-        "imgUrl": "https://images.pexels.com/photos/3355755/pexels-photo-3355755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "main": "No gain is too slight to bother with",
-        "secondary": "不积跬步无以至千里"
-      },
-      {
-        "imgUrl": "https://images.pexels.com/photos/25211987/pexels-photo-25211987/free-photo-of-man-sitting-on-palace-courtyard-and-reading-book.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "main": "你现在的气质里，藏着你走过的路，读过的书和爱过的人",
-        "secondary": "《卡萨布兰卡》"
-      }
-    ]
-  },
   "googleAnalyticsId": "G-6XETG2B9NV",
   "cnWebRegisterLicense": "粤ICP备19161005号-3",
   "defaultContentCoverImgUrl": "https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",

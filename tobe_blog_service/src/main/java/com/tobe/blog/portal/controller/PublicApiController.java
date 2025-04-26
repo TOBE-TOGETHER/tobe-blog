@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import com.tobe.blog.beans.consts.Const;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
@@ -70,9 +71,11 @@ public class PublicApiController {
         @RequestParam(value = "size", required = false, defaultValue = "10") int size,
         @RequestParam(value = "tags", required = false, defaultValue = "") String tags,
         @RequestParam(value = "ownerId", required = false, defaultValue = "") Long ownerId,
-        @RequestParam(value = "contentType", required = false, defaultValue = "") String contentType) {
+        @RequestParam(value = "contentType", required = false, defaultValue = "") String contentType,
+        @RequestParam(value = "topic", required = false, defaultValue = "") Const.Topic topic,
+        @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
         final String[] tagFilter = StringUtils.isNotBlank(tags) ? tags.split(",") : new String[]{};
-        return ResponseEntity.ok(publicApiService.searchContents(current, size, tagFilter, ownerId, contentType));
+        return ResponseEntity.ok(publicApiService.searchContents(current, size, tagFilter, ownerId, contentType, topic, keyword));
     }
 
     @GetMapping("/articles/{id}")
@@ -129,14 +132,25 @@ public class PublicApiController {
     @GetMapping("/tag-statistics")
     public ResponseEntity<List<TagInfoStatisticDTO>> getTagInfoStatistics(
         @RequestParam(value = "ownerId", required = false, defaultValue = "") Long ownerId,
-        @RequestParam(value = "contentType", required = false, defaultValue = "ARTICLE") String contentType
+        @RequestParam(value = "contentType", required = false, defaultValue = "ARTICLE") String contentType,
+        @RequestParam(value = "topic", required = false, defaultValue = "") Const.Topic topic,
+        @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
     ) {
-        return ResponseEntity.ok(publicApiService.getTagInfoStatistics(ownerId, contentType));
+        return ResponseEntity.ok(publicApiService.getTagInfoStatistics(ownerId, contentType, topic, keyword));
     }
 
-    @GetMapping("/top5-active-users")
-    public ResponseEntity<List<UserBriefProfileDTO>> getTop5ActiveUsers() {
-        return ResponseEntity.ok(publicApiService.getTop5ActiveUsers());
+    @PostMapping("/request-password-reset")
+    public ResponseEntity<Void> requestPasswordReset(@RequestParam(value = "email") String email) {
+        publicApiService.requestPasswordReset(email);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<Boolean> resetPassword(
+        @RequestParam(value = "email") String email,
+        @RequestParam(value = "token") String token,
+        @RequestParam(value = "newPassword") String newPassword) {
+        return ResponseEntity.ok(publicApiService.resetPassword(email, token, newPassword));
     }
 
     @GetMapping("/brief-profile/{id}")
@@ -170,7 +184,7 @@ public class PublicApiController {
         tagTree.forEach(node -> {
             node.setRelatedContents(
               publicApiService.searchContents(
-                            1, 1000, new String[]{ node.getTagId().toString() }, ownerId, Strings.EMPTY).getRecords()
+                            1, 1000, new String[]{ node.getTagId().toString() }, ownerId, Strings.EMPTY, null, Strings.EMPTY).getRecords()
                             .stream().sorted(Comparator.comparing(BaseContentDTO::getTitle))
                             .collect(Collectors.toList()));
             if (!Collections.isEmpty(node.getChildren())) {

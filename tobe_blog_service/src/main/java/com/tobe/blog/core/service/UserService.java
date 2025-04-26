@@ -163,4 +163,66 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
                 .getOneOpt(new LambdaQueryWrapper<UserFeatureEntity>().eq(UserFeatureEntity::getUserId, userId))
                 .map(e -> BasicConverter.convert(e, UserFeatureDTO.class)).orElse(null);
     }
+
+    /**
+     * Checks if an email is registered in the system
+     *
+     * @param email The email to check
+     * @return true if the email is registered, false otherwise
+     */
+    public boolean isEmailRegistered(String email) {
+        return this.getOneOpt(
+                new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getEmail, email))
+                .isPresent();
+    }
+
+    /**
+     * Gets a firstname by email
+     *
+     * @param email The user's email
+     * @return The firstname associated with the email, or null if not found
+     */
+    public String getFirstNameByEmail(String email) {
+        return this.getOneOpt(
+                new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getEmail, email))
+                .map(UserEntity::getFirstName)
+                .orElse(null);
+    }
+
+    /**
+     * Updates a user's password
+     *
+     * @param email The user's email
+     * @param newPassword The new password
+     * @return true if the password was updated successfully, false otherwise
+     */
+    @Transactional
+    public boolean updatePassword(String email, String newPassword) {
+        try {
+            // Find the user by email
+            Optional<UserEntity> userOpt = this.getOneOpt(
+                    new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getEmail, email));
+            
+            if (userOpt.isEmpty()) {
+                log.warn("Failed to update password: user with email {} not found", email);
+                return false;
+            }
+            
+            // Update the password
+            UserEntity userEntity = userOpt.get();
+            userEntity.setPassword(encoder.encode(newPassword));
+            boolean updated = this.updateById(userEntity);
+            
+            if (updated) {
+                log.info("Password updated successfully for user with email: {}", email);
+            } else {
+                log.warn("Failed to update password for user with email: {}", email);
+            }
+            
+            return updated;
+        } catch (Exception e) {
+            log.error("Error updating password for user with email: {}", email, e);
+            return false;
+        }
+    }
 }

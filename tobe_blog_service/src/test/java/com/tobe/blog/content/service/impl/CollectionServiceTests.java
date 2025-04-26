@@ -107,11 +107,11 @@ public class CollectionServiceTests {
         final CollectionDTO saveResult = collectionService.save(dto);
         Assertions.assertNotNull(saveResult.getId());
         final ContentVisibilityUpdateDTO visibilityUpdateDTO = ContentVisibilityUpdateDTO.builder().id(saveResult.getId()).visibility(Visibility.PUBLIC).build();
-        final CollectionDTO releaseResult = collectionService.updatVisibility(saveResult.getId(), visibilityUpdateDTO);
+        final CollectionDTO releaseResult = collectionService.updateVisibility(saveResult.getId(), visibilityUpdateDTO);
         Assertions.assertTrue(releaseResult.getPublicToAll());
         Assertions.assertNotNull(releaseResult.getPublishTime());
-        // should not be able to repeatly release 
-        Assertions.assertThrows(RuntimeException.class, () -> collectionService.updatVisibility(saveResult.getId(), visibilityUpdateDTO));
+        // should not be able to repeatedly release
+        Assertions.assertThrows(RuntimeException.class, () -> collectionService.updateVisibility(saveResult.getId(), visibilityUpdateDTO));
     }
 
     @Test

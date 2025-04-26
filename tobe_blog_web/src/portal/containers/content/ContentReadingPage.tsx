@@ -23,8 +23,7 @@ export default function ContentReadingPage(
       { name: 'og:url', content: window.location.href + 'v?=' + new Date().getTime() },
     ];
     switchMetas(metas);
-    window.document.title = props.content?.title ? props.content?.title : originTitle;
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    window.document.title = props.content?.title ?? originTitle;
     return function restoreTitleAndMeta() {
       window.document.title = `${originTitle}`;
       switchMetas(metas);
@@ -45,6 +44,7 @@ export default function ContentReadingPage(
         sx={{
           minHeight: '50vh',
           pb: 2,
+          backgroundColor: 'white',
         }}
       >
         <Loading open={!props.content} />

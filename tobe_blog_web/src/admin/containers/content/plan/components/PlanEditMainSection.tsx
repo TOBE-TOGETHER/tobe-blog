@@ -4,6 +4,7 @@ import { useCommonUtils } from '../../../../../commons';
 import { FormPanel, HalfRow, OneRow } from '../../../../../components';
 import { MultipleTagSelecter } from '../../../../components';
 import { IContentMainSectionProps } from '../../commons';
+import TopicSelector from '../../components/TopicSelector';
 
 interface IPlanEditMainSectionProps extends IContentMainSectionProps {
   fromTime: Date | null;
@@ -63,7 +64,7 @@ export default function PlanEditMainSection(props: Readonly<IPlanEditMainSection
           />
         </HalfRow>
       </Grid>
-      <OneRow>
+      <HalfRow>
         <TextField
           label={t('plan-detail-page.fields.cover-img-url')}
           fullWidth
@@ -71,7 +72,14 @@ export default function PlanEditMainSection(props: Readonly<IPlanEditMainSection
           onChange={e => props.setCoverImgUrl(e.target.value)}
           disabled={!props.editable}
         />
-      </OneRow>
+      </HalfRow>
+      <HalfRow>
+        <TopicSelector
+          editable={props.editable}
+          topic={props.topic}
+          setTopic={props.setTopic}
+        />
+      </HalfRow>
       <OneRow>
         <MultipleTagSelecter
           value={props.tagValues}

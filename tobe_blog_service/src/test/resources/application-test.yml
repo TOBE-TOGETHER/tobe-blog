@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: jdbc:h2:mem:local_test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_ON_EXIT=TRUE;NON_KEYWORDS=VALUE
-    username:
+    username: sa
     password:
     driver-class-name: org.h2.Driver
     hikari:
@@ -16,6 +16,48 @@ spring:
     init:
       data-locations: classpath:schema/data.sql
       schema-locations: classpath:schema/table.sql
+      mode: always
   test:
     database:
       replace: none
+  h2:
+    console:
+      enabled: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      connect-timeout: 3000
+  main:
+    allow-bean-definition-overriding: true
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: test@example.com
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+mybatis-plus:
+  global-config:
+    banner: false
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+jwt:
+  secret:
+    access: 482B4D6251655468576D597133743677397A24432646294A404E635266556A58
+    refresh: 38782F413F4428472B4B6250645367566B597033733676397924422645294840
+  expire:
+    access: 86400000
+    refresh: 864000000
+mail:
+  mail-from: 474504303@qq.com
+app:
+  frontend-url: http://localhost:3000
+security-context:
+  enable: false

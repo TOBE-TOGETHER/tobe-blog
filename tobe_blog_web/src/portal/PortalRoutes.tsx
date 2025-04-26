@@ -2,8 +2,10 @@ import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
 import { URL } from '../routes';
 const HomePage = React.lazy(() => import('./containers/home/Home'));
+const TopicPage = React.lazy(() => import('./containers/topic/TopicContentPage'));
 const SignUp = React.lazy(() => import('./containers/signUp/SignUp'));
 const SignIn = React.lazy(() => import('./containers/signIn/SignIn'));
+const ResetPasswordPage = React.lazy(() => import('./containers/resetPassword/ResetPasswordPage'));
 const PersonalPortalPage = React.lazy(() => import('./containers/personalPortal/PersonalPortalPage'));
 const ArticleReadingPage = React.lazy(() => import('./containers/content/article/ArticleReadingPage'));
 const PlanReadingPage = React.lazy(() => import('./containers/content/plan/PlanReadingPage'));
@@ -18,6 +20,11 @@ export default function getPortalRoutes(): ReactNode[] {
       element={<HomePage />}
     />,
     <Route
+      key={URL.TOPIC}
+      path={URL.TOPIC}
+      element={<TopicPage />}
+    />,
+    <Route
       key={URL.SIGN_IN}
       path={URL.SIGN_IN}
       element={<SignIn />}
@@ -26,6 +33,11 @@ export default function getPortalRoutes(): ReactNode[] {
       key={URL.SIGN_UP}
       path={URL.SIGN_UP}
       element={<SignUp />}
+    />,
+    <Route
+      key={URL.RESET_PASSWORD}
+      path={URL.RESET_PASSWORD}
+      element={<ResetPasswordPage />}
     />,
     <Route
       key={URL.PERSONAL_PORTAL}
