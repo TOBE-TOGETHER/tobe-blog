@@ -1,4 +1,4 @@
-import { Box, Grid, Link, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material';
+import { Box, Grid, Link, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, Button } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 import { useCommonUtils } from '../../../commons/index.ts';
@@ -12,10 +12,10 @@ import AuthSubmitButton from '../../components/auth/AuthSubmitButton';
 
 export default function SignIn() {
   const dispatch = useAuthDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const { t, navigate } = useCommonUtils();
-  const [resetPasswordOpen, setResetPasswordOpen] = useState(false);
-  const [resetEmail, setResetEmail] = useState('');
+  const [resetPasswordOpen, setResetPasswordOpen] = useState<boolean>(false);
+  const [resetEmail, setResetEmail] = useState<string>('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -168,16 +168,16 @@ export default function SignIn() {
 
       {/* Password Reset Dialog */}
       <Dialog open={resetPasswordOpen} onClose={() => setResetPasswordOpen(false)}>
-        <DialogTitle>{t('sign-in.reset-password-title') || 'Reset Password'}</DialogTitle>
+        <DialogTitle>{t('sign-in.reset-password-title')}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {t('sign-in.reset-password-message') || 'Enter your email address and we will send you a link to reset your password.'}
+            {t('sign-in.reset-password-message')}
           </DialogContentText>
           <AuthTextField
             autoFocus
             margin="dense"
             id="reset-email"
-            label={t('sign-in.description.email') || 'Email Address'}
+            label={t('sign-in.description.email')}
             type="email"
             value={resetEmail}
             onChange={(e) => setResetEmail(e.target.value)}
@@ -185,27 +185,23 @@ export default function SignIn() {
           />
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 3 }}>
-          <Link
+          <Button
             onClick={() => setResetPasswordOpen(false)}
             sx={{
-              borderRadius: '8px',
               textTransform: 'none',
               cursor: 'pointer',
-              mr: 2,
+              mr: 1,
             }}
           >
-            {t('sign-in.cancel-btn') || 'Cancel'}
-          </Link>
-          <AuthSubmitButton
+            {t('sign-in.cancel-btn')}
+          </Button>
+          <Button
             onClick={handleResetPasswordSubmit}
-            loading={loading}
-            sx={{
-              borderRadius: '8px',
-              width: 'auto',
-            }}
+            variant="contained"
+            color="primary"
           >
-            {t('sign-in.send-reset-btn') || 'Send Reset Link'}
-          </AuthSubmitButton>
+            {t('sign-in.send-reset-btn')}
+          </Button>
         </DialogActions>
       </Dialog>
     </>

@@ -10,7 +10,7 @@ import AuthSubmitButton from '../../components/auth/AuthSubmitButton';
 
 export default function SignUp() {
   const { t, navigate } = useCommonUtils();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -11,12 +11,12 @@ import AuthTextField from '../../components/auth/AuthTextField';
 import AuthSubmitButton from '../../components/auth/AuthSubmitButton';
 
 export default function ResetPasswordPage() {
-  const [loading, setLoading] = useState(false);
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [token, setToken] = useState('');
-  const [isValidLink, setIsValidLink] = useState(true);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [token, setToken] = useState<string>('');
+  const [isValidLink, setIsValidLink] = useState<boolean>(true);
   const { t } = useCommonUtils();
   const navigate = useNavigate();
   const location = useLocation();
