@@ -9,7 +9,7 @@ export default function AuthSubmitButton({
   loading = false,
   disabled,
   ...props
-}: AuthSubmitButtonProps) {
+}: Readonly<AuthSubmitButtonProps>) {
   return (
     <Button
       fullWidth

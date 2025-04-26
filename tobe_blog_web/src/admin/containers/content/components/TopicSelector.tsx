@@ -3,7 +3,7 @@ import { useCommonUtils } from '../../../../commons';
 import { ETopic } from '../../../../global/enums';
 import { TopicPropsType } from '../../../../global/types';
 
-export default function TopicSelector(props: { editable: boolean; topic: TopicPropsType; setTopic: (value: TopicPropsType) => void }) {
+export default function TopicSelector(props: Readonly<{ editable: boolean; topic: TopicPropsType; setTopic: (value: TopicPropsType) => void }>) {
   const { t } = useCommonUtils();
   return (
     <TextField

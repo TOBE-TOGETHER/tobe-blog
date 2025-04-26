@@ -15,7 +15,7 @@ interface AuthLayoutProps {
   children: ReactNode;
 }
 
-export default function AuthLayout({ title, subtitle, loading, children }: AuthLayoutProps) {
+export default function AuthLayout({ title, subtitle, loading, children }: Readonly<AuthLayoutProps>) {
 
   return (
     <PageContainer container>

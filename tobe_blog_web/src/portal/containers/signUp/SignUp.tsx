@@ -47,7 +47,7 @@ export default function SignUp() {
   function validateForm(data: FormData): boolean {
     // validate email template
     const emailReg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
-    if (!emailReg.test(data.get('email')?.toString() || '')) {
+    if (!emailReg.test(data.get('email')?.toString() ?? '')) {
       warn('sign-up.msg.warning.invalid-email-format');
       return false;
     }
