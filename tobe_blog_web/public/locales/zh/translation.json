@@ -123,7 +123,29 @@
     },
     "msg": {
       "success": "登录成功",
-      "error": "登录失败，请再次确认您的用户名密码"
+      "error": "登录失败，请再次确认您的用户名密码",
+      "invalid-email": "请输入有效的邮箱地址",
+      "password-reset-sent": "密码重置链接已发送到您的邮箱",
+      "password-reset-error": "发送密码重置邮件失败，请重试"
+    },
+    "reset-password-title": "重置密码",
+    "reset-password-message": "请输入您的邮箱地址，我们将向您发送密码重置邮件",
+    "cancel-btn": "取消",
+    "send-reset-btn": "发送"
+  },
+  "reset-password": {
+    "title": "重置您的密码",
+    "subtitle": "为您的账户设置新密码",
+    "new-password": "新密码",
+    "confirm-password": "确认新密码",
+    "submit-btn": "重置密码",
+    "back-to-login": "返回登录",
+    "msg": {
+      "success": "密码重置成功",
+      "error": "密码重置失败，请重试或请求新的重置链接",
+      "token-expired": "您的重置链接已过期，请重新获取",
+      "passwords-not-match": "两次输入的密码不一致",
+      "invalid-password-length": "密码长度至少为6个字符"
     }
   },
   "sign-up": {

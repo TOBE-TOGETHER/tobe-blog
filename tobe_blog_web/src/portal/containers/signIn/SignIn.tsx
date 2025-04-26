@@ -1,26 +1,26 @@
-import GitHubIcon from '@mui/icons-material/GitHub';
-import HomeIcon from '@mui/icons-material/Home';
-import { Box, Button, Container, Grid, IconButton, Link, Paper, TextField, Typography } from '@mui/material';
+import { Box, Grid, Link, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
-import config from '../../../../customization.json';
 import { useCommonUtils } from '../../../commons/index.ts';
-import { Loading, OneRow } from '../../../components';
-import { HeaderLanguageMenu } from '../../../components/layout';
+import { OneRow } from '../../../components';
 import { loginUser, useAuthDispatch } from '../../../contexts';
 import { URL } from '../../../routes';
-import FloatingElementContainer from '../../components/FloatingElementContainer.tsx';
-import { HeroSection, LogoText, PageContainer } from '../../components/StyledComponents.tsx';
+import * as publicDataService from '../../../services/PublicDataService';
+import AuthLayout from '../../components/auth/AuthLayout';
+import AuthTextField from '../../components/auth/AuthTextField';
+import AuthSubmitButton from '../../components/auth/AuthSubmitButton';
 
 export default function SignIn() {
   const dispatch = useAuthDispatch();
-  const [openLoading, setOpenLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { t, navigate } = useCommonUtils();
+  const [resetPasswordOpen, setResetPasswordOpen] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    setOpenLoading(true);
+    setLoading(true);
 
     loginUser(dispatch, {
       username: data.get('email'),
@@ -38,205 +38,176 @@ export default function SignIn() {
         });
       })
       .finally(() => {
-        setOpenLoading(false);
+        setLoading(false);
+      });
+  };
+
+  const handleResetPasswordSubmit = () => {
+    if (!resetEmail || !resetEmail.includes('@')) {
+      enqueueSnackbar(t('sign-in.msg.invalid-email'), {
+        variant: 'error',
+      });
+      return;
+    }
+
+    setLoading(true);
+    publicDataService.requestPasswordReset(resetEmail)
+      .then(() => {
+        enqueueSnackbar(t('sign-in.msg.password-reset-sent'), {
+          variant: 'success',
+        });
+        setResetPasswordOpen(false);
+        setResetEmail('');
+      })
+      .catch(() => {
+        enqueueSnackbar(t('sign-in.msg.password-reset-error'), {
+          variant: 'error',
+        });
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   return (
-    <PageContainer container>
-      <FloatingElementContainer />
-      <Container
-        component="main"
-        maxWidth="sm"
-        sx={{
-          pb: '2vh',
-          pt: { xs: '6vh', sm: '8vh' },
-          minHeight: '300px',
-          position: 'relative',
-          zIndex: 1,
-        }}
+    <>
+      <AuthLayout 
+        title={t('sign-in.title')}
+        loading={loading}
       >
-        <Loading open={openLoading} />
-        <HeroSection>
-          <Paper
-            elevation={0}
-            sx={{
-              position: 'relative',
-              my: { xs: 3, md: 3 },
-              p: { xs: 5, md: 6 },
-              borderRadius: 4,
-              zIndex: 2,
-              boxShadow: 'rgba(145, 158, 171, 0.28) 0px 0px 2px 0px, rgba(145, 158, 171, 0.16) 0px 12px 24px -4px',
-              backdropFilter: 'blur(8px)',
-              background: 'rgba(255, 255, 255, 0.9)',
-            }}
-          >
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmit}
+          sx={{ mt: 3 }}
+        >
+          <OneRow sx={{ mb: 3 }}>
+            <AuthTextField
+              required
+              id="email"
+              label={t('sign-in.description.email')}
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+          </OneRow>
+          <OneRow sx={{ mb: 4 }}>
+            <AuthTextField
+              required
+              name="password"
+              label={t('sign-in.description.password')}
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+          </OneRow>
+          <OneRow sx={{ mb: 3 }}>
+            <AuthSubmitButton
+              type="submit"
+              loading={loading}
+              sx={{
+                py: 1.8,
+                fontSize: '1.1rem',
+                boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
+                '&:hover': {
+                  boxShadow: '0 12px 20px rgba(0, 0, 0, 0.15)',
+                },
+              }}
+            >
+              {t('sign-in.sign-in-btn')}
+            </AuthSubmitButton>
+          </OneRow>
+          <OneRow sx={{ mt: 2 }}>
             <Grid
               container
-              justifyContent="flex-end"
-              mb={3}
-              spacing={1}
+              spacing={2}
             >
-              <Grid item>
-                <IconButton
-                  href="/"
-                  size="large"
+              <Grid
+                item
+                xs={6}
+                sx={{ textAlign: 'left' }}
+              >
+                <Link
+                  onClick={() => setResetPasswordOpen(true)}
+                  variant="body2"
+                  sx={{
+                    'color': 'text.secondary',
+                    'fontSize': '0.95rem',
+                    'cursor': 'pointer',
+                    '&:hover': {
+                      color: 'primary.main',
+                    },
+                  }}
                 >
-                  <HomeIcon color="primary" />
-                </IconButton>
+                  {t('sign-in.forget-pw-btn')}
+                </Link>
               </Grid>
-              {config.githubLink && (
-                <Grid item>
-                  <IconButton
-                    href={config.githubLink}
-                    size="large"
-                  >
-                    <GitHubIcon color="primary" />
-                  </IconButton>
-                </Grid>
-              )}
-              <Grid item>
-                <Box sx={{ flexGrow: 0 }}>
-                  <HeaderLanguageMenu />
-                </Box>
+              <Grid
+                item
+                xs={6}
+                sx={{ textAlign: 'right' }}
+              >
+                <Link
+                  href={URL.SIGN_UP}
+                  variant="body2"
+                  sx={{
+                    'color': 'text.secondary',
+                    'fontSize': '0.95rem',
+                    '&:hover': {
+                      color: 'primary.main',
+                    },
+                  }}
+                >
+                  {t('sign-in.sign-up-btn')}
+                </Link>
               </Grid>
             </Grid>
+          </OneRow>
+        </Box>
+      </AuthLayout>
 
-            <Box sx={{ textAlign: 'center', mb: 5 }}>
-              <LogoText variant="h1">Tobe Blog</LogoText>
-              <Typography
-                variant="h5"
-                sx={{
-                  color: 'text.secondary',
-                  fontWeight: 500,
-                  fontSize: { xs: '1.2rem', md: '1.4rem' },
-                  textShadow: '0 1px 2px rgba(0,0,0,0.05)',
-                  mt: 1,
-                }}
-              >
-                {t('sign-in.title')}
-              </Typography>
-            </Box>
-
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
-              <OneRow sx={{ mb: 3 }}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label={t('sign-in.description.email')}
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '12px',
-                    },
-                    '& .MuiInputLabel-root': {
-                      fontSize: '1rem',
-                    },
-                    '& .MuiOutlinedInput-input': {
-                      padding: '14px 16px',
-                    },
-                  }}
-                />
-              </OneRow>
-              <OneRow sx={{ mb: 4 }}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label={t('sign-in.description.password')}
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '12px',
-                    },
-                    '& .MuiInputLabel-root': {
-                      fontSize: '1rem',
-                    },
-                    '& .MuiOutlinedInput-input': {
-                      padding: '14px 16px',
-                    },
-                  }}
-                />
-              </OneRow>
-              <OneRow sx={{ mb: 3 }}>
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  sx={{
-                    'borderRadius': '12px',
-                    'py': 1.8,
-                    'fontWeight': 600,
-                    'fontSize': '1.1rem',
-                    'boxShadow': '0 8px 16px rgba(0, 0, 0, 0.1)',
-                    '&:hover': {
-                      boxShadow: '0 12px 20px rgba(0, 0, 0, 0.15)',
-                    },
-                  }}
-                >
-                  {t('sign-in.sign-in-btn')}
-                </Button>
-              </OneRow>
-              <OneRow sx={{ mt: 2 }}>
-                <Grid
-                  container
-                  spacing={2}
-                >
-                  <Grid
-                    item
-                    xs={6}
-                    sx={{ textAlign: 'left' }}
-                  >
-                    <Link
-                      href="#"
-                      variant="body2"
-                      sx={{
-                        'color': 'text.secondary',
-                        'fontSize': '0.95rem',
-                        '&:hover': {
-                          color: 'primary.main',
-                        },
-                      }}
-                    >
-                      {t('sign-in.forget-pw-btn')}
-                    </Link>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={6}
-                    sx={{ textAlign: 'right' }}
-                  >
-                    <Link
-                      href={URL.SIGN_UP}
-                      variant="body2"
-                      sx={{
-                        'color': 'text.secondary',
-                        'fontSize': '0.95rem',
-                        '&:hover': {
-                          color: 'primary.main',
-                        },
-                      }}
-                    >
-                      {t('sign-in.sign-up-btn')}
-                    </Link>
-                  </Grid>
-                </Grid>
-              </OneRow>
-            </Box>
-          </Paper>
-        </HeroSection>
-      </Container>
-    </PageContainer>
+      {/* Password Reset Dialog */}
+      <Dialog open={resetPasswordOpen} onClose={() => setResetPasswordOpen(false)}>
+        <DialogTitle>{t('sign-in.reset-password-title') || 'Reset Password'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('sign-in.reset-password-message') || 'Enter your email address and we will send you a link to reset your password.'}
+          </DialogContentText>
+          <AuthTextField
+            autoFocus
+            margin="dense"
+            id="reset-email"
+            label={t('sign-in.description.email') || 'Email Address'}
+            type="email"
+            value={resetEmail}
+            onChange={(e) => setResetEmail(e.target.value)}
+            sx={{ mt: 2 }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Link
+            onClick={() => setResetPasswordOpen(false)}
+            sx={{
+              borderRadius: '8px',
+              textTransform: 'none',
+              cursor: 'pointer',
+              mr: 2,
+            }}
+          >
+            {t('sign-in.cancel-btn') || 'Cancel'}
+          </Link>
+          <AuthSubmitButton
+            onClick={handleResetPasswordSubmit}
+            loading={loading}
+            sx={{
+              borderRadius: '8px',
+              width: 'auto',
+            }}
+          >
+            {t('sign-in.send-reset-btn') || 'Send Reset Link'}
+          </AuthSubmitButton>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }

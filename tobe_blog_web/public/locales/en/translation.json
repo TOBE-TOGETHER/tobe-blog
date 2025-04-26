@@ -123,7 +123,29 @@
     },
     "msg": {
       "success": "Sign in successfully",
-      "error": "Please double check your password and username"
+      "error": "Please double check your password and username",
+      "invalid-email": "Please enter a valid email address",
+      "password-reset-sent": "Password reset link has been sent to your email",
+      "password-reset-error": "Failed to send password reset email. Please try again."
+    },
+    "reset-password-title": "Reset Password",
+    "reset-password-message": "Enter your email address and we will send you an email to reset your password.",
+    "cancel-btn": "Cancel",
+    "send-reset-btn": "Send"
+  },
+  "reset-password": {
+    "title": "Reset Your Password",
+    "subtitle": "Enter a new password for your account",
+    "new-password": "New Password",
+    "confirm-password": "Confirm New Password",
+    "submit-btn": "Reset Password",
+    "back-to-login": "Back to Login",
+    "msg": {
+      "success": "Password has been reset successfully",
+      "error": "Failed to reset password. Please try again or request a new reset link.",
+      "token-expired": "Your reset link has expired. Please request a new one.",
+      "passwords-not-match": "Passwords do not match",
+      "invalid-password-length": "Password must be at least 6 characters long"
     }
   },
   "sign-up": {

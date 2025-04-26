@@ -139,6 +139,20 @@ public class PublicApiController {
         return ResponseEntity.ok(publicApiService.getTagInfoStatistics(ownerId, contentType, topic, keyword));
     }
 
+    @PostMapping("/request-password-reset")
+    public ResponseEntity<Void> requestPasswordReset(@RequestParam(value = "email") String email) {
+        publicApiService.requestPasswordReset(email);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<Boolean> resetPassword(
+        @RequestParam(value = "email") String email,
+        @RequestParam(value = "token") String token,
+        @RequestParam(value = "newPassword") String newPassword) {
+        return ResponseEntity.ok(publicApiService.resetPassword(email, token, newPassword));
+    }
+
     @GetMapping("/brief-profile/{id}")
     public ResponseEntity<UserBriefProfileDTO> getUserBasicProfile(@PathVariable long id) {
         UserBriefProfileDTO result = null;

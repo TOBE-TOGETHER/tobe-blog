@@ -50,7 +50,7 @@ export function getProgressesByPlanId(planId: string, size: number, current: num
   return server.get(`/${API_DATA_URI}/plans/${planId}/progresses?size=${size}&current=${current}`);
 }
 
-export function getWordsByVocabularyId(id: string): AxiosPromise {
+export function getWordsByVOCId(id: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/vocabularies/${id}/words`);
 }
 
@@ -66,10 +66,50 @@ export function getTagStatistics(contentType: EContentType, ownerId: string, top
   return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`);
 }
 
-export function getBySrcIdAndFileType(srcId: string, fileType: string) {
-  return server.get(`/${API_DATA_URI}/files?srcId=${srcId}&fileType=${fileType}`);
+export function likeContent(contentId: string): AxiosPromise {
+  return server.post(`/${API_DATA_URI}/like-content/${contentId}`);
 }
 
-export function likeContent(contentId: string) {
-  return server.post(`/${API_DATA_URI}/like-content/${contentId}`);
+export function requestPasswordReset(email: string): AxiosPromise {
+  return server.post(`/${API_DATA_URI}/request-password-reset?email=${encodeURIComponent(email)}`);
+}
+
+export function resetPassword(email: string, token: string, newPassword: string): AxiosPromise {
+  return server.post(`/${API_DATA_URI}/reset-password`, null, {
+    params: {
+      email: email,
+      token: token,
+      newPassword: newPassword
+    }
+  });
+}
+
+export function searchContents(
+  current: number,
+  size: number,
+  tags?: string,
+  ownerId?: number,
+  contentType?: string,
+  topic?: string,
+  keyword?: string,
+): AxiosPromise {
+  return server.get(
+    `/${API_DATA_URI}/contents?current=${current}&size=${size}${tags ? '&tags=' + tags : ''}${
+      ownerId ? '&ownerId=' + ownerId : ''
+    }${contentType ? '&contentType=' + contentType : ''}${topic ? '&topic=' + topic : ''}${
+      keyword ? '&keyword=' + keyword : ''
+    }`,
+  );
+}
+
+export function getCollectionById(id: string | number): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/collections/${id}`);
+}
+
+export function getUserFullProfile(id: number): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/full-profile/${id}`);
+}
+
+export function getUserBriefProfile(id: number): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/brief-profile/${id}`);
 }
