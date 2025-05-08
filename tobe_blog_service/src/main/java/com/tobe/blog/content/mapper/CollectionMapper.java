@@ -8,7 +8,6 @@ import com.tobe.blog.beans.dto.content.CollectionDTO;
 import com.tobe.blog.beans.entity.content.CollectionEntity;
 
 public interface CollectionMapper extends BaseContentMapper<CollectionDTO, CollectionEntity> {
-  
     @Override
     Page<CollectionDTO> pageDTOsByUserId(Page<CollectionDTO> page, @Param("tableName") String tableName, @Param("userId") Long userId, BaseSearchFilter filter);
 

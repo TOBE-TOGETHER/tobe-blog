@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import com.tobe.blog.beans.consts.Const;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tobe.blog.analytics.service.AnalyticsService;
+import com.tobe.blog.beans.consts.Const;
 import com.tobe.blog.beans.dto.analytics.UserContentAnalyticsDTO;
 import com.tobe.blog.beans.dto.content.ArticleDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
@@ -155,7 +155,7 @@ public class PublicApiController {
 
     @GetMapping("/brief-profile/{id}")
     public ResponseEntity<UserBriefProfileDTO> getUserBasicProfile(@PathVariable long id) {
-        UserBriefProfileDTO result = null;
+        UserBriefProfileDTO result;
         try {
             result = (UserBriefProfileDTO) cacheUtil.get(USER_PROFILE_CACHE_PREFIX + id);
             if (result != null) {
