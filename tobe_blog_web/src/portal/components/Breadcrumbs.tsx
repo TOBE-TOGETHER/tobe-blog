@@ -23,13 +23,15 @@ export default function Breadcrumbs(props: Readonly<{ nodes?: IBreadcrumbsNode[]
       >
         {t('breadcrumbs.home')}
       </Link>
-      {props.nodes?.map(n => {
+      {props.nodes?.map((n, index) => {
         return (
           <Link
             underline="hover"
             color="white"
             href={n.href}
-            key={n.href}
+            onClick={n.onClick}
+            key={n.href || `node-${index}`}
+            sx={{ cursor: n.onClick ? 'pointer' : 'default' }}
           >
             {n.label}
           </Link>

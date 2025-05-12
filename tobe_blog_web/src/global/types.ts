@@ -216,8 +216,10 @@ export interface ITagRelationship {
 
 export interface IBreadcrumbsNode {
   label: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 }
+
 export interface IWordCreateDTO {
   vocabularyId: string;
   text: string;

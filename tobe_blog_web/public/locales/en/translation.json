@@ -2,10 +2,7 @@
   "breadcrumbs": {
     "content": "Content",
     "home": "Home",
-    "collections": "Collections",
-    "articles": "Articles",
-    "plans": "Plans",
-    "vocabularies": "Vocabularies"
+    "topic": "Topic"
   },
   "components": {
     "relevant-contents": "Relevant Contents",

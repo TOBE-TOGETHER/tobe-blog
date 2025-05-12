@@ -14,7 +14,6 @@ interface IPageProps {
 export default function Page(props: Readonly<IPageProps>) {
   useEffect(() => {
     window.document.title = `${props.pageTitle ? props.pageTitle + ' | ' : ''}${config.title}`;
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
     return function restoreTitle() {
       window.document.title = `${config.title}`;
     };

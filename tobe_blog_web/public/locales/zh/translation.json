@@ -2,10 +2,7 @@
   "breadcrumbs": {
     "content": "正文",
     "home": "首页",
-    "collections": "合集",
-    "articles": "笔记",
-    "plans": "计划",
-    "vocabularies": "词汇"
+    "topic": "专题"
   },
   "components": {
     "relevant-contents": "相关内容",
