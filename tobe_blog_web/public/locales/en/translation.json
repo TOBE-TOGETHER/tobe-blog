@@ -6,6 +6,7 @@
   },
   "components": {
     "relevant-contents": "Relevant Contents",
+    "recent-contents": "Recent Contents",
     "upload-pics": "Upload Pictures",
     "edit-icon-button": {
       "save": "Save",

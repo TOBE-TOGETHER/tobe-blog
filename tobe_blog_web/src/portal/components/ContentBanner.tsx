@@ -1,10 +1,10 @@
 import { Container, Grid, Typography } from '@mui/material';
 import { TagDisplayBar } from '../../components';
-import { ITagOption } from '../../global/types';
+import { ITagOption, TopicPropsType } from '../../global/types';
 import ContentLikeButton from './ContentLikeButton';
 import ContentPageBreadcrumbsBar from './ContentPageBreadcrumbsBar';
 
-export default function ContentBanner(props: Readonly<{ contentId: string; title: string; subTitle?: string; coverImgUrl?: string; tags: ITagOption[] }>) {
+export default function ContentBanner(props: Readonly<{ contentId: string; title: string; subTitle?: string; coverImgUrl?: string; tags: ITagOption[]; topic: TopicPropsType }>) {
   return (
     <Grid
       container
@@ -55,7 +55,7 @@ export default function ContentBanner(props: Readonly<{ contentId: string; title
         </Grid>
         <Grid item>
           <TagDisplayBar tags={props.tags} />
-          <ContentPageBreadcrumbsBar />
+          <ContentPageBreadcrumbsBar topic={props.topic} />
         </Grid>
         <Grid
           item

@@ -170,6 +170,7 @@ export interface IBaseUserContentDTO {
   viewCount: number;
   likeCount: number;
   tags: ITagOption[];
+  topic: TopicPropsType;
   createTime: string;
   updateTime: string;
   contentType: string;
