@@ -67,13 +67,16 @@ server.interceptors.response.use(
         else {
           window.location.href = URL.SIGN_OUT;
         }
-      } catch (error) {
-        console.error('Server error: ' + JSON.stringify(error));
-        return Promise.reject(error);
+      } catch (ex: unknown) {
+        console.error('Server error: ' + JSON.stringify(ex));
+        const errorMessage = ex && typeof ex === 'object' && 'response' in ex
+          ? (ex.response as any)?.data?.message ?? ''
+          : '';
+        return Promise.reject(new Error(errorMessage));
       }
     }
     // For all other error status codes (including 409), reject the promise
-    return Promise.reject(error);
+    return Promise.reject(new Error(error.response?.data?.message ?? ''));
   }
 );
 

@@ -30,7 +30,7 @@ export default function Breadcrumbs(props: Readonly<{ nodes?: IBreadcrumbsNode[]
             color="white"
             href={n.href}
             onClick={n.onClick}
-            key={n.href || `node-${index}`}
+            key={n.href ?? `node-${index}`}
             sx={{ cursor: n.onClick ? 'pointer' : 'default' }}
           >
             {n.label}
