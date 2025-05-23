@@ -160,6 +160,7 @@
     "msg": {
       "success": "注册成功",
       "error": "注册失败",
+      "email-exists": "此邮箱已注册，请直接登录或使用其他邮箱",
       "warning": {
         "invalid-email-format": "邮件格式异常",
         "two-password-dismatch": "两次输入的密码不一致",

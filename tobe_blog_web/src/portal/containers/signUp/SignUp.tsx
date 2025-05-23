@@ -34,10 +34,18 @@ export default function SignUp() {
         });
         navigate(URL.SIGN_IN);
       })
-      .catch(() => {
-        enqueueSnackbar(t('sign-up.msg.error'), {
-          variant: 'error',
-        });
+      .catch((error) => {
+        console.error('Registration error:', error);
+        // Check if it's an email already exists error (409 Conflict)
+        if (error.response && error.response.status === 409) {
+          enqueueSnackbar(t('sign-up.msg.email-exists'), {
+            variant: 'warning',
+          });
+        } else {
+          enqueueSnackbar(t('sign-up.msg.error'), {
+            variant: 'error',
+          });
+        }
       })
       .finally(() => {
         setLoading(false);

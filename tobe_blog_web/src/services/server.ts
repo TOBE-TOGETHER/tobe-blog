@@ -51,7 +51,7 @@ server.interceptors.response.use(
   async error => {
     // 401 means access token invalid or expired,
     // should refresh token and retry for the requests besides fresh token and login
-    if (error.response.status === 401 && error.config.url.indexOf('login') === -1) {
+    if (error.response && error.response.status === 401 && error.config.url.indexOf('login') === -1) {
       try {
         // try to renewal access token with the refresh token
         const res = await AuthService.refreshToken(getRefreshToken() ?? '');
@@ -69,8 +69,11 @@ server.interceptors.response.use(
         }
       } catch (error) {
         console.error('Server error: ' + JSON.stringify(error));
+        return Promise.reject(error);
       }
     }
+    // For all other error status codes (including 409), reject the promise
+    return Promise.reject(error);
   }
 );
 
