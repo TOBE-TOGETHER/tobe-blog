@@ -88,7 +88,7 @@ export default function EmailVerification() {
           });
         })
         .catch((error: any) => {
-          enqueueSnackbar(t('email-verification.msg.resend-error') + ': ' + (error.response?.data?.message || t('email-verification.error.unknown')), {
+          enqueueSnackbar(t('email-verification.msg.resend-error') + ': ' + (error.response?.data?.message ?? t('email-verification.error.unknown')), {
             variant: 'error',
           });
         });
