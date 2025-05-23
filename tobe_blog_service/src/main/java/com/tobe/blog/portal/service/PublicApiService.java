@@ -52,6 +52,12 @@ public class PublicApiService {
         return this.apiMapper.searchContents(new Page<>(current, size), tags, ownerId, contentType, topic, keyword);
     }
 
+    /**
+     * Like a content
+     * @param ip The IP address of the user
+     * @param contentId The ID of the content to like
+     * @return true if the content was liked, false otherwise
+     */
     public Boolean likeContent(String ip, String contentId) {
         final String key = String.format("%s:%s:%s", LIKE_COUNT_UNI_KEY, ip, contentId);
         if (cacheUtil.hasKey(key)) {
@@ -62,6 +68,14 @@ public class PublicApiService {
         return Boolean.TRUE;
     }
 
+    /**
+     * Get tag info statistics
+     * @param ownerId The ID of the owner
+     * @param contentType The type of content
+     * @param topic The topic of the content
+     * @param keyword The keyword to search for
+     * @return A list of tag info statistics
+     */
     public List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType, Const.Topic topic, String keyword) {
         return apiMapper.getTagInfoStatistics(ownerId, contentType, topic, keyword);
     }

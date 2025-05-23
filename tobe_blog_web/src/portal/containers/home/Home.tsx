@@ -4,6 +4,7 @@ import { Theme } from '@mui/material/styles';
 import { useCommonUtils } from '../../../commons';
 import { PortalLayout } from '../../components';
 import FloatingElementContainer from '../../components/FloatingElementContainer';
+import RecentContentsPanel from '../../components/RecentContentsPanel';
 import { shine } from '../../components/StyledComponents';
 import AdvantagesSection from './AdvantagesSection';
 import TopicSection from './TopicSection';
@@ -14,6 +15,7 @@ const HeroSection = styled('div')`
   margin-bottom: ${(props: { theme?: Theme }) => props.theme?.spacing?.(8) ?? '64px'};
   position: relative;
   overflow: visible;
+  z-index: 1;
   &::before {
     content: '';
     position: absolute;
@@ -31,6 +33,7 @@ const LogoContainer = styled('div')`
   position: relative;
   display: inline-block;
   margin-bottom: 2rem;
+  z-index: 2;
 `;
 
 const LogoText = styled.h1`
@@ -57,7 +60,7 @@ export default function Home() {
   const { t } = useCommonUtils();
   return (
     <PortalLayout
-      headerStyles={{ backgroundColor: 'transparent' }}
+      headerStyles={{ backgroundColor: 'transparent', position: 'relative', zIndex: 5 }}
       bodyStyles={{
         background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)',
         position: 'relative',
@@ -73,7 +76,7 @@ export default function Home() {
           maxWidth="md"
           sx={{
             position: 'relative',
-            zIndex: 1,
+            zIndex: 2,
             overflow: 'hidden',
             px: { xs: 2, sm: 3 },
           }}
@@ -97,6 +100,7 @@ export default function Home() {
         </Container>
       </HeroSection>
       <TopicSection />
+      <RecentContentsPanel />
       <AdvantagesSection />
     </PortalLayout>
   );

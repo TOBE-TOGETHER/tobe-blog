@@ -11,8 +11,8 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
       item
       xs={12}
       sm={6}
-      md={6}
-      lg={4}
+      md={4}
+      lg={3}
       xl={3}
       sx={{
         'cursor': 'pointer',
@@ -28,7 +28,7 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
         component={Paper}
         container
         direction="column"
-        sx={{ width: '100%', borderRadius: 4, overflow: 'hidden' }}
+        sx={{ width: '100%', borderRadius: 4, overflow: 'hidden', position: 'relative', zIndex: 1 }}
       >
         <Grid
           sx={{
@@ -57,7 +57,7 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
           <Typography
             variant="subtitle2"
             color="textSecondary"
-            sx={{ fontWeight: '800', mt: 1 }}
+            sx={{ fontWeight: '800', mt: 1, maxWidth: '60%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
             {props.content.ownerName}
           </Typography>
@@ -71,6 +71,7 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
               backgroundColor: theme.palette.common.white,
               mt: '-25px',
               borderRadius: '30px',
+              zIndex: 2,
             }}
           >
             <Grid
@@ -95,12 +96,14 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
           <Typography
             variant="subtitle2"
             color="textSecondary"
+            sx={{ maxWidth: '45%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
             {TimeFormat.briefDateFormat(props.content.publishTime)}
           </Typography>
           <Typography
             variant="subtitle2"
             color="textSecondary"
+            sx={{ maxWidth: '55%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
             {t('components.meta-bar.view')} {props.content.viewCount} · {t('components.meta-bar.like')} {props.content.likeCount}
           </Typography>
@@ -109,9 +112,32 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
           <Typography
             variant="subtitle2"
             color="textSecondary"
-            sx={{ maxHeight: '110px', overflow: 'hidden', textOverflow: 'ellipsis' }}
+            sx={{
+              maxHeight: '48px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              fontWeight: 'bold',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+            }}
           >
-            {props.content.title} : {props.content.description}
+            {props.content.title}
+          </Typography>
+          <Typography
+            variant="subtitle2"
+            color="textSecondary"
+            sx={{
+              maxHeight: '80px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              mt: 1,
+            }}
+          >
+            {props.content.description}
           </Typography>
         </Grid>
       </Grid>

@@ -60,7 +60,7 @@ export function WordDetailDialog(props: { word: IWordGeneralDTO | null; setWord:
                   label={t('word-dialog.fields.word')}
                   fullWidth
                   defaultValue={props.word?.text}
-                  onChange={e => Object.assign(props.word || {}, { word: e.target.value })}
+                  onChange={e => Object.assign(props.word || {}, { text: e.target.value })}
                 />
               </Grid>
               <Grid

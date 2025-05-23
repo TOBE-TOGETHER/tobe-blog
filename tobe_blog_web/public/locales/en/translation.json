@@ -2,13 +2,11 @@
   "breadcrumbs": {
     "content": "Content",
     "home": "Home",
-    "collections": "Collections",
-    "articles": "Articles",
-    "plans": "Plans",
-    "vocabularies": "Vocabularies"
+    "topic": "Topic"
   },
   "components": {
     "relevant-contents": "Relevant Contents",
+    "recent-contents": "Recent Contents",
     "upload-pics": "Upload Pictures",
     "edit-icon-button": {
       "save": "Save",
@@ -162,6 +160,7 @@
     "msg": {
       "success": "Sign up successfully, let's sign in",
       "error": "Sign up failed",
+      "email-exists": "This email is already registered. Please sign in or use a different email",
       "warning": {
         "invalid-email-format": "Invalid email format",
         "two-password-dismatch": "Two passwords are not same",

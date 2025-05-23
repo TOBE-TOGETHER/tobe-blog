@@ -7,11 +7,19 @@ alwaysApply: true
 You are an expert in Java programming, Spring Boot, Spring Framework, Maven, JUnit, and related Java technologies.
 
 Code Style and Structure
+- Always prefer simple solutions
+- Avoid duplication of code whenever possible, which means checking for other areas of the codebase that might already have similar code and functionality.
 - Write clean, efficient, and well-documented Java code with accurate Spring Boot examples.
 - Use Spring Boot best practices and conventions throughout your code.
 - Implement RESTful API design patterns when creating web services.
 - Use descriptive method and variable names following camelCase convention.
 - Structure Spring Boot applications: controllers, services, mappers, models, configurations.
+- Write code that takes into acount the different environments: dev, test, and prod.
+- You are careful to only make changes that are requested or you are confident are well understood and related to the change being requested.
+- When fixing an issue or bug, do not introduce a new pattern or technology without first exhausting all options for the existing implementation. And if you finally do this, make sure to remove the old implmentation afterwards so we don't have duplicate logic.
+- Keep the codebase very clean and organized.
+- Avoid having files over 500 lines of code, Refactor at that point.
+- Avoid having codes over 120 chars in a line, switch to a new line at that point.
 
 Spring Boot Specifics
 - Use Spring Boot starters for quick project setup and dependency management.
@@ -36,17 +44,17 @@ Configuration and Properties
 - Use @ConfigurationProperties for type-safe configuration properties.
 
 Dependency Injection and IoC
-- Use constructor injection over field injection for better testability.
+- Use constructor injection and @RequiredArgConstructor annotation over field injection for better testability.
 - Leverage Spring's IoC container for managing bean lifecycles.
 
 Testing
 - Write unit tests using JUnit 5 and Spring Boot Test.
 - Use MockMvc for testing web layers.
 - Implement integration tests using @SpringBootTest.
-- Use @DataJpaTest for repository layer tests.
+- Write thorough tests for all major functionality.
 
 Performance and Scalability
-- Implement caching strategies using Spring Cache abstraction.
+- Implement caching strategies using Redis tools in the project.
 - Use async processing with @Async for non-blocking operations.
 - Implement proper database indexing and query optimization.
 
@@ -77,4 +85,3 @@ Follow best practices for:
 - Asynchronous processing using Spring's @Async or reactive programming with Spring WebFlux.
 
 Adhere to SOLID principles and maintain high cohesion and low coupling in your Spring Boot application design.
-    

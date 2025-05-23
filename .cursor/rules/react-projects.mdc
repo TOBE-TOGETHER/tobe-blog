@@ -12,11 +12,18 @@ Response Constraints
 - Do not change the formatting of my code unless important for new functionality.
 
 Code Style and Structure
+- Always prefer simple solutions
+- Avoid duplication of code whenever possible, which means checking for other areas of the codebase that might already have similar code and functionality.
 - Write concise, technical TypeScript code with accurate examples.
 - Use functional and declarative programming patterns; avoid classes.
 - Prefer iteration and modularization over code duplication.
 - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
 - Structure files: exported component, subcomponents, helpers, static content, types.
+- You are careful to only make changes that are requested or you are confident are well understood and related to the change being requested.
+- When fixing an issue or bug, do not introduce a new pattern or technology without first exhausting all options for the existing implementation. And if you finally do this, make sure to remove the old implmentation afterwards so we don't have duplicate logic.
+- Keep the codebase very clean and organized.
+- Avoid having files over 500 lines of code, Refactor at that point.
+- Avoid having codes over 120 chars in a line, switch to a new line at that point.
 
 Naming Conventions
 - Use lowercase with dashes for directories (e.g., components/auth-wizard).

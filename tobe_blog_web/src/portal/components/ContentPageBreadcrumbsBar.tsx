@@ -1,21 +1,17 @@
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { getContentTypeFromPath, getPathFromContentType, useCommonUtils } from '../../commons';
-import { EContentType } from '../../global/enums.ts';
-import { IBreadcrumbsNode } from '../../global/types';
+import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../commons';
+import { IBreadcrumbsNode, TopicPropsType } from '../../global/types';
 import Breadcrumbs from './Breadcrumbs';
 
-export default function ContentPageBreadcrumbsBar() {
+export default function ContentPageBreadcrumbsBar(props: Readonly<{ topic: TopicPropsType }>) {
   const { t } = useCommonUtils();
-  let [searchParams] = useSearchParams();
-  let path: string = useLocation().pathname;
-  let contentType: EContentType = getContentTypeFromPath(path.split('/')[2]);
+  const navigate = useNavigate();
   const breadcrumbs: IBreadcrumbsNode[] = [];
-  const pid = searchParams.get('pid');
-  path = getPathFromContentType(contentType);
-  if (path) {
+
+  if (props.topic) {
     breadcrumbs.push({
-      label: t(`breadcrumbs.${path}`),
-      href: pid ? `/personal-portal/${pid}/?t=${path}` : `/?t=${path}`,
+      label: t('breadcrumbs.topic'),
+      onClick: () => navigate(`/topic/${props.topic}`),
     });
   }
 

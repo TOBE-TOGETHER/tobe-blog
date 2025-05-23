@@ -170,6 +170,7 @@ export interface IBaseUserContentDTO {
   viewCount: number;
   likeCount: number;
   tags: ITagOption[];
+  topic: TopicPropsType;
   createTime: string;
   updateTime: string;
   contentType: string;
@@ -216,8 +217,10 @@ export interface ITagRelationship {
 
 export interface IBreadcrumbsNode {
   label: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 }
+
 export interface IWordCreateDTO {
   vocabularyId: string;
   text: string;

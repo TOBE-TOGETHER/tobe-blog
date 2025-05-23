@@ -2,13 +2,11 @@
   "breadcrumbs": {
     "content": "正文",
     "home": "首页",
-    "collections": "合集",
-    "articles": "笔记",
-    "plans": "计划",
-    "vocabularies": "词汇"
+    "topic": "专题"
   },
   "components": {
     "relevant-contents": "相关内容",
+    "recent-contents": "近期内容",
     "upload-pics": "上传图片",
     "visibility-switch": {
       "release": "草稿，点击发布",
@@ -162,6 +160,7 @@
     "msg": {
       "success": "注册成功",
       "error": "注册失败",
+      "email-exists": "此邮箱已注册，请直接登录或使用其他邮箱",
       "warning": {
         "invalid-email-format": "邮件格式异常",
         "two-password-dismatch": "两次输入的密码不一致",

@@ -233,5 +233,4 @@ function FloatingElementContainer() {
     </Box>
   );
 }
-
 export default FloatingElementContainer;
