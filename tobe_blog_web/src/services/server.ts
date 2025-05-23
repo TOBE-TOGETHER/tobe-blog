@@ -76,7 +76,7 @@ server.interceptors.response.use(
       }
     }
     // For all other error status codes (including 409), reject the promise
-    return Promise.reject(new Error(error.response?.data?.message ?? ''));
+    return Promise.reject(error);
   }
 );
 

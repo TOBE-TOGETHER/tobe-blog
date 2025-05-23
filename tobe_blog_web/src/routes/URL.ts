@@ -9,6 +9,7 @@ export const URL = {
   SIGN_IN: '/sign-in',
   SIGN_OUT: '/sign-out',
   SIGN_UP: '/sign-up',
+  VERIFY_EMAIL: '/verify-email',
   RESET_PASSWORD: '/reset-password',
   ARTICLE: '/article',
   ABOUT: '/about',

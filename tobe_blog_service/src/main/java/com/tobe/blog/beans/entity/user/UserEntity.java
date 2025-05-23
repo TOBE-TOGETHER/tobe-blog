@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.tobe.blog.beans.entity.BaseEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,4 +33,5 @@ public class UserEntity extends BaseEntity {
     private String photoImg;
     private String backgroundImg;
     private String profession;
+    private Boolean emailVerified = Boolean.FALSE;
 }

@@ -29,8 +29,9 @@ export default function SignUp() {
       password: data.get('password')?.toString(),
     })
       .then(() => {
-        enqueueSnackbar(t('sign-up.msg.success'), {
+        enqueueSnackbar(t('sign-up.msg.success-verification-required'), {
           variant: 'success',
+          autoHideDuration: 6000, // Show longer for email verification message
         });
         navigate(URL.SIGN_IN);
       })

@@ -15,6 +15,7 @@ CREATE TABLE `tobe_core_user`
     `BACKGROUND_IMG` varchar(2000) DEFAULT NULL,
     `PHOTO_IMG`      varchar(2000) DEFAULT NULL,
     `PROFESSION`     varchar(100)  DEFAULT NULL,
+    `EMAIL_VERIFIED` bit(1)        DEFAULT FALSE,
     `CREATE_TIME`    datetime      DEFAULT NULL,
     `CREATE_BY`      varchar(30)   DEFAULT NULL,
     `UPDATE_TIME`    datetime      DEFAULT NULL,
