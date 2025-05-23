@@ -51,6 +51,7 @@ public class AuthService implements UserDetailsService {
             log.info("Invalid user name, please confirm again!", userName);
             throw new UsernameNotFoundException("Invalid user name[ " + userName + " ], please confirm again!");
         }
+        
         final UserGeneralDTO profile = BasicConverter.convert(userEntity, UserGeneralDTO.class);
         profile.setFeatures(BasicConverter.convert(userFeatureService.getById(profile.getId()), UserFeatureDTO.class));
         return new EnhancedUserDetail(getAuthority(userEntity.getId()), userEntity.getUsername(),
@@ -63,7 +64,4 @@ public class AuthService implements UserDetailsService {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
 
-    // private UserFeatureDTO getUserFeature(long id) {
-    // return UserFeatureDTO.convert(userFeatureService.getById(id));
-    // }
 }

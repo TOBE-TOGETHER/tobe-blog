@@ -1,4 +1,4 @@
-import TranslateIcon from '@mui/icons-material/Translate';
+import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import { Grid, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import { changeLanguage } from 'i18next';
 import React from 'react';
@@ -43,7 +43,7 @@ export default function HeaderLanguageMenu() {
         title={t('app-header.language.btn-tooltip')}
         sx={{ color: theme.palette.primary.main }}
       >
-        <TranslateIcon />
+        <LanguageRoundedIcon />
       </IconButton>
       <Menu
         id="menu-header"

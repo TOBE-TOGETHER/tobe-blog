@@ -122,6 +122,7 @@
     "msg": {
       "success": "Sign in successfully",
       "error": "Please double check your password and username",
+      "email-not-verified": "Email not verified. Please check your email and complete the verification before logging in",
       "invalid-email": "Please enter a valid email address",
       "password-reset-sent": "Password reset link has been sent to your email",
       "password-reset-error": "Failed to send password reset email. Please try again."
@@ -147,9 +148,15 @@
     }
   },
   "sign-up": {
-    "title": "Join us",
+    "title": "Welcome to Join",
+    "description": {
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "email": "Email Address",
+      "password": "Password"
+    },
     "sign-up-btn": "Sign Up",
-    "sign-in-btn": "Already have an account? Sign in",
+    "sign-in-btn": "Already have an account? Sign In",
     "fields": {
       "first-name": "First name",
       "last-name": "Last name",
@@ -159,6 +166,7 @@
     },
     "msg": {
       "success": "Sign up successfully, let's sign in",
+      "success-verification-required": "Registration successful! We have sent a verification email to your inbox. Please check and verify before logging in.",
       "error": "Sign up failed",
       "email-exists": "This email is already registered. Please sign in or use a different email",
       "warning": {
@@ -166,6 +174,36 @@
         "two-password-dismatch": "Two passwords are not same",
         "invalid-password-length": "Password length should between 6-8 digits"
       }
+    }
+  },
+  "email-verification": {
+    "title": "Email Verification",
+    "subtitle": "Please verify your email address to complete registration",
+    "loading": "Verifying your email...",
+    "success": {
+      "title": "Email Verification Successful!",
+      "description": "Your email has been successfully verified. You can now log in and use our services."
+    },
+    "already-verified": {
+      "title": "Email Already Verified",
+      "description": "Your email has already been verified. You can log in using your credentials."
+    },
+    "error": {
+      "title": "Verification Failed",
+      "invalid-link": "Verification link is invalid, missing required parameters",
+      "verification-failed": "Verification failed, link may be expired or invalid",
+      "verification-error": "An error occurred during verification",
+      "unknown": "Unknown error"
+    },
+    "btn": {
+      "go-to-login": "Go to Login",
+      "resend": "Resend Verification Email",
+      "back-to-login": "Back to Login"
+    },
+    "msg": {
+      "success": "Email verification successful! You can now log in",
+      "resend-success": "Verification email has been resent",
+      "resend-error": "Failed to resend email"
     }
   },
   "app-header": {
@@ -205,6 +243,7 @@
       "email": "Email",
       "address": "Address",
       "blog": "Blog home",
+      "blog-placeholder": "https://xxx.blog.com",
       "introduction": "Introduction",
       "introduction-placeholder": "Let others know more about you...",
       "profession": "Profession",
@@ -212,7 +251,13 @@
       "customized-settings": "Customized settings",
       "module-switch": "Module switch",
       "background-img": "Portal background image URL",
-      "photo-img": "Personal photo image URL"
+      "background-img-placeholder": "Enter image URL here...",
+      "photo-img": "Personal photo image URL",
+      "photo-img-placeholder": "Enter image URL here...",
+      "articles": "Notes",
+      "plans": "Plans",
+      "vocabularies": "Vocabularies",
+      "collections": "Collections"
     },
     "view-btn": "View",
     "msg": {

@@ -1,4 +1,4 @@
-import { Login } from '@mui/icons-material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Avatar, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import React from 'react';
 import { authed, enabled, useCommonUtils } from '../../commons';
@@ -30,16 +30,23 @@ export default function HeaderUserMenu() {
     <>
       {authContext.user ? (
         <Tooltip title={t('app-header.settings.btn-tooltip')}>
-          <IconButton
+          {authContext.user.avatarUrl ? <IconButton
             onClick={handleOpenUserMenu}
             sx={{ p: 0.5 }}
             size="small"
           >
-            <Avatar
+             <Avatar
               alt={authContext.user.firstName}
               src={authContext.user.avatarUrl}
-            />
+            /> 
           </IconButton>
+          : <IconButton
+            onClick={handleOpenUserMenu}
+            size="large"
+          >
+            <AccountCircleIcon color="primary" />
+          </IconButton>
+        }
         </Tooltip>
       ) : (
         <Tooltip title={t('app-header.sign-in-btn')}>
@@ -48,7 +55,7 @@ export default function HeaderUserMenu() {
             onClick={() => navigate(URL.SIGN_IN)}
             size="large"
           >
-            <Login color="primary" />
+            <AccountCircleIcon color="primary" />
           </IconButton>
         </Tooltip>
       )}

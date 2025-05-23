@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset - Tobe Blog</title>
+    <title>Email Verification - Tobe Blog</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -59,11 +59,11 @@
             border-left: 4px solid #3f51b5;
             background-color: #f5f5f5;
         }
-        .code {
-            font-family: monospace;
-            background-color: #f0f0f0;
-            padding: 2px 4px;
-            border-radius: 3px;
+        .warning {
+            margin: 15px 0;
+            padding: 15px;
+            border-left: 4px solid #ff9800;
+            background-color: #fff3cd;
         }
     </style>
 </head>
@@ -73,21 +73,26 @@
             <h1>Tobe Blog</h1>
         </div>
         <div class="content">
-            <h2>Password Reset Request</h2>
-            <p>Hello <span th:text="${name}">User</span>,</p>
-            <p>We received your request to reset the password for your Tobe Blog account. If you didn't make this request, you can safely ignore this email.</p>
-            
-            <p>To reset your password, please click the button below:</p>
+            <h2>Email Verification</h2>
+            <p>Hello <span th:text="${firstName}">User</span>,</p>
+            <p>Thank you for registering with our platform! To ensure account security, please click the button below to verify your email address.</p>
             <div style="text-align: center;">
-                <a class="button" th:href="${resetUrl}">Reset My Password</a>
+                <a class="button" th:href="${verificationLink}">Verify Email Address</a>
             </div>
             
             <p>Or copy and paste the following URL into your browser:</p>
             <div class="info">
-                <span th:text="${resetUrl}">https://example.com/reset-password</span>
+                <span th:text="${verificationLink}">https://example.com/verify-email</span>
             </div>
             
-            <p>This link will expire in <span th:text="${expiryMinutes}">5</span> minutes.</p>
+            <div class="warning">
+                <strong>Important Notice:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>This verification link will expire in <span th:text="${expirationMinutes}">60</span> minutes</li>
+                    <li>If you did not register for our service, please ignore this email</li>
+                    <li>Please do not forward this email to others</li>
+                </ul>
+            </div>
             
             <p>If you're having trouble, please contact our support team at <a href="mailto:support@tobe.com">support@tobe.com</a>.</p>
             
@@ -96,7 +101,7 @@
         </div>
         <div class="footer">
             <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Tobe Blog. All rights reserved.</p>
-            <p>This email was sent to <span th:text="${email}">user@example.com</span> as part of your Tobe Blog account activities.</p>
+            <p>This email was sent to <span th:text="${email}">your registered email</span> as part of your Tobe Blog account activities.</p>
         </div>
     </div>
 </body>

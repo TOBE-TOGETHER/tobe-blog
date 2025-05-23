@@ -200,36 +200,6 @@ function FloatingElementContainer() {
           }}
         />
       </FloatingElement>
-      <FloatingElement
-        style={{ top: '25%', left: '50%' }}
-        delay="-3.8s"
-        duration="5.5s"
-      >
-        <Box
-          sx={{
-            width: '65px',
-            height: '65px',
-            background: 'linear-gradient(45deg, #795548, #A1887F)',
-            clipPath: 'circle(50% at 50% 50%)',
-            opacity: 0.05,
-          }}
-        />
-      </FloatingElement>
-      <FloatingElement
-        style={{ top: '60%', right: '45%' }}
-        delay="-2.8s"
-        reverse
-      >
-        <Box
-          sx={{
-            width: '45px',
-            height: '45px',
-            background: 'linear-gradient(45deg, #607D8B, #90A4AE)',
-            clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
-            opacity: 0.06,
-          }}
-        />
-      </FloatingElement>
     </Box>
   );
 }

@@ -32,10 +32,18 @@ export default function SignIn() {
         });
         navigate(URL.HOME);
       })
-      .catch(() => {
-        enqueueSnackbar(t('sign-in.msg.error'), {
-          variant: 'error',
-        });
+      .catch((error: any) => {
+        // Check if it's an email not verified error (422)
+        if (error.response && error.response.status === 422) {
+          enqueueSnackbar(t('sign-in.msg.email-not-verified'), {
+            variant: 'warning',
+            autoHideDuration: 6000, // Show longer for email verification message
+          });
+        } else {
+          enqueueSnackbar(t('sign-in.msg.error'), {
+            variant: 'error',
+          });
+        }
       })
       .finally(() => {
         setLoading(false);
@@ -71,7 +79,7 @@ export default function SignIn() {
 
   return (
     <>
-      <AuthLayout 
+      <AuthLayout
         title={t('sign-in.title')}
         loading={loading}
       >

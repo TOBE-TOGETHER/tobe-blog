@@ -5,6 +5,7 @@ const HomePage = React.lazy(() => import('./containers/home/Home'));
 const TopicPage = React.lazy(() => import('./containers/topic/TopicContentPage'));
 const SignUp = React.lazy(() => import('./containers/signUp/SignUp'));
 const SignIn = React.lazy(() => import('./containers/signIn/SignIn'));
+const EmailVerification = React.lazy(() => import('./containers/emailVerification/EmailVerification'));
 const ResetPasswordPage = React.lazy(() => import('./containers/resetPassword/ResetPasswordPage'));
 const PersonalPortalPage = React.lazy(() => import('./containers/personalPortal/PersonalPortalPage'));
 const ArticleReadingPage = React.lazy(() => import('./containers/content/article/ArticleReadingPage'));
@@ -33,6 +34,11 @@ export default function getPortalRoutes(): ReactNode[] {
       key={URL.SIGN_UP}
       path={URL.SIGN_UP}
       element={<SignUp />}
+    />,
+    <Route
+      key={URL.VERIFY_EMAIL}
+      path={URL.VERIFY_EMAIL}
+      element={<EmailVerification />}
     />,
     <Route
       key={URL.RESET_PASSWORD}

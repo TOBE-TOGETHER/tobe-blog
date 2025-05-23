@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,7 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
     private final CacheUtil cacheUtil;
     private final UserRoleService userRoleService;
     private final UserFeatureService userFeatureService;
+    private final ApplicationContext applicationContext;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public UserGeneralDTO getUser(long id) {
@@ -82,6 +84,7 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
         userEntity.setUsername(getDefaultUsernameFromEmail(userEntity.getEmail()));
         userEntity.setPassword(encoder.encode(dto.getPassword()));
         userEntity.setDeleted(Boolean.FALSE);
+        userEntity.setEmailVerified(Boolean.FALSE); // Set email as not verified initially
         this.save(userEntity);
 
         // insert default user role
@@ -90,6 +93,17 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
 
         // insert default user feature setting
         userFeatureService.save(createDefaultFeature(userEntity.getId()));
+        
+        // Send email verification
+        try {
+            EmailVerificationService emailVerificationService = applicationContext.getBean(EmailVerificationService.class);
+            emailVerificationService.sendVerificationEmail(userEntity.getEmail(), userEntity.getFirstName());
+        } catch (Exception e) {
+            log.error("Failed to send verification email during user registration for email: {}", 
+                userEntity.getEmail(), e);
+            // Don't fail the registration if email sending fails
+        }
+        
         return BasicConverter.convert(userEntity, UserGeneralDTO.class);
     }
 

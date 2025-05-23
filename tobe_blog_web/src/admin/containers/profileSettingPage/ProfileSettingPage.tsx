@@ -217,28 +217,28 @@ export default function ProfileSettingPage() {
             <SwitchGroup
               value={articleModule}
               setValue={setArticleModule}
-              label={t('breadcrumbs.articles')}
+              label={t('profile-setting.fields.articles')}
             />
           </QuarterRow>
           <QuarterRow>
             <SwitchGroup
               value={planModule}
               setValue={setPlanModule}
-              label={t('breadcrumbs.plans')}
+              label={t('profile-setting.fields.plans')}
             />
           </QuarterRow>
           <QuarterRow>
             <SwitchGroup
               value={vocabularyModule}
               setValue={setVocabularyModule}
-              label={t('breadcrumbs.vocabularies')}
+              label={t('profile-setting.fields.vocabularies')}
             />
           </QuarterRow>
           <QuarterRow>
             <SwitchGroup
               value={collectionModule}
               setValue={setCollectionModule}
-              label={t('breadcrumbs.collections')}
+              label={t('profile-setting.fields.collections')}
             />
           </QuarterRow>
         </InfoSection>
