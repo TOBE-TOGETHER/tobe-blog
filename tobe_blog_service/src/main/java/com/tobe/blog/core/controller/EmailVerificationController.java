@@ -65,7 +65,7 @@ public class EmailVerificationController {
             return ResponseEntity.ok("Verification email sent successfully");
         } catch (Exception e) {
             log.error("Error resending verification email: {}", email, e);
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("Failed to resend verification email");
         }
     }
 
