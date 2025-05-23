@@ -25,7 +25,7 @@ public class EmailVerificationService {
     private final UserService userService;
     private final CacheUtil cacheUtil;
     
-    @Value("${app.frontend.url:http://localhost:3000}")
+    @Value("${app.frontend-url:http://localhost:3000}")
     private String frontendUrl;
     
     private static final String EMAIL_VERIFICATION_TOKEN_KEY = "email_verification_token:";

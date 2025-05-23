@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
 import server from './server.ts';
 
-const EMAIL_VERIFICATION_URI = 'v1/email-verification';
+const EMAIL_VERIFICATION_URI = 'v1/api/email-verification';
 
 export function verifyEmail(email: string, token: string): AxiosPromise {
   return server.get(`/${EMAIL_VERIFICATION_URI}/verify`, {

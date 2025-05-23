@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tobe.blog.analytics.service.AnalyticsService;
 import com.tobe.blog.beans.consts.Const;
+import com.tobe.blog.beans.dto.EmailVerificationResponse;
 import com.tobe.blog.beans.dto.analytics.UserContentAnalyticsDTO;
 import com.tobe.blog.beans.dto.content.ArticleDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
@@ -36,6 +37,8 @@ import com.tobe.blog.content.service.impl.PlanProgressService;
 import com.tobe.blog.content.service.impl.PlanService;
 import com.tobe.blog.content.service.impl.VOCService;
 import com.tobe.blog.content.service.impl.WordService;
+import com.tobe.blog.core.service.EmailVerificationService;
+import com.tobe.blog.core.service.PasswordResetService;
 import com.tobe.blog.core.service.UserService;
 import com.tobe.blog.core.utils.CacheUtil;
 import com.tobe.blog.core.utils.IpUtil;
@@ -62,6 +65,8 @@ public class PublicApiController {
     private final WordService wordService;
     private final UserService userService;
     private final AnalyticsService analyticsService;
+    private final PasswordResetService passwordResetService;
+    private final EmailVerificationService emailVerificationService;
     private final CacheUtil cacheUtil;
     private static final String USER_PROFILE_CACHE_PREFIX = "USER_PROFILE_";
 
@@ -141,7 +146,7 @@ public class PublicApiController {
 
     @PostMapping("/request-password-reset")
     public ResponseEntity<Void> requestPasswordReset(@RequestParam(value = "email") String email) {
-        publicApiService.requestPasswordReset(email);
+        passwordResetService.requestPasswordReset(email);
         return ResponseEntity.ok().build();
     }
 
@@ -150,7 +155,7 @@ public class PublicApiController {
         @RequestParam(value = "email") String email,
         @RequestParam(value = "token") String token,
         @RequestParam(value = "newPassword") String newPassword) {
-        return ResponseEntity.ok(publicApiService.resetPassword(email, token, newPassword));
+        return ResponseEntity.ok(passwordResetService.resetPassword(email, token, newPassword));
     }
 
     @GetMapping("/brief-profile/{id}")
@@ -168,6 +173,68 @@ public class PublicApiController {
         fillViewData(result);
         cacheUtil.set(USER_PROFILE_CACHE_PREFIX + id, result, TimeUnit.HOURS.toSeconds(12));
         return ResponseEntity.ok(result);
+    }
+
+    /**
+     * API to verify email with token
+     */
+    @GetMapping("/email-verification/verify")
+    public ResponseEntity<EmailVerificationResponse> verifyEmail(
+            @RequestParam String email,
+            @RequestParam String token) {
+        try {
+            // First check if email is already verified
+            Boolean isAlreadyVerified = emailVerificationService.isEmailVerified(email);
+            if (isAlreadyVerified) {
+                return ResponseEntity.ok(
+                    EmailVerificationResponse.success("Email already verified", true)
+                );
+            }
+            
+            Boolean result = emailVerificationService.verifyEmail(email, token);
+            if (result) {
+                return ResponseEntity.ok(
+                    EmailVerificationResponse.success("Email verified successfully", false)
+                );
+            } else {
+                return ResponseEntity.badRequest().body(
+                    EmailVerificationResponse.failure("Invalid or expired verification token")
+                );
+            }
+        } catch (Exception e) {
+            log.error("Error verifying email: {}", email, e);
+            return ResponseEntity.internalServerError().body(
+                EmailVerificationResponse.failure("Internal server error")
+            );
+        }
+    }
+
+    /**
+     * API to resend verification email
+     */
+    @PostMapping("/email-verification/resend")
+    public ResponseEntity<String> resendVerificationEmail(@RequestParam String email) {
+        try {
+            emailVerificationService.resendVerificationEmail(email);
+            return ResponseEntity.ok("Verification email sent successfully");
+        } catch (Exception e) {
+            log.error("Error resending verification email: {}", email, e);
+            return ResponseEntity.badRequest().body("Failed to resend verification email");
+        }
+    }
+
+    /**
+     * API to check if email is verified
+     */
+    @GetMapping("/email-verification/status")
+    public ResponseEntity<Boolean> checkEmailVerificationStatus(@RequestParam String email) {
+        try {
+            Boolean isVerified = emailVerificationService.isEmailVerified(email);
+            return ResponseEntity.ok(isVerified);
+        } catch (Exception e) {
+            log.error("Error checking email verification status: {}", email, e);
+            return ResponseEntity.ok(Boolean.FALSE);
+        }
     }
 
     private void fillViewData(UserBriefProfileDTO result) {
