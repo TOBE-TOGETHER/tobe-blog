@@ -356,6 +356,11 @@ export default function UserDetailDrawer({ open, onClose, userId, onDelete }: IU
                   value={selectedRoles}
                   onChange={handleRoleChange}
                   label={t('user-detail.select-roles')}
+                  sx={{
+                    '& .MuiSelect-select': {
+                      padding: '12px 14px',
+                    },
+                  }}
                   renderValue={(selected) => (
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                       {(selected as string[]).map((value) => {

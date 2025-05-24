@@ -69,6 +69,11 @@ export default function UsersPage() {
     loadUserData(false, searchKeyword, emailVerified);
   }, [searchKeyword, emailVerificationFilter]);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }, []);
+
   const handleLoadMore = useCallback((): void => {
     const emailVerified = emailVerificationFilter === 'true' ? true : 
                          emailVerificationFilter === 'false' ? false : undefined;
@@ -132,7 +137,7 @@ export default function UsersPage() {
         alignItems="center"
         justifyContent="flex-end"
       >
-        <Grid item>
+        <Grid item sx={{ width: { xs: '100%', sm: 'auto' } }}>
           <TextField
             placeholder={t('user-table.search-placeholder')}
             variant="outlined"
@@ -140,7 +145,7 @@ export default function UsersPage() {
             value={searchKeyword}
             onChange={handleSearchChange}
             sx={{ 
-              width: 285,
+              width: { xs: '100%', sm: 285 },
               '& .MuiOutlinedInput-root': {
                 backgroundColor: 'rgba(255, 255, 255, 0.8)',
                 borderRadius: '4px',

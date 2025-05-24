@@ -83,7 +83,10 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
     }
 
     public Page<UserGeneralDTO> getUsers(int current, int size) {
-        Page<UserEntity> userPage = this.page(new Page<>(current, size));
+        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(UserEntity::getCreateTime);
+        
+        Page<UserEntity> userPage = this.page(new Page<>(current, size), queryWrapper);
         Page<UserGeneralDTO> resultPage = new Page<>();
         
         // Convert and populate roles
@@ -126,6 +129,9 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
         if (emailVerified != null) {
             queryWrapper.eq(UserEntity::getEmailVerified, emailVerified);
         }
+        
+        // Order by create time descending (newest first)
+        queryWrapper.orderByDesc(UserEntity::getCreateTime);
         
         Page<UserEntity> userPage = this.page(new Page<>(current, size), queryWrapper);
         Page<UserGeneralDTO> resultPage = new Page<>();
@@ -205,12 +211,6 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
 
     @Transactional
     public void deleteUser(long id) {
-        // delete role of the specific user
-        this.userRoleService.remove(new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, id));
-        // delete features of the specific user
-        this.userFeatureService
-                .remove(new LambdaQueryWrapper<UserFeatureEntity>().eq(UserFeatureEntity::getUserId, id));
-        // delete the specific user
         this.removeById(id);
     }
 
