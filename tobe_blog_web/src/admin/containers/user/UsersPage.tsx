@@ -123,7 +123,7 @@ export default function UsersPage() {
     />
   );
 
-  const renderSkeleton = () => <UserCardSkeleton key={Math.random()} />;
+  const renderSkeleton = () => <UserCardSkeleton />;
 
   return (
     <Page
