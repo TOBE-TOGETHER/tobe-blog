@@ -12,7 +12,7 @@ export function getUsers(
 ): AxiosPromise {
   let url = `/${USER_URI}?size=${size}&current=${current + 1}`;
   
-  if (keyword && keyword.trim()) {
+  if (keyword?.trim()) {
     url += `&keyword=${encodeURIComponent(keyword.trim())}`;
   }
   

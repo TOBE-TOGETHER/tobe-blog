@@ -35,7 +35,7 @@ export default function UsersPage() {
     
     UserService.getUsers(size, pageToLoad, keyword, emailVerified)
       .then(response => {
-        const newUsers = response.data.records || [];
+        const newUsers = response.data.records ?? [];
         const total = response.data.total;
         
         if (isLoadMore) {

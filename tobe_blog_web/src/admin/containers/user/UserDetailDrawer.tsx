@@ -161,7 +161,7 @@ export default function UserDetailDrawer({ open, onClose, userId, onDelete }: IU
 
   const getFullName = () => {
     if (!user) return '';
-    return `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.username || '';
+    return `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() ?? user.username ?? '';
   };
 
   const formatDateTime = (dateString: string | undefined) => {

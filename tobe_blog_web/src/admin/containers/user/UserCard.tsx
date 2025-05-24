@@ -16,8 +16,8 @@ export default function UserCard({ user, onCardClick }: IUserCardProps) {
   const { t } = useCommonUtils();
 
   const getFullName = () => {
-    const fullName = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-    return fullName || user.username || `User ${user.id}`;
+    const fullName = `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim();
+    return fullName ?? user.username ?? `User ${user.id}`;
   };
 
   // Available roles mapping for display
@@ -127,7 +127,7 @@ export default function UserCard({ user, onCardClick }: IUserCardProps) {
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
             <EmailIcon sx={{ color: 'text.secondary', mr: 1, fontSize: '1.1rem' }} />
             <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.85rem' }}>
-              {user.email || 'No email'}
+              {user.email ?? 'No email'}
             </Typography>
           </Box>
 
