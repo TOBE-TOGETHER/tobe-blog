@@ -1,12 +1,9 @@
 package com.tobe.blog.portal.controller;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +22,6 @@ import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.CollectionDTO;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressDTO;
-import com.tobe.blog.beans.dto.content.TagRelationshipDTO;
 import com.tobe.blog.beans.dto.content.VOCDTO;
 import com.tobe.blog.beans.dto.content.WordDTO;
 import com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO;
@@ -42,9 +38,9 @@ import com.tobe.blog.core.service.PasswordResetService;
 import com.tobe.blog.core.service.UserService;
 import com.tobe.blog.core.utils.CacheUtil;
 import com.tobe.blog.core.utils.IpUtil;
+import com.tobe.blog.core.utils.TagRelationshipUtil;
 import com.tobe.blog.portal.service.PublicApiService;
 
-import io.jsonwebtoken.lang.Collections;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -68,6 +64,7 @@ public class PublicApiController {
     private final PasswordResetService passwordResetService;
     private final EmailVerificationService emailVerificationService;
     private final CacheUtil cacheUtil;
+    private final TagRelationshipUtil tagRelationshipUtil;
     private static final String USER_PROFILE_CACHE_PREFIX = "USER_PROFILE_";
 
     @GetMapping("/contents")
@@ -104,7 +101,7 @@ public class PublicApiController {
     @GetMapping("/collections/{id}")
     public ResponseEntity<CollectionDTO> getCollectionById(@PathVariable(value = "id") String id) {
         final CollectionDTO result = collectionService.getDTOByIdAndCount(id);
-        setRelatedContentsForTagTree(result.getTagTree(), result.getOwnerId());
+        tagRelationshipUtil.setRelatedContentsForTagTree(result.getTagTree(), result.getOwnerId());
         return ResponseEntity.ok(result);
     }
 
@@ -245,18 +242,5 @@ public class PublicApiController {
             result.setViewCount(dto.getTotalViewCount());
             result.setLikeCount(dto.getTotalLikeCount());
         }
-    }
-
-    private void setRelatedContentsForTagTree(List<TagRelationshipDTO> tagTree, Long ownerId) {
-        tagTree.forEach(node -> {
-            node.setRelatedContents(
-              publicApiService.searchContents(
-                            1, 1000, new String[]{ node.getTagId().toString() }, ownerId, Strings.EMPTY, null, Strings.EMPTY).getRecords()
-                            .stream().sorted(Comparator.comparing(BaseContentDTO::getTitle))
-                            .collect(Collectors.toList()));
-            if (!Collections.isEmpty(node.getChildren())) {
-                setRelatedContentsForTagTree(node.getChildren(), ownerId);
-            }
-        });
     }
 }

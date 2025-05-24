@@ -6,6 +6,7 @@ import { useCommonContentState } from '../commons';
 import BaseContentPage from '../components/ContentPage';
 import { CollectionService } from '../UserContentService';
 import CollectionContentPanel from './components/CollectionContentPanel';
+import CollectionPreviewPanel from './components/CollectionPreviewPanel';
 import ContentEditMainSection from './components/CollectionEditMainSection';
 
 export default function CollectionDetailPage() {
@@ -18,6 +19,7 @@ export default function CollectionDetailPage() {
     name: 'ROOT',
     children: [],
   });
+  const [previewRefreshTrigger, setPreviewRefreshTrigger] = useState<number>(0);
   const { loading, setLoading, editable, setEditable, title, setTitle, description, setDescription, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } =
     useCommonContentState();
 
@@ -47,6 +49,8 @@ export default function CollectionDetailPage() {
           const newTreeData = treeData;
           newTreeData.children = convert(response.data.tagTree);
           setTreeData(newTreeData);
+          // Trigger preview refresh when tag tree changes
+          setPreviewRefreshTrigger(prev => prev + 1);
         })
         .catch(() => {
           enqueueSnackbar(t('msg.error'), {
@@ -90,6 +94,8 @@ export default function CollectionDetailPage() {
         enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
+        // Trigger preview refresh after update
+        setPreviewRefreshTrigger(prev => prev + 1);
       })
       .catch(() => {
         enqueueSnackbar(t('msg.error'), {
@@ -98,6 +104,11 @@ export default function CollectionDetailPage() {
       })
       .finally(() => setLoading(false));
   }
+
+  const handleTagTreeChange = useCallback(() => {
+    // Called when tag tree is modified in CollectionContentPanel
+    setPreviewRefreshTrigger(prev => prev + 1);
+  }, []);
 
   return collection ? (
     <BaseContentPage
@@ -123,8 +134,15 @@ export default function CollectionDetailPage() {
       />
       <CollectionContentPanel
         collectionId={collection.id}
-        loadData={loadData}
+        loadData={(id: string) => {
+          loadData(id);
+          handleTagTreeChange();
+        }}
         treeData={treeData}
+      />
+      <CollectionPreviewPanel
+        collectionId={collection.id}
+        refreshTrigger={previewRefreshTrigger}
       />
     </BaseContentPage>
   ) : (

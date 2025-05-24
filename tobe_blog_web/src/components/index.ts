@@ -1,4 +1,5 @@
 import PlanProgressModal from '../admin/containers/content/plan/components/PlanProgressModal';
+import CollectionTreeRenderer from './common/CollectionTreeRenderer';
 import { EditorStyle } from './common/EditorStyle';
 import { FormPanel, HalfRow, OneRow, QuarterRow } from './common/FormLayout';
 import InfiniteScrollList from './common/InfiniteScrollList';
@@ -14,6 +15,7 @@ import Loading from './loading/Loading';
 export {
   AppFooter,
   BasicLayout,
+  CollectionTreeRenderer,
   EditorStyle,
   FormPanel,
   HalfRow,

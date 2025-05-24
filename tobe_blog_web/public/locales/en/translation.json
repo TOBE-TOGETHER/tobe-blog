@@ -452,6 +452,14 @@
       "error": "Failed to fetch data"
     }
   },
+  "collection-preview": {
+    "title": "Preview",
+    "loading": "Loading preview...",
+    "tip": {
+      "no-data": "No collection data available",
+      "tba": "To be continued"
+    }
+  },
   "vocabulary-creation-page": {
     "page-main-title": "Create a new vocabulary",
     "fields": {

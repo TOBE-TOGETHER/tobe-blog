@@ -1,5 +1,8 @@
 package com.tobe.blog.content.controller.impl;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +27,13 @@ public class CollectionController extends
     protected CollectionService getConcreteSubContentService() {
         return this.collectionService;
     }
-  
+
+    /**
+     * Get collection with related contents for admin preview
+     */
+    @GetMapping("/{id}/preview")
+    public ResponseEntity<CollectionDTO> getCollectionWithRelatedContents(@PathVariable String id) {
+        CollectionDTO result = collectionService.getDTOByIdWithRelatedContents(id);
+        return ResponseEntity.ok(result);
+    }
 }

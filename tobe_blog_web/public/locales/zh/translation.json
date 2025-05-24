@@ -440,6 +440,14 @@
       "error": "加载数据失败"
     }
   },
+  "collection-preview": {
+    "title": "预览",
+    "loading": "正在加载预览...",
+    "tip": {
+      "no-data": "暂无合集数据",
+      "tba": "敬请期待"
+    }
+  },
   "vocabulary-creation-page": {
     "page-main-title": "词汇",
     "fields": {
