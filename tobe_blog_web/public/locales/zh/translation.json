@@ -197,7 +197,8 @@
     "msg": {
       "success": "邮箱验证成功！现在可以登录了",
       "resend-success": "验证邮件已重新发送",
-      "resend-error": "重发邮件失败"
+      "resend-error": "重发邮件失败",
+      "sending": "发送中..."
     }
   },
   "app-header": {
@@ -261,15 +262,36 @@
   },
   "user-table": {
     "title": "用户",
-    "label": {
-      "id": "ID",
+    "total-count": "共 {{count}} 位用户",
+    "delete-success": "用户删除成功",
+    "search-placeholder": "搜索用户..."
+  },
+  "user-detail": {
+    "title": "用户详情",
+    "basic-info": "基本信息",
+    "introduction": "个人介绍",
+    "visit-portal": "访问主页",
+    "roles": "用户角色",
+    "select-roles": "选择角色",
+    "update-roles": "更新角色",
+    "updating-roles": "更新中...",
+    "role-update-success": "用户角色更新成功",
+    "required": "必需",
+    "role-labels": {
+      "admin": "管理员",
+      "basic": "基础用户",
+      "no-roles": "无角色"
+    },
+    "fields": {
       "email": "邮箱",
-      "username": "用户名",
-      "first-name": "名字",
-      "last-name": "姓氏",
       "phone-number": "联系电话",
-      "operation": "操作"
-    }
+      "address": "地址",
+      "profession": "职业",
+      "blog": "博客",
+      "create-time": "注册时间",
+      "update-time": "最后更新"
+    },
+    "no-data": "无可用的用户数据"
   },
   "admin-table": {
     "title": "监管",

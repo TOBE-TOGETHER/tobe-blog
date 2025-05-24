@@ -36,9 +36,11 @@ public class UserController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Page<UserGeneralDTO>> getUsers(
         @RequestParam(value = "current", required = false, defaultValue = "1") int current,
-        @RequestParam(value = "size", required = false, defaultValue = "10") int size
+        @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+        @RequestParam(value = "keyword", required = false) String keyword,
+        @RequestParam(value = "emailVerified", required = false) Boolean emailVerified
     ) {
-        return ResponseEntity.ok(userService.getUsers(current, size));
+        return ResponseEntity.ok(userService.getUsers(current, size, keyword, emailVerified));
     }
 
     /**
@@ -76,5 +78,17 @@ public class UserController {
     public ResponseEntity<UserGeneralDTO> deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok(null);
+    }
+
+    /**
+     * API to update user roles, only open to admin
+     */
+    @PutMapping("{id}/roles")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<UserGeneralDTO> updateUserRoles(
+        @PathVariable long id,
+        @RequestBody java.util.List<String> roles
+    ) {
+        return ResponseEntity.ok(userService.updateUserRoles(id, roles));
     }
 }

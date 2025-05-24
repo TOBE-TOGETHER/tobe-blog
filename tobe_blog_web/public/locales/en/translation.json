@@ -203,7 +203,8 @@
     "msg": {
       "success": "Email verification successful! You can now log in",
       "resend-success": "Verification email has been resent",
-      "resend-error": "Failed to resend email"
+      "resend-error": "Failed to resend email",
+      "sending": "Sending..."
     }
   },
   "app-header": {
@@ -267,6 +268,9 @@
   },
   "user-table": {
     "title": "Users",
+    "total-count": "Total: {{count}} users",
+    "delete-success": "User deleted successfully",
+    "search-placeholder": "Search users...",
     "label": {
       "id": "ID",
       "email": "Email",
@@ -276,6 +280,33 @@
       "phone-number": "Phone Number",
       "operation": "Operation"
     }
+  },
+  "user-detail": {
+    "title": "User Details",
+    "basic-info": "Basic Information",
+    "introduction": "Introduction",
+    "visit-portal": "Visit Portal",
+    "roles": "User Roles",
+    "select-roles": "Select Roles",
+    "update-roles": "Update Roles",
+    "updating-roles": "Updating...",
+    "role-update-success": "User roles updated successfully",
+    "required": "Required",
+    "role-labels": {
+      "admin": "Administrator",
+      "basic": "Basic User",
+      "no-roles": "No roles"
+    },
+    "fields": {
+      "email": "Email",
+      "phone-number": "Phone Number",
+      "address": "Address",
+      "profession": "Profession",
+      "blog": "Blog",
+      "create-time": "Registration Time",
+      "update-time": "Last Updated"
+    },
+    "no-data": "No user data available"
   },
   "admin-table": {
     "title": "Audit",

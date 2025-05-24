@@ -4,8 +4,27 @@ import server from '../services/server.ts';
 
 const USER_URI = 'v1/users';
 
-export function getUsers(size: number, current: number): AxiosPromise {
-  return server.get(`/${USER_URI}?size=${size}&current=${current + 1}`);
+export function getUsers(
+  size: number, 
+  current: number, 
+  keyword?: string, 
+  emailVerified?: boolean
+): AxiosPromise {
+  let url = `/${USER_URI}?size=${size}&current=${current + 1}`;
+  
+  if (keyword && keyword.trim()) {
+    url += `&keyword=${encodeURIComponent(keyword.trim())}`;
+  }
+  
+  if (emailVerified !== undefined) {
+    url += `&emailVerified=${emailVerified}`;
+  }
+  
+  return server.get(url);
+}
+
+export function getUser(id: number | string): AxiosPromise {
+  return server.get(`/${USER_URI}/${id}`);
 }
 
 export function deleteUser(id: number | string): AxiosPromise {
@@ -41,4 +60,12 @@ export function updateUser(data: {
       'Content-Type': 'application/json',
     },
   });
+}
+
+export function updateUserRoles(id: number | string, roles: string[]): AxiosPromise {
+  return server.put(`/${USER_URI}/${id}/roles`, roles);
+}
+
+export function resendVerificationEmail(email: string): AxiosPromise {
+  return server.post('/v1/auth/resend-verification', { email });
 }
