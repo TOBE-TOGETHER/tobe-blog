@@ -14,12 +14,24 @@ export interface IOperation {
 }
 
 export interface IUserData {
-  id: number;
-  email: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  phoneNum: string;
+  readonly id: number | string;
+  readonly username?: string;
+  readonly firstName?: string;
+  readonly lastName?: string;
+  readonly phoneNum?: string;
+  readonly email?: string;
+  readonly address?: string;
+  readonly avatarUrl?: string;
+  readonly introduction?: string;
+  readonly blog?: string;
+  readonly profession?: string;
+  readonly photoImg?: string;
+  readonly backgroundImg?: string;
+  readonly emailVerified?: boolean;
+  readonly features?: IUserFeatureDTO;
+  readonly createTime?: string;
+  readonly updateTime?: string;
+  readonly roles?: string[];
 }
 
 export interface IPlanInfo extends IBaseUserContentDTO {

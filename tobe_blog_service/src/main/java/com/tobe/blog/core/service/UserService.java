@@ -3,6 +3,7 @@ package com.tobe.blog.core.service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
@@ -44,9 +45,24 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public UserGeneralDTO getUser(long id) {
-        return Optional.ofNullable(this.getById(id))
-                .map(u -> BasicConverter.convert(u, UserGeneralDTO.class))
-                .orElse(null);
+        UserEntity userEntity = this.getById(id);
+        if (Objects.isNull(userEntity)) {
+            log.warn("user doesn't exist, id: " + id);
+            return new UserGeneralDTO();
+        }
+        UserGeneralDTO result = BasicConverter.convert(userEntity, UserGeneralDTO.class);
+        
+        // Get user roles
+        List<UserRoleEntity> userRoles = userRoleService.list(
+            new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, id)
+        );
+        result.setRoles(userRoles.stream().map(UserRoleEntity::getRole).collect(Collectors.toList()));
+        
+        // Get user features
+        UserFeatureDTO featureDTO = BasicConverter.convert(userFeatureService.getById(id), UserFeatureDTO.class);
+        result.setFeatures(featureDTO);
+        
+        return result;
     }
 
     public UserBriefProfileDTO getUserBriefProfile(long id) {
@@ -67,8 +83,79 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
     }
 
     public Page<UserGeneralDTO> getUsers(int current, int size) {
-        return (Page<UserGeneralDTO>) this.page(new Page<>(current, size))
-                .convert((x) -> BasicConverter.convert(x, UserGeneralDTO.class));
+        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(UserEntity::getCreateTime);
+        
+        Page<UserEntity> userPage = this.page(new Page<>(current, size), queryWrapper);
+        Page<UserGeneralDTO> resultPage = new Page<>();
+        
+        // Convert and populate roles
+        List<UserGeneralDTO> userDTOs = userPage.getRecords().stream()
+            .map(user -> {
+                UserGeneralDTO dto = BasicConverter.convert(user, UserGeneralDTO.class);
+                // Get user roles
+                List<UserRoleEntity> userRoles = userRoleService.list(
+                    new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, user.getId())
+                );
+                dto.setRoles(userRoles.stream().map(UserRoleEntity::getRole).collect(Collectors.toList()));
+                return dto;
+            })
+            .collect(Collectors.toList());
+        
+        resultPage.setRecords(userDTOs);
+        resultPage.setTotal(userPage.getTotal());
+        resultPage.setCurrent(userPage.getCurrent());
+        resultPage.setSize(userPage.getSize());
+        resultPage.setPages(userPage.getPages());
+        
+        return resultPage;
+    }
+
+    public Page<UserGeneralDTO> getUsers(int current, int size, String keyword, Boolean emailVerified) {
+        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
+        
+        // Add keyword search for username, firstName, lastName, and email
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            String searchKeyword = "%" + keyword.trim() + "%";
+            queryWrapper.and(wrapper -> wrapper
+                .like(UserEntity::getUsername, searchKeyword)
+                .or().like(UserEntity::getFirstName, searchKeyword)
+                .or().like(UserEntity::getLastName, searchKeyword)
+                .or().like(UserEntity::getEmail, searchKeyword)
+            );
+        }
+        
+        // Add email verification filter
+        if (emailVerified != null) {
+            queryWrapper.eq(UserEntity::getEmailVerified, emailVerified);
+        }
+        
+        // Order by create time descending (newest first)
+        queryWrapper.orderByDesc(UserEntity::getCreateTime);
+        
+        Page<UserEntity> userPage = this.page(new Page<>(current, size), queryWrapper);
+        Page<UserGeneralDTO> resultPage = new Page<>();
+        
+        // Convert and populate roles
+        List<UserGeneralDTO> userDTOs = userPage.getRecords().stream()
+            .map(user -> {
+                UserGeneralDTO dto = BasicConverter.convert(user, UserGeneralDTO.class);
+                // Get user roles
+                List<UserRoleEntity> userRoles = userRoleService.list(
+                    new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, user.getId())
+                );
+                dto.setRoles(userRoles.stream().map(UserRoleEntity::getRole).collect(Collectors.toList()));
+                return dto;
+            })
+            .collect(Collectors.toList());
+        
+        resultPage.setRecords(userDTOs);
+        resultPage.setTotal(userPage.getTotal());
+        resultPage.setCurrent(userPage.getCurrent());
+        resultPage.setSize(userPage.getSize());
+        resultPage.setPages(userPage.getPages());
+        
+        return resultPage;
     }
 
     @Transactional
@@ -124,13 +211,22 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
 
     @Transactional
     public void deleteUser(long id) {
-        // delete role of the specific user
-        this.userRoleService.remove(new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, id));
-        // delete features of the specific user
-        this.userFeatureService
-                .remove(new LambdaQueryWrapper<UserFeatureEntity>().eq(UserFeatureEntity::getUserId, id));
-        // delete the specific user
         this.removeById(id);
+    }
+
+    @Transactional
+    public UserGeneralDTO updateUserRoles(long userId, List<String> roles) {
+        // Remove existing roles for the user
+        userRoleService.remove(new LambdaQueryWrapper<UserRoleEntity>().eq(UserRoleEntity::getUserId, userId));
+        
+        // Add new roles
+        roles.forEach(role -> {
+            UserRoleEntity userRole = new UserRoleEntity(role, userId);
+            userRoleService.save(userRole);
+        });
+        
+        // Return updated user information
+        return getUser(userId);
     }
 
     private List<UserRoleEntity> createDefaultRole(Long userId) {
