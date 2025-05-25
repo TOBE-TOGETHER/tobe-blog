@@ -12,6 +12,9 @@
       "save": "Save",
       "edit": "Edit"
     },
+    "info-icon-button": {
+      "tooltip": "View content statistics"
+    },
     "visibility-switch": {
       "release": "Draft, click to release",
       "retract": "Released, click to retract"
@@ -511,11 +514,13 @@
     "view-count": "View Count",
     "like-count": "Like Count",
     "status": "Status",
+    "draft": "Draft",
     "recommended": "Recommended",
     "banned": "Banned",
     "normal": "Normal",
     "portal-link": "Portal Link",
     "view-on-portal": "View on Portal",
+    "dates": "Timeline",
     "created-date": "Created Date",
     "published-date": "Published Date",
     "last-updated": "Last Updated"

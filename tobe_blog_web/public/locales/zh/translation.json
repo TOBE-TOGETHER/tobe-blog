@@ -16,6 +16,9 @@
       "save": "保存",
       "edit": "修改"
     },
+    "info-icon-button": {
+      "tooltip": "查看内容统计"
+    },
     "save-btn-panel": {
       "save": "保存",
       "back": "返回"
@@ -499,11 +502,13 @@
     "view-count": "阅读量",
     "like-count": "点赞数",
     "status": "状态",
+    "draft": "草稿",
     "recommended": "已推荐",
     "banned": "已封禁",
     "normal": "正常",
     "portal-link": "门户链接",
     "view-on-portal": "在门户查看",
+    "dates": "时间信息",
     "created-date": "创建日期",
     "published-date": "发布日期",
     "last-updated": "最后更新"

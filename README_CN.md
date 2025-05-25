@@ -1,9 +1,12 @@
 # tobe-blog
 
+> 🚀 **使用 Cursor AI 开发** - 本项目使用 Cursor 构建。
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-18.3.0-blue.svg)](https://reactjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2.2-blue.svg)](https://www.typescriptlang.org)
+[![Cursor](https://img.shields.io/badge/Built%20with-Cursor-blueviolet.svg)](https://cursor.sh)
 
 一个基于 Spring Boot 和 React 的现代化开源博客平台，支持多语言、多端适配，提供完整的内容管理和数据分析功能。
 

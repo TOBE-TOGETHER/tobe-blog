@@ -1,9 +1,12 @@
 # tobe-blog
 
+> 🚀 **Developed with Cursor AI** - This project is built using Cursor.
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-18.3.0-blue.svg)](https://reactjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2.2-blue.svg)](https://www.typescriptlang.org)
+[![Cursor](https://img.shields.io/badge/Built%20with-Cursor-blueviolet.svg)](https://cursor.sh)
 
 A modern open-source blog platform based on Spring Boot and React, supporting multiple languages, multi-device adaptation, and providing comprehensive content management and data analytics features.
 

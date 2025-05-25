@@ -3,7 +3,6 @@ import { Page } from '../../../components';
 import { IBaseUserContentDTO } from '../../../../global/types';
 import BaseContentService from '../BaseContentService';
 import ContentEditBar from './ContentEditBar';
-import ContentStatsSection from './ContentStatsSection';
 
 export default function BaseContentPage(
   props: Readonly<{
@@ -29,10 +28,7 @@ export default function BaseContentPage(
         handleEditableChange={props.handleEditableChange}
         service={props.service}
         onVisibilityChange={props.onVisibilityChange}
-      />
-      <ContentStatsSection 
-        content={props.contentData || null}
-        visible={!props.editable}
+        contentData={props.contentData}
       />
       {props.children}
     </Page>

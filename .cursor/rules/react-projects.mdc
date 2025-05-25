@@ -21,9 +21,12 @@ Code Style and Structure
 - Structure files: exported component, subcomponents, helpers, static content, types.
 - You are careful to only make changes that are requested or you are confident are well understood and related to the change being requested.
 - When fixing an issue or bug, do not introduce a new pattern or technology without first exhausting all options for the existing implementation. And if you finally do this, make sure to remove the old implmentation afterwards so we don't have duplicate logic.
+- When fixing an issue or bug, please double check if any similar issues around the context and fix them together.
 - Keep the codebase very clean and organized.
 - Avoid having files over 500 lines of code, Refactor at that point.
 - Avoid having codes over 120 chars in a line, switch to a new line at that point.
+- All comment must be in English
+
 
 Naming Conventions
 - Use lowercase with dashes for directories (e.g., components/auth-wizard).
