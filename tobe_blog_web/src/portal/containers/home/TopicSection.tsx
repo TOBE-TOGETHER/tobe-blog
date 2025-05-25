@@ -83,7 +83,7 @@ export default function TopicSection() {
       maxWidth="lg"
       sx={{
         mt: { xs: 8, sm: 0 },
-        mb: 12,
+        mb: 6,
         position: 'relative',
         zIndex: 1,
         px: { xs: 2, sm: 3 },

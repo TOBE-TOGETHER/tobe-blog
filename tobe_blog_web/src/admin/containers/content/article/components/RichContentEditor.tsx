@@ -1,9 +1,10 @@
 import '@wangeditor/editor/dist/css/style.css';
 
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery } from '@mui/material';
 import { IDomEditor, IEditorConfig, IToolbarConfig, SlateElement, i18nGetResources } from '@wangeditor/editor';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useCommonUtils } from '../../../../../commons';
 import { EditorStyle } from '../../../../../components';
 import theme from '../../../../../theme';
@@ -15,20 +16,38 @@ type ImageElement = SlateElement & {
   href: string;
 };
 
-function getLocale(): 'en' | 'zh-CN' {
-  if (localStorage.getItem('i18nextLng') === 'en') {
-    return 'en';
-  } else {
-    return 'zh-CN';
-  }
-}
-
 function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (value: string) => void; setTextValue: (value: string) => void; editable: boolean }>) {
   const { t } = useCommonUtils();
+  const { i18n } = useTranslation();
   const [editor, setEditor] = useState<IDomEditor | null>(null);
+  
+  // Detect screen size
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Function to get current locale for WangEditor
+  const getCurrentLocale = useCallback((): 'en' | 'zh-CN' => {
+    return i18n.language === 'en' ? 'en' : 'zh-CN';
+  }, [i18n.language]);
+
+  // Effect 1: Handle language changes and update editor locale
+  useEffect(() => {
+    const currentLocale = getCurrentLocale();
+    i18nGetResources(currentLocale);
+  }, [getCurrentLocale]);
+
+  // Effect 2: Cleanup editor instance when component unmounts or editable changes
+  useEffect(() => {
+    return () => {
+      if (editor == null) return;
+      editor.destroy();
+      setEditor(null);
+    };
+  }, [editor, props.editable]);
 
   const editorConfig: Partial<IEditorConfig> = {
     readOnly: !props.editable,
+    autoFocus: props.editable,
+    scroll: false,
     MENU_CONF: {
       insertImage: {
         onInsertedImage(imageNode: ImageElement | null) {
@@ -56,18 +75,28 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
     placeholder: t('components.rich-editor.placeholder'),
   };
 
+  // Configure different toolbars based on screen size
   const toolbarConfig: Partial<IToolbarConfig> = {
-    excludeKeys: ['bgColor', 'fontSize', 'fontFamily', 'lineHeight', 'group-video', 'fullScreen'],
+    excludeKeys: isMobile 
+      ? [
+          // Mobile: Exclude most tools, keep only basic editing features:
+          // Keep: blockquote, bulletedList, numberedList, code, codeBlock
+          'bold', 'italic', 'underline', 'emotion', 'code', 'codeBlock',
+          'bgColor', 'fontSize', 'fontFamily', 'lineHeight', 'group-video', 'fullScreen',
+          'color', 'through', 'sub', 'sup', 'clearStyle', 
+          'indent', 'delIndent', 'justifyLeft', 'justifyRight', 'justifyCenter', 'justifyJustify',
+          'insertLink', 'editLink', 'unLink', 'viewLink',
+          'uploadImage', 'deleteImage', 'editImage', 'viewImageLink',
+          'insertTable', 'deleteTable', 'insertTableRow', 'deleteTableRow',
+          'insertTableCol', 'deleteTableCol', 'tableHeader', 'tableFullWidth',
+          'divider', 'redo', 'undo', 'group-more-style', 'group-justify',
+          'group-indent', 'group-image', 'group-table', 'insertVideo', 'uploadVideo'
+        ]
+      : [
+          // Desktop: Show more tools, exclude only a few
+          'bgColor', 'fontSize', 'fontFamily', 'lineHeight', 'group-video', 'fullScreen'
+        ]
   };
-
-  useEffect(() => {
-    return () => {
-      if (editor == null) return;
-      editor.destroy();
-      setEditor(null);
-    };
-  }, [editor, props.editable]);
-  i18nGetResources(getLocale());
 
   return (
     <Grid
@@ -77,6 +106,8 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
         'width': '100%',
         'border': '1px, solid ' + theme.palette.grey[300],
         'overflow': 'hidden',
+        'pointerEvents': 'auto',
+        'cursor': 'text',
         '&:hover': { boxShadow: props.editable ? '0 0 0 1px ' + theme.palette.primary.dark : 'none' },
         '&:focus-within': { boxShadow: props.editable ? '0 0 0 1px ' + theme.palette.primary.dark : 'none', borderColor: props.editable ? theme.palette.primary.dark : 'none' },
       }}
@@ -86,20 +117,42 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
         defaultConfig={toolbarConfig}
         style={{
           borderBottom: '0.5px solid rgba(0,0,0,0.12)',
-          padding: '8px',
+          padding: isMobile ? '4px' : '8px',
           color: theme.palette.primary.dark,
+          fontSize: isMobile ? '14px' : '16px',
+          flexWrap: 'wrap',
         }}
       />
       <Editor
         defaultConfig={editorConfig}
         value={props.htmlValue}
-        onCreated={setEditor}
+        onCreated={(editor) => {
+          setEditor(editor);
+          // Set up focus handling after editor is created
+          if (props.editable) {
+            const editorContainer = editor.getEditableContainer() as HTMLElement;
+            if (editorContainer) {
+              editorContainer.style.cursor = 'text';
+              editorContainer.style.userSelect = 'text';
+            }
+          }
+        }}
         onChange={editor => {
           props.setHtmlValue(editor.getHtml());
           props.setTextValue(editor.getText());
         }}
         mode="default"
-        style={{ minHeight: '200px', width: '100%', backgroundColor: '#f1f3f5', padding: '8px', maxHeight: props.editable ? '500px' : 'none', overflowY: 'scroll' }}
+        style={{ 
+          minHeight: '200px', 
+          width: '100%', 
+          backgroundColor: '#f1f3f5', 
+          padding: '8px', 
+          maxHeight: props.editable ? '500px' : 'none', 
+          overflowY: 'auto',
+          userSelect: 'text',
+          cursor: 'text',
+          outline: 'none'
+        }}
       />
     </Grid>
   );

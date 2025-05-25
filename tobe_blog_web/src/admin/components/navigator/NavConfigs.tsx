@@ -17,20 +17,20 @@ export const basicPageItems: IPageItem[] = [
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
   },
   {
-    label: 'dashboard-nav.pages.plans',
-    icon: <FlagIcon />,
-    url: URL.PLANS,
-    secondaryUrl: URL.CREATE_PLAN,
-    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
-    requiredFeature: EFeatureCode.PLAN_MODULE,
-  },
-  {
     label: 'dashboard-nav.pages.articles',
     icon: <ArticleIcon />,
     url: URL.ARTICLES,
     secondaryUrl: URL.CREATE_ARTICLE,
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
     requiredFeature: EFeatureCode.ARTICLE_MODULE,
+  },
+  {
+    label: 'dashboard-nav.pages.plans',
+    icon: <FlagIcon />,
+    url: URL.PLANS,
+    secondaryUrl: URL.CREATE_PLAN,
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+    requiredFeature: EFeatureCode.PLAN_MODULE,
   },
   {
     label: 'dashboard-nav.pages.vocabularies',

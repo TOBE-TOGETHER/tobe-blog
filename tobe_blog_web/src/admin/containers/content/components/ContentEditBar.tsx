@@ -1,10 +1,17 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Grid, IconButton } from '@mui/material';
+import { useCommonUtils } from '../../../../commons';
 import { EditIconButton } from '../../../components';
 import BaseContentService from '../BaseContentService';
 import { VisibilitySwitch } from './VisibilitySwitch';
 
 export default function ComtentEditBar(props: Readonly<{ id: string | undefined; editable: boolean; handleEditableChange: () => void; service: BaseContentService }>) {
+  const { navigate } = useCommonUtils();
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
+
   return (
     <Grid
       container
@@ -13,16 +20,17 @@ export default function ComtentEditBar(props: Readonly<{ id: string | undefined;
     >
       <Grid
         item
-        flexGrow={1}
-      ></Grid>
-      <Grid
-        item
         flexGrow={0}
       >
-        <IconButton onClick={() => window.history.back()}>
+        <IconButton onClick={handleBackClick}>
           <ArrowBackIosNewIcon />
         </IconButton>
       </Grid>
+      <Grid
+        item
+        flexGrow={1}
+      ></Grid>
+      
       <Grid
         item
         flexGrow={0}

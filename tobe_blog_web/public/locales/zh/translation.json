@@ -73,6 +73,12 @@
     "no-content": "找不到相关内容",
     "tag-statistics": "标签筛选",
     "slogan": "记录成长，分享点滴",
+    "speed-dial": {
+      "create-article": "创建笔记",
+      "create-plan": "创建计划",
+      "create-vocabulary": "创建词汇",
+      "create-collection": "创建合集"
+    },
     "advantages": {
       "title": "为什么选择 Tobe Blog",
       "items": {

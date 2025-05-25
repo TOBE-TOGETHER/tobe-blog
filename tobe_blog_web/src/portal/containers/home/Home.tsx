@@ -2,9 +2,7 @@ import styled from '@emotion/styled';
 import { Container, Typography } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 import { useCommonUtils } from '../../../commons';
-import { PortalLayout } from '../../components';
-import FloatingElementContainer from '../../components/FloatingElementContainer';
-import RecentContentsPanel from '../../components/RecentContentsPanel';
+import { CreateSpeedDial, FloatingElementContainer, PortalLayout, RecentContentsPanel } from '../../components';
 import { shine } from '../../components/StyledComponents';
 import AdvantagesSection from './AdvantagesSection';
 import TopicSection from './TopicSection';
@@ -102,6 +100,9 @@ export default function Home() {
       <TopicSection />
       <RecentContentsPanel />
       <AdvantagesSection />
+      
+      {/* SpeedDial for authenticated users */}
+      <CreateSpeedDial />
     </PortalLayout>
   );
 }
