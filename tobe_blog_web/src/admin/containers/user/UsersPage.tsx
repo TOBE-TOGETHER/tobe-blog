@@ -10,44 +10,42 @@ import UserCard from './UserCard';
 import UserCardSkeleton from './UserCardSkeleton';
 import UserDetailDrawer from './UserDetailDrawer';
 
+interface ILoadDataOption {
+  status: string;
+  keyword: string;
+  emailVerified?: boolean;
+  reset: boolean;
+}
+
 export default function UsersPage() {
   const { t, enqueueSnackbar } = useCommonUtils();
-  const [current, setCurrent] = useState<number>(0);
-  const [size] = useState<number>(12);
+  const DEFAULT_PAGE_SIZE = 12;
   const [users, setUsers] = useState<IUserData[]>([]);
+  const [current, setCurrent] = useState<number>(0);
+  const [totalPage, setTotalPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(true);
+  
   const [selectedUserId, setSelectedUserId] = useState<number | string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [searchKeyword, setSearchKeyword] = useState<string>('');
-  const [emailVerificationFilter, setEmailVerificationFilter] = useState<string>(''); // '', 'true', 'false'
+  const [emailVerificationFilter, setEmailVerificationFilter] = useState<string>('');
 
-  const loadUserData = useCallback((
-    isLoadMore: boolean = false,
-    keyword?: string,
-    emailVerified?: boolean
-  ): void => {
-    if (loading) return;
+  function loadData(option: ILoadDataOption): void {
+    if (loading) return; // 防止重复请求
     
     setLoading(true);
-    const pageToLoad = isLoadMore ? current + 1 : 0;
+    const pageToLoad = option.reset ? 1 : current + 1;
+    const emailVerified = option.emailVerified;
     
-    UserService.getUsers(size, pageToLoad, keyword, emailVerified)
+    UserService.getUsers(DEFAULT_PAGE_SIZE, pageToLoad - 1, option.keyword || undefined, emailVerified)
       .then(response => {
         const newUsers = response.data.records ?? [];
-        const total = response.data.total;
         
-        if (isLoadMore) {
-          setUsers(prevUsers => [...prevUsers, ...newUsers]);
-          setCurrent(pageToLoad);
-        } else {
-          setUsers(newUsers);
-          setCurrent(0);
-        }
-        
-        setTotalCount(total);
-        setHasMore((pageToLoad + 1) * size < total);
+        setUsers(option.reset ? newUsers : users.concat(newUsers));
+        setCurrent(response.data.current);
+        setTotalPage(response.data.pages);
+        setTotalCount(response.data.total);
       })
       .catch(() => {
         enqueueSnackbar(t('msg.error'), {
@@ -57,16 +55,18 @@ export default function UsersPage() {
       .finally(() => {
         setLoading(false);
       });
-  }, [current, size, loading, t, enqueueSnackbar]);
+  }
 
   useEffect(() => {
     const emailVerified = emailVerificationFilter === 'true' ? true : 
                          emailVerificationFilter === 'false' ? false : undefined;
     
-    setUsers([]);
-    setCurrent(0);
-    setHasMore(true);
-    loadUserData(false, searchKeyword, emailVerified);
+    loadData({ 
+      status: '', 
+      keyword: searchKeyword, 
+      emailVerified, 
+      reset: true 
+    });
   }, [searchKeyword, emailVerificationFilter]);
 
   // Scroll to top when component mounts
@@ -74,22 +74,11 @@ export default function UsersPage() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }, []);
 
-  const handleLoadMore = useCallback((): void => {
-    const emailVerified = emailVerificationFilter === 'true' ? true : 
-                         emailVerificationFilter === 'false' ? false : undefined;
-    loadUserData(true, searchKeyword, emailVerified);
-  }, [loadUserData, searchKeyword, emailVerificationFilter]);
-
   const handleDelete = useCallback((id: number | string): void => {
     UserService.deleteUser(id)
       .then(() => {
-        const emailVerified = emailVerificationFilter === 'true' ? true : 
-                             emailVerificationFilter === 'false' ? false : undefined;
-        
-        setUsers([]);
-        setCurrent(0);
-        setHasMore(true);
-        loadUserData(false, searchKeyword, emailVerified);
+        setUsers(users.filter(u => u.id !== id));
+        setTotalCount(prev => prev - 1);
         enqueueSnackbar(t('user-table.delete-success'), { 
           variant: 'success' 
         });
@@ -99,7 +88,7 @@ export default function UsersPage() {
           variant: 'error' 
         });
       });
-  }, [loadUserData, t, enqueueSnackbar, searchKeyword, emailVerificationFilter]);
+  }, [users, t, enqueueSnackbar]);
 
   const handleCardClick = useCallback((userId: number | string): void => {
     setSelectedUserId(userId);
@@ -221,9 +210,15 @@ export default function UsersPage() {
         dataSource={users}
         renderItem={renderUserCard}
         renderSkeleton={renderSkeleton}
-        hasMore={hasMore}
-        loadMore={handleLoadMore}
-        option={{}}
+        hasMore={current < totalPage}
+        loadMore={loadData}
+        option={{ 
+          status: '', 
+          keyword: searchKeyword, 
+          emailVerified: emailVerificationFilter === 'true' ? true : 
+                         emailVerificationFilter === 'false' ? false : undefined,
+          reset: false 
+        }}
       />
 
       <UserDetailDrawer
