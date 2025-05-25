@@ -4,7 +4,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
 import { Grid, Link, SxProps, Typography } from '@mui/material';
 import { ReactNode } from 'react';
-import { getPathFromContentType, useCommonUtils } from '../../commons';
+import { useCommonUtils } from '../../commons';
 import { EContentType } from '../../global/enums';
 import { IBaseUserContentDTO, ICollectionDTO, ITagRelationshipDTO } from '../../global/types';
 import { URL } from '../../routes';
@@ -225,7 +225,7 @@ const ContentLink = (props: {
       }
     } else {
       // Portal mode: link to reading pages
-      return `/news/${getPathFromContentType(props.contentType)}/${props.id}`;
+      return `/content/${props.id}`;
     }
   }
 

@@ -12,6 +12,7 @@ const ArticleReadingPage = React.lazy(() => import('./containers/content/article
 const PlanReadingPage = React.lazy(() => import('./containers/content/plan/PlanReadingPage'));
 const VocabularyReadingPage = React.lazy(() => import('./containers/content/vocabulary/VocabularyReadingPage'));
 const CollectionReadingPage = React.lazy(() => import('./containers/content/collection/CollectionReadingPage'));
+const ContentRedirector = React.lazy(() => import('./containers/content/ContentRedirector'));
 
 export default function getPortalRoutes(): ReactNode[] {
   return [
@@ -49,6 +50,11 @@ export default function getPortalRoutes(): ReactNode[] {
       key={URL.PERSONAL_PORTAL}
       path={URL.PERSONAL_PORTAL}
       element={<PersonalPortalPage />}
+    />,
+    <Route
+      key={URL.CONTENT_REDIRECT}
+      path={URL.CONTENT_REDIRECT}
+      element={<ContentRedirector />}
     />,
     <Route
       key={URL.NEWS_ARTICLE_DETAIL}

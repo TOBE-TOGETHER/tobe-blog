@@ -493,5 +493,25 @@
     "TECHNICAL": "科技",
     "LIFE": "生活",
     "OTHER": "其他"
+  },
+  "content-stats": {
+    "title": "内容统计",
+    "view-count": "阅读量",
+    "like-count": "点赞数",
+    "status": "状态",
+    "recommended": "已推荐",
+    "banned": "已封禁",
+    "normal": "正常",
+    "portal-link": "门户链接",
+    "view-on-portal": "在门户查看",
+    "created-date": "创建日期",
+    "published-date": "发布日期",
+    "last-updated": "最后更新"
+  },
+  "content-redirector": {
+    "content-not-found": "内容未找到",
+    "content-not-available": "内容不可用或已被移除"
+  },
+  "admin": {
   }
 }

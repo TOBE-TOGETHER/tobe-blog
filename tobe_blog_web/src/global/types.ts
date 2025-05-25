@@ -192,6 +192,13 @@ export interface IBaseUserContentDTO {
   reason: string;
 }
 
+export interface IContentBasicInfoDTO {
+  id: string;
+  contentType: string;
+  publicToAll: boolean;
+  banned: boolean;
+}
+
 export interface ICollectionDTO extends IBaseUserContentDTO {
   tags: ITagOption[];
   tagTree: ITagRelationshipDTO[];

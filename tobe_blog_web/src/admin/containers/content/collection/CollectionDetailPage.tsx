@@ -118,6 +118,8 @@ export default function CollectionDetailPage() {
       editable={editable}
       handleEditableChange={handleEditableChange}
       service={CollectionService}
+      contentData={collection}
+      onVisibilityChange={() => loadData(id ?? '')}
     >
       <ContentEditMainSection
         title={title}

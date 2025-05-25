@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCommonUtils } from '../../../../commons';
-import { IArticleUpdateDTO } from '../../../../global/types';
+import { IArticleUpdateDTO, IArticleDetailDTO } from '../../../../global/types';
 import { useCommonContentState } from '../commons';
 import BaseContentPage from '../components/ContentPage';
 import { ArticleService } from '../UserContentService';
@@ -14,6 +14,7 @@ export default function ArticleDetailPage() {
   const [textValue, setTextValue] = useState<string>('');
   const [subTitle, setSubTitle] = useState<string>('');
   const [contentProtected, setContentProtected] = useState<boolean>(false);
+  const [articleData, setArticleData] = useState<IArticleDetailDTO | null>(null);
   const { loading, setLoading, editable, setEditable, title, setTitle, coverImgUrl, setCoverImgUrl, tagValues, setTagValues, topic, setTopic } = useCommonContentState();
 
   const loadData = useCallback((): void => {
@@ -23,13 +24,15 @@ export default function ArticleDetailPage() {
     setLoading(true);
     ArticleService.getById(id)
       .then(response => {
-        setHtmlValue(response.data.content);
-        setTitle(response.data.title);
-        setSubTitle(response.data.subTitle);
-        setCoverImgUrl(response.data.coverImgUrl);
-        setTagValues(response.data.tags);
-        setContentProtected(response.data.contentProtected);
-        setTopic(response.data.topic);
+        const data = response.data;
+        setArticleData(data);
+        setHtmlValue(data.content);
+        setTitle(data.title);
+        setSubTitle(data.subTitle);
+        setCoverImgUrl(data.coverImgUrl);
+        setTagValues(data.tags);
+        setContentProtected(data.contentProtected);
+        setTopic(data.topic);
       })
       .catch(() => {
         enqueueSnackbar(t('article-creation-page.msg.error'), {
@@ -48,6 +51,8 @@ export default function ArticleDetailPage() {
         enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
+        // Reload data to get updated statistics
+        loadData();
       })
       .catch(() => {
         enqueueSnackbar(t('msg.error'), {
@@ -88,6 +93,8 @@ export default function ArticleDetailPage() {
       editable={editable}
       handleEditableChange={handleEditableChange}
       service={ArticleService}
+      contentData={articleData}
+      onVisibilityChange={loadData}
     >
       <ArticleEditMainSection
         title={title}

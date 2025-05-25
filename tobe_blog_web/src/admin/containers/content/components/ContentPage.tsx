@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 import { Page } from '../../../components';
+import { IBaseUserContentDTO } from '../../../../global/types';
 import BaseContentService from '../BaseContentService';
 import ContentEditBar from './ContentEditBar';
+import ContentStatsSection from './ContentStatsSection';
 
 export default function BaseContentPage(
   props: Readonly<{
@@ -12,6 +14,8 @@ export default function BaseContentPage(
     editable: boolean;
     handleEditableChange: () => void;
     service: BaseContentService;
+    contentData?: IBaseUserContentDTO | null;
+    onVisibilityChange?: () => void;
   }>
 ) {
   return (
@@ -24,6 +28,11 @@ export default function BaseContentPage(
         editable={props.editable}
         handleEditableChange={props.handleEditableChange}
         service={props.service}
+        onVisibilityChange={props.onVisibilityChange}
+      />
+      <ContentStatsSection 
+        content={props.contentData || null}
+        visible={!props.editable}
       />
       {props.children}
     </Page>

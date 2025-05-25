@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { getPathFromContentType, useCommonUtils } from '../../../commons/index.ts';
+import { useCommonUtils } from '../../../commons/index.ts';
 import { EColumnPosition, EOperationName } from '../../../global/enums.ts';
 import { IColumn, IOperation, IUserData } from '../../../global/types.ts';
 import { Page, PagedTable } from '../../components/index.ts';
@@ -89,7 +89,7 @@ export default function ContentAdminPage() {
   const operations: IOperation[] = [
     {
       name: EOperationName.DETAIL,
-      onClick: (id: number | string, data: any) => navigate('/news/' + getPathFromContentType(data.contentType) + '/' + id),
+      onClick: (id: number | string, data: any) => navigate('/content/' + id),
     },
     {
       name: EOperationName.RECOMMEND,

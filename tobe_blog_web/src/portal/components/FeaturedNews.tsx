@@ -1,6 +1,6 @@
 import { Button, Grid, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import { getPathFromContentType, useCommonUtils } from '../../commons/index.ts';
+import { useCommonUtils } from '../../commons/index.ts';
 import { EContentType } from '../../global/enums.ts';
 import { IBaseUserContentDTO, TopicPropsType } from '../../global/types.ts';
 import * as PublicDataService from '../../services/PublicDataService.ts';
@@ -157,7 +157,7 @@ const NewsList = (props: { newsData: IBaseUserContentDTO[]; totalPage: number; c
           viewCount={n.viewCount}
           likeCount={n.likeCount}
           tags={n.tags}
-          onClick={() => navigate(`/news/${getPathFromContentType(n.contentType)}/${n.id}`)}
+          onClick={() => navigate(`/content/${n.id}`)}
         />
       ))}
       {current >= totalPage ? (

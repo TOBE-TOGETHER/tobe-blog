@@ -46,8 +46,6 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
 
   const editorConfig: Partial<IEditorConfig> = {
     readOnly: !props.editable,
-    autoFocus: props.editable,
-    scroll: false,
     MENU_CONF: {
       insertImage: {
         onInsertedImage(imageNode: ImageElement | null) {
@@ -128,14 +126,6 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
         value={props.htmlValue}
         onCreated={(editor) => {
           setEditor(editor);
-          // Set up focus handling after editor is created
-          if (props.editable) {
-            const editorContainer = editor.getEditableContainer() as HTMLElement;
-            if (editorContainer) {
-              editorContainer.style.cursor = 'text';
-              editorContainer.style.userSelect = 'text';
-            }
-          }
         }}
         onChange={editor => {
           props.setHtmlValue(editor.getHtml());
@@ -145,7 +135,6 @@ function RichContentEditor(props: Readonly<{ htmlValue: string; setHtmlValue: (v
         style={{ 
           minHeight: '200px', 
           width: '100%', 
-          backgroundColor: '#f1f3f5', 
           padding: '8px', 
           maxHeight: props.editable ? '500px' : 'none', 
           overflowY: 'auto',

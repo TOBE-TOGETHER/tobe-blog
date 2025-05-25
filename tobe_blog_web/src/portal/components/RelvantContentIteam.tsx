@@ -1,5 +1,5 @@
 import { Grid, Paper, Typography } from '@mui/material';
-import { getPathFromContentType, TimeFormat, useCommonUtils } from '../../commons';
+import { TimeFormat, useCommonUtils } from '../../commons';
 import { IBaseUserContentDTO } from '../../global/types';
 import theme from '../../theme';
 
@@ -22,7 +22,7 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
           transition: 'all .2s ease-in-out',
         },
       }}
-      onClick={() => navigate(`/news/${getPathFromContentType(props.content.contentType)}/${props.content.id}`)}
+      onClick={() => navigate(`/content/${props.content.id}`)}
     >
       <Grid
         component={Paper}

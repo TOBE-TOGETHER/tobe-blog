@@ -505,5 +505,25 @@
     "TECHNICAL": "Tech",
     "LIFE": "Life",
     "OTHER": "Other"
+  },
+  "content-stats": {
+    "title": "Content Statistics",
+    "view-count": "View Count",
+    "like-count": "Like Count",
+    "status": "Status",
+    "recommended": "Recommended",
+    "banned": "Banned",
+    "normal": "Normal",
+    "portal-link": "Portal Link",
+    "view-on-portal": "View on Portal",
+    "created-date": "Created Date",
+    "published-date": "Published Date",
+    "last-updated": "Last Updated"
+  },
+  "content-redirector": {
+    "content-not-found": "Content not found",
+    "content-not-available": "Content is not available or has been removed"
+  },
+  "admin": {
   }
 }

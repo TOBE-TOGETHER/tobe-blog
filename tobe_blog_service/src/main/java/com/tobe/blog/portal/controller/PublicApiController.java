@@ -20,6 +20,7 @@ import com.tobe.blog.beans.dto.analytics.UserContentAnalyticsDTO;
 import com.tobe.blog.beans.dto.content.ArticleDTO;
 import com.tobe.blog.beans.dto.content.BaseContentDTO;
 import com.tobe.blog.beans.dto.content.CollectionDTO;
+import com.tobe.blog.beans.dto.content.ContentBasicInfoDTO;
 import com.tobe.blog.beans.dto.content.PlanDTO;
 import com.tobe.blog.beans.dto.content.PlanProgressDTO;
 import com.tobe.blog.beans.dto.content.VOCDTO;
@@ -102,6 +103,12 @@ public class PublicApiController {
     public ResponseEntity<CollectionDTO> getCollectionById(@PathVariable(value = "id") String id) {
         final CollectionDTO result = collectionService.getDTOByIdAndCount(id);
         tagRelationshipUtil.setRelatedContentsForTagTree(result.getTagTree(), result.getOwnerId());
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/content-basic-info/{id}")
+    public ResponseEntity<ContentBasicInfoDTO> getContentBasicInfo(@PathVariable(value = "id") String id) {
+        final ContentBasicInfoDTO result = publicApiService.getContentBasicInfo(id);
         return ResponseEntity.ok(result);
     }
 
