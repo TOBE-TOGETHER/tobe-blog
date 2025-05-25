@@ -89,7 +89,7 @@ export default function ContentAdminPage() {
   const operations: IOperation[] = [
     {
       name: EOperationName.DETAIL,
-      onClick: (id: number | string, data: any) => navigate('/content/' + id),
+      onClick: (id: number | string) => navigate('/content/' + id),
     },
     {
       name: EOperationName.RECOMMEND,
