@@ -13,6 +13,7 @@ export const URL = {
   RESET_PASSWORD: '/reset-password',
   ARTICLE: '/article',
   ABOUT: '/about',
+  CONTENT_REDIRECT: '/content/:id',
   NEWS_PLAN_DETAIL: '/news/plans/:id',
   NEWS_ARTICLE_DETAIL: '/news/articles/:id',
   NEWS_VOCABULARY_DETAIL: '/news/vocabularies/:id',

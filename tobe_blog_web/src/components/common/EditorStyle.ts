@@ -6,16 +6,19 @@ export const EditorStyle: SxProps<Theme> = {
   '.w-e-text-container': {
     backgroundColor: 'transparent',
     fontFamily: 'Georgia, serif',
+    cursor: 'text',
+    userSelect: 'text',
   },
   '.w-e-text-container [data-slate-editor]': {
     'padding': '0px',
+    'cursor': 'text',
+    'userSelect': 'text',
     'blockquote': {
       'borderLeftColor': 'rgba(145, 158, 171, 0.08)',
       'backgroundColor': 'transparent',
       'color': '#637381',
       '&::before': {
         left: '16px',
-        content: `'“'`,
         paddingRight: '8px',
       },
     },

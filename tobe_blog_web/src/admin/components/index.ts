@@ -4,6 +4,7 @@ import AdminLayout from './layout/AdminLayout';
 import AddIconButton from './misc/AddIconButton';
 import CardHeaderActionButton from './misc/CardHeaderActionButton';
 import EditIconButton from './misc/EditIconButton';
+import InfoIconButton from './misc/InfoIconButton';
 import InputFileUploadButton from './misc/InputFileUploadButton';
 import SaveButtonPanel from './misc/SaveButtonPanel';
 import TreePanel from './misc/TreePanel';
@@ -16,6 +17,7 @@ export {
   AdminLayout,
   CardHeaderActionButton,
   EditIconButton,
+  InfoIconButton,
   InputFileUploadButton,
   Loading,
   MultipleTagSelecter,

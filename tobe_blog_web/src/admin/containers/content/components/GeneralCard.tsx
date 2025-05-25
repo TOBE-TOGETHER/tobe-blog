@@ -18,8 +18,15 @@ export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onCli
       xs={12}
       sm={6}
       key={props.record.id}
+      onClick={() => props.onClick && props.onClick(props.record.id)}
     >
-      <Paper sx={{ borderRadius: 4 }}>
+      <Paper sx={{ borderRadius: 4, boxShadow: theme.shadows[4], 
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: theme.shadows[8],
+          cursor: 'pointer',
+        }}}>
         <Grid container>
           <Grid
             item
@@ -85,7 +92,6 @@ export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onCli
               </Grid>
             </Grid>
             <Typography
-              onClick={() => props.onClick && props.onClick(props.record.id)}
               sx={{
                 'mt': 2,
                 'mb': 1,
@@ -137,10 +143,10 @@ export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onCli
                 item
                 flexGrow={1}
               >
-                <CardHeaderActionButton
-                  data={props.record}
-                  operations={props.operations}
-                />
+                  <CardHeaderActionButton
+                    data={props.record}
+                    operations={props.operations}
+                  />
               </Grid>
               <Grid
                 item

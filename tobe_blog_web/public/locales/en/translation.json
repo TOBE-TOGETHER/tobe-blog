@@ -12,6 +12,9 @@
       "save": "Save",
       "edit": "Edit"
     },
+    "info-icon-button": {
+      "tooltip": "View content statistics"
+    },
     "visibility-switch": {
       "release": "Draft, click to release",
       "retract": "Released, click to retract"
@@ -73,6 +76,12 @@
     "no-content": "No available content",
     "tag-statistics": "Featured tags",
     "slogan": "Record growth and share every little bit",
+    "speed-dial": {
+      "create-article": "Create Article",
+      "create-plan": "Create Plan",
+      "create-vocabulary": "Create Vocabulary",
+      "create-collection": "Create Collection"
+    },
     "advantages": {
       "title": "Why Choose Tobe Blog",
       "items": {
@@ -203,7 +212,8 @@
     "msg": {
       "success": "Email verification successful! You can now log in",
       "resend-success": "Verification email has been resent",
-      "resend-error": "Failed to resend email"
+      "resend-error": "Failed to resend email",
+      "sending": "Sending..."
     }
   },
   "app-header": {
@@ -267,6 +277,9 @@
   },
   "user-table": {
     "title": "Users",
+    "total-count": "Total: {{count}} users",
+    "delete-success": "User deleted successfully",
+    "search-placeholder": "Search users...",
     "label": {
       "id": "ID",
       "email": "Email",
@@ -276,6 +289,33 @@
       "phone-number": "Phone Number",
       "operation": "Operation"
     }
+  },
+  "user-detail": {
+    "title": "User Details",
+    "basic-info": "Basic Information",
+    "introduction": "Introduction",
+    "visit-portal": "Visit Portal",
+    "roles": "User Roles",
+    "select-roles": "Select Roles",
+    "update-roles": "Update Roles",
+    "updating-roles": "Updating...",
+    "role-update-success": "User roles updated successfully",
+    "required": "Required",
+    "role-labels": {
+      "admin": "Administrator",
+      "basic": "Basic User",
+      "no-roles": "No roles"
+    },
+    "fields": {
+      "email": "Email",
+      "phone-number": "Phone Number",
+      "address": "Address",
+      "profession": "Profession",
+      "blog": "Blog",
+      "create-time": "Registration Time",
+      "update-time": "Last Updated"
+    },
+    "no-data": "No user data available"
   },
   "admin-table": {
     "title": "Audit",
@@ -421,6 +461,14 @@
       "error": "Failed to fetch data"
     }
   },
+  "collection-preview": {
+    "title": "Preview",
+    "loading": "Loading preview...",
+    "tip": {
+      "no-data": "No collection data available",
+      "tba": "To be continued"
+    }
+  },
   "vocabulary-creation-page": {
     "page-main-title": "Create a new vocabulary",
     "fields": {
@@ -460,5 +508,27 @@
     "TECHNICAL": "Tech",
     "LIFE": "Life",
     "OTHER": "Other"
+  },
+  "content-stats": {
+    "title": "Content Statistics",
+    "view-count": "View Count",
+    "like-count": "Like Count",
+    "status": "Status",
+    "draft": "Draft",
+    "recommended": "Recommended",
+    "banned": "Banned",
+    "normal": "Normal",
+    "portal-link": "Portal Link",
+    "view-on-portal": "View on Portal",
+    "dates": "Timeline",
+    "created-date": "Created Date",
+    "published-date": "Published Date",
+    "last-updated": "Last Updated"
+  },
+  "content-redirector": {
+    "content-not-found": "Content not found",
+    "content-not-available": "Content is not available or has been removed"
+  },
+  "admin": {
   }
 }

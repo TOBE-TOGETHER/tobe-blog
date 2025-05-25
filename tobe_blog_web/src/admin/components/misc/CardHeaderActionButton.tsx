@@ -13,6 +13,7 @@ export default function CardHeaderActionButton(props: Readonly<{ operations: IOp
   const [openDialog, setOpenDialog] = useState(false);
   const [currentOperation, setCurrentOperation] = useState<IOperation | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
     setAnchorRecordId(id);
   };
@@ -20,7 +21,8 @@ export default function CardHeaderActionButton(props: Readonly<{ operations: IOp
     setAnchorEl(null);
     setAnchorRecordId(null);
   };
-  const handleItemOnClick = (id: number | string, data: any, operation: IOperation) => {
+  const handleItemOnClick = (event: React.MouseEvent<HTMLLIElement>, id: number | string, data: any, operation: IOperation) => {
+    event.stopPropagation();
     if (operation.name === 'delete') {
       setCurrentOperation(operation);
       handleClose();
@@ -93,7 +95,7 @@ export default function CardHeaderActionButton(props: Readonly<{ operations: IOp
             !operation?.hide?.call(null, props.data) && (
               <MenuItem
                 key={props.data.id + '-' + index}
-                onClick={() => handleItemOnClick(props.data.id, props.data, operation)}
+                onClick={(event) => handleItemOnClick(event, props.data.id, props.data, operation)}
               >
                 {getMenuItem(operation.name)}
               </MenuItem>

@@ -87,6 +87,8 @@ export default function VOCDetailPage() {
       editable={editable}
       handleEditableChange={handleEditableChange}
       service={VocabularyService}
+      contentData={vocabulary}
+      onVisibilityChange={() => loadData(id ?? '')}
     >
       <VOCEditMainSection
         title={title}

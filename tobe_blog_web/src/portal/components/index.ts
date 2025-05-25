@@ -5,5 +5,8 @@ import ContentPageMetaBar from './ContentPageMetaBar';
 import PortalHeader from './layout/PortalHeader';
 import PortalLayout from './layout/PortalLayout';
 import RelevantContentsPanel from './RelevantContentsPanel';
+import { CreateSpeedDial } from './CreateSpeedDial';
+import FloatingElementContainer from './FloatingElementContainer';
+import RecentContentsPanel from './RecentContentsPanel';
 
-export { ContentBanner, ContentPageBreadcrumbsBar, ContentPageMetaBar, Page, PortalHeader, PortalLayout, RelevantContentsPanel, TagDisplayBar, WordListPanel };
+export { ContentBanner, ContentPageBreadcrumbsBar, ContentPageMetaBar, Page, PortalHeader, PortalLayout, RelevantContentsPanel, TagDisplayBar, WordListPanel, CreateSpeedDial, FloatingElementContainer, RecentContentsPanel };

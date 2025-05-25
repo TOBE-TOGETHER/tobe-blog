@@ -53,7 +53,6 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v1/auth/**").permitAll()
                         .requestMatchers("/v1/api/**").permitAll()
-                        .requestMatchers("/v1/email-verification/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/v1/users/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterAfter(tokenFilter, UsernamePasswordAuthenticationFilter.class)

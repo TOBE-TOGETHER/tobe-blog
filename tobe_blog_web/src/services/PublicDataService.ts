@@ -46,6 +46,10 @@ export function getVocabularyById(id: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/vocabularies/${id}`);
 }
 
+export function getContentBasicInfo(id: string | number): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/content-basic-info/${id}`);
+}
+
 export function getProgressesByPlanId(planId: string, size: number, current: number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/plans/${planId}/progresses?size=${size}&current=${current}`);
 }

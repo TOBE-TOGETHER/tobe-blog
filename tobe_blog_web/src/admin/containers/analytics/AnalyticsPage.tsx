@@ -142,6 +142,11 @@ const UserContentAnalyticsPanel = (props: Readonly<{ data: IUserContentAnalytics
       item
       xs={12}
       md={6}
+      sx={{
+        '&:hover': {
+          cursor: 'pointer',
+        },
+      }}
     >
       <Grid
         item

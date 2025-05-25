@@ -9,19 +9,33 @@ import com.tobe.blog.beans.dto.content.CollectionUpdateDTO;
 import com.tobe.blog.beans.entity.content.CollectionEntity;
 import com.tobe.blog.content.mapper.CollectionMapper;
 import com.tobe.blog.content.mapper.TagRelationshipMapper;
+import com.tobe.blog.core.utils.TagRelationshipUtil;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CollectionService extends BaseContentService<CollectionDTO, CollectionCreationDTO, CollectionUpdateDTO, CollectionEntity, CollectionMapper> {
 
-    private TagRelationshipMapper tagRelationshipMapper;
+    private final TagRelationshipMapper tagRelationshipMapper;
+    private final TagRelationshipUtil tagRelationshipUtil;
 
     @Override
     public CollectionDTO getDTOById(String id) {
         CollectionDTO result = super.getDTOById(id);
         result.setTagTree(tagRelationshipMapper.getTagRelationshipByParentId(null, id));
+        return result;
+    }
+
+    /**
+     * Get collection with related contents for admin preview
+     * This includes only published content to ensure consistency with portal page
+     */
+    public CollectionDTO getDTOByIdWithRelatedContents(String id) {
+        CollectionDTO result = this.getDTOById(id);
+        if (result != null && result.getTagTree() != null && !result.getTagTree().isEmpty()) {
+            tagRelationshipUtil.setRelatedContentsForTagTree(result.getTagTree(), result.getOwnerId());
+        }
         return result;
     }
 
@@ -39,5 +53,4 @@ public class CollectionService extends BaseContentService<CollectionDTO, Collect
     protected ContentType getContentType() {
         return ContentType.COLLECTION;
     }
-  
 }

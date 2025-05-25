@@ -27,10 +27,10 @@ const Dialogx: React.FC<{
         <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>{closeBtnText}</Button>
+        <Button onClick={(e) => { e.stopPropagation(); onClose(); }}>{closeBtnText}</Button>
         <Button
           color="error"
-          onClick={onAction}
+          onClick={(e) => { e.stopPropagation(); onAction(); }}
         >
           {actionBtnText}
         </Button>

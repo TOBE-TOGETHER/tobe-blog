@@ -1,107 +1,231 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Typography, Grid, Tab, Tabs, Tooltip, TextField, InputAdornment } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
-import { EColumnPosition, EOperationName } from '../../../global/enums.ts';
-import { IColumn, IOperation, IUserData } from '../../../global/types';
+import { InfiniteScrollList } from '../../../components';
+import { IUserData } from '../../../global/types';
 import * as UserService from '../../../services/UserService.ts';
-import { PagedTable } from '../../components';
+import UserCard from './UserCard';
+import UserCardSkeleton from './UserCardSkeleton';
+import UserDetailDrawer from './UserDetailDrawer';
+
+interface ILoadDataOption {
+  status: string;
+  keyword: string;
+  emailVerified?: boolean;
+  reset: boolean;
+}
 
 export default function UsersPage() {
   const { t, enqueueSnackbar } = useCommonUtils();
+  const DEFAULT_PAGE_SIZE = 12;
+  const [users, setUsers] = useState<IUserData[]>([]);
   const [current, setCurrent] = useState<number>(0);
-  const [size, setSize] = useState<number>(10);
-  const [rows, setRows] = useState<IUserData[]>([]);
+  const [totalPage, setTotalPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  
+  const [selectedUserId, setSelectedUserId] = useState<number | string | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const [emailVerificationFilter, setEmailVerificationFilter] = useState<string>('');
 
-  const loadUserData = useCallback((): void => {
-    UserService.getUsers(size, current)
+  function loadData(option: ILoadDataOption): void {
+    if (loading) return; // 防止重复请求
+    
+    setLoading(true);
+    const pageToLoad = option.reset ? 1 : current + 1;
+    const emailVerified = option.emailVerified;
+    
+    UserService.getUsers(DEFAULT_PAGE_SIZE, pageToLoad - 1, option.keyword || undefined, emailVerified)
       .then(response => {
-        setRows(response.data.records || []);
+        const newUsers = response.data.records ?? [];
+        
+        setUsers(option.reset ? newUsers : users.concat(newUsers));
+        setCurrent(response.data.current);
+        setTotalPage(response.data.pages);
         setTotalCount(response.data.total);
       })
       .catch(() => {
         enqueueSnackbar(t('msg.error'), {
           variant: 'error',
         });
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }, [current, size]);
-
-  useEffect(() => loadUserData(), [loadUserData]);
-
-  const columns: IColumn[] = [
-    {
-      id: 'id',
-      label: t('user-table.label.id'),
-      align: EColumnPosition.CENTER,
-    },
-    {
-      id: 'email',
-      label: t('user-table.label.email'),
-    },
-    {
-      id: 'username',
-      label: t('user-table.label.username'),
-    },
-    {
-      id: 'firstName',
-      label: t('user-table.label.first-name'),
-    },
-    {
-      id: 'lastName',
-      label: t('user-table.label.last-name'),
-    },
-    {
-      id: 'phoneNum',
-      label: t('user-table.label.phone-number'),
-    },
-    {
-      id: 'operation',
-      label: t('user-table.label.operation'),
-      align: EColumnPosition.CENTER,
-    },
-  ];
-
-  function deleteUserDate(id: number | string) {
-    UserService.deleteUser(id)
-      .then(() => loadUserData())
-      .catch(() => enqueueSnackbar(t('msg.error'), { variant: 'error' }));
   }
 
-  const handleChangeCurrent = (_event: unknown, newPage: number): void => {
-    setCurrent(newPage);
-  };
+  useEffect(() => {
+    const emailVerified = emailVerificationFilter === 'true' ? true : 
+                         emailVerificationFilter === 'false' ? false : undefined;
+    
+    loadData({ 
+      status: '', 
+      keyword: searchKeyword, 
+      emailVerified, 
+      reset: true 
+    });
+  }, [searchKeyword, emailVerificationFilter]);
 
-  const handleChangeSize = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSize(+event.target.value);
-    setCurrent(0);
-  };
+  // Scroll to top when component mounts
+  useEffect(() => {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }, []);
 
-  const handleDelete = (id: number | string): void => {
-    deleteUserDate(id);
-  };
+  const handleDelete = useCallback((id: number | string): void => {
+    UserService.deleteUser(id)
+      .then(() => {
+        setUsers(users.filter(u => u.id !== id));
+        setTotalCount(prev => prev - 1);
+        enqueueSnackbar(t('user-table.delete-success'), { 
+          variant: 'success' 
+        });
+      })
+      .catch(() => {
+        enqueueSnackbar(t('msg.error'), { 
+          variant: 'error' 
+        });
+      });
+  }, [users, t, enqueueSnackbar]);
 
-  const operations: IOperation[] = [
-    {
-      name: EOperationName.DELETE,
-      onClick: (id: number | string) => handleDelete(id),
-    },
-  ];
+  const handleCardClick = useCallback((userId: number | string): void => {
+    setSelectedUserId(userId);
+    setDrawerOpen(true);
+  }, []);
+
+  const handleDrawerClose = useCallback((): void => {
+    setDrawerOpen(false);
+    setSelectedUserId(null);
+  }, []);
+
+  const handleSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchKeyword(event.target.value);
+  }, []);
+
+  const renderUserCard = (user: IUserData) => (
+    <UserCard
+      key={user.id}
+      user={user}
+      onCardClick={handleCardClick}
+    />
+  );
+
+  const renderSkeleton = () => <UserCardSkeleton />;
 
   return (
     <Page
-      pageTitle={t('user-table.title')}
+      pageTitle=""
       openLoading={false}
     >
-      <PagedTable
-        columns={columns}
-        rows={rows}
-        totalCount={totalCount}
-        size={size}
-        current={current}
-        operations={operations}
-        handleChangeCurrent={handleChangeCurrent}
-        handleChangeSize={handleChangeSize}
-        sx={{ my: 2 }}
+      {/* Header with Search */}
+      <Grid
+        container
+        sx={{ py: 1 }}
+        alignItems="center"
+        justifyContent="flex-end"
+      >
+        <Grid item sx={{ width: { xs: '100%', sm: 'auto' } }}>
+          <TextField
+            placeholder={t('user-table.search-placeholder')}
+            variant="outlined"
+            size="small"
+            value={searchKeyword}
+            onChange={handleSearchChange}
+            sx={{ 
+              width: { xs: '100%', sm: 285 },
+              '& .MuiOutlinedInput-root': {
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                borderRadius: '4px',
+                '& fieldset': {
+                  borderColor: 'rgba(0, 0, 0, 0.12)',
+                },
+                '&:hover fieldset': {
+                  borderColor: 'rgba(0, 0, 0, 0.24)',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'primary.main',
+                },
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: 'text.secondary' }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+      </Grid>
+
+      {/* Tabs and Count */}
+      <Grid
+        sx={{ mb: 1, width: '100%' }}
+        container
+        justifyContent="space-between"
+      >
+        <Grid item>
+          <Tabs
+            value={emailVerificationFilter}
+            onChange={(_, v: string) => setEmailVerificationFilter(v)}
+          >
+            <Tab
+              disableRipple
+              label="全部"
+              value=""
+            />
+            <Tab
+              disableRipple
+              label="已验证"
+              value="true"
+            />
+            <Tab
+              disableRipple
+              label="未验证"
+              value="false"
+            />
+          </Tabs>
+        </Grid>
+        <Grid
+          item
+          alignSelf="center"
+          px={2}
+        >
+          <Tooltip title="找到的用户数量">
+            <Typography
+              variant="subtitle2"
+              color="textSecondary"
+              sx={{ fontWeight: 800 }}
+            >
+              {totalCount}
+            </Typography>
+          </Tooltip>
+        </Grid>
+      </Grid>
+
+      <InfiniteScrollList
+        loading={loading}
+        dataSource={users}
+        renderItem={renderUserCard}
+        renderSkeleton={renderSkeleton}
+        hasMore={current < totalPage}
+        loadMore={loadData}
+        option={{ 
+          status: '', 
+          keyword: searchKeyword, 
+          emailVerified: emailVerificationFilter === 'true' ? true : 
+                         emailVerificationFilter === 'false' ? false : undefined,
+          reset: false 
+        }}
+      />
+
+      <UserDetailDrawer
+        open={drawerOpen}
+        onClose={handleDrawerClose}
+        userId={selectedUserId}
+        onDelete={handleDelete}
       />
     </Page>
   );

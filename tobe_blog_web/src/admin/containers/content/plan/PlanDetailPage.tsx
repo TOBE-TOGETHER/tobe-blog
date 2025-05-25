@@ -89,6 +89,8 @@ export default function PlanDetailPage() {
       editable={editable}
       handleEditableChange={handleEditableChange}
       service={PlanService}
+      contentData={plan}
+      onVisibilityChange={() => loadData(id ?? '')}
     >
       <PlanEditMainSection
         title={title}

@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import { useCommonUtils } from '../../../../commons';
 import BaseContentService from '../BaseContentService';
 
-export function VisibilitySwitch(props: { id: string | undefined; service: BaseContentService }) {
+export function VisibilitySwitch(props: { 
+  id: string | undefined; 
+  service: BaseContentService; 
+  onVisibilityChange?: () => void; 
+}) {
   const { t, enqueueSnackbar } = useCommonUtils();
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -28,6 +32,8 @@ export function VisibilitySwitch(props: { id: string | undefined; service: BaseC
         enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
+        // Notify parent component that visibility has changed
+        props.onVisibilityChange?.();
       })
       .catch(() => {
         enqueueSnackbar(t('msg.error'), {
