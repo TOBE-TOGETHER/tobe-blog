@@ -12,8 +12,15 @@ A modern open-source blog platform based on Spring Boot and React, supporting mu
 
 English | [中文](README_CN.md)
 
-<img src=https://github.com/user-attachments/assets/f5b366a1-5b43-4792-be72-ff2ea5b8027c width=48% /> 
-<img src=https://github.com/user-attachments/assets/a9f013bc-3f2b-4f20-aff6-b84de54c21d0 width=48% />
+<img src=https://github.com/user-attachments/assets/12eb30dd-6a14-4a53-ad15-9918304dab83 width=48% /> 
+<img src=https://github.com/user-attachments/assets/55f0e486-837d-4a5e-8b64-6b657e3e6cf1 width=48% />
+<img src=https://github.com/user-attachments/assets/56558162-5a1d-4e3b-bb57-a4d1eba58d4a width=48% /> 
+<img src=https://github.com/user-attachments/assets/3ac065e1-48d7-43f0-b31f-f7aef85207e1 width=48% /> 
+<img src=https://github.com/user-attachments/assets/7cadab36-d7b6-4bde-a4b4-2e24a3bc04b2 width=48% /> 
+<img src=https://github.com/user-attachments/assets/ba3c41d4-9ea4-44a0-aaf9-c9975978b743 width=48% />
+<img src=https://github.com/user-attachments/assets/d6681b35-168c-4e43-8d4e-f0feccd58189 width=48% /> 
+<img src=https://github.com/user-attachments/assets/6a8da21a-0e04-41fd-9cec-e6e4304bdf96 width=48% /> 
+
 
 ## ✨ Key Features
 
