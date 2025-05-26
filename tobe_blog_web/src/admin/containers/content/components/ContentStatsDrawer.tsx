@@ -1,4 +1,3 @@
-import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LaunchIcon from '@mui/icons-material/Launch';
 import RecommendIcon from '@mui/icons-material/Recommend';
@@ -8,16 +7,18 @@ import {
   Box, 
   Chip, 
   Divider, 
-  Drawer, 
   Grid, 
   IconButton, 
   Link, 
   Tooltip, 
-  Typography 
+  Typography,
+  Card,
+  CardContent,
+  useTheme
 } from '@mui/material';
 import { TimeFormat, useCommonUtils } from '../../../../commons';
+import { BaseDrawer } from '../../../components';
 import { IBaseUserContentDTO } from '../../../../global/types';
-import theme from '../../../../theme';
 
 interface IContentStatsDrawerProps {
   content: IBaseUserContentDTO | null;
@@ -27,141 +28,88 @@ interface IContentStatsDrawerProps {
 
 export default function ContentStatsDrawer(props: Readonly<IContentStatsDrawerProps>) {
   const { t } = useCommonUtils();
+  const theme = useTheme();
 
   if (!props.content) {
     return null;
   }
 
-  // Generate portal URL based on content type
-  const getPortalUrl = () => {
-    return `/content/${props.content!.id}`;
-  };
+  const content = props.content;
+  const shouldShowPortalLink = content.publicToAll && !content.banned;
 
-  // Check if portal link should be shown (published and not banned)
-  const shouldShowPortalLink = props.content.publicToAll && !props.content.banned;
+  // Common card style
+  const cardStyle = { elevation: 0, border: `1px solid ${theme.palette.divider}`, mb: 3 };
+
+  // Render stat item
+  const renderStatItem = (icon: React.ReactElement, label: string, value: number, color: string) => (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      {icon}
+      <Box>
+        <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
+          {label}
+        </Typography>
+        <Typography variant="h5" sx={{ fontWeight: 'bold', color }}>
+          {value?.toLocaleString() || 0}
+        </Typography>
+      </Box>
+    </Box>
+  );
+
+  // Render date item
+  const renderDateItem = (label: string, date: string | undefined) => (
+    <Box sx={{ mb: 2 }}>
+      <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600, fontSize: '0.75rem', mb: 0.25 }}>
+        {label}
+      </Typography>
+      <Typography variant="body2">
+        {TimeFormat.dateAndTimeFormat(date)}
+      </Typography>
+    </Box>
+  );
 
   return (
-    <Drawer
-      anchor="right"
+    <BaseDrawer
       open={props.open}
       onClose={props.onClose}
-      sx={{
-        '& .MuiDrawer-paper': {
-          width: { xs: '100%', sm: 400 },
-          p: 3,
-        },
-      }}
+      title={t('content-stats.title')}
+      width={{ xs: '100%', sm: 400 }}
     >
-      {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h6" sx={{ color: theme.palette.primary.main, fontWeight: 'bold' }}>
-          {t('content-stats.title')}
-        </Typography>
-        <IconButton
-          onClick={props.onClose}
-          size="small"
-          sx={{ 
-            color: theme.palette.text.secondary,
-            '&:hover': {
-              backgroundColor: theme.palette.action.hover,
-            }
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </Box>
-
-      <Divider sx={{ mb: 3 }} />
-
       {/* Statistics */}
-      <Grid container spacing={3}>
-        {/* Reading Count */}
-        <Grid item xs={12}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, p: 2, backgroundColor: '#f5f5f5', borderRadius: 2 }}>
-            <VisibilityIcon sx={{ color: theme.palette.primary.main, fontSize: '2rem' }} />
-            <Box>
-              <Typography variant="body2" color="text.secondary">
-                {t('content-stats.view-count')}
-              </Typography>
-              <Typography variant="h5" sx={{ fontWeight: 'bold', color: theme.palette.primary.main }}>
-                {props.content.viewCount?.toLocaleString() || 0}
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
+      <Card sx={cardStyle}>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              {renderStatItem(
+                <VisibilityIcon sx={{ color: theme.palette.primary.main, fontSize: '2rem' }} />,
+                t('content-stats.view-count'),
+                content.viewCount,
+                theme.palette.primary.main
+              )}
+            </Grid>
+            <Grid item xs={6}>
+              {renderStatItem(
+                <FavoriteIcon sx={{ color: '#e91e63', fontSize: '2rem' }} />,
+                t('content-stats.like-count'),
+                content.likeCount,
+                '#e91e63'
+              )}
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
 
-        {/* Like Count */}
-        <Grid item xs={12}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, p: 2, backgroundColor: '#f5f5f5', borderRadius: 2 }}>
-            <FavoriteIcon sx={{ color: '#e91e63', fontSize: '2rem' }} />
-            <Box>
-              <Typography variant="body2" color="text.secondary">
-                {t('content-stats.like-count')}
-              </Typography>
-              <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#e91e63' }}>
-                {props.content.likeCount?.toLocaleString() || 0}
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-
-        {/* Status and Portal Link */}
-        <Grid item xs={12}>
+      {/* Status */}
+      <Card sx={cardStyle}>
+        <CardContent>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-              <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                {t('content-stats.status')}
-              </Typography>
-              {!props.content.publicToAll && (
-                <Chip
-                  label={t('content-stats.draft')}
-                  variant="outlined"
-                  size="small"
-                  sx={{ 
-                    color: theme.palette.warning.main,
-                    borderColor: theme.palette.warning.main
-                  }}
-                />
-              )}
-              {props.content.recommended && (
-                <Chip
-                  icon={<RecommendIcon />}
-                  label={t('content-stats.recommended')}
-                  size="small"
-                  sx={{ 
-                    backgroundColor: '#FFD700', 
-                    color: '#000',
-                    fontWeight: 'bold'
-                  }}
-                />
-              )}
-              {props.content.banned && (
-                <Chip
-                  icon={<WarningIcon />}
-                  label={t('content-stats.banned')}
-                  color="error"
-                  size="small"
-                  sx={{ 
-                    fontWeight: 'bold'
-                  }}
-                />
-              )}
-              {props.content.publicToAll && !props.content.recommended && !props.content.banned && (
-                <Chip
-                  label={t('content-stats.normal')}
-                  variant="outlined"
-                  size="small"
-                  sx={{ 
-                    color: theme.palette.text.secondary
-                  }}
-                />
-              )}
-            </Box>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+              {t('content-stats.status')}
+            </Typography>
             {shouldShowPortalLink && (
               <Tooltip title={t('content-stats.view-on-portal')}>
                 <IconButton
                   component={Link}
-                  href={getPortalUrl()}
+                  href={`/content/${content.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   size="small"
@@ -178,54 +126,68 @@ export default function ContentStatsDrawer(props: Readonly<IContentStatsDrawerPr
               </Tooltip>
             )}
           </Box>
-        </Grid>
-      </Grid>
+          
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+            {!content.publicToAll && (
+              <Chip
+                label={t('content-stats.draft')}
+                variant="outlined"
+                size="small"
+                sx={{ 
+                  color: theme.palette.warning.main,
+                  borderColor: theme.palette.warning.main
+                }}
+              />
+            )}
+            {content.recommended && (
+              <Chip
+                icon={<RecommendIcon />}
+                label={t('content-stats.recommended')}
+                size="small"
+                sx={{ 
+                  backgroundColor: '#FFD700', 
+                  color: '#000',
+                  fontWeight: 'bold'
+                }}
+              />
+            )}
+            {content.banned && (
+              <Chip
+                icon={<WarningIcon />}
+                label={t('content-stats.banned')}
+                color="error"
+                size="small"
+                sx={{ fontWeight: 'bold' }}
+              />
+            )}
+            {content.publicToAll && !content.recommended && !content.banned && (
+              <Chip
+                label={t('content-stats.normal')}
+                variant="outlined"
+                size="small"
+                sx={{ color: theme.palette.text.secondary }}
+              />
+            )}
+          </Box>
+        </CardContent>
+      </Card>
 
       <Divider sx={{ my: 3 }} />
 
       {/* Dates */}
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 2 }}>
+      <Card sx={{ ...cardStyle, mb: 0 }}>
+        <CardContent>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
             {t('content-stats.dates')}
           </Typography>
-        </Grid>
-        
-        <Grid item xs={12}>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 'bold' }}>
-              {t('content-stats.created-date')}
-            </Typography>
-            <Typography variant="body1">
-              {TimeFormat.dateAndTimeFormat(props.content.createTime)}
-            </Typography>
-          </Box>
-        </Grid>
-        
-        {props.content.publicToAll && (
-          <Grid item xs={12}>
-            <Box sx={{ mb: 2 }}>
-              <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 'bold' }}>
-                {t('content-stats.published-date')}
-              </Typography>
-              <Typography variant="body1">
-                {TimeFormat.dateAndTimeFormat(props.content.publishTime)}
-              </Typography>
-            </Box>
-          </Grid>
-        )}
-        
-        <Grid item xs={12}>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 'bold' }}>
-              {t('content-stats.last-updated')}
-            </Typography>
-            <Typography variant="body1">
-              {TimeFormat.dateAndTimeFormat(props.content.updateTime)}
-            </Typography>
-          </Box>
-        </Grid>
-      </Grid>
-    </Drawer>
+          
+          {renderDateItem(t('content-stats.created-date'), content.createTime)}
+          
+          {content.publicToAll && renderDateItem(t('content-stats.published-date'), content.publishTime)}
+          
+          {renderDateItem(t('content-stats.last-updated'), content.updateTime)}
+        </CardContent>
+      </Card>
+    </BaseDrawer>
   );
 } 

@@ -75,6 +75,9 @@
     "load-more": "Load more",
     "no-content": "No available content",
     "tag-statistics": "Featured tags",
+    "content-type-filter": {
+      "title": "Content Categories"
+    },
     "slogan": "Record growth and share every little bit",
     "speed-dial": {
       "create-article": "Create Article",

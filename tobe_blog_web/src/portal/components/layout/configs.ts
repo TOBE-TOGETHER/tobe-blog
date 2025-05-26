@@ -18,16 +18,16 @@ export const pages: Array<{
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
   },
   {
-    label: 'app-header.settings.plans',
-    url: URL.PLANS,
-    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
-    requiredFeature: EFeatureCode.PLAN_MODULE,
-  },
-  {
     label: 'app-header.settings.articles',
     url: URL.ARTICLES,
     requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
     requiredFeature: EFeatureCode.ARTICLE_MODULE,
+  },
+  {
+    label: 'app-header.settings.plans',
+    url: URL.PLANS,
+    requiredRoles: [EAuthority.ROLE_BASIC, EAuthority.ROLE_ADMIN],
+    requiredFeature: EFeatureCode.PLAN_MODULE,
   },
   {
     label: 'app-header.settings.vocabularies',

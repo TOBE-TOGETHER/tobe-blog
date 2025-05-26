@@ -2,6 +2,7 @@ import { Page, SidePanel } from '../../components/layout';
 import Loading from '../../components/loading/Loading';
 import AdminLayout from './layout/AdminLayout';
 import AddIconButton from './misc/AddIconButton';
+import BaseDrawer from './misc/BaseDrawer';
 import CardHeaderActionButton from './misc/CardHeaderActionButton';
 import EditIconButton from './misc/EditIconButton';
 import InfoIconButton from './misc/InfoIconButton';
@@ -15,6 +16,7 @@ import PagedTable from './table/PagedTable';
 export {
   AddIconButton,
   AdminLayout,
+  BaseDrawer,
   CardHeaderActionButton,
   EditIconButton,
   InfoIconButton,

@@ -40,7 +40,7 @@ public class TagRelationshipUtil {
                     1, 1000, 
                     new String[]{node.getTagId().toString()}, 
                     ownerId, 
-                    "", 
+                    new String[]{}, 
                     null, 
                     ""
                 ).getRecords()

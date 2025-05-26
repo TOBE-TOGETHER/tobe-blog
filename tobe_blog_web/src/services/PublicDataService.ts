@@ -12,7 +12,7 @@ const options = {
 };
 
 export function getNewsByTags(
-  contentType: EContentType | string,
+  contentTypes: EContentType[] | EContentType | string,
   size: number,
   current: number,
   tags: number[],
@@ -20,8 +20,13 @@ export function getNewsByTags(
   topic: TopicPropsType,
   keyword: string
 ): AxiosPromise {
+  // Handle both single contentType and array of contentTypes
+  const contentTypeParam = Array.isArray(contentTypes) 
+    ? contentTypes.join(',') 
+    : contentTypes;
+    
   return server.get(
-    `/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`,
+    `/${API_DATA_URI}/contents?size=${size}&current=${current}&tags=${tags}&contentTypes=${contentTypeParam}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`,
     options
   );
 }
@@ -66,8 +71,8 @@ export function getFullProfileByUserId(userId: string | number): AxiosPromise {
   return server.get(`/${API_DATA_URI}/full-profile/${userId}`);
 }
 
-export function getTagStatistics(contentType: EContentType, ownerId: string, topic: TopicPropsType, keyword: string): AxiosPromise {
-  return server.get(`/${API_DATA_URI}/tag-statistics?contentType=${contentType}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`);
+export function getTagStatistics(contentTypes: EContentType[], ownerId: string, topic: TopicPropsType, keyword: string): AxiosPromise {
+  return server.get(`/${API_DATA_URI}/tag-statistics?contentTypes=${contentTypes}&ownerId=${ownerId}&topic=${topic ?? ''}&keyword=${keyword}`);
 }
 
 export function likeContent(contentId: string): AxiosPromise {

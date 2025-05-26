@@ -14,24 +14,38 @@
     <select id="searchContents"
         resultMap="com.tobe.blog.content.mapper.BaseContentMapper.general_dto_result_map">
         <!-- Create tag filtered table if tags are provided -->
-        <if
-            test="tags != null and tags.length > 0"> WITH TAG_FILTERED_TABLE AS ( SELECT DISTINCT
-        tct.CONTENT_ID AS ID FROM TOBE_CONTENT_TAG tct JOIN TOBE_TAG_INFO tti ON tti.ID = tct.TAG_ID
-        WHERE 1=1 AND tti.DELETED = 0 AND tti.ID IN <foreach item="tag" collection="tags" open="("
-                separator="," close=")"> #{tag} </foreach> ) </if> SELECT tcgi.*,
-        CONCAT(tcu.FIRST_NAME, ' ', tcu.LAST_NAME) as OWNER_NAME, tcu.AVATAR_URL, tca.* FROM
-        TOBE_CONTENT_GENERAL_INFO tcgi JOIN TOBE_CORE_USER tcu ON tcgi.OWNER_ID = tcu.ID <if
-            test="tags != null and tags.length > 0"> JOIN TAG_FILTERED_TABLE tfat ON tfat.ID =
-        tcgi.ID </if> JOIN TOBE_CONTENT_ADMIN tca ON tca.CONTENT_ID = tcgi.ID WHERE
-        tcgi.PUBLIC_TO_ALL = 1 AND tcgi.DELETED = 0 <if test="ownerId != null and ownerId != ''">
-        AND tcgi.OWNER_ID = #{ownerId} </if>
-            <if test="contentType != null and contentType != ''">
-        AND tcgi.CONTENT_TYPE = #{contentType} </if>
-            <if test="topic != null"> AND tcgi.TOPIC =
-        #{topic} </if>
-            <if test="keyword != null and keyword != ''"> AND (tcgi.TITLE LIKE CONCAT('%',
-        #{keyword}, '%') OR tcgi.DESCRIPTION LIKE CONCAT('%', #{keyword}, '%')) </if> AND tca.BANNED
-        = false ORDER BY tcgi.CREATE_TIME DESC, tcgi.VIEW_COUNT DESC, tcgi.UPDATE_TIME DESC </select>
+        <if test="tags != null and tags.length > 0">
+            WITH TAG_FILTERED_TABLE AS (SELECT DISTINCT tct.CONTENT_ID AS ID
+            FROM TOBE_CONTENT_TAG tct
+            JOIN TOBE_TAG_INFO tti ON tti.ID = tct.TAG_ID
+            WHERE 1=1 AND tti.DELETED = 0 AND tti.ID IN
+            <foreach item="tag" collection="tags" open="(" separator="," close=")"> #{tag} </foreach> )
+        </if>
+        SELECT tcgi.*,
+        CONCAT(tcu.FIRST_NAME, ' ', tcu.LAST_NAME) as OWNER_NAME,
+        tcu.AVATAR_URL,
+        tca.*
+        FROM TOBE_CONTENT_GENERAL_INFO tcgi
+        JOIN TOBE_CORE_USER tcu ON tcgi.OWNER_ID = tcu.ID
+        <if test="tags != null and tags.length > 0">
+            JOIN TAG_FILTERED_TABLE tfat ON tfat.ID = tcgi.ID
+        </if>
+        JOIN TOBE_CONTENT_ADMIN tca ON tca.CONTENT_ID = tcgi.ID
+        WHERE tcgi.PUBLIC_TO_ALL = 1 AND tcgi.DELETED = 0
+        <if test="ownerId != null and ownerId != ''">
+            AND tcgi.OWNER_ID = #{ownerId} </if>
+        <if test="contentTypes != null and contentTypes.length > 0">
+            AND tcgi.CONTENT_TYPE IN
+            <foreach item="contentType" collection="contentTypes" open="(" separator="," close=")"> #{contentType} </foreach>
+        </if>
+        <if test="topic != null">
+            AND tcgi.TOPIC = #{topic}
+        </if>
+        <if test="keyword != null and keyword != ''">
+             AND (tcgi.TITLE LIKE CONCAT('%', #{keyword}, '%') OR tcgi.DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        AND tca.BANNED = false ORDER BY tcgi.CREATE_TIME DESC, tcgi.VIEW_COUNT DESC, tcgi.UPDATE_TIME DESC
+    </select>
 
     <!-- Get Content Basic Info Query -->
     <select id="getContentBasicInfo" resultMap="contentBasicInfoResultMap"> SELECT tcgi.ID,
@@ -41,16 +55,28 @@
 
     <!-- Get Tag Info Statistics Query -->
     <select id="getTagInfoStatistics"
-        resultType="com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO"> WITH COUNT_TABLE AS ( SELECT
-        tct.TAG_ID, COUNT(*) as COUNT FROM TOBE_CONTENT_TAG tct JOIN TOBE_CONTENT_GENERAL_INFO tcgi
-        ON tct.CONTENT_ID = tcgi.ID AND tcgi.CONTENT_TYPE = #{contentType} <if test="topic != null">
-        AND tcgi.TOPIC = #{topic} </if>
-                <if test="keyword != null and keyword != ''"> AND (tcgi.TITLE
-        LIKE CONCAT('%', #{keyword}, '%') OR tcgi.DESCRIPTION LIKE CONCAT('%', #{keyword}, '%')) </if>
-        JOIN TOBE_CONTENT_ADMIN tca ON tca.CONTENT_ID = tcgi.ID WHERE tcgi.DELETED = 0 AND
-        tcgi.PUBLIC_TO_ALL = 1 AND tca.BANNED = false <if test="ownerId != null and ownerId != ''">
-        AND tcgi.OWNER_ID = #{ownerId} </if> GROUP BY tct.TAG_ID ) SELECT tti.KEYWORD as LABEL,
-        tti.ID as VALUE, ct.COUNT FROM TOBE_TAG_INFO tti JOIN COUNT_TABLE ct ON ct.TAG_ID = tti.ID
-        AND tti.DELETED = 0 ORDER BY ct.COUNT DESC, tti.KEYWORD DESC </select>
+        resultType="com.tobe.blog.beans.dto.tag.TagInfoStatisticDTO">
+        WITH COUNT_TABLE AS (SELECT tct.TAG_ID, COUNT(*) as COUNT
+            FROM TOBE_CONTENT_TAG tct
+            JOIN TOBE_CONTENT_GENERAL_INFO tcgi ON tct.CONTENT_ID = tcgi.ID
+        <if test="contentTypes != null and contentTypes.length > 0">
+            AND tcgi.CONTENT_TYPE IN <foreach item="contentType" collection="contentTypes" open="(" separator="," close=")">
+                #{contentType} </foreach>
+        </if>
+        <if test="topic != null">
+            AND tcgi.TOPIC = #{topic}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (tcgi.TITLE LIKE CONCAT('%', #{keyword}, '%') OR tcgi.DESCRIPTION LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+            JOIN TOBE_CONTENT_ADMIN tca ON tca.CONTENT_ID = tcgi.ID
+            WHERE tcgi.DELETED = 0 AND tcgi.PUBLIC_TO_ALL = 1 AND tca.BANNED = false
+        <if test="ownerId != null and ownerId != ''">
+            AND tcgi.OWNER_ID =  #{ownerId}
+        </if>
+        GROUP BY tct.TAG_ID)
+        SELECT tti.KEYWORD as LABEL, tti.ID as VALUE, ct.COUNT
+        FROM TOBE_TAG_INFO tti JOIN COUNT_TABLE ct ON ct.TAG_ID = tti.ID AND tti.DELETED =  0 ORDER BY ct.COUNT DESC, tti.KEYWORD DESC
+    </select>
 
 </mapper>
