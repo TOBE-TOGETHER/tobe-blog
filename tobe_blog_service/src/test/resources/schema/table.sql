@@ -253,3 +253,30 @@ create table tobe_content_tag
 );
 
 ALTER TABLE `tobe_content_general_info` ADD INDEX (`TOPIC`);
+
+CREATE TABLE IF NOT EXISTS `tobe_comment` (
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT 'Primary key',
+    `content_id` VARCHAR(255) NOT NULL COMMENT 'Content ID that this comment belongs to',
+    `content_type` VARCHAR(50) NOT NULL COMMENT 'Content type (ARTICLE, PLAN, VOCABULARY, etc.)',
+    `content` TEXT NOT NULL COMMENT 'Comment content',
+    `user_id` BIGINT(20) NOT NULL COMMENT 'User ID who created this comment',
+    `user_name` VARCHAR(255) NOT NULL COMMENT 'User name who created this comment',
+    `user_avatar_url` VARCHAR(500) COMMENT 'User avatar URL',
+    `parent_id` BIGINT(20) COMMENT 'Parent comment ID for nested comments',
+    `like_count` INT(11) NOT NULL DEFAULT 0 COMMENT 'Number of likes for this comment',
+    `is_deleted` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Whether this comment is deleted (soft delete)',
+    `ip_address` VARCHAR(50) COMMENT 'IP address of the commenter',
+    `create_time` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT 'Create time',
+    `update_time` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT 'Update time',
+    PRIMARY KEY (`id`),
+    INDEX `idx_content` (`content_id`, `content_type`),
+    INDEX `idx_user_id` (`user_id`),
+    INDEX `idx_parent_id` (`parent_id`),
+    INDEX `idx_create_time` (`create_time`),
+    INDEX `idx_is_deleted` (`is_deleted`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Comment table'; 
+
+-- Add reply quote fields to comment table for Teams-style flat display
+ALTER TABLE `tobe_comment` 
+ADD COLUMN `reply_to_user_name` VARCHAR(255) COMMENT 'Reply to user name (for quoted replies)' AFTER `parent_id`,
+ADD COLUMN `reply_to_content` VARCHAR(500) COMMENT 'Reply to content snippet (for quoted replies, max 500 chars)' AFTER `reply_to_user_name`; 
