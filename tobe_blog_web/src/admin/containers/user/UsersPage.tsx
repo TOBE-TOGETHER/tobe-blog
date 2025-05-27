@@ -32,7 +32,7 @@ export default function UsersPage() {
   const [emailVerificationFilter, setEmailVerificationFilter] = useState<string>('');
 
   function loadData(option: ILoadDataOption): void {
-    if (loading) return; // 防止重复请求
+    if (loading) return; // Prevent duplicate requests
     
     setLoading(true);
     const pageToLoad = option.reset ? 1 : current + 1;

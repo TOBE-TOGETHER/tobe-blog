@@ -1,6 +1,7 @@
 {
   "projectName": "TOBE-BLOG",
   "title": "Tobe Blog",
+  "baseUrl": "https://tobetogether.xyz",
   "image": "https://tobetogether.xyz/images/tobe_logo.png",
   "slogan": "Record growth and share every little bit",
   "description": "A website that advocates continuous learning and growth - Articles, Plans, Vocabularies, etc. Let's have fun together, grow up together!",

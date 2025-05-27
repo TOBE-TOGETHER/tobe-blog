@@ -2,8 +2,9 @@ import { Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { TimeFormat, useCommonUtils } from '../../../../commons';
-import { PlanProgressModal } from '../../../../components';
+import { PlanProgressModal, SEOHead } from '../../../../components';
 import { IPlanInfo } from '../../../../global/types';
+import { useSEO } from '../../../../hooks';
 import { URL } from '../../../../routes';
 import * as PublicDataService from '../../../../services/PublicDataService.ts';
 import ContentReadingPage from '../ContentReadingPage';
@@ -28,64 +29,73 @@ export default function PlanReadingPage() {
     loadProject(id || '');
   }, [enqueueSnackbar, t, id]);
 
+  // Use SEO Hook
+  const seoData = useSEO({
+    content: plan,
+    contentType: 'plan',
+  });
+
   return (
-    <ContentReadingPage
-      content={plan}
-      subTitle={plan?.description}
-      editLinkUrlPrefix={URL.PLAN_DETAIL}
-    >
-      <Grid container>
-        {plan && (
-          <Grid
-            container
-            sx={{ minHeight: '20vh', pt: 4 }}
-          >
+    <>
+      {seoData && <SEOHead {...seoData} />}
+      <ContentReadingPage
+        content={plan}
+        subTitle={plan?.description}
+        editLinkUrlPrefix={URL.PLAN_DETAIL}
+      >
+        <Grid container>
+          {plan && (
             <Grid
-              item
-              xs={12}
-              sx={{ textAlign: 'left' }}
-            >
-              <Typography
-                color="text.secondary"
-                variant="body1"
-                sx={{ whiteSpace: 'pre-wrap' }}
-              >
-                {plan.description}
-              </Typography>
-            </Grid>
-            <Grid
-              flexDirection={'column'}
               container
-              item
-              xs={12}
-              sx={{ textAlign: 'center', mt: 4 }}
+              sx={{ minHeight: '20vh', pt: 4 }}
             >
               <Grid
+                item
+                xs={12}
+                sx={{ textAlign: 'left' }}
+              >
+                <Typography
+                  color="text.secondary"
+                  variant="body1"
+                  sx={{ whiteSpace: 'pre-wrap' }}
+                >
+                  {plan.description}
+                </Typography>
+              </Grid>
+              <Grid
+                flexDirection={'column'}
                 container
                 item
                 xs={12}
+                sx={{ textAlign: 'center', mt: 4 }}
               >
-                <TimeField
-                  time={plan.targetStartTime}
-                  label={t('plan-detail-page.fields.target-start-time')}
-                />
-                <TimeField
-                  time={plan.targetEndTime}
-                  label={t('plan-detail-page.fields.target-end-time')}
-                />
+                <Grid
+                  container
+                  item
+                  xs={12}
+                >
+                  <TimeField
+                    time={plan.targetStartTime}
+                    label={t('plan-detail-page.fields.target-start-time')}
+                  />
+                  <TimeField
+                    time={plan.targetEndTime}
+                    label={t('plan-detail-page.fields.target-end-time')}
+                  />
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        )}
+          )}
 
-        {id && (
-          <PlanProgressModal
-            planId={id}
-            viewOnly={true}
-          />
-        )}
-      </Grid>
-    </ContentReadingPage>
+          {id && (
+            <PlanProgressModal
+              planId={id}
+              viewOnly={true}
+            />
+          )}
+        </Grid>
+      </ContentReadingPage>
+    </>
   );
 }
 

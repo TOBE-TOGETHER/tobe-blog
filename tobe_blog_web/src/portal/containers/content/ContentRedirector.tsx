@@ -26,7 +26,7 @@ export default function ContentRedirector() {
     PublicDataService.getContentBasicInfo(id!)
       .then(response => {
         const contentInfo: IContentBasicInfoDTO = response.data;
-        
+
         // Check if content is available
         if (!contentInfo.publicToAll || contentInfo.banned) {
           enqueueSnackbar(t('content-redirector.content-not-available'), {
@@ -69,4 +69,4 @@ export default function ContentRedirector() {
   }
 
   return null;
-} 
+}

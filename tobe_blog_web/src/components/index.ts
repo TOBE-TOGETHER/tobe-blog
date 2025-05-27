@@ -11,6 +11,14 @@ import { WordListPanel } from './common/word/WordListPanel';
 import { AppFooter } from './footer';
 import { BasicLayout, Page, SidePanel } from './layout';
 import Loading from './loading/Loading';
+import { 
+  SEOHead, 
+  generateArticleStructuredData, 
+  generatePlanStructuredData,
+  generateVocabularyStructuredData,
+  generateCollectionStructuredData,
+  generateWebsiteStructuredData 
+} from './seo/SEOHead';
 
 export {
   AppFooter,
@@ -25,10 +33,16 @@ export {
   Page,
   PlanProgressModal,
   QuarterRow,
+  SEOHead,
   SidePanel,
   TagDisplayBar,
   WordCreateDialog,
   WordDetailDialog,
   WordDisplayDialog,
   WordListPanel,
+  generateArticleStructuredData,
+  generatePlanStructuredData,
+  generateVocabularyStructuredData,
+  generateCollectionStructuredData,
+  generateWebsiteStructuredData,
 };

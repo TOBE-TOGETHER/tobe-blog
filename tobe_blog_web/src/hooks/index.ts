@@ -1,0 +1,1 @@
+export { useSEO } from './useSEO';

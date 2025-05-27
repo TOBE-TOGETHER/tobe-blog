@@ -2,8 +2,9 @@ import { Grid } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCommonUtils } from '../../../../commons';
-import { WordListPanel } from '../../../../components/common/word/WordListPanel';
+import { WordListPanel, SEOHead } from '../../../../components';
 import { IVocabularyDetailDTO } from '../../../../global/types';
+import { useSEO } from '../../../../hooks';
 import { URL } from '../../../../routes';
 import * as PublicDataService from '../../../../services/PublicDataService';
 import ContentReadingPage from '../ContentReadingPage';
@@ -29,26 +30,35 @@ export default function VocabularyReadingPage() {
     loadData();
   }, [loadData]);
 
+  // Use SEO Hook
+  const seoData = useSEO({
+    content: vocabulary,
+    contentType: 'vocabulary',
+  });
+
   return (
-    <ContentReadingPage
-      content={vocabulary}
-      subTitle={vocabulary?.description}
-      editLinkUrlPrefix={URL.VOCABULARY_DETAIL}
-    >
-      {vocabulary && (
-        <Grid
-          item
-          xs={12}
-          sx={{ my: 1 }}
-        >
-          {id && (
-            <WordListPanel
-              editable={false}
-              vocabularyId={id}
-            />
-          )}
-        </Grid>
-      )}
-    </ContentReadingPage>
+    <>
+      {seoData && <SEOHead {...seoData} />}
+      <ContentReadingPage
+        content={vocabulary}
+        subTitle={vocabulary?.description}
+        editLinkUrlPrefix={URL.VOCABULARY_DETAIL}
+      >
+        {vocabulary && (
+          <Grid
+            item
+            xs={12}
+            sx={{ my: 1 }}
+          >
+            {id && (
+              <WordListPanel
+                editable={false}
+                vocabularyId={id}
+              />
+            )}
+          </Grid>
+        )}
+      </ContentReadingPage>
+    </>
   );
 }
