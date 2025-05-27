@@ -54,6 +54,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/v1/auth/**").permitAll()
                         .requestMatchers("/v1/api/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/v1/users/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/comments").permitAll()
                         .anyRequest().authenticated())
                 .addFilterAfter(tokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

@@ -265,4 +265,37 @@ export interface IWordUpdateDTO {
   meaningInEnglish: string;
 }
 
+export interface ICommentDTO {
+  id: number;
+  contentId: string;
+  contentType: string;
+  content: string;
+  userId: number;
+  userName: string;
+  userAvatarUrl?: string;
+  parentId?: number;
+  replyToUserName?: string;
+  replyToContent?: string;
+  likeCount: number;
+  deleted: boolean;
+  createTime: string;
+  updateTime: string;
+  replies?: ICommentDTO[];
+}
+
+export interface ICommentCreateDTO {
+  contentId: string;
+  contentType: string;
+  content: string;
+  parentId?: number;
+}
+
+export interface ICommentsPageDTO {
+  records: ICommentDTO[];
+  total: number;
+  size: number;
+  current: number;
+  pages: number;
+}
+
 export type TopicPropsType = ETopic | string | null | undefined;

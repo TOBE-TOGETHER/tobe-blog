@@ -1,5 +1,6 @@
 import PlanProgressModal from '../admin/containers/content/plan/components/PlanProgressModal';
 import CollectionTreeRenderer from './common/CollectionTreeRenderer';
+import ConfirmDialog from './common/ConfirmDialog';
 import { EditorStyle } from './common/EditorStyle';
 import { FormPanel, HalfRow, OneRow, QuarterRow } from './common/FormLayout';
 import InfiniteScrollList from './common/InfiniteScrollList';
@@ -24,6 +25,7 @@ export {
   AppFooter,
   BasicLayout,
   CollectionTreeRenderer,
+  ConfirmDialog,
   EditorStyle,
   FormPanel,
   HalfRow,

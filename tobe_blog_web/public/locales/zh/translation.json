@@ -521,5 +521,58 @@
     "content-not-available": "内容不可用或已被移除"
   },
   "admin": {
+  },
+  "comments": {
+    "section": {
+      "title": "评论",
+      "no-comments": "暂无评论，快来抢沙发吧！",
+      "loading": "加载评论中...",
+      "load-more": "加载更多评论",
+      "sign-in-to-comment": "请登录后发表评论",
+      "sign-in-prompt": "请",
+      "sign-in-link": "登录",
+      "to-comment": "后发表评论"
+    },
+    "form": {
+      "placeholder": "写下你的评论...",
+      "reply-placeholder": "回复 {{userName}}...",
+      "submit": "发表评论",
+      "cancel": "取消",
+      "submitting": "发表中...",
+      "sign-in-required": "请登录后发表评论"
+    },
+    "item": {
+      "just-now": "刚刚",
+      "minutes-ago": "{{count}}分钟前",
+      "hours-ago": "{{count}}小时前",
+      "days-ago": "{{count}}天前",
+      "reply": "回复",
+      "reply-to": "回复",
+      "like": "点赞",
+      "delete": "删除",
+      "show-replies": "显示{{count}}条回复",
+      "hide-replies": "隐藏回复",
+      "show-reply": "显示{{count}}条回复",
+      "hide-reply": "隐藏回复"
+    },
+    "actions": {
+      "like-success": "已点赞",
+      "unlike-success": "已取消点赞",
+      "delete-success": "评论删除成功",
+      "create-success": "评论发表成功",
+      "reply-success": "回复发表成功"
+    },
+    "errors": {
+      "sign-in-required": "请登录后{{action}}",
+      "like-failed": "点赞失败",
+      "delete-failed": "删除评论失败",
+      "create-failed": "发表评论失败",
+      "load-failed": "加载评论失败",
+      "empty-content": "评论内容不能为空"
+    },
+    "menu": {
+      "delete-confirm": "确定要删除这条评论吗？",
+      "delete-confirm-content": "此操作无法撤销。"
+    }
   }
 }

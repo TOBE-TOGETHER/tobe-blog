@@ -4,6 +4,7 @@ import { IMeta, switchMetas } from '../../../commons';
 import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout, RelevantContentsPanel } from '../../components';
+import { CommentSection } from '../../components/comment';
 
 export default function ContentReadingPage(
   props: Readonly<{
@@ -71,6 +72,9 @@ export default function ContentReadingPage(
             </Grid>
           )}
         </Grid>
+
+        {/* Comment Section */}
+        {props.content && <CommentSection content={props.content} />}
 
         {props.content && <RelevantContentsPanel content={props.content} />}
       </Container>

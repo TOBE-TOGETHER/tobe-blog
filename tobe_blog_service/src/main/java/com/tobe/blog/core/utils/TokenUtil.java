@@ -1,25 +1,42 @@
 package com.tobe.blog.core.utils;
 
-import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
-import com.tobe.blog.beans.dto.user.UserGeneralDTO;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.SignatureException;
-import lombok.extern.slf4j.Slf4j;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
+import com.tobe.blog.beans.dto.user.UserGeneralDTO;
+import com.tobe.blog.core.service.UserService;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.SignatureException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class TokenUtil implements Serializable {
 
     private static final long serialVersionUID = -3L;
+
+    private final UserService userService;
 
     @Value("${jwt.expire.access}")
     private long ACCESS_TOKEN_EXPIRATION;
@@ -112,8 +129,15 @@ public class TokenUtil implements Serializable {
             final List<LinkedHashMap<String, String>> roleMap = claims.get("roles", ArrayList.class);
             final List<GrantedAuthority> roles = Optional.ofNullable(roleMap).orElse(List.of()).stream()
                     .map(r -> new SimpleGrantedAuthority(r.get("authority"))).collect(Collectors.toList());
-            final UserGeneralDTO userProfile = new UserGeneralDTO();
-            userProfile.setId(claims.get("id", Long.class));
+            
+            final Long userId = claims.get("id", Long.class);
+            final UserGeneralDTO userProfile = userService.getUser(userId);
+            
+            if (userProfile == null) {
+                log.warn("User not found for ID: {}", userId);
+                return null;
+            }
+            
             return new EnhancedUserDetail(roles, claims.getSubject(), Strings.EMPTY, userProfile);
         } catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
             log.error("Error happens when validate the token, token: " + token, e);

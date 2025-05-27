@@ -10,3 +10,4 @@ import FloatingElementContainer from './FloatingElementContainer';
 import RecentContentsPanel from './RecentContentsPanel';
 
 export { ContentBanner, ContentPageBreadcrumbsBar, ContentPageMetaBar, Page, PortalHeader, PortalLayout, RelevantContentsPanel, TagDisplayBar, WordListPanel, CreateSpeedDial, FloatingElementContainer, RecentContentsPanel };
+export * from './comment';

@@ -12,8 +12,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:analyze": "tsc && vite build && open dist/stats.html",
+    "build": "tsc && vite build && node scripts/generate-sitemap.js",
+    "build:analyze": "tsc && vite build && node scripts/generate-sitemap.js && open dist/stats.html",
+    "build:no-sitemap": "tsc && vite build",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
