@@ -539,7 +539,9 @@
       "submit": "发表评论",
       "cancel": "取消",
       "submitting": "发表中...",
-      "sign-in-required": "请登录后发表评论"
+      "sign-in-required": "请登录后发表评论",
+      "add-emoji": "添加表情",
+      "select-emoji": "选择表情"
     },
     "item": {
       "just-now": "刚刚",

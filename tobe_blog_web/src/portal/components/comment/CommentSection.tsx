@@ -88,9 +88,9 @@ export default function CommentSection({ content }: CommentSectionProps) {
         <Typography 
           variant="h5" 
           component="h3" 
+          color="textSecondary"
           sx={{ 
-            fontWeight: 700,
-            color: 'text.primary',
+            fontWeight: 400,
             mb: 1,
             fontSize: '1.5rem'
           }}
@@ -198,78 +198,53 @@ export default function CommentSection({ content }: CommentSectionProps) {
         </Alert>
       )}
 
-      {comments && !loading && (
-        <>
-          {comments.records.length === 0 ? (
+      {comments && !loading && comments.records.length > 0 && (
+        <Box>
+          {comments.records.map((comment) => (
+            <CommentItem
+              key={comment.id}
+              comment={comment}
+              onCommentDeleted={handleCommentDeleted}
+              onReplyCreated={handleCommentCreated}
+            />
+          ))}
+          
+          {/* Pagination */}
+          {comments.pages > 1 && (
             <Box 
+              display="flex" 
+              justifyContent="center" 
               sx={{ 
-                textAlign: 'center', 
-                py: 8,
-                backgroundColor: 'rgba(0, 0, 0, 0.02)',
-                borderRadius: '12px',
-                border: '1px dashed rgba(0, 0, 0, 0.12)'
+                mt: 4,
+                pt: 3,
               }}
             >
-              <Typography 
-                variant="body1" 
-                color="text.secondary"
-                sx={{ 
-                  fontSize: '1rem',
-                  fontWeight: 500
+              <Pagination
+                count={comments.pages}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+                size="large"
+                sx={{
+                  '& .MuiPaginationItem-root': {
+                    borderRadius: '8px',
+                    fontWeight: 500,
+                    '&:hover': {
+                      backgroundColor: 'rgba(25, 118, 210, 0.08)'
+                    }
+                  },
+                  '& .Mui-selected': {
+                    backgroundColor: 'primary.main',
+                    color: 'white',
+                    '&:hover': {
+                      backgroundColor: 'primary.dark'
+                    }
+                  }
                 }}
-              >
-                {t('comments.section.no-comments')}
-              </Typography>
-            </Box>
-          ) : (
-            <Box>
-              {comments.records.map((comment) => (
-                <CommentItem
-                  key={comment.id}
-                  comment={comment}
-                  onCommentDeleted={handleCommentDeleted}
-                  onReplyCreated={handleCommentCreated}
-                />
-              ))}
-              
-              {/* Pagination */}
-              {comments.pages > 1 && (
-                <Box 
-                  display="flex" 
-                  justifyContent="center" 
-                  sx={{ 
-                    mt: 4,
-                    pt: 3,
-                  }}
-                >
-                  <Pagination
-                    count={comments.pages}
-                    page={currentPage}
-                    onChange={handlePageChange}
-                    color="primary"
-                    size="large"
-                    sx={{
-                      '& .MuiPaginationItem-root': {
-                        borderRadius: '8px',
-                        fontWeight: 500,
-                        '&:hover': {
-                          backgroundColor: 'rgba(25, 118, 210, 0.08)'
-                        }
-                      },
-                      '& .Mui-selected': {
-                        backgroundColor: 'primary.main',
-                        color: 'white',
-                        '&:hover': {
-                          backgroundColor: 'primary.dark'
-                        }
-                      }
-                    }}
-                  />
-                </Box>
-              )}
+              />
             </Box>
           )}
-        </>
+        </Box>
       )}
     </Box>
   );

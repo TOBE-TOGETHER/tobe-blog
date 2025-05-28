@@ -551,7 +551,9 @@
       "submit": "Comment",
       "cancel": "Cancel",
       "submitting": "Posting...",
-      "sign-in-required": "Please sign in to comment"
+      "sign-in-required": "Please sign in to comment",
+      "add-emoji": "Add emoji",
+      "select-emoji": "Select emoji"
     },
     "item": {
       "just-now": "Just now",
