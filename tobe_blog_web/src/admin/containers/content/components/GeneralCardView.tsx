@@ -2,8 +2,7 @@ import { Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useCommonUtils } from '../../../../commons';
 import { InfiniteScrollList } from '../../../../components';
-import { EOperationName } from '../../../../global/enums';
-import { IBaseUserContentDTO, IOperation, ITagOption } from '../../../../global/types';
+import { IBaseUserContentDTO, ITagOption } from '../../../../global/types';
 import BaseContentService from '../BaseContentService';
 import { GeneralCard } from './GeneralCard';
 
@@ -59,72 +58,6 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
     loadData({ status: props.status, tagValues: props.tagValues, reset: true });
   }, [props.status, props.tagValues]);
 
-  function updateVisibility(id: number | string, visibility: 'PUBLIC' | 'PRIVATE') {
-    setLoading(true);
-    props.contentService
-      .updateVisibility(id, visibility)
-      .then(response => {
-        setData(
-          data.map(d => {
-            if (d.id === id) {
-              d.publicToAll = response.data.publicToAll;
-            }
-            return d;
-          })
-        );
-        enqueueSnackbar(t('msg.success'), {
-          variant: 'success',
-        });
-      })
-      .catch(error => {
-        console.error(error);
-        enqueueSnackbar(t('msg.error'), {
-          variant: 'error',
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-
-  function deleteById(id: number | string) {
-    setLoading(true);
-    props.contentService
-      .deleteById(id)
-      .then(() => {
-        setData(data.filter(d => d.id !== id));
-        enqueueSnackbar(t('msg.success'), {
-          variant: 'success',
-        });
-      })
-      .catch(error => {
-        console.error(error);
-        enqueueSnackbar(t('msg.error'), {
-          variant: 'error',
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-
-  const operations: IOperation[] = [
-    {
-      name: EOperationName.RELEASE,
-      onClick: (id: number | string) => updateVisibility(id, 'PUBLIC'),
-      hide: (data: any) => data.publicToAll,
-    },
-    {
-      name: EOperationName.RETRACT,
-      onClick: (id: number | string) => updateVisibility(id, 'PRIVATE'),
-      hide: (data: any) => !data.publicToAll,
-    },
-    {
-      name: EOperationName.DELETE,
-      onClick: (id: number | string) => deleteById(id),
-    },
-  ];
-
   return (
     <Grid container>
       <InfiniteScrollList
@@ -138,7 +71,6 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
             key={`item-${record.id}`}
             record={record}
             onClick={props.onClick}
-            operations={operations}
           />
         )}
       />

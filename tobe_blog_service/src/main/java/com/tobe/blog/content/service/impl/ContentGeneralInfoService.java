@@ -47,6 +47,10 @@ public class ContentGeneralInfoService extends ServiceImpl<ContentGeneralInfoMap
         return this.baseMapper.pagePublishedContentDTOs(new Page<>(current, size), keyword);
     }
 
+    public Page<BaseContentDTO> searchPublishedContentDTOs(int current, int size, String keyword, String status, String topic) {
+        return this.baseMapper.pagePublishedContentDTOs(new Page<>(current, size), keyword, status, topic);
+    }
+
     protected ContentGeneralInfoEntity getAndValidateContent(String id) {
         final ContentGeneralInfoEntity entity = this.getById(id);
         validateExistence(entity);

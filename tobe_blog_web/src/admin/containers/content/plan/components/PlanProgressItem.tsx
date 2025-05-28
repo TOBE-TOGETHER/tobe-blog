@@ -107,6 +107,7 @@ export default function PlanProgressItem(props: Readonly<IPlanProgressItemProps>
             <Typography
               color="text.secondary"
               variant="body2"
+              sx={{ whiteSpace: 'pre-wrap' }}
             >
               {progressDesc}
             </Typography>

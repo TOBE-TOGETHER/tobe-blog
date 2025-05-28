@@ -30,7 +30,9 @@
       "release": "Release",
       "retract": "Retract",
       "ban": "Ban",
-      "recommend": "Recommend"
+      "recommend": "Recommend",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
     },
     "rich-editor": {
       "placeholder": "Please input content..."
@@ -44,9 +46,10 @@
       }
     },
     "meta-bar": {
-      "view": "View",
-      "like": "Like",
-      "edit-btn": "Edit"
+      "view": "Views",
+      "like": "Likes",
+      "edit-btn": "Edit",
+      "comment": "Comments"
     },
     "author-panel": {
       "public-creation-count": "Public Creations",
@@ -56,6 +59,8 @@
     "general-card-view": {
       "published": "Published",
       "draft": "Draft",
+      "public": "Public",
+      "private": "Private",
       "recommended-tip": "The cream always rises to the top",
       "banned-tip": "Due to the potential discomfort or controversy that this content might cause, we have decided to impose a restriction",
       "title": {
@@ -214,8 +219,8 @@
     },
     "msg": {
       "success": "Email verification successful! You can now log in",
-      "resend-success": "Verification email has been resent",
-      "resend-error": "Failed to resend email",
+      "resend-success": "Verification email sent successfully",
+      "resend-error": "Failed to send verification email",
       "sending": "Sending..."
     }
   },
@@ -301,24 +306,24 @@
     "roles": "User Roles",
     "select-roles": "Select Roles",
     "update-roles": "Update Roles",
-    "updating-roles": "Updating...",
-    "role-update-success": "User roles updated successfully",
+    "updating-roles": "Updating roles...",
+    "role-update-success": "Roles updated successfully",
     "required": "Required",
     "role-labels": {
-      "admin": "Administrator",
       "basic": "Basic User",
-      "no-roles": "No roles"
+      "admin": "Administrator"
     },
     "fields": {
+      "author": "Author",
       "email": "Email",
       "phone-number": "Phone Number",
       "address": "Address",
       "profession": "Profession",
       "blog": "Blog",
-      "create-time": "Registration Time",
-      "update-time": "Last Updated"
+      "create-time": "Create Time",
+      "update-time": "Update Time"
     },
-    "no-data": "No user data available"
+    "no-data": "No data available"
   },
   "admin-table": {
     "title": "Audit",
@@ -330,7 +335,44 @@
       "recommended": "Recommended",
       "reason": "Reason",
       "operation": "Operation"
+    },
+    "content-types": {
+      "article": "Article",
+      "plan": "Plan",
+      "vocabulary": "Vocabulary",
+      "collection": "Collection"
     }
+  },
+  "content-admin": {
+    "title": "Content Administration",
+    "search-placeholder": "Search content...",
+    "total-count-tooltip": "Total content found",
+    "no-description": "No description available",
+    "tabs": {
+      "all": "All",
+      "banned": "Banned",
+      "recommended": "Recommended"
+    },
+    "status": {
+      "banned": "Banned",
+      "recommended": "Recommended",
+      "draft": "Draft"
+    },
+    "actions": {
+      "view-details": "View Details",
+      "view-on-portal": "View on Portal",
+      "ban": "Ban",
+      "unban": "Unban",
+      "recommend": "Recommend",
+      "unrecommend": "Unrecommend",
+      "delete": "Delete"
+    },
+    "ban-success": "Content has been banned successfully",
+    "unban-success": "Content has been unbanned successfully",
+    "recommend-success": "Content has been recommended successfully",
+    "unrecommend-success": "Content recommendation has been removed",
+    "delete-success": "Content has been deleted successfully",
+    "delete-confirm": "Are you sure you want to delete this content? This action cannot be undone."
   },
   "contents-page": {
     "filter": {
@@ -345,7 +387,7 @@
   },
   "msg": {
     "success": "Operation successful",
-    "error": "Operation failed"
+    "error": "Operation failed, please try again"
   },
   "admin-pages-title": {
     "plans": "Plans",
@@ -498,14 +540,14 @@
   },
   "dialog": {
     "delete": {
-      "title": "Confirm to delete?",
-      "content": "This operation cannot be undone, please double confirm if you want to delete"
+      "title": "Confirm Action",
+      "content": "Are you sure you want to proceed with this action? This action cannot be undone."
     },
     "cancel": "Cancel",
     "confirm": "Confirm"
   },
   "topic": {
-    "label": "Topic",
+    "label": "Tags",
     "READING": "Books",
     "LANGUAGE": "Lang",
     "TECHNICAL": "Tech",
@@ -513,7 +555,7 @@
     "OTHER": "Other"
   },
   "content-stats": {
-    "title": "Content Statistics",
+    "title": "Statistics",
     "view-count": "View Count",
     "like-count": "Like Count",
     "status": "Status",

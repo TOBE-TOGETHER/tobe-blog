@@ -2,202 +2,148 @@ import BlockIcon from '@mui/icons-material/Block';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import RecommendIcon from '@mui/icons-material/Recommend';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import SellIcon from '@mui/icons-material/Sell';
 import { Chip, Grid, Paper, Tooltip, Typography } from '@mui/material';
 import config from '../../../../../customization.json';
 import { useCommonUtils } from '../../../../commons';
 import { dateMonFormat } from '../../../../commons/TimeFormat';
-import { IBaseUserContentDTO, IOperation } from '../../../../global/types';
+import { IBaseUserContentDTO } from '../../../../global/types';
 import theme from '../../../../theme';
-import { CardHeaderActionButton } from '../../../components';
 
-export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onClick?: (id: string | number) => void; operations: IOperation[] }>) {
+export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onClick?: (id: string | number) => void }>) {
   const { t } = useCommonUtils();
+  
   return (
-    <Grid
-      item
-      xs={12}
-      sm={6}
-      key={props.record.id}
-      onClick={() => props.onClick && props.onClick(props.record.id)}
-    >
-      <Paper sx={{ borderRadius: 4, boxShadow: theme.shadows[4], 
+    <Grid item xs={12} sm={6} onClick={() => props.onClick?.(props.record.id)}>
+      <Paper sx={{ 
+        borderRadius: 4, 
+        boxShadow: theme.shadows[4], 
         transition: 'all 0.3s ease',
         '&:hover': {
           transform: 'translateY(-4px)',
           boxShadow: theme.shadows[8],
           cursor: 'pointer',
-        }}}>
+        }
+      }}>
         <Grid container>
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={6}
-            lg={8}
-            xl={8}
-            sx={{ p: 3, flexDirection: 'column', pb: { xs: 0, sm: 0, md: 3 } }}
-          >
-            <Grid container>
-              <Grid
-                container
-                flexGrow={1}
-                sx={{
-                  alignItems: 'center',
-                  width: 'fit-content',
-                }}
-              >
-                {props.record.publicToAll ? (
-                  <Tooltip title={t('components.general-card-view.title.open')}>
-                    <Chip
-                      sx={{ borderRadius: 1, height: '28px', p: 0, fontWeight: 800, color: theme.palette.info.dark }}
-                      label={t('components.general-card-view.published')}
-                    />
-                  </Tooltip>
-                ) : (
-                  <Tooltip title={t('components.general-card-view.title.private')}>
-                    <Chip
-                      sx={{ borderRadius: 1, height: '28px', p: 0, fontWeight: 800, color: theme.palette.text.secondary }}
-                      label={t('components.general-card-view.draft')}
-                    />
-                  </Tooltip>
-                )}
+          {/* Content Section */}
+          <Grid item xs={12} md={6} lg={8} sx={{ p: 3, pb: { xs: 0, md: 3 } }}>
+            {/* Status and Date */}
+            <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+              <Grid item sx={{ display: 'flex', alignItems: 'center' }}>
+                <Chip
+                  label={props.record.publicToAll ? t('components.general-card-view.published') : t('components.general-card-view.draft')}
+                  sx={{ 
+                    borderRadius: 1, 
+                    height: '28px', 
+                    fontWeight: 800, 
+                    color: props.record.publicToAll ? theme.palette.info.dark : theme.palette.text.secondary 
+                  }}
+                />
                 {props.record.banned && (
                   <Tooltip title={t('components.general-card-view.banned-tip')}>
-                    <BlockIcon
-                      sx={{
-                        ml: 1,
-                        color: '#F08080',
-                      }}
-                    />
+                    <BlockIcon sx={{ ml: 1, color: '#F08080' }} />
                   </Tooltip>
                 )}
                 {props.record.recommended && (
                   <Tooltip title={t('components.general-card-view.recommended-tip')}>
-                    <RecommendIcon
-                      sx={{
-                        ml: 1,
-                        color: '#FFD700',
-                      }}
-                    />
+                    <RecommendIcon sx={{ ml: 1, color: '#FFD700' }} />
                   </Tooltip>
                 )}
               </Grid>
-              <Grid flexGrow={0}>
-                <Typography
-                  color="textSecondary"
-                  variant="body2"
-                >
+              <Grid item>
+                <Typography color="textSecondary" variant="body2">
                   {dateMonFormat(props.record.createTime)}
                 </Typography>
               </Grid>
             </Grid>
+
+            {/* Title */}
             <Typography
+              variant="subtitle1"
               sx={{
-                'mt': 2,
-                'mb': 1,
-                'width': '100%',
-                'fontWeight': 500,
-                'maxWidth': '100%',
-                'display': 'block',
-                'whiteSpace': 'nowrap',
-                'overflow': 'hidden',
-                'textOverflow': 'ellipsis',
+                mb: 1,
+                fontWeight: 600,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
                 '&:hover': {
-                  cursor: 'pointer',
                   textDecoration: 'underline',
                 },
               }}
             >
               {props.record.title}
             </Typography>
+
+            {/* Description */}
             <Typography
-              gutterBottom
               variant="body2"
               color="text.secondary"
               sx={{
-                maxWidth: '100%',
+                mb: 2,
                 height: '40px',
-                display: 'block',
-                whiteSpace: 'wrap',
                 overflow: 'hidden',
-                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
               }}
             >
               {props.record.description}
             </Typography>
-            <Grid
-              container
-              sx={{ my: 1 }}
-            >
-              {props.record?.tags?.map(t => (
-                <Chip
-                  key={`${props.record.id}-tag-${t.label}`}
-                  label={t.label}
-                  variant="outlined"
-                  sx={{ borderRadius: 3, height: '28px', p: 0, mr: 1, fontWeight: 400, color: theme.palette.text.secondary }}
-                />
-              ))}
-            </Grid>
-            <Grid container>
-              <Grid
-                item
-                flexGrow={1}
-              >
-                  <CardHeaderActionButton
-                    data={props.record}
-                    operations={props.operations}
-                  />
-              </Grid>
-              <Grid
-                item
-                alignItems="center"
-                sx={{ display: 'inline-flex' }}
-              >
-                <VisibilityIcon
-                  color="disabled"
-                  sx={{ width: '16px', mr: 1 }}
-                />
-                <Typography
-                  color="textSecondary"
-                  variant="body2"
-                  sx={{ mr: 1 }}
-                >
+
+            {/* Stats and Tags */}
+            <Grid container justifyContent="space-between" alignItems="center">
+              <Grid item sx={{ display: 'flex', alignItems: 'center' }}>
+                <VisibilityIcon sx={{ width: 16, mr: 0.5, color: 'text.disabled' }} />
+                <Typography variant="body2" color="textSecondary" sx={{ mr: 2 }}>
                   {props.record.viewCount}
                 </Typography>
-                <FavoriteIcon
-                  color="disabled"
-                  sx={{ width: '16px', mr: 1 }}
-                />
-                <Typography
-                  color="textSecondary"
-                  variant="body2"
-                >
+                <FavoriteIcon sx={{ width: 16, mr: 0.5, color: 'text.disabled' }} />
+                <Typography variant="body2" color="textSecondary">
                   {props.record.likeCount}
                 </Typography>
               </Grid>
+              
+              {(props.record.topic || props.record.tags?.length) && (
+                <Grid item sx={{ display: 'flex', alignItems: 'center' }}>
+                  <SellIcon sx={{ width: 16, mr: 0.5, color: 'text.disabled' }} />
+                  {props.record.topic && (
+                    <Typography variant="body2" color="textSecondary" sx={{ mr: 1 }}>
+                      {t(`topic.${props.record.topic}`)}
+                    </Typography>
+                  )}
+                  {props.record.tags?.slice(0, 2).map(tag => (
+                    <Typography
+                      key={tag.label}
+                      variant="body2"
+                      color="textSecondary"
+                      sx={{ mr: 0.5 }}
+                    >
+                      {tag.label}
+                    </Typography>
+                  ))}
+                  {props.record.tags && props.record.tags.length > 2 && (
+                    <Typography variant="body2" color="textSecondary">
+                      +{props.record.tags.length - 2}
+                    </Typography>
+                  )}
+                </Grid>
+              )}
             </Grid>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={6}
-            lg={4}
-            xl={4}
-          >
-            <Grid
-              container
-              width="100%"
-              height="100%"
-              p={1}
-              sx={{ maxHeight: { xs: '160px', sm: '160px', md: '252px' } }}
-            >
+
+          {/* Image Section */}
+          <Grid item xs={12} md={6} lg={4}>
+            <Grid container sx={{ p: 1, height: { xs: '160px', md: '205px' } }}>
               <img
-                alt="cover picture"
-                style={{ objectFit: 'cover', verticalAlign: 'bottom', borderRadius: '16px' }}
-                width="100%"
-                height="100%"
+                alt="cover"
                 src={props.record.coverImgUrl || config.defaultContentCoverImgUrl}
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover', 
+                  borderRadius: '16px' 
+                }}
               />
             </Grid>
           </Grid>

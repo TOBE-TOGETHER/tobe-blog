@@ -26,6 +26,17 @@
                 OR tcgi.DESCRIPTION LIKE CONCAT('%', #{keyword}, '%')
             )
         </if>
+        <if test="status != null and status != ''">
+            <if test="status == 'banned'">
+                AND tca.BANNED = true
+            </if>
+            <if test="status == 'recommended'">
+                AND tca.RECOMMENDED = true
+            </if>
+        </if>
+        <if test="topic != null and topic != ''">
+            AND tcgi.TOPIC = #{topic}
+        </if>
         ORDER BY tcgi.CREATE_TIME DESC
     </select>
 </mapper>

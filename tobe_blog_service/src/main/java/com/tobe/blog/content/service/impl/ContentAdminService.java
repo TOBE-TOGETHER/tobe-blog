@@ -19,10 +19,26 @@ public class ContentAdminService extends ServiceImpl<ContentAdminMapper, Content
         return BasicConverter.convert(entity, BaseContentDTO.class);
     }
 
+    public BaseContentDTO unbanContentById(String id) {
+        final ContentAdminEntity entity = this.getById(id);
+        entity.setBanned(false);
+        entity.setReason("Content has been reviewed and unbanned by administrators");
+        this.updateById(entity);
+        return BasicConverter.convert(entity, BaseContentDTO.class);
+    }
+
     public BaseContentDTO recommmendContentById(String id) {
         final ContentAdminEntity entity = this.getById(id);
         entity.setRecommended(true);
         entity.setReason("High-quality content, recommended by administrators");
+        this.updateById(entity);
+        return BasicConverter.convert(entity, BaseContentDTO.class);
+    }
+
+    public BaseContentDTO unrecommendContentById(String id) {
+        final ContentAdminEntity entity = this.getById(id);
+        entity.setRecommended(false);
+        entity.setReason("Content recommendation has been removed by administrators");
         this.updateById(entity);
         return BasicConverter.convert(entity, BaseContentDTO.class);
     }
