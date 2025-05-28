@@ -25,7 +25,7 @@ Code Style and Structure
 - Keep the codebase very clean and organized.
 - Avoid having files over 500 lines of code, Refactor at that point.
 - Avoid having codes over 120 chars in a line, switch to a new line at that point.
-- All comment must be in English
+- All comment generated must be in English
 
 
 Naming Conventions
