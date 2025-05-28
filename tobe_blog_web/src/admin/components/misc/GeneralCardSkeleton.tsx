@@ -1,5 +1,5 @@
 import { Grid, Paper, Skeleton, Box } from '@mui/material';
-import theme from '../../../../theme';
+import theme from '../../../theme';
 
 export function GeneralCardSkeleton() {
   return (

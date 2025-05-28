@@ -4,11 +4,11 @@ import RecommendIcon from '@mui/icons-material/Recommend';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import SellIcon from '@mui/icons-material/Sell';
 import { Chip, Grid, Paper, Tooltip, Typography } from '@mui/material';
-import config from '../../../../../customization.json';
-import { useCommonUtils } from '../../../../commons';
-import { dateMonFormat } from '../../../../commons/TimeFormat';
-import { IBaseUserContentDTO } from '../../../../global/types';
-import theme from '../../../../theme';
+import config from '../../../../customization.json';
+import { useCommonUtils } from '../../../commons';
+import { dateMonFormat } from '../../../commons/TimeFormat';
+import { IBaseUserContentDTO } from '../../../global/types';
+import theme from '../../../theme';
 
 export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onClick?: (id: string | number) => void }>) {
   const { t } = useCommonUtils();

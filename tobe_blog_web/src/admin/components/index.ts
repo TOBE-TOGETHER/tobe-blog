@@ -5,7 +5,7 @@ import AddIconButton from './misc/AddIconButton';
 import BaseDrawer from './misc/BaseDrawer';
 import CardHeaderActionButton from './misc/CardHeaderActionButton';
 import EditIconButton from './misc/EditIconButton';
-import FilterTabsWithCount from './FilterTabsWithCount';
+import FilterTabsWithCount from './misc/FilterTabsWithCount';
 import InfoIconButton from './misc/InfoIconButton';
 import InputFileUploadButton from './misc/InputFileUploadButton';
 import SaveButtonPanel from './misc/SaveButtonPanel';
@@ -13,6 +13,8 @@ import TreePanel from './misc/TreePanel';
 import MultipleTagSelecter from './misc/selector/MultipleTagSelecter';
 import SingleTagSelecter from './misc/selector/SingleTagSelecter';
 import PagedTable from './table/PagedTable';
+import { GeneralCard } from './misc/GeneralCard';
+import { GeneralCardSkeleton } from './misc/GeneralCardSkeleton';
 
 export {
   AddIconButton,
@@ -31,4 +33,6 @@ export {
   SidePanel,
   SingleTagSelecter,
   TreePanel,
+  GeneralCard,
+  GeneralCardSkeleton,
 };

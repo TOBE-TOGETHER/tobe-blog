@@ -6,8 +6,7 @@ import { Page } from '../../../components/layout';
 import { InfiniteScrollList } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types.ts';
 import * as ContentAdminService from './ContentAdminService.ts';
-import { GeneralCard } from '../content/components/GeneralCard';
-import { GeneralCardSkeleton } from '../content/components/GeneralCardSkeleton';
+import { GeneralCard, GeneralCardSkeleton } from '../../components';
 import { FilterTabsWithCount } from '../../components';
 import ContentDetailDrawer from './ContentDetailDrawer';
 

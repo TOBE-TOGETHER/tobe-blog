@@ -4,7 +4,7 @@ import { useCommonUtils } from '../../../../commons';
 import { InfiniteScrollList } from '../../../../components';
 import { IBaseUserContentDTO, ITagOption } from '../../../../global/types';
 import BaseContentService from '../BaseContentService';
-import { GeneralCard } from './GeneralCard';
+import { GeneralCard } from '../../../components';
 
 interface IGeneralCardViewProps {
   contentService: BaseContentService;
