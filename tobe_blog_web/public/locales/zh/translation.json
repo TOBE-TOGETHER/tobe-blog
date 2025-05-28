@@ -38,7 +38,7 @@
       "placeholder": "请输入内容..."
     },
     "tag-select": {
-      "placeholder": "请输入标签名...",
+      "placeholder": "搜索标签...",
       "msg": {
         "success": "添加成功",
         "error": "添加失败",

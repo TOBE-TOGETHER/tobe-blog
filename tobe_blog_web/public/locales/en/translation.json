@@ -38,7 +38,7 @@
       "placeholder": "Please input content..."
     },
     "tag-select": {
-      "placeholder": "Please input tag name...",
+      "placeholder": "Search tags...",
       "msg": {
         "success": "Tag created!",
         "error": "Operation failed",

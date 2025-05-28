@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Grid, TextField, InputAdornment } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { Grid } from '@mui/material';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
 import { InfiniteScrollList } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types.ts';
 import * as ContentAdminService from './ContentAdminService.ts';
-import { GeneralCard, GeneralCardSkeleton } from '../../components';
-import { FilterTabsWithCount } from '../../components';
+import { GeneralCard, GeneralCardSkeleton, FilterTabsWithCount, AdminSearchBox } from '../../components';
 import ContentDetailDrawer from './ContentDetailDrawer';
 
 interface ILoadDataOption {
@@ -146,35 +144,10 @@ export default function ContentAdminPage() {
         justifyContent="flex-end"
       >
         <Grid item sx={{ width: { xs: '100%', sm: 'auto' } }}>
-          <TextField
+          <AdminSearchBox
             placeholder={t('content-admin.search-placeholder')}
-            variant="outlined"
-            size="small"
             value={searchKeyword}
             onChange={handleSearchChange}
-            sx={{ 
-              width: { xs: '100%', sm: 285 },
-              '& .MuiOutlinedInput-root': {
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderRadius: '4px',
-                '& fieldset': {
-                  borderColor: 'rgba(0, 0, 0, 0.12)',
-                },
-                '&:hover fieldset': {
-                  borderColor: 'rgba(0, 0, 0, 0.24)',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: 'primary.main',
-                },
-              },
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: 'text.secondary' }} />
-                </InputAdornment>
-              ),
-            }}
           />
         </Grid>
       </Grid>

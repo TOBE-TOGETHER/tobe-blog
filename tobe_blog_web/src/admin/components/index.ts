@@ -2,6 +2,7 @@ import { Page, SidePanel } from '../../components/layout';
 import Loading from '../../components/loading/Loading';
 import AdminLayout from './layout/AdminLayout';
 import AddIconButton from './misc/AddIconButton';
+import AdminSearchBox from './misc/AdminSearchBox';
 import BaseDrawer from './misc/BaseDrawer';
 import CardHeaderActionButton from './misc/CardHeaderActionButton';
 import EditIconButton from './misc/EditIconButton';
@@ -18,6 +19,7 @@ import { GeneralCardSkeleton } from './misc/GeneralCardSkeleton';
 
 export {
   AddIconButton,
+  AdminSearchBox,
   AdminLayout,
   BaseDrawer,
   CardHeaderActionButton,

@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Grid, TextField, InputAdornment } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { Grid } from '@mui/material';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
 import { InfiniteScrollList } from '../../../components';
 import { IUserData } from '../../../global/types.ts';
 import * as UserService from '../../../services/UserService.ts';
-import { FilterTabsWithCount } from '../../components';
+import { FilterTabsWithCount, AdminSearchBox } from '../../components';
 import UserCard from './UserCard';
 import UserCardSkeleton from './UserCardSkeleton';
 import UserDetailDrawer from './UserDetailDrawer';
@@ -128,35 +127,10 @@ export default function UsersPage() {
         justifyContent="flex-end"
       >
         <Grid item sx={{ width: { xs: '100%', sm: 'auto' } }}>
-          <TextField
+          <AdminSearchBox
             placeholder={t('user-table.search-placeholder')}
-            variant="outlined"
-            size="small"
             value={searchKeyword}
             onChange={handleSearchChange}
-            sx={{ 
-              width: { xs: '100%', sm: 285 },
-              '& .MuiOutlinedInput-root': {
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderRadius: '4px',
-                '& fieldset': {
-                  borderColor: 'rgba(0, 0, 0, 0.12)',
-                },
-                '&:hover fieldset': {
-                  borderColor: 'rgba(0, 0, 0, 0.24)',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: 'primary.main',
-                },
-              },
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: 'text.secondary' }} />
-                </InputAdornment>
-              ),
-            }}
           />
         </Grid>
       </Grid>

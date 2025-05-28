@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useCommonUtils } from '../../../../commons';
 import { Page } from '../../../../components/layout';
 import { FilterTabsWithCount } from '../../../components';
@@ -19,6 +19,12 @@ export default function GeneralContentListPage(
   const [tagValues, setTagValues] = useState<ITagOption[]>([]);
   const [recordFound, setRecordFound] = useState<number>(0);
   const [status, setStatus] = useState<string>('');
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+
+  const handleSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchKeyword(event.target.value);
+  }, []);
+
   return (
     <Page
       openLoading={false}
@@ -28,7 +34,10 @@ export default function GeneralContentListPage(
         createNewAction={() => navigate(props.createPageURL)}
         tagValues={tagValues}
         setTagValues={setTagValues}
+        searchKeyword={searchKeyword}
+        onSearchChange={handleSearchChange}
       />
+
       <FilterTabsWithCount
         value={status}
         onChange={setStatus}
@@ -44,6 +53,7 @@ export default function GeneralContentListPage(
         contentService={props.contentService}
         status={status}
         tagValues={tagValues}
+        keyword={searchKeyword}
         setRecordFound={setRecordFound}
         onClick={(id: number | string) => navigate(props.detailPageURL.replace(':id', id.toString()))}
       />

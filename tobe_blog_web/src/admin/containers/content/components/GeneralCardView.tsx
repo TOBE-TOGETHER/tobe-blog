@@ -10,6 +10,7 @@ interface IGeneralCardViewProps {
   contentService: BaseContentService;
   status: string;
   tagValues: ITagOption[];
+  keyword: string;
   setRecordFound: (v: number) => void;
   onClick?: (id: number | string) => void;
 }
@@ -17,6 +18,7 @@ interface IGeneralCardViewProps {
 interface ILoadDataOption {
   status: string;
   tagValues: ITagOption[];
+  keyword: string;
   reset: boolean;
 }
 
@@ -34,7 +36,7 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
       .get(
         DEFAULT_PAGE_SIZE,
         option.reset ? 1 : current + 1,
-        '',
+        option.keyword || '',
         option.status,
         option.tagValues.map(t => t.value)
       )
@@ -55,14 +57,14 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
   }
 
   useEffect(() => {
-    loadData({ status: props.status, tagValues: props.tagValues, reset: true });
-  }, [props.status, props.tagValues]);
+    loadData({ status: props.status, tagValues: props.tagValues, keyword: props.keyword, reset: true });
+  }, [props.status, props.tagValues, props.keyword]);
 
   return (
     <Grid container>
       <InfiniteScrollList
         loading={loading}
-        option={{ status: props.status, tagValues: props.tagValues, reset: false }}
+        option={{ status: props.status, tagValues: props.tagValues, keyword: props.keyword, reset: false }}
         dataSource={data}
         hasMore={current < totalPage}
         loadMore={loadData}
