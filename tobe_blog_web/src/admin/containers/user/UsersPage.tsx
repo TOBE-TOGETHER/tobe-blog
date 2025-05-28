@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Typography, Grid, Tab, Tabs, Tooltip, TextField, InputAdornment } from '@mui/material';
+import { Grid, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
 import { InfiniteScrollList } from '../../../components';
-import { IUserData } from '../../../global/types';
+import { IUserData } from '../../../global/types.ts';
 import * as UserService from '../../../services/UserService.ts';
+import { FilterTabsWithCount } from '../../components';
 import UserCard from './UserCard';
 import UserCardSkeleton from './UserCardSkeleton';
 import UserDetailDrawer from './UserDetailDrawer';
@@ -161,49 +162,17 @@ export default function UsersPage() {
       </Grid>
 
       {/* Tabs and Count */}
-      <Grid
-        sx={{ mb: 1, width: '100%' }}
-        container
-        justifyContent="space-between"
-      >
-        <Grid item>
-          <Tabs
-            value={emailVerificationFilter}
-            onChange={(_, v: string) => setEmailVerificationFilter(v)}
-          >
-            <Tab
-              disableRipple
-              label="全部"
-              value=""
-            />
-            <Tab
-              disableRipple
-              label="已验证"
-              value="true"
-            />
-            <Tab
-              disableRipple
-              label="未验证"
-              value="false"
-            />
-          </Tabs>
-        </Grid>
-        <Grid
-          item
-          alignSelf="center"
-          px={2}
-        >
-          <Tooltip title="找到的用户数量">
-            <Typography
-              variant="subtitle2"
-              color="textSecondary"
-              sx={{ fontWeight: 800 }}
-            >
-              {totalCount}
-            </Typography>
-          </Tooltip>
-        </Grid>
-      </Grid>
+      <FilterTabsWithCount
+        value={emailVerificationFilter}
+        onChange={setEmailVerificationFilter}
+        tabs={[
+          { label: '全部', value: '' },
+          { label: '已验证', value: 'true' },
+          { label: '未验证', value: 'false' }
+        ]}
+        count={totalCount}
+        countTooltip="找到的用户数量"
+      />
 
       <InfiniteScrollList
         loading={loading}

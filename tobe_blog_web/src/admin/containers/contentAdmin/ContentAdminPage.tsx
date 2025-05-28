@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Typography, Grid, Tab, Tabs, Tooltip, TextField, InputAdornment } from '@mui/material';
+import { Grid, TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
@@ -8,6 +8,7 @@ import { IBaseUserContentDTO } from '../../../global/types.ts';
 import * as ContentAdminService from './ContentAdminService.ts';
 import { GeneralCard } from '../content/components/GeneralCard';
 import { GeneralCardSkeleton } from '../content/components/GeneralCardSkeleton';
+import { FilterTabsWithCount } from '../../components';
 import ContentDetailDrawer from './ContentDetailDrawer';
 
 interface ILoadDataOption {
@@ -180,49 +181,17 @@ export default function ContentAdminPage() {
       </Grid>
 
       {/* Tabs and Count */}
-      <Grid
-        sx={{ mb: 1, width: '100%' }}
-        container
-        justifyContent="space-between"
-      >
-        <Grid item>
-          <Tabs
-            value={statusFilter}
-            onChange={(_, v: string) => setStatusFilter(v)}
-          >
-            <Tab
-              disableRipple
-              label={t('content-admin.tabs.all')}
-              value=""
-            />
-            <Tab
-              disableRipple
-              label={t('content-admin.tabs.banned')}
-              value="banned"
-            />
-            <Tab
-              disableRipple
-              label={t('content-admin.tabs.recommended')}
-              value="recommended"
-            />
-          </Tabs>
-        </Grid>
-        <Grid
-          item
-          alignSelf="center"
-          px={2}
-        >
-          <Tooltip title={t('content-admin.total-count-tooltip')}>
-            <Typography
-              variant="subtitle2"
-              color="textSecondary"
-              sx={{ fontWeight: 800 }}
-            >
-              {totalCount}
-            </Typography>
-          </Tooltip>
-        </Grid>
-      </Grid>
+      <FilterTabsWithCount
+        value={statusFilter}
+        onChange={setStatusFilter}
+        tabs={[
+          { label: t('content-admin.tabs.all'), value: '' },
+          { label: t('content-admin.tabs.banned'), value: 'banned' },
+          { label: t('content-admin.tabs.recommended'), value: 'recommended' }
+        ]}
+        count={totalCount}
+        countTooltip={t('content-admin.total-count-tooltip')}
+      />
 
       <InfiniteScrollList
         loading={loading}
