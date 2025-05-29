@@ -12,7 +12,7 @@ import theme from '../../../theme';
 
 export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onClick?: (id: string | number) => void }>) {
   const { t } = useCommonUtils();
-  
+  const hasTopic = props.record.topic ?? props.record.tags?.length;
   return (
     <Grid item xs={12} sm={6} onClick={() => props.onClick?.(props.record.id)}>
       <Paper sx={{ 
@@ -104,7 +104,7 @@ export function GeneralCard(props: Readonly<{ record: IBaseUserContentDTO; onCli
                 </Typography>
               </Grid>
               
-              {(props.record.topic || props.record.tags?.length) && (
+              {hasTopic && (
                 <Grid item sx={{ display: 'flex', alignItems: 'center' }}>
                   <SellIcon sx={{ width: 16, mr: 0.5, color: 'text.disabled' }} />
                   {props.record.topic && (

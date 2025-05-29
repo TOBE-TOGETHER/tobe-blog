@@ -15,7 +15,7 @@ export default function VocabularyReadingPage() {
   const [vocabulary, setVocabulary] = useState<IVocabularyDetailDTO | null>(null);
 
   const loadData = useCallback((): void => {
-    PublicDataService.getVocabularyById(id || '')
+    PublicDataService.getVocabularyById(id ?? '')
       .then(response => {
         setVocabulary(response.data);
       })

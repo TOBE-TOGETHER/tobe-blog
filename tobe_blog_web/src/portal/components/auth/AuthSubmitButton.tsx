@@ -14,7 +14,7 @@ export default function AuthSubmitButton({
     <Button
       fullWidth
       variant="contained"
-      disabled={disabled || loading}
+      disabled={disabled ?? loading}
       {...props}
       sx={{
         borderRadius: '12px',

@@ -26,6 +26,7 @@ Code Style and Structure
 - Avoid having files over 500 lines of code, Refactor at that point.
 - Avoid having codes over 120 chars in a line, switch to a new line at that point.
 - All comment generated must be in English
+- Prefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator.
 
 
 Naming Conventions

@@ -15,7 +15,7 @@ export default function CollectionReadingPage() {
 
   useEffect(() => {
     function load(): void {
-      PublicDataService.getSubjectById(id || '')
+      PublicDataService.getSubjectById(id ?? '')
         .then(response => {
           setCollection(response.data);
         })

@@ -19,7 +19,7 @@ export default function ArticleReadingPage() {
 
   useEffect(() => {
     function loadArticle(): void {
-      PublicDataService.getArticleById(id || '')
+      PublicDataService.getArticleById(id ?? '')
         .then(response => {
           setArticle(response.data);
         })

@@ -33,7 +33,7 @@ import Dialogx from '../../components/dialog/Dialogx';
 import { BaseDrawer } from '../../components';
 import { IUserData } from '../../../global/types';
 import * as UserService from '../../../services/UserService';
-
+import * as EmailVerificationService from '../../../services/EmailVerificationService';
 interface IUserDetailDrawerProps {
   readonly open: boolean;
   readonly onClose: () => void;
@@ -108,7 +108,7 @@ export default function UserDetailDrawer({ open, onClose, userId, onDelete }: IU
     if (!user?.email) return;
     
     setResendingEmail(true);
-    UserService.resendVerificationEmail(user.email)
+    EmailVerificationService.resendVerificationEmail(user.email)
       .then(() => {
         enqueueSnackbar(t('email-verification.msg.resend-success'), { variant: 'success' });
       })
@@ -350,7 +350,7 @@ export default function UserDetailDrawer({ open, onClose, userId, onDelete }: IU
                       return (
                         <Chip 
                           key={value} 
-                          label={roleInfo?.label || value} 
+                          label={roleInfo?.label ?? value} 
                           size="small" 
                         />
                       );

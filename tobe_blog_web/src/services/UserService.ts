@@ -66,6 +66,4 @@ export function updateUserRoles(id: number | string, roles: string[]): AxiosProm
   return server.put(`/${USER_URI}/${id}/roles`, roles);
 }
 
-export function resendVerificationEmail(email: string): AxiosPromise {
-  return server.post('/v1/auth/resend-verification', { email });
-}
+
