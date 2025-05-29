@@ -8,7 +8,7 @@ import * as PublicDataService from '../../services/PublicDataService';
 import NoContentNewsItem from './NoContentNewsItem';
 
 export default function TagFilterPanel(
-  props: Readonly<{ contentType: EContentType; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void; topic: TopicPropsType; keyword: string }>
+  props: Readonly<{ contentType: EContentType[]; ownerId: string; checked: number[]; setChecked: (newValue: number[]) => void; topic: TopicPropsType; keyword: string }>
 ) {
   const { t } = useCommonUtils();
   const [tagStatistics, setTagStatistics] = useState<ITagStatisticDTO[]>([]);

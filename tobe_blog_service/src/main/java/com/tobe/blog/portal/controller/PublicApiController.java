@@ -74,11 +74,12 @@ public class PublicApiController {
         @RequestParam(value = "size", required = false, defaultValue = "10") int size,
         @RequestParam(value = "tags", required = false, defaultValue = "") String tags,
         @RequestParam(value = "ownerId", required = false, defaultValue = "") Long ownerId,
-        @RequestParam(value = "contentType", required = false, defaultValue = "") String contentType,
+        @RequestParam(value = "contentTypes", required = false, defaultValue = "") String contentTypes,
         @RequestParam(value = "topic", required = false, defaultValue = "") Const.Topic topic,
         @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
         final String[] tagFilter = StringUtils.isNotBlank(tags) ? tags.split(",") : new String[]{};
-        return ResponseEntity.ok(publicApiService.searchContents(current, size, tagFilter, ownerId, contentType, topic, keyword));
+        final String[] contentTypeFilter = StringUtils.isNotBlank(contentTypes) ? contentTypes.split(",") : new String[]{};
+        return ResponseEntity.ok(publicApiService.searchContents(current, size, tagFilter, ownerId, contentTypeFilter, topic, keyword));
     }
 
     @GetMapping("/articles/{id}")
@@ -141,11 +142,12 @@ public class PublicApiController {
     @GetMapping("/tag-statistics")
     public ResponseEntity<List<TagInfoStatisticDTO>> getTagInfoStatistics(
         @RequestParam(value = "ownerId", required = false, defaultValue = "") Long ownerId,
-        @RequestParam(value = "contentType", required = false, defaultValue = "ARTICLE") String contentType,
+        @RequestParam(value = "contentTypes", required = false, defaultValue = "") String contentTypes,
         @RequestParam(value = "topic", required = false, defaultValue = "") Const.Topic topic,
         @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
     ) {
-        return ResponseEntity.ok(publicApiService.getTagInfoStatistics(ownerId, contentType, topic, keyword));
+        final String[] contentTypeFilter = StringUtils.isNotBlank(contentTypes) ? contentTypes.split(",") : new String[]{};
+        return ResponseEntity.ok(publicApiService.getTagInfoStatistics(ownerId, contentTypeFilter, topic, keyword));
     }
 
     @PostMapping("/request-password-reset")

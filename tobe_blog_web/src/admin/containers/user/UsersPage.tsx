@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Typography, Grid, Tab, Tabs, Tooltip, TextField, InputAdornment } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { Grid } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
 import { InfiniteScrollList } from '../../../components';
-import { IUserData } from '../../../global/types';
+import { IUserData } from '../../../global/types.ts';
 import * as UserService from '../../../services/UserService.ts';
+import { FilterTabsWithCount, AdminSearchBox } from '../../components';
 import UserCard from './UserCard';
 import UserCardSkeleton from './UserCardSkeleton';
 import UserDetailDrawer from './UserDetailDrawer';
@@ -19,7 +20,13 @@ interface ILoadDataOption {
 
 export default function UsersPage() {
   const { t, enqueueSnackbar } = useCommonUtils();
+  const [searchParams, setSearchParams] = useSearchParams();
   const DEFAULT_PAGE_SIZE = 12;
+  
+  // Initialize state from URL parameters
+  const paramKeyword: string = searchParams.get('keyword') ?? '';
+  const paramEmailVerified: string = searchParams.get('emailVerified') ?? '';
+  
   const [users, setUsers] = useState<IUserData[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -28,11 +35,25 @@ export default function UsersPage() {
   
   const [selectedUserId, setSelectedUserId] = useState<number | string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const [searchKeyword, setSearchKeyword] = useState<string>('');
-  const [emailVerificationFilter, setEmailVerificationFilter] = useState<string>('');
+  const [searchKeyword, setSearchKeyword] = useState<string>(paramKeyword);
+  const [emailVerificationFilter, setEmailVerificationFilter] = useState<string>(paramEmailVerified);
+
+  // Update URL when state changes
+  const updateURL = useCallback((newKeyword: string, newEmailVerified: string) => {
+    const params = new URLSearchParams();
+    
+    if (newKeyword.trim()) {
+      params.set('keyword', newKeyword.trim());
+    }
+    if (newEmailVerified) {
+      params.set('emailVerified', newEmailVerified);
+    }
+    
+    setSearchParams(params);
+  }, [setSearchParams]);
 
   function loadData(option: ILoadDataOption): void {
-    if (loading) return; // 防止重复请求
+    if (loading) return; // Prevent duplicate requests
     
     setLoading(true);
     const pageToLoad = option.reset ? 1 : current + 1;
@@ -101,8 +122,15 @@ export default function UsersPage() {
   }, []);
 
   const handleSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchKeyword(event.target.value);
-  }, []);
+    const newKeyword = event.target.value;
+    setSearchKeyword(newKeyword);
+    updateURL(newKeyword, emailVerificationFilter);
+  }, [emailVerificationFilter, updateURL]);
+
+  const handleEmailVerificationChange = useCallback((newEmailVerified: string) => {
+    setEmailVerificationFilter(newEmailVerified);
+    updateURL(searchKeyword, newEmailVerified);
+  }, [searchKeyword, updateURL]);
 
   const renderUserCard = (user: IUserData) => (
     <UserCard
@@ -127,83 +155,26 @@ export default function UsersPage() {
         justifyContent="flex-end"
       >
         <Grid item sx={{ width: { xs: '100%', sm: 'auto' } }}>
-          <TextField
+          <AdminSearchBox
             placeholder={t('user-table.search-placeholder')}
-            variant="outlined"
-            size="small"
             value={searchKeyword}
             onChange={handleSearchChange}
-            sx={{ 
-              width: { xs: '100%', sm: 285 },
-              '& .MuiOutlinedInput-root': {
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderRadius: '4px',
-                '& fieldset': {
-                  borderColor: 'rgba(0, 0, 0, 0.12)',
-                },
-                '&:hover fieldset': {
-                  borderColor: 'rgba(0, 0, 0, 0.24)',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: 'primary.main',
-                },
-              },
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: 'text.secondary' }} />
-                </InputAdornment>
-              ),
-            }}
           />
         </Grid>
       </Grid>
 
       {/* Tabs and Count */}
-      <Grid
-        sx={{ mb: 1, width: '100%' }}
-        container
-        justifyContent="space-between"
-      >
-        <Grid item>
-          <Tabs
-            value={emailVerificationFilter}
-            onChange={(_, v: string) => setEmailVerificationFilter(v)}
-          >
-            <Tab
-              disableRipple
-              label="全部"
-              value=""
-            />
-            <Tab
-              disableRipple
-              label="已验证"
-              value="true"
-            />
-            <Tab
-              disableRipple
-              label="未验证"
-              value="false"
-            />
-          </Tabs>
-        </Grid>
-        <Grid
-          item
-          alignSelf="center"
-          px={2}
-        >
-          <Tooltip title="找到的用户数量">
-            <Typography
-              variant="subtitle2"
-              color="textSecondary"
-              sx={{ fontWeight: 800 }}
-            >
-              {totalCount}
-            </Typography>
-          </Tooltip>
-        </Grid>
-      </Grid>
+      <FilterTabsWithCount
+        value={emailVerificationFilter}
+        onChange={handleEmailVerificationChange}
+        tabs={[
+          { label: '全部', value: '' },
+          { label: '已验证', value: 'true' },
+          { label: '未验证', value: 'false' }
+        ]}
+        count={totalCount}
+        countTooltip="找到的用户数量"
+      />
 
       <InfiniteScrollList
         loading={loading}

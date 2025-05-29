@@ -1,9 +1,9 @@
 import { Container, Grid, SxProps } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getContentTypeFromPath, getPathFromContentType } from '../../commons';
 import { EContentType } from '../../global/enums';
 import { TopicPropsType } from '../../global/types';
+import ContentTypeFilterPanel from './ContentTypeFilterPanel';
 import FeaturedNews from './FeaturedNews';
 import TagFilterPanel from './TagFilterPanel';
 
@@ -18,25 +18,44 @@ export default function FunctionSection(
   }>
 ) {
   const [searchParams] = useSearchParams();
-  const paramContentType: string = searchParams.get('t') ?? '';
+  const paramContentTypes: string = searchParams.get('ct') ?? '';
   const paramTags: string = searchParams.get('g') ?? '';
+  
+  // Initialize selected content types from URL params or default to empty array
+  const initialContentTypes = paramContentTypes 
+    ? paramContentTypes.split(',').filter(ct => 
+        props.availableContentTypes.includes(ct as EContentType)
+      ) as EContentType[]
+    : [];
+    
   const [checkedTags, setCheckedTags] = useState<number[]>(
     paramTags
       .split(',')
       .filter(i => !isNaN(Number.parseInt(i)))
       .map(i => Number.parseInt(i))
   );
-  const [contentType, setContentType] = useState<EContentType>(getContentTypeFromPath(paramContentType));
+  const [selectedContentTypes, setSelectedContentTypes] = useState<EContentType[]>(initialContentTypes);
 
-  function handleContentTypeChange(newValue: EContentType) {
-    setCheckedTags([]);
-    setContentType(newValue);
-    window.history.pushState(null, '', `?t=${getPathFromContentType(newValue)}`);
+  function handleContentTypesChange(newValue: EContentType[]) {
+    setSelectedContentTypes(newValue);
+    const contentTypeParam = newValue.join(',');
+    const tagsParam = checkedTags.join(',');
+    const params = new URLSearchParams();
+    if (contentTypeParam) params.set('ct', contentTypeParam);
+    if (tagsParam) params.set('g', tagsParam);
+    if (props.keyword.trim()) params.set('k', props.keyword.trim());
+    window.history.pushState(null, '', `?${params.toString()}`);
   }
 
   function handleContentTagsChange(newValue: number[]) {
     setCheckedTags(newValue);
-    window.history.pushState(null, '', `?t=${getPathFromContentType(contentType)}&g=${newValue}`);
+    const contentTypeParam = selectedContentTypes.join(',');
+    const tagsParam = newValue.join(',');
+    const params = new URLSearchParams();
+    if (contentTypeParam) params.set('ct', contentTypeParam);
+    if (tagsParam) params.set('g', tagsParam);
+    if (props.keyword.trim()) params.set('k', props.keyword.trim());
+    window.history.pushState(null, '', `?${params.toString()}`);
   }
 
   return (
@@ -55,11 +74,9 @@ export default function FunctionSection(
             <FeaturedNews
               ownerId={props.ownerId}
               tags={checkedTags}
-              contentType={contentType}
+              selectedContentTypes={selectedContentTypes}
               topic={props.topic}
               keyword={props.keyword}
-              availableContentTypes={props.availableContentTypes}
-              handleContentTypeChange={handleContentTypeChange}
             />
           </Grid>
           <Grid
@@ -72,12 +89,19 @@ export default function FunctionSection(
           >
             <Grid item>
               <TagFilterPanel
-                contentType={contentType}
+                contentType={selectedContentTypes}
                 checked={checkedTags}
                 setChecked={handleContentTagsChange}
                 ownerId={props.ownerId}
                 topic={props.topic}
                 keyword={props.keyword}
+              />
+            </Grid>
+            <Grid item>
+              <ContentTypeFilterPanel
+                availableContentTypes={props.availableContentTypes}
+                selectedContentTypes={selectedContentTypes}
+                onContentTypesChange={handleContentTypesChange}
               />
             </Grid>
             {props.extraPanels.map((c, i) => (

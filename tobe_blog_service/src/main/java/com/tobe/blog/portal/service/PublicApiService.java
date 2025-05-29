@@ -34,8 +34,8 @@ public class PublicApiService {
      * @param contentType: ARTICLE, PLAN, VOCABULARY or COLLECTION
      * @return A page of user contents of given ownerId and contentType
      */
-    public Page<BaseContentDTO> searchContents(int current, int size, String[] tags, Long ownerId, String contentType, Const.Topic topic, String keyword) {
-        return this.apiMapper.searchContents(new Page<>(current, size), tags, ownerId, contentType, topic, keyword);
+    public Page<BaseContentDTO> searchContents(int current, int size, String[] tags, Long ownerId, String[] contentTypes, Const.Topic topic, String keyword) {
+        return this.apiMapper.searchContents(new Page<>(current, size), tags, ownerId, contentTypes, topic, keyword);
     }
 
     /**
@@ -62,8 +62,8 @@ public class PublicApiService {
      * @param keyword The keyword to search for
      * @return A list of tag info statistics
      */
-    public List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String contentType, Const.Topic topic, String keyword) {
-        return apiMapper.getTagInfoStatistics(ownerId, contentType, topic, keyword);
+    public List<TagInfoStatisticDTO> getTagInfoStatistics(Long ownerId, String[] contentTypes, Const.Topic topic, String keyword) {
+        return apiMapper.getTagInfoStatistics(ownerId, contentTypes, topic, keyword);
     }
 
     /**

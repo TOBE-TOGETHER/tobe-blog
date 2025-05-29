@@ -26,10 +26,22 @@ public class ContentAdminController {
         return ResponseEntity.ok(contentAdminService.banContentById(id));
     }
 
+    @PutMapping("/{id}/unban")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<BaseContentDTO> unbanContentById(@PathVariable String id) {
+        return ResponseEntity.ok(contentAdminService.unbanContentById(id));
+    }
+
     @PutMapping("/{id}/recommend")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<BaseContentDTO> recommendContentById(@PathVariable String id) {
         return ResponseEntity.ok(contentAdminService.recommmendContentById(id));
+    }
+
+    @PutMapping("/{id}/unrecommend")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<BaseContentDTO> unrecommendContentById(@PathVariable String id) {
+        return ResponseEntity.ok(contentAdminService.unrecommendContentById(id));
     }
 
 }

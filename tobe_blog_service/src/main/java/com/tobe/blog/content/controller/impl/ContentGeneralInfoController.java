@@ -23,16 +23,22 @@ public class ContentGeneralInfoController {
 
     /** 
      * Search all published content no matter if the content get banned or not.
-     * This API is for administor to manage and review contents
-    */
+     * This API is for administrator to manage and review contents
+     * @param current page number (1-based)
+     * @param size page size
+     * @param keyword search keyword for title
+     * @param status filter by status: "banned", "recommended", or empty for all
+     * @param topic filter by topic
+     */
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Page<BaseContentDTO>> searchPublishedContents(
         @RequestParam(value = "current", required = false, defaultValue = "1") int current,
         @RequestParam(value = "size", required = false, defaultValue = "10") int size,
         @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+        @RequestParam(value = "status", required = false, defaultValue = "") String status,
         @RequestParam(value = "topic", required = false, defaultValue = "") String topic) {
-        return ResponseEntity.ok(contentService.searchPublishedContentDTOs(current, size, keyword));
+        return ResponseEntity.ok(contentService.searchPublishedContentDTOs(current, size, keyword, status, topic));
     }
     
 }

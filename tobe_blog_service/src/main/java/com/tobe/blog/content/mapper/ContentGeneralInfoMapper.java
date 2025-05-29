@@ -11,5 +11,11 @@ public interface ContentGeneralInfoMapper extends BaseMapper<ContentGeneralInfoE
     
     void updateContentMetaCount(@Param("column") String column, @Param("id") String id, @Param("newValue") long newValue);
 
-    Page<BaseContentDTO> pagePublishedContentDTOs(Page<BaseContentDTO> page, String keyword);
+    Page<BaseContentDTO> pagePublishedContentDTOs(Page<BaseContentDTO> page, @Param("keyword") String keyword);
+    
+    Page<BaseContentDTO> pagePublishedContentDTOs(
+        Page<BaseContentDTO> page, 
+        @Param("keyword") String keyword, 
+        @Param("status") String status, 
+        @Param("topic") String topic);
 }

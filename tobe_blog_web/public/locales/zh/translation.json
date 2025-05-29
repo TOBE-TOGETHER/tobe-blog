@@ -30,13 +30,15 @@
       "release": "公开",
       "retract": "撤回",
       "ban": "封禁",
-      "recommend": "推荐"
+      "recommend": "推荐",
+      "cancel": "取消",
+      "confirm": "确认"
     },
     "rich-editor": {
       "placeholder": "请输入内容..."
     },
     "tag-select": {
-      "placeholder": "请输入标签名...",
+      "placeholder": "搜索标签...",
       "msg": {
         "success": "添加成功",
         "error": "添加失败",
@@ -44,9 +46,10 @@
       }
     },
     "meta-bar": {
-      "view": "阅读",
+      "view": "浏览",
       "like": "点赞",
-      "edit-btn": "编辑"
+      "edit-btn": "编辑",
+      "comment": "评论"
     },
     "author-panel": {
       "public-creation-count": "公开内容",
@@ -56,6 +59,8 @@
     "general-card-view": {
       "published": "已发布",
       "draft": "草稿",
+      "public": "公开",
+      "private": "私有",
       "recommended-tip": "是金子总会发光",
       "banned-tip": "鉴于该内容可能会引发不适或争议，现决定进行封禁处理",
       "title": {
@@ -75,6 +80,9 @@
     "load-more": "加载更多",
     "no-content": "找不到相关内容",
     "tag-statistics": "标签筛选",
+    "content-type-filter": {
+      "title": "分类筛选"
+    },
     "slogan": "记录成长，分享点滴",
     "speed-dial": {
       "create-article": "创建笔记",
@@ -200,13 +208,13 @@
     },
     "btn": {
       "go-to-login": "前往登录",
-      "resend": "重新发送验证邮件",
+      "resend": "重发验证邮件",
       "back-to-login": "返回登录"
     },
     "msg": {
       "success": "邮箱验证成功！现在可以登录了",
-      "resend-success": "验证邮件已重新发送",
-      "resend-error": "重发邮件失败",
+      "resend-success": "验证邮件发送成功",
+      "resend-error": "验证邮件发送失败",
       "sending": "发送中..."
     }
   },
@@ -283,24 +291,24 @@
     "roles": "用户角色",
     "select-roles": "选择角色",
     "update-roles": "更新角色",
-    "updating-roles": "更新中...",
-    "role-update-success": "用户角色更新成功",
+    "updating-roles": "正在更新角色...",
+    "role-update-success": "角色更新成功",
     "required": "必需",
     "role-labels": {
       "admin": "管理员",
-      "basic": "基础用户",
-      "no-roles": "无角色"
+      "basic": "基础用户"
     },
     "fields": {
+      "author": "作者",
       "email": "邮箱",
-      "phone-number": "联系电话",
+      "phone-number": "电话号码",
       "address": "地址",
       "profession": "职业",
       "blog": "博客",
-      "create-time": "注册时间",
-      "update-time": "最后更新"
+      "create-time": "创建时间",
+      "update-time": "更新时间"
     },
-    "no-data": "无可用的用户数据"
+    "no-data": "暂无数据"
   },
   "admin-table": {
     "title": "监管",
@@ -312,7 +320,44 @@
       "recommended": "推荐",
       "reason": "原因",
       "operation": "操作"
+    },
+    "content-types": {
+      "article": "文章",
+      "plan": "计划",
+      "vocabulary": "词汇",
+      "collection": "合集"
     }
+  },
+  "content-admin": {
+    "title": "内容监管",
+    "search-placeholder": "搜索内容...",
+    "total-count-tooltip": "找到的内容数量",
+    "no-description": "暂无描述",
+    "tabs": {
+      "all": "全部",
+      "banned": "已封禁",
+      "recommended": "已推荐"
+    },
+    "status": {
+      "banned": "已封禁",
+      "recommended": "已推荐",
+      "draft": "草稿"
+    },
+    "actions": {
+      "view-details": "查看详情",
+      "view-on-portal": "在门户查看",
+      "ban": "封禁",
+      "unban": "解封",
+      "recommend": "推荐",
+      "unrecommend": "取消推荐",
+      "delete": "删除"
+    },
+    "ban-success": "内容已成功封禁",
+    "unban-success": "内容已成功解封",
+    "recommend-success": "内容已成功推荐",
+    "unrecommend-success": "内容推荐已取消",
+    "delete-success": "内容已成功删除",
+    "delete-confirm": "确定要删除此内容吗？此操作不可撤销。"
   },
   "contents-page": {
     "filter": {
@@ -327,7 +372,7 @@
   },
   "msg": {
     "success": "操作成功",
-    "error": "操作失败"
+    "error": "操作失败，请重试"
   },
   "admin-pages-title": {
     "plans": "计划",
@@ -483,14 +528,14 @@
   },
   "dialog": {
     "delete": {
-      "title": "确定删除吗？",
-      "content": "此操作无法撤销，请确认是否继续删除操作？"
+      "title": "确认操作",
+      "content": "确定要执行此操作吗？此操作不可撤销。"
     },
     "cancel": "取消",
-    "confirm": "确定"
+    "confirm": "确认"
   },
   "topic": {
-    "label": "主题",
+    "label": "标签",
     "READING": "读书",
     "LANGUAGE": "外语",
     "TECHNICAL": "科技",
@@ -498,9 +543,9 @@
     "OTHER": "其他"
   },
   "content-stats": {
-    "title": "内容统计",
-    "view-count": "阅读量",
-    "like-count": "点赞数",
+    "title": "统计信息",
+    "view-count": "浏览量",
+    "like-count": "点赞量",
     "status": "状态",
     "draft": "草稿",
     "recommended": "已推荐",
@@ -509,8 +554,8 @@
     "portal-link": "门户链接",
     "view-on-portal": "在门户查看",
     "dates": "时间信息",
-    "created-date": "创建日期",
-    "published-date": "发布日期",
+    "created-date": "创建时间",
+    "published-date": "发布时间",
     "last-updated": "最后更新"
   },
   "content-redirector": {
@@ -518,5 +563,60 @@
     "content-not-available": "内容不可用或已被移除"
   },
   "admin": {
+  },
+  "comments": {
+    "section": {
+      "title": "评论",
+      "no-comments": "暂无评论，快来抢沙发吧！",
+      "loading": "加载评论中...",
+      "load-more": "加载更多评论",
+      "sign-in-to-comment": "请登录后发表评论",
+      "sign-in-prompt": "请",
+      "sign-in-link": "登录",
+      "to-comment": "后发表评论"
+    },
+    "form": {
+      "placeholder": "写下你的评论...",
+      "reply-placeholder": "回复 {{userName}}...",
+      "submit": "发表评论",
+      "cancel": "取消",
+      "submitting": "发表中...",
+      "sign-in-required": "请登录后发表评论",
+      "add-emoji": "添加表情",
+      "select-emoji": "选择表情"
+    },
+    "item": {
+      "just-now": "刚刚",
+      "minutes-ago": "{{count}}分钟前",
+      "hours-ago": "{{count}}小时前",
+      "days-ago": "{{count}}天前",
+      "reply": "回复",
+      "reply-to": "回复",
+      "like": "点赞",
+      "delete": "删除",
+      "show-replies": "显示{{count}}条回复",
+      "hide-replies": "隐藏回复",
+      "show-reply": "显示{{count}}条回复",
+      "hide-reply": "隐藏回复"
+    },
+    "actions": {
+      "like-success": "已点赞",
+      "unlike-success": "已取消点赞",
+      "delete-success": "评论删除成功",
+      "create-success": "评论发表成功",
+      "reply-success": "回复发表成功"
+    },
+    "errors": {
+      "sign-in-required": "请登录后{{action}}",
+      "like-failed": "点赞失败",
+      "delete-failed": "删除评论失败",
+      "create-failed": "发表评论失败",
+      "load-failed": "加载评论失败",
+      "empty-content": "评论内容不能为空"
+    },
+    "menu": {
+      "delete-confirm": "确定要删除这条评论吗？",
+      "delete-confirm-content": "此操作无法撤销。"
+    }
   }
 }

@@ -14,9 +14,14 @@ export default function ContentBanner(props: Readonly<{ contentId: string; title
         position: 'relative',
         width: '100%',
         height: {
-          xs: '320px',
-          sm: '350px',
-          md: '45vh',
+          xs: '280px',
+          sm: '320px',
+          md: '35vh',
+        },
+        minHeight: {
+          xs: '280px',
+          sm: '320px',
+          md: '320px',
         },
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',

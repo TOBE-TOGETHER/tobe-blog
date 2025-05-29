@@ -60,11 +60,11 @@ export default defineConfig({
     manifest: true,
     rollupOptions: {
       output: {
-        // 手动配置chunk分割
+        // Manual chunk splitting configuration
         manualChunks: {
-          // 将React相关库单独打包
+          // Bundle React-related libraries separately
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          // 将Material-UI相关库单独打包
+          // Bundle Material-UI related libraries separately
           'mui-vendor': [
             '@mui/material', 
             '@mui/icons-material', 
@@ -73,12 +73,12 @@ export default defineConfig({
             '@emotion/react',
             '@emotion/styled'
           ],
-          // 将编辑器相关库单独打包
+          // Bundle editor-related libraries separately
           'editor-vendor': [
             '@wangeditor/editor',
             '@wangeditor/editor-for-react'
           ],
-          // 将工具库单独打包
+          // Bundle utility libraries separately
           'utils-vendor': [
             'axios',
             'moment',
@@ -89,7 +89,7 @@ export default defineConfig({
             'notistack'
           ],
         },
-        // 为CSS文件使用内容哈希
+        // Use content hash for CSS files
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.') || [];
           const extType = info[info.length - 1];
@@ -101,21 +101,21 @@ export default defineConfig({
           }
           return `assets/[name].[hash].[ext]`;
         },
-        // 为JS文件使用内容哈希
+        // Use content hash for JS files
         chunkFileNames: 'assets/js/[name].[hash].js',
         entryFileNames: 'assets/js/[name].[hash].js',
       },
     },
-    // 提高chunk大小警告限制
+    // Increase chunk size warning limit
     chunkSizeWarningLimit: 1000,
-    // 启用源码映射以便调试（生产环境可关闭）
+    // Enable source maps for debugging (can be disabled in production)
     sourcemap: false,
-    // 压缩设置
+    // Minification settings
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, // 移除console.log
-        drop_debugger: true, // 移除debugger
+        drop_console: true, // Remove console.log
+        drop_debugger: true, // Remove debugger
       },
     },
   },

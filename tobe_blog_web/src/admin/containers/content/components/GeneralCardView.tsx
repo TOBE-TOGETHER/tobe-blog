@@ -2,15 +2,15 @@ import { Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useCommonUtils } from '../../../../commons';
 import { InfiniteScrollList } from '../../../../components';
-import { EOperationName } from '../../../../global/enums';
-import { IBaseUserContentDTO, IOperation, ITagOption } from '../../../../global/types';
+import { IBaseUserContentDTO, ITagOption } from '../../../../global/types';
 import BaseContentService from '../BaseContentService';
-import { GeneralCard } from './GeneralCard';
+import { GeneralCard } from '../../../components';
 
 interface IGeneralCardViewProps {
   contentService: BaseContentService;
   status: string;
   tagValues: ITagOption[];
+  keyword: string;
   setRecordFound: (v: number) => void;
   onClick?: (id: number | string) => void;
 }
@@ -18,6 +18,7 @@ interface IGeneralCardViewProps {
 interface ILoadDataOption {
   status: string;
   tagValues: ITagOption[];
+  keyword: string;
   reset: boolean;
 }
 
@@ -35,7 +36,7 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
       .get(
         DEFAULT_PAGE_SIZE,
         option.reset ? 1 : current + 1,
-        '',
+        option.keyword || '',
         option.status,
         option.tagValues.map(t => t.value)
       )
@@ -56,80 +57,14 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
   }
 
   useEffect(() => {
-    loadData({ status: props.status, tagValues: props.tagValues, reset: true });
-  }, [props.status, props.tagValues]);
-
-  function updateVisibility(id: number | string, visibility: 'PUBLIC' | 'PRIVATE') {
-    setLoading(true);
-    props.contentService
-      .updateVisibility(id, visibility)
-      .then(response => {
-        setData(
-          data.map(d => {
-            if (d.id === id) {
-              d.publicToAll = response.data.publicToAll;
-            }
-            return d;
-          })
-        );
-        enqueueSnackbar(t('msg.success'), {
-          variant: 'success',
-        });
-      })
-      .catch(error => {
-        console.error(error);
-        enqueueSnackbar(t('msg.error'), {
-          variant: 'error',
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-
-  function deleteById(id: number | string) {
-    setLoading(true);
-    props.contentService
-      .deleteById(id)
-      .then(() => {
-        setData(data.filter(d => d.id !== id));
-        enqueueSnackbar(t('msg.success'), {
-          variant: 'success',
-        });
-      })
-      .catch(error => {
-        console.error(error);
-        enqueueSnackbar(t('msg.error'), {
-          variant: 'error',
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-
-  const operations: IOperation[] = [
-    {
-      name: EOperationName.RELEASE,
-      onClick: (id: number | string) => updateVisibility(id, 'PUBLIC'),
-      hide: (data: any) => data.publicToAll,
-    },
-    {
-      name: EOperationName.RETRACT,
-      onClick: (id: number | string) => updateVisibility(id, 'PRIVATE'),
-      hide: (data: any) => !data.publicToAll,
-    },
-    {
-      name: EOperationName.DELETE,
-      onClick: (id: number | string) => deleteById(id),
-    },
-  ];
+    loadData({ status: props.status, tagValues: props.tagValues, keyword: props.keyword, reset: true });
+  }, [props.status, props.tagValues, props.keyword]);
 
   return (
     <Grid container>
       <InfiniteScrollList
         loading={loading}
-        option={{ status: props.status, tagValues: props.tagValues, reset: false }}
+        option={{ status: props.status, tagValues: props.tagValues, keyword: props.keyword, reset: false }}
         dataSource={data}
         hasMore={current < totalPage}
         loadMore={loadData}
@@ -138,7 +73,6 @@ export default function GeneralCardView(props: Readonly<IGeneralCardViewProps>) 
             key={`item-${record.id}`}
             record={record}
             onClick={props.onClick}
-            operations={operations}
           />
         )}
       />

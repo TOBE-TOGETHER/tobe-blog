@@ -2,8 +2,10 @@ import { Grid, Link, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCommonUtils } from '../../../../commons/index.ts';
+import { SEOHead } from '../../../../components';
 import { useAuthState } from '../../../../contexts';
 import { IArticleDetailDTO } from '../../../../global/types';
+import { useSEO } from '../../../../hooks';
 import { URL } from '../../../../routes';
 import * as PublicDataService from '../../../../services/PublicDataService.ts';
 import ContentReadingPage from '../ContentReadingPage.tsx';
@@ -31,62 +33,71 @@ export default function ArticleReadingPage() {
     loadArticle();
   }, [t, id, enqueueSnackbar]);
 
+  // Use SEO Hook
+  const seoData = useSEO({
+    content: article,
+    contentType: 'article',
+  });
+
   return (
-    <ContentReadingPage
-      content={article}
-      subTitle={article?.subTitle}
-      editLinkUrlPrefix={URL.ARTICLE_DETAIL}
-    >
-      {article?.contentProtected && !authState?.user?.id ? (
-        <Grid container>
-          <Grid
-            container
-            justifyContent="center"
-          >
-            <Typography
-              color="textSecondary"
-              variant="body2"
+    <>
+      {seoData && <SEOHead {...seoData} />}
+      <ContentReadingPage
+        content={article}
+        subTitle={article?.subTitle}
+        editLinkUrlPrefix={URL.ARTICLE_DETAIL}
+      >
+        {article?.contentProtected && !authState?.user?.id ? (
+          <Grid container>
+            <Grid
+              container
+              justifyContent="center"
             >
-              {article.description}
-            </Typography>
-            <Link href={URL.SIGN_IN}>
               <Typography
                 color="textSecondary"
-                variant="h5"
-                sx={{ mt: 2 }}
+                variant="body2"
               >
-                {t('article-reading-page.content-protected')}
+                {article.description}
               </Typography>
-            </Link>
+              <Link href={URL.SIGN_IN}>
+                <Typography
+                  color="textSecondary"
+                  variant="h5"
+                  sx={{ mt: 2 }}
+                >
+                  {t('article-reading-page.content-protected')}
+                </Typography>
+              </Link>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                my: '1vh',
+                px: 0,
+                mx: 0,
+                filter: 'blur(3px)',
+                userSelect: 'none',
+              }}
+            >
+              <RichContentReader htmlValue={article.content} />
+            </Grid>
           </Grid>
+        ) : (
           <Grid
             item
+            container
             xs={12}
             sx={{
-              my: '1vh',
+              my: 1,
               px: 0,
               mx: 0,
-              filter: 'blur(3px)',
-              userSelect: 'none',
             }}
           >
-            <RichContentReader htmlValue={article.content} />
+            {article && <RichContentReader htmlValue={article.content} />}
           </Grid>
-        </Grid>
-      ) : (
-        <Grid
-          item
-          container
-          xs={12}
-          sx={{
-            my: 1,
-            px: 0,
-            mx: 0,
-          }}
-        >
-          {article && <RichContentReader htmlValue={article.content} />}
-        </Grid>
-      )}
-    </ContentReadingPage>
+        )}
+      </ContentReadingPage>
+    </>
   );
 }

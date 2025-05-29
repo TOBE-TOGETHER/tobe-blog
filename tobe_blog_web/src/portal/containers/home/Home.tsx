@@ -1,5 +1,8 @@
-import styled from '@emotion/styled';
 import { Container, Typography } from '@mui/material';
+import styled from '@emotion/styled';
+import { useEffect } from 'react';
+import { SEOHead, generateWebsiteStructuredData } from '../../../components';
+import config from '../../../../customization.json';
 import { Theme } from '@mui/material/styles';
 import { useCommonUtils } from '../../../commons';
 import { CreateSpeedDial, FloatingElementContainer, PortalLayout, RecentContentsPanel } from '../../components';
@@ -56,53 +59,74 @@ const LogoText = styled.h1`
 
 export default function Home() {
   const { t } = useCommonUtils();
+  useEffect(() => {
+    window.document.title = config.title;
+    return () => {
+      window.document.title = config.title;
+    };
+  }, []);
+
+  // Generate SEO data
+  const seoData = {
+    title: config.title,
+    description: config.description,
+    keywords: config.keywords,
+    image: config.image,
+    url: config.baseUrl,
+    type: 'website' as const,
+    structuredData: generateWebsiteStructuredData(),
+  };
+
   return (
-    <PortalLayout
-      headerStyles={{ backgroundColor: 'transparent', position: 'relative', zIndex: 5 }}
-      bodyStyles={{
-        background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)',
-        position: 'relative',
-        overflow: 'hidden',
-        width: '100%',
-        maxWidth: '100vw',
-      }}
-    >
-      {/* Floating elements container */}
-      <FloatingElementContainer />
-      <HeroSection>
-        <Container
-          maxWidth="md"
-          sx={{
-            position: 'relative',
-            zIndex: 2,
-            overflow: 'hidden',
-            px: { xs: 2, sm: 3 },
-          }}
-        >
-          <LogoContainer>
-            <LogoText>Tobe Blog</LogoText>
-          </LogoContainer>
-          <Typography
-            variant="h5"
+    <>
+      <SEOHead {...seoData} />
+      <PortalLayout
+        headerStyles={{ backgroundColor: 'transparent', position: 'relative', zIndex: 5 }}
+        bodyStyles={{
+          background: 'linear-gradient(135deg, #E6F0FA, #F0FFF0)',
+          position: 'relative',
+          overflow: 'hidden',
+          width: '100%',
+          maxWidth: '100vw',
+        }}
+      >
+        {/* Floating elements container */}
+        <FloatingElementContainer />
+        <HeroSection>
+          <Container
+            maxWidth="md"
             sx={{
-              fontSize: { xs: '1.5rem', md: '2.5rem' },
-              color: 'text.secondary',
-              fontWeight: 500,
-              textShadow: '0 2px 4px rgba(0,0,0,0.1)',
               position: 'relative',
               zIndex: 2,
+              overflow: 'hidden',
+              px: { xs: 2, sm: 3 },
             }}
           >
-            {t('home-page.slogan')}
-          </Typography>
-        </Container>
-      </HeroSection>
-      <TopicSection />
-      <RecentContentsPanel />
-      <AdvantagesSection />
-      
-      {/* SpeedDial for authenticated users */}
-      <CreateSpeedDial />
-    </PortalLayout>
+            <LogoContainer>
+              <LogoText>Tobe Blog</LogoText>
+            </LogoContainer>
+            <Typography
+              variant="h5"
+              sx={{
+                fontSize: { xs: '1.5rem', md: '2.5rem' },
+                color: 'text.secondary',
+                fontWeight: 500,
+                textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                position: 'relative',
+                zIndex: 2,
+              }}
+            >
+              {t('home-page.slogan')}
+            </Typography>
+          </Container>
+        </HeroSection>
+        <TopicSection />
+        <RecentContentsPanel />
+        <AdvantagesSection />
+
+        {/* SpeedDial for authenticated users */}
+        <CreateSpeedDial />
+      </PortalLayout>
+    </>
   );
 }

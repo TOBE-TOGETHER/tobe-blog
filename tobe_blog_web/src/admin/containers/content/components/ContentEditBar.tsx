@@ -31,6 +31,11 @@ export default function ComtentEditBar(props: Readonly<{
     setDrawerOpen(false);
   };
 
+  const handleContentDeleted = () => {
+    // Content was deleted, navigate back
+    navigate(-1);
+  };
+
   return (
     <>
       <Grid
@@ -84,6 +89,8 @@ export default function ComtentEditBar(props: Readonly<{
         content={props.contentData || null}
         open={drawerOpen}
         onClose={handleDrawerClose}
+        service={props.service}
+        onDelete={handleContentDeleted}
       />
     </>
   );

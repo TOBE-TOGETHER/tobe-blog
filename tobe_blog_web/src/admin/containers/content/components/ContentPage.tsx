@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Page } from '../../../components';
+import { Page } from '../../../../components/layout';
 import { IBaseUserContentDTO } from '../../../../global/types';
 import BaseContentService from '../BaseContentService';
 import ContentEditBar from './ContentEditBar';
