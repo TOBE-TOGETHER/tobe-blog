@@ -127,7 +127,6 @@ export default function ContentDetailDrawer({
         open={open}
         onClose={onClose}
         title={t('content-admin.actions.view-details')}
-        width={{ xs: '100%', sm: 400 }}
       >
         <Box sx={{ p: 3, textAlign: 'center' }}>
           <Typography variant="body2" color="text.secondary">
@@ -217,7 +216,6 @@ export default function ContentDetailDrawer({
         open={open}
         onClose={onClose}
         title={t('content-admin.actions.view-details')}
-        width={{ xs: '100%', sm: 400 }}
         actionButtons={renderActionButtons()}
       >
         {/* Content Header */}

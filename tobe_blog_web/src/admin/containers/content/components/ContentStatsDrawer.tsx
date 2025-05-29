@@ -99,7 +99,6 @@ export default function ContentStatsDrawer(props: Readonly<IContentStatsDrawerPr
         open={props.open}
         onClose={props.onClose}
         title={t('content-stats.title')}
-        width={{ xs: '100%', sm: 400 }}
         actionButtons={renderActionButtons()}
       >
         {/* Statistics */}
