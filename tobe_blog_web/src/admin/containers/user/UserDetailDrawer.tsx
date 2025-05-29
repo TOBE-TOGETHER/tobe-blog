@@ -350,7 +350,7 @@ export default function UserDetailDrawer({ open, onClose, userId, onDelete }: IU
                       return (
                         <Chip 
                           key={value} 
-                          label={roleInfo?.label || value} 
+                          label={roleInfo?.label ?? value} 
                           size="small" 
                         />
                       );

@@ -26,7 +26,7 @@ export default function PlanReadingPage() {
           });
         });
     }
-    loadProject(id || '');
+    loadProject(id ?? '');
   }, [enqueueSnackbar, t, id]);
 
   // Use SEO Hook

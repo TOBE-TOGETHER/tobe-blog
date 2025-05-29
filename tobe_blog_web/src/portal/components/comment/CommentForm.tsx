@@ -192,7 +192,7 @@ export default function CommentForm({
             type="submit"
             variant="contained"
             size="small"
-            disabled={submitting || !content.trim()}
+            disabled={submitting ?? !content.trim()}
             startIcon={submitting ? <CircularProgress size={16} color="inherit" /> : null}
             sx={{
               borderRadius: '20px',

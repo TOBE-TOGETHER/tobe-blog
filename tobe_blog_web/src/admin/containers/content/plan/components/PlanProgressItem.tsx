@@ -1,5 +1,5 @@
 import { Grid, Paper, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TimeFormat, useCommonUtils } from '../../../../../commons';
 import { IPlanProgress } from '../../../../../global/types';
 import { EditIconButton } from '../../../../components';
@@ -14,7 +14,6 @@ export default function PlanProgressItem(props: Readonly<IPlanProgressItemProps>
   const { t, enqueueSnackbar } = useCommonUtils();
   const [progress, setProgress] = useState<IPlanProgress>(props.progress);
   const [editable, setEditable] = useState<boolean>(false);
-  // const [imageURLs, setImageURLs] = useState<string[]>([]);
   const [progressDesc, setProgressDesc] = useState<string>(props.progress.description);
 
   const handleEditableChange = () => {
@@ -23,16 +22,6 @@ export default function PlanProgressItem(props: Readonly<IPlanProgressItemProps>
     }
     setEditable(!editable);
   };
-
-  useEffect(() => {
-    // function loadImages() {
-    //   PublicDataService.getBySrcIdAndFileType(props.progress.id, 'PLAN_PIC').then(response => {
-    //     let imageUrls = response.data.map((f: { downloadURL: string }) => f.downloadURL);
-    //     setImageURLs(imageUrls);
-    //   });
-    // }
-    // loadImages();
-  }, [props.progress.id]);
 
   function handleProgressUpdate(): void {
     PlanProgressService.updateProgress({

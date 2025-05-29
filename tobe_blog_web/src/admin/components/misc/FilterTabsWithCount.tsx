@@ -46,7 +46,7 @@ export default function FilterTabsWithCount({
         alignSelf="center"
         px={2}
       >
-        <Tooltip title={countTooltip || ''}>
+        <Tooltip title={countTooltip ?? ''}>
           <Typography
             variant="subtitle2"
             color="textSecondary"

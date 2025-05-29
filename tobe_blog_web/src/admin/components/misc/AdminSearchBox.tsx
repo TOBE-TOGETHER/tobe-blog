@@ -22,7 +22,7 @@ export default function AdminSearchBox({
 }: IAdminSearchBoxProps) {
   const { t } = useCommonUtils();
 
-  const defaultPlaceholder = placeholder || t('content-admin.search-placeholder');
+  const defaultPlaceholder = placeholder ?? t('content-admin.search-placeholder');
 
   return (
     <TextField

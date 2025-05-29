@@ -68,7 +68,7 @@ export function formatCommentDate(dateString: string, t: (key: string, options?:
   }
   
   // 30天之后显示具体日期和时间，根据语言环境格式化
-  const currentLang = i18n.language || 'en';
+  const currentLang = i18n.language ?? 'en';
   const locale = currentLang === 'zh' ? 'zh-CN' : 'en-US';
   
   const options: Intl.DateTimeFormatOptions = {

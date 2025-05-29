@@ -74,7 +74,7 @@ export default function CollectionTreeRenderer({
     if (!collection) {
       return (
         <Typography color="textSecondary">
-          {noDataMessage || t('collection-reading-page.tip.tba')}
+          {noDataMessage ?? t('collection-reading-page.tip.tba')}
         </Typography>
       );
     }
@@ -254,7 +254,7 @@ const ToBeContinuedTip = (props: { message?: string }): JSX.Element => {
       xs={12}
     >
       <Typography color={'textSecondary'}>
-        {props.message || t('collection-reading-page.tip.tba')}
+        {props.message ?? t('collection-reading-page.tip.tba')}
       </Typography>
     </Grid>
   );

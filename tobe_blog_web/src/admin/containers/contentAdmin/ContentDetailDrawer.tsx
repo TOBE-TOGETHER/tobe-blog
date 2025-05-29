@@ -9,23 +9,18 @@ import {
   Chip,
   Tooltip,
   IconButton,
-  Grid,
   Divider
 } from '@mui/material';
 import {
-  Visibility as VisibilityIcon,
-  Favorite as FavoriteIcon,
   Block as BlockIcon,
   CheckCircle as CheckCircleIcon,
   Star as StarIcon,
   StarBorder as StarBorderIcon,
   Launch as LaunchIcon,
-  Recommend as RecommendIcon,
-  Warning as WarningIcon
 } from '@mui/icons-material';
 import { useCallback, useState } from 'react';
-import { useCommonUtils, TimeFormat } from '../../../commons';
-import { BaseDrawer } from '../../components';
+import { useCommonUtils } from '../../../commons';
+import { BaseDrawer, ContentStatsSection, ContentStatusChips, ContentDatesSection } from '../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import * as ContentAdminService from './ContentAdminService';
 
@@ -163,33 +158,6 @@ export default function ContentDetailDrawer({
     }
   };
 
-  // Render stat item - reused from ContentStatsDrawer
-  const renderStatItem = (icon: React.ReactElement, label: string, value: number, color: string) => (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      {icon}
-      <Box>
-        <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
-          {label}
-        </Typography>
-        <Typography variant="h5" sx={{ fontWeight: 'bold', color }}>
-          {value?.toLocaleString() || 0}
-        </Typography>
-      </Box>
-    </Box>
-  );
-
-  // Render date item - reused from ContentStatsDrawer
-  const renderDateItem = (label: string, date: string | undefined) => (
-    <Box sx={{ mb: 2 }}>
-      <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600, fontSize: '0.75rem', mb: 0.25 }}>
-        {label}
-      </Typography>
-      <Typography variant="body2">
-        {TimeFormat.dateAndTimeFormat(date)}
-      </Typography>
-    </Box>
-  );
-
   const renderActionButtons = () => (
     <>
       {content.banned ? (
@@ -304,83 +272,17 @@ export default function ContentDetailDrawer({
           </CardContent>
         </Card>
 
-        {/* Statistics - reused design from ContentStatsDrawer */}
-        <Card sx={cardStyle}>
-          <CardContent>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
-              {t('content-stats.title')}
-            </Typography>
-            
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                {renderStatItem(
-                  <VisibilityIcon sx={{ color: theme.palette.primary.main, fontSize: '2rem' }} />,
-                  t('content-stats.view-count'),
-                  content.viewCount,
-                  theme.palette.primary.main
-                )}
-              </Grid>
-              <Grid item xs={6}>
-                {renderStatItem(
-                  <FavoriteIcon sx={{ color: '#e91e63', fontSize: '2rem' }} />,
-                  t('content-stats.like-count'),
-                  content.likeCount,
-                  '#e91e63'
-                )}
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
+        {/* Statistics - using shared component */}
+        <ContentStatsSection content={content} cardStyle={cardStyle} />
 
-        {/* Status - reused design from ContentStatsDrawer */}
+        {/* Status - using shared component */}
         <Card sx={cardStyle}>
           <CardContent>
             <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
               {t('content-stats.status')}
             </Typography>
             
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-              {!content.publicToAll && (
-                <Chip
-                  label={t('content-admin.status.draft')}
-                  variant="outlined"
-                  size="small"
-                  sx={{ 
-                    color: theme.palette.warning.main,
-                    borderColor: theme.palette.warning.main
-                  }}
-                />
-              )}
-              {content.recommended && (
-                <Chip
-                  icon={<RecommendIcon />}
-                  label={t('content-admin.status.recommended')}
-                  size="small"
-                  sx={{ 
-                    backgroundColor: '#FFD700', 
-                    color: '#000',
-                    fontWeight: 'bold'
-                  }}
-                />
-              )}
-              {content.banned && (
-                <Chip
-                  icon={<WarningIcon />}
-                  label={t('content-admin.status.banned')}
-                  color="error"
-                  size="small"
-                  sx={{ fontWeight: 'bold' }}
-                />
-              )}
-              {content.publicToAll && !content.recommended && !content.banned && (
-                <Chip
-                  label={t('components.general-card-view.published')}
-                  variant="outlined"
-                  size="small"
-                  sx={{ color: theme.palette.success.main, borderColor: theme.palette.success.main }}
-                />
-              )}
-            </Box>
+            <ContentStatusChips content={content} variant="admin" />
           </CardContent>
         </Card>
 
@@ -407,20 +309,8 @@ export default function ContentDetailDrawer({
 
         <Divider sx={{ my: 3 }} />
 
-        {/* Dates - reused design from ContentStatsDrawer */}
-        <Card sx={{ ...cardStyle, mb: 0 }}>
-          <CardContent>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
-              {t('content-stats.dates')}
-            </Typography>
-            
-            {renderDateItem(t('content-stats.created-date'), content.createTime)}
-            
-            {content.publicToAll && renderDateItem(t('content-stats.published-date'), content.publishTime)}
-            
-            {renderDateItem(t('content-stats.last-updated'), content.updateTime)}
-          </CardContent>
-        </Card>
+        {/* Dates - using shared component */}
+        <ContentDatesSection content={content} cardStyle={cardStyle} isLastCard={true} />
       </BaseDrawer>
     </>
   );

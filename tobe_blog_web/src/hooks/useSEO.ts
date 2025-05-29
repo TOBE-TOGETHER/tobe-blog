@@ -139,9 +139,9 @@ export function useSEO({ content, profile, contentType, defaultDescription, defa
     if (contentType === 'profile' && profile) {
       const typeConfig = CONTENT_TYPE_CONFIG[contentType];
       const fullName = `${profile.firstName} ${profile.lastName}`.trim();
-      const description = profile.introduction || profile.blog || defaultDescription || typeConfig.defaultDescription;
+      const description = profile.introduction ?? profile.blog ?? defaultDescription ?? typeConfig.defaultDescription;
       
-      const keywords = [fullName, profile.profession, 'profile', 'user', 'blog', 'learning'].filter(Boolean).join(', ') || defaultKeywords || typeConfig.defaultKeywords;
+      const keywords = [fullName, profile.profession, 'profile', 'user', 'blog', 'learning'].filter(Boolean).join(', ') ?? defaultKeywords ?? typeConfig.defaultKeywords;
 
       const url = generateContentUrl(contentType, profile.id);
 
@@ -149,7 +149,7 @@ export function useSEO({ content, profile, contentType, defaultDescription, defa
         title: `${fullName} | ${config.title}`,
         description: description,
         author: fullName,
-        image: profile.avatarUrl || profile.photoImg || config.image,
+        image: profile.avatarUrl ?? profile.photoImg ?? config.image,
         url: url,
       };
 
@@ -157,7 +157,7 @@ export function useSEO({ content, profile, contentType, defaultDescription, defa
         title: `${fullName} | ${config.title}`,
         description,
         keywords,
-        image: profile.avatarUrl || profile.photoImg || config.image,
+        image: profile.avatarUrl ?? profile.photoImg ?? config.image,
         url: url,
         type: 'profile' as const,
         author: fullName,
@@ -171,19 +171,19 @@ export function useSEO({ content, profile, contentType, defaultDescription, defa
     if (!content) return null;
 
     const typeConfig = CONTENT_TYPE_CONFIG[contentType];
-    const description = content.description || (contentType === 'article' ? (content as any).subTitle : '') || defaultDescription || typeConfig.defaultDescription;
+    const description = content.description ?? (contentType === 'article' ? (content as any).subTitle : '') ?? defaultDescription ?? typeConfig.defaultDescription;
 
-    const keywords = content.tags?.map(tag => tag.label).join(', ') || defaultKeywords || typeConfig.defaultKeywords;
+    const keywords = content.tags?.map(tag => tag.label).join(', ') ?? defaultKeywords ?? typeConfig.defaultKeywords;
 
     const url = generateContentUrl(contentType, content.id);
 
     const baseStructuredData = {
       title: content.title,
       description: description,
-      author: content.ownerName || 'Tobe Blog',
+      author: content.ownerName ?? 'Tobe Blog',
       publishedTime: content.createTime,
       modifiedTime: content.updateTime,
-      image: content.coverImgUrl || config.image,
+      image: content.coverImgUrl ?? config.image,
       url: url,
     };
 
@@ -191,14 +191,14 @@ export function useSEO({ content, profile, contentType, defaultDescription, defa
       title: `${content.title} | ${config.title}`,
       description,
       keywords,
-      image: content.coverImgUrl || config.image,
+      image: content.coverImgUrl ?? config.image,
       url: url,
       type: 'article' as const,
       publishedTime: content.createTime,
       modifiedTime: content.updateTime,
-      author: content.ownerName || 'Tobe Blog',
+      author: content.ownerName ?? 'Tobe Blog',
       section: typeConfig.section,
-      tags: content.tags?.map(tag => tag.label) || [],
+      tags: content.tags?.map(tag => tag.label) ?? [],
       structuredData: generateStructuredDataByType(content, contentType, baseStructuredData),
     };
   }, [content, profile, contentType, defaultDescription, defaultKeywords]);

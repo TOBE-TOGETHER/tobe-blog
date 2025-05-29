@@ -3,15 +3,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Box, Container, IconButton, InputAdornment, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
 
-export function SearchBox(props: { 
+export function SearchBox(props: Readonly<{
   setKeyword: (keyword: string) => void;
   initialValue?: string;
-}) {
+}>) {
   const [searchValue, setSearchValue] = useState<string>(props.initialValue || '');
 
   // Update search value when initialValue changes (for URL parameter changes)
   useEffect(() => {
-    setSearchValue(props.initialValue || '');
+    setSearchValue(props.initialValue ?? '');
   }, [props.initialValue]);
 
   const handleClear = () => {

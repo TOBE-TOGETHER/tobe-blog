@@ -129,7 +129,7 @@ export default function ContentAdminPage() {
   }, [contents, selectedContent]);
 
   const handleCardClick = useCallback((contentId: number | string): void => {
-    setSelectedContent(contents.find(c => c.id === contentId) || null);
+    setSelectedContent(contents.find(c => c.id === contentId) ?? null);
     setDrawerOpen(true);
   }, [contents]);
 

@@ -11,7 +11,6 @@ export default function PlanProgressModal(props: Readonly<{ planId: string; view
   const [newProgress, setNewProgress] = useState<string>('');
   const [images, setImages] = useState<any>([]);
   const [refreshCode, setRefreshCode] = useState<number>(new Date().getTime());
-  // const [imageURLs, setImageURLs] = useState<string[]>([]);
 
   function onImageChange(e: any) {
     setImages([...e.target.files]);
@@ -21,9 +20,6 @@ export default function PlanProgressModal(props: Readonly<{ planId: string; view
     if (images.length < 1) {
       return;
     }
-    // const newImageUrls: any = [];
-    // images.forEach((image: any) => newImageUrls.push(URL.createObjectURL(image)));
-    // setImageURLs(newImageUrls);
   }, [props.planId, images]);
 
   function handleProgressCreation(): void {
@@ -45,7 +41,6 @@ export default function PlanProgressModal(props: Readonly<{ planId: string; view
       .then(() => {
         setNewProgress('');
         setImages([]);
-        // setImageURLs([]);
         setRefreshCode(new Date().getTime());
         enqueueSnackbar(t('msg.success'), {
           variant: 'success',
