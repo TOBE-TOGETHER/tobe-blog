@@ -43,6 +43,7 @@ export default function FunctionSection(
     const params = new URLSearchParams();
     if (contentTypeParam) params.set('ct', contentTypeParam);
     if (tagsParam) params.set('g', tagsParam);
+    if (props.keyword.trim()) params.set('k', props.keyword.trim());
     window.history.pushState(null, '', `?${params.toString()}`);
   }
 
@@ -53,6 +54,7 @@ export default function FunctionSection(
     const params = new URLSearchParams();
     if (contentTypeParam) params.set('ct', contentTypeParam);
     if (tagsParam) params.set('g', tagsParam);
+    if (props.keyword.trim()) params.set('k', props.keyword.trim());
     window.history.pushState(null, '', `?${params.toString()}`);
   }
 

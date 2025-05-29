@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
 import { InfiniteScrollList } from '../../../components';
@@ -19,7 +20,13 @@ interface ILoadDataOption {
 
 export default function UsersPage() {
   const { t, enqueueSnackbar } = useCommonUtils();
+  const [searchParams, setSearchParams] = useSearchParams();
   const DEFAULT_PAGE_SIZE = 12;
+  
+  // Initialize state from URL parameters
+  const paramKeyword: string = searchParams.get('keyword') ?? '';
+  const paramEmailVerified: string = searchParams.get('emailVerified') ?? '';
+  
   const [users, setUsers] = useState<IUserData[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -28,8 +35,22 @@ export default function UsersPage() {
   
   const [selectedUserId, setSelectedUserId] = useState<number | string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const [searchKeyword, setSearchKeyword] = useState<string>('');
-  const [emailVerificationFilter, setEmailVerificationFilter] = useState<string>('');
+  const [searchKeyword, setSearchKeyword] = useState<string>(paramKeyword);
+  const [emailVerificationFilter, setEmailVerificationFilter] = useState<string>(paramEmailVerified);
+
+  // Update URL when state changes
+  const updateURL = useCallback((newKeyword: string, newEmailVerified: string) => {
+    const params = new URLSearchParams();
+    
+    if (newKeyword.trim()) {
+      params.set('keyword', newKeyword.trim());
+    }
+    if (newEmailVerified) {
+      params.set('emailVerified', newEmailVerified);
+    }
+    
+    setSearchParams(params);
+  }, [setSearchParams]);
 
   function loadData(option: ILoadDataOption): void {
     if (loading) return; // Prevent duplicate requests
@@ -101,8 +122,15 @@ export default function UsersPage() {
   }, []);
 
   const handleSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchKeyword(event.target.value);
-  }, []);
+    const newKeyword = event.target.value;
+    setSearchKeyword(newKeyword);
+    updateURL(newKeyword, emailVerificationFilter);
+  }, [emailVerificationFilter, updateURL]);
+
+  const handleEmailVerificationChange = useCallback((newEmailVerified: string) => {
+    setEmailVerificationFilter(newEmailVerified);
+    updateURL(searchKeyword, newEmailVerified);
+  }, [searchKeyword, updateURL]);
 
   const renderUserCard = (user: IUserData) => (
     <UserCard
@@ -138,7 +166,7 @@ export default function UsersPage() {
       {/* Tabs and Count */}
       <FilterTabsWithCount
         value={emailVerificationFilter}
-        onChange={setEmailVerificationFilter}
+        onChange={handleEmailVerificationChange}
         tabs={[
           { label: '全部', value: '' },
           { label: '已验证', value: 'true' },

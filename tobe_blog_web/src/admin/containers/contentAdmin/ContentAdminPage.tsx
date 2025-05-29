@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import { useCommonUtils } from '../../../commons/index.ts';
 import { Page } from '../../../components/layout';
 import { InfiniteScrollList } from '../../../components';
@@ -16,17 +17,37 @@ interface ILoadDataOption {
 
 export default function ContentAdminPage() {
   const { t, enqueueSnackbar } = useCommonUtils();
+  const [searchParams, setSearchParams] = useSearchParams();
   const DEFAULT_PAGE_SIZE = 12;
+  
+  // Initialize state from URL parameters
+  const paramKeyword: string = searchParams.get('keyword') ?? '';
+  const paramStatus: string = searchParams.get('status') ?? '';
+  
   const [contents, setContents] = useState<IBaseUserContentDTO[]>([]);
   const [current, setCurrent] = useState<number>(0);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   
-  const [searchKeyword, setSearchKeyword] = useState<string>('');
-  const [statusFilter, setStatusFilter] = useState<string>('');
+  const [searchKeyword, setSearchKeyword] = useState<string>(paramKeyword);
+  const [statusFilter, setStatusFilter] = useState<string>(paramStatus);
   const [selectedContent, setSelectedContent] = useState<IBaseUserContentDTO | null>(null);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+  // Update URL when state changes
+  const updateURL = useCallback((newKeyword: string, newStatus: string) => {
+    const params = new URLSearchParams();
+    
+    if (newKeyword.trim()) {
+      params.set('keyword', newKeyword.trim());
+    }
+    if (newStatus) {
+      params.set('status', newStatus);
+    }
+    
+    setSearchParams(params);
+  }, [setSearchParams]);
 
   function loadData(option: ILoadDataOption): void {
     if (loading) return; // Prevent duplicate requests
@@ -118,8 +139,15 @@ export default function ContentAdminPage() {
   }, []);
 
   const handleSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchKeyword(event.target.value);
-  }, []);
+    const newKeyword = event.target.value;
+    setSearchKeyword(newKeyword);
+    updateURL(newKeyword, statusFilter);
+  }, [statusFilter, updateURL]);
+
+  const handleStatusChange = useCallback((newStatus: string) => {
+    setStatusFilter(newStatus);
+    updateURL(searchKeyword, newStatus);
+  }, [searchKeyword, updateURL]);
 
   const renderContentCard = (content: IBaseUserContentDTO) => (
     <GeneralCard
@@ -155,7 +183,7 @@ export default function ContentAdminPage() {
       {/* Tabs and Count */}
       <FilterTabsWithCount
         value={statusFilter}
-        onChange={setStatusFilter}
+        onChange={handleStatusChange}
         tabs={[
           { label: t('content-admin.tabs.all'), value: '' },
           { label: t('content-admin.tabs.banned'), value: 'banned' },

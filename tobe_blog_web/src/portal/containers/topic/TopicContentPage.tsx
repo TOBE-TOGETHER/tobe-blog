@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
-import { useEffect, useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import config from '../../../../customization.json';
 import { useCommonUtils } from '../../../commons';
 import { SEOHead, generateWebsiteStructuredData } from '../../../components';
@@ -11,8 +11,28 @@ import { SearchBox } from './SearchBox';
 
 export default function TopicContentPage() {
   const { id } = useParams();
-  const [keyword, setKeyword] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
   const { t } = useCommonUtils();
+  
+  // Initialize keyword from URL parameter (changed from 'keyword' to 'k')
+  const paramKeyword: string = searchParams.get('k') ?? '';
+  const [keyword, setKeyword] = useState<string>(paramKeyword);
+
+  // Update URL when keyword changes
+  const updateURL = useCallback((newKeyword: string) => {
+    const params = new URLSearchParams();
+    
+    if (newKeyword.trim()) {
+      params.set('k', newKeyword.trim());
+    }
+    
+    setSearchParams(params);
+  }, [setSearchParams]);
+
+  const handleKeywordChange = useCallback((newKeyword: string) => {
+    setKeyword(newKeyword);
+    updateURL(newKeyword);
+  }, [updateURL]);
   
   useEffect(() => {
     window.document.title = `${config.title} - ${t(`home-page.categories.${id}.title`)}`;
@@ -51,7 +71,10 @@ export default function TopicContentPage() {
         >
           {t(`home-page.categories.${id}.title`)}
         </Typography>
-        <SearchBox setKeyword={setKeyword} />
+        <SearchBox 
+          setKeyword={handleKeywordChange}
+          initialValue={paramKeyword}
+        />
         <FunctionSection
           sx={{ mt: 2 }}
           extraPanels={[]}
