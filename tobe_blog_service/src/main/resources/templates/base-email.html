@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset - Tobe Blog</title>
+    <title th:text="${emailTitle}">Tobe Blog</title>
     <style>
+        /* Base Email Styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -33,6 +34,12 @@
         .content {
             padding: 30px 20px;
         }
+        .content h2 {
+            color: #333333;
+            margin: 0 0 20px 0;
+            font-weight: 600;
+            font-size: 20px;
+        }
         .button {
             display: inline-block;
             padding: 12px 24px;
@@ -42,6 +49,7 @@
             text-decoration: none;
             border-radius: 4px;
             font-weight: 600;
+            text-align: center;
         }
         .button:hover {
             background-color: #303f9f;
@@ -58,6 +66,13 @@
             padding: 15px;
             border-left: 4px solid #3f51b5;
             background-color: #f5f5f5;
+            word-break: break-all;
+        }
+        .warning {
+            margin: 15px 0;
+            padding: 15px;
+            border-left: 4px solid #ff9800;
+            background-color: #fff3cd;
         }
         .code {
             font-family: monospace;
@@ -65,38 +80,64 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
+        .greeting {
+            margin-bottom: 20px;
+        }
+        .signature {
+            margin-top: 30px;
+        }
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .url-info {
+            margin: 20px 0;
+        }
+        .support-link {
+            color: #3f51b5;
+            text-decoration: none;
+        }
+        .support-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header Section -->
         <div class="header">
             <h1>Tobe Blog</h1>
         </div>
+        
+        <!-- Content Section -->
         <div class="content">
-            <h2>Password Reset Request</h2>
-            <p>Hello <span th:text="${name}">User</span>,</p>
-            <p>We received your request to reset the password for your Tobe Blog account. If you didn't make this request, you can safely ignore this email.</p>
+            <h2 th:text="${emailSubject}">Email Subject</h2>
             
-            <p>To reset your password, please click the button below:</p>
-            <div style="text-align: center;">
-                <a class="button" th:href="${resetUrl}">Reset My Password</a>
+            <div class="greeting">
+                <p>Hello <span th:text="${recipientName}">User</span>,</p>
             </div>
             
-            <p>Or copy and paste the following URL into your browser:</p>
-            <div class="info">
-                <span th:text="${resetUrl}">https://example.com/reset-password</span>
+            <!-- Main Content Block - to be replaced by specific templates -->
+            <div th:replace="~{${contentTemplate} :: content}">
+                <p>Main content will be inserted here</p>
             </div>
             
-            <p>This link will expire in <span th:text="${expiryMinutes}">5</span> minutes.</p>
+            <!-- Support Contact -->
+            <p>If you're having trouble, please contact our support team at 
+               <a href="mailto:support@tobe.com" class="support-link">support@tobe.com</a>.
+            </p>
             
-            <p>If you're having trouble, please contact our support team at <a href="mailto:support@tobe.com">support@tobe.com</a>.</p>
-            
-            <p>Best Regards,<br>
-            The Tobe Blog Team</p>
+            <!-- Signature -->
+            <div class="signature">
+                <p>Best Regards,<br>
+                The Tobe Blog Team</p>
+            </div>
         </div>
+        
+        <!-- Footer Section -->
         <div class="footer">
             <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Tobe Blog. All rights reserved.</p>
-            <p>This email was sent to <span th:text="${email}">user@example.com</span> as part of your Tobe Blog account activities.</p>
+            <p>This email was sent to <span th:text="${recipientEmail}">your registered email</span> as part of your Tobe Blog account activities.</p>
         </div>
     </div>
 </body>

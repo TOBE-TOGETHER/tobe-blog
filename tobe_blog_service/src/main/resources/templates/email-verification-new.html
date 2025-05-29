@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:with="emailTitle='Email Verification - Tobe Blog',
+               emailSubject='Email Verification',
+               recipientName=${firstName},
+               recipientEmail=${email},
+               contentTemplate='fragments/email-verification-content'">
+<head th:replace="base-email :: head"></head>
+<body th:replace="base-email :: body">
+</body>
+</html> 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Email Verification Content Fragment -->
+    <div th:fragment="content">
+        <p>Thank you for registering with our platform! To ensure account security, please click the button below to verify your email address.</p>
+        
+        <div class="button-container">
+            <a class="button" th:href="${verificationLink}">Verify Email Address</a>
+        </div>
+        
+        <div class="url-info">
+            <p>Or copy and paste the following URL into your browser:</p>
+            <div class="info">
+                <span th:text="${verificationLink}">https://example.com/verify-email</span>
+            </div>
+        </div>
+        
+        <div class="warning">
+            <strong>Important Notice:</strong>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                <li>This verification link will expire in <span th:text="${expirationMinutes}">60</span> minutes</li>
+                <li>If you did not register for our service, please ignore this email</li>
+                <li>Please do not forward this email to others</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 
