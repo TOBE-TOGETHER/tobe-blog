@@ -1,11 +1,9 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { Grid, IconButton } from '@mui/material';
 import { useState } from 'react';
 import { useCommonUtils } from '../../../../commons';
 import { IBaseUserContentDTO } from '../../../../global/types';
 import { EditIconButton, InfoIconButton } from '../../../components';
-import Dialogx from '../../../components/dialog/Dialogx';
 import BaseContentService from '../BaseContentService';
 import ContentStatsDrawer from './ContentStatsDrawer';
 import { VisibilitySwitch } from './VisibilitySwitch';
@@ -18,10 +16,8 @@ export default function ComtentEditBar(props: Readonly<{
   onVisibilityChange?: () => void;
   contentData?: IBaseUserContentDTO | null;
 }>) {
-  const { navigate, t, enqueueSnackbar } = useCommonUtils();
+  const { navigate } = useCommonUtils();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
-  const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -35,30 +31,9 @@ export default function ComtentEditBar(props: Readonly<{
     setDrawerOpen(false);
   };
 
-  const handleDeleteClick = () => {
-    setDeleteDialogOpen(true);
-  };
-
-  const handleDeleteConfirm = () => {
-    if (!props.id) return;
-    
-    setDeleteLoading(true);
-    props.service.deleteById(props.id)
-      .then(() => {
-        enqueueSnackbar(t('content-admin.delete-success'), { variant: 'success' });
-        navigate(-1); // 删除成功后返回上一页
-      })
-      .catch(() => {
-        enqueueSnackbar(t('msg.error'), { variant: 'error' });
-      })
-      .finally(() => {
-        setDeleteLoading(false);
-        setDeleteDialogOpen(false);
-      });
-  };
-
-  const handleDeleteCancel = () => {
-    setDeleteDialogOpen(false);
+  const handleContentDeleted = () => {
+    // Content was deleted, navigate back
+    navigate(-1);
   };
 
   return (
@@ -81,18 +56,6 @@ export default function ComtentEditBar(props: Readonly<{
           flexGrow={1}
         ></Grid>
         
-        <Grid
-          item
-          flexGrow={0}
-        >
-          <IconButton 
-            onClick={handleDeleteClick}
-            disabled={deleteLoading}
-            sx={{ mr: 1 }}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </Grid>
         <Grid
           item
           flexGrow={0}
@@ -126,16 +89,8 @@ export default function ComtentEditBar(props: Readonly<{
         content={props.contentData || null}
         open={drawerOpen}
         onClose={handleDrawerClose}
-      />
-
-      <Dialogx
-        title={t('content-admin.actions.delete')}
-        content={t('content-admin.delete-confirm')}
-        open={deleteDialogOpen}
-        onClose={handleDeleteCancel}
-        closeBtnText={t('dialog.cancel')}
-        onAction={handleDeleteConfirm}
-        actionBtnText={t('dialog.confirm')}
+        service={props.service}
+        onDelete={handleContentDeleted}
       />
     </>
   );
