@@ -14,7 +14,7 @@ export default function ContentDatesSection({ content, cardStyle, isLastCard = f
   const theme = useTheme();
 
   const defaultCardStyle = { elevation: 0, border: `1px solid ${theme.palette.divider}`, mb: isLastCard ? 0 : 3 };
-  const finalCardStyle = cardStyle || defaultCardStyle;
+  const finalCardStyle = cardStyle ?? defaultCardStyle;
 
   return (
     <Card sx={finalCardStyle}>

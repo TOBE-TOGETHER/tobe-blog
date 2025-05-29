@@ -15,7 +15,7 @@ export default function ContentStatsSection({ content, cardStyle }: IContentStat
   const theme = useTheme();
 
   const defaultCardStyle = { elevation: 0, border: `1px solid ${theme.palette.divider}`, mb: 3 };
-  const finalCardStyle = cardStyle || defaultCardStyle;
+  const finalCardStyle = cardStyle ?? defaultCardStyle;
 
   return (
     <Card sx={finalCardStyle}>
