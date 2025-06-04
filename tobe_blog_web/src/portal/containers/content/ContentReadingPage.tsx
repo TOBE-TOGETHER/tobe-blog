@@ -5,6 +5,7 @@ import { Loading } from '../../../components';
 import { IBaseUserContentDTO } from '../../../global/types';
 import { ContentBanner, ContentPageMetaBar, PortalLayout, RelevantContentsPanel } from '../../components';
 import { CommentSection } from '../../components/comment';
+import config from '../../../../customization.json';
 
 export default function ContentReadingPage(
   props: Readonly<{
@@ -38,7 +39,7 @@ export default function ContentReadingPage(
           contentId={props.content.id}
           title={props.content.title}
           subTitle={props.subTitle}
-          coverImgUrl={props.content.coverImgUrl}
+          coverImgUrl={props.content.coverImgUrl || config.defaultContentCoverImgUrl}
           topic={props.content.topic}
           tags={props.content.tags}
         />

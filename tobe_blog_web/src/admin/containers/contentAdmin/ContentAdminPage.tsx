@@ -18,7 +18,7 @@ interface ILoadDataOption {
 export default function ContentAdminPage() {
   const { t, enqueueSnackbar } = useCommonUtils();
   const [searchParams, setSearchParams] = useSearchParams();
-  const DEFAULT_PAGE_SIZE = 12;
+  const DEFAULT_PAGE_SIZE = 24;
   
   // Initialize state from URL parameters
   const paramKeyword: string = searchParams.get('keyword') ?? '';

@@ -138,7 +138,7 @@ export default function CommentSection({ content }: CommentSectionProps) {
             color="text.secondary"
             sx={{ 
               fontWeight: 500,
-              fontSize: '0.95rem'
+              fontSize: '0.95rem',
             }}
           >
             {t('comments.section.sign-in-prompt')}
@@ -147,7 +147,8 @@ export default function CommentSection({ content }: CommentSectionProps) {
               variant="body1"
               onClick={() => navigate('/sign-in')}
               sx={{
-                ml: 0.5,
+                mx: 0.5,
+                mb: 0.5,
                 color: 'primary.main',
                 fontWeight: 600,
                 textDecoration: 'none',

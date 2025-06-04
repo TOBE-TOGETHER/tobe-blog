@@ -1,8 +1,7 @@
 # tobe-blog
 
-> 🚀 **使用 Cursor AI 开发** - 本项目使用 Cursor 构建。
+> 🚀 **使用 Cursor AI 开发**
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-18.3.0-blue.svg)](https://reactjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2.2-blue.svg)](https://www.typescriptlang.org)

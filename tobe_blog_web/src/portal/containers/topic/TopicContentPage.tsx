@@ -5,7 +5,7 @@ import config from '../../../../customization.json';
 import { useCommonUtils } from '../../../commons';
 import { SEOHead, generateWebsiteStructuredData } from '../../../components';
 import { EContentType } from '../../../global/enums';
-import { PortalLayout } from '../../components';
+import { CreateSpeedDial, PortalLayout } from '../../components';
 import FunctionSection from '../../components/FunctionSection';
 import { SearchBox } from './SearchBox';
 
@@ -83,6 +83,8 @@ export default function TopicContentPage() {
           keyword={keyword}
           availableContentTypes={[EContentType.Article, EContentType.Plan, EContentType.Vocabulary, EContentType.Collection]}
         />
+        {/* SpeedDial for authenticated users */}
+        <CreateSpeedDial />
       </PortalLayout>
     </>
   );
