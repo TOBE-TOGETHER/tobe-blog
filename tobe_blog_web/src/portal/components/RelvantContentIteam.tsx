@@ -2,6 +2,7 @@ import { Grid, Paper, Typography } from '@mui/material';
 import { TimeFormat, useCommonUtils } from '../../commons';
 import { IBaseUserContentDTO } from '../../global/types';
 import theme from '../../theme';
+import config from '../../../customization.json';
 
 export default function RelevantContentItem(props: Readonly<{ content: IBaseUserContentDTO }>) {
   const { t, navigate } = useCommonUtils();
@@ -32,7 +33,7 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
       >
         <Grid
           sx={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url(${props.content.coverImgUrl});`,
+            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url(${props.content.coverImgUrl || config.defaultContentCoverImgUrl});`,
             position: 'relative',
             width: '100%',
             maxHeight: '160px',

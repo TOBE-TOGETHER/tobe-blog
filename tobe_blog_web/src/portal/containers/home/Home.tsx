@@ -13,7 +13,7 @@ import TopicSection from './TopicSection';
 const HeroSection = styled('div')`
   text-align: center;
   padding: ${(props: { theme?: Theme }) => props.theme?.spacing?.(12, 2) ?? '96px 16px'};
-  margin-bottom: ${(props: { theme?: Theme }) => props.theme?.spacing?.(8) ?? '64px'};
+  margin-bottom: 24px;
   position: relative;
   overflow: visible;
   z-index: 1;

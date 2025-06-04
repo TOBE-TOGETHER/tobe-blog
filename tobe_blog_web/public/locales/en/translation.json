@@ -298,6 +298,12 @@
       "operation": "Operation"
     }
   },
+  "user-tabs": {
+    "all": "All",
+    "verified": "Verified",
+    "unverified": "Unverified",
+    "count-tooltip": "Number of users found"
+  },
   "user-detail": {
     "title": "User Details",
     "basic-info": "Basic Information",

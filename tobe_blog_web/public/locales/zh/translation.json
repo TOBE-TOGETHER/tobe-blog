@@ -283,6 +283,12 @@
     "delete-success": "用户删除成功",
     "search-placeholder": "搜索用户..."
   },
+  "user-tabs": {
+    "all": "全部",
+    "verified": "已验证",
+    "unverified": "未验证",
+    "count-tooltip": "找到的用户数量"
+  },
   "user-detail": {
     "title": "用户详情",
     "basic-info": "基本信息",
