@@ -21,7 +21,7 @@ interface ILoadDataOption {
 export default function UsersPage() {
   const { t, enqueueSnackbar } = useCommonUtils();
   const [searchParams, setSearchParams] = useSearchParams();
-  const DEFAULT_PAGE_SIZE = 12;
+  const DEFAULT_PAGE_SIZE = 24;
   
   // Initialize state from URL parameters
   const paramKeyword: string = searchParams.get('keyword') ?? '';
@@ -168,12 +168,12 @@ export default function UsersPage() {
         value={emailVerificationFilter}
         onChange={handleEmailVerificationChange}
         tabs={[
-          { label: '全部', value: '' },
-          { label: '已验证', value: 'true' },
-          { label: '未验证', value: 'false' }
+          { label: t('user-tabs.all'), value: '' },
+          { label: t('user-tabs.verified'), value: 'true' },
+          { label: t('user-tabs.unverified'), value: 'false' }
         ]}
         count={totalCount}
-        countTooltip="找到的用户数量"
+        countTooltip={t('user-tabs.count-tooltip')}
       />
 
       <InfiniteScrollList
