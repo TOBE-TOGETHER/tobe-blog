@@ -32,6 +32,11 @@ export {
   GeneralCardSkeleton,
 };
 
+// Notification components
+export {
+  NotificationsDrawer,
+} from './notification';
+
 // Content components
 export {
   ContentStatItem,

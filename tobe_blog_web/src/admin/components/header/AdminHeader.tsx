@@ -1,9 +1,13 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { Box, Container, IconButton, Toolbar } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { Box, Container, IconButton, Toolbar, Badge } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 import { HeaderLanguageMenu, HeaderUserMenu } from '../../../components/layout';
+import * as NotificationService from '../../../services/NotificationService';
 import theme from '../../../theme';
+import { NotificationsDrawer } from '..';
 
 interface IAdminHeaderProps {
   setOpenDrawer: (newValue: boolean) => void;
@@ -16,6 +20,9 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AdminHeader = (props: IAdminHeaderProps) => {
+  const [unreadCount, setUnreadCount] = useState<number>(0);
+  const [notificationsOpen, setNotificationsOpen] = useState<boolean>(false);
+
   const AppBar = styled(MuiAppBar, {
     shouldForwardProp: prop => prop !== 'open',
   })<AppBarProps>(({ theme, open }) => ({
@@ -31,6 +38,33 @@ const AdminHeader = (props: IAdminHeaderProps) => {
       }),
     }),
   }));
+
+  // Fetch unread notification count
+  useEffect(() => {
+    const fetchUnreadCount = async () => {
+      try {
+        const response = await NotificationService.getUnreadCount();
+        setUnreadCount(response.data);
+      } catch (error) {
+        console.error('Failed to fetch unread count:', error);
+      }
+    };
+
+    fetchUnreadCount();
+    
+    // Set up polling for unread count every 30 seconds
+    const interval = setInterval(fetchUnreadCount, 30000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleNotificationClick = () => {
+    setNotificationsOpen(true);
+  };
+
+  const handleNotificationsClose = () => {
+    setNotificationsOpen(false);
+  };
 
   return (
     <AppBar
@@ -58,6 +92,18 @@ const AdminHeader = (props: IAdminHeaderProps) => {
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ flexGrow: 0 }}>
+            <IconButton
+              size="small"
+              aria-label="view notifications"
+              onClick={handleNotificationClick}
+              sx={{ color: theme.palette.primary.main }}
+            >
+              <Badge badgeContent={unreadCount} color="error">
+                <NotificationsIcon sx={{ fontSize: '1.5rem' }} />
+              </Badge>
+            </IconButton>
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
             <HeaderLanguageMenu />
           </Box>
           <Box sx={{ flexGrow: 0 }}>
@@ -65,6 +111,10 @@ const AdminHeader = (props: IAdminHeaderProps) => {
           </Box>
         </Toolbar>
       </Container>
+      <NotificationsDrawer 
+        open={notificationsOpen} 
+        onClose={handleNotificationsClose} 
+      />
     </AppBar>
   );
 };

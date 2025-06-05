@@ -304,6 +304,37 @@
     "unverified": "Unverified",
     "count-tooltip": "Number of users found"
   },
+  "notifications": {
+    "title": "Notifications",
+    "mark-all-read": "Mark All Read",
+    "marking-all-read": "Marking as read...",
+    "mark-all-read-success": "All notifications marked as read",
+    "mark-as-read": "Mark as read",
+    "view-details": "View Details",
+    "no-notifications": "No notifications found",
+    "count-tooltip": "Total number of notifications",
+    "from": "From",
+    "content": {
+      "reply-label": "Reply",
+      "original-comment-label": "Your Original Comment",
+      "from-label": "From"
+    },
+    "actions": {
+      "mark-as-read": "Mark as read",
+      "view-details": "View Details"
+    },
+    "tabs": {
+      "all": "All",
+      "unread": "Unread",
+      "read": "Read"
+    },
+    "types": {
+      "CONTENT_RECOMMENDED": "Recommended",
+      "CONTENT_BANNED": "Banned", 
+      "CONTENT_COMMENTED": "Comment",
+      "SYSTEM_ANNOUNCEMENT": "System"
+    }
+  },
   "user-detail": {
     "title": "User Details",
     "basic-info": "Basic Information",

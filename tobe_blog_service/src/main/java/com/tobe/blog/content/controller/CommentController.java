@@ -14,8 +14,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tobe.blog.beans.dto.content.CommentCreateDTO;
 import com.tobe.blog.beans.dto.content.CommentDTO;
 import com.tobe.blog.content.service.CommentService;
+import com.tobe.blog.core.utils.AuthenticationUtil;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,17 +31,14 @@ public class CommentController {
     /**
      * Create a new comment
      * @param dto comment creation data
-     * @param request HTTP request for IP address
      * @return created comment DTO
      */
     @PostMapping
-    public ResponseEntity<CommentDTO> createComment(
-            @Valid @RequestBody CommentCreateDTO dto,
-            HttpServletRequest request) {
-        
-        CommentDTO comment = commentService.createComment(dto, request);
-        
-        return ResponseEntity.ok(comment);
+    public ResponseEntity<CommentDTO> createComment(@Valid @RequestBody CommentCreateDTO dto) {
+        return AuthenticationUtil.withAuthenticatedUser(user -> {
+            CommentDTO comment = commentService.createComment(dto, user);
+            return ResponseEntity.ok(comment);
+        });
     }
 
     /**
@@ -69,12 +66,14 @@ public class CommentController {
      */
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
-        boolean deleted = commentService.deleteComment(commentId);
-        if (deleted) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return AuthenticationUtil.withAuthenticatedUser(user -> {
+            boolean deleted = commentService.deleteComment(commentId, user);
+            if (deleted) {
+                return ResponseEntity.ok().<Void>build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        });
     }
 
     /**
@@ -87,7 +86,9 @@ public class CommentController {
     public ResponseEntity<Long> toggleLike(
             @PathVariable Long commentId,
             @RequestParam boolean isLike) {
-        Long likeCount = commentService.toggleCommentLike(commentId, isLike);
-        return ResponseEntity.ok(likeCount);
+        return AuthenticationUtil.withAuthenticatedUser(user -> {
+            Long likeCount = commentService.toggleCommentLike(commentId, isLike, user);
+            return ResponseEntity.ok(likeCount);
+        });
     }
 } 

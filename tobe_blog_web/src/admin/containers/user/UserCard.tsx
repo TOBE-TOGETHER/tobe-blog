@@ -5,6 +5,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import SecurityIcon from '@mui/icons-material/Security';
 import { IUserData } from '../../../global/types';
 import { useCommonUtils } from '../../../commons';
+import { buildFullName, getUserInitials } from '../../../utils/userDisplayUtils';
 
 interface IUserCardProps {
   readonly user: IUserData;
@@ -15,10 +16,9 @@ export default function UserCard({ user, onCardClick }: IUserCardProps) {
   const theme = useTheme();
   const { t } = useCommonUtils();
 
-  const getFullName = () => {
-    const fullName = `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim();
-    return fullName ?? user.username ?? `User ${user.id}`;
-  };
+  // Use utility function for consistent name building
+  const fullName = buildFullName(user);
+  const initials = getUserInitials(user);
 
   // Available roles mapping for display
   const getRoleLabel = (role: string) => {
@@ -89,7 +89,7 @@ export default function UserCard({ user, onCardClick }: IUserCardProps) {
           avatar={
             <Avatar
               src={user.avatarUrl}
-              alt={getFullName()}
+              alt={fullName}
               sx={{
                 width: 64,
                 height: 64,
@@ -98,16 +98,13 @@ export default function UserCard({ user, onCardClick }: IUserCardProps) {
                 fontWeight: 'bold',
               }}
             >
-              {!user.avatarUrl && (user.firstName && user.lastName ? 
-                `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase() : 
-                <PersonIcon sx={{ fontSize: '2rem' }} />
-              )}
+              {!user.avatarUrl && (initials !== 'U' ? initials : <PersonIcon sx={{ fontSize: '2rem' }} />)}
             </Avatar>
           }
           title={
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography variant="h6" sx={{ fontWeight: 600, fontSize: '1.1rem' }} noWrap>
-                {getFullName()}
+                {fullName}
               </Typography>
               {user.emailVerified && (
                 <VerifiedIcon sx={{ color: 'success.main', fontSize: '1.1rem', ml: 1 }} />

@@ -289,6 +289,37 @@
     "unverified": "未验证",
     "count-tooltip": "找到的用户数量"
   },
+  "notifications": {
+    "title": "通知",
+    "mark-all-read": "全部标记为已读",
+    "marking-all-read": "正在标记为已读...",
+    "mark-all-read-success": "所有通知已标记为已读",
+    "mark-as-read": "标记为已读",
+    "view-details": "查看详情",
+    "no-notifications": "暂无通知",
+    "count-tooltip": "通知总数",
+    "from": "来自",
+    "content": {
+      "reply-label": "回复",
+      "original-comment-label": "您的原评论",
+      "from-label": "来自"
+    },
+    "actions": {
+      "mark-as-read": "标记为已读",
+      "view-details": "查看详情"
+    },
+    "tabs": {
+      "all": "全部",
+      "unread": "未读",
+      "read": "已读"
+    },
+    "types": {
+      "CONTENT_RECOMMENDED": "推荐",
+      "CONTENT_BANNED": "封禁",
+      "CONTENT_COMMENTED": "评论",
+      "SYSTEM_ANNOUNCEMENT": "系统"
+    }
+  },
   "user-detail": {
     "title": "用户详情",
     "basic-info": "基本信息",
