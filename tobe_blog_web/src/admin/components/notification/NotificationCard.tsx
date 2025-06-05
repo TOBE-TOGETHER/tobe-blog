@@ -1,15 +1,16 @@
 import {
   ListItem,
   ListItemText,
-  Typography,
   Box,
+  Typography,
   useTheme,
   Divider,
 } from '@mui/material';
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCommonUtils } from '../../../commons';
 import { INotificationDTO } from '../../../global/types';
 import NotificationContent from './NotificationContent';
+import { resolveNotificationTitle } from '../../../utils/notificationMetadataUtils';
 
 interface INotificationCardProps {
   readonly notification: INotificationDTO;
@@ -18,32 +19,34 @@ interface INotificationCardProps {
 
 export default function NotificationCard({ notification, onMarkAsRead }: INotificationCardProps) {
   const theme = useTheme();
-  const navigate = useNavigate();
+  const { t } = useCommonUtils();
 
   const handleDetailClick = useCallback((event: React.MouseEvent) => {
     event.stopPropagation();
-    if (!notification.isRead) {
-      onMarkAsRead(notification.id);
-    }
     if (notification.actionUrl) {
-      navigate(notification.actionUrl);
+      window.open(notification.actionUrl, '_blank');
     }
-  }, [notification, onMarkAsRead, navigate]);
+  }, [notification.actionUrl]);
+
+  // Resolve i18n title
+  const localizedTitle = resolveNotificationTitle(notification, t);
 
   return (
     <>
       <ListItem
         sx={{
-          backgroundColor: notification.isRead ? 'inherit' : 'rgba(25, 118, 210, 0.03)',
-          borderLeft: notification.isRead ? 'none' : `4px solid ${theme.palette.primary.main}`,
-          '&:hover': {
-            backgroundColor: notification.isRead 
-              ? 'rgba(0, 0, 0, 0.04)' 
-              : 'rgba(25, 118, 210, 0.08)',
-          },
-          py: 2.5,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          backgroundColor: notification.isRead 
+            ? 'transparent' 
+            : theme.palette.action.hover,
+          transition: 'background-color 0.2s ease-in-out',
+          py: 2,
           px: 3,
-          transition: 'all 0.2s ease-in-out',
+          '&:hover': {
+            backgroundColor: theme.palette.action.selected,
+          },
         }}
       >
         <ListItemText
@@ -60,7 +63,7 @@ export default function NotificationCard({ notification, onMarkAsRead }: INotifi
                   flexGrow: 1,
                 }}
               >
-                {notification.title}
+                {localizedTitle}
               </Typography>
               {!notification.isRead && (
                 <Box

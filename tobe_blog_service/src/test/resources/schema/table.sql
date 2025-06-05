@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `tobe_comment` (
     `user_avatar_url` VARCHAR(500) COMMENT 'User avatar URL',
     `parent_id` BIGINT(20) COMMENT 'Parent comment ID for nested comments',
     `like_count` INT(11) NOT NULL DEFAULT 0 COMMENT 'Number of likes for this comment',
-    `is_deleted` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Whether this comment is deleted (soft delete)',
+    `deleted` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Whether this comment is deleted (soft delete)',
     `ip_address` VARCHAR(50) COMMENT 'IP address of the commenter',
     `create_time` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT 'Create time',
     `update_time` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT 'Update time',
@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `tobe_comment` (
     INDEX `idx_user_id` (`user_id`),
     INDEX `idx_parent_id` (`parent_id`),
     INDEX `idx_create_time` (`create_time`),
-    INDEX `idx_is_deleted` (`is_deleted`)
+    INDEX `idx_is_deleted` (`deleted`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Comment table'; 
 
 -- Add reply quote fields to comment table for Teams-style flat display

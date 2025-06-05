@@ -117,4 +117,81 @@ public class JsonMetadataUtil {
         
         return result;
     }
+
+    /**
+     * Create JSON metadata for basic notification i18n (content recommended/banned)
+     * @param contentType the content type
+     * @param contentTitle the content title
+     * @return JSON string with i18n parameters
+     */
+    public static String createNotificationI18nMetadata(String contentType, String contentTitle) {
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("contentType", contentType);
+        metadata.put("contentTitle", contentTitle);
+        return toJsonString(metadata);
+    }
+
+    /**
+     * Create JSON metadata for comment notification i18n
+     * @param commenterName the commenter name
+     * @param contentType the content type
+     * @param contentTitle the content title
+     * @param commentContent the comment content
+     * @return JSON string with i18n parameters
+     */
+    public static String createCommentNotificationI18nMetadata(String commenterName, String contentType, String contentTitle, String commentContent) {
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("commenterName", commenterName);
+        metadata.put("contentType", contentType);
+        metadata.put("contentTitle", contentTitle);
+        metadata.put("commentContent", commentContent);
+        return toJsonString(metadata);
+    }
+
+    /**
+     * Create JSON metadata for reply notification i18n
+     * @param replierName the replier name
+     * @param contentTitle the content title
+     * @param replyContent the reply content
+     * @param originalCommentContent the original comment content
+     * @return JSON string with i18n parameters
+     */
+    public static String createReplyNotificationI18nMetadata(String replierName, String contentTitle, String replyContent, String originalCommentContent) {
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("replierName", replierName);
+        metadata.put("contentTitle", contentTitle);
+        metadata.put("commentContent", replyContent);
+        metadata.put("originalCommentContent", originalCommentContent);
+        return toJsonString(metadata);
+    }
+
+    /**
+     * Create JSON metadata for deleted comment notification i18n
+     * @param contentType the content type
+     * @param contentTitle the content title
+     * @param deletedCommentContent the deleted comment content
+     * @return JSON string with i18n parameters
+     */
+    public static String createDeletedCommentNotificationI18nMetadata(String contentType, String contentTitle, String deletedCommentContent) {
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("contentType", contentType);
+        metadata.put("contentTitle", contentTitle);
+        metadata.put("commentContent", deletedCommentContent);
+        return toJsonString(metadata);
+    }
+
+    /**
+     * Create JSON metadata for deleted reply notification i18n
+     * @param contentTitle the content title
+     * @param deletedReplyContent the deleted reply content
+     * @param originalCommentContent the original comment content
+     * @return JSON string with i18n parameters
+     */
+    public static String createDeletedReplyNotificationI18nMetadata(String contentTitle, String deletedReplyContent, String originalCommentContent) {
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("contentTitle", contentTitle);
+        metadata.put("commentContent", deletedReplyContent);
+        metadata.put("originalCommentContent", originalCommentContent);
+        return toJsonString(metadata);
+    }
 } 

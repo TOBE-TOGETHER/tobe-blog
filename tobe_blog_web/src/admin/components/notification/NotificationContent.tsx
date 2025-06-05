@@ -7,7 +7,7 @@ import {
 import { useCallback } from 'react';
 import { useCommonUtils, TimeFormat } from '../../../commons';
 import { INotificationDTO } from '../../../global/types';
-import { getCommentContent, getOriginalCommentContent, isCommentReply } from '../../../utils/notificationMetadataUtils';
+import { getCommentContent, getOriginalCommentContent, isCommentReply, resolveNotificationMessage } from '../../../utils/notificationMetadataUtils';
 
 interface INotificationContentProps {
   readonly notification: INotificationDTO;
@@ -26,6 +26,9 @@ export default function NotificationContent({
   // Use utility functions for metadata parsing
   const commentContent = getCommentContent(notification);
   const originalCommentContent = getOriginalCommentContent(notification);
+
+  // Resolve i18n message
+  const localizedMessage = resolveNotificationMessage(notification, t);
 
   const handleMarkAsReadClick = useCallback((event: React.MouseEvent) => {
     event.stopPropagation();
@@ -58,16 +61,16 @@ export default function NotificationContent({
           fontSize: '0.9rem',
         }}
       >
-        {notification.message}
+        {localizedMessage}
       </Typography>
       
-      {/* Display comment content if available */}
-      {commentContent && (
+      {/* Display comment content if available - but hide for deletion notifications */}
+      {commentContent && notification.notificationType !== 'COMMENT_DELETED' && notification.notificationType !== 'REPLY_DELETED' && (
         <Box sx={{ 
           mb: 1.5,
           p: 2,
-          backgroundColor: 'rgba(0, 0, 0, 0.02)',
-          borderLeft: `3px solid ${theme.palette.primary.main}`,
+          backgroundColor: 'rgba(0, 0, 0, 0.02)', // Normal background for regular comments
+          borderLeft: `3px solid ${theme.palette.primary.main}`, // Blue border for regular comments
           borderRadius: 1,
         }}>
           {isCommentReply(notification) && (
@@ -88,7 +91,7 @@ export default function NotificationContent({
           <Typography 
             variant="body2" 
             sx={{ 
-              color: theme.palette.text.primary,
+              color: theme.palette.text.primary, // Normal text color
               fontSize: '0.9rem',
               lineHeight: 1.4,
               fontStyle: 'italic',
@@ -100,7 +103,8 @@ export default function NotificationContent({
         </Box>
       )}
       
-      {originalCommentContent && (
+      {/* Display original comment content for reply notifications - but hide for deletion types */}
+      {originalCommentContent && notification.notificationType !== 'COMMENT_DELETED' && notification.notificationType !== 'REPLY_DELETED' && (
         <Box sx={{ 
           mb: 1.5,
           p: 2,
@@ -141,27 +145,10 @@ export default function NotificationContent({
           mb: 1.5, 
           display: 'flex', 
           alignItems: 'center', 
-          justifyContent: 'space-between',
+          justifyContent: 'flex-end',
           gap: 2,
         }}>
-          <Typography 
-            variant="body2" 
-            sx={{ 
-              color: theme.palette.primary.main,
-              backgroundColor: theme.palette.primary.main + '15',
-              px: 1.5,
-              py: 0.5,
-              borderRadius: 1,
-              display: 'inline-block',
-              fontSize: '0.8rem',
-              fontWeight: 500,
-              border: `1px solid ${theme.palette.primary.main}30`,
-            }}
-          >
-            {t(`admin-table.content-types.${notification.relatedContentType?.toLowerCase()}`)}: "{notification.relatedContentTitle}"
-          </Typography>
-          
-          {/* Action buttons aligned with the related content tag */}
+          {/* Action buttons */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             {!notification.isRead && (
               <Button

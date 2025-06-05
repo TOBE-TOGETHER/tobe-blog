@@ -168,12 +168,15 @@ public class NotificationService extends ServiceImpl<NotificationMapper, Notific
         dto.setRecipientId(contentOwnerId);
         dto.setSenderId(adminId);
         dto.setNotificationType(NotificationType.CONTENT_RECOMMENDED);
-        dto.setTitle("Content Recommended");
-        dto.setMessage(String.format("Your %s \"%s\" has been recommended by an administrator", contentType.toLowerCase(), contentTitle));
+        dto.setTitle("notifications.messages.content-recommended.title");
+        dto.setMessage("notifications.messages.content-recommended.message");
         dto.setRelatedContentId(contentId);
         dto.setRelatedContentType(contentType);
         dto.setRelatedContentTitle(contentTitle);
         dto.setActionUrl("/content/" + contentId);
+        
+        // Store parameters for i18n resolution
+        dto.setMetadata(JsonMetadataUtil.createNotificationI18nMetadata(contentType.toLowerCase(), contentTitle));
         
         createNotification(dto);
     }
@@ -191,12 +194,15 @@ public class NotificationService extends ServiceImpl<NotificationMapper, Notific
         dto.setRecipientId(contentOwnerId);
         dto.setSenderId(adminId);
         dto.setNotificationType(NotificationType.CONTENT_BANNED);
-        dto.setTitle("Content Banned");
-        dto.setMessage(String.format("Your %s \"%s\" has been banned by an administrator", contentType.toLowerCase(), contentTitle));
+        dto.setTitle("notifications.messages.content-banned.title");
+        dto.setMessage("notifications.messages.content-banned.message");
         dto.setRelatedContentId(contentId);
         dto.setRelatedContentType(contentType);
         dto.setRelatedContentTitle(contentTitle);
         dto.setActionUrl("/content/" + contentId);
+        
+        // Store parameters for i18n resolution
+        dto.setMetadata(JsonMetadataUtil.createNotificationI18nMetadata(contentType.toLowerCase(), contentTitle));
         
         createNotification(dto);
     }
@@ -220,15 +226,16 @@ public class NotificationService extends ServiceImpl<NotificationMapper, Notific
         dto.setRecipientId(contentOwnerId);
         dto.setSenderId(commenterId);
         dto.setNotificationType(NotificationType.CONTENT_COMMENTED);
-        dto.setTitle("New Comment");
-        dto.setMessage(String.format("%s commented on your %s \"%s\"", commenterName, contentType.toLowerCase(), contentTitle));
+        dto.setTitle("notifications.messages.content-commented.title");
+        dto.setMessage("notifications.messages.content-commented.message");
         dto.setRelatedContentId(contentId);
         dto.setRelatedContentType(contentType);
         dto.setRelatedContentTitle(contentTitle);
         dto.setActionUrl("/content/" + contentId);
         
-        // Use JsonMetadataUtil for creating metadata
-        dto.setMetadata(JsonMetadataUtil.createCommentMetadata(commentContent));
+        // Store parameters for i18n resolution including comment content
+        dto.setMetadata(JsonMetadataUtil.createCommentNotificationI18nMetadata(
+            commenterName, contentType.toLowerCase(), contentTitle, commentContent));
         
         createNotification(dto);
     }
@@ -253,15 +260,83 @@ public class NotificationService extends ServiceImpl<NotificationMapper, Notific
         dto.setRecipientId(originalCommenterId);
         dto.setSenderId(replyerId);
         dto.setNotificationType(NotificationType.COMMENT_REPLIED);
-        dto.setTitle("New Reply");
-        dto.setMessage(String.format("%s replied to your comment on \"%s\"", replierName, contentTitle));
+        dto.setTitle("notifications.messages.comment-replied.title");
+        dto.setMessage("notifications.messages.comment-replied.message");
         dto.setRelatedContentId(contentId);
         dto.setRelatedContentType(contentType);
         dto.setRelatedContentTitle(contentTitle);
         dto.setActionUrl("/content/" + contentId);
         
-        // Use JsonMetadataUtil for creating metadata
-        dto.setMetadata(JsonMetadataUtil.createCommentReplyMetadata(replyContent, originalCommentContent));
+        // Store parameters for i18n resolution including reply and original comment content
+        dto.setMetadata(JsonMetadataUtil.createReplyNotificationI18nMetadata(
+            replierName, contentTitle, replyContent, originalCommentContent));
+        
+        createNotification(dto);
+    }
+
+    /**
+     * Helper method to notify when a comment is deleted
+     * @param contentId content ID
+     * @param contentTitle content title
+     * @param contentType content type
+     * @param contentOwnerId content owner ID
+     * @param deleterId deleter ID
+     * @param deleterName deleter name
+     * @param deletedCommentContent the deleted comment content
+     */
+    public void notifyCommentDeleted(String contentId, String contentTitle, String contentType, Long contentOwnerId, Long deleterId, String deleterName, String deletedCommentContent) {
+        // Don't notify if the content owner deleted their own comment or if the comment author deleted their own comment
+        if (contentOwnerId.equals(deleterId)) {
+            return;
+        }
+        NotificationCreateDTO dto = new NotificationCreateDTO();
+        dto.setRecipientId(contentOwnerId);
+        dto.setSenderId(deleterId);
+        dto.setNotificationType(NotificationType.COMMENT_DELETED);
+        dto.setTitle("notifications.messages.comment-deleted.title");
+        dto.setMessage("notifications.messages.comment-deleted.message");
+        dto.setRelatedContentId(contentId);
+        dto.setRelatedContentType(contentType);
+        dto.setRelatedContentTitle(contentTitle);
+        dto.setActionUrl("/content/" + contentId);
+        
+        // Store parameters for i18n resolution including deleted comment content
+        dto.setMetadata(JsonMetadataUtil.createDeletedCommentNotificationI18nMetadata(
+            contentType.toLowerCase(), contentTitle, deletedCommentContent));
+        
+        createNotification(dto);
+    }
+
+    /**
+     * Helper method to notify when a reply is deleted
+     * @param contentId content ID
+     * @param contentTitle content title
+     * @param contentType content type
+     * @param originalCommenterId original comment author ID
+     * @param deleterId deleter ID
+     * @param deleterName deleter name
+     * @param deletedReplyContent the deleted reply content
+     * @param originalCommentContent the original comment content for context
+     */
+    public void notifyReplyDeleted(String contentId, String contentTitle, String contentType, Long originalCommenterId, Long deleterId, String deleterName, String deletedReplyContent, String originalCommentContent) {
+        // Don't notify if the user deleted their own reply
+        if (originalCommenterId.equals(deleterId)) {
+            return;
+        }
+        NotificationCreateDTO dto = new NotificationCreateDTO();
+        dto.setRecipientId(originalCommenterId);
+        dto.setSenderId(deleterId);
+        dto.setNotificationType(NotificationType.REPLY_DELETED);
+        dto.setTitle("notifications.messages.reply-deleted.title");
+        dto.setMessage("notifications.messages.reply-deleted.message");
+        dto.setRelatedContentId(contentId);
+        dto.setRelatedContentType(contentType);
+        dto.setRelatedContentTitle(contentTitle);
+        dto.setActionUrl("/content/" + contentId);
+        
+        // Store parameters for i18n resolution including both deleted reply and original comment content
+        dto.setMetadata(JsonMetadataUtil.createDeletedReplyNotificationI18nMetadata(
+            contentTitle, deletedReplyContent, originalCommentContent));
         
         createNotification(dto);
     }

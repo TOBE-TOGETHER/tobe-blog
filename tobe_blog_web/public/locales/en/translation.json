@@ -317,6 +317,8 @@
     "content": {
       "reply-label": "Reply",
       "original-comment-label": "Your Original Comment",
+      "deleted-comment-label": "Deleted Comment",
+      "deleted-reply-label": "Deleted Reply",
       "from-label": "From"
     },
     "actions": {
@@ -332,7 +334,36 @@
       "CONTENT_RECOMMENDED": "Recommended",
       "CONTENT_BANNED": "Banned", 
       "CONTENT_COMMENTED": "Comment",
+      "COMMENT_REPLIED": "Reply",
+      "COMMENT_DELETED": "Comment Deleted",
+      "REPLY_DELETED": "Reply Deleted",
       "SYSTEM_ANNOUNCEMENT": "System"
+    },
+    "messages": {
+      "content-recommended": {
+        "title": "Content Recommended",
+        "message": "Your {{contentType}} \"{{contentTitle}}\" has been recommended by an administrator"
+      },
+      "content-banned": {
+        "title": "Content Banned",
+        "message": "Your {{contentType}} \"{{contentTitle}}\" has been banned by an administrator"
+      },
+      "content-commented": {
+        "title": "New Comment",
+        "message": "{{commenterName}} commented on your {{contentType}} \"{{contentTitle}}\""
+      },
+      "comment-replied": {
+        "title": "New Reply",
+        "message": "{{replierName}} replied to your comment on \"{{contentTitle}}\""
+      },
+      "comment-deleted": {
+        "title": "Comment Deleted",
+        "message": "A comment on your {{contentType}} \"{{contentTitle}}\" was deleted"
+      },
+      "reply-deleted": {
+        "title": "Reply Deleted",
+        "message": "A reply to your comment on \"{{contentTitle}}\" was deleted"
+      }
     }
   },
   "user-detail": {
