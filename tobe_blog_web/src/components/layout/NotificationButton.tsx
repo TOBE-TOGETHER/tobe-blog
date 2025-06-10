@@ -1,10 +1,10 @@
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Badge, IconButton, SxProps } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAuthState } from '../../contexts';
 import * as NotificationService from '../../services/NotificationService';
 import theme from '../../theme';
-import { NotificationsDrawer } from '../../admin/components/notification';
+import NotificationsDrawer from '../notification/NotificationsDrawer';
 
 interface NotificationButtonProps {
   /**
@@ -41,20 +41,30 @@ const NotificationButton = ({
     setNotificationsOpen(false);
   };
 
+  // Function to fetch and update unread count
+  const fetchUnreadCount = useCallback(async () => {
+    if (!shouldShow) {
+      return;
+    }
+
+    try {
+      const response = await NotificationService.getUnreadCount();
+      setUnreadCount(response.data);
+    } catch (error) {
+      console.error('Failed to fetch unread count:', error);
+    }
+  }, [shouldShow]);
+
+  // Callback function to refresh unread count from drawer
+  const handleUnreadCountUpdate = useCallback(() => {
+    fetchUnreadCount();
+  }, [fetchUnreadCount]);
+
   // Fetch unread notification count when user is logged in
   useEffect(() => {
     if (!shouldShow) {
       return;
     }
-
-    const fetchUnreadCount = async () => {
-      try {
-        const response = await NotificationService.getUnreadCount();
-        setUnreadCount(response.data);
-      } catch (error) {
-        console.error('Failed to fetch unread count:', error);
-      }
-    };
 
     fetchUnreadCount();
     
@@ -62,7 +72,7 @@ const NotificationButton = ({
     const interval = setInterval(fetchUnreadCount, 30000);
     
     return () => clearInterval(interval);
-  }, [shouldShow]);
+  }, [shouldShow, fetchUnreadCount]);
 
   // Don't render anything if not supposed to show
   if (!shouldShow) {
@@ -87,7 +97,8 @@ const NotificationButton = ({
       
       <NotificationsDrawer 
         open={notificationsOpen} 
-        onClose={handleNotificationsClose} 
+        onClose={handleNotificationsClose}
+        onUnreadCountUpdate={handleUnreadCountUpdate}
       />
     </>
   );

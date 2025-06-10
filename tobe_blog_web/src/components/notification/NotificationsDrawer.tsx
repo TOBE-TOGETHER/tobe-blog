@@ -5,13 +5,14 @@ import {
   Box, 
   List, 
 } from '@mui/material';
-import { useCommonUtils } from '../../../commons/index.ts';
-import { InfiniteScrollList } from '../../../components';
-import { INotificationDTO } from '../../../global/types.ts';
-import * as NotificationService from '../../../services/NotificationService.ts';
-import { FilterTabsWithCount, BaseDrawer } from '../../components';
+import { useCommonUtils } from '../../commons';
+import { INotificationDTO } from '../../global/types';
+import * as NotificationService from '../../services/NotificationService';
 import NotificationCard from './NotificationCard.tsx';
 import NotificationCardSkeleton from './NotificationCardSkeleton.tsx';
+import InfiniteScrollList from '../common/InfiniteScrollList.tsx';
+import BaseDrawer from '../common/BaseDrawer.tsx';
+import FilterTabsWithCount from '../common/FilterTabsWithCount.tsx';
 
 interface ILoadDataOption {
   isRead?: boolean;
@@ -21,9 +22,10 @@ interface ILoadDataOption {
 interface INotificationsDrawerProps {
   open: boolean;
   onClose: () => void;
+  onUnreadCountUpdate?: () => void;
 }
 
-export default function NotificationsDrawer({ open, onClose }: INotificationsDrawerProps) {
+export default function NotificationsDrawer({ open, onClose, onUnreadCountUpdate }: INotificationsDrawerProps) {
   const { t, enqueueSnackbar } = useCommonUtils();
   
   const [notifications, setNotifications] = useState<INotificationDTO[]>([]);
@@ -80,13 +82,16 @@ export default function NotificationsDrawer({ open, onClose }: INotificationsDra
         setNotifications(notifications.map(n => 
           n.id === notificationId ? { ...n, isRead: true } : n
         ));
+        setTimeout(() => {
+          onUnreadCountUpdate?.();
+        }, 100);
       })
       .catch(() => {
         enqueueSnackbar(t('msg.error'), { 
           variant: 'error' 
         });
       });
-  }, [notifications, t, enqueueSnackbar]);
+  }, [notifications, t, enqueueSnackbar, onUnreadCountUpdate]);
 
   const handleMarkAllAsRead = useCallback((): void => {
     setMarkingAllRead(true);
@@ -96,6 +101,9 @@ export default function NotificationsDrawer({ open, onClose }: INotificationsDra
         enqueueSnackbar(t('notifications.mark-all-read-success'), { 
           variant: 'success' 
         });
+        setTimeout(() => {
+          onUnreadCountUpdate?.();
+        }, 100);
       })
       .catch(() => {
         enqueueSnackbar(t('msg.error'), { 
@@ -105,7 +113,7 @@ export default function NotificationsDrawer({ open, onClose }: INotificationsDra
       .finally(() => {
         setMarkingAllRead(false);
       });
-  }, [notifications, t, enqueueSnackbar]);
+  }, [notifications, t, enqueueSnackbar, onUnreadCountUpdate]);
 
   const handleReadFilterChange = useCallback((newIsRead: string) => {
     setReadFilter(newIsRead);

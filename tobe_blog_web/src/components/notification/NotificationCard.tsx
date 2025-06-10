@@ -7,10 +7,10 @@ import {
   Divider,
 } from '@mui/material';
 import { useCallback } from 'react';
-import { useCommonUtils } from '../../../commons';
-import { INotificationDTO } from '../../../global/types';
 import NotificationContent from './NotificationContent';
-import { resolveNotificationTitle } from '../../../utils/notificationMetadataUtils';
+import { INotificationDTO } from '../../global/types';
+import { useCommonUtils } from '../../commons';
+import { resolveNotificationTitle } from '../../utils/notificationMetadataUtils';
 
 interface INotificationCardProps {
   readonly notification: INotificationDTO;
@@ -21,9 +21,9 @@ export default function NotificationCard({ notification, onMarkAsRead }: INotifi
   const theme = useTheme();
   const { t } = useCommonUtils();
 
-  const handleDetailClick = useCallback((event: React.MouseEvent) => {
-    event.stopPropagation();
+  const handleDetailClick = useCallback(() => {
     if (notification.actionUrl) {
+      onMarkAsRead(notification.id);
       window.open(notification.actionUrl, '_blank');
     }
   }, [notification.actionUrl]);
@@ -115,4 +115,4 @@ export default function NotificationCard({ notification, onMarkAsRead }: INotifi
       />
     </>
   );
-} 
+}

@@ -5,9 +5,9 @@ import {
   useTheme,
 } from '@mui/material';
 import { useCallback } from 'react';
-import { useCommonUtils, TimeFormat } from '../../../commons';
-import { INotificationDTO } from '../../../global/types';
-import { getCommentContent, getOriginalCommentContent, isCommentReply, resolveNotificationMessage } from '../../../utils/notificationMetadataUtils';
+import { INotificationDTO } from '../../global/types';
+import { useCommonUtils, TimeFormat } from '../../commons';
+import { getCommentContent, getOriginalCommentContent, isCommentReply, resolveNotificationMessage } from '../../utils/notificationMetadataUtils';
 
 interface INotificationContentProps {
   readonly notification: INotificationDTO;
