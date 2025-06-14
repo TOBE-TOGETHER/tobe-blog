@@ -13,13 +13,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tobe.blog.beans.dto.content.CommentCreateDTO;
 import com.tobe.blog.beans.dto.content.CommentDTO;
 import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
-import com.tobe.blog.beans.dto.user.UserGeneralDTO;
 import com.tobe.blog.beans.entity.content.CommentEntity;
+import com.tobe.blog.beans.entity.content.ContentGeneralInfoEntity;
 import com.tobe.blog.content.mapper.CommentMapper;
+import com.tobe.blog.content.service.impl.ContentGeneralInfoService;
+import com.tobe.blog.core.service.NotificationService;
 import com.tobe.blog.core.utils.BasicConverter;
-import com.tobe.blog.core.utils.SecurityUtil;
+import com.tobe.blog.core.utils.RequestContextUtil;
+import com.tobe.blog.core.utils.UserDisplayNameUtil;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,17 +31,17 @@ import lombok.extern.slf4j.Slf4j;
 public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
 
     private final CommentMapper commentMapper;
+    private final NotificationService notificationService;
+    private final ContentGeneralInfoService contentGeneralInfoService;
 
     /**
      * Create a new comment
      * @param dto comment creation data
-     * @param request HTTP request for IP address
+     * @param currentUser authenticated user
      * @return created comment DTO
      */
     @Transactional
-    public CommentDTO createComment(CommentCreateDTO dto, HttpServletRequest request) {
-        EnhancedUserDetail currentUser = SecurityUtil.getCurrentUserDetail();
-        
+    public CommentDTO createComment(CommentCreateDTO dto, EnhancedUserDetail currentUser) {
         CommentEntity entity = new CommentEntity();
         entity.setContentId(dto.getContentId());
         entity.setContentType(dto.getContentType());
@@ -47,10 +49,10 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
         entity.setParentId(dto.getParentId());
         entity.setUserId(currentUser.getUserProfile().getId());
         
-        String userName = buildUserDisplayName(currentUser.getUserProfile());
+        String userName = UserDisplayNameUtil.buildDisplayName(currentUser.getUserProfile());
         entity.setUserName(userName);
         entity.setUserAvatarUrl(currentUser.getUserProfile().getAvatarUrl());
-        entity.setIpAddress(getClientIpAddress(request));
+        entity.setIpAddress(RequestContextUtil.getClientIpAddress());
         entity.setDeleted(false);
         entity.setLikeCount(0L);
 
@@ -70,6 +72,15 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
 
         this.save(entity);
         
+        if (dto.getParentId() != null) {
+            // Send notification to original comment author if this is a reply
+            sendCommentReplyNotification(dto.getContentId(), dto.getContentType(), dto.getParentId(),
+                                       currentUser.getUserProfile().getId(), userName, dto.getContent());
+        } else {
+            // Send notification to content owner
+            sendCommentNotification(dto.getContentId(), dto.getContentType(), currentUser.getUserProfile().getId(), userName, dto.getContent());
+        }
+        
         log.info("Comment created successfully for content {} by user {}", 
                 dto.getContentId(), currentUser.getUsername());
         
@@ -77,6 +88,49 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
         CommentDTO result = convertToDTO(entity);
         
         return result;
+    }
+
+    private void sendCommentNotification(String contentId, String contentType, Long commenterId, String commenterName, String commentContent) {
+        try {
+            ContentGeneralInfoEntity content = contentGeneralInfoService.getById(contentId);
+            if (content != null) {
+                notificationService.notifyContentCommented(
+                    contentId,
+                    content.getTitle(),
+                    contentType,
+                    content.getOwnerId(),
+                    commenterId,
+                    commenterName,
+                    commentContent
+                );
+            }
+        } catch (Exception e) {
+            // Log error but don't fail the main operation
+            log.error("Failed to send comment notification for content {}", contentId, e);
+        }
+    }
+
+    private void sendCommentReplyNotification(String contentId, String contentType, Long parentCommentId, Long replierId, String replierName, String replyContent) {
+        try {
+            ContentGeneralInfoEntity content = contentGeneralInfoService.getById(contentId);
+            CommentEntity parentComment = this.getById(parentCommentId);
+            
+            if (content != null && parentComment != null && !parentComment.getDeleted()) {
+                notificationService.notifyCommentReplied(
+                    contentId,
+                    content.getTitle(),
+                    contentType,
+                    parentComment.getUserId(), // original comment author ID
+                    replierId,
+                    replierName,
+                    replyContent,
+                    parentComment.getContent() // original comment content
+                );
+            }
+        } catch (Exception e) {
+            // Log error but don't fail the main operation
+            log.error("Failed to send comment reply notification for content {}", contentId, e);
+        }
     }
 
     /**
@@ -121,12 +175,11 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
     /**
      * Delete a comment (soft delete)
      * @param commentId comment ID
+     * @param currentUser authenticated user
      * @return true if deleted successfully
      */
     @Transactional
-    public boolean deleteComment(Long commentId) {
-        EnhancedUserDetail currentUser = SecurityUtil.getCurrentUserDetail();
-        
+    public boolean deleteComment(Long commentId, EnhancedUserDetail currentUser) {
         CommentEntity comment = this.getById(commentId);
         if (comment == null) {
             log.warn("Comment {} not found", commentId);
@@ -155,16 +208,11 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
      * Like or unlike a comment
      * @param commentId comment ID
      * @param isLike true to like, false to unlike
+     * @param currentUser authenticated user
      * @return updated like count
      */
     @Transactional
-    public Long toggleCommentLike(Long commentId, boolean isLike) {
-        // Check if user is authenticated
-        EnhancedUserDetail currentUser = SecurityUtil.getCurrentUserDetail();
-        if (currentUser == null) {
-            throw new RuntimeException("User must be authenticated to like comments");
-        }
-        
+    public Long toggleCommentLike(Long commentId, boolean isLike, EnhancedUserDetail currentUser) {
         if (isLike) {
             commentMapper.incrementLikeCount(commentId);
         } else {
@@ -176,25 +224,6 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
     }
 
     /**
-     * Get client IP address from request
-     * @param request HTTP request
-     * @return client IP address
-     */
-    private String getClientIpAddress(HttpServletRequest request) {
-        String xForwardedFor = request.getHeader("X-Forwarded-For");
-        if (xForwardedFor != null && !xForwardedFor.isEmpty() && !"unknown".equalsIgnoreCase(xForwardedFor)) {
-            return xForwardedFor.split(",")[0];
-        }
-        
-        String xRealIp = request.getHeader("X-Real-IP");
-        if (xRealIp != null && !xRealIp.isEmpty() && !"unknown".equalsIgnoreCase(xRealIp)) {
-            return xRealIp;
-        }
-        
-        return request.getRemoteAddr();
-    }
-
-    /**
      * Check if current user has admin privileges
      * @param user current user
      * @return true if user has admin privileges
@@ -202,50 +231,6 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
     private boolean hasAdminPrivileges(EnhancedUserDetail user) {
         return user.getAuthorities().stream()
                 .anyMatch(auth -> auth.getAuthority().contains("ADMIN"));
-    }
-
-    /**
-     * Build user display name from user profile
-     * @param userProfile user profile
-     * @return display name
-     */
-    private String buildUserDisplayName(UserGeneralDTO userProfile) {
-        // Try to build full name from firstName and lastName
-        String firstName = userProfile.getFirstName();
-        String lastName = userProfile.getLastName();
-        
-        if (firstName != null && !firstName.trim().isEmpty() && 
-            lastName != null && !lastName.trim().isEmpty()) {
-            return (firstName.trim() + " " + lastName.trim()).trim();
-        }
-        
-        // If only firstName is available
-        if (firstName != null && !firstName.trim().isEmpty()) {
-            return firstName.trim();
-        }
-        
-        // If only lastName is available
-        if (lastName != null && !lastName.trim().isEmpty()) {
-            return lastName.trim();
-        }
-        
-        // Fall back to username if no name is available
-        if (userProfile.getUsername() != null && !userProfile.getUsername().trim().isEmpty()) {
-            return userProfile.getUsername().trim();
-        }
-        
-        // Last resort - use email prefix
-        if (userProfile.getEmail() != null && !userProfile.getEmail().trim().isEmpty()) {
-            String email = userProfile.getEmail().trim();
-            int atIndex = email.indexOf('@');
-            if (atIndex > 0) {
-                return email.substring(0, atIndex);
-            }
-            return email;
-        }
-        
-        // Ultimate fallback
-        return "Anonymous User";
     }
 
     /**

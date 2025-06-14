@@ -34,6 +34,8 @@ import { BaseDrawer } from '../../components';
 import { IUserData } from '../../../global/types';
 import * as UserService from '../../../services/UserService';
 import * as EmailVerificationService from '../../../services/EmailVerificationService';
+import { buildFullName, getUserInitials } from '../../../utils/userDisplayUtils';
+
 interface IUserDetailDrawerProps {
   readonly open: boolean;
   readonly onClose: () => void;
@@ -157,10 +159,9 @@ export default function UserDetailDrawer({ open, onClose, userId, onDelete }: IU
       });
   }, [user, selectedRoles, t, enqueueSnackbar]);
 
-  const getFullName = () => {
-    if (!user) return '';
-    return `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() ?? user.username ?? '';
-  };
+  // Use utility function for consistent name building
+  const fullName = buildFullName(user);
+  const initials = getUserInitials(user);
 
   const formatDateTime = (dateString: string | undefined) => {
     if (!dateString) return t('user-detail.no-data');
@@ -234,7 +235,7 @@ export default function UserDetailDrawer({ open, onClose, userId, onDelete }: IU
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
           <Avatar
             src={user.avatarUrl}
-            alt={getFullName()}
+            alt={fullName}
             sx={{
               width: 80,
               height: 80,
@@ -244,14 +245,11 @@ export default function UserDetailDrawer({ open, onClose, userId, onDelete }: IU
               fontWeight: 'bold',
             }}
           >
-            {!user.avatarUrl && (user.firstName && user.lastName ? 
-              `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase() : 
-              <PersonIcon sx={{ fontSize: '2.5rem' }} />
-            )}
+            {!user.avatarUrl && (initials !== 'U' ? initials : <PersonIcon sx={{ fontSize: '2.5rem' }} />)}
           </Avatar>
           <Box sx={{ flexGrow: 1 }}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 0.5 }}>
-              {getFullName()}
+              {fullName}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               ID: {user.id}

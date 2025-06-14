@@ -1,14 +1,15 @@
 package com.tobe.blog;
 
-import com.tobe.blog.beans.consts.Const;
-import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
-import com.tobe.blog.beans.dto.user.UserGeneralDTO;
+import java.util.List;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import java.util.List;
+import com.tobe.blog.beans.consts.Const;
+import com.tobe.blog.beans.dto.user.EnhancedUserDetail;
+import com.tobe.blog.beans.dto.user.UserGeneralDTO;
 
 public class DefaultTestData {
     public class DefaultUser {
@@ -33,7 +34,7 @@ public class DefaultTestData {
     }
 
     public static Authentication getDefaultUserAuthentication() {
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(Const.Role.ADMIN, Const.Role.BASIC);
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(Const.Role.ADMIN.getValue(), Const.Role.BASIC.getValue());
         UserGeneralDTO userProfile = new UserGeneralDTO();
         userProfile.setId(DefaultUser.USER_ID);
         userProfile.setUsername(DefaultUser.USERNAME);

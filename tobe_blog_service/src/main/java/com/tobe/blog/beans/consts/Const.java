@@ -6,9 +6,19 @@ public class Const {
 
     public static final String CONTENT_LIKE_COUNT_KEY = "CONTENT_LIKE_COUNT";
 
-    public static class Role {
-        public static final String ADMIN = "ROLE_ADMIN";
-        public static final String BASIC = "ROLE_BASIC";
+    public static enum Role {
+        BASIC("ROLE_BASIC"),
+        ADMIN("ROLE_ADMIN");
+
+        private final String value;
+
+        Role(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 
     public static enum ContentType {
@@ -34,5 +44,23 @@ public class Const {
         TECHNICAL,
         LIFE,
         OTHER
+    }
+
+    public enum NotificationType {
+        CONTENT_RECOMMENDED("CONTENT_RECOMMENDED"),
+        CONTENT_BANNED("CONTENT_BANNED"),
+        CONTENT_COMMENTED("CONTENT_COMMENTED"),
+        COMMENT_REPLIED("COMMENT_REPLIED"),
+        SYSTEM_ANNOUNCEMENT("SYSTEM_ANNOUNCEMENT");
+
+        private final String value;
+
+        NotificationType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 }

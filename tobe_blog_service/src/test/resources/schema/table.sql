@@ -280,3 +280,34 @@ CREATE TABLE IF NOT EXISTS `tobe_comment` (
 ALTER TABLE `tobe_comment` 
 ADD COLUMN `reply_to_user_name` VARCHAR(255) COMMENT 'Reply to user name (for quoted replies)' AFTER `parent_id`,
 ADD COLUMN `reply_to_content` VARCHAR(500) COMMENT 'Reply to content snippet (for quoted replies, max 500 chars)' AFTER `reply_to_user_name`; 
+
+-- Notification system table
+CREATE TABLE IF NOT EXISTS `tobe_notification` (
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT 'Primary key',
+    `recipient_id` BIGINT(20) NOT NULL COMMENT 'User ID who receives this notification',
+    `sender_id` BIGINT(20) COMMENT 'User ID who triggered this notification (nullable for system notifications)',
+    `notification_type` VARCHAR(50) NOT NULL COMMENT 'CONTENT_RECOMMENDED, CONTENT_BANNED, CONTENT_COMMENTED, SYSTEM_ANNOUNCEMENT',
+    `title` VARCHAR(255) NOT NULL COMMENT 'Notification title',
+    `message` VARCHAR(1000) NOT NULL COMMENT 'Notification message content',
+    `is_read` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Whether the notification has been read',
+    `related_content_id` VARCHAR(255) COMMENT 'Related content ID (for content-related notifications)',
+    `related_content_type` VARCHAR(50) COMMENT 'Related content type (ARTICLE, PLAN, VOCABULARY, COLLECTION)',
+    `related_content_title` VARCHAR(255) COMMENT 'Related content title for quick reference',
+    `action_url` VARCHAR(500) COMMENT 'URL to navigate when notification is clicked',
+    `metadata` JSON COMMENT 'Additional metadata for the notification',
+    `create_time` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT 'Create time',
+    `create_by` VARCHAR(30) DEFAULT NULL COMMENT 'Creator',
+    `update_time` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT 'Update time',
+    `update_by` VARCHAR(30) DEFAULT NULL COMMENT 'Updater',
+    `deleted` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Soft delete flag',
+    PRIMARY KEY (`id`),
+    INDEX `idx_recipient_id` (`recipient_id`),
+    INDEX `idx_notification_type` (`notification_type`),
+    INDEX `idx_is_read` (`is_read`),
+    INDEX `idx_create_time` (`create_time`),
+    INDEX `idx_deleted` (`deleted`),
+    INDEX `idx_recipient_read` (`recipient_id`, `is_read`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Notification table';
+
+-- data.sql content
+-- end of sql 

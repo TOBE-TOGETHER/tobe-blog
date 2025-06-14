@@ -293,9 +293,34 @@ export interface ICommentCreateDTO {
 export interface ICommentsPageDTO {
   records: ICommentDTO[];
   total: number;
-  size: number;
   current: number;
   pages: number;
+  size: number;
 }
 
 export type TopicPropsType = ETopic | string | null | undefined;
+
+export type NotificationType = 'CONTENT_RECOMMENDED' | 'CONTENT_BANNED' | 'CONTENT_COMMENTED' | 'COMMENT_REPLIED' | 'SYSTEM_ANNOUNCEMENT';
+
+export interface INotificationDTO {
+  id: number;
+  title: string;
+  message: string;
+  notificationType: NotificationType;
+  isRead: boolean;
+  relatedContentId?: string;
+  relatedContentType?: string;
+  relatedContentTitle?: string;
+  actionUrl?: string;
+  createTime: string;
+  senderName?: string;
+  metadata?: string;
+}
+
+export interface INotificationPageDTO {
+  records: INotificationDTO[];
+  total: number;
+  current: number;
+  pages: number;
+  size: number;
+}
