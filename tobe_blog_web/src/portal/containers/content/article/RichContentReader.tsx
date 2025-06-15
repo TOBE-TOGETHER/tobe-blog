@@ -1,31 +1,12 @@
 import { Grid } from '@mui/material';
-import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
-import { Editor } from '@wangeditor/editor-for-react';
-import '@wangeditor/editor/dist/css/style.css';
-import { useEffect, useState } from 'react';
-import { EditorStyle } from '../../../../components/common/EditorStyle';
 
 function RichContentReader(props: Readonly<{ htmlValue: string }>) {
-  const [editor, setEditor] = useState<IDomEditor | null>(null);
-  const editorConfig: Partial<IEditorConfig> = {
-    readOnly: true,
-  };
-
-  useEffect(() => {
-    return () => {
-      if (editor == null) return;
-      editor.destroy();
-      setEditor(null);
-    };
-  }, [editor]);
-
   return (
-    <Grid sx={EditorStyle}>
-      <Editor
+    <Grid sx={{ width: '100%' }}>
+      <div
         className="reader"
-        value={props.htmlValue}
-        defaultConfig={editorConfig}
-        mode="default"
+        dangerouslySetInnerHTML={{ __html: props.htmlValue }}
+        style={{ width: '100%' }}
       />
     </Grid>
   );

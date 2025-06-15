@@ -10,18 +10,25 @@ import { URL } from '../../../../routes';
 import * as PublicDataService from '../../../../services/PublicDataService.ts';
 import ContentReadingPage from '../ContentReadingPage.tsx';
 import RichContentReader from './RichContentReader.tsx';
+import { parseHeadingsFromHtml, HeadingInfo } from './headingTreeUtils.ts';
+import ContentNavFabDrawer from './ContentNavFabDrawer';
 
 export default function ArticleReadingPage() {
   const { t, enqueueSnackbar } = useCommonUtils();
   const authState = useAuthState();
   const { id } = useParams();
   const [article, setArticle] = useState<IArticleDetailDTO | null>(null);
+  const [headings, setHeadings] = useState<HeadingInfo[]>([]);
+  const [htmlWithIds, setHtmlWithIds] = useState<string>('');
 
   useEffect(() => {
     function loadArticle(): void {
       PublicDataService.getArticleById(id ?? '')
         .then(response => {
           setArticle(response.data);
+          const { headings, htmlWithIds } = parseHeadingsFromHtml(response.data.content);
+          setHeadings(headings);
+          setHtmlWithIds(htmlWithIds);
         })
         .catch(() => {
           enqueueSnackbar(t('article-reading-page.msg.error'), {
@@ -47,6 +54,7 @@ export default function ArticleReadingPage() {
         subTitle={article?.subTitle}
         editLinkUrlPrefix={URL.ARTICLE_DETAIL}
       >
+        <ContentNavFabDrawer headings={headings} />
         {article?.contentProtected && !authState?.user?.id ? (
           <Grid container>
             <Grid
@@ -80,7 +88,7 @@ export default function ArticleReadingPage() {
                 userSelect: 'none',
               }}
             >
-              <RichContentReader htmlValue={article.content} />
+              <RichContentReader htmlValue={htmlWithIds} />
             </Grid>
           </Grid>
         ) : (
@@ -94,7 +102,7 @@ export default function ArticleReadingPage() {
               mx: 0,
             }}
           >
-            {article && <RichContentReader htmlValue={article.content} />}
+            {article && <RichContentReader htmlValue={htmlWithIds} />}
           </Grid>
         )}
       </ContentReadingPage>
