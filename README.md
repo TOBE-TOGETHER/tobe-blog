@@ -253,10 +253,6 @@ We welcome all forms of contributions!
 4. **Push** to the branch (`git push origin feature/AmazingFeature`)
 5. **Create** a Pull Request
 
-## 📄 License
-
-This project is open-sourced under the [MIT License](LICENSE).
-
 ## 📞 Contact Us
 
 - **WeChat**: LucienChen_Chenxi
