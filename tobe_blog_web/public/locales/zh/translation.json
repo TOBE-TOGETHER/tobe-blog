@@ -501,7 +501,8 @@
     "content-protected": "请登录以阅读此文",
     "msg": {
       "error": "加载数据失败"
-    }
+    },
+    "content-nav": "内容导航"
   },
   "collection-creation-page": {
     "page-main-title": "创建一个合集",

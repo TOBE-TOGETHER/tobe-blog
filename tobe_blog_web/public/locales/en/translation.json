@@ -513,7 +513,8 @@
     "content-protected": "Please log in to read the full content",
     "msg": {
       "error": "Failed to fetch data"
-    }
+    },
+    "content-nav": "Content Navigation"
   },
   "collection-creation-page": {
     "page-main-title": "Create a new collection",
