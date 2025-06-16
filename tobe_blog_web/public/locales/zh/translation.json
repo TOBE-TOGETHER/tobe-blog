@@ -655,5 +655,10 @@
       "delete-confirm": "确定要删除这条评论吗？",
       "delete-confirm-content": "此操作无法撤销。"
     }
+  },
+  "article-detail-page": {
+    "msg": {
+      "restore-draft-confirm": "检测到未保存草稿，是否恢复？"
+    }
   }
 }
