@@ -1,28 +1,58 @@
 import { openDB } from 'idb';
+
 import type { LocalDraft } from './types';
+import { IndexedDBStorage } from '../../../../services/IndexedDBService';
 
-const DB_NAME = 'article-drafts';
-const STORE_NAME = 'drafts';
+export class DraftStorage extends IndexedDBStorage<LocalDraft> {
+  protected readonly DB_NAME = 'article-drafts';
+  protected readonly STORE_NAME = 'drafts';
+  protected readonly DB_VERSION = 1;
+  protected readonly dbPromise = this.initializeDB();
 
-const dbPromise = openDB(DB_NAME, 1, {
-  upgrade(db) {
-    if (!db.objectStoreNames.contains(STORE_NAME)) {
-      db.createObjectStore(STORE_NAME, { keyPath: 'articleId' });
+  private async initializeDB() {
+    try {
+      // Check if IndexedDB is supported
+      if (!window.indexedDB) {
+        throw new Error('Your browser does not support IndexedDB');
+      }
+
+      return await openDB(this.DB_NAME, this.DB_VERSION, {
+        upgrade: db => {
+          if (!db.objectStoreNames.contains(this.STORE_NAME)) {
+            db.createObjectStore(this.STORE_NAME, { keyPath: 'articleId' });
+          }
+        },
+      });
+    } catch (error) {
+      console.error('Failed to initialize IndexedDB:', error);
+      throw error;
     }
-  },
-});
+  }
 
-export async function saveDraft(draft: LocalDraft): Promise<void> {
-  const db = await dbPromise;
-  await db.put(STORE_NAME, draft);
+  async saveDraft(draft: LocalDraft): Promise<void> {
+    try {
+      await this.save(draft);
+    } catch (error) {
+      console.error('Failed to save draft:', error);
+      throw error;
+    }
+  }
+
+  async getDraft(articleId: string): Promise<LocalDraft | undefined> {
+    try {
+      return await this.get(articleId);
+    } catch (error) {
+      console.error('Failed to get draft:', error);
+      throw error;
+    }
+  }
+
+  async removeDraft(articleId: string): Promise<void> {
+    try {
+      await this.remove(articleId);
+    } catch (error) {
+      console.error('Failed to remove draft:', error);
+      throw error;
+    }
+  }
 }
-
-export async function getDraft(articleId: string): Promise<LocalDraft | undefined> {
-  const db = await dbPromise;
-  return db.get(STORE_NAME, articleId);
-}
-
-export async function removeDraft(articleId: string): Promise<void> {
-  const db = await dbPromise;
-  await db.delete(STORE_NAME, articleId);
-} 
