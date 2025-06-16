@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import { useCommonUtils } from '../../../commons/index.ts';
 import { IBaseUserContentDTO, IOperation } from '../../../global/types';
-import Dialogx from '../Dialog/Dialogx.tsx';
+import Dialogx from '../dialog/Dialogx.tsx';
 
 export default function CardHeaderActionButton(props: Readonly<{ operations: IOperation[]; data: IBaseUserContentDTO; color?: string }>) {
   const { t } = useCommonUtils();
