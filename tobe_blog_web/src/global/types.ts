@@ -300,7 +300,7 @@ export interface ICommentsPageDTO {
 
 export type TopicPropsType = ETopic | string | null | undefined;
 
-export type NotificationType = 'CONTENT_RECOMMENDED' | 'CONTENT_BANNED' | 'CONTENT_COMMENTED' | 'COMMENT_REPLIED' | 'SYSTEM_ANNOUNCEMENT';
+export type NotificationType = 'CONTENT_RECOMMENDED' | 'CONTENT_BANNED' | 'CONTENT_COMMENTED' | 'COMMENT_REPLIED' | 'COMMENT_DELETED' | 'REPLY_DELETED' | 'SYSTEM_ANNOUNCEMENT';
 
 export interface INotificationDTO {
   id: number;

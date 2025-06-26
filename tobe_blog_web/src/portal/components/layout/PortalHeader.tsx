@@ -8,6 +8,7 @@ import { useCommonUtils } from '../../../commons/index.ts';
 import StrokeText from '../../../components/common/StrokeText.tsx';
 import HeaderLanguageMenu from '../../../components/layout/HeaderLanguageMenu.tsx';
 import HeaderUserMenu from '../../../components/layout/HeaderUserMenu.tsx';
+import { NotificationButton } from '../../../components/layout';
 import { validateUrl } from '../../../routes';
 import theme from '../../../theme.ts';
 import { publicPages } from './configs.ts';
@@ -77,6 +78,7 @@ const HeaderContent = () => {
   const { t, navigate } = useCommonUtils();
   let location = useLocation();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
   };
@@ -181,6 +183,11 @@ const HeaderContent = () => {
             </IconButton>
           </Box>
         )}
+
+        {/* Notification icon - only show when user is logged in */}
+        <Box sx={{ flexGrow: 0 }}>
+          <NotificationButton size="large" />
+        </Box>
 
         <Box sx={{ flexGrow: 0 }}>
           <HeaderLanguageMenu />

@@ -302,6 +302,8 @@
     "content": {
       "reply-label": "回复",
       "original-comment-label": "您的原评论",
+      "deleted-comment-label": "已删除的评论",
+      "deleted-reply-label": "已删除的回复",
       "from-label": "来自"
     },
     "actions": {
@@ -317,7 +319,36 @@
       "CONTENT_RECOMMENDED": "推荐",
       "CONTENT_BANNED": "封禁",
       "CONTENT_COMMENTED": "评论",
+      "COMMENT_REPLIED": "回复",
+      "COMMENT_DELETED": "评论已删除",
+      "REPLY_DELETED": "回复已删除",
       "SYSTEM_ANNOUNCEMENT": "系统"
+    },
+    "messages": {
+      "content-recommended": {
+        "title": "内容推荐",
+        "message": "您的{{contentType}}「{{contentTitle}}」已被管理员推荐"
+      },
+      "content-banned": {
+        "title": "内容封禁",
+        "message": "您的{{contentType}}「{{contentTitle}}」已被管理员封禁"
+      },
+      "content-commented": {
+        "title": "新评论",
+        "message": "{{commenterName}} 评论了您的{{contentType}}「{{contentTitle}}」"
+      },
+      "comment-replied": {
+        "title": "新回复",
+        "message": "{{replierName}} 回复了您在「{{contentTitle}}」的评论"
+      },
+      "comment-deleted": {
+        "title": "评论已删除",
+        "message": "您在{{contentType}}「{{contentTitle}}」的一条评论已被删除"
+      },
+      "reply-deleted": {
+        "title": "回复已删除",
+        "message": "您在「{{contentTitle}}」的一条回复已被删除"
+      }
     }
   },
   "user-detail": {
@@ -359,7 +390,7 @@
       "operation": "操作"
     },
     "content-types": {
-      "article": "文章",
+      "article": "笔记",
       "plan": "计划",
       "vocabulary": "词汇",
       "collection": "合集"

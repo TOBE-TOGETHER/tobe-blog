@@ -1,10 +1,10 @@
 import AdminLayout from './layout/AdminLayout';
 import AddIconButton from './misc/AddIconButton';
 import AdminSearchBox from './misc/AdminSearchBox';
-import BaseDrawer from './misc/BaseDrawer';
+import BaseDrawer from '../../components/common/BaseDrawer';
 import CardHeaderActionButton from './misc/CardHeaderActionButton';
 import EditIconButton from './misc/EditIconButton';
-import FilterTabsWithCount from './misc/FilterTabsWithCount';
+import FilterTabsWithCount from '../../components/common/FilterTabsWithCount';
 import InfoIconButton from './misc/InfoIconButton';
 import InputFileUploadButton from './misc/InputFileUploadButton';
 import SaveButtonPanel from './misc/SaveButtonPanel';
@@ -31,11 +31,6 @@ export {
   GeneralCard,
   GeneralCardSkeleton,
 };
-
-// Notification components
-export {
-  NotificationsDrawer,
-} from './notification';
 
 // Content components
 export {

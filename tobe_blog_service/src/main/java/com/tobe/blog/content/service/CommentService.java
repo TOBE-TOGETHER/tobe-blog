@@ -186,6 +186,8 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
             return false;
         }
         
+        log.info("Before deletion - Comment {} deleted status: {}", commentId, comment.getDeleted());
+        
         // Check if current user is the owner of the comment or has admin privileges
         if (!comment.getUserId().equals(currentUser.getUserProfile().getId()) && 
             !hasAdminPrivileges(currentUser)) {
@@ -194,14 +196,182 @@ public class CommentService extends ServiceImpl<CommentMapper, CommentEntity> {
             return false;
         }
         
-        comment.setDeleted(true);
-        boolean result = this.updateById(comment);
+        // Store comment information before deletion for notifications
+        String contentId = comment.getContentId();
+        String contentType = comment.getContentType();
+        String deletedCommentContent = comment.getContent();
+        Long commentAuthorId = comment.getUserId();
+        Long parentCommentId = comment.getParentId();
+        String deleterName = UserDisplayNameUtil.buildDisplayName(currentUser.getUserProfile());
+        Long deleterId = currentUser.getUserProfile().getId();
+        
+        // Use MyBatis-Plus removeById for logical deletion (this will set deleted=1 automatically)
+        log.info("Performing logical deletion for comment {} using removeById", commentId);
+        boolean result = this.removeById(commentId);
+        log.info("Logical deletion result for comment {}: {}", commentId, result);
+        
+        // Try to retrieve the comment again to verify deletion
+        // Note: This should return null because @TableLogic will filter it out
+        CommentEntity deletedComment = this.getById(commentId);
+        if (deletedComment == null) {
+            log.info("Comment {} successfully logically deleted - filtered by @TableLogic", commentId);
+        } else {
+            log.warn("Comment {} still retrievable after logical deletion - deleted status: {}", 
+                    commentId, deletedComment.getDeleted());
+        }
         
         if (result) {
             log.info("Comment {} deleted by user {}", commentId, currentUser.getUsername());
+            
+            // Send notifications after successful deletion
+            sendCommentDeletionNotifications(contentId, contentType, deletedCommentContent, 
+                                           commentAuthorId, parentCommentId, deleterId, deleterName);
+        } else {
+            log.error("Failed to logically delete comment {} from database", commentId);
         }
         
         return result;
+    }
+
+    /**
+     * Send appropriate notifications when a comment is deleted
+     * @param contentId content ID
+     * @param contentType content type
+     * @param deletedCommentContent deleted comment content
+     * @param commentAuthorId original comment author ID
+     * @param parentCommentId parent comment ID (null for top-level comments)
+     * @param deleterId ID of user who deleted the comment
+     * @param deleterName name of user who deleted the comment
+     */
+    private void sendCommentDeletionNotifications(String contentId, String contentType, String deletedCommentContent,
+                                                 Long commentAuthorId, Long parentCommentId, Long deleterId, String deleterName) {
+        try {
+            ContentGeneralInfoEntity content = contentGeneralInfoService.getById(contentId);
+            if (content == null) {
+                log.warn("Content {} not found when sending deletion notifications", contentId);
+                return;
+            }
+            
+            // Check if content is deleted
+            if (content.getDeleted() != null && content.getDeleted()) {
+                log.info("Content {} is deleted - skipping deletion notification", contentId);
+                return;
+            }
+            
+            if (parentCommentId != null) {
+                // This was a reply - handle reply deletion notifications
+                handleReplyDeletionNotifications(contentId, content, deletedCommentContent, 
+                                               commentAuthorId, parentCommentId, deleterId, deleterName);
+            } else {
+                // This was a top-level comment - handle comment deletion notifications
+                handleCommentDeletionNotifications(contentId, content, deletedCommentContent, 
+                                                 commentAuthorId, deleterId, deleterName);
+            }
+        } catch (Exception e) {
+            // Log error but don't fail the main operation
+            log.error("Failed to send comment deletion notification for content {}", contentId, e);
+        }
+    }
+    
+    /**
+     * Handle notifications for reply deletion
+     */
+    private void handleReplyDeletionNotifications(String contentId, ContentGeneralInfoEntity content, 
+                                                String deletedReplyContent, Long replyAuthorId, 
+                                                Long parentCommentId, Long deleterId, String deleterName) {
+        try {
+            // Use direct query to bypass @TableLogic filtering to check if parent comment is deleted
+            LambdaQueryWrapper<CommentEntity> parentQuery = new LambdaQueryWrapper<CommentEntity>()
+                .eq(CommentEntity::getId, parentCommentId);
+            List<CommentEntity> parentComments = this.list(parentQuery);
+            
+            if (parentComments.isEmpty()) {
+                log.warn("Parent comment {} not found for reply deletion notification", parentCommentId);
+                return;
+            }
+            
+            CommentEntity parentComment = parentComments.get(0);
+            
+            // Check if parent comment is deleted
+            if (parentComment.getDeleted() != null && parentComment.getDeleted()) {
+                log.info("Parent comment {} is deleted - skipping reply deletion notification", parentCommentId);
+                return;
+            }
+            
+            // Notify the original comment author (if they are not the deleter)
+            if (!deleterId.equals(parentComment.getUserId())) {
+                log.info("Sending reply deletion notification to original comment author {} for reply by {} deleted by {}", 
+                        parentComment.getUserId(), replyAuthorId, deleterId);
+                notificationService.notifyReplyDeleted(
+                    contentId,
+                    content.getTitle(),
+                    content.getContentType(),
+                    parentComment.getUserId(), // original comment author
+                    deleterId,
+                    deleterName,
+                    deletedReplyContent,
+                    parentComment.getContent() // original comment content for context
+                );
+            }
+            
+            // Also notify the reply author if they didn't delete it themselves
+            if (!deleterId.equals(replyAuthorId) && !replyAuthorId.equals(parentComment.getUserId())) {
+                log.info("Sending comment deletion notification to reply author {} for reply deleted by {}", 
+                        replyAuthorId, deleterId);
+                notificationService.notifyCommentDeleted(
+                    contentId,
+                    content.getTitle(),
+                    content.getContentType(),
+                    replyAuthorId, // reply author
+                    deleterId,
+                    deleterName,
+                    deletedReplyContent
+                );
+            }
+        } catch (Exception e) {
+            log.error("Failed to send reply deletion notifications for content {}", contentId, e);
+        }
+    }
+    
+    /**
+     * Handle notifications for top-level comment deletion
+     */
+    private void handleCommentDeletionNotifications(String contentId, ContentGeneralInfoEntity content, 
+                                                  String deletedCommentContent, Long commentAuthorId, 
+                                                  Long deleterId, String deleterName) {
+        try {
+            // Notify the content owner if they didn't delete the comment and they are not the comment author
+            if (!deleterId.equals(content.getOwnerId()) && !commentAuthorId.equals(content.getOwnerId())) {
+                log.info("Sending comment deletion notification to content owner {} for comment by {} deleted by {}", 
+                        content.getOwnerId(), commentAuthorId, deleterId);
+                notificationService.notifyCommentDeleted(
+                    contentId,
+                    content.getTitle(),
+                    content.getContentType(),
+                    content.getOwnerId(), // content owner
+                    deleterId,
+                    deleterName,
+                    deletedCommentContent
+                );
+            }
+            
+            // Notify the comment author if they didn't delete it themselves
+            if (!deleterId.equals(commentAuthorId)) {
+                log.info("Sending comment deletion notification to comment author {} for comment deleted by {}", 
+                        commentAuthorId, deleterId);
+                notificationService.notifyCommentDeleted(
+                    contentId,
+                    content.getTitle(),
+                    content.getContentType(),
+                    commentAuthorId, // comment author
+                    deleterId,
+                    deleterName,
+                    deletedCommentContent
+                );
+            }
+        } catch (Exception e) {
+            log.error("Failed to send comment deletion notifications for content {}", contentId, e);
+        }
     }
 
     /**
