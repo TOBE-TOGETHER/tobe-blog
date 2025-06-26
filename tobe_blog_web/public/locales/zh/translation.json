@@ -532,7 +532,8 @@
     "content-protected": "请登录以阅读此文",
     "msg": {
       "error": "加载数据失败"
-    }
+    },
+    "content-nav": "内容导航"
   },
   "collection-creation-page": {
     "page-main-title": "创建一个合集",
@@ -685,6 +686,11 @@
     "menu": {
       "delete-confirm": "确定要删除这条评论吗？",
       "delete-confirm-content": "此操作无法撤销。"
+    }
+  },
+  "article-detail-page": {
+    "msg": {
+      "restore-draft-confirm": "检测到未保存草稿，是否恢复？"
     }
   }
 }

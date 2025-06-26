@@ -544,7 +544,8 @@
     "content-protected": "Please log in to read the full content",
     "msg": {
       "error": "Failed to fetch data"
-    }
+    },
+    "content-nav": "Content Navigation"
   },
   "collection-creation-page": {
     "page-main-title": "Create a new collection",
@@ -697,6 +698,11 @@
     "menu": {
       "delete-confirm": "Are you sure you want to delete this comment?",
       "delete-confirm-content": "This action cannot be undone."
+    }
+  },
+  "article-detail-page": {
+    "msg": {
+      "restore-draft-confirm": "A local draft was found. Do you want to restore it?"
     }
   }
 }

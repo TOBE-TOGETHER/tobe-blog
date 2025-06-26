@@ -6,6 +6,8 @@ import { useCommonContentState } from '../commons';
 import BaseContentPage from '../components/ContentPage';
 import { ArticleService } from '../UserContentService';
 import ArticleEditMainSection from './components/ArticleEditMainSection';
+import { useAutoSaveDraft } from './useAutoSaveDraft';
+import type { LocalDraft } from './types';
 
 export default function ArticleDetailPage() {
   const { id } = useParams();
@@ -44,6 +46,34 @@ export default function ArticleDetailPage() {
 
   useEffect(() => loadData(), [loadData]);
 
+  const { clearDraft, getDraft } = useAutoSaveDraft({
+    articleId: id ?? '',
+    editable: editable,
+    draft: {
+      articleId: id ?? '',
+      title,
+      subTitle,
+      content: htmlValue,
+      coverImgUrl,
+      tags: tagValues,
+      contentProtected,
+      topic,
+    },
+  });
+
+  // Compare local draft and current content
+  const isDraftDifferent = (draft: LocalDraft) => {
+    return (
+      draft.title !== title ||
+      draft.subTitle !== subTitle ||
+      draft.content !== htmlValue ||
+      draft.coverImgUrl !== coverImgUrl ||
+      JSON.stringify(draft.tags) !== JSON.stringify(tagValues) ||
+      draft.contentProtected !== contentProtected ||
+      draft.topic !== topic
+    );
+  };
+
   function saveArticle(updateDTO: IArticleUpdateDTO): void {
     setLoading(true);
     ArticleService.update(updateDTO)
@@ -51,6 +81,7 @@ export default function ArticleDetailPage() {
         enqueueSnackbar(t('msg.success'), {
           variant: 'success',
         });
+        clearDraft(); // Save success, clear local draft
         // Reload data to get updated statistics
         loadData();
       })
@@ -62,12 +93,28 @@ export default function ArticleDetailPage() {
       .finally(() => setLoading(false));
   }
 
-  const handleEditableChange = () => {
+  async function handleEditableChange() {
     if (!id) {
       return;
     }
     if (!title) {
       return;
+    }
+    // When entering edit mode, check for local draft and prompt if different
+    if (!editable) {
+      const localDraft = await getDraft(id ?? '');
+      if (localDraft && isDraftDifferent(localDraft)) {
+        if (window.confirm(t('article-detail-page.msg.restore-draft-confirm'))) {
+          setTitle(localDraft.title);
+          setSubTitle(localDraft.subTitle);
+          setHtmlValue(localDraft.content);
+          setCoverImgUrl(localDraft.coverImgUrl);
+          setTagValues(localDraft.tags);
+          setContentProtected(localDraft.contentProtected);
+          setTopic(localDraft.topic);
+          clearDraft();
+        }
+      }
     }
     if (editable) {
       saveArticle({
@@ -83,7 +130,7 @@ export default function ArticleDetailPage() {
       });
     }
     setEditable(!editable);
-  };
+  }
 
   return (
     <BaseContentPage
