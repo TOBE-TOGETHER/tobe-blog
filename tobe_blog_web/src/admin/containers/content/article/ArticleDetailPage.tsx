@@ -48,6 +48,7 @@ export default function ArticleDetailPage() {
 
   const { clearDraft, getDraft } = useAutoSaveDraft({
     articleId: id ?? '',
+    editable: editable,
     draft: {
       articleId: id ?? '',
       title,
