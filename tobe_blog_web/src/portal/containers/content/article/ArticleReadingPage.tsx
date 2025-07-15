@@ -78,6 +78,7 @@ export default function ArticleReadingPage() {
               </Link>
             </Grid>
             <Grid
+              container
               item
               xs={12}
               sx={{
@@ -86,6 +87,7 @@ export default function ArticleReadingPage() {
                 mx: 0,
                 filter: 'blur(3px)',
                 userSelect: 'none',
+                overflow: 'hidden',
               }}
             >
               <RichContentReader htmlValue={htmlWithIds} />
@@ -100,6 +102,7 @@ export default function ArticleReadingPage() {
               my: 1,
               px: 0,
               mx: 0,
+              overflow: 'hidden',
             }}
           >
             {article && <RichContentReader htmlValue={htmlWithIds} />}

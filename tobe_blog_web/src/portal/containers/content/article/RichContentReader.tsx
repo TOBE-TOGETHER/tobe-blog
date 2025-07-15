@@ -1,13 +1,14 @@
 import { Grid } from '@mui/material';
+import '@wangeditor/editor/dist/css/style.css';
 
 function RichContentReader(props: Readonly<{ htmlValue: string }>) {
   return (
-    <Grid sx={{ width: '100%' }}>
-      <div
-        className="reader"
-        dangerouslySetInnerHTML={{ __html: props.htmlValue }}
-        style={{ width: '100%' }}
-      />
+    <Grid className="w-e-text-container" container>
+        <div
+          className='w-e-text-container'
+          data-slate-editor
+          dangerouslySetInnerHTML={{ __html: props.htmlValue }}
+        />
     </Grid>
   );
 }
