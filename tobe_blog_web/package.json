@@ -35,15 +35,17 @@
     "i18next-browser-languagedetector": "^7.0.0",
     "i18next-http-backend": "^1.4.1",
     "idb": "^8.0.3",
-    "uuid": "^11.1.0",
     "moment": "^2.29.4",
     "notistack": "3.0.1",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-i18next": "^11.17.2",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "6.23.1",
     "react-select": "^5.8.0",
-    "react-text-to-speech": "^0.14.8"
+    "react-text-to-speech": "^0.14.8",
+    "remark-gfm": "^4.0.1",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
