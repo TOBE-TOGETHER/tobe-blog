@@ -107,7 +107,6 @@ export function createContentTools(apiClient: TobeBlogApiClient): Tool[] {
     // Article tools
     createTool('create_article', 'Create a new article', ArticleCreationSchema),
     createTool('update_article', 'Update an existing article', ArticleUpdateSchema),
-    createTool('delete_article', 'Delete an article', IdSchema),
     createTool('get_article', 'Get an article by ID', IdSchema),
     createTool('search_articles', 'Search articles with filters and pagination', SearchParamsSchema),
     createTool('update_article_visibility', 'Update article visibility (publish/retract)', VisibilityUpdateSchema),
@@ -115,7 +114,6 @@ export function createContentTools(apiClient: TobeBlogApiClient): Tool[] {
     // Plan tools
     createTool('create_plan', 'Create a new plan', PlanCreationSchema),
     createTool('update_plan', 'Update an existing plan', PlanUpdateSchema),
-    createTool('delete_plan', 'Delete a plan', IdSchema),
     createTool('get_plan', 'Get a plan by ID', IdSchema),
     createTool('search_plans', 'Search plans with filters and pagination', SearchParamsSchema),
     createTool('update_plan_visibility', 'Update plan visibility (publish/retract)', VisibilityUpdateSchema),
@@ -128,13 +126,11 @@ export function createContentTools(apiClient: TobeBlogApiClient): Tool[] {
     })),
     createTool('create_plan_progress', 'Create a new plan progress item', PlanProgressCreationSchema),
     createTool('update_plan_progress', 'Update a plan progress item', PlanProgressUpdateSchema),
-    createTool('delete_plan_progress', 'Delete a plan progress item', NumberIdSchema),
     createTool('get_plan_progress', 'Get a plan progress item by ID', IdSchema),
 
     // Vocabulary tools
     createTool('create_vocabulary', 'Create a new vocabulary', VOCCreationSchema),
     createTool('update_vocabulary', 'Update an existing vocabulary', VOCUpdateSchema),
-    createTool('delete_vocabulary', 'Delete a vocabulary', IdSchema),
     createTool('get_vocabulary', 'Get a vocabulary by ID', IdSchema),
     createTool('search_vocabularies', 'Search vocabularies with filters and pagination', SearchParamsSchema),
     createTool('update_vocabulary_visibility', 'Update vocabulary visibility (publish/retract)', VisibilityUpdateSchema),
@@ -143,7 +139,6 @@ export function createContentTools(apiClient: TobeBlogApiClient): Tool[] {
     createTool('get_words_by_vocabulary', 'Get all words in a vocabulary', z.object({ vocabularyId: z.string() })),
     createTool('create_word', 'Create a new word in a vocabulary', WordCreationSchema),
     createTool('update_word', 'Update an existing word', WordUpdateSchema),
-    createTool('delete_word', 'Delete a word', NumberIdSchema),
     createTool('get_word', 'Get a word by ID', NumberIdSchema),
 
     // Admin tools

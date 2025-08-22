@@ -48,10 +48,6 @@ export class TobeBlogApiClient {
     return response.data;
   }
 
-  async deleteArticle(id: string): Promise<void> {
-    await this.client.delete(`/v1/articles/${id}`);
-  }
-
   async getArticleById(id: string): Promise<ArticleDTO> {
     const response = await this.client.get(`/v1/articles/${id}`);
     return response.data;
@@ -87,10 +83,6 @@ export class TobeBlogApiClient {
   async updatePlan(id: string, data: PlanUpdateDTO): Promise<PlanDTO> {
     const response = await this.client.put(`/v1/plans/${id}`, data);
     return response.data;
-  }
-
-  async deletePlan(id: string): Promise<void> {
-    await this.client.delete(`/v1/plans/${id}`);
   }
 
   async getPlanById(id: string): Promise<PlanDTO> {
@@ -135,10 +127,6 @@ export class TobeBlogApiClient {
     return response.data;
   }
 
-  async deletePlanProgress(id: number): Promise<void> {
-    await this.client.delete(`/v1/plan-progresses/${id}`);
-  }
-
   async getPlanProgressById(id: string): Promise<PlanProgressDTO> {
     const response = await this.client.get(`/v1/plan-progresses/${id}`);
     return response.data;
@@ -160,10 +148,6 @@ export class TobeBlogApiClient {
   async updateVocabulary(id: string, data: VOCUpdateDTO): Promise<VOCDTO> {
     const response = await this.client.put(`/v1/vocabularies/${id}`, data);
     return response.data;
-  }
-
-  async deleteVocabulary(id: string): Promise<void> {
-    await this.client.delete(`/v1/vocabularies/${id}`);
   }
 
   async getVocabularyById(id: string): Promise<VOCDTO> {
@@ -206,10 +190,6 @@ export class TobeBlogApiClient {
   async updateWord(id: number, data: WordUpdateDTO): Promise<WordDTO> {
     const response = await this.client.put(`/v1/words/${id}`, data);
     return response.data;
-  }
-
-  async deleteWord(id: number): Promise<void> {
-    await this.client.delete(`/v1/words/${id}`);
   }
 
   async getWordById(id: number): Promise<WordDTO> {

@@ -46,9 +46,20 @@ mvn test
 
 Project follows the RESTful API design principles and has integrated the spring-doc plugin, thus the APIs can be viewed and online debugged by `/swagger-ui/index.html` page.
 
-## Configuation
+## Configuration
 
 Project configurations are all placed in yaml files starting with `application` under the `resources` path.
+
+### Environment Variables
+
+Copy `env.example` to `.env` and configure the following environment variables:
+
+- `DEEPSEEK_API_KEY`: Your DeepSeek API key for AI chat functionality
+- `DEEPSEEK_API_URL`: DeepSeek API endpoint (default: https://api.deepseek.com/v1/chat/completions)
+- `MAIL_USERNAME`: Email username for sending notifications
+- `MAIL_PASSWORD`: Email password for sending notifications
+- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USERNAME`, `DB_PASSWORD`: Database configuration
+- `REDIS_HOST`, `REDIS_PORT`: Redis configuration
 
 ## Dependencies
 
