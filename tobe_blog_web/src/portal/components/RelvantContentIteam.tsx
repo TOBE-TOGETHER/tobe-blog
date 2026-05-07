@@ -33,7 +33,6 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
       >
         <Grid
           sx={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url(${props.content.coverImgUrl || config.defaultContentCoverImgUrl});`,
             position: 'relative',
             width: '100%',
             maxHeight: '160px',
@@ -48,7 +47,28 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
             backgroundSize: 'cover',
             overflow: 'hidden',
           }}
-        />
+        >
+          <Grid
+            component="img"
+            src={props.content.coverImgUrl ?? config.defaultContentCoverImgUrl}
+            alt={props.content.title}
+            loading="lazy"
+            decoding="async"
+            sx={{
+              width: '100%',
+              height: '100%',
+              display: 'block',
+              objectFit: 'cover',
+            }}
+          />
+          <Grid
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1))',
+            }}
+          />
+        </Grid>
 
         <Grid
           container
@@ -76,15 +96,19 @@ export default function RelevantContentItem(props: Readonly<{ content: IBaseUser
             }}
           >
             <Grid
+              component="img"
+              src={props.content.avatarUrl}
+              alt={props.content.ownerName}
+              loading="lazy"
+              decoding="async"
               sx={{
-                background: `url(${props.content.avatarUrl}); no-repeat center/cover`,
                 mt: '8px',
                 ml: '5px',
                 width: '40px',
                 height: '40px',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
+                objectFit: 'cover',
+                borderRadius: '50%',
+                display: 'block',
               }}
             />
           </Grid>

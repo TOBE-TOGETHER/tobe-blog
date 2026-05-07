@@ -1,7 +1,7 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Box, Button, Container, Grid, IconButton, Menu, MenuItem, SxProps, Toolbar, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import config from '../../../../customization.json';
 import { useCommonUtils } from '../../../commons/index.ts';
@@ -14,34 +14,56 @@ import theme from '../../../theme.ts';
 import { publicPages } from './configs.ts';
 
 const PortalHeader = (props: { styles?: SxProps }) => {
-  const [yIndex, setYIndex] = useState<number>(0);
   const [showFixedHeader, setShowFixedHeader] = useState<boolean>(false);
-  const [shouldShowHeader, setShouldShowHeader] = useState<boolean>(false);
+  const scrollTopRef = useRef<number>(0);
+  const shouldShowHeaderRef = useRef<boolean>(false);
+  const showFixedHeaderRef = useRef<boolean>(false);
+  const rafIdRef = useRef<number | null>(null);
 
-  function handleScroll() {
-    // if scroll down more than 80, it should show header when scroll up
-    if (document.documentElement.scrollTop > 80) {
-      setShouldShowHeader(true);
+  const handleScroll = useCallback(() => {
+    const currentTop = document.documentElement.scrollTop;
+    const previousTop = scrollTopRef.current;
+    const isScrollingDown = currentTop - previousTop > 0;
+    const isAtTop = currentTop <= 0;
+
+    if (currentTop > 80) {
+      shouldShowHeaderRef.current = true;
     }
 
-    // if scroll to the top, then reset the shouldShowHeader flag
-    if (document.documentElement.scrollTop === 0) {
-      setShouldShowHeader(false);
+    if (isAtTop) {
+      shouldShowHeaderRef.current = false;
     }
 
-    if (document.documentElement.scrollTop - yIndex > 0 || (document.documentElement.scrollTop - yIndex < 0 && document.documentElement.scrollTop <= 0)) {
-      setShowFixedHeader(false);
-    } else if (shouldShowHeader) {
-      setShowFixedHeader(true);
+    const nextShowFixedHeader = !isScrollingDown && !isAtTop && shouldShowHeaderRef.current;
+    if (nextShowFixedHeader !== showFixedHeaderRef.current) {
+      showFixedHeaderRef.current = nextShowFixedHeader;
+      setShowFixedHeader(nextShowFixedHeader);
     }
 
-    setYIndex(document.documentElement.scrollTop);
-  }
+    scrollTopRef.current = currentTop;
+  }, []);
+
+  const handleScrollWithRaf = useCallback(() => {
+    if (rafIdRef.current !== null) {
+      return;
+    }
+
+    rafIdRef.current = window.requestAnimationFrame(() => {
+      handleScroll();
+      rafIdRef.current = null;
+    });
+  }, [handleScroll]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  });
+    window.addEventListener('scroll', handleScrollWithRaf, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScrollWithRaf);
+      if (rafIdRef.current !== null) {
+        window.cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, [handleScrollWithRaf]);
 
   return (
     <>
