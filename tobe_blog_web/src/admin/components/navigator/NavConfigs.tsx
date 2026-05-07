@@ -5,7 +5,6 @@ import FlagIcon from '@mui/icons-material/Flag';
 import FolderIcon from '@mui/icons-material/Folder';
 import Groups from '@mui/icons-material/Groups';
 import RuleOutlinedIcon from '@mui/icons-material/RuleOutlined';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { EAuthority, EFeatureCode } from '../../../global/enums';
 import { IPageItem } from '../../../global/types';
 import { URL } from '../../../routes/URL';
@@ -62,12 +61,6 @@ export const adminPageItems: IPageItem[] = [
     label: 'dashboard-nav.pages.admin',
     icon: <RuleOutlinedIcon />,
     url: URL.ADMIN,
-    requiredRoles: [EAuthority.ROLE_ADMIN],
-  },
-  {
-    label: 'dashboard-nav.pages.agent',
-    icon: <SmartToyIcon />,
-    url: URL.AGENT,
     requiredRoles: [EAuthority.ROLE_ADMIN],
   },
 ];

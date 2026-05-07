@@ -44,8 +44,6 @@ export const URL = {
   CREATE_VOCABULARY: '/my/vocabularies/create-vocabularies',
   VOCABULARY_DETAIL: '/my/vocabularies/:id',
   VOCABULARIES: '/my/vocabularies',
-
-  AGENT: '/my/agent', // Agent page route
 };
 
 export function validateUrl(target: string): boolean {

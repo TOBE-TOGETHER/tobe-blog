@@ -492,8 +492,7 @@
       "articles": "笔记",
       "vocabularies": "词汇",
       "collections": "合集",
-      "admin": "监管",
-      "agent": "智能体"
+      "admin": "监管"
     },
     "msg": {
       "error": "获取数据失败"
@@ -582,23 +581,6 @@
       "tags": "标签",
       "topic": "主题"
     }
-  },
-  "agent-page": {
-    "title": "AI 智能体聊天",
-    "conversations": "对话列表",
-    "clear-chat": "清空聊天",
-    "new-conversation": "新建对话",
-    "no-conversations": "暂无对话",
-    "no-conversations-subtitle": "开始新的对话来与 AI 聊天",
-    "ai-typing": "AI 正在输入...",
-    "delete-confirm": "确定要删除这个对话吗？此操作无法撤销。",
-    "clear-confirm": "确定要清空对话吗？此操作无法撤销。",
-    "delete": "删除",
-    "message-placeholder": "输入您的消息...",
-    "send": "发送",
-    "sending": "发送中...",
-    "cancel": "终止",
-    "ai-error": "获取 AI 响应失败"
   },
   "word-dialog": {
     "add": "新增",

@@ -11,7 +11,6 @@ import ArticlesPage from './containers/content/article/ArticlesPage';
 import CollectionsPage from './containers/content/collection/CollectionsPage';
 import PlansPage from './containers/content/plan/PlansPage.tsx';
 import VOCsPage from './containers/content/vocabulary/VOCsPage';
-import { AgentPage } from './containers/agent';
 
 // lazy loading following secondary pages
 const SignInPage = React.lazy(() => import('../portal/containers/signIn/SignIn'));
@@ -104,10 +103,6 @@ export function getAdminRoutes(): React.ReactNode[] {
       <Route
         path={URL.CREATE_COLLECTION}
         element={<CollectionCreationPage />}
-      />
-      <Route
-        path={URL.AGENT}
-        element={<AgentPage />}
       />
     </Route>,
   ];
