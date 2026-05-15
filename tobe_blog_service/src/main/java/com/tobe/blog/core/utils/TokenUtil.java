@@ -23,9 +23,11 @@ import com.tobe.blog.core.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,47 +62,39 @@ public class TokenUtil implements Serializable {
     public static final String TOKEN_PATTERN = "Bearer %s";
 
     public String createAccessToken(EnhancedUserDetail user) {
-        try {
-            return buildToken(ACCESS_SECRET_KEY, user.getUsername(), user.getUserProfile().getId(),
-                    user.getAuthorities(), ACCESS_TOKEN_EXPIRATION);
-        } catch (Exception e) {
-            log.error("Error happens when create access token for: " + user.getUsername(), e);
-            return null;
-        }
+        return buildToken(ACCESS_SECRET_KEY, user, ACCESS_TOKEN_EXPIRATION);
     }
 
     public String createRefreshToken(EnhancedUserDetail user) {
-        try {
-            return buildToken(REFRESH_SECRET_KEY, user.getUsername(), user.getUserProfile().getId(),
-                    user.getAuthorities(), REFRESH_TOKEN_EXPIRATION);
-        } catch (Exception e) {
-            log.error("Error happens when create refresh token for: " + user.getUsername(), e);
-            return null;
-        }
+        return buildToken(REFRESH_SECRET_KEY, user, REFRESH_TOKEN_EXPIRATION);
     }
 
-    @SuppressWarnings("deprecation")
-    private String buildToken(String secret, String subject, long id, Collection<? extends GrantedAuthority> roles,
-            long tokenExpiration) {
+    private String buildToken(String secret, EnhancedUserDetail user, long tokenExpiration) {
+        final Long userId = resolveUserId(user);
+        final List<String> roleNames = user.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
 
         final String token = Jwts.builder()
                 .setHeader(HEADERS)
                 .setIssuer(TOKEN_ISSUER)
-                .setSubject(subject)
+                .setSubject(user.getUsername())
                 .setExpiration(getExpiredDate(tokenExpiration))
                 .setIssuedAt(new Date())
-                .claim("roles", roles)
-                .claim("id", id)
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .claim("roles", roleNames)
+                .claim("id", userId)
+                .signWith(resolveSigningKey(secret))
                 .compact();
         return String.format(TOKEN_PATTERN, token);
     }
 
-    @SuppressWarnings("deprecation")
     public String freshAccessToken(String refreshToken) {
         try {
-            final Claims refreshClaims = Jwts.parserBuilder().setSigningKey(REFRESH_SECRET_KEY).build()
-                    .parseClaimsJws(refreshToken).getBody();
+            final Claims refreshClaims = Jwts.parserBuilder()
+                    .setSigningKey(resolveSigningKey(REFRESH_SECRET_KEY))
+                    .build()
+                    .parseClaimsJws(refreshToken)
+                    .getBody();
             if (isTokenExpired(refreshClaims)) {
                 return null;
             }
@@ -110,7 +104,8 @@ public class TokenUtil implements Serializable {
                     .setSubject(refreshClaims.getSubject())
                     .setIssuedAt(new Date())
                     .setExpiration(getExpiredDate(ACCESS_TOKEN_EXPIRATION))
-                    .signWith(SignatureAlgorithm.HS256, ACCESS_SECRET_KEY).compact();
+                    .signWith(resolveSigningKey(ACCESS_SECRET_KEY))
+                    .compact();
             return String.format(TOKEN_PATTERN, token);
         } catch (Exception e) {
             log.error("Error happens when refresh the token, token: " + refreshToken, e);
@@ -121,14 +116,15 @@ public class TokenUtil implements Serializable {
     @SuppressWarnings("unchecked")
     public EnhancedUserDetail validationToken(String token) {
         try {
-            final Claims claims = Jwts.parserBuilder().setSigningKey(ACCESS_SECRET_KEY).build()
-                    .parseClaimsJws(token).getBody();
+            final Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(resolveSigningKey(ACCESS_SECRET_KEY))
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
             if (isTokenExpired(claims)) {
                 return null;
             }
-            final List<LinkedHashMap<String, String>> roleMap = claims.get("roles", ArrayList.class);
-            final List<GrantedAuthority> roles = Optional.ofNullable(roleMap).orElse(List.of()).stream()
-                    .map(r -> new SimpleGrantedAuthority(r.get("authority"))).collect(Collectors.toList());
+            final List<GrantedAuthority> roles = parseRoleClaims(claims.get("roles"));
             
             final Long userId = claims.get("id", Long.class);
             final UserGeneralDTO userProfile = userService.getUser(userId);
@@ -151,5 +147,43 @@ public class TokenUtil implements Serializable {
 
     private boolean isTokenExpired(Claims claims) {
         return claims.getExpiration().before(new Date());
+    }
+
+    private Long resolveUserId(EnhancedUserDetail user) {
+        if (user.getUserProfile() == null || user.getUserProfile().getId() == null) {
+            throw new IllegalStateException(
+                    "Cannot create token because user profile id is missing for user: " + user.getUsername());
+        }
+        return user.getUserProfile().getId();
+    }
+
+    private Key resolveSigningKey(String secret) {
+        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<GrantedAuthority> parseRoleClaims(Object rolesClaim) {
+        if (rolesClaim == null) {
+            return List.of();
+        }
+        if (rolesClaim instanceof List<?> roleList) {
+            return roleList.stream()
+                    .map(this::toGrantedAuthority)
+                    .collect(Collectors.toList());
+        }
+        return List.of();
+    }
+
+    private GrantedAuthority toGrantedAuthority(Object roleClaim) {
+        if (roleClaim instanceof String roleName) {
+            return new SimpleGrantedAuthority(roleName);
+        }
+        if (roleClaim instanceof LinkedHashMap<?, ?> roleMap) {
+            Object authority = roleMap.get("authority");
+            if (authority instanceof String roleName) {
+                return new SimpleGrantedAuthority(roleName);
+            }
+        }
+        throw new IllegalArgumentException("Unsupported role claim format: " + roleClaim);
     }
 }

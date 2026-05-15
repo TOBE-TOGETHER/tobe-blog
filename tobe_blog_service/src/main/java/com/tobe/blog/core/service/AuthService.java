@@ -16,6 +16,7 @@ import com.tobe.blog.beans.dto.user.UserGeneralDTO;
 import com.tobe.blog.beans.dto.user.UserLoginDTO;
 import com.tobe.blog.beans.entity.user.UserEntity;
 import com.tobe.blog.beans.entity.user.UserRoleEntity;
+import com.tobe.blog.core.exception.TobeRuntimeException;
 import com.tobe.blog.core.utils.BasicConverter;
 import com.tobe.blog.core.utils.TokenUtil;
 
@@ -34,11 +35,16 @@ public class AuthService implements UserDetailsService {
 
     public EnhancedUserDetail login(UserLoginDTO dto) {
         final EnhancedUserDetail userDetails = (EnhancedUserDetail) loadUserByUsername(dto.getUsername());
-        final String accessToken = tokenUtil.createAccessToken(userDetails);
-        final String refreshToken = tokenUtil.createRefreshToken(userDetails);
-        userDetails.setAccessToken(accessToken);
-        userDetails.setRefreshToken(refreshToken);
-        return userDetails;
+        try {
+            final String accessToken = tokenUtil.createAccessToken(userDetails);
+            final String refreshToken = tokenUtil.createRefreshToken(userDetails);
+            userDetails.setAccessToken(accessToken);
+            userDetails.setRefreshToken(refreshToken);
+            return userDetails;
+        } catch (IllegalStateException ex) {
+            log.error("Failed to issue tokens for user: {}", dto.getUsername(), ex);
+            throw new TobeRuntimeException("Failed to issue authentication tokens, please contact administrator.");
+        }
     }
 
     @Override
@@ -53,7 +59,10 @@ public class AuthService implements UserDetailsService {
         }
         
         final UserGeneralDTO profile = BasicConverter.convert(userEntity, UserGeneralDTO.class);
-        profile.setFeatures(BasicConverter.convert(userFeatureService.getById(profile.getId()), UserFeatureDTO.class));
+        if (profile.getId() == null) {
+            profile.setId(userEntity.getId());
+        }
+        profile.setFeatures(UserFeatureDTO.convert(userFeatureService.getById(profile.getId())));
         return new EnhancedUserDetail(getAuthority(userEntity.getId()), userEntity.getUsername(),
                 userEntity.getPassword(), profile);
     }
